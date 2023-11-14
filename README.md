@@ -34,7 +34,7 @@ be credited as the project is developed.
 * ~~[EWRAM Fix](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen)~~
 * ~~[Pokedex Fix](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)~~
 * ~~[Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518)~~
-* [Implement RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)
+* ~~[Implement RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)~~
 * [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
 * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
 * [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)
@@ -147,6 +147,8 @@ be credited as the project is developed.
 
 * `Anon822`, for creating the [Wrong Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518) tutorial
 
+* `FlameTix`, for creating the [Implement Missing Text Function RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
@@ -155,9 +157,11 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 ### Ver. 0.0.4
 
 Implemented not showing dex entries until getting the Pokedex 
-([tutorial by Jaizu](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)), 
-and an error screen for if a flash chip is not present on the cart 
-([tutorial by Anon822](https://www.pokecommunity.com/showpost.php?p=10449518))
+([tutorial by Jaizu](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)),
+an error screen for if a flash chip is not present on the cart 
+([tutorial by Anon822](https://www.pokecommunity.com/showpost.php?p=10449518)), 
+implemented missing text function RESET_FONT 
+([tutorial by Flametix](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)),
 
 ### Ver. 0.0.3
 
