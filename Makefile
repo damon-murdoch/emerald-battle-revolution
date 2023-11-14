@@ -37,7 +37,7 @@ EXE :=
 endif
 
 # Project Build Version (major_minor_revision)
-VERSION := 0_0_2
+VERSION := 0_0_3
 
 TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
