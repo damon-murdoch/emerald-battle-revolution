@@ -855,12 +855,17 @@ static void Task_WaitForAtePokeblockMessage(u8 taskId)
         gTasks[taskId].func = Task_FadeOutPokeblockFeed;
 }
 
+// [Ghoulslash] Nature mints implementation
+// Use original nature for Favorite PokeBlock (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
+
 static void Task_PrintAtePokeblockMessage(u8 taskId)
 {
     struct Pokemon *mon = &gPlayerParty[gPokeblockMonId];
     struct Pokeblock *pokeblock = &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId];
 
-    gPokeblockGain = PokeblockGetGain(GetNature(mon), pokeblock);
+    gPokeblockGain = PokeblockGetGain(GetNature(mon, POKEBLOCK_USE_ORIGINAL_NATURE), pokeblock);
     GetMonNickname(mon, gStringVar1);
     PokeblockCopyName(pokeblock, gStringVar2);
 
@@ -912,7 +917,9 @@ static u8 CreateMonSprite(struct Pokemon *mon)
 
     sPokeblockFeed->species = species;
     sPokeblockFeed->monSpriteId_ = spriteId;
-    sPokeblockFeed->nature = GetNature(mon);
+
+    // [Ghoulslash] Nature mints implementation
+    sPokeblockFeed->nature = GetNature(mon, POKEBLOCK_USE_ORIGINAL_NATURE);
     gSprites[spriteId].sSpecies = species;
     gSprites[spriteId].callback = SpriteCallbackDummy;
 

@@ -1272,9 +1272,14 @@ void RemoveCameraObject(void)
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
 
+// [Ghoulslash] Nature mints implementation
+// Use original nature for Favorite PokeBlock (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
+
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()]), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()], POKEBLOCK_USE_ORIGINAL_NATURE), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -2781,6 +2786,10 @@ void SetBattleTowerLinkPlayerGfx(void)
     }
 }
 
+// Use original nature for Nature Girl (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define NATURE_GIRL_USE_ORIGINAL_NATURE FALSE
+
 void ShowNatureGirlMessage(void)
 {
     static const u8 *const sNatureGirlMessages[NUM_NATURES] = {
@@ -2816,7 +2825,8 @@ void ShowNatureGirlMessage(void)
     if (gSpecialVar_0x8004 >= PARTY_SIZE)
         gSpecialVar_0x8004 = 0;
 
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004]);
+    // [Ghoulslash] Nature mints implementation
+    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004], NATURE_GIRL_USE_ORIGINAL_NATURE);
     ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 

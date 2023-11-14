@@ -1376,6 +1376,11 @@ static bool8 LoadUsePokeblockMenuGfx(void)
     return TRUE;
 }
 
+// [Ghoulslash] Nature mints implementation
+// Use original nature for Favorite PokeBlock (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
+
 static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
 {
     u8 partyIndex;
@@ -1388,7 +1393,7 @@ static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
     {
         AddTextPrinterParameterized(WIN_NAME, FONT_NORMAL, sMenu->monNameStrings[loadId], 0, 1, 0, NULL);
         partyIndex = GetPartyIdFromSelectionId(sMenu->info.curSelection);
-        nature = GetNature(&gPlayerParty[partyIndex]);
+        nature = GetNature(&gPlayerParty[partyIndex], POKEBLOCK_USE_ORIGINAL_NATURE);
         str = StringCopy(sMenu->info.natureText, gText_NatureSlash);
         str = StringCopy(str, gNatureNamePointers[nature]);
         AddTextPrinterParameterized3(WIN_NATURE, FONT_NORMAL, 2, 1, sNatureTextColors, 0, sMenu->info.natureText);

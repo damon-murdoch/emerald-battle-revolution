@@ -171,6 +171,9 @@
 #define MON_FEMALE     0xFE
 #define MON_GENDERLESS 0xFF
 
+// [Ghoulslash] Nature mints implementation
+#define HIDDEN_NATURE_NONE 26
+
 // Constants for AdjustFriendship
 #define FRIENDSHIP_EVENT_GROW_LEVEL       0
 #define FRIENDSHIP_EVENT_VITAMIN          1 // unused, handled by PokemonUseItemEffects

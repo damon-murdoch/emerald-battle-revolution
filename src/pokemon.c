@@ -3612,6 +3612,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         SetBoxMonData(boxMon, MON_DATA_ABILITY_NUM, &value);
     }
 
+    // [Ghoulslash] Nature mints implementation
+    value = HIDDEN_NATURE_NONE;
+    SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &value);
+
     GiveBoxMonInitialMoveset(boxMon);
 }
 
@@ -4089,7 +4093,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
 {                                                               \
     u8 baseStat = gSpeciesInfo[species].base;                   \
     s32 n = (((2 * baseStat + iv + ev / 4) * level) / 100) + 5; \
-    u8 nature = GetNature(mon);                                 \
+    u8 nature = GetNature(mon, TRUE);                           \
     n = ModifyStatByNature(nature, n, statIndex);               \
     CALC_FRIENDSHIP_BOOST()                                     \
     SetMonData(mon, field, &n);                                 \
@@ -5007,6 +5011,10 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
                     | (substruct3->earthRibbon << 25)
                     | (substruct3->worldRibbon << 26);
             }
+            break;
+        // [Ghoulslash] Nature mints implementation
+        case MON_DATA_HIDDEN_NATURE:
+            retVal = substruct0->hiddenNature;
             break;
         default:
             break;
@@ -6397,15 +6405,24 @@ u8 *UseStatIncreaseItem(u16 itemId)
     return gDisplayedStringBattle;
 }
 
-u8 GetNature(struct Pokemon *mon)
+u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {
     return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+    if (!checkHidden || GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)
+        return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
+    else
+        return GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0);
 }
 
 u8 GetNatureFromPersonality(u32 personality)
 {
     return personality % NUM_NATURES;
 }
+
+// [Ghoulslash] Nature mints implementation
+// Use original nature for pokemon evolution methods (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define EVOLUTION_USE_ORIGINAL_NATURE FALSE
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
@@ -6621,7 +6638,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_AMPED:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon);
+                    u8 nature = GetNature(mon, EVOLUTION_USE_ORIGINAL_NATURE);
                     switch (nature)
                     {
                     case NATURE_HARDY:
@@ -6645,7 +6662,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_LOW_KEY:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon);
+                    u8 nature = GetNature(mon, EVOLUTION_USE_ORIGINAL_NATURE);
                     switch (nature)
                     {
                     case NATURE_LONELY:
@@ -7763,9 +7780,14 @@ bool8 IsMonSpriteNotFlipped(u16 species)
     return gSpeciesInfo[species].noFlip;
 }
 
+// [Ghoulslash] Nature mints implementation
+// Use original nature for Favorite Flavour (Boolean)
+// Todo: Move this to somewhere more appropriate (config?)
+#define FAVORITE_FLAVOR_USE_ORIGINAL_NATURE FALSE
+
 s8 GetMonFlavorRelation(struct Pokemon *mon, u8 flavor)
 {
-    u8 nature = GetNature(mon);
+    u8 nature = GetNature(mon, FAVORITE_FLAVOR_USE_ORIGINAL_NATURE);
     return gPokeblockFlavorCompatibilityTable[nature * FLAVOR_COUNT + flavor];
 }
 
