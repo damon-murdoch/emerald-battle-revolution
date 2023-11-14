@@ -326,6 +326,22 @@ static u8 ObjectEventCB2_NoMovement2(void)
     return 0;
 }
 
+// [ghoulslash] Better Reflection System
+static void TryHidePlayerReflection(void)
+{
+    if (gObjectEvents[gPlayerAvatar.objectEventId].hasReflection) {
+        s16 x, y;
+        struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
+        x = playerObjEvent->currentCoords.x;
+        y = playerObjEvent->currentCoords.y;
+        MoveCoords(DIR_SOUTH, &x, &y);
+        if (!MetatileBehavior_IsReflective(MapGridGetMetatileBehaviorAt(x, y)))
+            playerObjEvent->hideReflection = TRUE;
+        else 
+            playerObjEvent->hideReflection = FALSE;
+    }
+}
+
 void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
 {
     struct ObjectEvent *playerObjEvent = &gObjectEvents[gPlayerAvatar.objectEventId];
@@ -333,6 +349,9 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
     HideShowWarpArrow(playerObjEvent);
     if (gPlayerAvatar.preventStep == FALSE)
     {
+        // [ghoulslash] Better Reflection System
+        TryHidePlayerReflection();
+
         Bike_TryAcroBikeHistoryUpdate(newKeys, heldKeys);
         if (TryInterruptObjectEventSpecialAnim(playerObjEvent, direction) == 0)
         {
@@ -343,6 +362,9 @@ void PlayerStep(u8 direction, u16 newKeys, u16 heldKeys)
                 MovePlayerAvatarUsingKeypadInput(direction, newKeys, heldKeys);
                 PlayerAllowForcedMovementIfMovingSameDirection();
             }
+
+            // [ghoulslash] Better Reflection System
+            TryHidePlayerReflection();
         }
     }
 }
@@ -1663,6 +1685,8 @@ static void Task_WaitStopSurfing(u8 taskId)
         gPlayerAvatar.preventStep = FALSE;
         UnlockPlayerFieldControls();
         DestroySprite(&gSprites[playerObjEvent->fieldEffectSpriteId]);
+        // [ghoulslash] Fix Surfing Dismount Ground Effects Bug
+        playerObjEvent->triggerGroundEffectsOnMove = TRUE;
         DestroyTask(taskId);
     }
 }

@@ -8083,7 +8083,8 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
 {
     u32 flags;
 
-    if (objEvent->triggerGroundEffectsOnMove)
+    // [LOuroboros] Keep the Camera from Making Waves
+    if (objEvent->triggerGroundEffectsOnMove && !objEvent->invisible)
     {
         flags = 0;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
@@ -8099,7 +8100,8 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
 {
     u32 flags;
 
-    if (objEvent->triggerGroundEffectsOnMove)
+    // [LOuroboros] Keep the Camera from Making Waves
+    if (objEvent->triggerGroundEffectsOnMove && !objEvent->invisible)
     {
         flags = 0;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
@@ -8116,7 +8118,8 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sp
 {
     u32 flags;
 
-    if (objEvent->triggerGroundEffectsOnStop)
+    // [LOuroboros] Keep the Camera from Making Waves
+    if (objEvent->triggerGroundEffectsOnStop && !objEvent->invisible)
     {
         flags = 0;
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
