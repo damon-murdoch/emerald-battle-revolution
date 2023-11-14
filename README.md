@@ -31,9 +31,9 @@ be credited as the project is developed.
 
 ### Bug Fixes
 
-* [EWRAM Fix](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen)
-* [Pokedex Fix](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)
-* [Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518)
+* ~~[EWRAM Fix](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen)~~
+* ~~[Pokedex Fix](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)~~
+* ~~[Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518)~~
 * [Implement RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)
 * [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
 * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
@@ -143,10 +143,21 @@ be credited as the project is developed.
 
 * `SonikkuA-DatH`, for creating the [Make space for EWRAM Data for Summary Screen](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen) tutorial
 
+* `Jaizu`, for creating the [Not showing dex entries until getting the Pokédex](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex) tutorial
+
+* `Anon822`, for creating the [Wrong Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.0.4
+
+Implemented not showing dex entries until getting the Pokedex 
+([tutorial by Jaizu](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)), 
+and an error screen for if a flash chip is not present on the cart 
+([tutorial by Anon822](https://www.pokecommunity.com/showpost.php?p=10449518))
 
 ### Ver. 0.0.3
 
