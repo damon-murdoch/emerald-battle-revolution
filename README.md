@@ -35,10 +35,9 @@ be credited as the project is developed.
 * ~~[Pokedex Fix](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)~~
 * ~~[Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518)~~
 * ~~[Implement RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)~~
-* [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
-* [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
-* [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)
-* [WaitForBlank Fix](https://github.com/pret/pokeemerald/wiki/Reflections)
+* ~~[Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)~~
+* ~~[Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)~~
+* ~~[Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)~~
 
 ### UI Improvements
 
@@ -149,6 +148,10 @@ be credited as the project is developed.
 
 * `FlameTix`, for creating the [Implement Missing Text Function RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT) tutorial
 
+* `Ghoulslash`, for creating the [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects) and [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections) tutorials
+
+* `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
@@ -162,6 +165,12 @@ an error screen for if a flash chip is not present on the cart
 ([tutorial by Anon822](https://www.pokecommunity.com/showpost.php?p=10449518)), 
 implemented missing text function RESET_FONT 
 ([tutorial by Flametix](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)),
+fixed surf dismount ground effect bug
+([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)), 
+fixed camera wave bug 
+([tutorial by LOuroboros](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)), 
+implemented better reflections
+([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Reflections))
 
 ### Ver. 0.0.3
 
