@@ -24,6 +24,7 @@
 #include "graphics.h"
 #include "pokemon_summary_screen.h"
 #include "item_menu.h"
+#include "config/nature.h"
 
 /*
     This file handles the screen where the player chooses
@@ -1375,11 +1376,6 @@ static bool8 LoadUsePokeblockMenuGfx(void)
     sMenu->info.helperState++;
     return TRUE;
 }
-
-// [Ghoulslash] Nature mints implementation
-// Use original nature for Favorite PokeBlock (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
 
 static void UpdateMonInfoText(u16 loadId, bool8 firstPrint)
 {

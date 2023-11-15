@@ -32,6 +32,7 @@
 #include "constants/items.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
+#include "config/nature.h"
 
 #define MAX_MENU_ITEMS 9
 #define MENU_MIDPOINT (MAX_MENU_ITEMS / 2)
@@ -1253,14 +1254,9 @@ static void CloseTossPokeblockWindow(u8 taskId)
     gTasks[taskId].func = Task_HandlePokeblockMenuInput;
 }
 
-// [Ghoulslash] Nature mints implementation
-// Use original nature for Favorite Toss Effect (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define TOSS_POKEBLOCK_USE_ORIGINAL_NATURE FALSE
-
 static void PokeblockAction_UseInBattle(u8 taskId)
 {
-    u8 nature = GetNature(&gEnemyParty[0], TOSS_POKEBLOCK_USE_ORIGINAL_NATURE);
+    u8 nature = GetNature(&gEnemyParty[0], POKEBLOCK_USE_ORIGINAL_NATURE);
 
     s16 gain = PokeblockGetGain(nature, &gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId]);
     StringCopy(gBattleTextBuff1, gPokeblockNames[gSaveBlock1Ptr->pokeblocks[gSpecialVar_ItemId].color]);

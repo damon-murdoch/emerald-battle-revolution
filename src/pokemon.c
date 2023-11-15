@@ -52,6 +52,7 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
+#include "config/nature.h"
 
 struct SpeciesItem
 {
@@ -6418,11 +6419,6 @@ u8 GetNatureFromPersonality(u32 personality)
 {
     return personality % NUM_NATURES;
 }
-
-// [Ghoulslash] Nature mints implementation
-// Use original nature for pokemon evolution methods (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define EVOLUTION_USE_ORIGINAL_NATURE FALSE
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
