@@ -43,7 +43,7 @@ be credited as the project is developed.
 
 * [Registered Items List](https://www.pokecommunity.com/showpost.php?p=10380770) / [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
 * [Reuse Repel Prompt](https://github.com/pret/pokeemerald/wiki/Prompt-for-reusing-Repels)
-* [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
+* ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
 * [Nature Mints](https://www.pokecommunity.com/showpost.php?p=10245635&postcount=191)
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
 * [Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)
@@ -148,7 +148,10 @@ be credited as the project is developed.
 
 * `FlameTix`, for creating the [Implement Missing Text Function RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT) tutorial
 
-* `Ghoulslash`, for creating the [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects) and [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections) tutorials
+* `Ghoulslash`, for creating the following tutorials: 
+  * [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
+  * [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)
+  * [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
 
 * `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
 
@@ -156,6 +159,11 @@ be credited as the project is developed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.0.5
+
+Implemented repeated medicine use without re-entering the bag menu
+([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use))
 
 ### Ver. 0.0.4
 
