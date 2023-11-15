@@ -49,7 +49,6 @@ be credited as the project is developed.
 * [Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
 * [Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)
-* [Faster HP Drain](https://github.com/pret/pokeemerald/wiki/Faster-HP-Drain)
 * [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
 * [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
@@ -71,7 +70,6 @@ be credited as the project is developed.
 * [DPPt Two-in-one-Bike](https://www.pokecommunity.com/showpost.php?p=10161144&postcount=74) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
 * [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
 * [Modify Pickup Item Table](https://www.pokecommunity.com/showpost.php?p=9987541&postcount=11)
-* [Update Sitrus Berry](https://github.com/pret/pokeemerald/wiki/Update-Sitrus-Berry's-effect-to-Gen-4-standard)
 * [Infinite TM Usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
 * [Items to increase/decrease IVs](https://www.pokecommunity.com/showpost.php?p=10469674)
 * [Increase Bag Capacity](https://www.pokecommunity.com/showpost.php?p=10523495) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Make-the-Bag-Able-to-Hold-120-Items-Instead-of-30)
@@ -81,7 +79,6 @@ be credited as the project is developed.
 
 * [Setting EVs with Scripting Specials](https://www.pokecommunity.com/showpost.php?p=10162417&postcount=80)
 * [Giving Custom Pokemon](https://www.pokecommunity.com/showpost.php?p=10203404)
-* [Create Party Pokemon](https://github.com/pret/pokeemerald/wiki/Temporarily-Replace-Player-or-Enemy-Party-Pokemon)
 
 ### Overworld Improvements
 
