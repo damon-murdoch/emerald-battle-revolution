@@ -6408,11 +6408,28 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {
+    // Return value
+    u8 nature;
+
+    DebugPrintf("Getting nature for Pokemon %d ...\n", mon->box.nickname);
+
     // [Ghoulslash] Nature mints implementation
-    if (!checkHidden || GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)
-        return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
-    else
-        return GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0);
+    if ((checkHidden == false) || (GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)) {
+
+        DebugPrintf("Retrieving original (non-hidden) nature ...\n");
+
+        nature = GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
+    }
+    else {
+        DebugPrintf("Retrieving hidden nature ...\n");
+
+        nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0);
+    }
+
+    DebugPrintf("Nature retrieved: %d ...\n", nature);
+
+    // Return nature
+    return nature;
 }
 
 u8 GetNatureFromPersonality(u32 personality)
@@ -6634,7 +6651,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_AMPED:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon, EVOLUTION_USE_ORIGINAL_NATURE);
+                    u8 nature = GetNature(mon, EVOLUTION_USE_HIDDEN_NATURE);
                     switch (nature)
                     {
                     case NATURE_HARDY:
@@ -6658,7 +6675,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
             case EVO_LEVEL_NATURE_LOW_KEY:
                 if (gEvolutionTable[species][i].param <= level)
                 {
-                    u8 nature = GetNature(mon, EVOLUTION_USE_ORIGINAL_NATURE);
+                    u8 nature = GetNature(mon, EVOLUTION_USE_HIDDEN_NATURE);
                     switch (nature)
                     {
                     case NATURE_LONELY:

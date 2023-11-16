@@ -1275,7 +1275,7 @@ void RemoveCameraObject(void)
 
 u8 GetPokeblockNameByMonNature(void)
 {
-    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()], POKEBLOCK_USE_ORIGINAL_NATURE), gStringVar1);
+    return CopyMonFavoritePokeblockName(GetNature(&gPlayerParty[GetLeadMonIndex()], POKEBLOCK_USE_HIDDEN_NATURE), gStringVar1);
 }
 
 void GetSecretBaseNearbyMapName(void)
@@ -2818,7 +2818,7 @@ void ShowNatureGirlMessage(void)
         gSpecialVar_0x8004 = 0;
 
     // [Ghoulslash] Nature mints implementation
-    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004], NATURE_GIRL_USE_ORIGINAL_NATURE);
+    nature = GetNature(&gPlayerParty[gSpecialVar_0x8004], NATURE_GIRL_USE_HIDDEN_NATURE);
     ShowFieldMessage(sNatureGirlMessages[nature]);
 }
 

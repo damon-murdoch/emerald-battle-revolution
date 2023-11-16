@@ -1504,24 +1504,24 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
         sum->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
         break;
     case 2:
+        // [Ghoulslash] Nature mints implementation
+        sum->nature = GetNature(mon, TRUE);
+
+        // Get current hp / max hp
+        sum->currentHP = GetMonData(mon, MON_DATA_HP);
+        sum->maxHP = GetMonData(mon, MON_DATA_MAX_HP);
+        
+        // Get atk/def/spatk/spdef/speed
         if (sMonSummaryScreen->monList.mons == gPlayerParty || sMonSummaryScreen->mode == SUMMARY_MODE_BOX || sMonSummaryScreen->handleDeoxys == TRUE)
         {
-            // [Ghoulslash] Nature mints implementation
-            sum->nature = GetNature(mon, TRUE);
-            sum->currentHP = GetMonData(mon, MON_DATA_HP);
-            sum->maxHP = GetMonData(mon, MON_DATA_MAX_HP);
             sum->atk = GetMonData(mon, MON_DATA_ATK);
             sum->def = GetMonData(mon, MON_DATA_DEF);
             sum->spatk = GetMonData(mon, MON_DATA_SPATK);
             sum->spdef = GetMonData(mon, MON_DATA_SPDEF);
             sum->speed = GetMonData(mon, MON_DATA_SPEED);
         }
-        else
+        else // Get atk2/def2/spatk2/spdef2/speed2
         {
-            // [Ghoulslash] Nature mints implementation
-            sum->nature = GetNature(mon, TRUE);
-            sum->currentHP = GetMonData(mon, MON_DATA_HP);
-            sum->maxHP = GetMonData(mon, MON_DATA_MAX_HP);
             sum->atk = GetMonData(mon, MON_DATA_ATK2);
             sum->def = GetMonData(mon, MON_DATA_DEF2);
             sum->spatk = GetMonData(mon, MON_DATA_SPATK2);
