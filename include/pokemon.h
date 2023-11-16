@@ -114,17 +114,7 @@ struct PokemonSubstruct0
     /*0x09*/ u8 friendship;
     /*0x0A*/ u8 pokeball; // 31 balls
     /*0x0B*/ u8 hiddenNature;  // 25 natures
-            // u16 filler:11;
-            // u8 free_sub0:3;
-            // u8 free_sub0_b;
 }; /* size = 12 */
-
-/*
-u16 filler;
-u8 hiddenNature:5;  // 25 natures
-u8 free_sub0:3;
-u8 free_sub0_b;
-*/
 
 struct PokemonSubstruct1
 {
