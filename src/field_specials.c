@@ -66,6 +66,7 @@
 #include "constants/metatile_labels.h"
 #include "palette.h"
 #include "battle_util.h"
+#include "config/nature.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -1271,11 +1272,6 @@ void RemoveCameraObject(void)
     CameraObjectSetFollowedSpriteId(GetPlayerAvatarSpriteId());
     RemoveObjectEventByLocalIdAndMap(OBJ_EVENT_ID_CAMERA, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
 }
-
-// [Ghoulslash] Nature mints implementation
-// Use original nature for Favorite PokeBlock (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
 
 u8 GetPokeblockNameByMonNature(void)
 {
@@ -2785,10 +2781,6 @@ void SetBattleTowerLinkPlayerGfx(void)
             VarSet(VAR_OBJ_GFX_ID_F - i, OBJ_EVENT_GFX_RIVAL_MAY_NORMAL);
     }
 }
-
-// Use original nature for Nature Girl (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define NATURE_GIRL_USE_ORIGINAL_NATURE FALSE
 
 void ShowNatureGirlMessage(void)
 {

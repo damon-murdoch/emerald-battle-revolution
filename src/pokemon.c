@@ -52,6 +52,7 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
+#include "config/nature.h"
 
 struct SpeciesItem
 {
@@ -6407,7 +6408,7 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {
-    return GetMonData(mon, MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+    // [Ghoulslash] Nature mints implementation
     if (!checkHidden || GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)
         return GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
     else
@@ -6418,11 +6419,6 @@ u8 GetNatureFromPersonality(u32 personality)
 {
     return personality % NUM_NATURES;
 }
-
-// [Ghoulslash] Nature mints implementation
-// Use original nature for pokemon evolution methods (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define EVOLUTION_USE_ORIGINAL_NATURE FALSE
 
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {

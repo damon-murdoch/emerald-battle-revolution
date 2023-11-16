@@ -25,6 +25,7 @@
 #include "trig.h"
 #include "util.h"
 #include "constants/rgb.h"
+#include "config/nature.h"
 
 enum {
     ANIMDATA_ROT_IDX,
@@ -854,11 +855,6 @@ static void Task_WaitForAtePokeblockMessage(u8 taskId)
     if (RunTextPrintersRetIsActive(0) != TRUE)
         gTasks[taskId].func = Task_FadeOutPokeblockFeed;
 }
-
-// [Ghoulslash] Nature mints implementation
-// Use original nature for Favorite PokeBlock (Boolean)
-// Todo: Move this to somewhere more appropriate (config?)
-#define POKEBLOCK_USE_ORIGINAL_NATURE FALSE
 
 static void Task_PrintAtePokeblockMessage(u8 taskId)
 {
