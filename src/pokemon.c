@@ -4758,6 +4758,8 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
     // Any field greater than MON_DATA_ENCRYPT_SEPARATOR is encrypted and must be treated as such
     if (field > MON_DATA_ENCRYPT_SEPARATOR)
     {
+        DebugPrintf("Retrieving encrypted box mon data field '%d' ...", field);
+
         substruct0 = &(GetSubstruct(boxMon, boxMon->personality, 0)->type0);
         substruct1 = &(GetSubstruct(boxMon, boxMon->personality, 1)->type1);
         substruct2 = &(GetSubstruct(boxMon, boxMon->personality, 2)->type2);
@@ -5015,7 +5017,12 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         // [Ghoulslash] Nature mints implementation
         case MON_DATA_HIDDEN_NATURE:
+
+            DebugPrintf("Retrieving hidden nature ...");
+
             retVal = substruct0->hiddenNature;
+
+            DebugPrintf("Retried: '%d' -> '%d' ...", (substruct0->hiddenNature), retVal);
             break;
         default:
             break;
@@ -5382,6 +5389,10 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             substruct3->spDefenseIV = (ivs >> 25) & MAX_IV_MASK;
             break;
         }
+        // [Ghoulslash] Nature mints implementation
+        case MON_DATA_HIDDEN_NATURE:
+            SET8(substruct0->hiddenNature);
+            break;
         default:
             break;
         }
@@ -6408,25 +6419,31 @@ u8 *UseStatIncreaseItem(u16 itemId)
 
 u8 GetNature(struct Pokemon *mon, bool32 checkHidden)
 {
+    // [Ghoulslash] Nature mints implementation
+
     // Return value
     u8 nature;
 
-    DebugPrintf("Getting nature for Pokemon %d ...\n", mon->box.nickname);
+    // Hidden nature
+    u8 hiddenNature = GetMonData(mon, MON_DATA_HIDDEN_NATURE);
 
-    // [Ghoulslash] Nature mints implementation
-    if ((checkHidden == false) || (GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0) == HIDDEN_NATURE_NONE)) {
+    DebugPrintf("Getting nature for Pokemon '%s' (Check Hidden: '%d') ...", mon->box.nickname, checkHidden);
 
-        DebugPrintf("Retrieving original (non-hidden) nature ...\n");
+    // Hidden nature set to false, or hidden nature is set to default
+    if ((checkHidden == FALSE) || (hiddenNature == HIDDEN_NATURE_NONE)) {
 
-        nature = GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY, 0));
+        DebugPrintf("Retrieving original (non-hidden) nature ...");
+
+        nature = GetNatureFromPersonality(GetMonData(mon, MON_DATA_PERSONALITY));
     }
     else {
-        DebugPrintf("Retrieving hidden nature ...\n");
+        DebugPrintf("Retrieving hidden nature ...");
 
-        nature = GetMonData(mon, MON_DATA_HIDDEN_NATURE, 0);
+        // Use hidden nature
+        nature = hiddenNature;
     }
 
-    DebugPrintf("Nature retrieved: %d ...\n", nature);
+    DebugPrintf("Nature retrieved: %d ... (hidden nature: %d)", nature, hiddenNature);
 
     // Return nature
     return nature;
