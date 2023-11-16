@@ -43,13 +43,12 @@ be credited as the project is developed.
 
 * [Registered Items List](https://www.pokecommunity.com/showpost.php?p=10380770) / [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
 * [Reuse Repel Prompt](https://github.com/pret/pokeemerald/wiki/Prompt-for-reusing-Repels)
-* [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
+* ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
 * [Nature Mints](https://www.pokecommunity.com/showpost.php?p=10245635&postcount=191)
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
 * [Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
 * [Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)
-* [Faster HP Drain](https://github.com/pret/pokeemerald/wiki/Faster-HP-Drain)
 * [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
 * [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
@@ -71,7 +70,6 @@ be credited as the project is developed.
 * [DPPt Two-in-one-Bike](https://www.pokecommunity.com/showpost.php?p=10161144&postcount=74) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
 * [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
 * [Modify Pickup Item Table](https://www.pokecommunity.com/showpost.php?p=9987541&postcount=11)
-* [Update Sitrus Berry](https://github.com/pret/pokeemerald/wiki/Update-Sitrus-Berry's-effect-to-Gen-4-standard)
 * [Infinite TM Usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
 * [Items to increase/decrease IVs](https://www.pokecommunity.com/showpost.php?p=10469674)
 * [Increase Bag Capacity](https://www.pokecommunity.com/showpost.php?p=10523495) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Make-the-Bag-Able-to-Hold-120-Items-Instead-of-30)
@@ -81,7 +79,6 @@ be credited as the project is developed.
 
 * [Setting EVs with Scripting Specials](https://www.pokecommunity.com/showpost.php?p=10162417&postcount=80)
 * [Giving Custom Pokemon](https://www.pokecommunity.com/showpost.php?p=10203404)
-* [Create Party Pokemon](https://github.com/pret/pokeemerald/wiki/Temporarily-Replace-Player-or-Enemy-Party-Pokemon)
 
 ### Overworld Improvements
 
@@ -148,7 +145,10 @@ be credited as the project is developed.
 
 * `FlameTix`, for creating the [Implement Missing Text Function RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT) tutorial
 
-* `Ghoulslash`, for creating the [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects) and [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections) tutorials
+* `Ghoulslash`, for creating the following tutorials: 
+  * [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
+  * [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)
+  * [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
 
 * `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
 
@@ -156,6 +156,11 @@ be credited as the project is developed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.0.5
+
+Implemented repeated medicine use without re-entering the bag menu
+([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use))
 
 ### Ver. 0.0.4
 
