@@ -46,7 +46,7 @@ be credited as the project is developed.
 * ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
 * [Nature Mints](https://www.pokecommunity.com/showpost.php?p=10245635&postcount=191)
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
-* [Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)
+* ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
 * [Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)
 * [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
@@ -152,6 +152,8 @@ be credited as the project is developed.
 
 * `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
 
+* `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
@@ -160,7 +162,8 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 ### Ver. 0.0.5
 
 Implemented repeated medicine use without re-entering the bag menu
-([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use))
+([tutorial by ghoulslash](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)),
+faster text speed ([tutorial by ellabrella](https://www.pokecommunity.com/showpost.php?p=10400198))
 
 ### Ver. 0.0.4
 
