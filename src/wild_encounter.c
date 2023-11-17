@@ -68,6 +68,10 @@ EWRAM_DATA static u32 sFeebasRngValue = 0;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 
+// [ghoulslash] Chain Fishing
+EWRAM_DATA u8 gChainFishingStreak = 0;
+EWRAM_DATA static u16 sLastFishingSpecies = 0;
+
 #include "data/wild_encounters.h"
 
 static const struct WildPokemon sWildFeebas = {20, 25, SPECIES_FEEBAS};
@@ -884,6 +888,8 @@ void FishingWildEncounter(u8 rod)
 {
     u16 species;
 
+    gIsFishingEncounter = TRUE; // Must be set before mon is created
+
     if (CheckFeebas() == TRUE)
     {
         u8 level = ChooseWildMonLevel(&sWildFeebas, 0, WILD_AREA_FISHING);
@@ -895,6 +901,21 @@ void FishingWildEncounter(u8 rod)
     {
         species = GenerateFishingWildMon(gWildMonHeaders[GetCurrentMapWildMonHeaderId()].fishingMonsInfo, rod);
     }
+
+    // [ghoulslash] Chain Fishing
+    if (species == sLastFishingSpecies)
+    {
+        if (gChainFishingStreak < 20){
+            gChainFishingStreak++;
+        }
+    }
+    else
+    {
+        gChainFishingStreak = 0; // Reeling in different species resets chain fish counter
+    }
+
+    sLastFishingSpecies = species;
+
     IncrementGameStat(GAME_STAT_FISHING_ENCOUNTERS);
     SetPokemonAnglerSpecies(species);
     gIsFishingEncounter = TRUE;
