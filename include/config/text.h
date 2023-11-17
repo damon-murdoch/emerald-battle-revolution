@@ -4,6 +4,9 @@
 // Automatically switch to lowercase
 #define TEXT_AUTO_LOWERCASE TRUE // Default: Switch automatically
 
+// Allow battle text to be skipped
+#define TEXT_BATTLE_SKIP TRUE // Default: Allow battle text skip
+
 // Slow Text Speed 
 #define TEXT_SPEED_SLOW 1 // (Default: 1 Character per frame)
 #define TEXT_SPEED_SLOW_DELAY 1 // Slow Text Speed Delay (Frames)

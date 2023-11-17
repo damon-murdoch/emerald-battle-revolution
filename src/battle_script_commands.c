@@ -62,6 +62,7 @@
 #include "battle_util.h"
 #include "constants/pokemon.h"
 #include "config/battle.h"
+#include "config/text.h"
 
 // Helper for accessing command arguments and advancing gBattlescriptCurrInstr.
 //
@@ -335,6 +336,9 @@ static const u16 sWhiteOutBadgeMoney[9] = { 8, 16, 24, 36, 48, 64, 80, 100, 120 
 #define LEVEL_UP_BANNER_END   512
 
 #define TAG_LVLUP_BANNER_MON_ICON 55130
+
+// [Mkol103] Improving the Pace of Battles
+#define CHECK_BATTLE_SKIP() (TEXT_BATTLE_SKIP && (JOY_NEW(A_BUTTON | B_BUTTON)))
 
 static bool8 IsTwoTurnsMove(u16 move);
 static void TrySetDestinyBondToHappen(void);
@@ -2655,7 +2659,10 @@ static void Cmd_waitmessage(void)
         else
         {
             u16 toWait = cmd->time;
-            if (++gPauseCounterBattle >= toWait)
+            
+            // [Mkol103] Improving the Pace of Battles
+            // If the battle pause counter has passed, or skip is pressed
+            if (++gPauseCounterBattle >= toWait || CHECK_BATTLE_SKIP())
             {
                 gPauseCounterBattle = 0;
                 gBattlescriptCurrInstr = cmd->nextInstr;
@@ -4831,7 +4838,10 @@ static void Cmd_pause(void)
     if (gBattleControllerExecFlags == 0)
     {
         u16 value = cmd->frames;
-        if (++gPauseCounterBattle >= value)
+
+        // [Mkol103] Improving the Pace of Battles
+        // If the battle pause counter has passed, or skip is pressed
+        if (++gPauseCounterBattle >= value || CHECK_BATTLE_SKIP())
         {
             gPauseCounterBattle = 0;
             gBattlescriptCurrInstr = cmd->nextInstr;

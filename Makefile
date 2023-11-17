@@ -36,9 +36,6 @@ else
 EXE :=
 endif
 
-# Project Build Version (major_minor_revision)
-VERSION := 0_0_5
-
 TITLE       := POKEMON EMER
 GAME_CODE   := BPEE
 MAKER_CODE  := 01
@@ -72,12 +69,12 @@ else
   CPP := $(PREFIX)cpp
 endif
 
-ROM_NAME := pokeemerald_dev_$(VERSION).gba
+ROM_NAME := pokeemerald_dev.gba
 ELF_NAME := $(ROM_NAME:.gba=.elf)
 MAP_NAME := $(ROM_NAME:.gba=.map)
 OBJ_DIR_NAME := build/emerald
 
-MODERN_ROM_NAME := pokeemerald_modern_dev_$(VERSION).gba
+MODERN_ROM_NAME := pokeemerald_modern_dev.gba
 MODERN_ELF_NAME := $(MODERN_ROM_NAME:.gba=.elf)
 MODERN_MAP_NAME := $(MODERN_ROM_NAME:.gba=.map)
 MODERN_OBJ_DIR_NAME := build/modern

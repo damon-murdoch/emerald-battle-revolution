@@ -47,7 +47,7 @@ be credited as the project is developed.
 * ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
 * ~~[Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)~~
-* [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
+* ~~[Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)~~
 * [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
 * [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)
@@ -143,10 +143,13 @@ be credited as the project is developed.
 
 * `Hiram Anderson`, for creating the [Extra Save Space](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code) tutorial
 
-* `FieryMewtwo`, for creating the [Keyboard auto switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/) 
-and [Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game) tutorials
+* `FieryMewtwo`, for creating the following tutorials: 
+  * [Keyboard auto switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/) 
+  * [Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)
 
 * `voloved`, for creating the [Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode) tutorial
+
+* `Mkol103`, for creating the [mid-battle test skip](https://www.pokecommunity.com/showpost.php?p=10266925) tutorial
 
 ## Changelog
 
@@ -158,7 +161,8 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 Implemented additional save space ([tutorial by Hiram Anderson](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code)),
 keyboard auto switch ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)), 
 early FRLG trading ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)), 
-sleep mode ([tutorial by voloved](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode))
+sleep mode ([tutorial by voloved](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)), 
+mid-battle text skip ([tutorial by Mkol103](https://www.pokecommunity.com/showpost.php?p=10266925))
 
 ### Ver. 0.0.5
 
