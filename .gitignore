@@ -21,6 +21,7 @@ sound/**/*.bin
 sound/songs/midi/*.s
 build_release.sh
 build_dev.sh
+cleanup.sh
 tools/agbcc
 *.map
 *.ld
