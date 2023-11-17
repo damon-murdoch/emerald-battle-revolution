@@ -42,9 +42,7 @@ be credited as the project is developed.
 ### UI Improvements
 
 * [Registered Items List](https://www.pokecommunity.com/showpost.php?p=10380770) / [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
-* [Reuse Repel Prompt](https://github.com/pret/pokeemerald/wiki/Prompt-for-reusing-Repels)
 * ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
-* [Nature Mints](https://www.pokecommunity.com/showpost.php?p=10245635&postcount=191)
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
 * ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
