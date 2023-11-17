@@ -41,18 +41,16 @@ be credited as the project is developed.
 
 ### UI Improvements
 
-* [Registered Items List](https://www.pokecommunity.com/showpost.php?p=10380770) / [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
-* [Reuse Repel Prompt](https://github.com/pret/pokeemerald/wiki/Prompt-for-reusing-Repels)
+* [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
 * ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
-* [Nature Mints](https://www.pokecommunity.com/showpost.php?p=10245635&postcount=191)
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
 * ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
-* [Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)
-* [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
-* [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
+* ~~[Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)~~
+* ~~[Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)~~
+* ~~[Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)~~
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
-* [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)
+* ~~[Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)~~
 * [Show Correct Hidden Power Type](https://www.pokecommunity.com/showpost.php?p=10269149)
 * [Move Relearner in Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602)
 * [Move Relearner for Pre-Evo Moves](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know)
@@ -95,17 +93,6 @@ be credited as the project is developed.
 * ~~[Intro Pokemon Replaced with Zorua](https://www.pokecommunity.com/showpost.php?p=9967857&postcount=6)~~
 * [Add Party to trainer card](https://www.pokecommunity.com/showpost.php?p=10566704&postcount=416)
 
-### Pokemon Breeding / Battling / Other Modifications
-
-* Updated spawn tables for new Pokemon (gen 4+)
-* [Eggs hatch at level 1](https://www.pokecommunity.com/showpost.php?p=10154622)
-* [Inherit nature with everstone](https://www.pokecommunity.com/showpost.php?p=10160374)
-* [Destiny Knot IV Inheritance](https://www.pokecommunity.com/showpost.php?p=10161151)
-* [Gen-6 Exp. Share](https://www.pokecommunity.com/showpost.php?p=10060538&postcount=26) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Gen-6-style-Exp.-Share---Alternative-Option)
-* [Improved Switching AI](https://www.pokecommunity.com/showpost.php?p=10263816) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10264391)
-* [Inherit moves from parents](https://www.pokecommunity.com/showpost.php?p=10416415)
-* [Add Hyper Training](https://www.pokecommunity.com/showpost.php?p=10597632&postcount=446)
-
 ### Battle Frontier
 
 * Pokemon EV/IV Customiser (NPC/item/etc.)
@@ -116,13 +103,13 @@ be credited as the project is developed.
 
 ### Optimisations / Other Improvements
 
-* [Faster Soft Resets](https://www.pokecommunity.com/showpost.php?p=10414167)
+* Updated spawn tables for new Pokemon (gen 4+)
 * [Save File Backwards Compatibility](https://github.com/pret/pokeemerald/wiki/How-to-Support-Savefile-Backwards-Compatibility)
 * [Version Identification](https://github.com/pret/pokeemerald/wiki/Adding-Support-for-Connectivity-with-Other-Hacks-Whilst-Maintaining-Connectivity-with-Vanilla)
-* [Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)
-* [Extra Save Space](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code)
+* ~~[Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)~~
+* ~~[Extra Save Space](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code)~~
 * [Uniquely Shuffle Arrays](https://github.com/pret/pokeemerald/wiki/Uniquely-Shuffle-Array)
-* [Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)
+* ~~[Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)~~
 
 ## Useful Links 
 
@@ -154,10 +141,34 @@ be credited as the project is developed.
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
+* `Hiram Anderson`, for creating the [Extra Save Space](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code) tutorial
+
+* `FieryMewtwo`, for creating the following tutorials: 
+  * [Keyboard auto switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/) 
+  * [Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)
+
+* `voloved`, for creating the [Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode) tutorial
+
+* `Mkol103`, for creating the [mid-battle test skip](https://www.pokecommunity.com/showpost.php?p=10266925) tutorial
+
+* `DizzyEgg`, for creating the [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen) tutorial
+
+* `PokemonCrazy`, for creating the [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.0.6
+
+Implemented additional save space ([tutorial by Hiram Anderson](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code)),
+keyboard auto switch ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)), 
+early FRLG trading ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)), 
+sleep mode ([tutorial by voloved](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)), 
+mid-battle text skip ([tutorial by Mkol103](https://www.pokecommunity.com/showpost.php?p=10266925)), 
+coloured stats by nature ([tutorial by DizzyEgg](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)),
+show EVs / IVs in summary ([tutorial by PokemonCrazy](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77))
 
 ### Ver. 0.0.5
 

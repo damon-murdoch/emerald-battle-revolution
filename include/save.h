@@ -1,10 +1,17 @@
 #ifndef GUARD_SAVE_H
 #define GUARD_SAVE_H
 
-// Each 4 KiB flash sector contains 3968 bytes of actual data followed by a 128 byte footer.
-// Only 12 bytes of the footer are used.
+#include "config/system.h"
+
+// Extra Sector Space
+#ifdef ENABLE_EXTRA_SPACE
+#define SECTOR_DATA_SIZE 4084
+#define SECTOR_FOOTER_SIZE 12
+#else // No Extra Space
 #define SECTOR_DATA_SIZE 3968
 #define SECTOR_FOOTER_SIZE 128
+#endif // EXTRA_SPACE
+
 #define SECTOR_SIZE (SECTOR_DATA_SIZE + SECTOR_FOOTER_SIZE)
 
 #define NUM_SAVE_SLOTS 2

@@ -29,6 +29,7 @@
 #include "main.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
+#include "config/text.h"
 
 enum {
     INPUT_NONE,
@@ -1480,7 +1481,14 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     {
         bool8 textFull = AddTextCharacter();
 
+        if (TEXT_AUTO_LOWERCASE){
+            // [FieryMewtwo] Automatically switch keyboard to lowercase after the first character
+            if (sNamingScreen ->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
+                MainState_StartPageSwap();
+        }
+
         SquishCursor();
+        
         if (textFull)
         {
             SetInputState(INPUT_STATE_OVERRIDE);

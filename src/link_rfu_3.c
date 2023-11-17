@@ -6,6 +6,7 @@
 #include "random.h"
 #include "text.h"
 #include "event_data.h"
+#include "config/system.h"
 
 enum {
     WIRELESS_STATUS_ANIM_3_BARS,
@@ -677,7 +678,12 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->compatibility.hasNews = FALSE;
     data->compatibility.hasCard = FALSE;
     data->compatibility.unknown = FALSE;
+#ifdef ENABLE_FRLG_EARLY_TRADE
+    // [FieryMewtwo] Enable trade with FRLG without beating the game
+    data->compatibility.canLinkNationally = TRUE;
+#else
     data->compatibility.canLinkNationally = FlagGet(FLAG_IS_CHAMPION);
+#endif
     data->compatibility.hasNationalDex = IsNationalPokedexEnabled();
     data->compatibility.gameClear = FlagGet(FLAG_SYS_GAME_CLEAR);
 }
