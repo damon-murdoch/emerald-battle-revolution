@@ -41,12 +41,12 @@ be credited as the project is developed.
 
 ### UI Improvements
 
-* [Registered Items List](https://www.pokecommunity.com/showpost.php?p=10380770) / [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
+* [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
 * ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
 * [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
 * ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
-* [Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)
+* ~~[Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)~~
 * [Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)
 * [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
