@@ -19,6 +19,8 @@
 *.fwjpnfont
 sound/**/*.bin
 sound/songs/midi/*.s
+build_release.sh
+build_dev.sh
 tools/agbcc
 *.map
 *.ld
