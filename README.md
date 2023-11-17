@@ -48,9 +48,9 @@ be credited as the project is developed.
 * [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
 * ~~[Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)~~
 * ~~[Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)~~
-* [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)
+* ~~[Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)~~
 * [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
-* [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)
+* ~~[Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)~~
 * [Show Correct Hidden Power Type](https://www.pokecommunity.com/showpost.php?p=10269149)
 * [Move Relearner in Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602)
 * [Move Relearner for Pre-Evo Moves](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know)
@@ -151,6 +151,10 @@ be credited as the project is developed.
 
 * `Mkol103`, for creating the [mid-battle test skip](https://www.pokecommunity.com/showpost.php?p=10266925) tutorial
 
+* `DizzyEgg`, for creating the [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen) tutorial
+
+* `PokemonCrazy`, for creating the [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77) tutorial
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
@@ -162,7 +166,9 @@ Implemented additional save space ([tutorial by Hiram Anderson](https://github.c
 keyboard auto switch ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)), 
 early FRLG trading ([tutorial by FieryMewtwo](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)), 
 sleep mode ([tutorial by voloved](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)), 
-mid-battle text skip ([tutorial by Mkol103](https://www.pokecommunity.com/showpost.php?p=10266925))
+mid-battle text skip ([tutorial by Mkol103](https://www.pokecommunity.com/showpost.php?p=10266925)), 
+coloured stats by nature ([tutorial by DizzyEgg](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)),
+show EVs / IVs in summary ([tutorial by PokemonCrazy](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77))
 
 ### Ver. 0.0.5
 
