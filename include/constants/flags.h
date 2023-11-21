@@ -42,7 +42,7 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#define FLAG_UNUSED_0x020    0x20 // Unused Flag
+#define FLAG_EXP_SHARE_ENABLED    0x20
 #define FLAG_UNUSED_0x021    0x21 // Unused Flag
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
 #define FLAG_UNUSED_0x023    0x23 // Unused Flag
@@ -1498,7 +1498,7 @@
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
-#define FLAG_UNUSED_0x8E3                           (SYSTEM_FLAGS + 0x83) // Unused Flag
+#define FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS         (SYSTEM_FLAGS + 0x83) // Unused Flag
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 

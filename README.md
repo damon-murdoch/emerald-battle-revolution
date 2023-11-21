@@ -56,7 +56,7 @@ be credited as the project is developed.
 * [Move Relearner for Pre-Evo Moves](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know)
 * [Show Type-Effectiveness in Battle](https://www.pokecommunity.com/showpost.php?p=10167016&postcount=83) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Show-Type-Effectiveness-In-Battle-Using-Pre-Existing--Function-and-Disable-in-Option-Menu)
 * [Add Move Description in Battles](https://github.com/pret/pokeemerald/wiki/Add-Description-Submenu)
-* [Keyboard lowercase auto-switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)
+* ~~[Keyboard lowercase auto-switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)~~
 * [Allow Nicknaming from Party Menu](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
 * [XY-Style Wrapping Summary Screen](https://www.pokecommunity.com/showpost.php?p=10060875&postcount=27)
 * [Swap party slots with select](https://www.pokecommunity.com/showpost.php?p=10420662)
