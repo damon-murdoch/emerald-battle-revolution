@@ -510,6 +510,22 @@ EventScript_RegisterProfBirch::
 	release
 	end
 
+LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
+	giveitem ITEM_POKE_BALL, 5
+	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls, MSGBOX_DEFAULT
+	setvar VAR_RESULT, 0
+	return
+
+LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese, MSGBOX_DEFAULT
+	giveitem ITEM_POKE_BALL, 5
+	call_if_eq VAR_RESULT, FALSE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls, MSGBOX_DEFAULT
+	setvar VAR_RESULT, 1
+	return
+
 LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
@@ -546,9 +562,37 @@ LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait::
 	release
 	end
 
+LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
+	.string "MAY: Oh, wow, {PLAYER}{KUN}!\n"
+	.string "You got a POKéDEX, too!\p"
+	.string "That's great! Just like me!\n"
+	.string "I've got something for you, too!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
+	.string "MAY: It's fun if you can get a lot of\n"
+	.string "POKéMON!\p"
+	.string "I'm going to look all over the place\n"
+	.string "because I want different POKéMON.\p"
+	.string "If I find any cute POKéMON, I'll catch\n"
+	.string "them with POKé BALLS!$"
+
 LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull, MSGBOX_DEFAULT
 	return
+
+LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
+	.string "BRENDAN: Huh…\n"
+	.string "So you got a POKéDEX, too.\p"
+	.string "Well then, here.\n"
+	.string "I'll give you these.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
+	.string "BRENDAN: You know it's more fun to\n"
+	.string "have a whole bunch of POKéMON.\p"
+	.string "I'm going to explore all over the place\n"
+	.string "to find different POKéMON.\p"
+	.string "If I find any cool POKéMON, you bet\n"
+	.string "I'll try to get them with POKé BALLS.$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull, MSGBOX_DEFAULT
@@ -965,7 +1009,7 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex {
 	}
 	else // Already has national pokedex
 	{
-		msgbox(format("... Oh! it appears you already have the national Pokedex!"))
+		msgbox(format("... Oh! it appears you already have the national POKéDEX!"))
 	}
 
 	// Clean up
@@ -978,14 +1022,10 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
 	if (flag(FLAG_RECEIVED_POKEDEX_FROM_BIRCH) == false){
 		call(LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex)
 	}
-	else // Already has Pokedex
+	else // Already has POKéDEX
 	{
-		msgbox(format("... Oh! it appears you already have the Pokedex!"))
+		msgbox(format("... Oh! it appears you already have the POKéDEX!"))
 	}
-
-	// Also enable national dex flag (if unset)
-	special(EnableNationalPokedex)
-	setflag(FLAG_SYS_NATIONAL_DEX)
 
 	// Clean up
 	releaseall
@@ -1001,19 +1041,25 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems {
 
 		giveitem(ITEM_MEGA_RING)
 
-		msgbox(format("The Mega Ring will allow compatible Pokemon to mega evolve once per battle, when holding their respective Mega Stone."))
+		msgbox(format("The Mega Ring will allow compatible POKéMON to mega evolve once per battle, when holding their respective Mega Stone."))
 
 		giveitem(ITEM_Z_POWER_RING)
 
-		msgbox(format("The Z Power Ring will allow your Pokemon to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some Pokemon even have signature Z-Moves!"))
+		msgbox(format("The Z Power Ring will allow your POKéMON to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some POKéMON even have signature Z-Moves!"))
 
 		// I have to decide if I even want this, lol
 		giveitem(ITEM_DYNAMAX_BAND)
 
-		msgbox(format("The Dynamax Band will allow you to Dynamax your Pokemon once per battle under certain circumstances. Some Pokemon even have special Gigantamax formes!"))
+		msgbox(format("The Dynamax Band will allow you to Dynamax your POKéMON once per battle under certain circumstances. Some POKéMON even have special Gigantamax formes!"))
 
 		msgbox(format("Mega Stones and Z-Crystals may be found scattered across the HOENN region, or may even be found in shops."))
 		msgbox(format("Utilise these abilities to achieve your full potential as a trainer!"))
+
+		// Also enable national dex flag (if unset)
+		special(EnableNationalPokedex)
+		setflag(FLAG_SYS_NATIONAL_DEX)
+
+		msgbox(format("I've also taken the liberty of upgrading your POKéDEX to the national version. You'll be able to record all kinds of POKéMON, even those not normally seen in the HOENN region!"))
 
 		// If this is unset, a trainer may return to 
 		// professor Birch and receive these items later
