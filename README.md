@@ -66,7 +66,7 @@ be credited as the project is developed.
 
 * [New Item Balls Utility](https://github.com/pret/pokeemerald/wiki/Set-Up-Item-Balls-on-a-Map-Without-Needing-New-Scripts)
 * [DPPt Two-in-one-Bike](https://www.pokecommunity.com/showpost.php?p=10161144&postcount=74) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
-* [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
+* ~~[Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)~~
 * [Modify Pickup Item Table](https://www.pokecommunity.com/showpost.php?p=9987541&postcount=11)
 * [Infinite TM Usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
 * [Items to increase/decrease IVs](https://www.pokecommunity.com/showpost.php?p=10469674)
@@ -82,7 +82,6 @@ be credited as the project is developed.
 
 * [Day/Night Encounters](https://www.pokecommunity.com/showpost.php?p=10450677)
 * [Overworld Expansion](https://www.pokecommunity.com/showpost.php?p=10221532&postcount=176)
-* [Allow Running Indoors](https://github.com/pret/pokeemerald/wiki/Allow-running-indoors)
 * [Faster Surfing](https://www.pokecommunity.com/showpost.php?p=10137446&postcount=59)
 * [Add PC Access to PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav)
 * [Catch both Latios and Latias](https://github.com/pret/pokeemerald/wiki/Allow-Both-Latios-and-Latias-Appear.)
@@ -136,6 +135,7 @@ be credited as the project is developed.
   * [Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)
   * [Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)
   * [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
+  * [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
 
 * `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
 
@@ -155,10 +155,21 @@ be credited as the project is developed.
 
 * `PokemonCrazy`, for creating the [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77) tutorial
 
+* `huderlem`, for creating [Poryscript](https://github.com/huderlem/poryscript)
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.1.0
+
+Implemented [Poryscript](https://github.com/huderlem/poryscript) to build pipeline, 
+converted all pre-existing map script.inc files to .pory format, 
+removed running shoes event when returning to Littleroot town and enabled running shoes flags by default when exiting the truck, 
+Added National Dex upgrade to initial Birch Pokedex event, as well as the battle key items (Mega Ring, Z Power Ring, Dynamax Band), 
+Added follow-up event where these items can be recieved instead of they are missed initially (for migrated save files). 
+Modified EXP.Share to use Gen 6+ behavior (Key item, affects all party members, can be toggled on or off.)
 
 ### Ver. 0.0.6
 
