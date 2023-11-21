@@ -514,13 +514,22 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
+	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
 	closemessage
-	call LittlerootTown_ProfessorBirchsLab_EventScript_RivalGivePokeballs
+	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
 	setvar VAR_BIRCH_LAB_STATE, 5
 	setflag FLAG_ADVENTURE_STARTED
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	releaseall
+	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	playfanfare MUS_OBTAIN_ITEM
@@ -978,18 +987,6 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
 	special(EnableNationalPokedex)
 	setflag(FLAG_SYS_NATIONAL_DEX)
 
-	// Make player look at rival
-	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterUp)
-	waitmovement(0)
-
-	// Battle mechanic items not received
-	if (flag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS) == false){
-		msgbox(format("Before you go, I have a few other things I'd like to give you."))
-
-		// Give battle mechanic items (and experience share)
-		call(LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems)
-	}
-
 	// Clean up
 	releaseall
 	end
@@ -997,26 +994,41 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems {
 
-	giveitem(ITEM_MEGA_RING)
+	// Battle mechanic items not received
+	if (flag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS) == false)
+	{
+		msgbox(format("Before you go, I have a few other things I'd like to give you."))
 
-	msgbox(format("The MEGA RING will allow compatible Pokemon to mega evolve once per battle, when holding their respective Mega Stone."))
+		giveitem(ITEM_MEGA_RING)
 
-	giveitem(ITEM_Z_POWER_RING)
+		msgbox(format("The Mega Ring will allow compatible Pokemon to mega evolve once per battle, when holding their respective Mega Stone."))
 
-	msgbox(format("The Z RING will allow Pokemon to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some Pokemon even have signature Z-Moves!"))
+		giveitem(ITEM_Z_POWER_RING)
 
-	// I have to decide if I even want this, lol
-	// giveitem(ITEM_DYNAMAX_BAND)
+		msgbox(format("The Z Power Ring will allow your Pokemon to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some Pokemon even have signature Z-Moves!"))
 
-	msgbox(format("Mega Stones and Z-Crystals may be found scattered across the HOENN region, or may even be found in shops. Utilise them to achieve your full potential as a trainer!"))
+		// I have to decide if I even want this, lol
+		giveitem(ITEM_DYNAMAX_BAND)
 
-	// If this is unset, a trainer may return to 
-	// professor Birch and receive these items later
-	setflag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS)
+		msgbox(format("The Dynamax Band will allow you to Dynamax your Pokemon once per battle under certain circumstances. Some Pokemon even have special Gigantamax formes!"))
+
+		msgbox(format("Mega Stones and Z-Crystals may be found scattered across the HOENN region, or may even be found in shops."))
+		msgbox(format("Utilise these abilities to achieve your full potential as a trainer!"))
+
+		// If this is unset, a trainer may return to 
+		// professor Birch and receive these items later
+		setflag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS)
+	}
+	else // Player has already received the items
+	{
+		// Should not happen, just a safety net
+		msgbox(format("... Oh! You already have the battle items!"))
+	}
 }
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems {
-	msgbox(format("Oh, {PLAYER}! Good to see you. I have a few items I'd like to give you!"))
+
+	msgbox(format("Oh, {PLAYER}! Good to see you."))
 
 	// Give battle mechanic items (and experience share)
 	call(LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems)
@@ -1024,18 +1036,4 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems 
 	// Clean up
 	release
 	end
-}
-
-script LittlerootTown_ProfessorBirchsLab_EventScript_RivalGivePokeballs {
-	// Move rival character
-	applymovement(LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer)
-	waitmovement(0)
-
-	// Make player look at rival
-	applymovement(OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight)
-	waitmovement(0)
-
-	msgbox(format("Oh wow, {PLAYER}! You got a POKéDEX too! That's great! Just like me! I've got something for you, too!"))
-	giveitem(ITEM_POKE_BALL, 5)
-	msgbox(format("You can catch all kinds of POKéMON with these! I'm going to look all over the place and catch as many different POKéMON as I can!"))
 }
