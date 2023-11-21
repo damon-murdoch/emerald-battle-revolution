@@ -105,7 +105,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_SetObjectPosForJohtoStarters::
 LittlerootTown_ProfessorBirchsLab_OnFrame:
 	map_script_2 VAR_BIRCH_LAB_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GiveStarterEvent
 	map_script_2 VAR_BIRCH_LAB_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent
-	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
+	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 1, LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex
 	map_script_2 VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 4, LittlerootTown_ProfessorBirchsLab_EventScript_ChooseJohtoStarter
 	.2byte 0
 
@@ -152,7 +152,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedexEvent::
 	lockall
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex
 	waitmovement 0
-	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex
 	end
 
 LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForPokedex:
@@ -209,8 +209,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex::
 	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 0
 	setflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
-	releaseall
-	end
 
 LittlerootTown_ProfessorBirchsLab_EventScript_MayUpgradeComment::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayUpgradeSoCool, MSGBOX_DEFAULT
@@ -472,6 +470,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
+	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -510,26 +509,6 @@ EventScript_RegisterProfBirch::
 	release
 	end
 
-LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
-	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
-	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	closemessage
-	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	checkplayergender
-	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
-	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
-	setvar VAR_BIRCH_LAB_STATE, 5
-	setflag FLAG_ADVENTURE_STARTED
-	setvar VAR_OLDALE_TOWN_STATE, 1
-	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
-	setvar VAR_LITTLEROOT_TOWN_STATE, 3
-	releaseall
-	end
-
 LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese, MSGBOX_DEFAULT
 	giveitem ITEM_POKE_BALL, 5
@@ -546,6 +525,27 @@ LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls::
 	setvar VAR_RESULT, 1
 	return
 
+LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
+	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
+	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
+	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	closemessage
+	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	checkplayergender
+	call_if_eq VAR_RESULT, MALE, LittlerootTown_ProfessorBirchsLab_EventScript_MayGivePokeBalls
+	call_if_eq VAR_RESULT, FEMALE, LittlerootTown_ProfessorBirchsLab_EventScript_BrendanGivePokeBalls
+	setvar VAR_BIRCH_LAB_STATE, 5
+	setflag FLAG_ADVENTURE_STARTED
+	setvar VAR_OLDALE_TOWN_STATE, 1
+	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
+	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	releaseall
+	end
+
 LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex::
 	playfanfare MUS_OBTAIN_ITEM
 	message LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex
@@ -561,9 +561,37 @@ LittlerootTown_ProfessorBirchsLab_EventScript_PokemonAwait::
 	release
 	end
 
+LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
+	.string "MAY: Oh, wow, {PLAYER}{KUN}!\n"
+	.string "You got a POKéDEX, too!\p"
+	.string "That's great! Just like me!\n"
+	.string "I've got something for you, too!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
+	.string "MAY: It's fun if you can get a lot of\n"
+	.string "POKéMON!\p"
+	.string "I'm going to look all over the place\n"
+	.string "because I want different POKéMON.\p"
+	.string "If I find any cute POKéMON, I'll catch\n"
+	.string "them with POKé BALLS!$"
+
 LittlerootTown_ProfessorBirchsLab_EventScript_MayNoRoomForPokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull, MSGBOX_DEFAULT
 	return
+
+LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
+	.string "BRENDAN: Huh…\n"
+	.string "So you got a POKéDEX, too.\p"
+	.string "Well then, here.\n"
+	.string "I'll give you these.$"
+
+LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
+	.string "BRENDAN: You know it's more fun to\n"
+	.string "have a whole bunch of POKéMON.\p"
+	.string "I'm going to explore all over the place\n"
+	.string "to find different POKéMON.\p"
+	.string "If I find any cool POKéMON, you bet\n"
+	.string "I'll try to get them with POKé BALLS.$"
 
 LittlerootTown_ProfessorBirchsLab_EventScript_BrendanNoRoomForPokeBalls::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull, MSGBOX_DEFAULT
@@ -766,40 +794,12 @@ LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
 	.string "Argh, I'm getting the itch to get out\n"
 	.string "and do fieldwork again!$"
 
-LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
-	.string "MAY: Oh, wow, {PLAYER}{KUN}!\n"
-	.string "You got a POKéDEX, too!\p"
-	.string "That's great! Just like me!\n"
-	.string "I've got something for you, too!$"
-
-LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
-	.string "MAY: It's fun if you can get a lot of\n"
-	.string "POKéMON!\p"
-	.string "I'm going to look all over the place\n"
-	.string "because I want different POKéMON.\p"
-	.string "If I find any cute POKéMON, I'll catch\n"
-	.string "them with POKé BALLS!$"
-
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull:
 	.string "Oh? Your BAG's full.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext:
 	.string "MAY: I wonder where I should go look\n"
 	.string "for POKéMON next?$"
-
-LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
-	.string "BRENDAN: Huh…\n"
-	.string "So you got a POKéDEX, too.\p"
-	.string "Well then, here.\n"
-	.string "I'll give you these.$"
-
-LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
-	.string "BRENDAN: You know it's more fun to\n"
-	.string "have a whole bunch of POKéMON.\p"
-	.string "I'm going to explore all over the place\n"
-	.string "to find different POKéMON.\p"
-	.string "If I find any cool POKéMON, you bet\n"
-	.string "I'll try to get them with POKé BALLS.$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
 	.string "Hey, your BAG's full.$"
@@ -999,3 +999,111 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 	.string "we meet. I'll be waiting!\p"
 	.string "… … … … … …\n"
 	.string "… … … … … Click!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex::
+	goto_if_unset FLAG_SYS_NATIONAL_DEX, LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_2
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_1:
+	releaseall
+	end
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_2:
+	call LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_1
+
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex::
+	goto_if_unset FLAG_RECEIVED_POKEDEX_FROM_BIRCH, LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_2
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_Text_0
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_1:
+	releaseall
+	end
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_2:
+	call LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_1
+
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems::
+	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_7
+	return
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1:
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0
+	giveitem ITEM_MEGA_RING
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1
+	giveitem ITEM_Z_POWER_RING
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2
+	giveitem ITEM_DYNAMAX_BAND
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5
+	special EnableNationalPokedex
+	setflag FLAG_SYS_NATIONAL_DEX
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_6
+	setflag FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS
+	return
+
+
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems::
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0
+	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	release
+	end
+
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0:
+	.string "... Oh! it appears you already have the\n"
+	.string "national POKéDEX!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_Text_0:
+	.string "... Oh! it appears you already have the\n"
+	.string "POKéDEX!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0:
+	.string "Before you go, I have a few other\n"
+	.string "things I'd like to give you.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1:
+	.string "The Mega Ring will allow compatible\n"
+	.string "POKéMON to mega evolve once per battle,\l"
+	.string "when holding their respective Mega\l"
+	.string "Stone.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2:
+	.string "The Z Power Ring will allow your POKéMON\n"
+	.string "to use a Powerful Z-Move once per\l"
+	.string "battle, when holding the correct a\l"
+	.string "Z-Crystal. Some POKéMON even have\l"
+	.string "signature Z-Moves!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3:
+	.string "The Dynamax Band will allow you to\n"
+	.string "Dynamax your POKéMON once per battle\l"
+	.string "under certain circumstances. Some\l"
+	.string "POKéMON even have special Gigantamax\l"
+	.string "formes!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4:
+	.string "Mega Stones and Z-Crystals may be\n"
+	.string "found scattered across the HOENN\l"
+	.string "region, or may even be found in shops.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5:
+	.string "Utilise these abilities to achieve your\n"
+	.string "full potential as a trainer!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_6:
+	.string "I've also taken the liberty of\n"
+	.string "upgrading your POKéDEX to the national\l"
+	.string "version. You'll be able to record all\l"
+	.string "kinds of POKéMON, even those not\l"
+	.string "normally seen in the HOENN region!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_7:
+	.string "... Oh! You already have the battle\n"
+	.string "items!$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0:
+	.string "Oh, {PLAYER}! Good to see you.$"

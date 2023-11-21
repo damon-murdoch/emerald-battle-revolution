@@ -94,6 +94,9 @@ void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
             StringCopy(dst, gText_PokeBalls);
     }
     else
+        StringCopy(dst, ItemId_GetName(itemId));
+    
+    if (quantity > 1)
     {
         if (itemId >= FIRST_BERRY_INDEX && itemId <= LAST_BERRY_INDEX)
             GetBerryCountString(dst, gBerries[itemId - FIRST_BERRY_INDEX].name, quantity);

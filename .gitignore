@@ -20,6 +20,7 @@
 sound/**/*.bin
 sound/songs/midi/*.s
 build_release.sh
+convert_inc.sh
 build_dev.sh
 cleanup.sh
 tools/agbcc
