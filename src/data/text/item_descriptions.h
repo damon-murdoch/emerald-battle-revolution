@@ -390,33 +390,33 @@ static const u8 sPPMaxDesc[] = _(
 // EV Feathers
 static const u8 sHealthFeatherDesc[] = _(
     "An item that raises\n"
-    "the base HP of\n"
-    "a Pokémon.");
+    "the HP EVs of a\n"
+    "Pokémon by four.");
 
 static const u8 sMuscleFeatherDesc[] = _(
     "An item that raises\n"
-    "the base Attack of\n"
-    "a Pokémon.");
+    "the Attack EVs of a\n"
+    "Pokémon by four.");
 
 static const u8 sResistFeatherDesc[] = _(
     "An item that raises\n"
-    "the base Defense\n"
-    "of a Pokémon.");
+    "the Defense EVs of a\n"
+    "Pokémon by four.");
 
 static const u8 sGeniusFeatherDesc[] = _(
     "An item that raises\n"
-    "the base Sp. Atk.\n"
-    "of a Pokémon.");
+    "the Sp.Atk EVs of a.\n"
+    "Pokémon by four.");
 
 static const u8 sCleverFeatherDesc[] = _(
     "An item that raises\n"
-    "the base Sp. Def.\n"
-    "of a Pokémon.");
+    "the Sp.Def EVs of a.\n"
+    "Pokémon by four.");
 
 static const u8 sSwiftFeatherDesc[] = _(
     "An item that raises\n"
-    "the base Speed of\n"
-    "a Pokémon.");
+    "the Speed EVs of a.\n"
+    "Pokémon by four.");
 
 // Ability Modifiers
 static const u8 sAbilityCapsuleDesc[] = _(
