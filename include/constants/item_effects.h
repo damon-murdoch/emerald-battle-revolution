@@ -63,8 +63,8 @@
 #define ITEM6_HEAL_PP_FULL   0x7F
 
 // Amount of EV modified by ITEM4_EV_HP, ITEM4_EV_ATK, ITEM5_EV_DEF, ITEM5_EV_SPEED, ITEM5_EV_SPDEF and ITEM5_EV_SPATK
-#define ITEM6_ADD_EV       10
-#define ITEM6_SUBTRACT_EV -10
+#define ITEM6_MAX_EV      252
+#define ITEM6_MIN_EV     -255
 #define ITEM6_ADD_FOUR_EVS  4
 
 // Used for GetItemEffectType.
