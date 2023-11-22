@@ -1035,7 +1035,7 @@ Route104_Text_LikeFillingMouthWithSeedsTakeThis:
 	.string "Use it on a POKéMON, and it will learn\n"
 	.string "a move for firing seeds rapidly.$"
 
-Route104_Text_TMsAreOneTimeUse:
+Route104_Text_TMsCanBeReused:
 	.string "By the way, a TM, TECHNICAL MACHINE,\n"
 	.string "can be used as many times as you want!$"
 

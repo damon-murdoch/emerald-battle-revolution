@@ -349,28 +349,34 @@ static const u8 sBigMalasadaDesc[] = _(
 
 // Vitamins
 static const u8 sHPUpDesc[] = _(
-    "Maximises the HP EVs\n"
-    "of one Pokémon.");
+    "An item that raises\n"
+    "the HP EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sProteinDesc[] = _(
-    "Maximises the Attack\n"
-    "EVs of one Pokémon.");
+    "An item that raises\n"
+    "the Attack EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sIronDesc[] = _(
-    "Maximises the Defense\n"
-    "EVs of one Pokémon.");
+    "An item that raises\n"
+    "the Defense EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sCalciumDesc[] = _(
-    "Maximises the Sp.Atk\n"
-    "EVs of one Pokémon.");
+    "An item that raises\n"
+    "the Sp.Atk EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sZincDesc[] = _(
-    "Maximises the Sp.Def\n"
-    "EVs of one Pokémon.");
+    "An item that raises\n"
+    "the Sp.Def EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sCarbosDesc[] = _(
-    "Maximises the Speed\n"
-    "EVs of one Pokémon.");
+    "An item that raises\n"
+    "the Speed EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sPPUpDesc[] = _(
     "Raises the maximum\n"
@@ -2762,93 +2768,93 @@ static const u8 sIapapaBerryDesc[] = _(
 
 static const u8 sRazzBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "HP IVs by one.\n");
+    "Increases HP\n"
+    "IVs by one.");
 
 static const u8 sBlukBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "Attack IVs by one.\n");
+    "Increases Attack\n"
+    "IVs by one.");
 
 static const u8 sNanabBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "Defense IVs by one.\n");
+    "Increases Defense\n"
+    "IVs by one.");
 
 static const u8 sWepearBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "Sp.Atk IVs by one.\n");
+    "Increases Sp.Atk\n"
+    "IVs by one.");
 
 static const u8 sPinapBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "Sp.Def IVs by one.\n");
+    "Increases Sp.Def\n"
+    "IVs by one.");
 
 static const u8 sPomegBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "HP EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases HP\n"
+    "EVs by 28.");
 
 static const u8 sKelpsyBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "Attack EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases Attack\n"
+    "EVs by 28.");
 
 static const u8 sQualotBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "Defense EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases Defense\n"
+    "EVs by 28.");
 
 static const u8 sHondewBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "Sp.Atk EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases Sp.Atk\n"
+    "EVs by 28.");
 
 static const u8 sGrepaBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "Sp.Def EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases Sp.Def\n"
+    "EVs by 28.");
 
 static const u8 sTamatoBerryDesc[] = _(
-    "Makes a Pokémon more\n"
-    "friendly but resets\n"
-    "Speed EVs.");
+    "{POKEBLOCK} ingredient.\n"
+    "Decreases Speed\n"
+    "EVs by 28.");
 
 static const u8 sCornnBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Increases a Pokémon's\n"
-    "Speed IVs by one.\n");
+    "Increases Speed\n"
+    "IVs by one.");
 
 static const u8 sMagostBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "HP IVs by one.\n");
+    "Decreases HP\n"
+    "IVs by one.");
 
 static const u8 sRabutaBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "Attack IVs by one.\n");
+    "Decreases Attack\n"
+    "IVs by one.");
 
 static const u8 sNomelBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "Defense IVs by one.\n");
+    "Decreases Defense\n"
+    "IVs by one.");
 
 static const u8 sSpelonBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "Sp.Atk IVs by one.\n");
+    "Decreases Sp.Atk\n"
+    "IVs by one.");
 
 static const u8 sPamtreBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "Sp.Def IVs by one.\n");
+    "Decreases Sp.Def\n"
+    "IVs by one.");
 
 static const u8 sWatmelBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Reduces a Pokémon's\n"
-    "Speed IVs by one.\n");
+    "Decreases Speed\n"
+    "IVs by one.");
 
 static const u8 sDurinBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
