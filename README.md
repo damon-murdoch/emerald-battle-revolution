@@ -48,7 +48,9 @@ Pokemon easily without the need for modifying save files.
   * [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
   * [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
 
-* `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
+* `LOuroboros`, for creating the following tutorials:
+  * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
+  * [Infinite TM usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -73,14 +75,20 @@ Pokemon easily without the need for modifying save files.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.1.1
+
+Updated TM behavior based on [this](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage) tutorial, now 
+infinitely reusable and cannot be sold / bought more than once. Text references to TMs have now been updated 
+to reflect new behavior. Replacing a move with a new move will no longer refresh the PP for the move slot
+
 ### Ver. 0.1.0
 
-Implemented [Poryscript](https://github.com/huderlem/poryscript) to build pipeline, 
-converted all pre-existing map script.inc files to .pory format, 
-removed running shoes event when returning to Littleroot town and enabled running shoes flags by default when exiting the truck, 
-Added National Dex upgrade to initial Birch Pokedex event, as well as the battle key items (Mega Ring, Z Power Ring, Dynamax Band), 
-Added follow-up event where these items can be recieved instead of they are missed initially (for migrated save files). 
-Modified EXP.Share to use Gen 6+ behavior (Key item, affects all party members, can be toggled on or off.)
+Implemented [Poryscript](https://github.com/huderlem/poryscript) to build pipeline, converted all pre-existing map script.inc files 
+to .pory format, removed running shoes event when returning to Littleroot town and enabled running shoes flags by default when 
+exiting the truck, Added National Dex upgrade to initial Birch Pokedex event, as well as the battle key items (Mega Ring, 
+Z Power Ring, Dynamax Band), Added follow-up event where these items can be recieved instead of they are missed 
+initially (for migrated save files). Modified EXP.Share to use Gen 6+ behavior (Key item, affects all 
+party members, can be toggled on or off.)
 
 ### Ver. 0.0.6
 
