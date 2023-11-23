@@ -1,17 +1,6 @@
 OldaleTown_Mart_MapScripts::
 	.byte 0
 
-OldaleTown_Mart_EventScript_Clerk::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_ExpandedItems
-	pokemart OldaleTown_Mart_Pokemart_Basic
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
 	.align 2
 OldaleTown_Mart_Pokemart_Basic:
 	.2byte ITEM_POTION
@@ -69,3 +58,20 @@ OldaleTown_Mart_Text_RestoreHPWithPotion:
 	.string "and faints, it won't be able to battle.\p"
 	.string "To prevent your POKéMON from fainting,\n"
 	.string "restore its HP with a POTION.$"
+
+OldaleTown_Mart_EventScript_Clerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_Clerk_2
+	pokemart OldaleTown_Mart_Pokemart_Basic
+OldaleTown_Mart_EventScript_Clerk_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Mart_EventScript_Clerk_2:
+	pokemart 0
+	goto OldaleTown_Mart_EventScript_Clerk_1
+
