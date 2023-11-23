@@ -401,22 +401,22 @@ static const u8 sMuscleFeatherDesc[] = _(
 
 static const u8 sResistFeatherDesc[] = _(
     "An item that raises\n"
-    "the Defense EVs of a\n"
-    "Pokémon by four.");
+    "the Defense EVs of\n"
+    "a Pokémon by four.");
 
 static const u8 sGeniusFeatherDesc[] = _(
     "An item that raises\n"
-    "the Sp.Atk EVs of a.\n"
+    "the Sp.Atk EVs of a\n"
     "Pokémon by four.");
 
 static const u8 sCleverFeatherDesc[] = _(
     "An item that raises\n"
-    "the Sp.Def EVs of a.\n"
+    "the Sp.Def EVs of a\n"
     "Pokémon by four.");
 
 static const u8 sSwiftFeatherDesc[] = _(
     "An item that raises\n"
-    "the Speed EVs of a.\n"
+    "the Speed EVs of a\n"
     "Pokémon by four.");
 
 // Ability Modifiers
