@@ -19,103 +19,14 @@ been completely lacking since Generation 7 using new Pokemon
 and simple methods for obtaining properly trained, competitive
 Pokemon easily without the need for modifying save files.
 
-## Planned Features
-
-Please note, this is not an exhaustive list and may be expanded or 
-reduced at any time. Some of these features may or may not already 
-be implemented by the existing codebase, and this will be investigated 
-and adjusted accordingly if required. Features which have been implemented 
-will be ~~crossed out~~, or deleted if no longer required. Please note that
-the vast majority of these fixes are from [this tutorial page](https://github.com/pret/pokeemerald/wiki/Tutorials), and the creators of each of these tutorials will
-be credited as the project is developed.
-
-### Bug Fixes
-
-* ~~[EWRAM Fix](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen)~~
-* ~~[Pokedex Fix](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)~~
-* ~~[Save Type Error Screen](https://www.pokecommunity.com/showpost.php?p=10449518)~~
-* ~~[Implement RESET_FONT](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_FONT)~~
-* ~~[Surf Dismount Fix](https://github.com/pret/pokeemerald/wiki/Surfing-Dismount-Ground-Effects)~~
-* ~~[Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)~~
-* ~~[Better Reflections](https://github.com/pret/pokeemerald/wiki/Reflections)~~
-
-### UI Improvements
-
-* [Select Registered Item](https://github.com/pret/pokeemerald/wiki/Holding-Select-Allows-For-A-Second-Register-Item)
-* ~~[Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)~~
-* [Bag Sorting](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
-* ~~[Increased Text Speed](https://www.pokecommunity.com/showpost.php?p=10400198)~~
-* [Dynamic Multi Choice](https://www.pokecommunity.com/showthread.php?t=489984) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10158928)
-* ~~[Chain Fishing](https://github.com/pret/pokeemerald/wiki/Chain-Fishing)~~
-* ~~[Improved Battle Pacing](https://www.pokecommunity.com/showpost.php?p=10266925)~~
-* ~~[Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen)~~
-* [DS-Style Party Screens](https://www.pokecommunity.com/showpost.php?p=10218092&postcount=173)
-* ~~[Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)~~
-* [Show Correct Hidden Power Type](https://www.pokecommunity.com/showpost.php?p=10269149)
-* [Move Relearner in Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602)
-* [Move Relearner for Pre-Evo Moves](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know)
-* [Show Type-Effectiveness in Battle](https://www.pokecommunity.com/showpost.php?p=10167016&postcount=83) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Show-Type-Effectiveness-In-Battle-Using-Pre-Existing--Function-and-Disable-in-Option-Menu)
-* [Add Move Description in Battles](https://github.com/pret/pokeemerald/wiki/Add-Description-Submenu)
-* ~~[Keyboard lowercase auto-switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/)~~
-* [Allow Nicknaming from Party Menu](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
-* [XY-Style Wrapping Summary Screen](https://www.pokecommunity.com/showpost.php?p=10060875&postcount=27)
-* [Swap party slots with select](https://www.pokecommunity.com/showpost.php?p=10420662)
-* [Return/Frustration power in summary](https://www.pokecommunity.com/showpost.php?p=10575976&postcount=420)
-
-### Item Improvements
-
-* [New Item Balls Utility](https://github.com/pret/pokeemerald/wiki/Set-Up-Item-Balls-on-a-Map-Without-Needing-New-Scripts)
-* [DPPt Two-in-one-Bike](https://www.pokecommunity.com/showpost.php?p=10161144&postcount=74) / [Alternate Method](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
-* ~~[Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)~~
-* [Modify Pickup Item Table](https://www.pokecommunity.com/showpost.php?p=9987541&postcount=11)
-* [Infinite TM Usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
-* [Items to increase/decrease IVs](https://www.pokecommunity.com/showpost.php?p=10469674)
-* [Increase Bag Capacity](https://www.pokecommunity.com/showpost.php?p=10523495) / [Alternate Method](https://github.com/pret/pokeemerald/wiki/Make-the-Bag-Able-to-Hold-120-Items-Instead-of-30)
-* [Change Money / BP Limit](https://github.com/pret/pokeemerald/wiki/Increase-money-limit)
-
-### Scripting Improvements
-
-* [Setting EVs with Scripting Specials](https://www.pokecommunity.com/showpost.php?p=10162417&postcount=80)
-* [Giving Custom Pokemon](https://www.pokecommunity.com/showpost.php?p=10203404)
-
-### Overworld Improvements
-
-* [Day/Night Encounters](https://www.pokecommunity.com/showpost.php?p=10450677)
-* [Overworld Expansion](https://www.pokecommunity.com/showpost.php?p=10221532&postcount=176)
-* [Faster Surfing](https://www.pokecommunity.com/showpost.php?p=10137446&postcount=59)
-* [Add PC Access to PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav)
-* [Catch both Latios and Latias](https://github.com/pret/pokeemerald/wiki/Allow-Both-Latios-and-Latias-Appear.)
-
-### Graphical Changes
-
-* [New Trainer Classes](https://github.com/pret/pokeemerald/wiki/Adding-a-New-Trainer-Class)
-* ~~[Intro Pokemon Replaced with Zorua](https://www.pokecommunity.com/showpost.php?p=9967857&postcount=6)~~
-* [Add Party to trainer card](https://www.pokecommunity.com/showpost.php?p=10566704&postcount=416)
-
-### Battle Frontier
-
-* Pokemon EV/IV Customiser (NPC/item/etc.)
-* New Pokemon in Battle Frontier 
-* Mega Evolutions in Battle Frontier
-* New tiers in Battle Frontier (i.e. ubers, restricted, etc.)
-* Custom trainers in Battle Frontier
-
-### Optimisations / Other Improvements
-
-* Updated spawn tables for new Pokemon (gen 4+)
-* [Save File Backwards Compatibility](https://github.com/pret/pokeemerald/wiki/How-to-Support-Savefile-Backwards-Compatibility)
-* [Version Identification](https://github.com/pret/pokeemerald/wiki/Adding-Support-for-Connectivity-with-Other-Hacks-Whilst-Maintaining-Connectivity-with-Vanilla)
-* ~~[Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)~~
-* ~~[Extra Save Space](https://github.com/pret/pokeemerald/wiki/Extra-save-space-with-two-lines-of-code)~~
-* [Uniquely Shuffle Arrays](https://github.com/pret/pokeemerald/wiki/Uniquely-Shuffle-Array)
-* ~~[Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)~~
-
 ## Useful Links 
 
 * [PokeEmerald Expansion Readme](./EXPANSION.md)
 * [PokeEmerald Install / Build Guide](./INSTALL.md)
 * [PokeEmerald Tutorials](https://github.com/pret/pokeemerald/wiki/Tutorials)
 * [Dragapult.xyz Main Site](https://www.dragapult.xyz)
+* [Github Project](https://github.com/users/damon-murdoch/projects/1)
+* [Github Issues & Milestones](https://github.com/damon-murdoch/dragapult-emerald/milestones)
 
 ## Credits
 
@@ -137,7 +48,9 @@ be credited as the project is developed.
   * [Repeated Medicine Use](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
   * [Plural Give-Item Command](https://github.com/pret/pokeemerald/wiki/Plural-Giveitem)
 
-* `LOuroboros`, for creating the [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves) tutorial
+* `LOuroboros`, for creating the following tutorials:
+  * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
+  * [Infinite TM usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -162,14 +75,30 @@ be credited as the project is developed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.2.0
+
+Implemented EV/IV increasing/decreasing items - Some Pokeblock-only berries have been repurposed to increase
+or decrease IVs by one, and Zinc/Carbos/etc. have been modified to provide 28 EVs at a time in their respective
+stat, requiring only 9 to reach the maximum value (252). Feathers have also been modified to provide 4 of their
+respective stats, which can be useful for building more fine-grained EV spreads. EV-reducing berries have also
+been modified to reduce stats by 28. Item descriptions have been updated to reflect the new behavior. New TM 
+behavior has been tested and verified. A bug was fixed where mom would be placed outside (for the running
+shoes encounter), even though this encounter has been removed from the game.
+
+### Ver. 0.1.1
+
+Updated TM behavior based on [this](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage) tutorial, now 
+infinitely reusable and cannot be sold / bought more than once. Text references to TMs have now been updated 
+to reflect new behavior. Replacing a move with a new move will no longer refresh the PP for the move slot
+
 ### Ver. 0.1.0
 
-Implemented [Poryscript](https://github.com/huderlem/poryscript) to build pipeline, 
-converted all pre-existing map script.inc files to .pory format, 
-removed running shoes event when returning to Littleroot town and enabled running shoes flags by default when exiting the truck, 
-Added National Dex upgrade to initial Birch Pokedex event, as well as the battle key items (Mega Ring, Z Power Ring, Dynamax Band), 
-Added follow-up event where these items can be recieved instead of they are missed initially (for migrated save files). 
-Modified EXP.Share to use Gen 6+ behavior (Key item, affects all party members, can be toggled on or off.)
+Implemented [Poryscript](https://github.com/huderlem/poryscript) to build pipeline, converted all pre-existing 
+map script.inc files to .pory format, removed running shoes event when returning to Littleroot town and enabled 
+running shoes flags by default when exiting the truck, Added National Dex upgrade to initial Birch Pokedex event, 
+as well as the battle key items (Mega Ring, Z Power Ring, Dynamax Band), Added follow-up event where these items 
+can be recieved instead of they are missed initially (for migrated save files). Modified EXP.Share to use Gen 6+ 
+behavior (Key item, affects all party members, can be toggled on or off.)
 
 ### Ver. 0.0.6
 

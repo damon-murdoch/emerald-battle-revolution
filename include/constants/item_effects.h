@@ -63,9 +63,11 @@
 #define ITEM6_HEAL_PP_FULL   0x7F
 
 // Amount of EV modified by ITEM4_EV_HP, ITEM4_EV_ATK, ITEM5_EV_DEF, ITEM5_EV_SPEED, ITEM5_EV_SPDEF and ITEM5_EV_SPATK
-#define ITEM6_ADD_EV       10
-#define ITEM6_SUBTRACT_EV -10
-#define ITEM6_ADD_ONE_EV    1
+#define ITEM6_INC_EV      28 // 252 / 28 = 9
+#define ITEM6_DEC_EV     -28 // 252 / 28 = 9
+
+// Small EV increment (Used for feathers)
+#define ITEM6_SMALL_INC_EV  4 // 252 / 4 = 63
 
 // Used for GetItemEffectType.
 #define ITEM_EFFECT_X_ITEM 0
