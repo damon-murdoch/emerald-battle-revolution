@@ -75,6 +75,12 @@ Pokemon easily without the need for modifying save files.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.2.1
+
+Updated spawn tables for route 101, 102 and 103 with new wild encounters, as well as water
+and fishing encounters where applicable. All (Non-Department Store) PokeMarts have now been
+updated to use the same item list, which is dependent on the number of badges the player has.
+
 ### Ver. 0.2.0
 
 Implemented EV/IV increasing/decreasing items - Some Pokeblock-only berries have been repurposed to increase
