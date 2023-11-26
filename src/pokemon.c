@@ -3814,10 +3814,6 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
                 totalRerolls += I_SHINY_CHARM_ADDITIONAL_ROLLS;
             if (LURE_STEP_COUNT != 0)
                 totalRerolls += 1;
-            // [ghoulslash] Chain Fishing
-            if (gIsFishingEncounter)
-    +            totalRerolls += 1 + 2 * gChainFishingStreak; // 1 + 2 rolls per streak count. Max: 41
-
             while (GET_SHINY_VALUE(value, personality) >= SHINY_ODDS && totalRerolls > 0)
             {
                 personality = Random32();
@@ -8554,6 +8550,9 @@ static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
     }
 }
 
+// Unused??
+
+/*
 static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
 {
     u16 i, j;
@@ -8568,6 +8567,7 @@ static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
         gfx->templates[i].paletteTag = i;
     }
 }
+*/
 
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void)
 {

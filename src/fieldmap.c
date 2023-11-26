@@ -67,8 +67,6 @@ const struct MapHeader *const GetMapHeaderFromConnection(const struct MapConnect
 
 void InitMap(void)
 {
-    // [ghoulslash] Chain Fishing
-    gChainFishingStreak = 0; // Reset Chain Fishing Streak
     InitMapLayoutData(&gMapHeader);
     SetOccupiedSecretBaseEntranceMetatiles(gMapHeader.events);
     RunOnLoadMapScript();
