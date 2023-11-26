@@ -459,6 +459,7 @@ extern const u8 BattleScript_RuinAbilityActivates[];
 extern const u8 BattleScript_CudChewActivates[];
 extern const u8 BattleScript_SupremeOverlordActivates[];
 extern const u8 BattleScript_CostarActivates[];
+extern const u8 BattleScript_ZeroToHeroActivates[];
 extern const u8 BattleScript_ToxicDebrisActivates[];
 extern const u8 BattleScript_EarthEaterActivates[];
 extern const u8 BattleScript_MimicryActivates_End3[];
@@ -482,6 +483,13 @@ extern const u8 BattleScript_SelectingNotAllowedCurrentMoveInPalace[];
 extern const u8 BattleScript_SaltCureExtraDamage[];
 extern const u8 BattleScript_SyrupBombEndTurn[];
 extern const u8 BattleScript_SyrupBombActivates[];
+extern const u8 BattleScript_EffectCombinedPledge_Water[];
+extern const u8 BattleScript_EffectCombinedPledge_Fire[];
+extern const u8 BattleScript_EffectCombinedPledge_Grass[];
+extern const u8 BattleScript_TheRainbowDisappeared[];
+extern const u8 BattleScript_HurtByTheSeaOfFire[];
+extern const u8 BattleScript_TheSeaOfFireDisappeared[];
+extern const u8 BattleScript_TheSwampDisappeared[];
 
 // zmoves
 extern const u8 BattleScript_ZMoveActivateDamaging[];

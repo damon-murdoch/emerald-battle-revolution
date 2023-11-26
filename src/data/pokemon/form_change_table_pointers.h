@@ -124,6 +124,12 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_ABOMASNOW_MEGA] = sAbomasnowFormChangeTable,
     [SPECIES_GALLADE] = sGalladeFormChangeTable,
     [SPECIES_GALLADE_MEGA] = sGalladeFormChangeTable,
+    [SPECIES_ROTOM] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_HEAT] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_WASH] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_FROST] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_FAN] = sRotomFormChangeTable,
+    [SPECIES_ROTOM_MOW] = sRotomFormChangeTable,
     [SPECIES_DIALGA] = sDialgaFormChangeTable,
     [SPECIES_DIALGA_ORIGIN] = sDialgaFormChangeTable,
     [SPECIES_PALKIA] = sPalkiaFormChangeTable,
@@ -183,9 +189,11 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_AEGISLASH_BLADE] = sAegislashFormChangeTable,
     [SPECIES_XERNEAS_NEUTRAL] = sXerneasFormChangeTable,
     [SPECIES_XERNEAS_ACTIVE] = sXerneasFormChangeTable,
-    [SPECIES_ZYGARDE_10_POWER_CONSTRUCT] = sZygardePowerConstructFormChangeTable,
+    [SPECIES_ZYGARDE] = sZygardeFormChangeTable,
+    [SPECIES_ZYGARDE_10] = sZygarde10FormChangeTable,
     [SPECIES_ZYGARDE_50_POWER_CONSTRUCT] = sZygardePowerConstructFormChangeTable,
-    [SPECIES_ZYGARDE_COMPLETE] = sZygardePowerConstructFormChangeTable,
+    [SPECIES_ZYGARDE_10_POWER_CONSTRUCT] = sZygarde10PowerConstructFormChangeTable,
+    [SPECIES_ZYGARDE_COMPLETE] = sZygardeCompleteFormChangeTable,
     [SPECIES_DIANCIE] = sDiancieFormChangeTable,
     [SPECIES_DIANCIE_MEGA] = sDiancieFormChangeTable,
     [SPECIES_HOOPA_CONFINED] = sHoopaFormChangeTable,
@@ -353,5 +361,42 @@ const struct FormChange *const gFormChangeTablePointers[NUM_SPECIES] =
     [SPECIES_URSHIFU_RAPID_STRIKE_STYLE_GIGANTAMAX] = sUrshifuRapidStrikeFormChangeTable,
     [SPECIES_ENAMORUS_INCARNATE] = sEnamorusFormChangeTable,
     [SPECIES_ENAMORUS_THERIAN] = sEnamorusFormChangeTable,
+#endif
+#if P_GEN_9_POKEMON == TRUE
+    [SPECIES_PALAFIN_ZERO] = sPalafinZeroFormChangeTable,
+    [SPECIES_PALAFIN_HERO] = sPalafinZeroFormChangeTable,
+    [SPECIES_OGERPON_TEAL_MASK] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_WELLSPRING_MASK] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_CORNERSTONE_MASK] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_TEAL_MASK_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA] = sOgerponFormChangeTable,
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA] = sOgerponFormChangeTable,
+#endif
+};
+
+const struct Fusion *const gFusionTablePointers[NUM_SPECIES] =
+{
+#if P_GEN_5_POKEMON == TRUE
+    [SPECIES_KYUREM] = sKyuremFusionTable,
+    [SPECIES_KYUREM_BLACK] = sKyuremFusionTable,
+    [SPECIES_KYUREM_WHITE] = sKyuremFusionTable,
+    [SPECIES_RESHIRAM] = sKyuremFusionTable,
+    [SPECIES_ZEKROM] = sKyuremFusionTable,
+#endif
+#if P_GEN_7_POKEMON == TRUE
+    [SPECIES_NECROZMA] = sNecrozmaFusionTable,
+    [SPECIES_NECROZMA_DAWN_WINGS] = sNecrozmaFusionTable,
+    [SPECIES_NECROZMA_DUSK_MANE] = sNecrozmaFusionTable,
+    [SPECIES_SOLGALEO] = sNecrozmaFusionTable,
+    [SPECIES_LUNALA] = sNecrozmaFusionTable,
+#endif
+#if P_GEN_8_POKEMON == TRUE
+    [SPECIES_CALYREX] = sCalyrexFusionTable,
+    [SPECIES_CALYREX_ICE_RIDER] = sCalyrexFusionTable,
+    [SPECIES_CALYREX_SHADOW_RIDER] = sCalyrexFusionTable,
+    [SPECIES_SPECTRIER] = sCalyrexFusionTable,
+    [SPECIES_GLASTRIER] = sCalyrexFusionTable,
 #endif
 };

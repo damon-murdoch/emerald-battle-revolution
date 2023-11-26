@@ -54,15 +54,6 @@
 #include "constants/union_room.h"
 #include "constants/weather.h"
 
-#define DAY_EVO_HOUR_BEGIN       12
-#define DAY_EVO_HOUR_END         HOURS_PER_DAY
-
-#define DUSK_EVO_HOUR_BEGIN      17
-#define DUSK_EVO_HOUR_END        18
-
-#define NIGHT_EVO_HOUR_BEGIN     0
-#define NIGHT_EVO_HOUR_END       12
-
 #if P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9
 #define FRIENDSHIP_EVO_THRESHOLD 160
 #else
@@ -482,6 +473,9 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(MAGMAR),
     SPECIES_TO_NATIONAL(PINSIR),
     SPECIES_TO_NATIONAL(TAUROS),
+    [SPECIES_TAUROS_PALDEAN_COMBAT_BREED - 1] = NATIONAL_DEX_TAUROS,
+    [SPECIES_TAUROS_PALDEAN_BLAZE_BREED - 1] = NATIONAL_DEX_TAUROS,
+    [SPECIES_TAUROS_PALDEAN_AQUA_BREED - 1] = NATIONAL_DEX_TAUROS,
     SPECIES_TO_NATIONAL(MAGIKARP),
     SPECIES_TO_NATIONAL(GYARADOS),
     SPECIES_TO_NATIONAL(LAPRAS),
@@ -548,6 +542,7 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(SUNFLORA),
     SPECIES_TO_NATIONAL(YANMA),
     SPECIES_TO_NATIONAL(WOOPER),
+    [SPECIES_WOOPER_PALDEAN - 1] = NATIONAL_DEX_WOOPER,
     SPECIES_TO_NATIONAL(QUAGSIRE),
     SPECIES_TO_NATIONAL(ESPEON),
     SPECIES_TO_NATIONAL(UMBREON),
@@ -1326,10 +1321,144 @@ static const u16 sSpeciesToNationalPokedexNum[NUM_SPECIES - 1] =
     SPECIES_TO_NATIONAL(WYRDEER),
     SPECIES_TO_NATIONAL(KLEAVOR),
     SPECIES_TO_NATIONAL(URSALUNA),
+    [SPECIES_URSALUNA_BLOODMOON - 1] = NATIONAL_DEX_URSALUNA,
     SPECIES_TO_NATIONAL(BASCULEGION),
     SPECIES_TO_NATIONAL(SNEASLER),
     SPECIES_TO_NATIONAL(OVERQWIL),
     SPECIES_TO_NATIONAL(ENAMORUS),
+#endif
+#if P_GEN_9_POKEMON == TRUE
+    SPECIES_TO_NATIONAL(SPRIGATITO),
+    SPECIES_TO_NATIONAL(FLORAGATO),
+    SPECIES_TO_NATIONAL(MEOWSCARADA),
+    SPECIES_TO_NATIONAL(FUECOCO),
+    SPECIES_TO_NATIONAL(CROCALOR),
+    SPECIES_TO_NATIONAL(SKELEDIRGE),
+    SPECIES_TO_NATIONAL(QUAXLY),
+    SPECIES_TO_NATIONAL(QUAXWELL),
+    SPECIES_TO_NATIONAL(QUAQUAVAL),
+    SPECIES_TO_NATIONAL(LECHONK),
+    SPECIES_TO_NATIONAL(OINKOLOGNE),
+    [SPECIES_OINKOLOGNE_FEMALE - 1] = NATIONAL_DEX_OINKOLOGNE,
+    SPECIES_TO_NATIONAL(TAROUNTULA),
+    SPECIES_TO_NATIONAL(SPIDOPS),
+    SPECIES_TO_NATIONAL(NYMBLE),
+    SPECIES_TO_NATIONAL(LOKIX),
+    SPECIES_TO_NATIONAL(PAWMI),
+    SPECIES_TO_NATIONAL(PAWMO),
+    SPECIES_TO_NATIONAL(PAWMOT),
+    SPECIES_TO_NATIONAL(TANDEMAUS),
+    SPECIES_TO_NATIONAL(MAUSHOLD),
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR - 1] = NATIONAL_DEX_MAUSHOLD,
+    SPECIES_TO_NATIONAL(FIDOUGH),
+    SPECIES_TO_NATIONAL(DACHSBUN),
+    SPECIES_TO_NATIONAL(SMOLIV),
+    SPECIES_TO_NATIONAL(DOLLIV),
+    SPECIES_TO_NATIONAL(ARBOLIVA),
+    SPECIES_TO_NATIONAL(SQUAWKABILLY),
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE - 1] = NATIONAL_DEX_SQUAWKABILLY,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE - 1] = NATIONAL_DEX_SQUAWKABILLY,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE - 1] = NATIONAL_DEX_SQUAWKABILLY,
+    SPECIES_TO_NATIONAL(NACLI),
+    SPECIES_TO_NATIONAL(NACLSTACK),
+    SPECIES_TO_NATIONAL(GARGANACL),
+    SPECIES_TO_NATIONAL(CHARCADET),
+    SPECIES_TO_NATIONAL(ARMAROUGE),
+    SPECIES_TO_NATIONAL(CERULEDGE),
+    SPECIES_TO_NATIONAL(TADBULB),
+    SPECIES_TO_NATIONAL(BELLIBOLT),
+    SPECIES_TO_NATIONAL(WATTREL),
+    SPECIES_TO_NATIONAL(KILOWATTREL),
+    SPECIES_TO_NATIONAL(MASCHIFF),
+    SPECIES_TO_NATIONAL(MABOSSTIFF),
+    SPECIES_TO_NATIONAL(SHROODLE),
+    SPECIES_TO_NATIONAL(GRAFAIAI),
+    SPECIES_TO_NATIONAL(BRAMBLIN),
+    SPECIES_TO_NATIONAL(BRAMBLEGHAST),
+    SPECIES_TO_NATIONAL(TOEDSCOOL),
+    SPECIES_TO_NATIONAL(TOEDSCRUEL),
+    SPECIES_TO_NATIONAL(KLAWF),
+    SPECIES_TO_NATIONAL(CAPSAKID),
+    SPECIES_TO_NATIONAL(SCOVILLAIN),
+    SPECIES_TO_NATIONAL(RELLOR),
+    SPECIES_TO_NATIONAL(RABSCA),
+    SPECIES_TO_NATIONAL(FLITTLE),
+    SPECIES_TO_NATIONAL(ESPATHRA),
+    SPECIES_TO_NATIONAL(TINKATINK),
+    SPECIES_TO_NATIONAL(TINKATUFF),
+    SPECIES_TO_NATIONAL(TINKATON),
+    SPECIES_TO_NATIONAL(WIGLETT),
+    SPECIES_TO_NATIONAL(WUGTRIO),
+    SPECIES_TO_NATIONAL(BOMBIRDIER),
+    SPECIES_TO_NATIONAL(FINIZEN),
+    SPECIES_TO_NATIONAL(PALAFIN),
+    [SPECIES_PALAFIN_HERO - 1] = NATIONAL_DEX_PALAFIN,
+    SPECIES_TO_NATIONAL(VAROOM),
+    SPECIES_TO_NATIONAL(REVAVROOM),
+    SPECIES_TO_NATIONAL(CYCLIZAR),
+    SPECIES_TO_NATIONAL(ORTHWORM),
+    SPECIES_TO_NATIONAL(GLIMMET),
+    SPECIES_TO_NATIONAL(GLIMMORA),
+    SPECIES_TO_NATIONAL(GREAVARD),
+    SPECIES_TO_NATIONAL(HOUNDSTONE),
+    SPECIES_TO_NATIONAL(FLAMIGO),
+    SPECIES_TO_NATIONAL(CETODDLE),
+    SPECIES_TO_NATIONAL(CETITAN),
+    SPECIES_TO_NATIONAL(VELUZA),
+    SPECIES_TO_NATIONAL(DONDOZO),
+    SPECIES_TO_NATIONAL(TATSUGIRI),
+    [SPECIES_TATSUGIRI_DROOPY - 1] = NATIONAL_DEX_TATSUGIRI,
+    [SPECIES_TATSUGIRI_STRETCHY - 1] = NATIONAL_DEX_TATSUGIRI,
+    SPECIES_TO_NATIONAL(ANNIHILAPE),
+    SPECIES_TO_NATIONAL(CLODSIRE),
+    SPECIES_TO_NATIONAL(FARIGIRAF),
+    SPECIES_TO_NATIONAL(DUDUNSPARCE),
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT - 1] = NATIONAL_DEX_DUDUNSPARCE,
+    SPECIES_TO_NATIONAL(KINGAMBIT),
+    SPECIES_TO_NATIONAL(GREAT_TUSK),
+    SPECIES_TO_NATIONAL(SCREAM_TAIL),
+    SPECIES_TO_NATIONAL(BRUTE_BONNET),
+    SPECIES_TO_NATIONAL(FLUTTER_MANE),
+    SPECIES_TO_NATIONAL(SLITHER_WING),
+    SPECIES_TO_NATIONAL(SANDY_SHOCKS),
+    SPECIES_TO_NATIONAL(IRON_TREADS),
+    SPECIES_TO_NATIONAL(IRON_BUNDLE),
+    SPECIES_TO_NATIONAL(IRON_HANDS),
+    SPECIES_TO_NATIONAL(IRON_JUGULIS),
+    SPECIES_TO_NATIONAL(IRON_MOTH),
+    SPECIES_TO_NATIONAL(IRON_THORNS),
+    SPECIES_TO_NATIONAL(FRIGIBAX),
+    SPECIES_TO_NATIONAL(ARCTIBAX),
+    SPECIES_TO_NATIONAL(BAXCALIBUR),
+    SPECIES_TO_NATIONAL(GIMMIGHOUL),
+    [SPECIES_GIMMIGHOUL_ROAMING - 1] = NATIONAL_DEX_GIMMIGHOUL,
+    SPECIES_TO_NATIONAL(GHOLDENGO),
+    SPECIES_TO_NATIONAL(WO_CHIEN),
+    SPECIES_TO_NATIONAL(CHIEN_PAO),
+    SPECIES_TO_NATIONAL(TING_LU),
+    SPECIES_TO_NATIONAL(CHI_YU),
+    SPECIES_TO_NATIONAL(ROARING_MOON),
+    SPECIES_TO_NATIONAL(IRON_VALIANT),
+    SPECIES_TO_NATIONAL(KORAIDON),
+    SPECIES_TO_NATIONAL(MIRAIDON),
+    SPECIES_TO_NATIONAL(WALKING_WAKE),
+    SPECIES_TO_NATIONAL(IRON_LEAVES),
+    SPECIES_TO_NATIONAL(DIPPLIN),
+    SPECIES_TO_NATIONAL(POLTCHAGEIST),
+    [SPECIES_POLTCHAGEIST_ARTISAN - 1] = NATIONAL_DEX_POLTCHAGEIST,
+    SPECIES_TO_NATIONAL(SINISTCHA),
+    [SPECIES_SINISTCHA_MASTERPIECE - 1] = NATIONAL_DEX_POLTCHAGEIST,
+    SPECIES_TO_NATIONAL(OKIDOGI),
+    SPECIES_TO_NATIONAL(MUNKIDORI),
+    SPECIES_TO_NATIONAL(FEZANDIPITI),
+    SPECIES_TO_NATIONAL(OGERPON),
+    [SPECIES_OGERPON_WELLSPRING_MASK - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_CORNERSTONE_MASK - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_TEAL_MASK_TERA - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA - 1] = NATIONAL_DEX_OGERPON,
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA - 1] = NATIONAL_DEX_OGERPON,
 #endif
 
     // Megas
@@ -2264,6 +2393,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_SUNFLORA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_YANMA - 1]                        = ANIM_FIGURE_8,
     [SPECIES_WOOPER - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WOOPER_PALDEAN - 1]               = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_QUAGSIRE - 1]                     = ANIM_H_STRETCH,
     [SPECIES_ESPEON - 1]                       = ANIM_GROW_VIBRATE,
     [SPECIES_UMBREON - 1]                      = ANIM_V_SHAKE,
@@ -2727,7 +2857,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_GENESECT - 1]                     = ANIM_H_VIBRATE,
 
     // Gen 6
-    [SPECIES_CHESPIN - 1]                      = ANIM_V_JUMPS_SMALL,
+    [SPECIES_CHESPIN - 1]                      = ANIM_H_SLIDE_SLOW,
     [SPECIES_QUILLADIN - 1]                    = ANIM_LUNGE_GROW,
     [SPECIES_CHESNAUGHT - 1]                   = ANIM_GROW_IN_STAGES,
     [SPECIES_FENNEKIN - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
@@ -2736,19 +2866,19 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_FROAKIE - 1]                      = ANIM_H_JUMPS,
     [SPECIES_FROGADIER - 1]                    = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
     [SPECIES_GRENINJA - 1]                     = ANIM_V_STRETCH,
-    [SPECIES_BUNNELBY - 1]                     = ANIM_V_JUMPS_SMALL,
+    [SPECIES_BUNNELBY - 1]                     = ANIM_CIRCULAR_STRETCH_TWICE,
     [SPECIES_DIGGERSBY - 1]                    = ANIM_H_JUMPS_V_STRETCH,
-    [SPECIES_FLETCHLING - 1]                   = ANIM_RAPID_H_HOPS,
-    [SPECIES_FLETCHINDER - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_TALONFLAME - 1]                   = ANIM_SWING_CONCAVE_FAST,
+    [SPECIES_FLETCHLING - 1]                   = ANIM_V_JUMPS_SMALL,
+    [SPECIES_FLETCHINDER - 1]                  = ANIM_V_SLIDE_SLOW,
+    [SPECIES_TALONFLAME - 1]                   = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_SCATTERBUG - 1]                   = ANIM_V_STRETCH,
     [SPECIES_SPEWPA - 1]                       = ANIM_V_SHAKE,
     [SPECIES_VIVILLON_ICY_SNOW - 1]            = ANIM_ZIGZAG_SLOW,
     [SPECIES_LITLEO - 1]                       = ANIM_BACK_AND_LUNGE,
     [SPECIES_PYROAR - 1]                       = ANIM_V_SHAKE,
-    [SPECIES_FLABEBE_RED_FLOWER - 1]           = ANIM_SWING_CONCAVE_FAST_SHORT,
+    [SPECIES_FLABEBE_RED_FLOWER - 1]           = ANIM_H_SLIDE_SLOW,
     [SPECIES_FLOETTE_RED_FLOWER - 1]           = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_FLORGES_RED_FLOWER - 1]           = ANIM_GROW_VIBRATE,
+    [SPECIES_FLORGES_RED_FLOWER - 1]           = ANIM_V_SLIDE_SLOW,
     [SPECIES_SKIDDO - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_GOGOAT - 1]                       = ANIM_V_STRETCH,
     [SPECIES_PANCHAM - 1]                      = ANIM_H_STRETCH,
@@ -2775,7 +2905,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_HELIOLISK - 1]                    = ANIM_RAPID_H_HOPS,
     [SPECIES_TYRUNT - 1]                       = ANIM_V_SHAKE,
     [SPECIES_TYRANTRUM - 1]                    = ANIM_V_SHAKE,
-    [SPECIES_AMAURA - 1]                       = ANIM_H_STRETCH,
+    [SPECIES_AMAURA - 1]                       = ANIM_CONCAVE_ARC_SMALL_TWICE,
     [SPECIES_AURORUS - 1]                      = ANIM_GROW_VIBRATE,
     [SPECIES_SYLVEON - 1]                      = ANIM_SHRINK_GROW,
     [SPECIES_HAWLUCHA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
@@ -3045,10 +3175,144 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_WYRDEER - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_KLEAVOR - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_URSALUNA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_URSALUNA_BLOODMOON - 1]           = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_BASCULEGION_MALE - 1]             = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_SNEASLER - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_OVERQWIL - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_ENAMORUS_INCARNATE - 1]           = ANIM_V_SQUISH_AND_BOUNCE,
+
+    // Gen 9 Todo: Assign proper ones.
+    [SPECIES_SPRIGATITO - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FLORAGATO - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MEOWSCARADA - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FUECOCO - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CROCALOR - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SKELEDIRGE - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_QUAXLY - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_QUAXWELL - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_QUAQUAVAL - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_LECHONK - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OINKOLOGNE_MALE - 1]              = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OINKOLOGNE_FEMALE - 1]            = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TAROUNTULA - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SPIDOPS - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_NYMBLE - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_LOKIX - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_PAWMI - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_PAWMO - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_PAWMOT - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TANDEMAUS - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MAUSHOLD_FAMILY_OF_THREE - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MAUSHOLD_FAMILY_OF_FOUR - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FIDOUGH - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DACHSBUN - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SMOLIV - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DOLLIV - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ARBOLIVA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SQUAWKABILLY_GREEN_PLUMAGE - 1]   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SQUAWKABILLY_BLUE_PLUMAGE - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SQUAWKABILLY_YELLOW_PLUMAGE - 1]  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SQUAWKABILLY_WHITE_PLUMAGE - 1]   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_NACLI - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_NACLSTACK - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GARGANACL - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CHARCADET - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ARMAROUGE - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CERULEDGE - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TADBULB - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BELLIBOLT - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WATTREL - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_KILOWATTREL - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MASCHIFF - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MABOSSTIFF - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SHROODLE - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GRAFAIAI - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BRAMBLIN - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BRAMBLEGHAST - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TOEDSCOOL - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TOEDSCRUEL - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_KLAWF - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CAPSAKID - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SCOVILLAIN - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_RELLOR - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_RABSCA - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FLITTLE - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ESPATHRA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TINKATINK - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TINKATUFF - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TINKATON - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WIGLETT - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WUGTRIO - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BOMBIRDIER - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FINIZEN - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_PALAFIN_ZERO - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_PALAFIN_HERO - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_VAROOM - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_REVAVROOM - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CYCLIZAR - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ORTHWORM - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GLIMMET - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GLIMMORA - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GREAVARD - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_HOUNDSTONE - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FLAMIGO - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CETODDLE - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CETITAN - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_VELUZA - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DONDOZO - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TATSUGIRI_CURLY - 1]              = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TATSUGIRI_DROOPY - 1]             = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TATSUGIRI_STRETCHY - 1]           = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ANNIHILAPE - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CLODSIRE - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FARIGIRAF - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DUDUNSPARCE_TWO_SEGMENT - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DUDUNSPARCE_THREE_SEGMENT - 1]    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_KINGAMBIT - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GREAT_TUSK - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SCREAM_TAIL - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BRUTE_BONNET - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FLUTTER_MANE - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SLITHER_WING - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SANDY_SHOCKS - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_TREADS - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_BUNDLE - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_HANDS - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_JUGULIS - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_MOTH - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_THORNS - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FRIGIBAX - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ARCTIBAX - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_BAXCALIBUR - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GIMMIGHOUL_CHEST - 1]             = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GIMMIGHOUL_ROAMING - 1]           = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_GHOLDENGO - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WO_CHIEN - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CHIEN_PAO - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TING_LU - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_CHI_YU - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_ROARING_MOON - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_VALIANT - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_KORAIDON - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MIRAIDON - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_WALKING_WAKE - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_IRON_LEAVES - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_DIPPLIN - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_POLTCHAGEIST_COUNTERFEIT - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_POLTCHAGEIST_ARTISAN - 1]         = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SINISTCHA_UNREMARKABLE - 1]       = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_SINISTCHA_MASTERPIECE - 1]        = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OKIDOGI - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MUNKIDORI - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_FEZANDIPITI - 1]                  = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_TEAL_MASK - 1]                 = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_WELLSPRING_MASK - 1]           = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK - 1]          = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_CORNERSTONE_MASK - 1]          = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_TEAL_MASK_TERA - 1]            = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_WELLSPRING_MASK_TERA - 1]      = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_HEARTHFLAME_MASK_TERA - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_OGERPON_CORNERSTONE_MASK_TERA - 1]     = ANIM_V_SQUISH_AND_BOUNCE,
 
     // Gen 3 Forms
     [SPECIES_CASTFORM_SUNNY - 1]               = ANIM_GROW_VIBRATE,
@@ -3135,19 +3399,19 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_VIVILLON_JUNGLE - 1]              = ANIM_ZIGZAG_SLOW,
     [SPECIES_VIVILLON_FANCY - 1]               = ANIM_ZIGZAG_SLOW,
     [SPECIES_VIVILLON_POKE_BALL - 1]           = ANIM_ZIGZAG_SLOW,
-    [SPECIES_FLABEBE_YELLOW_FLOWER - 1]        = ANIM_SWING_CONCAVE_FAST_SHORT,
-    [SPECIES_FLABEBE_ORANGE_FLOWER - 1]        = ANIM_SWING_CONCAVE_FAST_SHORT,
-    [SPECIES_FLABEBE_BLUE_FLOWER - 1]          = ANIM_SWING_CONCAVE_FAST_SHORT,
-    [SPECIES_FLABEBE_WHITE_FLOWER - 1]         = ANIM_SWING_CONCAVE_FAST_SHORT,
+    [SPECIES_FLABEBE_YELLOW_FLOWER - 1]        = ANIM_H_SLIDE_SLOW,
+    [SPECIES_FLABEBE_ORANGE_FLOWER - 1]        = ANIM_H_SLIDE_SLOW,
+    [SPECIES_FLABEBE_BLUE_FLOWER - 1]          = ANIM_H_SLIDE_SLOW,
+    [SPECIES_FLABEBE_WHITE_FLOWER - 1]         = ANIM_H_SLIDE_SLOW,
     [SPECIES_FLOETTE_YELLOW_FLOWER - 1]        = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_FLOETTE_ORANGE_FLOWER - 1]        = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_FLOETTE_BLUE_FLOWER - 1]          = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_FLOETTE_WHITE_FLOWER - 1]         = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_FLOETTE_ETERNAL_FLOWER - 1]       = ANIM_V_SLIDE_WOBBLE,
-    [SPECIES_FLORGES_YELLOW_FLOWER - 1]        = ANIM_GROW_VIBRATE,
-    [SPECIES_FLORGES_ORANGE_FLOWER - 1]        = ANIM_GROW_VIBRATE,
-    [SPECIES_FLORGES_BLUE_FLOWER - 1]          = ANIM_GROW_VIBRATE,
-    [SPECIES_FLORGES_WHITE_FLOWER - 1]         = ANIM_GROW_VIBRATE,
+    [SPECIES_FLORGES_YELLOW_FLOWER - 1]        = ANIM_V_SLIDE_SLOW,
+    [SPECIES_FLORGES_ORANGE_FLOWER - 1]        = ANIM_V_SLIDE_SLOW,
+    [SPECIES_FLORGES_BLUE_FLOWER - 1]          = ANIM_V_SLIDE_SLOW,
+    [SPECIES_FLORGES_WHITE_FLOWER - 1]         = ANIM_V_SLIDE_SLOW,
     [SPECIES_FURFROU_HEART_TRIM - 1]           = ANIM_H_SLIDE,
     [SPECIES_FURFROU_STAR_TRIM - 1]            = ANIM_H_SLIDE,
     [SPECIES_FURFROU_DIAMOND_TRIM - 1]         = ANIM_H_SLIDE,
@@ -6779,28 +7043,23 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                if (GetTimeOfDay() != TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && gEvolutionTable[species][i].param <= level)
+                if (GetTimeOfDay() != TIME_NIGHT && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && friendship >= FRIENDSHIP_EVO_THRESHOLD)
+                if (GetTimeOfDay() == TIME_NIGHT && friendship >= FRIENDSHIP_EVO_THRESHOLD)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && gEvolutionTable[species][i].param <= level)
+                if (GetTimeOfDay() == TIME_NIGHT && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_HOLD_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && heldItem == gEvolutionTable[species][i].param)
+                if (GetTimeOfDay() == TIME_NIGHT && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = ITEM_NONE;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6808,8 +7067,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_ITEM_HOLD_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && heldItem == gEvolutionTable[species][i].param)
+                if (GetTimeOfDay() != TIME_NIGHT && heldItem == gEvolutionTable[species][i].param)
                 {
                     heldItem = ITEM_NONE;
                     SetMonData(mon, MON_DATA_HELD_ITEM, &heldItem);
@@ -6817,8 +7075,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 }
                 break;
             case EVO_LEVEL_DUSK:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DUSK_EVO_HOUR_BEGIN && gLocalTime.hours < DUSK_EVO_HOUR_END && gEvolutionTable[species][i].param <= level)
+                if (GetTimeOfDay() == TIME_EVENING && gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_LEVEL:
@@ -6860,12 +7117,28 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                 if (gEvolutionTable[species][i].param <= level)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
+            case EVO_LEVEL_FAMILY_OF_FOUR:
+                if (gEvolutionTable[species][i].param <= level && (personality % 100) != 0)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_LEVEL_FAMILY_OF_THREE:
+                if (gEvolutionTable[species][i].param <= level && (personality % 100) == 0)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
             case EVO_BEAUTY:
                 if (gEvolutionTable[species][i].param <= beauty)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_MOVE:
                 if (MonKnowsMove(mon, gEvolutionTable[species][i].param))
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_MOVE_TWO_SEGMENT:
+                if (MonKnowsMove(mon, gEvolutionTable[species][i].param) && (personality % 100) != 0)
+                    targetSpecies = gEvolutionTable[species][i].targetSpecies;
+                break;
+            case EVO_MOVE_THREE_SEGMENT:
+                if (MonKnowsMove(mon, gEvolutionTable[species][i].param) && (personality % 100) == 0)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_FRIENDSHIP_MOVE_TYPE:
@@ -7027,13 +7300,11 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_NIGHT:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END && gEvolutionTable[species][i].param == evolutionItem)
+                if (GetTimeOfDay() == TIME_NIGHT && gEvolutionTable[species][i].param == evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             case EVO_ITEM_DAY:
-                RtcCalcLocalTime();
-                if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END && gEvolutionTable[species][i].param == evolutionItem)
+                if (GetTimeOfDay() != TIME_NIGHT && gEvolutionTable[species][i].param == evolutionItem)
                     targetSpecies = gEvolutionTable[species][i].targetSpecies;
                 break;
             }
@@ -8729,19 +9000,24 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                         switch (formChanges[i].param2)
                         {
                         case DAY:
-                            RtcCalcLocalTime();
-                            if (gLocalTime.hours >= DAY_EVO_HOUR_BEGIN && gLocalTime.hours < DAY_EVO_HOUR_END)
+                            if (GetTimeOfDay() != TIME_NIGHT)
                                 targetSpecies = formChanges[i].targetSpecies;
                             break;
                         case NIGHT:
-                            RtcCalcLocalTime();
-                            if (gLocalTime.hours >= NIGHT_EVO_HOUR_BEGIN && gLocalTime.hours < NIGHT_EVO_HOUR_END)
+                            if (GetTimeOfDay() == TIME_NIGHT)
                                 targetSpecies = formChanges[i].targetSpecies;
                             break;
                         default:
                             targetSpecies = formChanges[i].targetSpecies;
                             break;
                         }
+                    }
+                    break;
+                case FORM_CHANGE_ITEM_USE_MULTICHOICE:
+                    if (arg == formChanges[i].param1)
+                    {
+                        if (formChanges[i].param2 == gSpecialVar_Result)
+                            targetSpecies = formChanges[i].targetSpecies;
                     }
                     break;
                 case FORM_CHANGE_MOVE:
@@ -8760,6 +9036,19 @@ u16 GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, u16 method, u32 
                 case FORM_CHANGE_WITHDRAW:
                 case FORM_CHANGE_FAINT:
                     targetSpecies = formChanges[i].targetSpecies;
+                    break;
+                case FORM_CHANGE_TIME_OF_DAY:
+                    switch (formChanges[i].param1)
+                    {
+                    case DAY:
+                        if (GetTimeOfDay() != TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    case NIGHT:
+                        if (GetTimeOfDay() == TIME_NIGHT)
+                            targetSpecies = formChanges[i].targetSpecies;
+                        break;
+                    }
                     break;
                 }
             }
@@ -8960,6 +9249,24 @@ u32 GetMonFriendshipScore(struct Pokemon *pokemon)
         return FRIENDSHIP_1_TO_49;
 
     return FRIENDSHIP_NONE;
+}
+
+u32 GetMonAffectionHearts(struct Pokemon *pokemon)
+{
+    u32 friendship = GetMonData(pokemon, MON_DATA_FRIENDSHIP, NULL);
+
+    if (friendship == MAX_FRIENDSHIP)
+        return AFFECTION_FIVE_HEARTS;
+    if (friendship >= 220)
+        return AFFECTION_FOUR_HEARTS;
+    if (friendship >= 180)
+        return AFFECTION_THREE_HEARTS;
+    if (friendship >= 130)
+        return AFFECTION_TWO_HEARTS;
+    if (friendship >= 80)
+        return AFFECTION_ONE_HEART;
+
+    return AFFECTION_NO_HEARTS;
 }
 
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)

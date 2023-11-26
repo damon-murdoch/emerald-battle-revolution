@@ -105,11 +105,11 @@ struct DisableStruct
     u8 toxicSpikesDone:1;
     u8 stickyWebDone:1;
     u8 stealthRockDone:1;
-    u8 terrainAbilityDone:1;
-    u8 weatherAbilityDone:1;
     u8 syrupBombTimer;
     u8 syrupBombIsShiny:1;
     u8 steelSurgeDone:1;
+    u8 weatherAbilityDone:1;
+    u8 terrainAbilityDone:1;
 };
 
 struct ProtectStruct
@@ -235,6 +235,9 @@ struct SideTimer
     u8 retaliateTimer;
     u8 damageNonTypesTimer;
     u8 damageNonTypesType;
+    u8 rainbowTimer;
+    u8 seaOfFireTimer;
+    u8 swampTimer;
 };
 
 struct FieldTimer
@@ -290,6 +293,12 @@ struct AIPartyData // Opposing battlers - party mons.
     u8 count[NUM_BATTLE_SIDES];
 };
 
+struct SwitchinCandidate
+{
+    struct BattlePokemon battleMon;
+    bool8 hypotheticalStatus;
+};
+
 // Ai Data used when deciding which move to use, computed only once before each turn's start.
 struct AiLogicData
 {
@@ -301,7 +310,6 @@ struct AiLogicData
     u8 hpPercents[MAX_BATTLERS_COUNT];
     u16 partnerMove;
     u16 speedStats[MAX_BATTLERS_COUNT]; // Speed stats for all battles, calculated only once, same way as damages
-    u8 moveDmgResult[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // MOVE_POWER defines for GetMoveDamageResult ; attacker, target, moveIndex
     s32 simulatedDmg[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 effectiveness[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
     u8 moveAccuracy[MAX_BATTLERS_COUNT][MAX_BATTLERS_COUNT][MAX_MON_MOVES]; // attacker, target, moveIndex
@@ -309,6 +317,8 @@ struct AiLogicData
     bool8 shouldSwitchMon; // Because all available moves have no/little effect. Each bit per battler.
     u8 monToSwitchId[MAX_BATTLERS_COUNT]; // ID of the mon to switch.
     bool8 weatherHasEffect; // The same as WEATHER_HAS_EFFECT. Stored here, so it's called only once.
+    u8 mostSuitableMonId; // Stores result of GetMostSuitableMonToSwitchInto, which decides which generic mon the AI would switch into if they decide to switch. This can be overruled by specific mons found in ShouldSwitch; the final resulting mon is stored in AI_monToSwitchIntoId.
+    struct SwitchinCandidate switchinCandidate; // Struct used for deciding which mon to switch to in battle_ai_switch_items.c
 };
 
 struct AI_ThinkingStruct
@@ -700,7 +710,7 @@ struct BattleStruct
     bool8 effectsBeforeUsingMoveDone:1; // Mega Evo and Focus Punch/Shell Trap effects.
     u8 targetsDone[MAX_BATTLERS_COUNT]; // Each battler as a bit.
     u16 overwrittenAbilities[MAX_BATTLERS_COUNT];    // abilities overwritten during battle (keep separate from battle history in case of switching)
-    bool8 allowedToChangeFormInWeather[PARTY_SIZE][2]; // For each party member and side, used by Ice Face.
+    bool8 allowedToChangeFormInWeather[PARTY_SIZE][NUM_BATTLE_SIDES]; // For each party member and side, used by Ice Face.
     u8 battleBondTransformed[NUM_BATTLE_SIDES]; // Bitfield for each party.
     u8 storedHealingWish:4; // Each battler as a bit.
     u8 storedLunarDance:4; // Each battler as a bit.
@@ -716,8 +726,11 @@ struct BattleStruct
     bool8 trainerSlideMegaEvolutionMsgDone;
     bool8 trainerSlideZMoveMsgDone;
     bool8 trainerSlideBeforeFirstTurnMsgDone;
+    bool8 trainerSlideDynamaxMsgDone;
     u32 aiDelayTimer; // Counts number of frames AI takes to choose an action.
     u32 aiDelayFrames; // Number of frames it took to choose an action.
+    bool8 transformZeroToHero[PARTY_SIZE][NUM_BATTLE_SIDES];
+    u8 pledgeMove:1;
 };
 
 // The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
