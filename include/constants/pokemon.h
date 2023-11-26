@@ -163,7 +163,7 @@
 
 #define LEVEL_UP_MOVE_ID   0x01FF
 #define LEVEL_UP_MOVE_LV   0xFE00
-#define LEVEL_UP_END       0xFFFF
+#define LEVEL_UP_MOVE_END  0xFFFF
 
 #define MAX_LEVEL_UP_MOVES       20
 
@@ -192,8 +192,12 @@
 #define FRIENDSHIP_200_TO_254  5
 #define FRIENDSHIP_MAX         6
 
-// Friendship value that the majority of species use. This was changed in Generation 8 to 50.
+// Friendship value that the majority of species use.
+#if P_UPDATED_FRIENDSHIP >= GEN_8
+#define STANDARD_FRIENDSHIP 50
+#else
 #define STANDARD_FRIENDSHIP 70
+#endif
 
 #define MAX_FRIENDSHIP  255
 #define MAX_SHEEN       255
@@ -286,7 +290,7 @@
 #define EVO_ITEM_HOLD                     41     // Pokémon levels up, holds specified item
 #define EVO_LEVEL_FOG                     42     // Pokémon reaches the specified level during fog in the overworld
 
-#define EVOS_PER_MON 10
+#define EVOS_PER_MON 11
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0
