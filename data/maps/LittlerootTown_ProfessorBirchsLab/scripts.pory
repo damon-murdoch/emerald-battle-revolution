@@ -471,7 +471,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
+	goto_if_eq FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -1037,47 +1037,47 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems {
 	// Battle mechanic items not received
 	if (flag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS) == false)
 	{
-		msgbox(format("Before you go, I have a few other things I'd like to give you."))
+		msgbox(format("I have a few things I'd like to give you."))
 
-		giveitem(ITEM_MEGA_RING)
+		// Mega Ring Not Obtained
+		if(flag(FLAG_ITEM_MEGA_RING_OBTAINED) == false){
+			giveitem(ITEM_MEGA_RING)
+			msgbox(format("The Mega Ring will allow compatible POKéMON to mega evolve once per battle, when holding their respective Mega Stone."))
+			setflag(FLAG_ITEM_MEGA_RING_OBTAINED)
+			msgbox(format("Mega Stones can be found throughout the HOENN region, or bought from some shops."))
+		}
 
-		msgbox(format("The Mega Ring will allow compatible POKéMON to mega evolve once per battle, when holding their respective Mega Stone."))
+		// Z Power Ring Not Obtained
+		if(flag(FLAG_ITEM_Z_POWER_RING_OBTAINED) == false){
+			giveitem(ITEM_Z_POWER_RING)
+			msgbox(format("The Z Power Ring will allow your POKéMON to use a Powerful Z-Move once per battle, when holding the correct the Z-Crystal. Some POKéMON even have signature Z-Moves!"))
+			setflag(FLAG_ITEM_Z_POWER_RING_OBTAINED)
+			msgbox(format("Z Crystals can be found throughout the HOENN region, or bought from some shops."))
+		}
 
-		giveitem(ITEM_Z_POWER_RING)
-
-		msgbox(format("The Z Power Ring will allow your POKéMON to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some POKéMON even have signature Z-Moves!"))
-
-		// I have to decide if I even want this, lol
-		giveitem(ITEM_DYNAMAX_BAND)
-
-		msgbox(format("The Dynamax Band will allow you to Dynamax your POKéMON once per battle under certain circumstances. Some POKéMON even have special Gigantamax formes!"))
-
-		msgbox(format("Mega Stones and Z-Crystals may be found scattered across the HOENN region, or may even be found in shops."))
-		msgbox(format("Utilise these abilities to achieve your full potential as a trainer!"))
-
-		// Also enable national dex flag (if unset)
-		special(EnableNationalPokedex)
-		setflag(FLAG_SYS_NATIONAL_DEX)
-
-		msgbox(format("I've also taken the liberty of upgrading your POKéDEX to the national version. You'll be able to record all kinds of POKéMON, even those not normally seen in the HOENN region!"))
+		// Enable national dex flag (if unset)
+		if (flag(FLAG_SYS_NATIONAL_DEX) == false){
+			special(EnableNationalPokedex)
+			setflag(FLAG_SYS_NATIONAL_DEX)
+			msgbox(format("I've also taken the liberty of upgrading your POKéDEX to the national version. You'll be able to record all kinds of POKéMON, even those not normally seen in the HOENN region!"))
+		}
 
 		// If this is unset, a trainer may return to 
 		// professor Birch and receive these items later
 		setflag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS)
 	}
-	else // Player has already received the items
-	{
-		// Should not happen, just a safety net
-		msgbox(format("... Oh! You already have the battle items!"))
-	}
 }
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems {
-
+	
 	msgbox(format("Oh, {PLAYER}! Good to see you."))
 
-	// Give battle mechanic items (and experience share)
-	call(LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems)
+	// If the player has received the Pokedex
+	if (var(VAR_BIRCH_LAB_STATE) == 5){
+
+		// Give battle mechanic items (and experience share)
+		call(LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems)
+	}
 
 	// Clean up
 	release
