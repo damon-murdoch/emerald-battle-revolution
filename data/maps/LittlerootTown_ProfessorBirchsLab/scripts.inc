@@ -470,7 +470,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
+	goto_if_eq FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -1026,31 +1026,51 @@ LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_2:
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems::
 	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_7
 	return
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1:
 	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0
-	giveitem ITEM_MEGA_RING
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1
-	giveitem ITEM_Z_POWER_RING
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2
-	giveitem ITEM_DYNAMAX_BAND
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5
-	special EnableNationalPokedex
-	setflag FLAG_SYS_NATIONAL_DEX
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_6
+	goto_if_unset FLAG_ITEM_MEGA_RING_OBTAINED, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_4
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_3:
+	goto_if_unset FLAG_ITEM_Z_POWER_RING_OBTAINED, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_7
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_6:
+	goto_if_unset FLAG_SYS_NATIONAL_DEX, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_10
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_9:
 	setflag FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS
 	return
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_4:
+	giveitem ITEM_MEGA_RING
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1
+	setflag FLAG_ITEM_MEGA_RING_OBTAINED
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_3
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_7:
+	giveitem ITEM_Z_POWER_RING
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3
+	setflag FLAG_ITEM_Z_POWER_RING_OBTAINED
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_6
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_10:
+	special EnableNationalPokedex
+	setflag FLAG_SYS_NATIONAL_DEX
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_9
 
 
 LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems::
 	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0
-	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	compare VAR_BIRCH_LAB_STATE, 5
+	goto_if_eq LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_2
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_1:
 	release
 	end
+
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_2:
+	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_1
 
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0:
@@ -1062,8 +1082,7 @@ LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_Text_0:
 	.string "POKéDEX!$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0:
-	.string "Before you go, I have a few other\n"
-	.string "things I'd like to give you.$"
+	.string "I have a few things I'd like to give you.$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1:
 	.string "The Mega Ring will allow compatible\n"
@@ -1072,38 +1091,28 @@ LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1:
 	.string "Stone.$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2:
+	.string "Mega Stones can be found throughout\n"
+	.string "the HOENN region, or bought from some\l"
+	.string "shops.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3:
 	.string "The Z Power Ring will allow your POKéMON\n"
 	.string "to use a Powerful Z-Move once per\l"
-	.string "battle, when holding the correct a\l"
+	.string "battle, when holding the correct the\l"
 	.string "Z-Crystal. Some POKéMON even have\l"
 	.string "signature Z-Moves!$"
 
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3:
-	.string "The Dynamax Band will allow you to\n"
-	.string "Dynamax your POKéMON once per battle\l"
-	.string "under certain circumstances. Some\l"
-	.string "POKéMON even have special Gigantamax\l"
-	.string "formes!$"
-
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4:
-	.string "Mega Stones and Z-Crystals may be\n"
-	.string "found scattered across the HOENN\l"
-	.string "region, or may even be found in shops.$"
+	.string "Z Crystals can be found throughout the\n"
+	.string "HOENN region, or bought from some\l"
+	.string "shops.$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5:
-	.string "Utilise these abilities to achieve your\n"
-	.string "full potential as a trainer!$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_6:
 	.string "I've also taken the liberty of\n"
 	.string "upgrading your POKéDEX to the national\l"
 	.string "version. You'll be able to record all\l"
 	.string "kinds of POKéMON, even those not\l"
 	.string "normally seen in the HOENN region!$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_7:
-	.string "... Oh! You already have the battle\n"
-	.string "items!$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0:
 	.string "Oh, {PLAYER}! Good to see you.$"
