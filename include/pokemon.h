@@ -330,6 +330,7 @@ struct SpeciesInfo /*0x24*/
  /* 0x1F */ u8 bodyColor : 7;
             u8 noFlip : 1;
  /* 0x20 */ u16 flags;
+ /* 0x22 */ u8 gigantamax:1;
 };
 
 struct BattleMove
@@ -353,6 +354,7 @@ struct BattleMove
     u32 mirrorMoveBanned:1;
     u32 ignoresKingsRock:1;
     u32 highCritRatio:1;
+    u32 twoTurnMove:1;
     u32 punchingMove:1;
     u32 sheerForceBoost:1;
     u32 bitingMove:1;
@@ -375,13 +377,19 @@ struct BattleMove
     u32 thawsUser:1;
     u32 ignoresSubstitute:1;
     u32 strikeCount:4;  // Max 15 hits. Defaults to 1 if not set. May apply its effect on each hit.
-    u32 meFirstBanned:1;
+    u32 forcePressure:1;
+    u32 cantUseTwice:1;
     u32 gravityBanned:1;
+    u32 healBlockBanned:1;
+    u32 meFirstBanned:1;
     u32 mimicBanned:1;
     u32 metronomeBanned:1;
     u32 copycatBanned:1;
+    u32 assistBanned:1; // Matches same moves as copycatBanned + semi-invulnerable moves and Mirror Coat.
     u32 sleepTalkBanned:1;
     u32 instructBanned:1;
+    u32 encoreBanned:1;
+    u32 parentalBondBanned:1;
 };
 
 #define SPINDA_SPOT_WIDTH 16
@@ -414,6 +422,19 @@ struct FormChange
     u16 param2;
     u16 param3;
 };
+
+struct Fusion
+{
+    u16 fusionStorageIndex;
+    u16 itemId;
+    u16 targetSpecies1;
+    u16 targetSpecies2;
+    u16 fusingIntoMon;
+    u16 fusionMove;
+    u16 unfuseForgetMove;
+};
+
+extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
 #define NUM_UNOWN_FORMS 28
 
@@ -616,6 +637,7 @@ bool32 SpeciesHasGenderDifferences(u16 species);
 bool32 TryFormChange(u32 monId, u32 side, u16 method);
 void TryToSetBattleFormChangeMoves(struct Pokemon *mon, u16 method);
 u32 GetMonFriendshipScore(struct Pokemon *pokemon);
+u32 GetMonAffectionHearts(struct Pokemon *pokemon);
 void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality);
 u8 CalculatePartyCount(struct Pokemon *party);
 u16 SanitizeSpeciesId(u16 species);
