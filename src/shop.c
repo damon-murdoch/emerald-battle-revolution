@@ -189,6 +189,7 @@ static const u16 sShopInventory_OneBadge[] = {
     ITEM_X_SPEED,
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
+    ITEM_EXP_CANDY_XS,
     ITEM_NONE
 };
 
@@ -213,12 +214,16 @@ static const u16 sShopInventory_TwoBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
     ITEM_NONE
 };
 
 static const u16 sShopInventory_ThreeBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_ANTIDOTE,
@@ -239,12 +244,17 @@ static const u16 sShopInventory_ThreeBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
     ITEM_NONE
 };
 
 static const u16 sShopInventory_FourBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
@@ -266,6 +276,10 @@ static const u16 sShopInventory_FourBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
     ITEM_NONE
 };
 
@@ -273,6 +287,7 @@ static const u16 sShopInventory_FiveBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
@@ -296,6 +311,11 @@ static const u16 sShopInventory_FiveBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
+	ITEM_EXP_CANDY_M,
     ITEM_NONE
 };
 
@@ -303,6 +323,7 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
@@ -327,6 +348,11 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
+	ITEM_EXP_CANDY_M,
     ITEM_NONE
 };
 
@@ -334,6 +360,7 @@ static const u16 sShopInventory_SevenBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
@@ -361,6 +388,12 @@ static const u16 sShopInventory_SevenBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
+	ITEM_EXP_CANDY_M,
+	ITEM_EXP_CANDY_L,
     ITEM_NONE
 };
 
@@ -368,6 +401,7 @@ static const u16 sShopInventory_EightBadges[] = {
     ITEM_POKE_BALL,
     ITEM_GREAT_BALL,
     ITEM_ULTRA_BALL,
+    ITEM_HEAL_BALL,
     ITEM_POTION,
     ITEM_SUPER_POTION,
     ITEM_HYPER_POTION,
@@ -396,6 +430,13 @@ static const u16 sShopInventory_EightBadges[] = {
     ITEM_DIRE_HIT,
     ITEM_GUARD_SPEC,
     ITEM_POKE_DOLL,
+    ITEM_FLUFFY_TAIL,
+    ITEM_POKE_TOY,
+    ITEM_EXP_CANDY_XS,
+	ITEM_EXP_CANDY_S,
+	ITEM_EXP_CANDY_M,
+	ITEM_EXP_CANDY_L,
+	ITEM_EXP_CANDY_XL,
     ITEM_NONE
 };
 

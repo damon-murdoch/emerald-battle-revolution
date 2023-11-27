@@ -294,3 +294,110 @@ LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
 	.string "procured all the paintings upstairs.$"
 
 `
+
+script LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop {
+	lock
+	faceplayer
+	message(format("Welcome to the Lilycove Museum Souvenir Shop!"))
+	message(format("You can find rare items from all around the world here."))
+	waitmessage
+	
+	// Player has defeated champion
+	if (flag(FLAG_IS_CHAMPION)){
+		// Drug shop, including pp up / pp max
+		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded)
+	}
+	else // Player is not champion
+	{
+		// Drug shop, including standard items
+		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop)
+	}
+
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop {
+	ITEM_PEWTER_CRUNCHIES
+	ITEM_RAGE_CANDY_BAR
+	ITEM_LAVA_COOKIE
+	ITEM_OLD_GATEAU
+	ITEM_CASTELIACONE
+	ITEM_LUMIOSE_GALETTE
+	ITEM_SHALOUR_SABLE
+	ITEM_BIG_MALASADA
+	ITEM_YELLOW_FLUTE
+	ITEM_BLACK_FLUTE
+	ITEM_WHITE_FLUTE
+	ITEM_BLUE_FLUTE
+	ITEM_RED_FLUTE
+}
+
+mart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded {
+	ITEM_PEWTER_CRUNCHIES
+	ITEM_RAGE_CANDY_BAR
+	ITEM_LAVA_COOKIE
+	ITEM_OLD_GATEAU
+	ITEM_CASTELIACONE
+	ITEM_LUMIOSE_GALETTE
+	ITEM_SHALOUR_SABLE
+	ITEM_BIG_MALASADA
+	ITEM_YELLOW_FLUTE
+	ITEM_BLACK_FLUTE
+	ITEM_WHITE_FLUTE
+	ITEM_BLUE_FLUTE
+	ITEM_RED_FLUTE
+	ITEM_RED_SHARD
+	ITEM_BLUE_SHARD
+	ITEM_YELLOW_SHARD
+	ITEM_GREEN_SHARD
+	ITEM_HEART_SCALE
+}
+
+script LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2 {
+	lock
+	faceplayer
+	message(format("Welcome to the Lilycove Museum Souvenir Shop!"))
+	message(format("You can find rare items from all around the world here."))
+	waitmessage
+	
+	// Player has defeated champion
+	if (flag(FLAG_IS_CHAMPION)){
+		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded)
+	}
+	else // Player is not champion
+	{
+		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2)
+	}
+
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2 {
+	ITEM_HELIX_FOSSIL
+	ITEM_DOME_FOSSIL
+	ITEM_OLD_AMBER
+	ITEM_ROOT_FOSSIL
+	ITEM_CLAW_FOSSIL
+}
+
+mart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded {
+	ITEM_HELIX_FOSSIL
+	ITEM_DOME_FOSSIL
+	ITEM_OLD_AMBER
+	ITEM_ROOT_FOSSIL
+	ITEM_CLAW_FOSSIL
+	ITEM_ARMOR_FOSSIL
+	ITEM_SKULL_FOSSIL
+	ITEM_COVER_FOSSIL
+	ITEM_PLUME_FOSSIL
+	ITEM_JAW_FOSSIL
+	ITEM_SAIL_FOSSIL
+	ITEM_FOSSILIZED_BIRD
+	ITEM_FOSSILIZED_FISH
+	ITEM_FOSSILIZED_DRAKE
+	ITEM_FOSSILIZED_DINO
+}
