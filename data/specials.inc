@@ -539,3 +539,9 @@ gSpecials::
 	def_special GetNumberSprayStrength
 	def_special GetSprayId
 	def_special GetLastUsedSprayType
+	def_special SetMonBall
+	def_special GetSeenMon
+	def_special GetCaughtMon
+	def_special SetSeenMon
+	def_special SetCaughtMon
+	def_special CheckPartyForMon;

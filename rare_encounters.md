@@ -1,5 +1,4 @@
 bulbasaur
-
 chikorita
 cyndaquil
 totadile

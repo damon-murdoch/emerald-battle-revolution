@@ -54,6 +54,7 @@ LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft:
 	.2byte ITEM_ZINC
 	.2byte ITEM_CARBOS
 	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
 	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_RESIST_FEATHER

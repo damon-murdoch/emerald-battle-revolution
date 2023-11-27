@@ -298,18 +298,16 @@ LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
 script LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop {
 	lock
 	faceplayer
-	message(format("Welcome to the Lilycove Museum Souvenir Shop!"))
-	message(format("You can find rare items from all around the world here."))
+	msgbox(format("Welcome to the Lilycove Museum Souvenir Shop!"))
+	msgbox(format("You can find rare items from all around the world here."))
 	waitmessage
 	
 	// Player has defeated champion
 	if (flag(FLAG_IS_CHAMPION)){
-		// Drug shop, including pp up / pp max
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded)
 	}
 	else // Player is not champion
 	{
-		// Drug shop, including standard items
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop)
 	}
 
@@ -355,11 +353,11 @@ mart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded {
 	ITEM_HEART_SCALE
 }
 
-script LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2 {
+script LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2 {
 	lock
 	faceplayer
-	message(format("Welcome to the Lilycove Museum Souvenir Shop!"))
-	message(format("You can find rare items from all around the world here."))
+	msgbox(format("Welcome to the Lilycove Museum Souvenir Shop!"))
+	msgbox(format("You can find rare items from all around the world here."))
 	waitmessage
 	
 	// Player has defeated champion

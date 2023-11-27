@@ -16,8 +16,8 @@
   "object_events": [
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 3,
-      "y": 11,
+      "x": 5,
+      "y": 12,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
@@ -147,19 +147,19 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
       "x": 5,
-      "y": 12,
+      "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop",
+      "script": "LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop",
       "flag": "0"
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
-      "x": 5,
+      "x": 3,
       "y": 11,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
@@ -167,7 +167,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2",
+      "script": "LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2",
       "flag": "0"
     }
   ],

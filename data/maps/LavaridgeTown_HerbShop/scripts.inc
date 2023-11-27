@@ -32,7 +32,6 @@ LavaridgeTown_HerbShop_Pokemart:
 	.2byte ITEM_MAGO_BERRY
 	.2byte ITEM_AGUAV_BERRY
 	.2byte ITEM_IAPAPA_BERRY
-	.2byte ITEM_ENIGMA_BERRY_E_READER
 	.2byte ITEM_NONE
 	release
 	end
@@ -120,7 +119,6 @@ LavaridgeTown_HerbShop_Mart_Clerk2:
 	.2byte ITEM_APICOT_BERRY
 	.2byte ITEM_LANSAT_BERRY
 	.2byte ITEM_STARF_BERRY
-	.2byte ITEM_ENIGMA_BERRY
 	.2byte ITEM_MICLE_BERRY
 	.2byte ITEM_CUSTAP_BERRY
 	.2byte ITEM_JABOCA_BERRY
