@@ -20,5 +20,7 @@ int DisplayTextAndGetWidth(const u8 *str, int width);
 int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width);
 bool16 ScriptMenu_CreatePCMultichoice(void);
 void ScriptMenu_DisplayPCStartupPrompt(void);
+bool8 ScriptMenu_MultichoiceGridCustom(u8 left, u8 top, u8 cursorPos, bool8 ignoreBPress, u8 columnCount, const struct MenuAction *actions, int count);
+void DrawMultichoiceMenuCustom(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos, const struct MenuAction *actions, int count);
 
 #endif //GUARD_SCRIPT_MENU_H

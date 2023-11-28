@@ -2324,3 +2324,40 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     ResetInitialPlayerAvatarState();
     return TRUE;
 }
+
+bool8 ScrCmd_multichoice2(struct ScriptContext *ctx){
+    u8 x = ScriptReadByte(ctx);
+    u8 y = ScriptReadByte(ctx);
+    unsigned char* choices = (unsigned char*)ScriptReadWord(ctx);
+    bool8 ignoreBPress = ScriptReadByte(ctx);
+    u8 columns = ScriptReadByte(ctx);
+    u8 defaultChoice = ScriptReadByte(ctx);
+    if((u32)choices < 0x1000000){ //choices is a multichoiceId
+        if(columns > 1)
+            ScriptMenu_MultichoiceGrid(x, y, (u32)choices, ignoreBPress, columns);
+        else
+            ScriptMenu_MultichoiceWithDefault(x, y, (u32)choices, ignoreBPress, defaultChoice);
+        ScriptContext_Stop();
+        return TRUE;
+    }else{ //choices is a string
+        struct MenuAction menuItems[16] = {NULL};
+        u8 count = 0;
+        while(count < ARRAY_COUNT(menuItems)){
+		    int len = StringLength(choices);
+		    if(!len) break;
+		    menuItems[count++].text = choices;
+		    choices += len + 1;
+        }
+        if(defaultChoice >= count)
+            defaultChoice = 0;
+        if (count > 0){
+		    if(columns > 1)
+			    ScriptMenu_MultichoiceGridCustom(x, y, defaultChoice, ignoreBPress, columns, menuItems, count);
+		    else
+			    DrawMultichoiceMenuCustom(x, y, 0, ignoreBPress, defaultChoice, menuItems, count);
+            ScriptContext_Stop();
+            return TRUE;
+	    }
+    }
+    return FALSE;
+}

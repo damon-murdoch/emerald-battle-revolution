@@ -764,3 +764,46 @@ int ScriptMenu_AdjustLeftCoordFromWidth(int left, int width)
 
     return adjustedLeft;
 }
+
+void DrawMultichoiceMenuCustom(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos, const struct MenuAction *actions, int count){
+    int i, windowId, width = 0;
+    u8 newWidth;
+    for (i = 0; i < count; i++){
+        width = DisplayTextAndGetWidth(actions[i].text, width);
+    }
+    newWidth = ConvertPixelWidthToTileWidth(width);
+    left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
+    windowId = CreateWindowFromRect(left, top, newWidth, count * 2);
+    SetStandardWindowBorderStyle(windowId, 0);
+    PrintMenuTable(windowId, count, actions);
+    InitMenuInUpperLeftCornerNormal(windowId, count, cursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+    InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
+}
+
+bool8 ScriptMenu_MultichoiceGridCustom(u8 left, u8 top, u8 cursorPos, bool8 ignoreBPress, u8 columnCount, const struct MenuAction *actions, int count){
+    if (FuncIsActiveTask(Task_HandleMultichoiceGridInput) == TRUE){
+        return FALSE;
+    }
+    else{
+        u8 taskId;
+        u8 rowCount, newWidth;
+        int i, width;
+        gSpecialVar_Result = 0xFF;
+        width = 0;
+        for (i = 0; i < count; i++){
+            width = DisplayTextAndGetWidth(actions[i].text, width);
+        }
+        newWidth = ConvertPixelWidthToTileWidth(width);
+        left = ScriptMenu_AdjustLeftCoordFromWidth(left, columnCount * newWidth);
+        rowCount = count / columnCount;
+        taskId = CreateTask(Task_HandleMultichoiceGridInput, 80);
+        gTasks[taskId].data[4] = ignoreBPress;
+        gTasks[taskId].data[6] = CreateWindowFromRect(left, top, columnCount * newWidth, rowCount * 2);
+        SetStandardWindowBorderStyle(gTasks[taskId].data[6], 0);
+        PrintMenuGridTable(gTasks[taskId].data[6], newWidth * 8, columnCount, rowCount, actions);
+        InitMenuActionGrid(gTasks[taskId].data[6], newWidth * 8, columnCount, rowCount, cursorPos);
+        CopyWindowToVram(gTasks[taskId].data[6], COPYWIN_FULL);
+        return TRUE;
+    }
+}
