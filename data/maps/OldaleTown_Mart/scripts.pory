@@ -97,46 +97,48 @@ script OldaleTown_Mart_EventScript_Man {
 }
 
 script OldaleTown_Mart_EventScript_Clerk2 {
-
 	lock
 	faceplayer
-	message(gText_HowMayIServeYou)
-	waitmessage
-
-	// If pokedex has been received
 	if (flag(FLAG_ADVENTURE_STARTED)) {
+			message(gText_HowMayIServeYou)
+			waitmessage
 		pokemart(OldaleTown_Mart_Pokemart_Clerk2)
 	}
-	else // Pokedex not received
+	else // Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}
-
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
 }
 
 mart OldaleTown_Mart_Pokemart_Clerk2 {
-	ITEM_LONELY_MINT
-	ITEM_ADAMANT_MINT
-	ITEM_NAUGHTY_MINT
-	ITEM_BRAVE_MINT
-	ITEM_BOLD_MINT
-	ITEM_IMPISH_MINT
-	ITEM_LAX_MINT
-	ITEM_RELAXED_MINT
-	ITEM_MODEST_MINT
-	ITEM_MILD_MINT
-	ITEM_RASH_MINT
-	ITEM_QUIET_MINT
-	ITEM_CALM_MINT
-	ITEM_GENTLE_MINT
-	ITEM_CAREFUL_MINT
-	ITEM_SASSY_MINT
-	ITEM_TIMID_MINT
-	ITEM_HASTY_MINT
-	ITEM_JOLLY_MINT
-	ITEM_NAIVE_MINT
-	ITEM_SERIOUS_MINT
+	ITEM_NET_BALL
+	ITEM_BEAD_MAIL
+	ITEM_DUSK_STONE
+	ITEM_DAWN_STONE
+	ITEM_SYRUPY_APPLE
+	ITEM_DIANCITE
+	ITEM_GLALITITE
+	ITEM_ALTARIANITE
+	ITEM_FIST_PLATE
+	ITEM_TOXIC_PLATE
+	ITEM_EARTH_PLATE
+	ITEM_FIRE_GEM
+	ITEM_WATER_GEM
+	ITEM_GRASS_GEM
+	ITEM_LAX_INCENSE
+	ITEM_THICK_CLUB
+	ITEM_ROSE_INCENSE
+	ITEM_STICKY_BARB
+	ITEM_EXPERT_BELT
+	ITEM_BIG_ROOT
+	ITEM_FIRIUM_Z
+	ITEM_WATERIUM_Z
+	ITEM_GRASSIUM_Z
+	// ITEM_SASSY_MINT
+	// ITEM_IMPISH_MINT
+	// ITEM_NAIVE_MINT
+	// ITEM_DARK_TERA_SHARD
 }

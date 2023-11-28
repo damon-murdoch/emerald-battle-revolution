@@ -38,31 +38,3 @@ MossdeepCity_PokemonCenter_1F_Text_AbilitiesMightChangeMoves:
 	.string "or not work at all.$"
 
 `
-
-script MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist {
-	lock
-	faceplayer
-	msgbox(format("Have you ever heard of a POKéMON named Genesect?"))
-	msgbox(format("It's a Mythical POKéMON said to have been genetically modified by an evil team from another region."))
-	msgbox(format("If you happen to find a Genesect, please let me examine it for my research."))
-	msgbox(format("I'll give you some items in return."))
-	checkforspecies(SPECIES_GENESECT, NO_PARTY_SCREEN, MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect)
-	release
-	end
-}
-
-script MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect {
-	msgbox(format("... Oh, that's a Genesect!"))
-	msgbox(format("Let me take a look at it quickly."))
-	msgbox(format("... Interesting ... Okay!"))
-	msgbox(format("This will be very useful for my research."))
-	msgbox(format("Please accept these as my thanks."))
-	msgbox(format("These items will change Genesect's type when they are held."))
-	giveitem(ITEM_DOUSE_DRIVE)
-	giveitem(ITEM_SHOCK_DRIVE)
-	giveitem(ITEM_BURN_DRIVE)
-	giveitem(ITEM_CHILL_DRIVE)
-	msgbox(format("If you ever require more, please come see me again. I'll be happy to provide more drives in exchange for more data."))
-	release
-	end
-}

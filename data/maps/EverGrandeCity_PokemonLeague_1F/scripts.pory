@@ -130,3 +130,49 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 	.string "POKéMON, and go forth!$"
 
 `
+
+script EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE08_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2 {
+	ITEM_LEVEL_BALL
+	ITEM_MECH_MAIL
+	ITEM_STRAWBERRY_SWEET
+	ITEM_LOVE_SWEET
+	ITEM_BERRY_SWEET
+	ITEM_CLOVER_SWEET
+	ITEM_FLOWER_SWEET
+	ITEM_STAR_SWEET
+	ITEM_RIBBON_SWEET
+	ITEM_UNREMARKABLE_TEACUP
+	ITEM_MASTERPIECE_TEACUP
+	ITEM_SHARPEDONITE
+	ITEM_WIDE_LENS
+	ITEM_CLEANSE_TAG
+	ITEM_UTILITY_UMBRELLA
+	ITEM_BLACK_SLUDGE
+	ITEM_HARD_STONE
+	ITEM_SPELL_TAG
+	ITEM_BLACK_GLASSES
+	ITEM_LUCK_INCENSE
+	ITEM_AIR_BALLOON
+	ITEM_FIGHTINIUM_Z
+	ITEM_POISONIUM_Z
+	ITEM_GROUNDIUM_Z
+	// ITEM_BUG_TERA_SHARD
+	// ITEM_GROUND_TERA_SHARD
+}

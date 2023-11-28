@@ -43,3 +43,46 @@ PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
 	.string "Take some ANTIDOTES with you.$"
 
 `
+
+script PetalburgCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	// First gym badge obtained
+	if (flag(FLAG_BADGE05_GET)) {
+		pokemart(PetalburgCity_Mart_Pokemart_Clerk2)
+		message(gText_HowMayIServeYou)
+		waitmessage
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart PetalburgCity_Mart_Pokemart_Clerk2 {
+	ITEM_REPEAT_BALL
+	ITEM_PARK_BALL
+	ITEM_DREAM_MAIL
+	ITEM_EVERSTONE
+	ITEM_PRISM_SCALE
+	ITEM_KANGASKHANITE
+	ITEM_AUDINITE
+	ITEM_LOPUNNITE
+	ITEM_SKY_PLATE
+	ITEM_MIND_PLATE
+	ITEM_INSECT_PLATE
+	ITEM_PURE_INCENSE
+	ITEM_BRIGHT_POWDER
+	ITEM_THROAT_SPRAY
+	ITEM_EJECT_BUTTON
+	ITEM_ABILITY_SHIELD
+	ITEM_METRONOME
+	ITEM_PROTECTIVE_PADS
+	ITEM_ROCKIUM_Z
+	ITEM_GHOSTIUM_Z
+	ITEM_DARKINIUM_Z
+	// ITEM_STEEL_TERA_SHARD
+}

@@ -35,3 +35,46 @@ MauvilleCity_Mart_Text_DecisionsDetermineBattle:
 	.string "battles turn out, I think.$"
 
 `
+
+script MauvilleCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE03_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(MauvilleCity_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart MauvilleCity_Mart_Pokemart_Clerk2 {
+	ITEM_DUSK_BALL
+	ITEM_FAB_MAIL
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+	ITEM_GALARICA_CUFF
+	ITEM_GALARICA_WREATH
+	ITEM_GARCHOMPITE
+	ITEM_GARDEVOIRITE
+	ITEM_STEELIXITE
+	ITEM_ZAP_PLATE
+	ITEM_ICICLE_PLATE
+	ITEM_BINDING_BAND
+	ITEM_BOOSTER_ENERGY
+	ITEM_CHARCOAL
+	ITEM_MYSTIC_WATER
+	ITEM_MIRACLE_SEED
+	ITEM_WHITE_HERB
+	ITEM_RAZOR_CLAW
+	ITEM_FOCUS_BAND
+	// ITEM_CALM_MINT
+	// ITEM_TIMID_MINT
+	// ITEM_MODEST_MINT
+	// ITEM_GHOST_TERA_SHARD
+}

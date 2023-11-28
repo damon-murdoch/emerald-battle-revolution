@@ -43,3 +43,56 @@ RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
 	.string "the entrance.$"
 
 `
+
+script RustboroCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE01_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(RustboroCity_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart RustboroCity_Mart_Pokemart_Clerk2 {
+	ITEM_DIVE_BALL
+	ITEM_RETRO_MAIL
+	ITEM_OVAL_STONE
+	ITEM_SACHET
+	ITEM_ABOMASITE
+	ITEM_SCEPTILITE
+	ITEM_BLAZIKENITE
+	ITEM_SWAMPERTITE
+	ITEM_GALLADITE
+	ITEM_FLAME_PLATE
+	ITEM_SPLASH_PLATE
+	ITEM_MEADOW_PLATE
+	ITEM_LAGGING_TAIL
+	ITEM_BLACK_BELT
+	ITEM_POISON_BARB
+	ITEM_SOFT_SAND
+	ITEM_DRAGON_GEM
+	ITEM_STEEL_GEM
+	ITEM_FAIRY_GEM
+	ITEM_BLUNDER_POLICY
+	ITEM_ELECTRIC_SEED
+	ITEM_PSYCHIC_SEED
+	ITEM_MISTY_SEED
+	ITEM_GRASSY_SEED
+	ITEM_SHED_SHELL
+	ITEM_CHOICE_BAND
+	ITEM_CHOICE_SPECS
+	ITEM_CHOICE_SCARF
+	ITEM_NORMALIUM_Z
+	ITEM_ELECTRIUM_Z
+	ITEM_ICIUM_Z
+	// ITEM_FIRE_TERA_SHARD
+	// ITEM_ICE_TERA_SHARD
+}

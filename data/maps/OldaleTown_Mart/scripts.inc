@@ -91,8 +91,6 @@ OldaleTown_Mart_EventScript_Man::
 OldaleTown_Mart_EventScript_Clerk2::
 	lock
 	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_EventScript_Clerk2_2
 	msgbox OldaleTown_Mart_EventScript_Clerk2_Text_0
 OldaleTown_Mart_EventScript_Clerk2_1:
@@ -101,33 +99,37 @@ OldaleTown_Mart_EventScript_Clerk2_1:
 	end
 
 OldaleTown_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
 	pokemart OldaleTown_Mart_Pokemart_Clerk2
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 OldaleTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_LONELY_MINT
-	.2byte ITEM_ADAMANT_MINT
-	.2byte ITEM_NAUGHTY_MINT
-	.2byte ITEM_BRAVE_MINT
-	.2byte ITEM_BOLD_MINT
-	.2byte ITEM_IMPISH_MINT
-	.2byte ITEM_LAX_MINT
-	.2byte ITEM_RELAXED_MINT
-	.2byte ITEM_MODEST_MINT
-	.2byte ITEM_MILD_MINT
-	.2byte ITEM_RASH_MINT
-	.2byte ITEM_QUIET_MINT
-	.2byte ITEM_CALM_MINT
-	.2byte ITEM_GENTLE_MINT
-	.2byte ITEM_CAREFUL_MINT
-	.2byte ITEM_SASSY_MINT
-	.2byte ITEM_TIMID_MINT
-	.2byte ITEM_HASTY_MINT
-	.2byte ITEM_JOLLY_MINT
-	.2byte ITEM_NAIVE_MINT
-	.2byte ITEM_SERIOUS_MINT
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_BEAD_MAIL
+	.2byte ITEM_DUSK_STONE
+	.2byte ITEM_DAWN_STONE
+	.2byte ITEM_SYRUPY_APPLE
+	.2byte ITEM_DIANCITE
+	.2byte ITEM_GLALITITE
+	.2byte ITEM_ALTARIANITE
+	.2byte ITEM_FIST_PLATE
+	.2byte ITEM_TOXIC_PLATE
+	.2byte ITEM_EARTH_PLATE
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_THICK_CLUB
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_STICKY_BARB
+	.2byte ITEM_EXPERT_BELT
+	.2byte ITEM_BIG_ROOT
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_NONE
 
 OldaleTown_Mart_EventScript_Man_Text_0:

@@ -32,3 +32,48 @@ LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney:
 	.string "Give it to a POKéMON--it will be elated.$"
 
 `
+
+script LavaridgeTown_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE04_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(LavaridgeTown_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LavaridgeTown_Mart_Pokemart_Clerk2 {
+	ITEM_FAST_BALL
+	ITEM_HEAVY_BALL
+	ITEM_LEAF_STONE
+	ITEM_ICE_STONE
+	ITEM_SWEET_APPLE
+	ITEM_TART_APPLE
+	ITEM_CAMERUPTITE
+	ITEM_MAWILITE
+	ITEM_ABSOLITE
+	ITEM_RED_NECTAR
+	ITEM_YELLOW_NECTAR
+	ITEM_PINK_NECTAR
+	ITEM_PURPLE_NECTAR
+	ITEM_RAZOR_FANG
+	ITEM_ROOM_SERVICE
+	ITEM_IRON_BALL
+	ITEM_ADRENALINE_ORB
+	ITEM_LIGHT_CLAY
+	ITEM_PUNCHING_GLOVE
+	ITEM_ALORAICHIUM_Z
+	ITEM_PIKASHUNIUM_Z
+	// ITEM_NAUGHTY_MINT
+	// ITEM_GENTLE_MINT
+	// ITEM_RASH_MINT
+	// ITEM_WATER_TERA_SHARD
+}

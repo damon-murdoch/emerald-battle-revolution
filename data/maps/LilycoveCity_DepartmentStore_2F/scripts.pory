@@ -41,71 +41,47 @@ LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems:
 script LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight {
 	lock
 	faceplayer
-	message(gText_HowMayIServeYou)
-	waitmessage
-	
-	// If player is champion
-	if (flag(FLAG_IS_CHAMPION))
-	{
-		// Expanded Pokemart
-		pokemart(LilycoveCity_DepartmentStore_2F_Pokemart2_Expanded)
+	if (flag(FLAG_BADGE06_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(LilycoveCity_Mart_Pokemart_Clerk2)
 	}
-	else // Player is not champion
+	else // Not unlocked
 	{
-		// Normal Pokemart
-		pokemart(LilycoveCity_DepartmentStore_2F_Pokemart2)
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
 }
 
-# Custom Pokemart with all special Pokeballs for sale
-mart LilycoveCity_DepartmentStore_2F_Pokemart2 {
-	ITEM_PREMIER_BALL
-	ITEM_DUSK_BALL
-	ITEM_NET_BALL
-	ITEM_DIVE_BALL
-	ITEM_TIMER_BALL
-	ITEM_QUICK_BALL
-	ITEM_REPEAT_BALL
-	ITEM_LUXURY_BALL
-	ITEM_LEVEL_BALL
-	ITEM_LURE_BALL
-	ITEM_MOON_BALL
-	ITEM_FRIEND_BALL
+mart LilycoveCity_Mart_Pokemart_Clerk2 {
 	ITEM_LOVE_BALL
-	ITEM_FAST_BALL
-	ITEM_HEAVY_BALL
 	ITEM_DREAM_BALL
-	ITEM_SAFARI_BALL
-	ITEM_SPORT_BALL
-	ITEM_PARK_BALL
-	ITEM_BEAST_BALL
-}
-
-# Custom Pokemart with all special Pokeballs for sale (incl. Exclusive Balls)
-mart LilycoveCity_DepartmentStore_2F_Pokemart2_Expanded {
-	ITEM_CHERISH_BALL
-	ITEM_MASTER_BALL
-	ITEM_PREMIER_BALL
-	ITEM_DUSK_BALL
-	ITEM_NET_BALL
-	ITEM_DIVE_BALL
-	ITEM_TIMER_BALL
-	ITEM_QUICK_BALL
-	ITEM_REPEAT_BALL
-	ITEM_LUXURY_BALL
-	ITEM_LEVEL_BALL
-	ITEM_LURE_BALL
-	ITEM_MOON_BALL
-	ITEM_FRIEND_BALL
-	ITEM_LOVE_BALL
-	ITEM_FAST_BALL
-	ITEM_HEAVY_BALL
-	ITEM_DREAM_BALL
-	ITEM_SAFARI_BALL
-	ITEM_SPORT_BALL
-	ITEM_PARK_BALL
-	ITEM_BEAST_BALL
+	ITEM_HARBOR_MAIL
+	ITEM_PEAT_BLOCK
+	ITEM_WHIPPED_DREAM
+	ITEM_HERACRONITE
+	ITEM_GYARADOSITE
+	ITEM_BANETTITE
+	ITEM_LIFE_ORB
+	ITEM_MACHO_BRACE
+	ITEM_POWER_WEIGHT
+	ITEM_POWER_BRACER
+	ITEM_POWER_BELT
+	ITEM_POWER_LENS
+	ITEM_POWER_BAND
+	ITEM_POWER_ANKLET
+	ITEM_FIGHTING_GEM
+	ITEM_POISON_GEM
+	ITEM_GROUND_GEM
+	ITEM_FLAME_ORB
+	ITEM_TOXIC_ORB
+	ITEM_NORMAL_GEM
+	ITEM_ELECTRIC_GEM
+	ITEM_ICE_GEM
+	ITEM_EJECT_PACK
+	ITEM_SCOPE_LENS
+	// ITEM_POISON_TERA_SHARD
+	// ITEM_ROCK_TERA_SHARD
 }

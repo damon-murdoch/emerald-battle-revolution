@@ -43,3 +43,52 @@ VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
 	.string "buy it.$"
 
 `
+
+script VerdanturfTown_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE03_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(VerdanturfTown_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart VerdanturfTown_Mart_Pokemart_Clerk2 {
+	ITEM_NEST_BALL
+	ITEM_MOON_BALL
+	ITEM_TROPIC_MAIL
+	ITEM_REAPER_CLOTH
+	ITEM_AUSPICIOUS_ARMOR
+	ITEM_MALICIOUS_ARMOR
+	ITEM_SCIZORITE
+	ITEM_RUSTED_SWORD
+	ITEM_RUSTED_SWORD
+	ITEM_BEEDRILLITE
+	ITEM_SHARP_BEAK
+	ITEM_TWISTED_SPOON
+	ITEM_SILVER_POWDER
+	ITEM_CLEAR_AMULET
+	ITEM_LEFTOVERS
+	ITEM_HEAVY_DUTY_BOOTS
+	ITEM_ABSORB_BULB
+	ITEM_CELL_BATTERY
+	ITEM_LUMINOUS_MOSS
+	ITEM_SNOWBALL
+	ITEM_DRAGON_FANG
+	ITEM_METAL_COAT
+	ITEM_FAIRY_FEATHER
+	ITEM_ROCK_GEM
+	ITEM_GHOST_GEM
+	ITEM_DARK_GEM
+	ITEM_EVIOLITE
+	// ITEM_FLYING_TERA_SHARD
+	// ITEM_PSYCHIC_TERA_SHARD
+}

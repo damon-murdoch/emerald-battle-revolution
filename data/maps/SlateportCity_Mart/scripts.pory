@@ -33,3 +33,44 @@ SlateportCity_Mart_Text_GreatBallIsBetter:
 	.string "elusive POKéMON…$"
 
 `
+
+script SlateportCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE02_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(SlateportCity_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart SlateportCity_Mart_Pokemart_Clerk2 {
+	ITEM_LURE_BALL
+	ITEM_SPORT_BALL
+	ITEM_SHADOW_MAIL
+	ITEM_LINKING_CORD
+	ITEM_UPGRADE
+	ITEM_DUBIOUS_DISC
+	ITEM_MANECTITE
+	ITEM_PINSIRITE
+	ITEM_MENTAL_HERB
+	ITEM_BERSERK_GENE
+	ITEM_GRIP_CLAW
+	ITEM_SHELL_BELL
+	ITEM_POWER_HERB
+	ITEM_FLOAT_STONE
+	ITEM_FLYINIUM_Z
+	ITEM_PSYCHIUM_Z
+	ITEM_BUGINIUM_Z
+	// ITEM_HASTY_MINT
+	// ITEM_ADAMANT_MINT
+	// ITEM_CAREFUL_MINT
+	// ITEM_DRAGON_TERA_SHARD
+}

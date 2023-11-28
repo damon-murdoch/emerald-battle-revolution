@@ -1410,7 +1410,7 @@ script SlateportCity_EventScript_MochiClerk {
 	end
 }
 
-mart SlateportCity_Mart_MochiClerk {
+mart SlateportCity_Mart_MochiClerk {	
 	ITEM_HEALTH_MOCHI
 	ITEM_MUSCLE_MOCHI
 	ITEM_RESIST_MOCHI
