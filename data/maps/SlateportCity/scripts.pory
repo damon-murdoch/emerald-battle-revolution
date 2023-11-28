@@ -1390,15 +1390,37 @@ script SlateportCity_EventScript_MochiClerk {
 	lock
 	faceplayer
 	msgbox(format("Welcome to Kitakami Mochi! We make special mochi for training your POKéMON!"))
-	message(format("What can I get for you?"))
+
 	waitmessage
-	pokemart(SlateportCity_Pokemart_MochiClerk)
+
+	// If the player is the champion
+	if (flag(FLAG_IS_CHAMPION)){
+		message(format("We now also have original Kitakami festival masks!"))
+		message(format("What can I get for you?"))
+		pokemart(SlateportCity_Mart_MochiClerk_Expanded)
+	}
+	else // Player is not the champion
+	{
+		message(format("What can I get for you?"))
+		pokemart(SlateportCity_Mart_MochiClerk)
+	}
+	
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
 }
 
 mart SlateportCity_Mart_MochiClerk {
+	ITEM_HEALTH_MOCHI
+	ITEM_MUSCLE_MOCHI
+	ITEM_RESIST_MOCHI
+	ITEM_GENIUS_MOCHI
+	ITEM_CLEVER_MOCHI
+	ITEM_SWIFT_MOCHI
+	ITEM_FRESH_START_MOCHI
+}
+
+mart SlateportCity_Mart_MochiClerk_Expanded {
 	ITEM_HEALTH_MOCHI
 	ITEM_MUSCLE_MOCHI
 	ITEM_RESIST_MOCHI

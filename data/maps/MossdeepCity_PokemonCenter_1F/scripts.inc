@@ -52,11 +52,14 @@ MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect::
 	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_0
 	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_1
 	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_2
+	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_3
+	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_4
+	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_5
 	giveitem ITEM_DOUSE_DRIVE
 	giveitem ITEM_SHOCK_DRIVE
 	giveitem ITEM_BURN_DRIVE
 	giveitem ITEM_CHILL_DRIVE
-	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_3
+	msgbox MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_6
 	release
 	end
 
@@ -79,21 +82,25 @@ MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_Text_3:
 	.string "I'll give you some items in return.$"
 
 MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_0:
-	.string "... Oh, that's a Genesect!))\n"
-	.string "	msgbox(format(Let me take a look at it\l"
-	.string "quickly.$"
+	.string "... Oh, that's a Genesect!$"
 
 MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_1:
-	.string "... Interesting ... Okay!))\n"
-	.string "	msgbox(format(This will be very useful\l"
-	.string "for my research.$"
+	.string "Let me take a look at it quickly.$"
 
 MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_2:
-	.string "Please accept these as my thanks.))\n"
-	.string "	msgbox(format(These items will change\l"
-	.string "Genesect's type when they are held.$"
+	.string "... Interesting ... Okay!$"
 
 MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_3:
+	.string "This will be very useful for my research.$"
+
+MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_4:
+	.string "Please accept these as my thanks.$"
+
+MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_5:
+	.string "These items will change Genesect's type\n"
+	.string "when they are held.$"
+
+MossdeepCity_PokemonCenter_1F_EventScript_GenesectScientist_HasGenesect_Text_6:
 	.string "If you ever require more, please come\n"
 	.string "see me again. I'll be happy to provide\l"
 	.string "more drives in exchange for more data.$"

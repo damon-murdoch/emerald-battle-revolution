@@ -1383,3 +1383,60 @@ SlateportCity_Text_TakingBattleTentChallenge:
 	.string "After all, a tough TRAINER is\n"
 	.string "the perfect fit for the BATTLE TENT!\p"
 	.string "Give it your best effort!$"
+
+SlateportCity_EventScript_MochiClerk::
+	lock
+	faceplayer
+	msgbox SlateportCity_EventScript_MochiClerk_Text_0
+	waitmessage
+	goto_if_set FLAG_IS_CHAMPION, SlateportCity_EventScript_MochiClerk_2
+	message SlateportCity_EventScript_MochiClerk_Text_2
+	pokemart SlateportCity_Mart_MochiClerk
+SlateportCity_EventScript_MochiClerk_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_MochiClerk_2:
+	message SlateportCity_EventScript_MochiClerk_Text_1
+	message SlateportCity_EventScript_MochiClerk_Text_2
+	pokemart SlateportCity_Mart_MochiClerk_Expanded
+	goto SlateportCity_EventScript_MochiClerk_1
+
+
+	.align 2
+SlateportCity_Mart_MochiClerk:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Mart_MochiClerk_Expanded:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_CORNERSTONE_MASK
+	.2byte ITEM_WELLSPRING_MASK
+	.2byte ITEM_HEARTHFLAME_MASK
+	.2byte ITEM_NONE
+
+SlateportCity_EventScript_MochiClerk_Text_0:
+	.string "Welcome to Kitakami Mochi! We make\n"
+	.string "special mochi for training your\l"
+	.string "POKéMON!$"
+
+SlateportCity_EventScript_MochiClerk_Text_1:
+	.string "We now also have original Kitakami\n"
+	.string "festival masks!$"
+
+SlateportCity_EventScript_MochiClerk_Text_2:
+	.string "What can I get for you?$"
