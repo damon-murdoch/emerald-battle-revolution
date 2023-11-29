@@ -47,11 +47,16 @@ PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
 script PetalburgCity_Mart_EventScript_Clerk2 {
 	lock
 	faceplayer
-	// First gym badge obtained
-	if (flag(FLAG_BADGE05_GET)) {
-		pokemart(PetalburgCity_Mart_Pokemart_Clerk2)
+	if (flag(FLAG_ADVENTURE_STARTED)){
 		message(gText_HowMayIServeYou)
 		waitmessage
+		if (flag(FLAG_BADGE05_GET)) {
+			pokemart(PetalburgCity_Mart_Pokemart_Clerk2_Expanded)
+		}
+		else // Not unlocked
+		{
+			pokemart(PetalburgCity_Mart_Pokemart_Clerk2)
+		}
 	}
 	else // Not unlocked
 	{
@@ -63,26 +68,27 @@ script PetalburgCity_Mart_EventScript_Clerk2 {
 }
 
 mart PetalburgCity_Mart_Pokemart_Clerk2 {
-	ITEM_REPEAT_BALL
-	ITEM_PARK_BALL
-	ITEM_DREAM_MAIL
-	ITEM_EVERSTONE
-	ITEM_PRISM_SCALE
-	ITEM_KANGASKHANITE
-	ITEM_AUDINITE
-	ITEM_LOPUNNITE
-	ITEM_SKY_PLATE
-	ITEM_MIND_PLATE
-	ITEM_INSECT_PLATE
-	ITEM_PURE_INCENSE
-	ITEM_BRIGHT_POWDER
-	ITEM_THROAT_SPRAY
-	ITEM_EJECT_BUTTON
-	ITEM_ABILITY_SHIELD
-	ITEM_METRONOME
-	ITEM_PROTECTIVE_PADS
-	ITEM_ROCKIUM_Z
-	ITEM_GHOSTIUM_Z
-	ITEM_DARKINIUM_Z
-	// ITEM_STEEL_TERA_SHARD
+	ITEM_FIRE_STONE
+	ITEM_WATER_STONE
+	ITEM_THUNDER_STONE
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+}
+mart PetalburgCity_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_VENUSAURITE
+	ITEM_CHARIZARDITE_X
+	ITEM_CHARIZARDITE_Y
+	ITEM_BLASTOISINITE
+	ITEM_SLOWBRONITE
+	ITEM_PIKANIUM_Z
+	ITEM_EEVIUM_Z
+	ITEM_SNORLIUM_Z
+	ITEM_FIRE_STONE
+	ITEM_WATER_STONE
+	ITEM_THUNDER_STONE
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+	ITEM_LOADED_DICE
+	ITEM_WIDE_LENS
+	ITEM_RED_CARD
 }

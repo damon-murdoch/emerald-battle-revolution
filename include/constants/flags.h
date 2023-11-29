@@ -42,10 +42,10 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#define FLAG_EXP_SHARE_ENABLED    0x20
-#define FLAG_UNUSED_0x021    0x21 // Unused Flag
-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
+#define FLAG_RECEIVED_OVAL_CHARM       0x20 // Oval Charm Obtained
+#define FLAG_RECEIVED_SHINY_CHARM      0x21 // Shiny Charm Obtained
+#define FLAG_RECEIVED_CATCHING_CHARM   0x22 // Catching Charm Obtained
+#define FLAG_RECEIVED_EXP_CHARM        0x23 // Experience Charm Obtained
 #define FLAG_UNUSED_0x024    0x24 // Unused Flag
 #define FLAG_UNUSED_0x025    0x25 // Unused Flag
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
@@ -119,7 +119,7 @@
 #define FLAG_MOSSDEEP_GYM_SWITCH_3           0x66 //
 #define FLAG_MOSSDEEP_GYM_SWITCH_4           0x67 //
 
-#define FLAG_UNUSED_0x068                    0x68  // Unused Flag
+#define FLAG_EXP_SHARE_ENABLED               0x68  // Exp.Share enabled or disabled
 
 #define FLAG_OCEANIC_MUSEUM_MET_REPORTER     0x69
 #define FLAG_RECEIVED_HM_STRENGTH            0x6A

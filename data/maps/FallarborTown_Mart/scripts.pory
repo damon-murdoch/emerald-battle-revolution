@@ -56,9 +56,15 @@ script FallarborTown_Mart_EventScript_Clerk2 {
 	if (flag(FLAG_BADGE03_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
-		pokemart(FallarborTown_Mart_Pokemart_Clerk2)
+		if (flag(FLAG_BADGE04_GET)){
+			pokemart(FallarborTown_Mart_Pokemart_Clerk2_Expanded)
+		}
+		else // Not unlocked
+		{
+			pokemart(FallarborTown_Mart_Pokemart_Clerk2)
+		}
 	}
-	else // Pokedex not received
+	else // Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}
@@ -68,27 +74,34 @@ script FallarborTown_Mart_EventScript_Clerk2 {
 }
 
 mart FallarborTown_Mart_Pokemart_Clerk2 {
-	ITEM_LUXURY_BALL
-	ITEM_SAFARI_BALL
-	ITEM_SHINY_STONE
-	ITEM_SCROLL_OF_DARKNESS
-	ITEM_SCROLL_OF_WATERS
-	ITEM_SLOWBRONITE
-	ITEM_ALAKAZITE
-	ITEM_VENUSAURITE
-	ITEM_CHARIZARDITE_X
-	ITEM_CHARIZARDITE_Y
-	ITEM_BLASTOISINITE
-	ITEM_COVERT_CLOAK
-	ITEM_SEA_INCENSE
-	ITEM_WAVE_INCENSE
-	ITEM_TERRAIN_EXTENDER
-	ITEM_QUICK_CLAW
-	ITEM_METAL_POWDER
-	ITEM_PIKANIUM_Z
-	ITEM_EEVIUM_Z
-	ITEM_SNORLIUM_Z
-	ITEM_MEWNIUM_Z
-	// ITEM_NORMAL_TERA_SHARD
-	// ITEM_FIGHTING_TERA_SHARD
+	ITEM_GYARADOSITE
+	ITEM_ALTARIANITE
+	ITEM_CAMERUPTITE
+	ITEM_METAL_COAT
+	ITEM_DRAGON_FANG
+	ITEM_NEVER_MELT_ICE
+	ITEM_DRAGON_GEM
+	ITEM_STEEL_GEM
+	ITEM_ICE_GEM
+	ITEM_MENTAL_HERB
+	ITEM_BERSERK_GENE
+	ITEM_GRIP_CLAW
+}
+
+mart FallarborTown_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_STEELIUM_Z
+	ITEM_DRAGONIUM_Z
+	ITEM_ICIUM_Z
+	ITEM_GYARADOSITE
+	ITEM_GARCHOMPITE
+	ITEM_CAMERUPTITE
+	ITEM_METAL_COAT
+	ITEM_DRAGON_FANG
+	ITEM_NEVER_MELT_ICE
+	ITEM_DRAGON_GEM
+	ITEM_STEEL_GEM
+	ITEM_ICE_GEM
+	ITEM_MENTAL_HERB
+	ITEM_BERSERK_GENE
+	ITEM_GRIP_CLAW
 }
