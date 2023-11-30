@@ -433,25 +433,13 @@ TrainerHill_Entrance_Mart_EventScript_Clerk2_2:
 
 	.align 2
 TrainerHill_Entrance_Mart_Pokemart_Clerk2:
-	.2byte ITEM_WAVE_MAIL
-	.2byte ITEM_BLACK_AUGURITE
-	.2byte ITEM_LEADERS_CREST
-	.2byte ITEM_GIMMIGHOUL_COIN
-	.2byte ITEM_PIDGEOTITE
-	.2byte ITEM_RED_ORB
-	.2byte ITEM_BLUE_ORB
-	.2byte ITEM_AGGRONITE
-	.2byte ITEM_LIGHT_BALL
-	.2byte ITEM_SOOTHE_BELL
-	.2byte ITEM_DEEP_SEA_SCALE
-	.2byte ITEM_DEEP_SEA_TOOTH
-	.2byte ITEM_KINGS_ROCK
-	.2byte ITEM_DESTINY_KNOT
-	.2byte ITEM_WEAKNESS_POLICY
-	.2byte ITEM_ODD_INCENSE
-	.2byte ITEM_DECIDIUM_Z
-	.2byte ITEM_INCINIUM_Z
-	.2byte ITEM_PRIMARIUM_Z
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
 	.2byte ITEM_NONE
 
 TrainerHill_Entrance_Mart_EventScript_Clerk2_Text_0:

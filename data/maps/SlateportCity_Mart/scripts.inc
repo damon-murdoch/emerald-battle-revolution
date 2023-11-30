@@ -44,29 +44,48 @@ SlateportCity_Mart_EventScript_Clerk2_1:
 SlateportCity_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, SlateportCity_Mart_EventScript_Clerk2_5
 	pokemart SlateportCity_Mart_Pokemart_Clerk2
+	goto SlateportCity_Mart_EventScript_Clerk2_1
+
+SlateportCity_Mart_EventScript_Clerk2_5:
+	pokemart SlateportCity_Mart_Pokemart_Clerk2_Expanded
 	goto SlateportCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 SlateportCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_LURE_BALL
-	.2byte ITEM_SPORT_BALL
-	.2byte ITEM_SHADOW_MAIL
-	.2byte ITEM_LINKING_CORD
-	.2byte ITEM_UPGRADE
-	.2byte ITEM_DUBIOUS_DISC
-	.2byte ITEM_MANECTITE
-	.2byte ITEM_PINSIRITE
-	.2byte ITEM_MENTAL_HERB
-	.2byte ITEM_BERSERK_GENE
-	.2byte ITEM_GRIP_CLAW
+	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_FIGHTING_GEM
+	.2byte ITEM_PSYCHIC_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_FAIRY_FEATHER
 	.2byte ITEM_SHELL_BELL
 	.2byte ITEM_POWER_HERB
 	.2byte ITEM_FLOAT_STONE
-	.2byte ITEM_FLYINIUM_Z
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_FIGHTINIUM_Z
 	.2byte ITEM_PSYCHIUM_Z
-	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FAIRIUM_Z
+	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_FIGHTING_GEM
+	.2byte ITEM_PSYCHIC_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_SHELL_BELL
+	.2byte ITEM_POWER_HERB
+	.2byte ITEM_FLOAT_STONE
 	.2byte ITEM_NONE
 
 SlateportCity_Mart_EventScript_Clerk2_Text_0:

@@ -50,15 +50,16 @@ script RustboroCity_Mart_EventScript_Clerk2 {
 	if (flag(FLAG_BADGE01_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
-		if (flag(FLAG_BADGE04_GET)){
+		if (flag(FLAG_BADGE04_GET)) {
 			pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded2)
 		}
-		else if (flag(FLAG_BADGE02_GET)){
-			pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded)
-		}
-		else
-		{
-			pokemart(RustboroCity_Mart_Pokemart_Clerk2)
+		else {
+			if (flag(FLAG_BADGE02_GET)) {
+				pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded)
+			}
+			else {
+				pokemart(RustboroCity_Mart_Pokemart_Clerk2)
+			}
 		}
 	}
 	else // Not unlocked

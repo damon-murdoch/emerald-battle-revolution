@@ -59,33 +59,48 @@ FallarborTown_Mart_EventScript_Clerk2_1:
 FallarborTown_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, FallarborTown_Mart_EventScript_Clerk2_5
 	pokemart FallarborTown_Mart_Pokemart_Clerk2
+	goto FallarborTown_Mart_EventScript_Clerk2_1
+
+FallarborTown_Mart_EventScript_Clerk2_5:
+	pokemart FallarborTown_Mart_Pokemart_Clerk2_Expanded
 	goto FallarborTown_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 FallarborTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_LUXURY_BALL
-	.2byte ITEM_SAFARI_BALL
-	.2byte ITEM_SHINY_STONE
-	.2byte ITEM_SCROLL_OF_DARKNESS
-	.2byte ITEM_SCROLL_OF_WATERS
-	.2byte ITEM_SLOWBRONITE
-	.2byte ITEM_ALAKAZITE
-	.2byte ITEM_VENUSAURITE
-	.2byte ITEM_CHARIZARDITE_X
-	.2byte ITEM_CHARIZARDITE_Y
-	.2byte ITEM_BLASTOISINITE
-	.2byte ITEM_COVERT_CLOAK
-	.2byte ITEM_SEA_INCENSE
-	.2byte ITEM_WAVE_INCENSE
-	.2byte ITEM_TERRAIN_EXTENDER
-	.2byte ITEM_QUICK_CLAW
-	.2byte ITEM_METAL_POWDER
-	.2byte ITEM_PIKANIUM_Z
-	.2byte ITEM_EEVIUM_Z
-	.2byte ITEM_SNORLIUM_Z
-	.2byte ITEM_MEWNIUM_Z
+	.2byte ITEM_GYARADOSITE
+	.2byte ITEM_ALTARIANITE
+	.2byte ITEM_CAMERUPTITE
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_DRAGON_FANG
+	.2byte ITEM_NEVER_MELT_ICE
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_STEEL_GEM
+	.2byte ITEM_ICE_GEM
+	.2byte ITEM_MENTAL_HERB
+	.2byte ITEM_BERSERK_GENE
+	.2byte ITEM_GRIP_CLAW
+	.2byte ITEM_NONE
+
+	.align 2
+FallarborTown_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_STEELIUM_Z
+	.2byte ITEM_DRAGONIUM_Z
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_GYARADOSITE
+	.2byte ITEM_GARCHOMPITE
+	.2byte ITEM_CAMERUPTITE
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_DRAGON_FANG
+	.2byte ITEM_NEVER_MELT_ICE
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_STEEL_GEM
+	.2byte ITEM_ICE_GEM
+	.2byte ITEM_MENTAL_HERB
+	.2byte ITEM_BERSERK_GENE
+	.2byte ITEM_GRIP_CLAW
 	.2byte ITEM_NONE
 
 FallarborTown_Mart_EventScript_Clerk2_Text_0:

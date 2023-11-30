@@ -72,7 +72,7 @@ mart SlateportCity_Mart_Pokemart_Clerk2 {
 	ITEM_FLOAT_STONE
 }
 
-mart SlateportCity_Mart_Pokemart_Clerk2_Expanded2 {
+mart SlateportCity_Mart_Pokemart_Clerk2_Expanded {
 	ITEM_FIGHTINIUM_Z
 	ITEM_PSYCHIUM_Z
 	ITEM_FAIRIUM_Z

@@ -54,39 +54,48 @@ VerdanturfTown_Mart_EventScript_Clerk2_1:
 VerdanturfTown_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, VerdanturfTown_Mart_EventScript_Clerk2_5
 	pokemart VerdanturfTown_Mart_Pokemart_Clerk2
+	goto VerdanturfTown_Mart_EventScript_Clerk2_1
+
+VerdanturfTown_Mart_EventScript_Clerk2_5:
+	pokemart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded
 	goto VerdanturfTown_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 VerdanturfTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_NEST_BALL
-	.2byte ITEM_MOON_BALL
-	.2byte ITEM_TROPIC_MAIL
-	.2byte ITEM_REAPER_CLOTH
-	.2byte ITEM_AUSPICIOUS_ARMOR
-	.2byte ITEM_MALICIOUS_ARMOR
-	.2byte ITEM_SCIZORITE
-	.2byte ITEM_RUSTED_SWORD
-	.2byte ITEM_RUSTED_SWORD
-	.2byte ITEM_BEEDRILLITE
-	.2byte ITEM_SHARP_BEAK
-	.2byte ITEM_TWISTED_SPOON
-	.2byte ITEM_SILVER_POWDER
-	.2byte ITEM_CLEAR_AMULET
-	.2byte ITEM_LEFTOVERS
-	.2byte ITEM_HEAVY_DUTY_BOOTS
-	.2byte ITEM_ABSORB_BULB
-	.2byte ITEM_CELL_BATTERY
-	.2byte ITEM_LUMINOUS_MOSS
-	.2byte ITEM_SNOWBALL
-	.2byte ITEM_DRAGON_FANG
-	.2byte ITEM_METAL_COAT
-	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_GARDEVOIRITE
+	.2byte ITEM_AGGRONITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_POISON_GEM
+	.2byte ITEM_GROUND_GEM
 	.2byte ITEM_ROCK_GEM
-	.2byte ITEM_GHOST_GEM
-	.2byte ITEM_DARK_GEM
-	.2byte ITEM_EVIOLITE
+	.2byte ITEM_POISON_BARB
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_FLAME_ORB
+	.2byte ITEM_TOXIC_ORB
+	.2byte ITEM_LIFE_ORB
+	.2byte ITEM_NONE
+
+	.align 2
+VerdanturfTown_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_POISONIUM_Z
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_ROCKIUM_Z
+	.2byte ITEM_GARDEVOIRITE
+	.2byte ITEM_AGGRONITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_POISON_GEM
+	.2byte ITEM_GROUND_GEM
+	.2byte ITEM_ROCK_GEM
+	.2byte ITEM_POISON_BARB
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_FLAME_ORB
+	.2byte ITEM_TOXIC_ORB
+	.2byte ITEM_LIFE_ORB
 	.2byte ITEM_NONE
 
 VerdanturfTown_Mart_EventScript_Clerk2_Text_0:
