@@ -54,43 +54,65 @@ RustboroCity_Mart_EventScript_Clerk2_1:
 RustboroCity_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, RustboroCity_Mart_EventScript_Clerk2_5
+	goto_if_set FLAG_BADGE02_GET, RustboroCity_Mart_EventScript_Clerk2_8
 	pokemart RustboroCity_Mart_Pokemart_Clerk2
+	goto RustboroCity_Mart_EventScript_Clerk2_1
+
+RustboroCity_Mart_EventScript_Clerk2_5:
+	pokemart RustboroCity_Mart_Pokemart_Clerk2_Expanded2
+	goto RustboroCity_Mart_EventScript_Clerk2_1
+
+RustboroCity_Mart_EventScript_Clerk2_8:
+	pokemart RustboroCity_Mart_Pokemart_Clerk2_Expanded
 	goto RustboroCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 RustboroCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_DIVE_BALL
-	.2byte ITEM_RETRO_MAIL
-	.2byte ITEM_OVAL_STONE
-	.2byte ITEM_SACHET
-	.2byte ITEM_ABOMASITE
-	.2byte ITEM_SCEPTILITE
-	.2byte ITEM_BLAZIKENITE
-	.2byte ITEM_SWAMPERTITE
-	.2byte ITEM_GALLADITE
-	.2byte ITEM_FLAME_PLATE
-	.2byte ITEM_SPLASH_PLATE
-	.2byte ITEM_MEADOW_PLATE
-	.2byte ITEM_LAGGING_TAIL
-	.2byte ITEM_BLACK_BELT
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_SOFT_SAND
-	.2byte ITEM_DRAGON_GEM
-	.2byte ITEM_STEEL_GEM
-	.2byte ITEM_FAIRY_GEM
-	.2byte ITEM_BLUNDER_POLICY
-	.2byte ITEM_ELECTRIC_SEED
-	.2byte ITEM_PSYCHIC_SEED
-	.2byte ITEM_MISTY_SEED
-	.2byte ITEM_GRASSY_SEED
-	.2byte ITEM_SHED_SHELL
-	.2byte ITEM_CHOICE_BAND
-	.2byte ITEM_CHOICE_SPECS
-	.2byte ITEM_CHOICE_SCARF
+	.2byte ITEM_NORMAL_GEM
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FLYING_GEM
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_SHARP_BEAK
+	.2byte ITEM_EXPERT_BELT
+	.2byte ITEM_EJECT_PACK
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_NONE
+
+	.align 2
+RustboroCity_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_PIDGEOTITE
+	.2byte ITEM_BEEDRILLITE
+	.2byte ITEM_NORMAL_GEM
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FLYING_GEM
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_SHARP_BEAK
+	.2byte ITEM_EXPERT_BELT
+	.2byte ITEM_EJECT_PACK
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_NONE
+
+	.align 2
+RustboroCity_Mart_Pokemart_Clerk2_Expanded2:
 	.2byte ITEM_NORMALIUM_Z
-	.2byte ITEM_ELECTRIUM_Z
-	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FLYINIUM_Z
+	.2byte ITEM_AUDINITE
+	.2byte ITEM_PIDGEOTITE
+	.2byte ITEM_BEEDRILLITE
+	.2byte ITEM_NORMAL_GEM
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FLYING_GEM
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_SHARP_BEAK
+	.2byte ITEM_EXPERT_BELT
+	.2byte ITEM_EJECT_PACK
+	.2byte ITEM_SCOPE_LENS
 	.2byte ITEM_NONE
 
 RustboroCity_Mart_EventScript_Clerk2_Text_0:
