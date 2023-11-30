@@ -1383,6 +1383,7 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 void ItemUseOutOfBattle_Mints(u8 taskId)
 {
     gItemUseCB = ItemUseCB_Mints;
+    SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_ReduceIV(u8 taskId)
