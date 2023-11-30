@@ -44,7 +44,7 @@ PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
 PetalburgCity_Mart_EventScript_Clerk2::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Mart_EventScript_Clerk2_2
+	goto_if_set FLAG_ADVENTURE_STARTED, PetalburgCity_Mart_EventScript_Clerk2_2
 	msgbox PetalburgCity_Mart_EventScript_Clerk2_Text_0
 PetalburgCity_Mart_EventScript_Clerk2_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
@@ -52,35 +52,44 @@ PetalburgCity_Mart_EventScript_Clerk2_1:
 	end
 
 PetalburgCity_Mart_EventScript_Clerk2_2:
-	pokemart PetalburgCity_Mart_Pokemart_Clerk2
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Mart_EventScript_Clerk2_5
+	pokemart PetalburgCity_Mart_Pokemart_Clerk2
+	goto PetalburgCity_Mart_EventScript_Clerk2_1
+
+PetalburgCity_Mart_EventScript_Clerk2_5:
+	pokemart PetalburgCity_Mart_Pokemart_Clerk2_Expanded
 	goto PetalburgCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 PetalburgCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_REPEAT_BALL
-	.2byte ITEM_PARK_BALL
-	.2byte ITEM_DREAM_MAIL
-	.2byte ITEM_EVERSTONE
-	.2byte ITEM_PRISM_SCALE
-	.2byte ITEM_KANGASKHANITE
-	.2byte ITEM_AUDINITE
-	.2byte ITEM_LOPUNNITE
-	.2byte ITEM_SKY_PLATE
-	.2byte ITEM_MIND_PLATE
-	.2byte ITEM_INSECT_PLATE
-	.2byte ITEM_PURE_INCENSE
-	.2byte ITEM_BRIGHT_POWDER
-	.2byte ITEM_THROAT_SPRAY
-	.2byte ITEM_EJECT_BUTTON
-	.2byte ITEM_ABILITY_SHIELD
-	.2byte ITEM_METRONOME
-	.2byte ITEM_PROTECTIVE_PADS
-	.2byte ITEM_ROCKIUM_Z
-	.2byte ITEM_GHOSTIUM_Z
-	.2byte ITEM_DARKINIUM_Z
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_THUNDER_STONE
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_NONE
+
+	.align 2
+PetalburgCity_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_VENUSAURITE
+	.2byte ITEM_CHARIZARDITE_X
+	.2byte ITEM_CHARIZARDITE_Y
+	.2byte ITEM_BLASTOISINITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_PIKANIUM_Z
+	.2byte ITEM_EEVIUM_Z
+	.2byte ITEM_SNORLIUM_Z
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_THUNDER_STONE
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_LOADED_DICE
+	.2byte ITEM_WIDE_LENS
+	.2byte ITEM_RED_CARD
 	.2byte ITEM_NONE
 
 PetalburgCity_Mart_EventScript_Clerk2_Text_0:

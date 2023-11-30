@@ -102,17 +102,18 @@ script OldaleTown_Mart_EventScript_Clerk2 {
 	if (flag(FLAG_ADVENTURE_STARTED)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
-		// Unlock Megas
 		if(flag(FLAG_BADGE04_GET)){
 			pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded2)
 		}
-		// Unlock Z Moves
-		else if (flag(FLAG_BADGE02_GET)){
-			pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded)
-		}
 		else // Not unlocked
 		{
-			pokemart(OldaleTown_Mart_Pokemart_Clerk2)
+			if (flag(FLAG_BADGE02_GET)){
+				pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded)
+			}
+			else // Not unlocked
+			{
+				pokemart(OldaleTown_Mart_Pokemart_Clerk2)
+			}
 		}
 	}
 	else // Not unlocked
