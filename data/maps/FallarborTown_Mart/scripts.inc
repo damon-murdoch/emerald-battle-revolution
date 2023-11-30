@@ -6,26 +6,8 @@ FallarborTown_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart FallarborTown_Mart_Pokemart
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-FallarborTown_Mart_Pokemart:
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -64,3 +46,48 @@ FallarborTown_Mart_Text_SellNuggetIFound:
 	.string "I suppose I'll have to sell it, seeing\l"
 	.string "as how it has no other use.$"
 
+FallarborTown_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE03_GET, FallarborTown_Mart_EventScript_Clerk2_2
+	msgbox FallarborTown_Mart_EventScript_Clerk2_Text_0
+FallarborTown_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+FallarborTown_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart FallarborTown_Mart_Pokemart_Clerk2
+	goto FallarborTown_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+FallarborTown_Mart_Pokemart_Clerk2:
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_SAFARI_BALL
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_SCROLL_OF_DARKNESS
+	.2byte ITEM_SCROLL_OF_WATERS
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_VENUSAURITE
+	.2byte ITEM_CHARIZARDITE_X
+	.2byte ITEM_CHARIZARDITE_Y
+	.2byte ITEM_BLASTOISINITE
+	.2byte ITEM_COVERT_CLOAK
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_TERRAIN_EXTENDER
+	.2byte ITEM_QUICK_CLAW
+	.2byte ITEM_METAL_POWDER
+	.2byte ITEM_PIKANIUM_Z
+	.2byte ITEM_EEVIUM_Z
+	.2byte ITEM_SNORLIUM_Z
+	.2byte ITEM_MEWNIUM_Z
+	.2byte ITEM_NONE
+
+FallarborTown_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

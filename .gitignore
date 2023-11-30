@@ -19,6 +19,10 @@
 *.fwjpnfont
 sound/**/*.bin
 sound/songs/midi/*.s
+build_release.sh
+convert_inc.sh
+build_dev.sh
+cleanup.sh
 tools/agbcc
 *.map
 *.ld
@@ -39,3 +43,4 @@ prefabs.json
 *.diff
 *.sym
 *.js
+src/data/map_group_count.h

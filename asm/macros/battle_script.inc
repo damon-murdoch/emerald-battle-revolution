@@ -1366,6 +1366,31 @@
 	.byte \battler
 	.endm
 
+	.macro trysetoctolock battler:req, failInstr:req
+	callnative BS_TrySetOctolock
+	.byte \battler
+	.4byte \failInstr
+	.endm
+
+	.macro setglaiverush
+	callnative BS_SetGlaiveRush
+	.endm
+
+	.macro tryrelicsong
+	callnative BS_TryRelicSong
+	.endm
+
+	.macro setpledge jumpInstr:req
+	callnative BS_SetPledge
+	.4byte \jumpInstr
+	.endm
+
+	.macro setpledgestatus battler:req sidestatus:req
+	callnative BS_SetPledgeStatus
+	.byte \battler
+	.4byte \sidestatus
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1459,6 +1484,61 @@
 	.macro tryreflecttype failInstr:req
 	callnative BS_TryReflectType
 	.4byte \failInstr
+	.endm
+
+	@ Used to active a different Max Move effects.
+	.macro setmaxmoveeffect
+	callnative BS_SetMaxMoveEffect
+	.endm
+
+	.macro setsteelsurge, failInstr:req
+	callnative BS_SetSteelsurge
+	.4byte \failInstr
+	.endm
+
+	.macro damagenontypes
+	callnative BS_DamageNonTypes
+	.endm
+
+	.macro trysetstatus1, ptr:req
+	callnative BS_TrySetStatus1
+	.4byte \ptr
+	.endm
+
+	.macro trysetstatus2, ptr:req
+	callnative BS_TrySetStatus2
+	.4byte \ptr
+	.endm
+
+	.macro tryhealsixthhealth, ptr:req
+	callnative BS_HealOneSixth
+	.4byte \ptr
+	.endm
+
+	.macro tryrecycleberry, ptr:req
+	callnative BS_TryRecycleBerry
+	.4byte \ptr
+	.endm
+
+	.macro updatedynamax
+	callnative BS_UpdateDynamax
+	.endm
+
+	.macro jumpiftargetdynamaxed, ptr:req
+	callnative BS_JumpIfDynamaxed
+	.4byte \ptr
+	.endm
+
+	.macro trytrainerslidezmovemsg
+	callnative BS_TryTrainerSlideZMoveMsg
+	.endm
+
+	.macro trytrainerslidemegaevolutionmsg
+	callnative BS_TryTrainerSlideMegaEvolutionMsg
+	.endm
+
+	.macro trytrainerslidedynamaxmsg
+	callnative BS_TryTrainerSlideDynamaxMsg
 	.endm
 
 @ various command changed to more readable macros
@@ -2004,10 +2084,6 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro applyplasmafists
-	various BS_ATTACKER, VARIOUS_APPLY_PLASMA_FISTS
-	.endm
-
 	.macro jumpifweatheraffected battler:req, flags:req, jumpInstr:req
 	various \battler, VARIOUS_JUMP_IF_WEATHER_AFFECTED
 	.4byte \flags
@@ -2041,11 +2117,6 @@
 
 	.macro checkpoltergeist battler:req, failInstr:req
 	various \battler, VARIOUS_CHECK_POLTERGEIST
-	.4byte \failInstr
-	.endm
-
-	.macro setoctolock battler:req, failInstr:req
-	various \battler, VARIOUS_SET_OCTOLOCK
 	.4byte \failInstr
 	.endm
 
@@ -2127,14 +2198,6 @@
 
 	.macro activateterrainchangeabilities battler:req
 	various \battler, VARIOUS_ACTIVATE_TERRAIN_CHANGE_ABILITIES
-	.endm
-
-	.macro trytrainerslidezmovemsg battler:req
-	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_Z_MOVE
-	.endm
-
-	.macro trytrainerslidemegaevolutionmsg battler:req
-	various \battler, VARIOUS_TRY_TRAINER_SLIDE_MSG_MEGA_EVOLUTION
 	.endm
 
 @ helpful macros
@@ -2339,4 +2402,9 @@
 	.macro jumpiffainted battler:req, value:req, ptr:req
 	getbattlerfainted \battler
 	jumpifbyte CMP_EQUAL, gBattleCommunication, \value, \ptr
+	.endm
+
+	.macro flushtextbox
+	printstring STRINGID_EMPTYSTRING3
+	waitmessage 1
 	.endm

@@ -31,21 +31,8 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-EverGrandeCity_PokemonLeague_1F_Pokemart:
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -141,3 +128,51 @@ EverGrandeCity_PokemonLeague_1F_Text_GoForth:
 	.string "TRAINER! Believe in yourself and your\n"
 	.string "POKéMON, and go forth!$"
 
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_2
+	msgbox EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_Text_0
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2
+	goto EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_1
+
+
+	.align 2
+EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2:
+	.2byte ITEM_LEVEL_BALL
+	.2byte ITEM_MECH_MAIL
+	.2byte ITEM_STRAWBERRY_SWEET
+	.2byte ITEM_LOVE_SWEET
+	.2byte ITEM_BERRY_SWEET
+	.2byte ITEM_CLOVER_SWEET
+	.2byte ITEM_FLOWER_SWEET
+	.2byte ITEM_STAR_SWEET
+	.2byte ITEM_RIBBON_SWEET
+	.2byte ITEM_UNREMARKABLE_TEACUP
+	.2byte ITEM_MASTERPIECE_TEACUP
+	.2byte ITEM_SHARPEDONITE
+	.2byte ITEM_WIDE_LENS
+	.2byte ITEM_CLEANSE_TAG
+	.2byte ITEM_UTILITY_UMBRELLA
+	.2byte ITEM_BLACK_SLUDGE
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_BLACK_GLASSES
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_AIR_BALLOON
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_POISONIUM_Z
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_NONE
+
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

@@ -246,50 +246,8 @@ TrainerHill_Entrance_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_SYS_GAME_CLEAR, TrainerHill_Entrance_EventScript_ExpandedPokemart
-	pokemart TrainerHill_Entrance_Pokemart_Basic
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-TrainerHill_Entrance_Pokemart_Basic:
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
-
-TrainerHill_Entrance_EventScript_ExpandedPokemart::
-	pokemart TrainerHill_Entrance_Pokemart_Expanded
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-TrainerHill_Entrance_Pokemart_Expanded:
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -455,3 +413,47 @@ TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen:
 TrainerHill_Elevator_Text_ReturnToReception:
 	.string "Would you like to return to\n"
 	.string "the reception counter?$"
+
+TrainerHill_Entrance_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	goto_if_set FLAG_BADGE08_GET, TrainerHill_Entrance_Mart_EventScript_Clerk2_2
+	msgbox TrainerHill_Entrance_Mart_EventScript_Clerk2_Text_0
+TrainerHill_Entrance_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+TrainerHill_Entrance_Mart_EventScript_Clerk2_2:
+	pokemart TrainerHill_Entrance_Mart_Pokemart_Clerk2
+	goto TrainerHill_Entrance_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+TrainerHill_Entrance_Mart_Pokemart_Clerk2:
+	.2byte ITEM_WAVE_MAIL
+	.2byte ITEM_BLACK_AUGURITE
+	.2byte ITEM_LEADERS_CREST
+	.2byte ITEM_GIMMIGHOUL_COIN
+	.2byte ITEM_PIDGEOTITE
+	.2byte ITEM_RED_ORB
+	.2byte ITEM_BLUE_ORB
+	.2byte ITEM_AGGRONITE
+	.2byte ITEM_LIGHT_BALL
+	.2byte ITEM_SOOTHE_BELL
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_WEAKNESS_POLICY
+	.2byte ITEM_ODD_INCENSE
+	.2byte ITEM_DECIDIUM_Z
+	.2byte ITEM_INCINIUM_Z
+	.2byte ITEM_PRIMARIUM_Z
+	.2byte ITEM_NONE
+
+TrainerHill_Entrance_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

@@ -3,6 +3,7 @@
 	.include "asm/macros/movement.inc"
 	.include "asm/macros/map.inc"
 	.include "asm/macros/field_effect_script.inc"
+	.include "asm/macros/field_specials.inc"
 	.include "asm/macros/trainer_hill.inc"
 	.include "asm/macros/battle_tent.inc"
 	.include "asm/macros/battle_frontier/apprentice.inc"

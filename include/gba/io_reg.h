@@ -1,6 +1,8 @@
 #ifndef GUARD_GBA_IO_REG_H
 #define GUARD_GBA_IO_REG_H
 
+#include "config/system.h"
+
 #define REG_BASE 0x4000000 // I/O register base address
 
 // I/O register offsets
@@ -713,6 +715,12 @@
 #define KEY_AND_INTR    0x8000
 #define DPAD_ANY        ((DPAD_RIGHT | DPAD_LEFT | DPAD_UP | DPAD_DOWN))
 #define JOY_EXCL_DPAD   0x030F
+
+// [voloved] Add Sleep Mode
+#ifdef ENABLE_SLEEP_MODE
+#define SLEEP_KEYS      ((L_BUTTON | R_BUTTON | SELECT_BUTTON))
+#define WAKE_KEYS       ((SELECT_BUTTON | START_BUTTON))
+#endif // SLEEP_MODE_ENABLED
 
 // interrupt flags
 #define INTR_FLAG_VBLANK  (1 <<  0)

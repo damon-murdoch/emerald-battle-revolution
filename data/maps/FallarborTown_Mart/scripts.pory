@@ -1,0 +1,107 @@
+raw `
+FallarborTown_Mart_MapScripts::
+	.byte 0
+
+FallarborTown_Mart_EventScript_Clerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart 0
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+FallarborTown_Mart_EventScript_Woman::
+	msgbox FallarborTown_Mart_Text_DecidingSkittyEvolve, MSGBOX_NPC
+	end
+
+FallarborTown_Mart_EventScript_PokefanM::
+	msgbox FallarborTown_Mart_Text_SellNuggetIFound, MSGBOX_NPC
+	end
+
+FallarborTown_Mart_EventScript_Skitty::
+	lock
+	faceplayer
+	waitse
+	playmoncry SPECIES_SKITTY, CRY_MODE_NORMAL
+	msgbox FallarborTown_Mart_Text_Skitty, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+FallarborTown_Mart_Text_DecidingSkittyEvolve:
+	.string "I'm having a hard time deciding if I\n"
+	.string "should make my SKITTY evolve or not.\p"
+	.string "I only have to use this MOON STONE,\n"
+	.string "but it's so hard to decide…\p"
+	.string "If I make it evolve, it will become\n"
+	.string "much stronger.\p"
+	.string "But it will look so different, too.$"
+
+FallarborTown_Mart_Text_Skitty:
+	.string "SKITTY: Miyao?$"
+
+FallarborTown_Mart_Text_SellNuggetIFound:
+	.string "This NUGGET I found here…\n"
+	.string "I suppose I'll have to sell it, seeing\l"
+	.string "as how it has no other use.$"
+
+`
+
+script FallarborTown_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	// First gym badge obtained
+	if (flag(FLAG_BADGE03_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		if (flag(FLAG_BADGE04_GET)){
+			pokemart(FallarborTown_Mart_Pokemart_Clerk2_Expanded)
+		}
+		else // Not unlocked
+		{
+			pokemart(FallarborTown_Mart_Pokemart_Clerk2)
+		}
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart FallarborTown_Mart_Pokemart_Clerk2 {
+	ITEM_GYARADOSITE
+	ITEM_ALTARIANITE
+	ITEM_CAMERUPTITE
+	ITEM_METAL_COAT
+	ITEM_DRAGON_FANG
+	ITEM_NEVER_MELT_ICE
+	ITEM_DRAGON_GEM
+	ITEM_STEEL_GEM
+	ITEM_ICE_GEM
+	ITEM_MENTAL_HERB
+	ITEM_BERSERK_GENE
+	ITEM_GRIP_CLAW
+}
+
+mart FallarborTown_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_STEELIUM_Z
+	ITEM_DRAGONIUM_Z
+	ITEM_ICIUM_Z
+	ITEM_GYARADOSITE
+	ITEM_GARCHOMPITE
+	ITEM_CAMERUPTITE
+	ITEM_METAL_COAT
+	ITEM_DRAGON_FANG
+	ITEM_NEVER_MELT_ICE
+	ITEM_DRAGON_GEM
+	ITEM_STEEL_GEM
+	ITEM_ICE_GEM
+	ITEM_MENTAL_HERB
+	ITEM_BERSERK_GENE
+	ITEM_GRIP_CLAW
+}

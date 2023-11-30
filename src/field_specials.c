@@ -67,6 +67,7 @@
 #include "palette.h"
 #include "battle_util.h"
 #include "config/nature.h"
+#include "pokedex.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -139,6 +140,12 @@ static u8 DidPlayerGetFirstFans(void);
 static void SetInitialFansOfPlayer(void);
 static u16 PlayerGainRandomTrainerFan(void);
 static void BufferFanClubTrainerName_(struct LinkBattleRecords *, u8, u8);
+void SetMonBall(void);
+bool8 GetSeenMon(void);
+bool8 GetCaughtMon(void);
+void SetSeenMon(void);
+void SetCaughtMon(void);
+bool8 CheckPartyForMon(void);
 
 void Special_ShowDiploma(void)
 {
@@ -965,8 +972,8 @@ void FieldShowRegionMap(void)
 
 static bool8 IsPlayerInFrontOfPC(void)
 {
-    u16 x, y;
-    u16 tileInFront;
+    s16 x, y;
+    u32 tileInFront;
 
     GetXYCoordsOneStepInFrontOfPlayer(&x, &y);
     tileInFront = MapGridGetMetatileIdAt(x, y);
@@ -2202,6 +2209,8 @@ void ShowFrontierManiacMessage(void)
         else
             winStreak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[FRONTIER_LVL_OPEN];
         break;
+    default:
+        return;
     }
 
     for (i = 0; i < FRONTIER_MANIAC_MESSAGE_COUNT - 1 && sFrontierManiacStreakThresholds[facility][i] < winStreak; i++);
@@ -4206,4 +4215,42 @@ void SetPlayerGotFirstFans(void)
 u8 Script_TryGainNewFanFromCounter(void)
 {
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
+}
+
+void SetMonBall(void)
+{
+    u16 ballId = VarGet(VAR_TEMP_1);
+    SetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_POKEBALL, &ballId);
+}
+
+bool8 GetSeenMon(void)
+{
+    return GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_GET_SEEN);
+}
+
+bool8 GetCaughtMon(void)
+{
+    return GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_GET_CAUGHT);
+}
+
+void SetSeenMon(void)
+{
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_SEEN);
+}
+
+void SetCaughtMon(void)
+{
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_SEEN);
+    GetSetPokedexFlag(SpeciesToNationalPokedexNum(VarGet(VAR_TEMP_1)), FLAG_SET_CAUGHT);
+}
+
+bool8 CheckPartyForMon(void)
+{
+    int i;
+    for (i = 0; i < CalculatePlayerPartyCount(); i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES) == VarGet(VAR_TEMP_1))
+            return TRUE;
+    }
+    return FALSE;
 }

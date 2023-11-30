@@ -29,6 +29,7 @@
 #include "main.h"
 #include "constants/event_objects.h"
 #include "constants/rgb.h"
+#include "config/text.h"
 
 enum {
     INPUT_NONE,
@@ -1480,7 +1481,14 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     {
         bool8 textFull = AddTextCharacter();
 
+        if (TEXT_AUTO_LOWERCASE){
+            // [FieryMewtwo] Automatically switch keyboard to lowercase after the first character
+            if (sNamingScreen ->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
+                MainState_StartPageSwap();
+        }
+
         SquishCursor();
+        
         if (textFull)
         {
             SetInputState(INPUT_STATE_OVERRIDE);
@@ -2058,23 +2066,23 @@ static bool8 IsWideLetter(u8 character)
     return FALSE;
 }
 
-// Debug? Unused, and arguments aren't sensible for non-player screens.
-static void Debug_NamingScreenPlayer(void)
+// Debug? Arguments aren't sensible for non-player screens.
+static void UNUSED Debug_NamingScreenPlayer(void)
 {
     DoNamingScreen(NAMING_SCREEN_PLAYER, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenBox(void)
+static void UNUSED Debug_NamingScreenBox(void)
 {
     DoNamingScreen(NAMING_SCREEN_BOX, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenCaughtMon(void)
+static void UNUSED Debug_NamingScreenCaughtMon(void)
 {
     DoNamingScreen(NAMING_SCREEN_CAUGHT_MON, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }
 
-static void Debug_NamingScreenNickname(void)
+static void UNUSED Debug_NamingScreenNickname(void)
 {
     DoNamingScreen(NAMING_SCREEN_NICKNAME, gSaveBlock2Ptr->playerName, gSaveBlock2Ptr->playerGender, 0, 0, CB2_ReturnToFieldWithOpenMenu);
 }

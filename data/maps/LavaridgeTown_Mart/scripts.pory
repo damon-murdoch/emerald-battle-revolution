@@ -1,0 +1,70 @@
+raw `
+LavaridgeTown_Mart_MapScripts::
+	.byte 0
+
+LavaridgeTown_Mart_EventScript_Clerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart 0
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+LavaridgeTown_Mart_EventScript_ExpertM::
+	msgbox LavaridgeTown_Mart_Text_XSpeedFirstStrike, MSGBOX_NPC
+	end
+
+LavaridgeTown_Mart_EventScript_OldWoman::
+	msgbox LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney, MSGBOX_NPC
+	end
+
+LavaridgeTown_Mart_Text_XSpeedFirstStrike:
+	.string "Use X SPEED to add to a POKéMON's\n"
+	.string "SPEED in battle.\p"
+	.string "That will help it get in the first\n"
+	.string "strike--a decided advantage!$"
+
+LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney:
+	.string "On MT. CHIMNEY's peak, there's a local\n"
+	.string "specialty that you can buy only there.\p"
+	.string "Give it to a POKéMON--it will be elated.$"
+
+`
+
+script LavaridgeTown_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE04_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(LavaridgeTown_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LavaridgeTown_Mart_Pokemart_Clerk2 {
+	ITEM_HOUNDOOMINITE
+	ITEM_ALTARIANITE
+	ITEM_HERACRONITE
+	ITEM_ABOMASITE
+	ITEM_DECIDIUM_Z
+	ITEM_INCINIUM_Z
+	ITEM_PRIMARIUM_Z
+	ITEM_DAMP_ROCK
+	ITEM_HEAT_ROCK
+	ITEM_SMOOTH_ROCK
+	ITEM_ICY_ROCK
+	ITEM_TERRAIN_EXTENDER
+	ITEM_SCROLL_OF_DARKNESS
+	ITEM_SCROLL_OF_WATERS
+	ITEM_COVERT_CLOAK
+	ITEM_QUICK_CLAW
+}

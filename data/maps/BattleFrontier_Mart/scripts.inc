@@ -8,27 +8,8 @@ BattleFrontier_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart BattleFrontier_Mart_Pokemart
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-BattleFrontier_Mart_Pokemart:
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_RESTORE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -67,3 +48,67 @@ BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
 	.string "That rule makes things tougher than\n"
 	.string "they already are!$"
 
+BattleFrontier_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, BattleFrontier_Mart_EventScript_Clerk2_2
+	msgbox BattleFrontier_Mart_EventScript_Clerk2_Text_0
+BattleFrontier_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Mart_Pokemart_Clerk2
+	goto BattleFrontier_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+BattleFrontier_Mart_Pokemart_Clerk2:
+	.2byte ITEM_CHERISH_BALL
+	.2byte ITEM_MASTER_BALL
+	.2byte ITEM_BEAST_BALL
+	.2byte ITEM_SHOCK_DRIVE
+	.2byte ITEM_BURN_DRIVE
+	.2byte ITEM_CHILL_DRIVE
+	.2byte ITEM_DOUSE_DRIVE
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
+	.2byte ITEM_ADAMANT_ORB
+	.2byte ITEM_LUSTROUS_ORB
+	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_FIRE_MEMORY
+	.2byte ITEM_WATER_MEMORY
+	.2byte ITEM_ELECTRIC_MEMORY
+	.2byte ITEM_GRASS_MEMORY
+	.2byte ITEM_ICE_MEMORY
+	.2byte ITEM_FIGHTING_MEMORY
+	.2byte ITEM_POISON_MEMORY
+	.2byte ITEM_GROUND_MEMORY
+	.2byte ITEM_FLYING_MEMORY
+	.2byte ITEM_PSYCHIC_MEMORY
+	.2byte ITEM_BUG_MEMORY
+	.2byte ITEM_ROCK_MEMORY
+	.2byte ITEM_GHOST_MEMORY
+	.2byte ITEM_DRAGON_MEMORY
+	.2byte ITEM_DARK_MEMORY
+	.2byte ITEM_STEEL_MEMORY
+	.2byte ITEM_FAIRY_MEMORY
+	.2byte ITEM_MEWTWONITE_X
+	.2byte ITEM_MEWTWONITE_Y
+	.2byte ITEM_LATIASITE
+	.2byte ITEM_LATIOSITE
+	.2byte ITEM_SOUL_DEW
+	.2byte ITEM_SOLGANIUM_Z
+	.2byte ITEM_LUNALIUM_Z
+	.2byte ITEM_TAPUNIUM_Z
+	.2byte ITEM_ULTRANECROZIUM_Z
+	.2byte ITEM_MARSHADIUM_Z
+	.2byte ITEM_NONE
+
+BattleFrontier_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

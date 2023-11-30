@@ -6,53 +6,8 @@ RustboroCity_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_unset FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartBasic
-	goto_if_set FLAG_MET_DEVON_EMPLOYEE, RustboroCity_Mart_EventScript_PokemartExpanded
-	end
-
-RustboroCity_Mart_EventScript_PokemartBasic::
-	pokemart RustboroCity_Mart_Pokemart_Basic
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-RustboroCity_Mart_Pokemart_Basic:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_NONE
-	release
-	end
-
-RustboroCity_Mart_EventScript_PokemartExpanded::
-	pokemart RustboroCity_Mart_Pokemart_Expanded
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-RustboroCity_Mart_Pokemart_Expanded:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_TIMER_BALL
-	.2byte ITEM_REPEAT_BALL
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_REPEL
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -86,3 +41,58 @@ RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
 	.string "I just need to use it to get back to\n"
 	.string "the entrance.$"
 
+RustboroCity_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE01_GET, RustboroCity_Mart_EventScript_Clerk2_2
+	msgbox RustboroCity_Mart_EventScript_Clerk2_Text_0
+RustboroCity_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+RustboroCity_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart RustboroCity_Mart_Pokemart_Clerk2
+	goto RustboroCity_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+RustboroCity_Mart_Pokemart_Clerk2:
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_RETRO_MAIL
+	.2byte ITEM_OVAL_STONE
+	.2byte ITEM_SACHET
+	.2byte ITEM_ABOMASITE
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_FLAME_PLATE
+	.2byte ITEM_SPLASH_PLATE
+	.2byte ITEM_MEADOW_PLATE
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_POISON_BARB
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_STEEL_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_ELECTRIC_SEED
+	.2byte ITEM_PSYCHIC_SEED
+	.2byte ITEM_MISTY_SEED
+	.2byte ITEM_GRASSY_SEED
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_CHOICE_BAND
+	.2byte ITEM_CHOICE_SPECS
+	.2byte ITEM_CHOICE_SCARF
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_NONE
+
+RustboroCity_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

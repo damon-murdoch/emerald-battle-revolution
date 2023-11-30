@@ -1,0 +1,164 @@
+raw `
+LilycoveCity_DepartmentStore_3F_MapScripts::
+	.byte 0
+
+LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
+	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
+	end
+
+LilycoveCity_DepartmentStore_3F_EventScript_PokefanM::
+	msgbox LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance, MSGBOX_NPC
+	end
+
+LilycoveCity_DepartmentStore_3F_EventScript_Woman::
+	msgbox LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon, MSGBOX_NPC
+	end
+
+LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon:
+	.string "For quickly toughening up POKéMON,\n"
+	.string "items are the best.\p"
+	.string "PROTEIN boosts ATTACK,\n"
+	.string "and CALCIUM raises SP. ATK.$"
+
+LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
+	.string "I want my POKéMON to have more\n"
+	.string "endurance.\p"
+	.string "I'm trying to decide whether to raise\n"
+	.string "DEFENSE with IRON, or SP. DEF with ZINC.$"
+
+LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
+	.string "I gave a CARBOS to my POKéMON,\n"
+	.string "and its SPEED went up.$"
+
+`
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	
+	// Player has defeated champion
+	if (flag(FLAG_IS_CHAMPION)){
+		// Drug shop, including pp up / pp max
+		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded)
+	}
+	else // Player is not champion
+	{
+		// Drug shop, including standard items
+		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft)
+	}
+
+	// pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft {
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_FEATHER
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded {
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_PP_MAX
+	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_FEATHER
+	ITEM_ABILITY_CAPSULE
+	ITEM_ABILITY_PATCH
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+
+
+	// Player has defeated champion
+	if (flag(FLAG_IS_CHAMPION)){
+		// Stat modifiers, including level up / exp. items
+		pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_StatModifiers_Expanded)
+	}
+	else // Player is not champion
+	{
+		// Stat modifiers, including nature mints
+		pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_StatModifiers)
+	}
+
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Pokemart_StatModifiers {
+	ITEM_LONELY_MINT
+	ITEM_ADAMANT_MINT
+	ITEM_NAUGHTY_MINT
+	ITEM_BRAVE_MINT
+	ITEM_BOLD_MINT
+	ITEM_IMPISH_MINT
+	ITEM_LAX_MINT
+	ITEM_RELAXED_MINT
+	ITEM_MODEST_MINT
+	ITEM_MILD_MINT
+	ITEM_RASH_MINT
+	ITEM_QUIET_MINT
+	ITEM_CALM_MINT
+	ITEM_GENTLE_MINT
+	ITEM_CAREFUL_MINT
+	ITEM_SASSY_MINT
+	ITEM_TIMID_MINT
+	ITEM_HASTY_MINT
+	ITEM_JOLLY_MINT
+	ITEM_NAIVE_MINT
+	ITEM_SERIOUS_MINT
+}
+
+mart LilycoveCity_DepartmentStore_3F_Pokemart_StatModifiers_Expanded {
+	ITEM_RARE_CANDY
+	// ITEM_DYNAMAX_CANDY // Waiting for implement
+	ITEM_LONELY_MINT
+	ITEM_ADAMANT_MINT
+	ITEM_NAUGHTY_MINT
+	ITEM_BRAVE_MINT
+	ITEM_BOLD_MINT
+	ITEM_IMPISH_MINT
+	ITEM_LAX_MINT
+	ITEM_RELAXED_MINT
+	ITEM_MODEST_MINT
+	ITEM_MILD_MINT
+	ITEM_RASH_MINT
+	ITEM_QUIET_MINT
+	ITEM_CALM_MINT
+	ITEM_GENTLE_MINT
+	ITEM_CAREFUL_MINT
+	ITEM_SASSY_MINT
+	ITEM_TIMID_MINT
+	ITEM_HASTY_MINT
+	ITEM_JOLLY_MINT
+	ITEM_NAIVE_MINT
+	ITEM_SERIOUS_MINT
+}

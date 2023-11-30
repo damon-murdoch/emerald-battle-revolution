@@ -6,23 +6,8 @@ SootopolisCity_Mart_EventScript_Clerk::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart SootopolisCity_Mart_Pokemart
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-SootopolisCity_Mart_Pokemart:
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_REVIVE
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_SHADOW_MAIL
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -75,3 +60,49 @@ SootopolisCity_Mart_Text_DidSomethingAwaken:
 	.string "This weather…\n"
 	.string "Did something awaken?$"
 
+SootopolisCity_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Mart_EventScript_Clerk2_2
+	msgbox SootopolisCity_Mart_EventScript_Clerk2_Text_0
+SootopolisCity_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart SootopolisCity_Mart_Pokemart_Clerk2
+	goto SootopolisCity_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+SootopolisCity_Mart_Pokemart_Clerk2:
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_WOOD_MAIL
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_DRAGON_SCALE
+	.2byte ITEM_GENGARITE
+	.2byte ITEM_MEDICHAMITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_STONE_PLATE
+	.2byte ITEM_SPOOKY_PLATE
+	.2byte ITEM_DREAD_PLATE
+	.2byte ITEM_MUSCLE_BAND
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_MAGNET
+	.2byte ITEM_NEVER_MELT_ICE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_QUICK_POWDER
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_DRAGONIUM_Z
+	.2byte ITEM_STEELIUM_Z
+	.2byte ITEM_FAIRIUM_Z
+	.2byte ITEM_NONE
+
+SootopolisCity_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"
