@@ -101,35 +101,66 @@ OldaleTown_Mart_EventScript_Clerk2_1:
 OldaleTown_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, OldaleTown_Mart_EventScript_Clerk2_5
+	goto_if_set FLAG_BADGE02_GET, OldaleTown_Mart_EventScript_Clerk2_8
 	pokemart OldaleTown_Mart_Pokemart_Clerk2
+	goto OldaleTown_Mart_EventScript_Clerk2_1
+
+OldaleTown_Mart_EventScript_Clerk2_5:
+	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded2
+	goto OldaleTown_Mart_EventScript_Clerk2_1
+
+OldaleTown_Mart_EventScript_Clerk2_8:
+	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 OldaleTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_NET_BALL
-	.2byte ITEM_BEAD_MAIL
-	.2byte ITEM_DUSK_STONE
-	.2byte ITEM_DAWN_STONE
-	.2byte ITEM_SYRUPY_APPLE
-	.2byte ITEM_DIANCITE
-	.2byte ITEM_GLALITITE
-	.2byte ITEM_ALTARIANITE
-	.2byte ITEM_FIST_PLATE
-	.2byte ITEM_TOXIC_PLATE
-	.2byte ITEM_EARTH_PLATE
 	.2byte ITEM_FIRE_GEM
 	.2byte ITEM_WATER_GEM
 	.2byte ITEM_GRASS_GEM
-	.2byte ITEM_LAX_INCENSE
-	.2byte ITEM_THICK_CLUB
-	.2byte ITEM_ROSE_INCENSE
-	.2byte ITEM_STICKY_BARB
-	.2byte ITEM_EXPERT_BELT
-	.2byte ITEM_BIG_ROOT
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_NONE
+
+	.align 2
+OldaleTown_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_NONE
+
+	.align 2
+OldaleTown_Mart_Pokemart_Clerk2_Expanded2:
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
 	.2byte ITEM_FIRIUM_Z
 	.2byte ITEM_WATERIUM_Z
 	.2byte ITEM_GRASSIUM_Z
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BLUNDER_POLICY
 	.2byte ITEM_NONE
 
 OldaleTown_Mart_EventScript_Man_Text_0:
@@ -139,14 +170,13 @@ OldaleTown_Mart_EventScript_Man_Text_0:
 
 OldaleTown_Mart_EventScript_Man_Text_1:
 	.string "The standard counter is the same\n"
-	.string "everywhere, but new items will become\l"
-	.string "available as you earn more badges.$"
+	.string "everywhere, but the special counter\l"
+	.string "has unique items you won't find\l"
+	.string "elsewhere.$"
 
 OldaleTown_Mart_EventScript_Man_Text_2:
-	.string "The special counter is the same no\n"
-	.string "matter how many badges you have, but\l"
-	.string "will have different items at each\l"
-	.string "location!$"
+	.string "More items will be made available at\n"
+	.string "both as you earn more badges.$"
 
 OldaleTown_Mart_EventScript_Man_Text_3:
 	.string "I'm always excited to check the\n"

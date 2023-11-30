@@ -79,28 +79,6 @@ SootopolisCity_Mart_EventScript_Clerk2_2:
 
 	.align 2
 SootopolisCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_TIMER_BALL
-	.2byte ITEM_WOOD_MAIL
-	.2byte ITEM_SUN_STONE
-	.2byte ITEM_MOON_STONE
-	.2byte ITEM_DRAGON_SCALE
-	.2byte ITEM_GENGARITE
-	.2byte ITEM_MEDICHAMITE
-	.2byte ITEM_SABLENITE
-	.2byte ITEM_STONE_PLATE
-	.2byte ITEM_SPOOKY_PLATE
-	.2byte ITEM_DREAD_PLATE
-	.2byte ITEM_MUSCLE_BAND
-	.2byte ITEM_ZOOM_LENS
-	.2byte ITEM_SILK_SCARF
-	.2byte ITEM_MAGNET
-	.2byte ITEM_NEVER_MELT_ICE
-	.2byte ITEM_FULL_INCENSE
-	.2byte ITEM_QUICK_POWDER
-	.2byte ITEM_MIRROR_HERB
-	.2byte ITEM_DRAGONIUM_Z
-	.2byte ITEM_STEELIUM_Z
-	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_NONE
 
 SootopolisCity_Mart_EventScript_Clerk2_Text_0:
