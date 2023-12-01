@@ -1388,20 +1388,12 @@ SlateportCity_EventScript_MochiClerk::
 	lock
 	faceplayer
 	msgbox SlateportCity_EventScript_MochiClerk_Text_0
+	message SlateportCity_EventScript_MochiClerk_Text_1
 	waitmessage
-	goto_if_set FLAG_IS_CHAMPION, SlateportCity_EventScript_MochiClerk_2
-	message SlateportCity_EventScript_MochiClerk_Text_2
 	pokemart SlateportCity_Mart_MochiClerk
-SlateportCity_EventScript_MochiClerk_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
-
-SlateportCity_EventScript_MochiClerk_2:
-	message SlateportCity_EventScript_MochiClerk_Text_1
-	message SlateportCity_EventScript_MochiClerk_Text_2
-	pokemart SlateportCity_Mart_MochiClerk_Expanded
-	goto SlateportCity_EventScript_MochiClerk_1
 
 
 	.align 2
@@ -1413,20 +1405,12 @@ SlateportCity_Mart_MochiClerk:
 	.2byte ITEM_CLEVER_MOCHI
 	.2byte ITEM_SWIFT_MOCHI
 	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_NONE
-
-	.align 2
-SlateportCity_Mart_MochiClerk_Expanded:
-	.2byte ITEM_HEALTH_MOCHI
-	.2byte ITEM_MUSCLE_MOCHI
-	.2byte ITEM_RESIST_MOCHI
-	.2byte ITEM_GENIUS_MOCHI
-	.2byte ITEM_CLEVER_MOCHI
-	.2byte ITEM_SWIFT_MOCHI
-	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_CORNERSTONE_MASK
-	.2byte ITEM_WELLSPRING_MASK
-	.2byte ITEM_HEARTHFLAME_MASK
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
 	.2byte ITEM_NONE
 
 SlateportCity_EventScript_MochiClerk_Text_0:
@@ -1435,8 +1419,4 @@ SlateportCity_EventScript_MochiClerk_Text_0:
 	.string "POKéMON!$"
 
 SlateportCity_EventScript_MochiClerk_Text_1:
-	.string "We now also have original Kitakami\n"
-	.string "festival masks!$"
-
-SlateportCity_EventScript_MochiClerk_Text_2:
 	.string "What can I get for you?$"

@@ -141,36 +141,106 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_1:
 EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_IS_CHAMPION, EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_5
 	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2
+	goto EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_1
+
+EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_5:
+	pokemart EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2_Expanded
 	goto EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_1
 
 
 	.align 2
 EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2:
-	.2byte ITEM_LEVEL_BALL
-	.2byte ITEM_MECH_MAIL
-	.2byte ITEM_STRAWBERRY_SWEET
-	.2byte ITEM_LOVE_SWEET
-	.2byte ITEM_BERRY_SWEET
-	.2byte ITEM_CLOVER_SWEET
-	.2byte ITEM_FLOWER_SWEET
-	.2byte ITEM_STAR_SWEET
-	.2byte ITEM_RIBBON_SWEET
-	.2byte ITEM_UNREMARKABLE_TEACUP
-	.2byte ITEM_MASTERPIECE_TEACUP
-	.2byte ITEM_SHARPEDONITE
-	.2byte ITEM_WIDE_LENS
-	.2byte ITEM_CLEANSE_TAG
-	.2byte ITEM_UTILITY_UMBRELLA
-	.2byte ITEM_BLACK_SLUDGE
-	.2byte ITEM_HARD_STONE
-	.2byte ITEM_SPELL_TAG
-	.2byte ITEM_BLACK_GLASSES
-	.2byte ITEM_LUCK_INCENSE
-	.2byte ITEM_AIR_BALLOON
-	.2byte ITEM_FIGHTINIUM_Z
-	.2byte ITEM_POISONIUM_Z
-	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_ADAMANT_MINT
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_MILD_MINT
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_CALM_MINT
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_SERIOUS_MINT
+	.2byte ITEM_NONE
+
+	.align 2
+EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_ADAMANT_MINT
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_MILD_MINT
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_CALM_MINT
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_SERIOUS_MINT
 	.2byte ITEM_NONE
 
 EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2_Text_0:

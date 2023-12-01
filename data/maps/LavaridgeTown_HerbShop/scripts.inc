@@ -32,6 +32,10 @@ LavaridgeTown_HerbShop_Pokemart:
 	.2byte ITEM_MAGO_BERRY
 	.2byte ITEM_AGUAV_BERRY
 	.2byte ITEM_IAPAPA_BERRY
+	.2byte ITEM_MAX_MUSHROOMS
+	.2byte ITEM_MOOMOO_MILK
+	.2byte ITEM_MAX_HONEY
+	.2byte ITEM_HONEY
 	.2byte ITEM_NONE
 	release
 	end
@@ -125,6 +129,7 @@ LavaridgeTown_HerbShop_Mart_Clerk2:
 	.2byte ITEM_ROWAP_BERRY
 	.2byte ITEM_KEE_BERRY
 	.2byte ITEM_MARANGA_BERRY
+	.2byte ITEM_ENIGMA_BERRY
 	.2byte ITEM_NONE
 
 LavaridgeTown_HerbShop_EventScript_Clerk3::

@@ -49,43 +49,88 @@ SlateportCity_Mart_EventScript_Clerk2_2:
 	goto SlateportCity_Mart_EventScript_Clerk2_1
 
 SlateportCity_Mart_EventScript_Clerk2_5:
+	goto_if_set FLAG_BADGE08_GET, SlateportCity_Mart_EventScript_Clerk2_8
 	pokemart SlateportCity_Mart_Pokemart_Clerk2_Expanded
+	goto SlateportCity_Mart_EventScript_Clerk2_1
+
+SlateportCity_Mart_EventScript_Clerk2_8:
+	pokemart SlateportCity_Mart_Pokemart_Clerk2_Expanded2
 	goto SlateportCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 SlateportCity_Mart_Pokemart_Clerk2:
 	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_LOPUNNITE
 	.2byte ITEM_ALAKAZITE
-	.2byte ITEM_MAWILITE
 	.2byte ITEM_FIGHTING_GEM
 	.2byte ITEM_PSYCHIC_GEM
-	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_BLACK_BELT
 	.2byte ITEM_TWISTED_SPOON
-	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_YELLOW_NECTAR
+	.2byte ITEM_PURPLE_NECTAR
+	.2byte ITEM_PINK_NECTAR
+	.2byte ITEM_RED_NECTAR
+	.2byte ITEM_SYRUPY_APPLE
+	.2byte ITEM_SWEET_APPLE
+	.2byte ITEM_TART_APPLE
 	.2byte ITEM_SHELL_BELL
 	.2byte ITEM_POWER_HERB
 	.2byte ITEM_FLOAT_STONE
+	.2byte ITEM_LUCKY_PUNCH
 	.2byte ITEM_NONE
 
 	.align 2
 SlateportCity_Mart_Pokemart_Clerk2_Expanded:
 	.2byte ITEM_FIGHTINIUM_Z
 	.2byte ITEM_PSYCHIUM_Z
-	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_LOPUNNITE
 	.2byte ITEM_ALAKAZITE
-	.2byte ITEM_MAWILITE
 	.2byte ITEM_FIGHTING_GEM
 	.2byte ITEM_PSYCHIC_GEM
-	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_BLACK_BELT
 	.2byte ITEM_TWISTED_SPOON
-	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_YELLOW_NECTAR
+	.2byte ITEM_PURPLE_NECTAR
+	.2byte ITEM_PINK_NECTAR
+	.2byte ITEM_RED_NECTAR
+	.2byte ITEM_SYRUPY_APPLE
+	.2byte ITEM_SWEET_APPLE
+	.2byte ITEM_TART_APPLE
 	.2byte ITEM_SHELL_BELL
 	.2byte ITEM_POWER_HERB
 	.2byte ITEM_FLOAT_STONE
+	.2byte ITEM_LUCKY_PUNCH
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Mart_Pokemart_Clerk2_Expanded2:
+	.2byte ITEM_FIGHTING_TERA_SHARD
+	.2byte ITEM_PSYCHIC_TERA_SHARD
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
+	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_LOPUNNITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_FIGHTING_GEM
+	.2byte ITEM_PSYCHIC_GEM
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_YELLOW_NECTAR
+	.2byte ITEM_PURPLE_NECTAR
+	.2byte ITEM_PINK_NECTAR
+	.2byte ITEM_RED_NECTAR
+	.2byte ITEM_SYRUPY_APPLE
+	.2byte ITEM_SWEET_APPLE
+	.2byte ITEM_TART_APPLE
+	.2byte ITEM_SHELL_BELL
+	.2byte ITEM_POWER_HERB
+	.2byte ITEM_FLOAT_STONE
+	.2byte ITEM_LUCKY_PUNCH
 	.2byte ITEM_NONE
 
 SlateportCity_Mart_EventScript_Clerk2_Text_0:

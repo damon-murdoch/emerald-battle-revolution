@@ -470,7 +470,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_eq FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -529,7 +528,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	call LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
@@ -1002,14 +1001,29 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex::
 	goto_if_unset FLAG_SYS_NATIONAL_DEX, LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_2
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0
+	msgbox LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BIRCH
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_RIVAL
+	setvar VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2
+	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 0
+	setflag FLAG_SCOTT_CALL_BATTLE_FRONTIER
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_1:
+	goto_if_unset FLAG_RECEIVED_CATCHING_CHARM, LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_6
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_5:
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_2
 	releaseall
 	end
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_2:
 	call LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex
 	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_1
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_6:
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0
+	giveitem ITEM_CATCHING_CHARM
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_1
+	setflag FLAG_RECEIVED_CATCHING_CHARM
+	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_5
 
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex::
@@ -1024,95 +1038,49 @@ LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_2:
 	goto LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_1
 
 
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems::
-	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex::
+	goto_if_unset FLAG_SYS_NATIONAL_DEX, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_1
 	return
 
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_1:
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0
-	goto_if_unset FLAG_ITEM_MEGA_RING_OBTAINED, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_4
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_3:
-	goto_if_unset FLAG_ITEM_Z_POWER_RING_OBTAINED, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_7
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_6:
-	goto_if_unset FLAG_SYS_NATIONAL_DEX, LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_10
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_9:
-	setflag FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS
-	return
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_4:
-	giveitem ITEM_MEGA_RING
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1
-	setflag FLAG_ITEM_MEGA_RING_OBTAINED
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2
-	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_3
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_7:
-	giveitem ITEM_Z_POWER_RING
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3
-	setflag FLAG_ITEM_Z_POWER_RING_OBTAINED
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4
-	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_6
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_10:
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_1:
 	special EnableNationalPokedex
 	setflag FLAG_SYS_NATIONAL_DEX
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5
-	goto LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_9
-
-
-LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems::
-	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0
-	compare VAR_BIRCH_LAB_STATE, 5
-	goto_if_eq LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_2
-LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_1:
-	release
-	end
-
-LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_2:
-	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
-	goto LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_1
+	msgbox LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_Text_0
+	return
 
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0:
-	.string "... Oh! it appears you already have the\n"
-	.string "national POKéDEX!$"
+	.string "Also, I'd like you to have this.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_1:
+	.string "This item increases the likelihood of\n"
+	.string "wild POKéMON being caught.$"
+
+LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_2:
+	.string "Now, get out there and enjoy the HOENN\n"
+	.string "region!$"
 
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex_Text_0:
 	.string "... Oh! it appears you already have the\n"
 	.string "POKéDEX!$"
 
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_0:
-	.string "I have a few things I'd like to give you.$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_1:
-	.string "The Mega Ring will allow compatible\n"
-	.string "POKéMON to mega evolve once per battle,\l"
-	.string "when holding their respective Mega\l"
-	.string "Stone.$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_2:
-	.string "Mega Stones can be found throughout\n"
-	.string "the HOENN region, or bought from some\l"
-	.string "shops.$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_3:
-	.string "The Z Power Ring will allow your POKéMON\n"
-	.string "to use a Powerful Z-Move once per\l"
-	.string "battle, when holding the correct the\l"
-	.string "Z-Crystal. Some POKéMON even have\l"
-	.string "signature Z-Moves!$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_4:
-	.string "Z Crystals can be found throughout the\n"
-	.string "HOENN region, or bought from some\l"
-	.string "shops.$"
-
-LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems_Text_5:
+LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_Text_0:
 	.string "I've also taken the liberty of\n"
 	.string "upgrading your POKéDEX to the national\l"
 	.string "version. You'll be able to record all\l"
 	.string "kinds of POKéMON, even those not\l"
 	.string "normally seen in the HOENN region!$"
 
-LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems_Text_0:
-	.string "Oh, {PLAYER}! Good to see you.$"
+LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex::
+	.string "PROF. BIRCH: Now…\p"
+	.string "{PLAYER}{KUN} and {RIVAL}, I've had the two\n"
+	.string "of you help me study POKéMON.\p"
+	.string "Thanks to your help, new facts\n"
+	.string "are coming to light.\p"
+	.string "PROF. BIRCH: But listen.\n"
+	.string "You've become the CHAMPION,\l"
+	.string "but your POKéMON journey isn't over.\p"
+	.string "There is no end to the road\n"
+	.string "that is POKéMON.\p"
+	.string "Somewhere, there is a grassy patch\n"
+	.string "that's waiting for you!$"

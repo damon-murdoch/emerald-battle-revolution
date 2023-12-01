@@ -101,17 +101,22 @@ OldaleTown_Mart_EventScript_Clerk2_1:
 OldaleTown_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_BADGE04_GET, OldaleTown_Mart_EventScript_Clerk2_5
-	goto_if_set FLAG_BADGE02_GET, OldaleTown_Mart_EventScript_Clerk2_8
+	goto_if_set FLAG_BADGE02_GET, OldaleTown_Mart_EventScript_Clerk2_5
 	pokemart OldaleTown_Mart_Pokemart_Clerk2
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 OldaleTown_Mart_EventScript_Clerk2_5:
-	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded2
+	goto_if_set FLAG_BADGE04_GET, OldaleTown_Mart_EventScript_Clerk2_8
+	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 OldaleTown_Mart_EventScript_Clerk2_8:
-	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded
+	goto_if_set FLAG_BADGE08_GET, OldaleTown_Mart_EventScript_Clerk2_11
+	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded2
+	goto OldaleTown_Mart_EventScript_Clerk2_1
+
+OldaleTown_Mart_EventScript_Clerk2_11:
+	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded3
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 
@@ -146,21 +151,45 @@ OldaleTown_Mart_Pokemart_Clerk2_Expanded:
 
 	.align 2
 OldaleTown_Mart_Pokemart_Clerk2_Expanded2:
-	.2byte ITEM_SCEPTILITE
-	.2byte ITEM_BLAZIKENITE
-	.2byte ITEM_SWAMPERTITE
 	.2byte ITEM_FIRIUM_Z
 	.2byte ITEM_WATERIUM_Z
 	.2byte ITEM_GRASSIUM_Z
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
 	.2byte ITEM_FIRE_GEM
 	.2byte ITEM_WATER_GEM
 	.2byte ITEM_GRASS_GEM
 	.2byte ITEM_CHARCOAL
 	.2byte ITEM_MYSTIC_WATER
 	.2byte ITEM_MIRACLE_SEED
-	.2byte ITEM_SHED_SHELL
-	.2byte ITEM_LAGGING_TAIL
 	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BERRY_JUICE
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_NONE
+
+	.align 2
+OldaleTown_Mart_Pokemart_Clerk2_Expanded3:
+	.2byte ITEM_FIRE_TERA_SHARD
+	.2byte ITEM_WATER_TERA_SHARD
+	.2byte ITEM_GRASS_TERA_SHARD
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_GRASSIUM_Z
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_BERRY_JUICE
+	.2byte ITEM_SHED_SHELL
 	.2byte ITEM_NONE
 
 OldaleTown_Mart_EventScript_Man_Text_0:

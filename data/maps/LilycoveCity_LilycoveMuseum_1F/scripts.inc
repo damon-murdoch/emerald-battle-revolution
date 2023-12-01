@@ -320,6 +320,7 @@ LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop:
 	.2byte ITEM_LUMIOSE_GALETTE
 	.2byte ITEM_SHALOUR_SABLE
 	.2byte ITEM_BIG_MALASADA
+	.2byte ITEM_SWEET_HEART
 	.2byte ITEM_YELLOW_FLUTE
 	.2byte ITEM_BLACK_FLUTE
 	.2byte ITEM_WHITE_FLUTE
@@ -337,6 +338,7 @@ LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded:
 	.2byte ITEM_LUMIOSE_GALETTE
 	.2byte ITEM_SHALOUR_SABLE
 	.2byte ITEM_BIG_MALASADA
+	.2byte ITEM_SWEET_HEART
 	.2byte ITEM_YELLOW_FLUTE
 	.2byte ITEM_BLACK_FLUTE
 	.2byte ITEM_WHITE_FLUTE
@@ -369,6 +371,15 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2_2:
 
 	.align 2
 LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2:
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_PURE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
 	.2byte ITEM_HELIX_FOSSIL
 	.2byte ITEM_DOME_FOSSIL
 	.2byte ITEM_OLD_AMBER
@@ -378,6 +389,15 @@ LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2:
 
 	.align 2
 LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded:
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_PURE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
 	.2byte ITEM_HELIX_FOSSIL
 	.2byte ITEM_DOME_FOSSIL
 	.2byte ITEM_OLD_AMBER

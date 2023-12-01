@@ -59,21 +59,33 @@ VerdanturfTown_Mart_EventScript_Clerk2_2:
 	goto VerdanturfTown_Mart_EventScript_Clerk2_1
 
 VerdanturfTown_Mart_EventScript_Clerk2_5:
+	goto_if_set FLAG_BADGE08_GET, VerdanturfTown_Mart_EventScript_Clerk2_8
 	pokemart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded
+	goto VerdanturfTown_Mart_EventScript_Clerk2_1
+
+VerdanturfTown_Mart_EventScript_Clerk2_8:
+	pokemart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2
 	goto VerdanturfTown_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 VerdanturfTown_Mart_Pokemart_Clerk2:
 	.2byte ITEM_GARDEVOIRITE
-	.2byte ITEM_AGGRONITE
+	.2byte ITEM_HERACRONITE
+	.2byte ITEM_BEEDRILLITE
 	.2byte ITEM_GALLADITE
-	.2byte ITEM_POISON_GEM
-	.2byte ITEM_GROUND_GEM
-	.2byte ITEM_ROCK_GEM
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_SOFT_SAND
-	.2byte ITEM_HARD_STONE
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_WHIPPED_DREAM
+	.2byte ITEM_STRAWBERRY_SWEET
+	.2byte ITEM_LOVE_SWEET
+	.2byte ITEM_BERRY_SWEET
+	.2byte ITEM_CLOVER_SWEET
+	.2byte ITEM_FLOWER_SWEET
+	.2byte ITEM_STAR_SWEET
+	.2byte ITEM_RIBBON_SWEET
 	.2byte ITEM_FLAME_ORB
 	.2byte ITEM_TOXIC_ORB
 	.2byte ITEM_LIFE_ORB
@@ -81,18 +93,51 @@ VerdanturfTown_Mart_Pokemart_Clerk2:
 
 	.align 2
 VerdanturfTown_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_POISONIUM_Z
-	.2byte ITEM_GROUNDIUM_Z
-	.2byte ITEM_ROCKIUM_Z
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_GARDEVOIRITE
-	.2byte ITEM_AGGRONITE
+	.2byte ITEM_HERACRONITE
+	.2byte ITEM_BEEDRILLITE
 	.2byte ITEM_GALLADITE
-	.2byte ITEM_POISON_GEM
-	.2byte ITEM_GROUND_GEM
-	.2byte ITEM_ROCK_GEM
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_SOFT_SAND
-	.2byte ITEM_HARD_STONE
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_WHIPPED_DREAM
+	.2byte ITEM_STRAWBERRY_SWEET
+	.2byte ITEM_LOVE_SWEET
+	.2byte ITEM_BERRY_SWEET
+	.2byte ITEM_CLOVER_SWEET
+	.2byte ITEM_FLOWER_SWEET
+	.2byte ITEM_STAR_SWEET
+	.2byte ITEM_RIBBON_SWEET
+	.2byte ITEM_FLAME_ORB
+	.2byte ITEM_TOXIC_ORB
+	.2byte ITEM_LIFE_ORB
+	.2byte ITEM_NONE
+
+	.align 2
+VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2:
+	.2byte ITEM_BUG_TERA_SHARD
+	.2byte ITEM_FAIRY_TERA_SHARD
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FAIRIUM_Z
+	.2byte ITEM_GARDEVOIRITE
+	.2byte ITEM_HERACRONITE
+	.2byte ITEM_BEEDRILLITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_FAIRY_FEATHER
+	.2byte ITEM_WHIPPED_DREAM
+	.2byte ITEM_STRAWBERRY_SWEET
+	.2byte ITEM_LOVE_SWEET
+	.2byte ITEM_BERRY_SWEET
+	.2byte ITEM_CLOVER_SWEET
+	.2byte ITEM_FLOWER_SWEET
+	.2byte ITEM_STAR_SWEET
+	.2byte ITEM_RIBBON_SWEET
 	.2byte ITEM_FLAME_ORB
 	.2byte ITEM_TOXIC_ORB
 	.2byte ITEM_LIFE_ORB

@@ -303,8 +303,8 @@ RustboroCity_DevonCorp_3F_Text_ExplainExpShare::
 
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare_Text_0:
-	.string "When you defeat a Pokemon in battle,\n"
-	.string "this item will share experience with\l"
-	.string "your entire party. This effect can be\l"
-	.string "toggled at any time in the KEY ITEMS\l"
+	.string "When experience is gained in a POKéMON\n"
+	.string "battle, this item will share experience\l"
+	.string "with your entire party. This effect can\l"
+	.string "be toggled at any time in the KEY ITEMS\l"
 	.string "menu.$"
