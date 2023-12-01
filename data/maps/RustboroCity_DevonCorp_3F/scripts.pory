@@ -301,5 +301,5 @@ RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 `
 
 script RustboroCity_DevonCorp_3F_Text_ExplainExpShare {
-	msgbox(format("When you defeat a Pokemon in battle, this item will share experience with your entire party. This effect can be toggled at any time in the KEY ITEMS menu."))
+	msgbox(format("When experience is gained in a POKéMON battle, this item will share experience with your entire party. This effect can be toggled at any time in the KEY ITEMS menu."))
 }
