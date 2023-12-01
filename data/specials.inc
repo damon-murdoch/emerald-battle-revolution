@@ -545,3 +545,6 @@ gSpecials::
 	def_special SetSeenMon
 	def_special SetCaughtMon
 	def_special CheckPartyForMon;
+	def_special TrySkyBattle
+	def_special VsSeekerResetObjectMovementAfterChargeComplete
+	def_special VsSeekerFreezeObjectsAfterChargeComplete
