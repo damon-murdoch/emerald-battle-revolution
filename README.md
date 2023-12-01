@@ -70,16 +70,86 @@ Pokemon easily without the need for modifying save files.
 
 * `huderlem`, for creating [Poryscript](https://github.com/huderlem/poryscript)
 
+## Branches
+
+### Main (Release)
+
+This is the main release branch for the software, where the latest stable version
+of the code will be deployed.
+
+### Mint (Release)
+
+This is the second main release branch for the software, which has Groulslash's nature
+mints code implemented on top of the other main branch features. This has been added
+to a seperate branch to prevent merge conflicts in the future once the mints are
+implemented on the upstream branch of `PokeEmerald-Expanded.`
+
+### Debug (Release)
+
+This is the third release branch for the software, which has all of the main branch
+features with debug code (i.e. debug menu) added for testing purposes. 
+
+### Dev (Development)
+
+This is the main development branch for the software, which is where code which is actively
+being worked on is stored. The `Main` and `Mint` branches are both merged from this branch
+once the software has been tested and verified as working. This branch is generally not
+advised to be used for a genuine playthrough, and may not always be in a compiling state
+when committed.
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.4.1
+
+Battle mechanic items (e.g. Mega Power Ring) will now be recieved during the story, after
+defeating the 2nd, 4th, 6th and 8th gyms respectively. The order is as follows:
+* 2nd Gym: Mega Ring
+* 4th Gym: Z Power Ring
+* 6th Gym: Dynamax Band
+* 8th Gym: Tera Orb
+After defeating these gyms, the related items will become available in the Pokemart. Flags
+for enabling and disabling most optional mechanics have also been implemented, for both
+debug and in-game purposes.
+
+### Ver. 0.4.0
+
+Special sellers in each Pokemart have been completely reworked, and the item table for each
+has been overhauled to provide a variety of unique items for the player to use while progressing
+through the game. Mega Stones, Z-Crystals, Dynamax Candies and Tera Shards will be made available
+in each special shop where other items of the same type are also available (e.g. Sootopolis will 
+have Dragonium Z and Tera Dragon Shards). Trainer Hill, Lilycove Department Store, Evergrande 
+City and the Battle Frontier all have unique secondary special shops which do not follow the
+general pattern of the other special shops.
+
+### Ver. 0.3.1
+
+Removed unnecessary files, modified item prices, fixed issues with mochi seller, 
+added special shop vendors with static, randomised contents to each Pokemart. 
+Implemented and tested multichoice2, which allows for an easy method for 
+implementing multiple choice menus. 
+
+### Ver. 0.3.0
+
+Completed rough spawn tables up to route 120, with recurring patterns for water/fishing
+encounter tables and mostly new spawn tables for wild encounters (Original wild encounters
+remain available, but with lower spawn rate).
+
+### Ver. 0.2.2
+
+Merged upcoming branch of PokeEmerald-Expanded into the project, which adds support for
+several new features including all of the Generation 9 Pokemon (so far), Dynamax, most of
+the new items, and more. Resolved several merge conflicts which were caused as a result of
+this change.
 
 ### Ver. 0.2.1
 
 Updated spawn tables for route 101, 102 and 103 with new wild encounters, as well as water
 and fishing encounters where applicable. All (Non-Department Store) PokeMarts have now been
 updated to use the same item list, which is dependent on the number of badges the player has.
+Modified Pokemarts to have stock dependent on the number of badges the player has earned.
 
 ### Ver. 0.2.0
 
