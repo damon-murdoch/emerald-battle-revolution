@@ -18,6 +18,25 @@ LavaridgeTown_HerbShop_Pokemart:
 	.2byte ITEM_ENERGY_ROOT
 	.2byte ITEM_HEAL_POWDER
 	.2byte ITEM_REVIVAL_HERB
+	.2byte ITEM_CHERI_BERRY
+	.2byte ITEM_CHESTO_BERRY
+	.2byte ITEM_PECHA_BERRY
+	.2byte ITEM_RAWST_BERRY
+	.2byte ITEM_ASPEAR_BERRY
+	.2byte ITEM_LEPPA_BERRY
+	.2byte ITEM_ORAN_BERRY
+	.2byte ITEM_PERSIM_BERRY
+	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_SITRUS_BERRY
+	.2byte ITEM_FIGY_BERRY
+	.2byte ITEM_WIKI_BERRY
+	.2byte ITEM_MAGO_BERRY
+	.2byte ITEM_AGUAV_BERRY
+	.2byte ITEM_IAPAPA_BERRY
+	.2byte ITEM_MAX_MUSHROOMS
+	.2byte ITEM_MOOMOO_MILK
+	.2byte ITEM_MAX_HONEY
+	.2byte ITEM_HONEY
 	.2byte ITEM_NONE
 	release
 	end
@@ -44,7 +63,9 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
 
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop:
 	.string "Welcome to the HERB SHOP, home of\n"
-	.string "effective and inexpensive medicine!$"
+	.string "effective and inexpensive medicine!\n"
+	.string "we also sell many different berries\n"
+	.string "for you to feed your Pokemon.\n$"
 
 LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
 	.string "You've come to look at herbal medicine\n"
@@ -66,3 +87,86 @@ LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike:
 	.string "It must be horribly bitter!$"
 
 `
+
+script LavaridgeTown_HerbShop_EventScript_Clerk2 {
+	lock
+	faceplayer
+	msgbox(format("Welcome to the battle berries counter!"))
+	msgbox(format("Here you'll find berries for your POKéMON to use in battle!"))
+	waitmessage
+	pokemart(LavaridgeTown_HerbShop_Mart_Clerk2)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LavaridgeTown_HerbShop_Mart_Clerk2 {
+	ITEM_CHILAN_BERRY
+	ITEM_OCCA_BERRY
+	ITEM_PASSHO_BERRY
+	ITEM_WACAN_BERRY
+	ITEM_RINDO_BERRY
+	ITEM_YACHE_BERRY
+	ITEM_CHOPLE_BERRY
+	ITEM_KEBIA_BERRY
+	ITEM_SHUCA_BERRY
+	ITEM_COBA_BERRY
+	ITEM_PAYAPA_BERRY
+	ITEM_TANGA_BERRY
+	ITEM_CHARTI_BERRY
+	ITEM_KASIB_BERRY
+	ITEM_COLBUR_BERRY
+	ITEM_BABIRI_BERRY
+	ITEM_ROSELI_BERRY
+	ITEM_LIECHI_BERRY
+	ITEM_GANLON_BERRY
+	ITEM_SALAC_BERRY
+	ITEM_PETAYA_BERRY
+	ITEM_APICOT_BERRY
+	ITEM_LANSAT_BERRY
+	ITEM_STARF_BERRY
+	ITEM_MICLE_BERRY
+	ITEM_CUSTAP_BERRY
+	ITEM_JABOCA_BERRY
+	ITEM_ROWAP_BERRY
+	ITEM_KEE_BERRY
+	ITEM_MARANGA_BERRY
+	ITEM_ENIGMA_BERRY
+	// ITEM_ENIGMA_BERRY_E_READER
+}
+
+script LavaridgeTown_HerbShop_EventScript_Clerk3 {
+	lock
+	faceplayer
+	msgbox(format("Welcome to the training berries counter!")) 
+	msgbox(format("Here you'll find berries to use when training your Pokemon!"))
+	waitmessage
+	pokemart(LavaridgeTown_HerbShop_Mart_Clerk3)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LavaridgeTown_HerbShop_Mart_Clerk3 {
+	ITEM_RAZZ_BERRY
+	ITEM_BLUK_BERRY
+	ITEM_NANAB_BERRY
+	ITEM_WEPEAR_BERRY
+	ITEM_PINAP_BERRY
+	ITEM_CORNN_BERRY
+	ITEM_POMEG_BERRY
+	ITEM_KELPSY_BERRY
+	ITEM_QUALOT_BERRY
+	ITEM_HONDEW_BERRY
+	ITEM_GREPA_BERRY
+	ITEM_TAMATO_BERRY
+	ITEM_MAGOST_BERRY
+	ITEM_RABUTA_BERRY
+	ITEM_NOMEL_BERRY
+	ITEM_SPELON_BERRY
+	ITEM_PAMTRE_BERRY
+	ITEM_WATMEL_BERRY
+	// For future use
+	// ITEM_DURIN_BERRY
+	// ITEM_BELUE_BERRY
+}

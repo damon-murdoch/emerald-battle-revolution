@@ -43,3 +43,63 @@ PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
 	.string "Take some ANTIDOTES with you.$"
 
 `
+
+script PetalburgCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_ADVENTURE_STARTED)){
+		message(gText_HowMayIServeYou)
+		waitmessage
+		if (flag(FLAG_BADGE05_GET)) {
+			pokemart(PetalburgCity_Mart_Pokemart_Clerk2_Expanded)
+		}
+		else // Not unlocked
+		{
+			pokemart(PetalburgCity_Mart_Pokemart_Clerk2)
+		}
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart PetalburgCity_Mart_Pokemart_Clerk2 {
+	ITEM_THUNDER_STONE
+	ITEM_WATER_STONE
+	ITEM_FIRE_STONE
+	ITEM_WIDE_LENS
+	ITEM_LEFTOVERS
+	ITEM_RED_CARD
+}
+
+mart PetalburgCity_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_VENUSAURITE
+	ITEM_CHARIZARDITE_X
+	ITEM_CHARIZARDITE_Y
+	ITEM_BLASTOISINITE
+	ITEM_ALORAICHIUM_Z
+	ITEM_PIKASHUNIUM_Z
+	ITEM_SNORLIUM_Z
+	ITEM_PIKANIUM_Z
+	ITEM_EEVIUM_Z
+	ITEM_THUNDER_STONE
+	ITEM_WATER_STONE
+	ITEM_FIRE_STONE
+	ITEM_LINKING_CORD
+	ITEM_DUBIOUS_DISC
+	ITEM_UPGRADE
+	ITEM_HEAVY_DUTY_BOOTS
+	ITEM_CLEAR_AMULET
+	ITEM_LOADED_DICE
+	ITEM_SOOTHE_BELL
+	ITEM_KINGS_ROCK
+	ITEM_LIGHT_BALL
+	ITEM_OVAL_STONE
+	ITEM_WIDE_LENS
+	ITEM_LEFTOVERS
+	ITEM_RED_CARD
+}

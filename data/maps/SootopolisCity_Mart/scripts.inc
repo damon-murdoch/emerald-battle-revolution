@@ -59,3 +59,54 @@ SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
 SootopolisCity_Mart_Text_DidSomethingAwaken:
 	.string "This weather…\n"
 	.string "Did something awaken?$"
+
+SootopolisCity_Mart_EventScript_Clerk2::
+	lock
+	faceplayer
+	goto_if_set FLAG_BADGE08_GET, SootopolisCity_Mart_EventScript_Clerk2_2
+	msgbox SootopolisCity_Mart_EventScript_Clerk2_Text_0
+SootopolisCity_Mart_EventScript_Clerk2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+SootopolisCity_Mart_EventScript_Clerk2_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart SootopolisCity_Mart_Pokemart_Clerk2
+	goto SootopolisCity_Mart_EventScript_Clerk2_1
+
+
+	.align 2
+SootopolisCity_Mart_Pokemart_Clerk2:
+	.2byte ITEM_DRAGON_TERA_SHARD
+	.2byte ITEM_LYCANIUM_Z
+	.2byte ITEM_MIMIKIUM_Z
+	.2byte ITEM_KOMMONIUM_Z
+	.2byte ITEM_DRAGONIUM_Z
+	.2byte ITEM_TYRANITARITE
+	.2byte ITEM_SALAMENCITE
+	.2byte ITEM_METAGROSSITE
+	.2byte ITEM_DRAGON_FANG
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_DRAGON_SCALE
+	.2byte ITEM_PRISM_SCALE
+	.2byte ITEM_SCROLL_OF_DARKNESS
+	.2byte ITEM_SCROLL_OF_WATERS
+	.2byte ITEM_AUSPICIOUS_ARMOR
+	.2byte ITEM_MALICIOUS_ARMOR
+	.2byte ITEM_GIMMIGHOUL_COIN
+	.2byte ITEM_BLACK_AUGURITE
+	.2byte ITEM_LEADERS_CREST
+	.2byte ITEM_SAFETY_GOGGLES
+	.2byte ITEM_ASSAULT_VEST
+	.2byte ITEM_CHOICE_SCARF
+	.2byte ITEM_CHOICE_SPECS
+	.2byte ITEM_CHOICE_BAND
+	.2byte ITEM_SMOKE_BALL
+	.2byte ITEM_FOCUS_SASH
+	.2byte ITEM_NONE
+
+SootopolisCity_Mart_EventScript_Clerk2_Text_0:
+	.string "I'm afraid we are all out of stock at the\n"
+	.string "moment, sorry!$"

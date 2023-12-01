@@ -35,3 +35,107 @@ MauvilleCity_Mart_Text_DecisionsDetermineBattle:
 	.string "battles turn out, I think.$"
 
 `
+
+script MauvilleCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE03_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		if (flag(FLAG_BADGE04_GET)){
+			if(flag(FLAG_BADGE08_GET)){
+				pokemart(MauvilleCity_Mart_Pokemart_Clerk2_Expanded2)
+			}
+			else // Not unlocked
+			{
+				pokemart(MauvilleCity_Mart_Pokemart_Clerk2_Expanded)
+			}
+		}
+		else // Not unlocked
+		{
+			pokemart(MauvilleCity_Mart_Pokemart_Clerk2)
+		}
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart MauvilleCity_Mart_Pokemart_Clerk2 {
+	ITEM_AMPHAROSITE
+	ITEM_MANECTITE
+	ITEM_SABLENITE
+	ITEM_BANETTITE
+	ITEM_SPELL_TAG
+	ITEM_ELECTRIC_GEM
+	ITEM_GHOST_GEM
+	ITEM_MAGNET
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+	ITEM_SUN_STONE
+	ITEM_MOON_STONE
+	ITEM_SHINY_STONE
+	ITEM_ABILITY_SHIELD
+	ITEM_EJECT_BUTTON
+	ITEM_DESTINY_KNOT
+	ITEM_MUSCLE_BAND
+	ITEM_MIRROR_HERB
+	ITEM_ZOOM_LENS
+	ITEM_EVERSTONE
+}
+
+mart MauvilleCity_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_ELECTRIUM_Z
+	ITEM_GHOSTIUM_Z
+	ITEM_MANECTITE
+	ITEM_SABLENITE
+	ITEM_BANETTITE
+	ITEM_MAWILITE
+	ITEM_SPELL_TAG
+	ITEM_ELECTRIC_GEM
+	ITEM_GHOST_GEM
+	ITEM_MAGNET
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+	ITEM_SUN_STONE
+	ITEM_MOON_STONE
+	ITEM_SHINY_STONE
+	ITEM_ABILITY_SHIELD
+	ITEM_EJECT_BUTTON
+	ITEM_DESTINY_KNOT
+	ITEM_MUSCLE_BAND
+	ITEM_MIRROR_HERB
+	ITEM_ZOOM_LENS
+	ITEM_EVERSTONE
+}
+
+mart MauvilleCity_Mart_Pokemart_Clerk2_Expanded2 {
+	ITEM_ELECTRIC_TERA_SHARD
+	ITEM_GHOST_TERA_SHARD
+	ITEM_ELECTRIUM_Z
+	ITEM_GHOSTIUM_Z
+	ITEM_MANECTITE
+	ITEM_SABLENITE
+	ITEM_BANETTITE
+	ITEM_MAWILITE
+	ITEM_SPELL_TAG
+	ITEM_ELECTRIC_GEM
+	ITEM_GHOST_GEM
+	ITEM_MAGNET
+	ITEM_ELECTIRIZER
+	ITEM_MAGMARIZER
+	ITEM_SUN_STONE
+	ITEM_MOON_STONE
+	ITEM_SHINY_STONE
+	ITEM_ABILITY_SHIELD
+	ITEM_EJECT_BUTTON
+	ITEM_DESTINY_KNOT
+	ITEM_MUSCLE_BAND
+	ITEM_MIRROR_HERB
+	ITEM_ZOOM_LENS
+	ITEM_EVERSTONE
+}

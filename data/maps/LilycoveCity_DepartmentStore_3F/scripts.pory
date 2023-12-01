@@ -2,51 +2,6 @@ raw `
 LilycoveCity_DepartmentStore_3F_MapScripts::
 	.byte 0
 
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
-	.2byte ITEM_NONE
-	release
-	end
-
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Pokemart_StatBoosters:
-	.2byte ITEM_X_SPEED
-	.2byte ITEM_X_SP_ATK
-	.2byte ITEM_X_ATTACK
-	.2byte ITEM_X_DEFENSE
-	.2byte ITEM_DIRE_HIT
-	.2byte ITEM_GUARD_SPEC
-	.2byte ITEM_X_ACCURACY
-	.2byte ITEM_NONE
-	release
-	end
-
 LilycoveCity_DepartmentStore_3F_EventScript_TriathleteM::
 	msgbox LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon, MSGBOX_NPC
 	end
@@ -76,3 +31,146 @@ LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
 	.string "and its SPEED went up.$"
 
 `
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	
+	// Player has defeated champion
+	if (flag(FLAG_IS_CHAMPION)){
+		// Drug shop, including pp up / pp max
+		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded)
+	}
+	else // Player is not champion
+	{
+		// Drug shop, including standard items
+		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft)
+	}
+
+	// pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft {
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_FEATHER
+	ITEM_MACHO_BRACE
+	ITEM_POWER_WEIGHT
+	ITEM_POWER_BRACER
+	ITEM_POWER_BELT
+	ITEM_POWER_LENS
+	ITEM_POWER_BAND
+	ITEM_POWER_ANKLET
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded {
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_PP_MAX
+	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_FEATHER
+	ITEM_MACHO_BRACE
+	ITEM_POWER_WEIGHT
+	ITEM_POWER_BRACER
+	ITEM_POWER_BELT
+	ITEM_POWER_LENS
+	ITEM_POWER_BAND
+	ITEM_POWER_ANKLET
+	ITEM_ABILITY_CAPSULE
+	ITEM_ABILITY_PATCH
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	// Stat modifiers, including nature mints
+	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkRight)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight {
+	ITEM_LONELY_MINT
+	ITEM_ADAMANT_MINT
+	ITEM_NAUGHTY_MINT
+	ITEM_BRAVE_MINT
+	ITEM_BOLD_MINT
+	ITEM_IMPISH_MINT
+	ITEM_LAX_MINT
+	ITEM_RELAXED_MINT
+	ITEM_MODEST_MINT
+	ITEM_MILD_MINT
+	ITEM_RASH_MINT
+	ITEM_QUIET_MINT
+	ITEM_CALM_MINT
+	ITEM_GENTLE_MINT
+	ITEM_CAREFUL_MINT
+	ITEM_SASSY_MINT
+	ITEM_TIMID_MINT
+	ITEM_HASTY_MINT
+	ITEM_JOLLY_MINT
+	ITEM_NAIVE_MINT
+	ITEM_SERIOUS_MINT
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkBerry {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry {
+	ITEM_RAZZ_BERRY
+	ITEM_BLUK_BERRY
+	ITEM_NANAB_BERRY
+	ITEM_WEPEAR_BERRY
+	ITEM_PINAP_BERRY
+	ITEM_CORNN_BERRY
+	ITEM_POMEG_BERRY
+	ITEM_KELPSY_BERRY
+	ITEM_QUALOT_BERRY
+	ITEM_HONDEW_BERRY
+	ITEM_GREPA_BERRY
+	ITEM_TAMATO_BERRY
+	ITEM_MAGOST_BERRY
+	ITEM_RABUTA_BERRY
+	ITEM_NOMEL_BERRY
+	ITEM_SPELON_BERRY
+	ITEM_PAMTRE_BERRY
+	ITEM_WATMEL_BERRY
+	// For future use
+	// ITEM_DURIN_BERRY
+	// ITEM_BELUE_BERRY
+}

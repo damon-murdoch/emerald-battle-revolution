@@ -19,51 +19,8 @@ LilycoveCity_DepartmentStore_2F_EventScript_ClerkLeft::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	pokemart LilycoveCity_DepartmentStore_2F_Pokemart1
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_2F_Pokemart1:
-	.2byte ITEM_POKE_BALL
-	.2byte ITEM_GREAT_BALL
-	.2byte ITEM_ULTRA_BALL
-	.2byte ITEM_ESCAPE_ROPE
-	.2byte ITEM_FULL_HEAL
-	.2byte ITEM_ANTIDOTE
-	.2byte ITEM_PARALYZE_HEAL
-	.2byte ITEM_BURN_HEAL
-	.2byte ITEM_ICE_HEAL
-	.2byte ITEM_AWAKENING
-	.2byte ITEM_FLUFFY_TAIL
-	.2byte ITEM_NONE
-	release
-	end
-
-LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_2F_Pokemart2
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-	.align 2
-LilycoveCity_DepartmentStore_2F_Pokemart2:
-	.2byte ITEM_POTION
-	.2byte ITEM_SUPER_POTION
-	.2byte ITEM_HYPER_POTION
-	.2byte ITEM_MAX_POTION
-	.2byte ITEM_REVIVE
-	.2byte ITEM_REPEL
-	.2byte ITEM_SUPER_REPEL
-	.2byte ITEM_MAX_REPEL
-	.2byte ITEM_WAVE_MAIL
-	.2byte ITEM_MECH_MAIL
-	.2byte ITEM_NONE
 	release
 	end
 
@@ -80,3 +37,74 @@ LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems:
 	.string "I need to stock up on items.$"
 
 `
+
+script LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE06_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		if (flag(FLAG_IS_CHAMPION)){
+			pokemart(LilycoveCity_Mart_Pokemart_Clerk2_Expanded)
+		}
+		else // Not unlocked
+		{
+			pokemart(LilycoveCity_Mart_Pokemart_Clerk2)
+		}
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_Mart_Pokemart_Clerk2 {
+	ITEM_MOON_BALL
+	ITEM_FAST_BALL
+	ITEM_HEAVY_BALL
+	ITEM_FRIEND_BALL
+	ITEM_LEVEL_BALL
+	ITEM_LOVE_BALL
+	ITEM_LURE_BALL
+	ITEM_FAB_MAIL
+	ITEM_ORANGE_MAIL
+	ITEM_DREAM_MAIL
+	ITEM_RETRO_MAIL
+	ITEM_SHADOW_MAIL
+	ITEM_WOOD_MAIL
+	ITEM_WAVE_MAIL
+	ITEM_TROPIC_MAIL
+	ITEM_MECH_MAIL
+	ITEM_BEAD_MAIL
+	ITEM_HARBOR_MAIL
+	ITEM_GLITTER_MAIL
+}
+
+mart LilycoveCity_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_SPORT_BALL
+	ITEM_SAFARI_BALL
+	ITEM_DREAM_BALL
+	ITEM_PARK_BALL
+	ITEM_MOON_BALL
+	ITEM_FAST_BALL
+	ITEM_HEAVY_BALL
+	ITEM_FRIEND_BALL
+	ITEM_LEVEL_BALL
+	ITEM_LOVE_BALL
+	ITEM_LURE_BALL
+	ITEM_FAB_MAIL
+	ITEM_ORANGE_MAIL
+	ITEM_DREAM_MAIL
+	ITEM_RETRO_MAIL
+	ITEM_SHADOW_MAIL
+	ITEM_WOOD_MAIL
+	ITEM_WAVE_MAIL
+	ITEM_TROPIC_MAIL
+	ITEM_MECH_MAIL
+	ITEM_BEAD_MAIL
+	ITEM_HARBOR_MAIL
+	ITEM_GLITTER_MAIL
+}

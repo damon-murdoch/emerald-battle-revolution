@@ -1383,3 +1383,40 @@ SlateportCity_Text_TakingBattleTentChallenge:
 	.string "After all, a tough TRAINER is\n"
 	.string "the perfect fit for the BATTLE TENT!\p"
 	.string "Give it your best effort!$"
+
+SlateportCity_EventScript_MochiClerk::
+	lock
+	faceplayer
+	msgbox SlateportCity_EventScript_MochiClerk_Text_0
+	message SlateportCity_EventScript_MochiClerk_Text_1
+	waitmessage
+	pokemart SlateportCity_Mart_MochiClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+	.align 2
+SlateportCity_Mart_MochiClerk:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_NONE
+
+SlateportCity_EventScript_MochiClerk_Text_0:
+	.string "Welcome to Kitakami Mochi! We make\n"
+	.string "special mochi for training your\l"
+	.string "POKéMON!$"
+
+SlateportCity_EventScript_MochiClerk_Text_1:
+	.string "What can I get for you?$"

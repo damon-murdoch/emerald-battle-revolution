@@ -291,3 +291,134 @@ LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
 	.string "No, great for the HOENN region!\p"
 	.string "This is what I've heard--a lone TRAINER\n"
 	.string "procured all the paintings upstairs.$"
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop::
+	lock
+	faceplayer
+	msgbox LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_0
+	msgbox LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_1
+	waitmessage
+	goto_if_set FLAG_IS_CHAMPION, LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_2
+	pokemart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_2:
+	pokemart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded
+	goto LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_1
+
+
+	.align 2
+LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop:
+	.2byte ITEM_PEWTER_CRUNCHIES
+	.2byte ITEM_RAGE_CANDY_BAR
+	.2byte ITEM_LAVA_COOKIE
+	.2byte ITEM_OLD_GATEAU
+	.2byte ITEM_CASTELIACONE
+	.2byte ITEM_LUMIOSE_GALETTE
+	.2byte ITEM_SHALOUR_SABLE
+	.2byte ITEM_BIG_MALASADA
+	.2byte ITEM_SWEET_HEART
+	.2byte ITEM_YELLOW_FLUTE
+	.2byte ITEM_BLACK_FLUTE
+	.2byte ITEM_WHITE_FLUTE
+	.2byte ITEM_BLUE_FLUTE
+	.2byte ITEM_RED_FLUTE
+	.2byte ITEM_NONE
+
+	.align 2
+LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded:
+	.2byte ITEM_PEWTER_CRUNCHIES
+	.2byte ITEM_RAGE_CANDY_BAR
+	.2byte ITEM_LAVA_COOKIE
+	.2byte ITEM_OLD_GATEAU
+	.2byte ITEM_CASTELIACONE
+	.2byte ITEM_LUMIOSE_GALETTE
+	.2byte ITEM_SHALOUR_SABLE
+	.2byte ITEM_BIG_MALASADA
+	.2byte ITEM_SWEET_HEART
+	.2byte ITEM_YELLOW_FLUTE
+	.2byte ITEM_BLACK_FLUTE
+	.2byte ITEM_WHITE_FLUTE
+	.2byte ITEM_BLUE_FLUTE
+	.2byte ITEM_RED_FLUTE
+	.2byte ITEM_RED_SHARD
+	.2byte ITEM_BLUE_SHARD
+	.2byte ITEM_YELLOW_SHARD
+	.2byte ITEM_GREEN_SHARD
+	.2byte ITEM_HEART_SCALE
+	.2byte ITEM_NONE
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2::
+	lock
+	faceplayer
+	msgbox LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_0
+	msgbox LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_1
+	waitmessage
+	goto_if_set FLAG_IS_CHAMPION, LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2_2
+	pokemart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2_2:
+	pokemart LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded
+	goto LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2_1
+
+
+	.align 2
+LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2:
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_PURE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
+	.2byte ITEM_HELIX_FOSSIL
+	.2byte ITEM_DOME_FOSSIL
+	.2byte ITEM_OLD_AMBER
+	.2byte ITEM_ROOT_FOSSIL
+	.2byte ITEM_CLAW_FOSSIL
+	.2byte ITEM_NONE
+
+	.align 2
+LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded:
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_PURE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
+	.2byte ITEM_HELIX_FOSSIL
+	.2byte ITEM_DOME_FOSSIL
+	.2byte ITEM_OLD_AMBER
+	.2byte ITEM_ROOT_FOSSIL
+	.2byte ITEM_CLAW_FOSSIL
+	.2byte ITEM_ARMOR_FOSSIL
+	.2byte ITEM_SKULL_FOSSIL
+	.2byte ITEM_COVER_FOSSIL
+	.2byte ITEM_PLUME_FOSSIL
+	.2byte ITEM_JAW_FOSSIL
+	.2byte ITEM_SAIL_FOSSIL
+	.2byte ITEM_FOSSILIZED_BIRD
+	.2byte ITEM_FOSSILIZED_FISH
+	.2byte ITEM_FOSSILIZED_DRAKE
+	.2byte ITEM_FOSSILIZED_DINO
+	.2byte ITEM_NONE
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_0:
+	.string "Welcome to the Lilycove Museum\n"
+	.string "Souvenir Shop!$"
+
+LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop_Text_1:
+	.string "You can find rare items from all around\n"
+	.string "the world here.$"

@@ -43,5 +43,50 @@ MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 	.string "BUG-type and WATER-type POKéMON.\p"
 	.string "A DIVE BALL works best on POKéMON\n"
 	.string "at the bottom of the sea.$"
-
 `
+
+script MossdeepCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE07_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(MossdeepCity_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart MossdeepCity_Mart_Pokemart_Clerk2 {
+	ITEM_DECIDIUM_Z
+	ITEM_INCINIUM_Z
+	ITEM_PRIMARIUM_Z
+	ITEM_AERODACTYLITE
+	ITEM_HOUNDOOMINITE
+	ITEM_MEDICHAMITE
+	ITEM_ABSOLITE
+	ITEM_PROTECTIVE_PADS
+	ITEM_WEAKNESS_POLICY
+	ITEM_DEEP_SEA_SCALE
+	ITEM_DEEP_SEA_TOOTH
+	ITEM_BLUNDER_POLICY
+	ITEM_ADRENALINE_ORB
+	ITEM_WISE_GLASSES
+	ITEM_ROCKY_HELMET
+	ITEM_LIGHT_CLAY
+	ITEM_PEAT_BLOCK
+	ITEM_METRONOME
+	ITEM_ELECTRIC_SEED
+	ITEM_PSYCHIC_SEED
+	ITEM_GRASSY_SEED
+	ITEM_MISTY_SEED
+	ITEM_LUMINOUS_MOSS
+	ITEM_CELL_BATTERY
+	ITEM_ABSORB_BULB
+	ITEM_SNOWBALL
+}

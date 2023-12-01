@@ -471,7 +471,6 @@ LittlerootTown_ProfessorBirchsLab_EventScript_Birch::
 	faceplayer
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 5, LittlerootTown_ProfessorBirchsLab_EventScript_CanHaveAnyOneOfRarePokemon
 	goto_if_eq VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2, LittlerootTown_ProfessorBirchsLab_EventScript_GrassyPatchWaiting
-	goto_if_unset FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS, LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems
 	goto_if_unset FLAG_HAS_MATCH_CALL, LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
 	goto_if_unset FLAG_ENABLE_PROF_BIRCH_MATCH_CALL, EventScript_RegisterProfBirch
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_TryRatePokedexOrRegister
@@ -530,7 +529,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex, MSGBOX_DEFAULT
 	call LittlerootTown_ProfessorBirchsLab_EventScript_ReceivePokedex
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex, MSGBOX_DEFAULT
-	call LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems
+	call LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex
 	closemessage
 	applymovement LOCALID_RIVAL, LittlerootTown_ProfessorBirchsLab_Movement_RivalApproachPlayer
 	waitmovement 0
@@ -1009,12 +1008,45 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex {
 	}
 	else // Already has national pokedex
 	{
-		msgbox(format("... Oh! it appears you already have the national POKéDEX!"))
+		// Show Birch message box
+		msgbox(LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex)
+
+		// Ensure flags are correct
+		setflag(FLAG_HIDE_LITTLEROOT_TOWN_BIRCH)
+		setflag(FLAG_HIDE_LITTLEROOT_TOWN_RIVAL)
+		setvar(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2)
+		setvar(VAR_SCOTT_BF_CALL_STEP_COUNTER, 0)
+		setflag(FLAG_SCOTT_CALL_BATTLE_FRONTIER)
 	}
+
+	// Give catching charm, if not already owned
+	if (flag(FLAG_RECEIVED_CATCHING_CHARM) == false){
+		msgbox(format("Also, I'd like you to have this."))
+		giveitem(ITEM_CATCHING_CHARM)
+		msgbox(format("This item increases the likelihood of wild POKéMON being caught."))
+		setflag(FLAG_RECEIVED_CATCHING_CHARM)
+	}
+
+	msgbox(format("Now, get out there and enjoy the HOENN region!"))
 
 	// Clean up
 	releaseall
 	end
+}
+
+text LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex {
+	"PROF. BIRCH: Now…\p"
+	"{PLAYER}{KUN} and {RIVAL}, I've had the two\n"
+	"of you help me study POKéMON.\p"
+	"Thanks to your help, new facts\n"
+	"are coming to light.\p"
+	"PROF. BIRCH: But listen.\n"
+	"You've become the CHAMPION,\l"
+	"but your POKéMON journey isn't over.\p"
+	"There is no end to the road\n"
+	"that is POKéMON.\p"
+	"Somewhere, there is a grassy patch\n"
+	"that's waiting for you!"
 }
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
@@ -1032,54 +1064,11 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
 	end
 }
 
-script LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems {
-
-	// Battle mechanic items not received
-	if (flag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS) == false)
-	{
-		msgbox(format("Before you go, I have a few other things I'd like to give you."))
-
-		giveitem(ITEM_MEGA_RING)
-
-		msgbox(format("The Mega Ring will allow compatible POKéMON to mega evolve once per battle, when holding their respective Mega Stone."))
-
-		giveitem(ITEM_Z_POWER_RING)
-
-		msgbox(format("The Z Power Ring will allow your POKéMON to use a Powerful Z-Move once per battle, when holding the correct a Z-Crystal. Some POKéMON even have signature Z-Moves!"))
-
-		// I have to decide if I even want this, lol
-		giveitem(ITEM_DYNAMAX_BAND)
-
-		msgbox(format("The Dynamax Band will allow you to Dynamax your POKéMON once per battle under certain circumstances. Some POKéMON even have special Gigantamax formes!"))
-
-		msgbox(format("Mega Stones and Z-Crystals may be found scattered across the HOENN region, or may even be found in shops."))
-		msgbox(format("Utilise these abilities to achieve your full potential as a trainer!"))
-
-		// Also enable national dex flag (if unset)
+script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex {
+	// Enable national dex flag (if unset)
+	if (flag(FLAG_SYS_NATIONAL_DEX) == false){
 		special(EnableNationalPokedex)
 		setflag(FLAG_SYS_NATIONAL_DEX)
-
 		msgbox(format("I've also taken the liberty of upgrading your POKéDEX to the national version. You'll be able to record all kinds of POKéMON, even those not normally seen in the HOENN region!"))
-
-		// If this is unset, a trainer may return to 
-		// professor Birch and receive these items later
-		setflag(FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS)
 	}
-	else // Player has already received the items
-	{
-		// Should not happen, just a safety net
-		msgbox(format("... Oh! You already have the battle items!"))
-	}
-}
-
-script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveBattleMechanicItems {
-
-	msgbox(format("Oh, {PLAYER}! Good to see you."))
-
-	// Give battle mechanic items (and experience share)
-	call(LittleRootTown_ProfessorBirchsLab_EventScript_GiveBattleMechanicItems)
-
-	// Clean up
-	release
-	end
 }

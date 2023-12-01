@@ -43,3 +43,104 @@ VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
 	.string "buy it.$"
 
 `
+
+script VerdanturfTown_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE03_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		if (flag(FLAG_BADGE04_GET)){
+			if (flag(FLAG_BADGE08_GET)){
+				pokemart(VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2)
+			}
+			else // Not unlocked
+			{
+				pokemart(VerdanturfTown_Mart_Pokemart_Clerk2_Expanded)
+			}
+		}
+		else // Not unlocked
+		{
+			pokemart(VerdanturfTown_Mart_Pokemart_Clerk2)
+		}
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart VerdanturfTown_Mart_Pokemart_Clerk2 {
+	ITEM_GARDEVOIRITE
+	ITEM_HERACRONITE
+	ITEM_BEEDRILLITE
+	ITEM_GALLADITE
+	ITEM_BUG_GEM
+	ITEM_FAIRY_GEM
+	ITEM_SILVER_POWDER
+	ITEM_FAIRY_FEATHER
+	ITEM_WHIPPED_DREAM
+	ITEM_STRAWBERRY_SWEET
+	ITEM_LOVE_SWEET
+	ITEM_BERRY_SWEET
+	ITEM_CLOVER_SWEET
+	ITEM_FLOWER_SWEET
+	ITEM_STAR_SWEET
+	ITEM_RIBBON_SWEET
+	ITEM_FLAME_ORB
+	ITEM_TOXIC_ORB
+	ITEM_LIFE_ORB
+}
+
+mart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded {
+	ITEM_BUGINIUM_Z
+	ITEM_FAIRIUM_Z
+	ITEM_GARDEVOIRITE
+	ITEM_HERACRONITE
+	ITEM_BEEDRILLITE
+	ITEM_GALLADITE
+	ITEM_BUG_GEM
+	ITEM_FAIRY_GEM
+	ITEM_SILVER_POWDER
+	ITEM_FAIRY_FEATHER
+	ITEM_WHIPPED_DREAM
+	ITEM_STRAWBERRY_SWEET
+	ITEM_LOVE_SWEET
+	ITEM_BERRY_SWEET
+	ITEM_CLOVER_SWEET
+	ITEM_FLOWER_SWEET
+	ITEM_STAR_SWEET
+	ITEM_RIBBON_SWEET
+	ITEM_FLAME_ORB
+	ITEM_TOXIC_ORB
+	ITEM_LIFE_ORB
+}
+
+mart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2 {
+	ITEM_BUG_TERA_SHARD
+	ITEM_FAIRY_TERA_SHARD
+	ITEM_BUGINIUM_Z
+	ITEM_FAIRIUM_Z
+	ITEM_GARDEVOIRITE
+	ITEM_HERACRONITE
+	ITEM_BEEDRILLITE
+	ITEM_GALLADITE
+	ITEM_BUG_GEM
+	ITEM_FAIRY_GEM
+	ITEM_SILVER_POWDER
+	ITEM_FAIRY_FEATHER
+	ITEM_WHIPPED_DREAM
+	ITEM_STRAWBERRY_SWEET
+	ITEM_LOVE_SWEET
+	ITEM_BERRY_SWEET
+	ITEM_CLOVER_SWEET
+	ITEM_FLOWER_SWEET
+	ITEM_STAR_SWEET
+	ITEM_RIBBON_SWEET
+	ITEM_FLAME_ORB
+	ITEM_TOXIC_ORB
+	ITEM_LIFE_ORB
+}

@@ -73,6 +73,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
+	call LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -404,3 +405,14 @@ LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
 	.string "I hate to say this, but when you come\n"
 	.string "see me, bring at least two POKéMON.$"
 `
+
+script LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing {
+	if (flag(FLAG_ITEM_Z_POWER_RING_OBTAINED) == false) {
+		msgbox(format("Also, as a trainer with four gym badges, you've earned this."))
+		giveitem(ITEM_Z_POWER_RING)
+		msgbox(format("This item will allow your POKéMON to unleash a powerful Z-Move once per battle, when holding the Z-Crystal of the correct type!"))
+		msgbox(format("Some POKéMON even have access to exclusive Z-Moves!"))
+		msgbox(format("Z-Crystals will now be available at most POKéMARTs - Even those you've already visited."))
+		setflag(FLAG_ITEM_Z_POWER_RING_OBTAINED)
+	}
+}

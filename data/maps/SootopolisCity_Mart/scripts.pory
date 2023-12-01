@@ -62,3 +62,50 @@ SootopolisCity_Mart_Text_DidSomethingAwaken:
 	.string "Did something awaken?$"
 
 `
+
+script SootopolisCity_Mart_EventScript_Clerk2 {
+	lock
+	faceplayer
+	if (flag(FLAG_BADGE08_GET)) {
+		message(gText_HowMayIServeYou)
+		waitmessage
+		pokemart(SootopolisCity_Mart_Pokemart_Clerk2)
+	}
+	else // Not unlocked
+	{
+		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
+	}
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart SootopolisCity_Mart_Pokemart_Clerk2 {
+	ITEM_DRAGON_TERA_SHARD
+	ITEM_LYCANIUM_Z
+	ITEM_MIMIKIUM_Z
+	ITEM_KOMMONIUM_Z
+	ITEM_DRAGONIUM_Z
+	ITEM_TYRANITARITE
+	ITEM_SALAMENCITE
+	ITEM_METAGROSSITE
+	ITEM_DRAGON_FANG
+	ITEM_DRAGON_GEM
+	ITEM_DRAGON_SCALE
+	ITEM_PRISM_SCALE
+	ITEM_SCROLL_OF_DARKNESS
+	ITEM_SCROLL_OF_WATERS
+	ITEM_AUSPICIOUS_ARMOR
+	ITEM_MALICIOUS_ARMOR
+	ITEM_GIMMIGHOUL_COIN
+	ITEM_BLACK_AUGURITE
+	ITEM_LEADERS_CREST
+	ITEM_SAFETY_GOGGLES
+	ITEM_ASSAULT_VEST
+	ITEM_CHOICE_SCARF
+	ITEM_CHOICE_SPECS
+	ITEM_CHOICE_BAND
+	ITEM_SMOKE_BALL
+	ITEM_FOCUS_SASH
+}
+

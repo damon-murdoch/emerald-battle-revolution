@@ -41,9 +41,7 @@ enum
 
 static EWRAM_DATA u16 sSaveFailedType = {0};
 static EWRAM_DATA u16 sClockInfo[2] = {0};
-static EWRAM_DATA u8 sUnused1[12] = {0};
 static EWRAM_DATA u8 sWindowIds[2] = {0};
-static EWRAM_DATA u8 sUnused2[4] = {0};
 
 static const struct OamData sClockOamData =
 {
@@ -415,7 +413,7 @@ void CB2_FlashNotDetectedScreen(void){
         }
     };
 	
-    static const char errorMsg[] = _(
+    static const unsigned char errorMsg[] = _(
         "{COLOR RED}ERROR!\n"
         "{COLOR DARK_GRAY}Flash memory not detected.\n\n"
         "Set your emulator's save type\nsetting to Flash 1Mb / 128K\n"
