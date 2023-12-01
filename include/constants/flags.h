@@ -1498,14 +1498,14 @@
 #define FLAG_ARRIVED_AT_NAVEL_ROCK                  (SYSTEM_FLAGS + 0x81)
 #define FLAG_LANDMARK_TRAINER_HILL                  (SYSTEM_FLAGS + 0x82)
 
-#define FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS         (SYSTEM_FLAGS + 0x83) // Unused Flag
+#define FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS         (SYSTEM_FLAGS + 0x83)
 
 #define FLAG_RECEIVED_POKEDEX_FROM_BIRCH            (SYSTEM_FLAGS + 0x84)
 
-#define FLAG_ITEM_MEGA_RING_OBTAINED                (SYSTEM_FLAGS + 0x85) // Unused Flag
-#define FLAG_ITEM_Z_POWER_RING_OBTAINED             (SYSTEM_FLAGS + 0x86) // Unused Flag
-#define FLAG_ITEM_DYNAMAX_BAND_OBTAINED             (SYSTEM_FLAGS + 0x87) // Unused Flag
-#define FLAG_ITEM_TERA_ORB_OBTAINED                 (SYSTEM_FLAGS + 0x88) // Unused Flag
+#define FLAG_ITEM_MEGA_RING_OBTAINED                (SYSTEM_FLAGS + 0x85)
+#define FLAG_ITEM_Z_POWER_RING_OBTAINED             (SYSTEM_FLAGS + 0x86)
+#define FLAG_ITEM_DYNAMAX_BAND_OBTAINED             (SYSTEM_FLAGS + 0x87)
+#define FLAG_ITEM_TERA_ORB_OBTAINED                 (SYSTEM_FLAGS + 0x88)
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
@@ -1547,20 +1547,20 @@
 #define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
 #define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
 #define FLAG_UNUSED_0x911                           (SYSTEM_FLAGS + 0xB1) // Unused Flag
-#define FLAG_UNUSED_0x912                           (SYSTEM_FLAGS + 0xB2) // Unused Flag
-#define FLAG_UNUSED_0x913                           (SYSTEM_FLAGS + 0xB3) // Unused Flag
-#define FLAG_UNUSED_0x914                           (SYSTEM_FLAGS + 0xB4) // Unused Flag
-#define FLAG_UNUSED_0x915                           (SYSTEM_FLAGS + 0xB5) // Unused Flag
-#define FLAG_UNUSED_0x916                           (SYSTEM_FLAGS + 0xB6) // Unused Flag
-#define FLAG_UNUSED_0x917                           (SYSTEM_FLAGS + 0xB7) // Unused Flag
-#define FLAG_UNUSED_0x918                           (SYSTEM_FLAGS + 0xB8) // Unused Flag
-#define FLAG_UNUSED_0x919                           (SYSTEM_FLAGS + 0xB9) // Unused Flag
-#define FLAG_UNUSED_0x91A                           (SYSTEM_FLAGS + 0xBA) // Unused Flag
-#define FLAG_UNUSED_0x91B                           (SYSTEM_FLAGS + 0xBB) // Unused Flag
-#define FLAG_UNUSED_0x91C                           (SYSTEM_FLAGS + 0xBC) // Unused Flag
-#define FLAG_UNUSED_0x91D                           (SYSTEM_FLAGS + 0xBD) // Unused Flag
-#define FLAG_UNUSED_0x91E                           (SYSTEM_FLAGS + 0xBE) // Unused Flag
-#define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF) // Unused Flag
+#define FLAG_FORCE_NO_SHINY                         (SYSTEM_FLAGS + 0xB2)
+#define FLAG_FORCE_SHINY                            (SYSTEM_FLAGS + 0xB3)
+#define FLAG_NO_COLLISION                           (SYSTEM_FLAGS + 0xB4)
+#define FLAG_NO_TRAINER_SEE                         (SYSTEM_FLAGS + 0xB5) 
+#define FLAG_NO_ENCOUNTER                           (SYSTEM_FLAGS + 0xB6)
+#define FLAG_SKY_BATTLE                             (SYSTEM_FLAGS + 0xB7)
+#define FLAG_DYNAMAX_BATTLE                         (SYSTEM_FLAGS + 0xB8)
+#define FLAG_AI_VS_AI_BATTLE                        (SYSTEM_FLAGS + 0xB9)
+#define FLAG_NO_CATCHING                            (SYSTEM_FLAGS + 0xBA)
+#define FLAG_NO_BAG_USE                             (SYSTEM_FLAGS + 0xBB)
+#define FLAG_SMART_WILD_AI_FLAG                     (SYSTEM_FLAGS + 0xBC)
+#define FLAG_FORCE_DOUBLE_WILD                      (SYSTEM_FLAGS + 0xBD)
+#define FLAG_INVERSE_BATTLE                         (SYSTEM_FLAGS + 0xBE)
+#define FLAG_UNUSED_0x91F                           (SYSTEM_FLAGS + 0xBF)
 
 // Daily Flags
 // These flags are cleared once per day

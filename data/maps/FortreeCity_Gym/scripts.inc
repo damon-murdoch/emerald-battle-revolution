@@ -35,6 +35,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
 	setvar VAR_0x8008, 6
 	call Common_EventScript_SetGymTrainers
 	call FortreeCity_Gym_EventScript_GiveAerialAce
+	call FortreeCity_Gym_EventScript_GiveZPowerRing
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -316,3 +317,42 @@ FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "POKéMON with you?\p"
 	.string "Please return with two POKéMON\n"
 	.string "at the very least.$"
+
+FortreeCity_Gym_EventScript_GiveZPowerRing::
+	goto_if_unset FLAG_ITEM_DYNAMAX_BAND_OBTAINED, FortreeCity_Gym_EventScript_GiveZPowerRing_1
+	return
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_1:
+	msgbox FortreeCity_Gym_EventScript_GiveZPowerRing_Text_0
+	giveitem ITEM_DYNAMAX_BAND
+	msgbox FortreeCity_Gym_EventScript_GiveZPowerRing_Text_1
+	msgbox FortreeCity_Gym_EventScript_GiveZPowerRing_Text_2
+	msgbox FortreeCity_Gym_EventScript_GiveZPowerRing_Text_3
+	msgbox FortreeCity_Gym_EventScript_GiveZPowerRing_Text_4
+	setflag FLAG_ITEM_DYNAMAX_BAND_OBTAINED
+	return
+
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_Text_0:
+	.string "Also, as a trainer with six gym badges,\n"
+	.string "you've earned this.$"
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_Text_1:
+	.string "This item will allow your POKéMON to\n"
+	.string "transform into a powerful Dynamax form\l"
+	.string "for three turns, once per battle.$"
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_Text_2:
+	.string "This will increase their hit points, and\n"
+	.string "change moves into their MAX move type.\l"
+	.string "Some POKéMON even have unique\l"
+	.string "gigantamax formes!$"
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_Text_3:
+	.string "Although, dynamaxing is only available\n"
+	.string "in certain areas.$"
+
+FortreeCity_Gym_EventScript_GiveZPowerRing_Text_4:
+	.string "Dynamax candy will now be available at\n"
+	.string "most POKéMARTs - Even those you've\l"
+	.string "already visited.$"

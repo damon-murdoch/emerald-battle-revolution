@@ -105,6 +105,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
+	call SootopolisCity_Gym_1F_EventScript_GiveTeraOrb
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -319,3 +320,15 @@ SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
 	.string "two, perhaps more, POKéMON, please.$"
 
 `
+
+script SootopolisCity_Gym_1F_EventScript_GiveTeraOrb {
+	if (flag(FLAG_ITEM_TERA_ORB_OBTAINED) == false) {
+		msgbox(format("Also, as a trainer with all eight gym badges, you've earned this."))
+		giveitem(ITEM_TERA_ORB)
+		msgbox(format("This item will allow your POKéMON to change its type into its Terastral type, once per battle."))
+		msgbox(format("This can be used to change to a new type, or provide even stronger damage for same-type transformations!"))
+		msgbox(format("Most POKéMON have a Tera Type matching either their primary or secondary type."))
+		msgbox(format("Tera Shards can be used to change the type of a POKéMON, and will be available at most POKéMARTs - Even those you've already visited."))
+		setflag(FLAG_ITEM_TERA_ORB_OBTAINED)
+	}
+}
