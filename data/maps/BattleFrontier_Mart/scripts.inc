@@ -51,7 +51,7 @@ BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
 BattleFrontier_Mart_EventScript_Clerk2::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE08_GET, BattleFrontier_Mart_EventScript_Clerk2_2
+	goto_if_set FLAG_IS_CHAMPION, BattleFrontier_Mart_EventScript_Clerk2_2
 	msgbox BattleFrontier_Mart_EventScript_Clerk2_Text_0
 BattleFrontier_Mart_EventScript_Clerk2_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
@@ -67,19 +67,23 @@ BattleFrontier_Mart_EventScript_Clerk2_2:
 
 	.align 2
 BattleFrontier_Mart_Pokemart_Clerk2:
-	.2byte ITEM_CHERISH_BALL
-	.2byte ITEM_MASTER_BALL
-	.2byte ITEM_BEAST_BALL
-	.2byte ITEM_SHOCK_DRIVE
-	.2byte ITEM_BURN_DRIVE
-	.2byte ITEM_CHILL_DRIVE
-	.2byte ITEM_DOUSE_DRIVE
-	.2byte ITEM_ADAMANT_CRYSTAL
-	.2byte ITEM_GRISEOUS_CORE
-	.2byte ITEM_LUSTROUS_GLOBE
-	.2byte ITEM_ADAMANT_ORB
-	.2byte ITEM_LUSTROUS_ORB
-	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_FLAME_PLATE
+	.2byte ITEM_SPLASH_PLATE
+	.2byte ITEM_MEADOW_PLATE
+	.2byte ITEM_ZAP_PLATE
+	.2byte ITEM_ICICLE_PLATE
+	.2byte ITEM_FIST_PLATE
+	.2byte ITEM_TOXIC_PLATE
+	.2byte ITEM_EARTH_PLATE
+	.2byte ITEM_SKY_PLATE
+	.2byte ITEM_MIND_PLATE
+	.2byte ITEM_INSECT_PLATE
+	.2byte ITEM_STONE_PLATE
+	.2byte ITEM_SPOOKY_PLATE
+	.2byte ITEM_DREAD_PLATE
+	.2byte ITEM_DRACO_PLATE
+	.2byte ITEM_IRON_PLATE
+	.2byte ITEM_PIXIE_PLATE
 	.2byte ITEM_FIRE_MEMORY
 	.2byte ITEM_WATER_MEMORY
 	.2byte ITEM_ELECTRIC_MEMORY
@@ -97,16 +101,73 @@ BattleFrontier_Mart_Pokemart_Clerk2:
 	.2byte ITEM_DARK_MEMORY
 	.2byte ITEM_STEEL_MEMORY
 	.2byte ITEM_FAIRY_MEMORY
+	.2byte ITEM_NONE
+
+BattleFrontier_Mart_EventScript_Clerk3::
+	lock
+	faceplayer
+	goto_if_set FLAG_IS_CHAMPION, BattleFrontier_Mart_EventScript_Clerk3_2
+	msgbox BattleFrontier_Mart_EventScript_Clerk2_Text_0
+BattleFrontier_Mart_EventScript_Clerk3_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+BattleFrontier_Mart_EventScript_Clerk3_2:
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Mart_Pokemart_Clerk3
+	goto BattleFrontier_Mart_EventScript_Clerk3_1
+
+
+	.align 2
+BattleFrontier_Mart_Pokemart_Clerk3:
+	.2byte ITEM_CHERISH_BALL
+	.2byte ITEM_MASTER_BALL
+	.2byte ITEM_BEAST_BALL
+	.2byte ITEM_SOUL_DEW
+	.2byte ITEM_SHOCK_DRIVE
+	.2byte ITEM_BURN_DRIVE
+	.2byte ITEM_CHILL_DRIVE
+	.2byte ITEM_DOUSE_DRIVE
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
+	.2byte ITEM_ADAMANT_ORB
+	.2byte ITEM_LUSTROUS_ORB
+	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_RUSTED_SWORD
+	.2byte ITEM_RUSTED_SWORD
+	.2byte ITEM_BOOSTER_ENERGY
+	.2byte ITEM_CORNERSTONE_MASK
+	.2byte ITEM_WELLSPRING_MASK
+	.2byte ITEM_HEARTHFLAME_MASK
 	.2byte ITEM_MEWTWONITE_X
 	.2byte ITEM_MEWTWONITE_Y
 	.2byte ITEM_LATIASITE
 	.2byte ITEM_LATIOSITE
-	.2byte ITEM_SOUL_DEW
+	.2byte ITEM_DIANCITE
+	.2byte ITEM_RED_ORB
+	.2byte ITEM_BLUE_ORB
 	.2byte ITEM_SOLGANIUM_Z
 	.2byte ITEM_LUNALIUM_Z
 	.2byte ITEM_TAPUNIUM_Z
 	.2byte ITEM_ULTRANECROZIUM_Z
 	.2byte ITEM_MARSHADIUM_Z
+	.2byte ITEM_MEWNIUM_Z
+	.2byte ITEM_ROTOM_CATALOG
+	.2byte ITEM_GRACIDEA
+	.2byte ITEM_REVEAL_GLASS
+	.2byte ITEM_DNA_SPLICERS
+	.2byte ITEM_ZYGARDE_CUBE
+	.2byte ITEM_PRISON_BOTTLE
+	.2byte ITEM_N_SOLARIZER
+	.2byte ITEM_N_LUNARIZER
+	.2byte ITEM_REINS_OF_UNITY
+	.2byte ITEM_MEGA_RING
+	.2byte ITEM_Z_POWER_RING
+	.2byte ITEM_DYNAMAX_BAND
+	.2byte ITEM_TERA_ORB
 	.2byte ITEM_NONE
 
 BattleFrontier_Mart_EventScript_Clerk2_Text_0:

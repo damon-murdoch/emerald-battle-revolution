@@ -46,31 +46,96 @@ MauvilleCity_Mart_EventScript_Clerk2_1:
 MauvilleCity_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
+	goto_if_set FLAG_BADGE04_GET, MauvilleCity_Mart_EventScript_Clerk2_5
 	pokemart MauvilleCity_Mart_Pokemart_Clerk2
+	goto MauvilleCity_Mart_EventScript_Clerk2_1
+
+MauvilleCity_Mart_EventScript_Clerk2_5:
+	goto_if_set FLAG_BADGE08_GET, MauvilleCity_Mart_EventScript_Clerk2_8
+	pokemart MauvilleCity_Mart_Pokemart_Clerk2_Expanded
+	goto MauvilleCity_Mart_EventScript_Clerk2_1
+
+MauvilleCity_Mart_EventScript_Clerk2_8:
+	pokemart MauvilleCity_Mart_Pokemart_Clerk2_Expanded2
 	goto MauvilleCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 MauvilleCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_DUSK_BALL
-	.2byte ITEM_FAB_MAIL
+	.2byte ITEM_AMPHAROSITE
+	.2byte ITEM_MANECTITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_BANETTITE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_ELECTRIC_GEM
+	.2byte ITEM_GHOST_GEM
+	.2byte ITEM_MAGNET
 	.2byte ITEM_ELECTIRIZER
 	.2byte ITEM_MAGMARIZER
-	.2byte ITEM_GALARICA_CUFF
-	.2byte ITEM_GALARICA_WREATH
-	.2byte ITEM_GARCHOMPITE
-	.2byte ITEM_GARDEVOIRITE
-	.2byte ITEM_STEELIXITE
-	.2byte ITEM_ZAP_PLATE
-	.2byte ITEM_ICICLE_PLATE
-	.2byte ITEM_BINDING_BAND
-	.2byte ITEM_BOOSTER_ENERGY
-	.2byte ITEM_CHARCOAL
-	.2byte ITEM_MYSTIC_WATER
-	.2byte ITEM_MIRACLE_SEED
-	.2byte ITEM_WHITE_HERB
-	.2byte ITEM_RAZOR_CLAW
-	.2byte ITEM_FOCUS_BAND
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_ABILITY_SHIELD
+	.2byte ITEM_EJECT_BUTTON
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_MUSCLE_BAND
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_EVERSTONE
+	.2byte ITEM_NONE
+
+	.align 2
+MauvilleCity_Mart_Pokemart_Clerk2_Expanded:
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
+	.2byte ITEM_MANECTITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_BANETTITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_ELECTRIC_GEM
+	.2byte ITEM_GHOST_GEM
+	.2byte ITEM_MAGNET
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_ABILITY_SHIELD
+	.2byte ITEM_EJECT_BUTTON
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_MUSCLE_BAND
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_EVERSTONE
+	.2byte ITEM_NONE
+
+	.align 2
+MauvilleCity_Mart_Pokemart_Clerk2_Expanded2:
+	.2byte ITEM_ELECTRIC_TERA_SHARD
+	.2byte ITEM_GHOST_TERA_SHARD
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
+	.2byte ITEM_MANECTITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_BANETTITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_ELECTRIC_GEM
+	.2byte ITEM_GHOST_GEM
+	.2byte ITEM_MAGNET
+	.2byte ITEM_ELECTIRIZER
+	.2byte ITEM_MAGMARIZER
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_SHINY_STONE
+	.2byte ITEM_ABILITY_SHIELD
+	.2byte ITEM_EJECT_BUTTON
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_MUSCLE_BAND
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_EVERSTONE
 	.2byte ITEM_NONE
 
 MauvilleCity_Mart_EventScript_Clerk2_Text_0:
