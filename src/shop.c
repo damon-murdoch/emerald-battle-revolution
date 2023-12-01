@@ -360,6 +360,7 @@ static const u16 sShopInventory_SixBadges[] = {
     ITEM_EXP_CANDY_XS,
 	ITEM_EXP_CANDY_S,
 	ITEM_EXP_CANDY_M,
+    ITEM_DYNAMAX_CANDY,
     ITEM_NONE
 };
 
@@ -407,6 +408,7 @@ static const u16 sShopInventory_SevenBadges[] = {
 	ITEM_EXP_CANDY_S,
 	ITEM_EXP_CANDY_M,
 	ITEM_EXP_CANDY_L,
+    ITEM_DYNAMAX_CANDY,
     ITEM_NONE
 };
 
@@ -457,6 +459,7 @@ static const u16 sShopInventory_EightBadges[] = {
 	ITEM_EXP_CANDY_M,
 	ITEM_EXP_CANDY_L,
 	ITEM_EXP_CANDY_XL,
+    ITEM_DYNAMAX_CANDY,
     ITEM_NONE
 };
 

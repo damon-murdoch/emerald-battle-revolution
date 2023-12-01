@@ -20,10 +20,6 @@ RustboroCity_Mart_EventScript_Boy::
 	msgbox RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead, MSGBOX_NPC
 	end
 
-RustboroCity_Mart_EventScript_BugCatcher::
-	msgbox RustboroCity_Mart_Text_GettingEscapeRopeJustInCase, MSGBOX_NPC
-	end
-
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish:
 	.string "I'm buying some PARLYZ HEALS and\n"
 	.string "ANTIDOTES.\p"
@@ -36,30 +32,30 @@ RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead:
 	.string "I should buy SUPER POTIONS for it\n"
 	.string "instead of ordinary POTIONS.$"
 
-RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
-	.string "I'm getting an ESCAPE ROPE just in\n"
-	.string "case I get lost in a cave.\p"
-	.string "I just need to use it to get back to\n"
-	.string "the entrance.$"
-
-`
-
 script RustboroCity_Mart_EventScript_Clerk2 {
 	lock
 	faceplayer
 	if (flag(FLAG_BADGE01_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
-		if (flag(FLAG_BADGE04_GET)) {
-			pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded2)
-		}
-		else {
-			if (flag(FLAG_BADGE02_GET)) {
+		if (flag(FLAG_BADGE02_GET)) {
+			if (flag(FLAG_BADGE04_GET)) {
+				if(flag(FLAG_BADGE08_GET)){
+					pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded3)
+				}
+				else // Not unlocked
+				{
+					pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded2)
+				}
+			}
+			else // Not unlocked
+			{
 				pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded)
 			}
-			else {
-				pokemart(RustboroCity_Mart_Pokemart_Clerk2)
-			}
+		}
+		else // Not unlocked
+		{
+			pokemart(RustboroCity_Mart_Pokemart_Clerk2)
 		}
 	}
 	else // Not unlocked
@@ -73,14 +69,18 @@ script RustboroCity_Mart_EventScript_Clerk2 {
 
 mart RustboroCity_Mart_Pokemart_Clerk2 {
 	ITEM_NORMAL_GEM
-	ITEM_BUG_GEM
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF
-	ITEM_SILVER_POWDER
 	ITEM_SHARP_BEAK
+	ITEM_ROOM_SERVICE
+	ITEM_STICKY_BARB
 	ITEM_EXPERT_BELT
+	ITEM_RAZOR_FANG
 	ITEM_EJECT_PACK
 	ITEM_SCOPE_LENS
+	ITEM_IRON_BALL
+	ITEM_EVIOLITE
+	ITEM_LEEK
 }
 
 mart RustboroCity_Mart_Pokemart_Clerk2_Expanded {
@@ -92,9 +92,15 @@ mart RustboroCity_Mart_Pokemart_Clerk2_Expanded {
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF
 	ITEM_SHARP_BEAK
+	ITEM_ROOM_SERVICE
+	ITEM_STICKY_BARB
 	ITEM_EXPERT_BELT
+	ITEM_RAZOR_FANG
 	ITEM_EJECT_PACK
 	ITEM_SCOPE_LENS
+	ITEM_IRON_BALL
+	ITEM_EVIOLITE
+	ITEM_LEEK
 }
 
 mart RustboroCity_Mart_Pokemart_Clerk2_Expanded2 {
@@ -108,8 +114,38 @@ mart RustboroCity_Mart_Pokemart_Clerk2_Expanded2 {
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF
 	ITEM_SHARP_BEAK
+	ITEM_ROOM_SERVICE
+	ITEM_STICKY_BARB
 	ITEM_EXPERT_BELT
+	ITEM_RAZOR_FANG
 	ITEM_EJECT_PACK
 	ITEM_SCOPE_LENS
+	ITEM_IRON_BALL
+	ITEM_EVIOLITE
+	ITEM_LEEK
+}
+
+mart RustboroCity_Mart_Pokemart_Clerk2_Expanded3 {
+	ITEM_NORMAL_TERA_SHARD
+	ITEM_FLYING_TERA_SHARD
+	ITEM_NORMALIUM_Z
+	ITEM_FLYINIUM_Z
+	ITEM_KANGASKHANITE
+	ITEM_PIDGEOTITE
+	ITEM_PINSIRITE
+	ITEM_AUDINITE
+	ITEM_NORMAL_GEM
+	ITEM_FLYING_GEM
+	ITEM_SILK_SCARF
+	ITEM_SHARP_BEAK
+	ITEM_ROOM_SERVICE
+	ITEM_STICKY_BARB
+	ITEM_EXPERT_BELT
+	ITEM_RAZOR_FANG
+	ITEM_EJECT_PACK
+	ITEM_SCOPE_LENS
+	ITEM_IRON_BALL
+	ITEM_EVIOLITE
+	ITEM_LEEK
 }
 
