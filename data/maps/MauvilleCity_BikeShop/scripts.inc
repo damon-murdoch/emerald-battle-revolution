@@ -19,10 +19,10 @@ MauvilleCity_BikeShop_EventScript_SkipGreeting::
 	end
 
 MauvilleCity_BikeShop_EventScript_ChooseBike::
-	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
+	msgbox MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
 	call MauvilleCity_BikeShop_EventScript_GetAcroBike
 	call MauvilleCity_BikeShop_EventScript_ExplainBike
-	waitmessage
+	release
 	end
 
 MauvilleCity_BikeShop_EventScript_NotFar::
@@ -38,7 +38,6 @@ MauvilleCity_BikeShop_EventScript_YesFar::
 
 MauvilleCity_BikeShop_EventScript_GetAcroBike::
 	giveitem ITEM_ACRO_BIKE
-	release
 	end
 
 MauvilleCity_BikeShop_EventScript_Assistant::
@@ -254,25 +253,33 @@ MauvilleCity_BikeShop_EventScript_ExplainBike::
 	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_0
 	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_1
 	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_2
-	return
+	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_3
+	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_4
+	end
 
 
 MauvilleCity_BikeShop_EventScript_Greeting::
-	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_0
-	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_1
-	msgbox MauvilleCity_BikeShop_EventScript_ExplainBike_Text_2
+	call MauvilleCity_BikeShop_EventScript_ExplainBike
 	release
 	end
 
 
 MauvilleCity_BikeShop_EventScript_ExplainBike_Text_0:
-	.string "This bike has two modes - ACRO mode and\n"
-	.string "MACH mode!$"
+	.string "{PLAYER} received the ACRO BIKE!$"
 
 MauvilleCity_BikeShop_EventScript_ExplainBike_Text_1:
+	.string "This bike has two modes - ACRO mode and\n"
+	.string "MACH mode.$"
+
+MauvilleCity_BikeShop_EventScript_ExplainBike_Text_2:
 	.string "The MACH BIKE is for cyclists who want\n"
 	.string "to feel the wind with their bodies!$"
 
-MauvilleCity_BikeShop_EventScript_ExplainBike_Text_2:
+MauvilleCity_BikeShop_EventScript_ExplainBike_Text_3:
 	.string "And the ACRO BIKE is for those who\n"
 	.string "prefer technical rides!$"
+
+MauvilleCity_BikeShop_EventScript_ExplainBike_Text_4:
+	.string "By default, the bike will be in ACRO\n"
+	.string "mode. Press R when stopped to switch\l"
+	.string "modes!$"

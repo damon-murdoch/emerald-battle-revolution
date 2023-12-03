@@ -24,6 +24,7 @@ MauvilleCity_BikeShop_EventScript_ChooseBike::
 	call MauvilleCity_BikeShop_EventScript_GetAcroBike
 	call MauvilleCity_BikeShop_EventScript_ExplainBike
 	waitmessage
+	release
 	end
 
 MauvilleCity_BikeShop_EventScript_NotFar::
@@ -39,6 +40,7 @@ MauvilleCity_BikeShop_EventScript_YesFar::
 
 MauvilleCity_BikeShop_EventScript_GetAcroBike::
 	giveitem ITEM_ACRO_BIKE
+	end
 
 MauvilleCity_BikeShop_EventScript_Assistant::
 	msgbox MauvilleCity_BikeShop_Text_HandbooksAreInBack, MSGBOX_NPC
@@ -252,10 +254,12 @@ MauvilleCity_BikeShop_Text_Jumps:
 `
 
 script MauvilleCity_BikeShop_EventScript_ExplainBike {
-	msgbox(format("This bike has two modes - ACRO mode and MACH mode!"))
+	msgbox(format("{PLAYER} received the ACRO BIKE!"))
+	msgbox(format("This bike has two modes - ACRO mode and MACH mode."))
 	msgbox(format("The MACH BIKE is for cyclists who want to feel the wind with their bodies!"))
 	msgbox(format("And the ACRO BIKE is for those who prefer technical rides!"))
-	msgbox(format("By default, the bike will be in ACRO mode. Press {R} when stopped to switch modes!"))
+	msgbox(format("By default, the bike will be in ACRO mode. Press R when stopped to switch modes!"))
+	end
 }
 
 script MauvilleCity_BikeShop_EventScript_Greeting {
