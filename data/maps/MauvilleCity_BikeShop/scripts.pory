@@ -5,7 +5,7 @@ MauvilleCity_BikeShop_MapScripts::
 MauvilleCity_BikeShop_EventScript_Rydel::
 	lock
 	faceplayer
-	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_Greeting
+	goto_if_set FLAG_RECEIVED_BIKE, MauvilleCity_BikeShop_EventScript_ExplainBike
 	goto_if_set FLAG_DECLINED_BIKE, MauvilleCity_BikeShop_EventScript_SkipGreeting
 	msgbox MauvilleCity_BikeShop_Text_RydelGreeting, MSGBOX_DEFAULT
 	msgbox MauvilleCity_BikeShop_Text_DidYouComeFromFarAway, MSGBOX_YESNO
@@ -19,14 +19,6 @@ MauvilleCity_BikeShop_EventScript_SkipGreeting::
 	goto_if_eq VAR_RESULT, NO, MauvilleCity_BikeShop_EventScript_NotFar
 	end
 
-MauvilleCity_BikeShop_EventScript_ChooseBike::
-	message MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne
-	call MauvilleCity_BikeShop_EventScript_GetAcroBike
-	call MauvilleCity_BikeShop_EventScript_ExplainBike
-	waitmessage
-	release
-	end
-
 MauvilleCity_BikeShop_EventScript_NotFar::
 	setflag FLAG_DECLINED_BIKE
 	msgbox MauvilleCity_BikeShop_Text_GuessYouDontNeedBike, MSGBOX_DEFAULT
@@ -38,9 +30,6 @@ MauvilleCity_BikeShop_EventScript_YesFar::
 	goto MauvilleCity_BikeShop_EventScript_ChooseBike
 	end
 
-MauvilleCity_BikeShop_EventScript_GetAcroBike::
-	giveitem ITEM_ACRO_BIKE
-	end
 
 MauvilleCity_BikeShop_EventScript_Assistant::
 	msgbox MauvilleCity_BikeShop_Text_HandbooksAreInBack, MSGBOX_NPC
@@ -121,149 +110,126 @@ MauvilleCity_BikeShop_EventScript_Jumps::
 MauvilleCity_BikeShop_EventScript_ExitAcroHandbook::
 	release
 	end
-
-MauvilleCity_BikeShop_Text_RydelGreeting:
-	.string "Well, well, what have we here?\n"
-	.string "A most energetic customer!\p"
-	.string "Me? You may call me RYDEL.\n"
-	.string "I'm the owner of this cycle shop.$"
-
-MauvilleCity_BikeShop_Text_DidYouComeFromFarAway:
-	.string "RYDEL: Your RUNNING SHOES…\n"
-	.string "They're awfully filthy.\p"
-	.string "Did you come from far away?$"
-
-MauvilleCity_BikeShop_Text_GuessYouDontNeedBike:
-	.string "RYDEL: Is that right?\p"
-	.string "Then, I guess you have no need for\n"
-	.string "any of my BIKES.$"
-
-MauvilleCity_BikeShop_Text_ExplainBikesChooseWhichOne:
-	.string "RYDEL: Hm, hm… … … … …\p"
-	.string "You're saying that you came all this\n"
-	.string "way from LITTLEROOT?\p"
-	.string "My goodness!\n"
-	.string "That's ridiculously far!\p"
-	.string "If you had one of my BIKES, you could\n"
-	.string "go anywhere easily while feeling the\l"
-	.string "gentle caress of the wind!\p"
-	.string "I'll tell you what!\n"
-	.string "I'll give you a BIKE!$"
-
-MauvilleCity_BikeShop_Text_ChoseMachBike:
-	.string "{PLAYER} chose the MACH BIKE.$"
-
-MauvilleCity_BikeShop_Text_ComeBackToSwitchBikes:
-	.string "RYDEL: If you get the urge to switch\n"
-	.string "BIKES, just come see me!$"
-
-MauvilleCity_BikeShop_Text_WantToSwitchBikes:
-	.string "RYDEL: Oh? Were you thinking about\n"
-	.string "switching BIKES?$"
-
-MauvilleCity_BikeShop_Text_IllSwitchBikes:
-	.string "RYDEL: Okay, no problem!\n"
-	.string "I'll switch BIKES for you!$"
-
-MauvilleCity_BikeShop_Text_ExchangedMachForAcro:
-	.string "{PLAYER} got the MACH BIKE exchanged\n"
-	.string "for an ACRO BIKE.$"
-
-MauvilleCity_BikeShop_Text_ExchangedAcroForMach:
-	.string "{PLAYER} got the ACRO BIKE exchanged\n"
-	.string "for a MACH BIKE.$"
-
-MauvilleCity_BikeShop_Text_HappyYouLikeIt:
-	.string "RYDEL: Good, good!\n"
-	.string "I'm happy that you like it!$"
-
-MauvilleCity_BikeShop_Text_OhYourBikeIsInPC:
-	.string "Oh? What happened to that BIKE\n"
-	.string "I gave you?\p"
-	.string "Oh, I get it, you stored it using your PC.\p"
-	.string "Well, take it out of PC storage,\n"
-	.string "and I'll be happy to exchange it!\p"
-	.string "May the wind always be at your back\n"
-	.string "on your adventure!$"
-
-MauvilleCity_BikeShop_Text_HandbooksAreInBack:
-	.string "I'm learning about BIKES while\n"
-	.string "I work here.\p"
-	.string "If you need advice on how to ride your\n"
-	.string "BIKE, there're a couple handbooks in\l"
-	.string "the back.$"
-
-MauvilleCity_BikeShop_Text_MachHandbookWhichPage:
-	.string "It's a handbook on the MACH BIKE.\p"
-	.string "Which page do you want to read?$"
-
-MauvilleCity_BikeShop_Text_HowToRideMachBike:
-	.string "A BIKE moves in the direction that\n"
-	.string "the + Control Pad is pressed.\p"
-	.string "It will speed up once it gets rolling.\p"
-	.string "To stop, release the + Control Pad.\n"
-	.string "The BIKE will slow to a stop.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_HowToTurnMachBike:
-	.string "A MACH BIKE is speedy, but it can't\n"
-	.string "stop very quickly.\p"
-	.string "It gets a little tricky to get around\n"
-	.string "a corner.\p"
-	.string "Release the + Control Pad a little\n"
-	.string "before the corner and slow down.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_SandySlopes:
-	.string "There are small sandy slopes\n"
-	.string "throughout the HOENN region.\p"
-	.string "The loose, crumbly sand makes it\n"
-	.string "impossible to climb normally.\p"
-	.string "But if you have a MACH BIKE, you can\n"
-	.string "zip up a sandy slope.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_AcroHandbookWhichPage:
-	.string "It's a handbook on the ACRO BIKE.\p"
-	.string "Which page do you want to read?$"
-
-MauvilleCity_BikeShop_Text_Wheelies:
-	.string "Press the B Button while riding,\n"
-	.string "and the front wheel lifts up.\p"
-	.string "You can zip around with the front\n"
-	.string "wheel up using the + Control Pad.\p"
-	.string "This technique is called a wheelie.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_BunnyHops:
-	.string "Keeping the B Button pressed,\n"
-	.string "your BIKE can hop on the spot.\p"
-	.string "This technique is called a bunny hop.\p"
-	.string "You can ride while hopping, too.\p"
-	.string "Want to read a different page?$"
-
-MauvilleCity_BikeShop_Text_Jumps:
-	.string "Press the B Button and the + Control\n"
-	.string "Pad at the same time to jump.\p"
-	.string "Press the + Control Pad to the side\n"
-	.string "to jump sideways.\p"
-	.string "Press it backwards to make the BIKE\n"
-	.string "change directions while jumping.\p"
-	.string "Want to read a different page?$"
-
 `
 
+script MauvilleCity_BikeShop_EventScript_ChooseBike {
+	msgbox(MauvilleCity_BikeShop_Text_ChooseBike) 
+	giveitem(ITEM_ACRO_BIKE)
+	goto(MauvilleCity_BikeShop_EventScript_ExplainBike)
+}
+
 script MauvilleCity_BikeShop_EventScript_ExplainBike {
-	msgbox(format("{PLAYER} received the ACRO BIKE!"))
 	msgbox(format("This bike has two modes - ACRO mode and MACH mode."))
 	msgbox(format("The MACH BIKE is for cyclists who want to feel the wind with their bodies!"))
 	msgbox(format("And the ACRO BIKE is for those who prefer technical rides!"))
 	msgbox(format("By default, the bike will be in ACRO mode. Press R when stopped to switch modes!"))
+	release
 	end
 }
 
-script MauvilleCity_BikeShop_EventScript_Greeting {
-	call(MauvilleCity_BikeShop_EventScript_ExplainBike)
-	release
-	end
+text MauvilleCity_BikeShop_Text_RydelGreeting {
+	"Well, well, what have we here?\n"
+	"A most energetic customer!\p"
+	"Me? You may call me RYDEL.\n"
+	"I'm the owner of this cycle shop."
+}
+
+
+text MauvilleCity_BikeShop_Text_DidYouComeFromFarAway {
+	"RYDEL: Your RUNNING SHOES…\n"
+	"They're awfully filthy.\p"
+	"Did you come from far away?"
+}
+
+text MauvilleCity_BikeShop_Text_GuessYouDontNeedBike {
+	"RYDEL: Is that right?\p"
+	"Then, I guess you have no need for\n"
+	"any of my BIKES."
+}
+
+text MauvilleCity_BikeShop_Text_HandbooksAreInBack {
+	"I'm learning about BIKES while\n"
+	"I work here.\p"
+	"If you need advice on how to ride your\n"
+	"BIKE, there're a couple handbooks in\l"
+	"the back."
+}
+
+text MauvilleCity_BikeShop_Text_MachHandbookWhichPage {
+	"It's a handbook on the MACH BIKE.\p"
+	"Which page do you want to read?"
+}
+
+text MauvilleCity_BikeShop_Text_HowToRideMachBike {
+	"A BIKE moves in the direction that\n"
+	"the + Control Pad is pressed.\p"
+	"It will speed up once it gets rolling.\p"
+	"To stop, release the + Control Pad.\n"
+	"The BIKE will slow to a stop.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_HowToTurnMachBike {
+	"A MACH BIKE is speedy, but it can't\n"
+	"stop very quickly.\p"
+	"It gets a little tricky to get around\n"
+	"a corner.\p"
+	"Release the + Control Pad a little\n"
+	"before the corner and slow down.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_SandySlopes {
+	"There are small sandy slopes\n"
+	"throughout the HOENN region.\p"
+	"The loose, crumbly sand makes it\n"
+	"impossible to climb normally.\p"
+	"But if you have a MACH BIKE, you can\n"
+	"zip up a sandy slope.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_AcroHandbookWhichPage {
+	"It's a handbook on the ACRO BIKE.\p"
+	"Which page do you want to read?"
+}
+
+text MauvilleCity_BikeShop_Text_Wheelies {
+	"Press the B Button while riding,\n"
+	"and the front wheel lifts up.\p"
+	"You can zip around with the front\n"
+	"wheel up using the + Control Pad.\p"
+	"This technique is called a wheelie.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_BunnyHops {
+	"Keeping the B Button pressed,\n"
+	"your BIKE can hop on the spot.\p"
+	"This technique is called a bunny hop.\p"
+	"You can ride while hopping, too.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_Jumps {
+	"Press the B Button and the + Control\n"
+	"Pad at the same time to jump.\p"
+	"Press the + Control Pad to the side\n"
+	"to jump sideways.\p"
+	"Press it backwards to make the BIKE\n"
+	"change directions while jumping.\p"
+	"Want to read a different page?"
+}
+
+text MauvilleCity_BikeShop_Text_ChooseBike {
+	"RYDEL: Hm, hm… … … … …\p"
+	"You're saying that you came all this\n"
+	"way from LITTLEROOT?\p"
+	"My goodness!\n"
+	"That's ridiculously far!\p"
+	"If you had one of my BIKES, you could\n"
+	"go anywhere easily while feeling the\l"
+	"gentle caress of the wind!\p"
+	"I'll tell you what!\n"
+	"I'll give you a BIKE!"
 }
