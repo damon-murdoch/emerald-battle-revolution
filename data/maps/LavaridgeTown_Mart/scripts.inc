@@ -43,7 +43,7 @@ LavaridgeTown_Mart_EventScript_Clerk2_1:
 LavaridgeTown_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_BADGE08_GET, LavaridgeTown_Mart_EventScript_Clerk2_5
+	goto_if_set FLAG_BADGE06_GET, LavaridgeTown_Mart_EventScript_Clerk2_5
 	pokemart LavaridgeTown_Mart_Pokemart_Clerk2
 	goto LavaridgeTown_Mart_EventScript_Clerk2_1
 
@@ -54,12 +54,12 @@ LavaridgeTown_Mart_EventScript_Clerk2_5:
 
 	.align 2
 LavaridgeTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_GROUNDIUM_Z
-	.2byte ITEM_ROCKIUM_Z
 	.2byte ITEM_CAMERUPTITE
 	.2byte ITEM_ALTARIANITE
 	.2byte ITEM_GARCHOMPITE
 	.2byte ITEM_STEELIXITE
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_ROCKIUM_Z
 	.2byte ITEM_GROUND_GEM
 	.2byte ITEM_ROCK_GEM
 	.2byte ITEM_SOFT_SAND
@@ -84,12 +84,12 @@ LavaridgeTown_Mart_Pokemart_Clerk2:
 LavaridgeTown_Mart_Pokemart_Clerk2_Expanded:
 	.2byte ITEM_GROUND_TERA_SHARD
 	.2byte ITEM_ROCK_TERA_SHARD
-	.2byte ITEM_GROUNDIUM_Z
-	.2byte ITEM_ROCKIUM_Z
 	.2byte ITEM_CAMERUPTITE
 	.2byte ITEM_ALTARIANITE
 	.2byte ITEM_GARCHOMPITE
 	.2byte ITEM_STEELIXITE
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_ROCKIUM_Z
 	.2byte ITEM_GROUND_GEM
 	.2byte ITEM_ROCK_GEM
 	.2byte ITEM_SOFT_SAND

@@ -43,7 +43,7 @@ script MauvilleCity_Mart_EventScript_Clerk2 {
 		message(gText_HowMayIServeYou)
 		waitmessage
 		if (flag(FLAG_BADGE04_GET)){
-			if(flag(FLAG_BADGE08_GET)){
+			if(flag(FLAG_BADGE06_GET)){
 				pokemart(MauvilleCity_Mart_Pokemart_Clerk2_Expanded2)
 			}
 			else // Not unlocked
@@ -89,12 +89,12 @@ mart MauvilleCity_Mart_Pokemart_Clerk2 {
 }
 
 mart MauvilleCity_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_ELECTRIUM_Z
-	ITEM_GHOSTIUM_Z
 	ITEM_MANECTITE
 	ITEM_SABLENITE
 	ITEM_BANETTITE
 	ITEM_MAWILITE
+	ITEM_ELECTRIUM_Z
+	ITEM_GHOSTIUM_Z
 	ITEM_SPELL_TAG
 	ITEM_ELECTRIC_GEM
 	ITEM_GHOST_GEM
@@ -116,12 +116,12 @@ mart MauvilleCity_Mart_Pokemart_Clerk2_Expanded {
 mart MauvilleCity_Mart_Pokemart_Clerk2_Expanded2 {
 	ITEM_ELECTRIC_TERA_SHARD
 	ITEM_GHOST_TERA_SHARD
-	ITEM_ELECTRIUM_Z
-	ITEM_GHOSTIUM_Z
 	ITEM_MANECTITE
 	ITEM_SABLENITE
 	ITEM_BANETTITE
 	ITEM_MAWILITE
+	ITEM_ELECTRIUM_Z
+	ITEM_GHOSTIUM_Z
 	ITEM_SPELL_TAG
 	ITEM_ELECTRIC_GEM
 	ITEM_GHOST_GEM

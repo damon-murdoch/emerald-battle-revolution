@@ -51,6 +51,7 @@ Pokemon easily without the need for modifying save files.
 * `LOuroboros`, for creating the following tutorials:
   * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
   * [Infinite TM usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
+  * [DPPt Style 2-in-1 Bike](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -101,6 +102,17 @@ when committed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.4.2
+
+Implemented `Lunos`'s [2-in-1-bike](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172) 
+tutorial, and modified the bike shop scripts to adjust it for the new behavior. Swapped the order of battle
+mechanic items to be the following:
+* 2nd Gym: Z Power Ring
+* 4th Gym: Mega Ring
+* 6th Gym: Tera Orb
+* 8th Gym: Dynamax Band
+Shops have also been modified to unlock relevant items for each mechanic as they are unlocked.
 
 ### Ver. 0.4.1
 

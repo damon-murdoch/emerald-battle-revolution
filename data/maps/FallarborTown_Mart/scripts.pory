@@ -57,7 +57,7 @@ script FallarborTown_Mart_EventScript_Clerk2 {
 		message(gText_HowMayIServeYou)
 		waitmessage
 		if (flag(FLAG_BADGE04_GET)){
-			if(flag(FLAG_BADGE08_GET))
+			if(flag(FLAG_BADGE06_GET))
 			{
 				pokemart(FallarborTown_Mart_Pokemart_Clerk2_Expanded2)
 			}
@@ -81,10 +81,8 @@ script FallarborTown_Mart_EventScript_Clerk2 {
 }
 
 mart FallarborTown_Mart_Pokemart_Clerk2 {
-	ITEM_SHARPEDONITE
-	ITEM_GYARADOSITE
-	ITEM_GLALITITE
-	ITEM_ABOMASITE
+	ITEM_ICIUM_Z
+	ITEM_DARKINIUM_Z
 	ITEM_ICE_GEM
 	ITEM_DARK_GEM
 	ITEM_NEVER_MELT_ICE
@@ -102,12 +100,12 @@ mart FallarborTown_Mart_Pokemart_Clerk2 {
 }
 
 mart FallarborTown_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_ICIUM_Z
-	ITEM_DARKINIUM_Z
 	ITEM_SHARPEDONITE
 	ITEM_GYARADOSITE
 	ITEM_GLALITITE
 	ITEM_ABOMASITE
+	ITEM_ICIUM_Z
+	ITEM_DARKINIUM_Z
 	ITEM_ICE_GEM
 	ITEM_DARK_GEM
 	ITEM_NEVER_MELT_ICE
@@ -127,12 +125,12 @@ mart FallarborTown_Mart_Pokemart_Clerk2_Expanded {
 mart FallarborTown_Mart_Pokemart_Clerk2_Expanded2 {
 	ITEM_ICE_TERA_SHARD
 	ITEM_DARK_TERA_SHARD
-	ITEM_ICIUM_Z
-	ITEM_DARKINIUM_Z
 	ITEM_SHARPEDONITE
 	ITEM_GYARADOSITE
 	ITEM_GLALITITE
 	ITEM_ABOMASITE
+	ITEM_ICIUM_Z
+	ITEM_DARKINIUM_Z
 	ITEM_ICE_GEM
 	ITEM_DARK_GEM
 	ITEM_NEVER_MELT_ICE

@@ -39,7 +39,7 @@ script LavaridgeTown_Mart_EventScript_Clerk2 {
 	if (flag(FLAG_BADGE04_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
-		if(flag(FLAG_BADGE08_GET)){
+		if(flag(FLAG_BADGE06_GET)){
 			pokemart(LavaridgeTown_Mart_Pokemart_Clerk2_Expanded)
 		}
 		else // Not unlocked
@@ -57,12 +57,12 @@ script LavaridgeTown_Mart_EventScript_Clerk2 {
 }
 
 mart LavaridgeTown_Mart_Pokemart_Clerk2 {
-	ITEM_GROUNDIUM_Z
-	ITEM_ROCKIUM_Z
 	ITEM_CAMERUPTITE
 	ITEM_ALTARIANITE
 	ITEM_GARCHOMPITE
 	ITEM_STEELIXITE
+	ITEM_GROUNDIUM_Z
+	ITEM_ROCKIUM_Z
 	ITEM_GROUND_GEM
 	ITEM_ROCK_GEM
 	ITEM_SOFT_SAND
@@ -86,12 +86,12 @@ mart LavaridgeTown_Mart_Pokemart_Clerk2 {
 mart LavaridgeTown_Mart_Pokemart_Clerk2_Expanded {
 	ITEM_GROUND_TERA_SHARD
 	ITEM_ROCK_TERA_SHARD
-	ITEM_GROUNDIUM_Z
-	ITEM_ROCKIUM_Z
 	ITEM_CAMERUPTITE
 	ITEM_ALTARIANITE
 	ITEM_GARCHOMPITE
 	ITEM_STEELIXITE
+	ITEM_GROUNDIUM_Z
+	ITEM_ROCKIUM_Z
 	ITEM_GROUND_GEM
 	ITEM_ROCK_GEM
 	ITEM_SOFT_SAND

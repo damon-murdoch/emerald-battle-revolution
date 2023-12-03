@@ -37,86 +37,13 @@ script LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft {
 	faceplayer
 	message(gText_HowMayIServeYou)
 	waitmessage
-	
-	// Player has defeated champion
-	if (flag(FLAG_IS_CHAMPION)){
-		// Drug shop, including pp up / pp max
-		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded)
-	}
-	else // Player is not champion
-	{
-		// Drug shop, including standard items
-		pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft)
-	}
-
-	// pokemart(LilycoveCity_DepartmentStore_3F_Pokemart_Vitamins)
+	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft)
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
 }
 
 mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft {
-	ITEM_PROTEIN
-	ITEM_CALCIUM
-	ITEM_IRON
-	ITEM_ZINC
-	ITEM_CARBOS
-	ITEM_HP_UP
-	ITEM_PP_UP
-	ITEM_HEALTH_FEATHER
-	ITEM_MUSCLE_FEATHER
-	ITEM_RESIST_FEATHER
-	ITEM_GENIUS_FEATHER
-	ITEM_CLEVER_FEATHER
-	ITEM_SWIFT_FEATHER
-	ITEM_MACHO_BRACE
-	ITEM_POWER_WEIGHT
-	ITEM_POWER_BRACER
-	ITEM_POWER_BELT
-	ITEM_POWER_LENS
-	ITEM_POWER_BAND
-	ITEM_POWER_ANKLET
-}
-
-mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded {
-	ITEM_PROTEIN
-	ITEM_CALCIUM
-	ITEM_IRON
-	ITEM_ZINC
-	ITEM_CARBOS
-	ITEM_HP_UP
-	ITEM_PP_UP
-	ITEM_PP_MAX
-	ITEM_HEALTH_FEATHER
-	ITEM_MUSCLE_FEATHER
-	ITEM_RESIST_FEATHER
-	ITEM_GENIUS_FEATHER
-	ITEM_CLEVER_FEATHER
-	ITEM_SWIFT_FEATHER
-	ITEM_MACHO_BRACE
-	ITEM_POWER_WEIGHT
-	ITEM_POWER_BRACER
-	ITEM_POWER_BELT
-	ITEM_POWER_LENS
-	ITEM_POWER_BAND
-	ITEM_POWER_ANKLET
-	ITEM_ABILITY_CAPSULE
-	ITEM_ABILITY_PATCH
-}
-
-script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
-	lock
-	faceplayer
-	message(gText_HowMayIServeYou)
-	waitmessage
-	// Stat modifiers, including nature mints
-	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkRight)
-	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
-	release
-	end
-}
-
-mart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight {
 	ITEM_LONELY_MINT
 	ITEM_ADAMANT_MINT
 	ITEM_NAUGHTY_MINT
@@ -138,20 +65,6 @@ mart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight {
 	ITEM_JOLLY_MINT
 	ITEM_NAIVE_MINT
 	ITEM_SERIOUS_MINT
-}
-
-script LilycoveCity_DepartmentStore_3F_EventScript_ClerkBerry {
-	lock
-	faceplayer
-	message(gText_HowMayIServeYou)
-	waitmessage
-	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry)
-	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
-	release
-	end
-}
-
-mart LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry {
 	ITEM_RAZZ_BERRY
 	ITEM_BLUK_BERRY
 	ITEM_NANAB_BERRY
@@ -173,4 +86,49 @@ mart LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry {
 	// For future use
 	// ITEM_DURIN_BERRY
 	// ITEM_BELUE_BERRY
+}
+
+script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
+	lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	// Stat modifiers, including nature mints
+	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkRight)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+mart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight {
+	ITEM_HEALTH_MOCHI
+	ITEM_MUSCLE_MOCHI
+	ITEM_RESIST_MOCHI
+	ITEM_GENIUS_MOCHI
+	ITEM_CLEVER_MOCHI
+	ITEM_SWIFT_MOCHI
+	ITEM_FRESH_START_MOCHI
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_PP_MAX
+	ITEM_ABILITY_CAPSULE
+	ITEM_ABILITY_PATCH
+	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_FEATHER
+	ITEM_MACHO_BRACE
+	ITEM_POWER_WEIGHT
+	ITEM_POWER_BRACER
+	ITEM_POWER_BELT
+	ITEM_POWER_LENS
+	ITEM_POWER_BAND
+	ITEM_POWER_ANKLET
 }

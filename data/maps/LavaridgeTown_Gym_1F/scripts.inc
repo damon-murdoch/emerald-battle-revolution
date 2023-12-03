@@ -72,7 +72,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
 	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
-	call LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing
+	call LavaridgeTown_Gym_1F_EventScript_GiveMegaRing
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -404,35 +404,30 @@ LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
 	.string "I hate to say this, but when you come\n"
 	.string "see me, bring at least two POKéMON.$"
 
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing::
-	goto_if_unset FLAG_ITEM_Z_POWER_RING_OBTAINED, LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_1
+LavaridgeTown_Gym_1F_EventScript_GiveMegaRing::
+	goto_if_unset FLAG_ITEM_MEGA_RING_OBTAINED, LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_1
 	return
 
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_1:
-	msgbox LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_0
-	giveitem ITEM_Z_POWER_RING
-	msgbox LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_1
-	msgbox LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_2
-	msgbox LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_3
-	setflag FLAG_ITEM_Z_POWER_RING_OBTAINED
+LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_1:
+	msgbox LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_0
+	giveitem ITEM_MEGA_RING
+	msgbox LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_1
+	msgbox LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_2
+	setflag FLAG_ITEM_MEGA_RING_OBTAINED
 	return
 
 
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_0:
+LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_0:
 	.string "Also, as a trainer with four gym badges,\n"
 	.string "you've earned this.$"
 
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_1:
-	.string "This item will allow your POKéMON to\n"
-	.string "unleash a powerful Z-Move once per\l"
-	.string "battle, when holding the Z-Crystal of\l"
-	.string "the correct type!$"
+LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_1:
+	.string "This powerful item will allow you to mega\n"
+	.string "evolve some POKéMON once per battle,\l"
+	.string "when holding their respective mega\l"
+	.string "stone.$"
 
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_2:
-	.string "Some POKéMON even have access to\n"
-	.string "exclusive Z-Moves!$"
-
-LavaridgeTown_Gym_1F_EventScript_GiveZPowerRing_Text_3:
-	.string "Z-Crystals will now be available at most\n"
-	.string "POKéMARTs - Even those you've already\l"
-	.string "visited.$"
+LavaridgeTown_Gym_1F_EventScript_GiveMegaRing_Text_2:
+	.string "Mega Stones will now be available at\n"
+	.string "most POKéMARTs - Even those you've\l"
+	.string "already visited.$"

@@ -50,7 +50,7 @@ script PetalburgCity_Mart_EventScript_Clerk2 {
 	if (flag(FLAG_ADVENTURE_STARTED)){
 		message(gText_HowMayIServeYou)
 		waitmessage
-		if (flag(FLAG_BADGE05_GET)) {
+		if (flag(FLAG_BADGE04_GET)) {
 			pokemart(PetalburgCity_Mart_Pokemart_Clerk2_Expanded)
 		}
 		else // Not unlocked

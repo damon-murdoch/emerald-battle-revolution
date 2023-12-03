@@ -41,7 +41,7 @@ script SlateportCity_Mart_EventScript_Clerk2 {
 		message(gText_HowMayIServeYou)
 		waitmessage
 		if (flag(FLAG_BADGE04_GET)){
-			if(flag(FLAG_BADGE08_GET)){
+			if(flag(FLAG_BADGE06_GET)){
 				pokemart(SlateportCity_Mart_Pokemart_Clerk2_Expanded2)
 			}
 			else
@@ -64,10 +64,8 @@ script SlateportCity_Mart_EventScript_Clerk2 {
 }
 
 mart SlateportCity_Mart_Pokemart_Clerk2 {
-	ITEM_LUCARIONITE
-	ITEM_SLOWBRONITE
-	ITEM_LOPUNNITE
-	ITEM_ALAKAZITE
+	ITEM_FIGHTINIUM_Z
+	ITEM_PSYCHIUM_Z
 	ITEM_FIGHTING_GEM
 	ITEM_PSYCHIC_GEM
 	ITEM_BLACK_BELT
@@ -86,12 +84,12 @@ mart SlateportCity_Mart_Pokemart_Clerk2 {
 }
 
 mart SlateportCity_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_FIGHTINIUM_Z
-	ITEM_PSYCHIUM_Z
 	ITEM_LUCARIONITE
 	ITEM_SLOWBRONITE
 	ITEM_LOPUNNITE
 	ITEM_ALAKAZITE
+	ITEM_FIGHTINIUM_Z
+	ITEM_PSYCHIUM_Z
 	ITEM_FIGHTING_GEM
 	ITEM_PSYCHIC_GEM
 	ITEM_BLACK_BELT
@@ -112,12 +110,12 @@ mart SlateportCity_Mart_Pokemart_Clerk2_Expanded {
 mart SlateportCity_Mart_Pokemart_Clerk2_Expanded2 {
 	ITEM_FIGHTING_TERA_SHARD
 	ITEM_PSYCHIC_TERA_SHARD
-	ITEM_FIGHTINIUM_Z
-	ITEM_PSYCHIUM_Z
 	ITEM_LUCARIONITE
 	ITEM_SLOWBRONITE
 	ITEM_LOPUNNITE
 	ITEM_ALAKAZITE
+	ITEM_FIGHTINIUM_Z
+	ITEM_PSYCHIUM_Z
 	ITEM_FIGHTING_GEM
 	ITEM_PSYCHIC_GEM
 	ITEM_BLACK_BELT

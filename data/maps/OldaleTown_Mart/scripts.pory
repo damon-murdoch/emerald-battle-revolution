@@ -104,7 +104,7 @@ script OldaleTown_Mart_EventScript_Clerk2 {
 		waitmessage
 		if (flag(FLAG_BADGE02_GET)){
 			if(flag(FLAG_BADGE04_GET)){
-				if(flag(FLAG_BADGE08_GET)){
+				if(flag(FLAG_BADGE06_GET)){
 					pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded3)
 				}
 				else // Not unlocked
@@ -144,9 +144,9 @@ mart OldaleTown_Mart_Pokemart_Clerk2 {
 }
 
 mart OldaleTown_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_SCEPTILITE
-	ITEM_BLAZIKENITE
-	ITEM_SWAMPERTITE
+	ITEM_FIRIUM_Z
+	ITEM_WATERIUM_Z
+	ITEM_GRASSIUM_Z
 	ITEM_FIRE_GEM
 	ITEM_WATER_GEM
 	ITEM_GRASS_GEM
@@ -159,12 +159,12 @@ mart OldaleTown_Mart_Pokemart_Clerk2_Expanded {
 }
 
 mart OldaleTown_Mart_Pokemart_Clerk2_Expanded2 {
-	ITEM_FIRIUM_Z
-	ITEM_WATERIUM_Z
-	ITEM_GRASSIUM_Z
 	ITEM_SCEPTILITE
 	ITEM_BLAZIKENITE
 	ITEM_SWAMPERTITE
+	ITEM_FIRIUM_Z
+	ITEM_WATERIUM_Z
+	ITEM_GRASSIUM_Z
 	ITEM_FIRE_GEM
 	ITEM_WATER_GEM
 	ITEM_GRASS_GEM
@@ -181,12 +181,12 @@ mart OldaleTown_Mart_Pokemart_Clerk2_Expanded3 {
 	ITEM_FIRE_TERA_SHARD
 	ITEM_WATER_TERA_SHARD
 	ITEM_GRASS_TERA_SHARD
-	ITEM_FIRIUM_Z
-	ITEM_WATERIUM_Z
-	ITEM_GRASSIUM_Z
 	ITEM_SCEPTILITE
 	ITEM_BLAZIKENITE
 	ITEM_SWAMPERTITE
+	ITEM_FIRIUM_Z
+	ITEM_WATERIUM_Z
+	ITEM_GRASSIUM_Z
 	ITEM_FIRE_GEM
 	ITEM_WATER_GEM
 	ITEM_GRASS_GEM
