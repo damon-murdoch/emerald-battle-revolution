@@ -882,16 +882,3 @@ script LittlerootTown_EventScript_StepOffTruck {
 	// Go inside house
 	call(LittlerootTown_EventScript_GoInsideWithMom)
 }
-
-script LittlerootTown_EventScript_Multichoice {
-	msgbox(format("Please select an option"))
-	multichoice2(1,1,LittlerootTown_Text_DemoOptions)
-	closemessage
-    end
-}
-
-text LittlerootTown_Text_DemoOptions {
-	"Hello$"
-	"World$"
-	""
-}
