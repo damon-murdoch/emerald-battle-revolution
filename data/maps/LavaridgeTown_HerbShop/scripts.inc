@@ -138,14 +138,40 @@ LavaridgeTown_HerbShop_EventScript_Clerk3::
 	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_0
 	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_1
 	waitmessage
-	pokemart LavaridgeTown_HerbShop_Mart_Clerk3
+	multichoice2 1, 1, LavaridgeTown_HerbShop_Text_Clerk3Options
+	switch VAR_RESULT
+	case 0, LavaridgeTown_HerbShop_EventScript_Clerk3_3
+	case 1, LavaridgeTown_HerbShop_EventScript_Clerk3_4
+	case 2, LavaridgeTown_HerbShop_EventScript_Clerk3_5
+	case 3, LavaridgeTown_HerbShop_EventScript_Clerk3_6
+LavaridgeTown_HerbShop_EventScript_Clerk3_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
+LavaridgeTown_HerbShop_EventScript_Clerk3_3:
+	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_2
+	pokemart LavaridgeTown_HerbShop_Pokemart_Clerk3Medicine
+	goto LavaridgeTown_HerbShop_EventScript_Clerk3_1
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_4:
+	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_3
+	pokemart LavaridgeTown_HerbShop_Pokemart_Clerk3Berries
+	goto LavaridgeTown_HerbShop_EventScript_Clerk3_1
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_5:
+	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_4
+	pokemart LavaridgeTown_HerbShop_Pokemart_Clerk3Mints
+	goto LavaridgeTown_HerbShop_EventScript_Clerk3_1
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_6:
+	msgbox LavaridgeTown_HerbShop_EventScript_Clerk3_Text_5
+	pokemart LavaridgeTown_HerbShop_Pokemart_Clerk3Other
+	goto LavaridgeTown_HerbShop_EventScript_Clerk3_1
+
 
 	.align 2
-LavaridgeTown_HerbShop_Mart_Clerk3:
+LavaridgeTown_HerbShop_Pokemart_Clerk3Medicine:
 	.2byte ITEM_HEALTH_MOCHI
 	.2byte ITEM_MUSCLE_MOCHI
 	.2byte ITEM_RESIST_MOCHI
@@ -153,16 +179,48 @@ LavaridgeTown_HerbShop_Mart_Clerk3:
 	.2byte ITEM_CLEVER_MOCHI
 	.2byte ITEM_SWIFT_MOCHI
 	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
-	.2byte ITEM_ABILITY_CAPSULE
-	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_RESIST_FEATHER
 	.2byte ITEM_GENIUS_FEATHER
 	.2byte ITEM_CLEVER_FEATHER
 	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_NONE
+
+	.align 2
+LavaridgeTown_HerbShop_Pokemart_Clerk3Berries:
+	.2byte ITEM_RAZZ_BERRY
+	.2byte ITEM_BLUK_BERRY
+	.2byte ITEM_NANAB_BERRY
+	.2byte ITEM_WEPEAR_BERRY
+	.2byte ITEM_PINAP_BERRY
+	.2byte ITEM_CORNN_BERRY
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
+	.2byte ITEM_MAGOST_BERRY
+	.2byte ITEM_RABUTA_BERRY
+	.2byte ITEM_NOMEL_BERRY
+	.2byte ITEM_SPELON_BERRY
+	.2byte ITEM_PAMTRE_BERRY
+	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+LavaridgeTown_HerbShop_Pokemart_Clerk3Mints:
 	.2byte ITEM_LONELY_MINT
 	.2byte ITEM_ADAMANT_MINT
 	.2byte ITEM_NAUGHTY_MINT
@@ -184,24 +242,10 @@ LavaridgeTown_HerbShop_Mart_Clerk3:
 	.2byte ITEM_JOLLY_MINT
 	.2byte ITEM_NAIVE_MINT
 	.2byte ITEM_SERIOUS_MINT
-	.2byte ITEM_RAZZ_BERRY
-	.2byte ITEM_BLUK_BERRY
-	.2byte ITEM_NANAB_BERRY
-	.2byte ITEM_WEPEAR_BERRY
-	.2byte ITEM_PINAP_BERRY
-	.2byte ITEM_CORNN_BERRY
-	.2byte ITEM_POMEG_BERRY
-	.2byte ITEM_KELPSY_BERRY
-	.2byte ITEM_QUALOT_BERRY
-	.2byte ITEM_HONDEW_BERRY
-	.2byte ITEM_GREPA_BERRY
-	.2byte ITEM_TAMATO_BERRY
-	.2byte ITEM_MAGOST_BERRY
-	.2byte ITEM_RABUTA_BERRY
-	.2byte ITEM_NOMEL_BERRY
-	.2byte ITEM_SPELON_BERRY
-	.2byte ITEM_PAMTRE_BERRY
-	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+LavaridgeTown_HerbShop_Pokemart_Clerk3Other:
 	.2byte ITEM_MACHO_BRACE
 	.2byte ITEM_POWER_WEIGHT
 	.2byte ITEM_POWER_BRACER
@@ -224,3 +268,27 @@ LavaridgeTown_HerbShop_EventScript_Clerk3_Text_0:
 LavaridgeTown_HerbShop_EventScript_Clerk3_Text_1:
 	.string "Here you'll find berries and other items\n"
 	.string "to use when training your Pokemon!$"
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_Text_2:
+	.string "This medicine will make your POKéMON\n"
+	.string "stronger!$"
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_Text_3:
+	.string "These berries will help you train your\n"
+	.string "POKéMON!$"
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_Text_4:
+	.string "These mints will change the nature of a\n"
+	.string "POKéMON$"
+
+LavaridgeTown_HerbShop_EventScript_Clerk3_Text_5:
+	.string "These items will help you train POKéMON\n"
+	.string "in battle!$"
+
+LavaridgeTown_HerbShop_Text_Clerk3Options::
+	.string "Medicine$"
+	.string "Berries$"
+	.string "Mints$"
+	.string "Other$"
+	.string "Cancel$"
+	.string "$"
