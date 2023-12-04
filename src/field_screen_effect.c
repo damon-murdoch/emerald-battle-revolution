@@ -330,7 +330,8 @@ static void Task_ExitDoor(u8 taskId)
         task->tState = 1;
         break;
     case 1:
-        if (WaitForWeatherFadeIn())
+        // [devolov] Add PC Access in PokeNav
+        if (WaitForWeatherFadeIn()  && !gSysPcFromPokenav)
         {
             u8 objEventId;
             SetPlayerVisibility(TRUE);
