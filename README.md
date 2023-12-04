@@ -69,6 +69,8 @@ Pokemon easily without the need for modifying save files.
 
 * `PokemonCrazy`, for creating the [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77) tutorial
 
+* `devolov`, for creating the [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial
+
 * `huderlem`, for creating [Poryscript](https://github.com/huderlem/poryscript)
 
 ## Branches
@@ -102,6 +104,10 @@ when committed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.4.3
+
+Implemented `devolov`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial
 
 ### Ver. 0.4.2
 
