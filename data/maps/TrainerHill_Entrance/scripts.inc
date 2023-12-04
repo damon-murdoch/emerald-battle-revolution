@@ -420,19 +420,44 @@ TrainerHill_Entrance_EventScript_Clerk2::
 	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_BADGE03_GET, TrainerHill_Entrance_EventScript_Clerk2_2
-	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_0
+	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_4
 TrainerHill_Entrance_EventScript_Clerk2_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
 
 TrainerHill_Entrance_EventScript_Clerk2_2:
-	pokemart TrainerHill_Entrance_Mart_Pokemart_Clerk2
+	multichoice2 1, 1, TrainerHill_Entrance_Text_Clerk2Options
+	switch VAR_RESULT
+	case 0, TrainerHill_Entrance_EventScript_Clerk2_6
+	case 1, TrainerHill_Entrance_EventScript_Clerk2_7
+	case 2, TrainerHill_Entrance_EventScript_Clerk2_8
+	case 3, TrainerHill_Entrance_EventScript_Clerk2_9
+	goto TrainerHill_Entrance_EventScript_Clerk2_1
+
+TrainerHill_Entrance_EventScript_Clerk2_6:
+	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_0
+	pokemart TrainerHill_Entrance_Pokemart_Clerk2Medicine
+	goto TrainerHill_Entrance_EventScript_Clerk2_1
+
+TrainerHill_Entrance_EventScript_Clerk2_7:
+	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_1
+	pokemart TrainerHill_Entrance_Pokemart_Clerk2Berries
+	goto TrainerHill_Entrance_EventScript_Clerk2_1
+
+TrainerHill_Entrance_EventScript_Clerk2_8:
+	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_2
+	pokemart TrainerHill_Entrance_Pokemart_Clerk2Mints
+	goto TrainerHill_Entrance_EventScript_Clerk2_1
+
+TrainerHill_Entrance_EventScript_Clerk2_9:
+	msgbox TrainerHill_Entrance_EventScript_Clerk2_Text_3
+	pokemart TrainerHill_Entrance_Pokemart_Clerk2Other
 	goto TrainerHill_Entrance_EventScript_Clerk2_1
 
 
 	.align 2
-TrainerHill_Entrance_Mart_Pokemart_Clerk2:
+TrainerHill_Entrance_Pokemart_Clerk2Medicine:
 	.2byte ITEM_HEALTH_MOCHI
 	.2byte ITEM_MUSCLE_MOCHI
 	.2byte ITEM_RESIST_MOCHI
@@ -440,16 +465,48 @@ TrainerHill_Entrance_Mart_Pokemart_Clerk2:
 	.2byte ITEM_CLEVER_MOCHI
 	.2byte ITEM_SWIFT_MOCHI
 	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
-	.2byte ITEM_ABILITY_CAPSULE
-	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_RESIST_FEATHER
 	.2byte ITEM_GENIUS_FEATHER
 	.2byte ITEM_CLEVER_FEATHER
 	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_NONE
+
+	.align 2
+TrainerHill_Entrance_Pokemart_Clerk2Berries:
+	.2byte ITEM_RAZZ_BERRY
+	.2byte ITEM_BLUK_BERRY
+	.2byte ITEM_NANAB_BERRY
+	.2byte ITEM_WEPEAR_BERRY
+	.2byte ITEM_PINAP_BERRY
+	.2byte ITEM_CORNN_BERRY
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
+	.2byte ITEM_MAGOST_BERRY
+	.2byte ITEM_RABUTA_BERRY
+	.2byte ITEM_NOMEL_BERRY
+	.2byte ITEM_SPELON_BERRY
+	.2byte ITEM_PAMTRE_BERRY
+	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+TrainerHill_Entrance_Pokemart_Clerk2Mints:
 	.2byte ITEM_LONELY_MINT
 	.2byte ITEM_ADAMANT_MINT
 	.2byte ITEM_NAUGHTY_MINT
@@ -471,24 +528,10 @@ TrainerHill_Entrance_Mart_Pokemart_Clerk2:
 	.2byte ITEM_JOLLY_MINT
 	.2byte ITEM_NAIVE_MINT
 	.2byte ITEM_SERIOUS_MINT
-	.2byte ITEM_RAZZ_BERRY
-	.2byte ITEM_BLUK_BERRY
-	.2byte ITEM_NANAB_BERRY
-	.2byte ITEM_WEPEAR_BERRY
-	.2byte ITEM_PINAP_BERRY
-	.2byte ITEM_CORNN_BERRY
-	.2byte ITEM_POMEG_BERRY
-	.2byte ITEM_KELPSY_BERRY
-	.2byte ITEM_QUALOT_BERRY
-	.2byte ITEM_HONDEW_BERRY
-	.2byte ITEM_GREPA_BERRY
-	.2byte ITEM_TAMATO_BERRY
-	.2byte ITEM_MAGOST_BERRY
-	.2byte ITEM_RABUTA_BERRY
-	.2byte ITEM_NOMEL_BERRY
-	.2byte ITEM_SPELON_BERRY
-	.2byte ITEM_PAMTRE_BERRY
-	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+TrainerHill_Entrance_Pokemart_Clerk2Other:
 	.2byte ITEM_MACHO_BRACE
 	.2byte ITEM_POWER_WEIGHT
 	.2byte ITEM_POWER_BRACER
@@ -499,5 +542,29 @@ TrainerHill_Entrance_Mart_Pokemart_Clerk2:
 	.2byte ITEM_NONE
 
 TrainerHill_Entrance_EventScript_Clerk2_Text_0:
+	.string "This medicine will make your POKéMON\n"
+	.string "stronger!$"
+
+TrainerHill_Entrance_EventScript_Clerk2_Text_1:
+	.string "These berries will help you train your\n"
+	.string "POKéMON!$"
+
+TrainerHill_Entrance_EventScript_Clerk2_Text_2:
+	.string "These mints will change the nature of a\n"
+	.string "POKéMON$"
+
+TrainerHill_Entrance_EventScript_Clerk2_Text_3:
+	.string "These items will help you train POKéMON\n"
+	.string "in battle!$"
+
+TrainerHill_Entrance_EventScript_Clerk2_Text_4:
 	.string "I'm afraid we are all out of stock at the\n"
 	.string "moment, sorry!$"
+
+TrainerHill_Entrance_Text_Clerk2Options::
+	.string "Medicine$"
+	.string "Berries$"
+	.string "Mints$"
+	.string "Other$"
+	.string "Cancel$"
+	.string "$"

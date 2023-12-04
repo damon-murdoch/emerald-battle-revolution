@@ -3957,33 +3957,33 @@ static const u8 sHearthflameMaskDesc[] = _(
 
 static const u8 sHealthMochiDesc[] = _(
     "An item that raises\n"
-    "the base HP of\n"
-    "a Pokémon.");
+    "the HP EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sMuscleMochiDesc[] = _(
     "An item that raises\n"
-    "the base Attack of\n"
-    "a Pokémon.");
+    "the Attack EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sResistMochiDesc[] = _(
     "An item that raises\n"
-    "the base Defense\n"
-    "of a Pokémon.");
+    "the Defense EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sGeniusMochiDesc[] = _(
     "An item that raises\n"
-    "the base Sp. Atk.\n"
-    "of a Pokémon.");
+    "the Sp.Atk EVs of a\n"
+    "Pokémon by 28.");
 
-static const u8 sCleverMochiDesc[] = _(
+static const u8 sZincDesc[] = _(
     "An item that raises\n"
-    "the base Sp. Def.\n"
-    "of a Pokémon.");
+    "the Sp.Def EVs of a\n"
+    "Pokémon by 28.");
 
-static const u8 sSwiftMochiDesc[] = _(
+static const u8 sCarbosDesc[] = _(
     "An item that raises\n"
-    "the base Speed of\n"
-    "a Pokémon.");
+    "the Speed EVs of a\n"
+    "Pokémon by 28.");
 
 static const u8 sFreshStartMochiDesc[] = _(
     "An item that resets\n"
