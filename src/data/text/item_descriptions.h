@@ -3975,12 +3975,12 @@ static const u8 sGeniusMochiDesc[] = _(
     "the Sp.Atk EVs of a\n"
     "Pokémon by 28.");
 
-static const u8 sZincDesc[] = _(
+static const u8 sCleverMochiDesc[] = _(
     "An item that raises\n"
     "the Sp.Def EVs of a\n"
     "Pokémon by 28.");
 
-static const u8 sCarbosDesc[] = _(
+static const u8 sSwiftMochiDesc[] = _(
     "An item that raises\n"
     "the Speed EVs of a\n"
     "Pokémon by 28.");
