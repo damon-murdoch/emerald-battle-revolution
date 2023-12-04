@@ -36,6 +36,7 @@ static u32 HandleMainMenuInput(struct Pokenav_Menu *);
 static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu *);
 static void SetMenuInputHandler(struct Pokenav_Menu *);
 
+// [devolov] Add PC Access in PokeNav
 extern const u8 EventScript_PCMainMenu[];
 
 // Number of entries - 1 for that menu type
