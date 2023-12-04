@@ -360,8 +360,8 @@ static const u8 sProteinDesc[] = _(
 
 static const u8 sIronDesc[] = _(
     "An item that raises\n"
-    "the Defense EVs of a\n"
-    "Pokémon by 28.");
+    "the Defense EVs of\n"
+    "a Pokémon by 28.");
 
 static const u8 sCalciumDesc[] = _(
     "An item that raises\n"
@@ -3967,8 +3967,8 @@ static const u8 sMuscleMochiDesc[] = _(
 
 static const u8 sResistMochiDesc[] = _(
     "An item that raises\n"
-    "the Defense EVs of a\n"
-    "Pokémon by 28.");
+    "the Defense EVs of\n"
+    "a Pokémon by 28.");
 
 static const u8 sGeniusMochiDesc[] = _(
     "An item that raises\n"
