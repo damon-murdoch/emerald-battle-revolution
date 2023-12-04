@@ -873,6 +873,7 @@ RustboroCity_EventScript_BattleMay::
 
 RustboroCity_EventScript_MayBrineyHint::
 	msgbox RustboroCity_Text_MayMrBrineyHint, MSGBOX_DEFAULT
+	call RustboroCity_EventScript_RivalGiveExpShare
 	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
@@ -939,6 +940,7 @@ RustboroCity_EventScript_BattleBrendan::
 
 RustboroCity_EventScript_BrendanBrineyHint::
 	msgbox RustboroCity_Text_BrendanMrBrineyHint, MSGBOX_DEFAULT
+	call RustboroCity_EventScript_RivalGiveExpShare
 	call_if_eq VAR_0x8008, 0, RustboroCity_EventScript_RestoreBgm
 	releaseall
 	end
@@ -1297,3 +1299,26 @@ RustboroCity_Text_YouCanHave2On2Battle:
 	.string "they'll both challenge you.\p"
 	.string "Don't you think it'd be cool if you\n"
 	.string "could beat two TRAINERS by yourself?$"
+
+RustboroCity_EventScript_RivalGiveExpShare::
+	goto_if_unset FLAG_RECEIVED_EXP_SHARE, RustboroCity_EventScript_RivalGiveExpShare_1
+	return
+
+RustboroCity_EventScript_RivalGiveExpShare_1:
+	msgbox RustboroCity_EventScript_RivalGiveExpShare_Text_0
+	giveitem ITEM_EXP_SHARE
+	msgbox RustboroCity_EventScript_RivalGiveExpShare_Text_1
+	setflag FLAG_RECEIVED_EXP_SHARE
+	return
+
+
+RustboroCity_EventScript_RivalGiveExpShare_Text_0:
+	.string "One more thing! Dad asked me to give\n"
+	.string "this to you.$"
+
+RustboroCity_EventScript_RivalGiveExpShare_Text_1:
+	.string "When experience is earned in a battle,\n"
+	.string "this item will share experience with\l"
+	.string "your entire party. This effect can be\l"
+	.string "toggled at any time in the KEY ITEMS\l"
+	.string "menu.$"

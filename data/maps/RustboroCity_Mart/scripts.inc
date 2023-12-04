@@ -54,7 +54,7 @@ RustboroCity_Mart_EventScript_Clerk2_5:
 	goto RustboroCity_Mart_EventScript_Clerk2_1
 
 RustboroCity_Mart_EventScript_Clerk2_8:
-	goto_if_set FLAG_BADGE08_GET, RustboroCity_Mart_EventScript_Clerk2_11
+	goto_if_set FLAG_BADGE06_GET, RustboroCity_Mart_EventScript_Clerk2_11
 	pokemart RustboroCity_Mart_Pokemart_Clerk2_Expanded2
 	goto RustboroCity_Mart_EventScript_Clerk2_1
 
@@ -82,10 +82,8 @@ RustboroCity_Mart_Pokemart_Clerk2:
 
 	.align 2
 RustboroCity_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_KANGASKHANITE
-	.2byte ITEM_PIDGEOTITE
-	.2byte ITEM_PINSIRITE
-	.2byte ITEM_AUDINITE
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_FLYINIUM_Z
 	.2byte ITEM_NORMAL_GEM
 	.2byte ITEM_FLYING_GEM
 	.2byte ITEM_SILK_SCARF
@@ -103,12 +101,12 @@ RustboroCity_Mart_Pokemart_Clerk2_Expanded:
 
 	.align 2
 RustboroCity_Mart_Pokemart_Clerk2_Expanded2:
-	.2byte ITEM_NORMALIUM_Z
-	.2byte ITEM_FLYINIUM_Z
 	.2byte ITEM_KANGASKHANITE
 	.2byte ITEM_PIDGEOTITE
 	.2byte ITEM_PINSIRITE
 	.2byte ITEM_AUDINITE
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_FLYINIUM_Z
 	.2byte ITEM_NORMAL_GEM
 	.2byte ITEM_FLYING_GEM
 	.2byte ITEM_SILK_SCARF
@@ -128,12 +126,12 @@ RustboroCity_Mart_Pokemart_Clerk2_Expanded2:
 RustboroCity_Mart_Pokemart_Clerk2_Expanded3:
 	.2byte ITEM_NORMAL_TERA_SHARD
 	.2byte ITEM_FLYING_TERA_SHARD
-	.2byte ITEM_NORMALIUM_Z
-	.2byte ITEM_FLYINIUM_Z
 	.2byte ITEM_KANGASKHANITE
 	.2byte ITEM_PIDGEOTITE
 	.2byte ITEM_PINSIRITE
 	.2byte ITEM_AUDINITE
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_FLYINIUM_Z
 	.2byte ITEM_NORMAL_GEM
 	.2byte ITEM_FLYING_GEM
 	.2byte ITEM_SILK_SCARF

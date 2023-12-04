@@ -274,6 +274,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
 LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
 	lock
 	faceplayer
+	goto_if_unset FLAG_RECEIVED_EXP_CHARM, LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm
 	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork, MSGBOX_DEFAULT
@@ -1049,6 +1050,44 @@ LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_1:
 	return
 
 
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm::
+	compare VAR_BIRCH_LAB_STATE, 5
+	goto_if_eq LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_2
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_1:
+	releaseall
+	end
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_2:
+	msgbox LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_Text_0
+	msgbox LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_Text_1
+	multichoice2 1, 1, LittlerootTown_ProfessorBirchsLab_Text_AideGiveExpCharmChoice
+	switch VAR_RESULT
+	case 0, LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_6
+	case 1, LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_7
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_1
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_6:
+	call LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_1
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_7:
+	call LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm
+	goto LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_1
+
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm::
+	giveitem ITEM_EXP_CHARM
+	setflag FLAG_RECEIVED_EXP_CHARM
+	msgbox LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm_Text_0
+	return
+
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm::
+	msgbox LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm_Text_0
+	return
+
+
 LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex_Text_0:
 	.string "Also, I'd like you to have this.$"
 
@@ -1071,6 +1110,23 @@ LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex_Text_0:
 	.string "kinds of POKéMON, even those not\l"
 	.string "normally seen in the HOENN region!$"
 
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_Text_0:
+	.string "I have something to help you with your\n"
+	.string "journey, if you'd like - the Exp. Charm.$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm_Text_1:
+	.string "This item will make your Pokemon earn\n"
+	.string "more experience in each battle. Would\l"
+	.string "you like to accept the Exp. Charm?$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm_Text_0:
+	.string "I hope this makes your journey a little\n"
+	.string "easier. Stay safe out there!$"
+
+LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm_Text_0:
+	.string "No problem - Please feel free to ask me\n"
+	.string "again anytime if you change your mind.$"
+
 LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex::
 	.string "PROF. BIRCH: Now…\p"
 	.string "{PLAYER}{KUN} and {RIVAL}, I've had the two\n"
@@ -1084,3 +1140,8 @@ LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex::
 	.string "that is POKéMON.\p"
 	.string "Somewhere, there is a grassy patch\n"
 	.string "that's waiting for you!$"
+
+LittlerootTown_ProfessorBirchsLab_Text_AideGiveExpCharmChoice::
+	.string "Yes$"
+	.string "No$"
+	.string "$"

@@ -104,7 +104,7 @@ SootopolisCity_Gym_1F_EventScript_JuanDefeated::
 	setvar VAR_0x8008, 8
 	call Common_EventScript_SetGymTrainers
 	call SootopolisCity_Gym_1F_EventScript_GiveWaterPulse
-	call SootopolisCity_Gym_1F_EventScript_GiveTeraOrb
+	call SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand
 	closemessage
 	delay 30
 	playfanfare MUS_REGISTER_MATCH_CALL
@@ -318,41 +318,41 @@ SootopolisCity_Gym_1F_Text_JuanRematchNeedTwoMons:
 	.string "I wish that you would return with\n"
 	.string "two, perhaps more, POKéMON, please.$"
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb::
-	goto_if_unset FLAG_ITEM_TERA_ORB_OBTAINED, SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_1
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand::
+	goto_if_unset FLAG_ITEM_DYNAMAX_BAND_OBTAINED, SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_1
 	return
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_1:
-	msgbox SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_0
-	giveitem ITEM_TERA_ORB
-	msgbox SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_1
-	msgbox SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_2
-	msgbox SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_3
-	msgbox SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_4
-	setflag FLAG_ITEM_TERA_ORB_OBTAINED
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_1:
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_0
+	giveitem ITEM_DYNAMAX_BAND
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_1
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_2
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_3
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_4
+	setflag FLAG_ITEM_DYNAMAX_BAND_OBTAINED
 	return
 
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_0:
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_0:
 	.string "Also, as a trainer with all eight gym\n"
 	.string "badges, you've earned this.$"
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_1:
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_1:
 	.string "This item will allow your POKéMON to\n"
-	.string "change its type into its Terastral\l"
-	.string "type, once per battle.$"
+	.string "transform into a powerful Dynamax form\l"
+	.string "for three turns, once per battle.$"
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_2:
-	.string "This can be used to change to a new\n"
-	.string "type, or provide even stronger damage\l"
-	.string "for same-type transformations!$"
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_2:
+	.string "This will increase their hit points, and\n"
+	.string "change moves into their MAX move type.\l"
+	.string "Some POKéMON even have unique\l"
+	.string "gigantamax formes!$"
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_3:
-	.string "Most POKéMON have a Tera Type matching\n"
-	.string "either their primary or secondary type.$"
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_3:
+	.string "Although, dynamaxing is only available\n"
+	.string "in certain areas.$"
 
-SootopolisCity_Gym_1F_EventScript_GiveTeraOrb_Text_4:
-	.string "Tera Shards can be used to change the\n"
-	.string "type of a POKéMON, and will be available\l"
-	.string "at most POKéMARTs - Even those you've\l"
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_4:
+	.string "Dynamax candy will now be available at\n"
+	.string "most POKéMARTs - Even those you've\l"
 	.string "already visited.$"

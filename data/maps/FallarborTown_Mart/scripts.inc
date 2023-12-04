@@ -64,7 +64,7 @@ FallarborTown_Mart_EventScript_Clerk2_2:
 	goto FallarborTown_Mart_EventScript_Clerk2_1
 
 FallarborTown_Mart_EventScript_Clerk2_5:
-	goto_if_set FLAG_BADGE08_GET, FallarborTown_Mart_EventScript_Clerk2_8
+	goto_if_set FLAG_BADGE06_GET, FallarborTown_Mart_EventScript_Clerk2_8
 	pokemart FallarborTown_Mart_Pokemart_Clerk2_Expanded
 	goto FallarborTown_Mart_EventScript_Clerk2_1
 
@@ -75,10 +75,8 @@ FallarborTown_Mart_EventScript_Clerk2_8:
 
 	.align 2
 FallarborTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_SHARPEDONITE
-	.2byte ITEM_GYARADOSITE
-	.2byte ITEM_GLALITITE
-	.2byte ITEM_ABOMASITE
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_DARKINIUM_Z
 	.2byte ITEM_ICE_GEM
 	.2byte ITEM_DARK_GEM
 	.2byte ITEM_NEVER_MELT_ICE
@@ -97,12 +95,12 @@ FallarborTown_Mart_Pokemart_Clerk2:
 
 	.align 2
 FallarborTown_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_ICIUM_Z
-	.2byte ITEM_DARKINIUM_Z
 	.2byte ITEM_SHARPEDONITE
 	.2byte ITEM_GYARADOSITE
 	.2byte ITEM_GLALITITE
 	.2byte ITEM_ABOMASITE
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_DARKINIUM_Z
 	.2byte ITEM_ICE_GEM
 	.2byte ITEM_DARK_GEM
 	.2byte ITEM_NEVER_MELT_ICE
@@ -123,12 +121,12 @@ FallarborTown_Mart_Pokemart_Clerk2_Expanded:
 FallarborTown_Mart_Pokemart_Clerk2_Expanded2:
 	.2byte ITEM_ICE_TERA_SHARD
 	.2byte ITEM_DARK_TERA_SHARD
-	.2byte ITEM_ICIUM_Z
-	.2byte ITEM_DARKINIUM_Z
 	.2byte ITEM_SHARPEDONITE
 	.2byte ITEM_GYARADOSITE
 	.2byte ITEM_GLALITITE
 	.2byte ITEM_ABOMASITE
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_DARKINIUM_Z
 	.2byte ITEM_ICE_GEM
 	.2byte ITEM_DARK_GEM
 	.2byte ITEM_NEVER_MELT_ICE

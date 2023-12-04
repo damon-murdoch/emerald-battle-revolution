@@ -17,21 +17,6 @@ LavaridgeTown_HerbShop_Pokemart:
 	.2byte ITEM_ENERGY_ROOT
 	.2byte ITEM_HEAL_POWDER
 	.2byte ITEM_REVIVAL_HERB
-	.2byte ITEM_CHERI_BERRY
-	.2byte ITEM_CHESTO_BERRY
-	.2byte ITEM_PECHA_BERRY
-	.2byte ITEM_RAWST_BERRY
-	.2byte ITEM_ASPEAR_BERRY
-	.2byte ITEM_LEPPA_BERRY
-	.2byte ITEM_ORAN_BERRY
-	.2byte ITEM_PERSIM_BERRY
-	.2byte ITEM_LUM_BERRY
-	.2byte ITEM_SITRUS_BERRY
-	.2byte ITEM_FIGY_BERRY
-	.2byte ITEM_WIKI_BERRY
-	.2byte ITEM_MAGO_BERRY
-	.2byte ITEM_AGUAV_BERRY
-	.2byte ITEM_IAPAPA_BERRY
 	.2byte ITEM_MAX_MUSHROOMS
 	.2byte ITEM_MOOMOO_MILK
 	.2byte ITEM_MAX_HONEY
@@ -99,6 +84,21 @@ LavaridgeTown_HerbShop_EventScript_Clerk2::
 
 	.align 2
 LavaridgeTown_HerbShop_Mart_Clerk2:
+	.2byte ITEM_CHERI_BERRY
+	.2byte ITEM_CHESTO_BERRY
+	.2byte ITEM_PECHA_BERRY
+	.2byte ITEM_RAWST_BERRY
+	.2byte ITEM_ASPEAR_BERRY
+	.2byte ITEM_LEPPA_BERRY
+	.2byte ITEM_ORAN_BERRY
+	.2byte ITEM_PERSIM_BERRY
+	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_SITRUS_BERRY
+	.2byte ITEM_FIGY_BERRY
+	.2byte ITEM_WIKI_BERRY
+	.2byte ITEM_MAGO_BERRY
+	.2byte ITEM_AGUAV_BERRY
+	.2byte ITEM_IAPAPA_BERRY
 	.2byte ITEM_CHILAN_BERRY
 	.2byte ITEM_OCCA_BERRY
 	.2byte ITEM_PASSHO_BERRY
@@ -146,6 +146,44 @@ LavaridgeTown_HerbShop_EventScript_Clerk3::
 
 	.align 2
 LavaridgeTown_HerbShop_Mart_Clerk3:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_ADAMANT_MINT
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_MILD_MINT
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_CALM_MINT
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_SERIOUS_MINT
 	.2byte ITEM_RAZZ_BERRY
 	.2byte ITEM_BLUK_BERRY
 	.2byte ITEM_NANAB_BERRY
@@ -164,6 +202,13 @@ LavaridgeTown_HerbShop_Mart_Clerk3:
 	.2byte ITEM_SPELON_BERRY
 	.2byte ITEM_PAMTRE_BERRY
 	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
 	.2byte ITEM_NONE
 
 LavaridgeTown_HerbShop_EventScript_Clerk2_Text_0:
@@ -174,9 +219,8 @@ LavaridgeTown_HerbShop_EventScript_Clerk2_Text_1:
 	.string "POKéMON to use in battle!$"
 
 LavaridgeTown_HerbShop_EventScript_Clerk3_Text_0:
-	.string "Welcome to the training berries\n"
-	.string "counter!$"
+	.string "Welcome to the training items counter!$"
 
 LavaridgeTown_HerbShop_EventScript_Clerk3_Text_1:
-	.string "Here you'll find berries to use when\n"
-	.string "training your Pokemon!$"
+	.string "Here you'll find berries and other items\n"
+	.string "to use when training your Pokemon!$"

@@ -49,7 +49,7 @@ SlateportCity_Mart_EventScript_Clerk2_2:
 	goto SlateportCity_Mart_EventScript_Clerk2_1
 
 SlateportCity_Mart_EventScript_Clerk2_5:
-	goto_if_set FLAG_BADGE08_GET, SlateportCity_Mart_EventScript_Clerk2_8
+	goto_if_set FLAG_BADGE06_GET, SlateportCity_Mart_EventScript_Clerk2_8
 	pokemart SlateportCity_Mart_Pokemart_Clerk2_Expanded
 	goto SlateportCity_Mart_EventScript_Clerk2_1
 
@@ -60,10 +60,8 @@ SlateportCity_Mart_EventScript_Clerk2_8:
 
 	.align 2
 SlateportCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_LUCARIONITE
-	.2byte ITEM_SLOWBRONITE
-	.2byte ITEM_LOPUNNITE
-	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
 	.2byte ITEM_FIGHTING_GEM
 	.2byte ITEM_PSYCHIC_GEM
 	.2byte ITEM_BLACK_BELT
@@ -83,12 +81,12 @@ SlateportCity_Mart_Pokemart_Clerk2:
 
 	.align 2
 SlateportCity_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_FIGHTINIUM_Z
-	.2byte ITEM_PSYCHIUM_Z
 	.2byte ITEM_LUCARIONITE
 	.2byte ITEM_SLOWBRONITE
 	.2byte ITEM_LOPUNNITE
 	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
 	.2byte ITEM_FIGHTING_GEM
 	.2byte ITEM_PSYCHIC_GEM
 	.2byte ITEM_BLACK_BELT
@@ -110,12 +108,12 @@ SlateportCity_Mart_Pokemart_Clerk2_Expanded:
 SlateportCity_Mart_Pokemart_Clerk2_Expanded2:
 	.2byte ITEM_FIGHTING_TERA_SHARD
 	.2byte ITEM_PSYCHIC_TERA_SHARD
-	.2byte ITEM_FIGHTINIUM_Z
-	.2byte ITEM_PSYCHIUM_Z
 	.2byte ITEM_LUCARIONITE
 	.2byte ITEM_SLOWBRONITE
 	.2byte ITEM_LOPUNNITE
 	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
 	.2byte ITEM_FIGHTING_GEM
 	.2byte ITEM_PSYCHIC_GEM
 	.2byte ITEM_BLACK_BELT

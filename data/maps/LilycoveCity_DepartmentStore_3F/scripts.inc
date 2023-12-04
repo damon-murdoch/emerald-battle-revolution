@@ -34,82 +34,14 @@ LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft::
 	faceplayer
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_IS_CHAMPION, LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft_2
 	pokemart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
-
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft_2:
-	pokemart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded
-	goto LilycoveCity_DepartmentStore_3F_EventScript_ClerkLeft_1
 
 
 	.align 2
 LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
-	.2byte ITEM_PP_UP
-	.2byte ITEM_HEALTH_FEATHER
-	.2byte ITEM_MUSCLE_FEATHER
-	.2byte ITEM_RESIST_FEATHER
-	.2byte ITEM_GENIUS_FEATHER
-	.2byte ITEM_CLEVER_FEATHER
-	.2byte ITEM_SWIFT_FEATHER
-	.2byte ITEM_MACHO_BRACE
-	.2byte ITEM_POWER_WEIGHT
-	.2byte ITEM_POWER_BRACER
-	.2byte ITEM_POWER_BELT
-	.2byte ITEM_POWER_LENS
-	.2byte ITEM_POWER_BAND
-	.2byte ITEM_POWER_ANKLET
-	.2byte ITEM_NONE
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft_Expanded:
-	.2byte ITEM_PROTEIN
-	.2byte ITEM_CALCIUM
-	.2byte ITEM_IRON
-	.2byte ITEM_ZINC
-	.2byte ITEM_CARBOS
-	.2byte ITEM_HP_UP
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
-	.2byte ITEM_HEALTH_FEATHER
-	.2byte ITEM_MUSCLE_FEATHER
-	.2byte ITEM_RESIST_FEATHER
-	.2byte ITEM_GENIUS_FEATHER
-	.2byte ITEM_CLEVER_FEATHER
-	.2byte ITEM_SWIFT_FEATHER
-	.2byte ITEM_MACHO_BRACE
-	.2byte ITEM_POWER_WEIGHT
-	.2byte ITEM_POWER_BRACER
-	.2byte ITEM_POWER_BELT
-	.2byte ITEM_POWER_LENS
-	.2byte ITEM_POWER_BAND
-	.2byte ITEM_POWER_ANKLET
-	.2byte ITEM_ABILITY_CAPSULE
-	.2byte ITEM_ABILITY_PATCH
-	.2byte ITEM_NONE
-
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Mart_ClerkRight:
 	.2byte ITEM_LONELY_MINT
 	.2byte ITEM_ADAMANT_MINT
 	.2byte ITEM_NAUGHTY_MINT
@@ -131,21 +63,6 @@ LilycoveCity_DepartmentStore_3F_Mart_ClerkRight:
 	.2byte ITEM_JOLLY_MINT
 	.2byte ITEM_NAIVE_MINT
 	.2byte ITEM_SERIOUS_MINT
-	.2byte ITEM_NONE
-
-LilycoveCity_DepartmentStore_3F_EventScript_ClerkBerry::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-
-	.align 2
-LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry:
 	.2byte ITEM_RAZZ_BERRY
 	.2byte ITEM_BLUK_BERRY
 	.2byte ITEM_NANAB_BERRY
@@ -164,4 +81,49 @@ LilycoveCity_DepartmentStore_3F_Mart_ClerkBerry:
 	.2byte ITEM_SPELON_BERRY
 	.2byte ITEM_PAMTRE_BERRY
 	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart LilycoveCity_DepartmentStore_3F_Mart_ClerkRight
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+	.align 2
+LilycoveCity_DepartmentStore_3F_Mart_ClerkRight:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
 	.2byte ITEM_NONE

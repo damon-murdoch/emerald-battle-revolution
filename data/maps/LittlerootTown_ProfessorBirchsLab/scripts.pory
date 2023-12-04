@@ -275,6 +275,7 @@ LittlerootTown_ProfessorBirchsLab_Movement_PlayerEnterLabForJohtoStarter:
 LittlerootTown_ProfessorBirchsLab_EventScript_Aide::
 	lock
 	faceplayer
+	goto_if_unset FLAG_RECEIVED_EXP_CHARM, LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm
 	goto_if_ge VAR_BIRCH_LAB_STATE, 3, LittlerootTown_ProfessorBirchsLab_EventScript_AideReceivedStarter
 	goto_if_set FLAG_BIRCH_AIDE_MET, LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork, MSGBOX_DEFAULT
@@ -1071,4 +1072,39 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex {
 		setflag(FLAG_SYS_NATIONAL_DEX)
 		msgbox(format("I've also taken the liberty of upgrading your POKéDEX to the national version. You'll be able to record all kinds of POKéMON, even those not normally seen in the HOENN region!"))
 	}
+}
+
+script LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm {
+	// Player has received Pokedex
+	if(var(VAR_BIRCH_LAB_STATE) == 5){
+		msgbox(format("I have something to help you with your journey, if you'd like - the Exp. Charm."))
+		msgbox(format("This item will make your Pokemon earn more experience in each battle. Would you like to accept the Exp. Charm?"))
+		multichoice2(1,1,LittlerootTown_ProfessorBirchsLab_Text_AideGiveExpCharmChoice)
+		switch (var(VAR_RESULT)) {
+			case 0: call(LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm)
+			case 1: call(LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm)
+		}
+	}
+	else // Not unlocked
+	{
+		goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet)
+	}
+	releaseall
+	end
+}
+
+script LittlerootTown_ProfessorBirchsLab_EventScript_AideAcceptExpCharm {
+	giveitem(ITEM_EXP_CHARM)
+	setflag(FLAG_RECEIVED_EXP_CHARM)
+	msgbox(format("I hope this makes your journey a little easier. Stay safe out there!"))
+}
+
+script LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm {
+	msgbox(format("No problem - Please feel free to ask me again anytime if you change your mind."))
+}
+
+text LittlerootTown_ProfessorBirchsLab_Text_AideGiveExpCharmChoice {
+	"Yes$"
+	"No$"
+	""
 }
