@@ -48,7 +48,7 @@ MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 script MossdeepCity_Mart_EventScript_Clerk2 {
 	lock
 	faceplayer
-	if (flag(FLAG_BADGE07_GET)) {
+	if (flag(FLAG_BADGE06_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
 		pokemart(MossdeepCity_Mart_Pokemart_Clerk2)

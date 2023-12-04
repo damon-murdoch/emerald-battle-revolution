@@ -51,7 +51,7 @@ script VerdanturfTown_Mart_EventScript_Clerk2 {
 		message(gText_HowMayIServeYou)
 		waitmessage
 		if (flag(FLAG_BADGE04_GET)){
-			if (flag(FLAG_BADGE08_GET)){
+			if (flag(FLAG_BADGE06_GET)){
 				pokemart(VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2)
 			}
 			else // Not unlocked
@@ -74,10 +74,6 @@ script VerdanturfTown_Mart_EventScript_Clerk2 {
 }
 
 mart VerdanturfTown_Mart_Pokemart_Clerk2 {
-	ITEM_GARDEVOIRITE
-	ITEM_HERACRONITE
-	ITEM_BEEDRILLITE
-	ITEM_GALLADITE
 	ITEM_BUG_GEM
 	ITEM_FAIRY_GEM
 	ITEM_SILVER_POWDER
@@ -96,12 +92,12 @@ mart VerdanturfTown_Mart_Pokemart_Clerk2 {
 }
 
 mart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_BUGINIUM_Z
-	ITEM_FAIRIUM_Z
 	ITEM_GARDEVOIRITE
 	ITEM_HERACRONITE
 	ITEM_BEEDRILLITE
 	ITEM_GALLADITE
+	ITEM_BUGINIUM_Z
+	ITEM_FAIRIUM_Z
 	ITEM_BUG_GEM
 	ITEM_FAIRY_GEM
 	ITEM_SILVER_POWDER
@@ -122,12 +118,12 @@ mart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded {
 mart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2 {
 	ITEM_BUG_TERA_SHARD
 	ITEM_FAIRY_TERA_SHARD
-	ITEM_BUGINIUM_Z
-	ITEM_FAIRIUM_Z
 	ITEM_GARDEVOIRITE
 	ITEM_HERACRONITE
 	ITEM_BEEDRILLITE
 	ITEM_GALLADITE
+	ITEM_BUGINIUM_Z
+	ITEM_FAIRIUM_Z
 	ITEM_BUG_GEM
 	ITEM_FAIRY_GEM
 	ITEM_SILVER_POWDER

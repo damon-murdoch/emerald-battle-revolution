@@ -877,18 +877,3 @@ LittlerootTown_EventScript_StepOffTruck::
 	call LittlerootTown_EventScript_GoInsideWithMom
 	return
 
-
-LittlerootTown_EventScript_Multichoice::
-	msgbox LittlerootTown_EventScript_Multichoice_Text_0
-	multichoice2 1, 1, LittlerootTown_Text_DemoOptions
-	closemessage
-	end
-
-
-LittlerootTown_EventScript_Multichoice_Text_0:
-	.string "Please select an option$"
-
-LittlerootTown_Text_DemoOptions::
-	.string "Hello$"
-	.string "World$"
-	.string "$"

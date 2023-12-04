@@ -111,7 +111,7 @@ OldaleTown_Mart_EventScript_Clerk2_5:
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
 OldaleTown_Mart_EventScript_Clerk2_8:
-	goto_if_set FLAG_BADGE08_GET, OldaleTown_Mart_EventScript_Clerk2_11
+	goto_if_set FLAG_BADGE06_GET, OldaleTown_Mart_EventScript_Clerk2_11
 	pokemart OldaleTown_Mart_Pokemart_Clerk2_Expanded2
 	goto OldaleTown_Mart_EventScript_Clerk2_1
 
@@ -135,9 +135,9 @@ OldaleTown_Mart_Pokemart_Clerk2:
 
 	.align 2
 OldaleTown_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_SCEPTILITE
-	.2byte ITEM_BLAZIKENITE
-	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_FIRE_GEM
 	.2byte ITEM_WATER_GEM
 	.2byte ITEM_GRASS_GEM
@@ -151,12 +151,12 @@ OldaleTown_Mart_Pokemart_Clerk2_Expanded:
 
 	.align 2
 OldaleTown_Mart_Pokemart_Clerk2_Expanded2:
-	.2byte ITEM_FIRIUM_Z
-	.2byte ITEM_WATERIUM_Z
-	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_SCEPTILITE
 	.2byte ITEM_BLAZIKENITE
 	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_FIRE_GEM
 	.2byte ITEM_WATER_GEM
 	.2byte ITEM_GRASS_GEM
@@ -174,12 +174,12 @@ OldaleTown_Mart_Pokemart_Clerk2_Expanded3:
 	.2byte ITEM_FIRE_TERA_SHARD
 	.2byte ITEM_WATER_TERA_SHARD
 	.2byte ITEM_GRASS_TERA_SHARD
-	.2byte ITEM_FIRIUM_Z
-	.2byte ITEM_WATERIUM_Z
-	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_SCEPTILITE
 	.2byte ITEM_BLAZIKENITE
 	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_GRASSIUM_Z
 	.2byte ITEM_FIRE_GEM
 	.2byte ITEM_WATER_GEM
 	.2byte ITEM_GRASS_GEM

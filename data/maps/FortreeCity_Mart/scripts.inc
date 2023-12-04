@@ -52,50 +52,19 @@ FortreeCity_Mart_EventScript_Clerk2_1:
 FortreeCity_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_BADGE08_GET, FortreeCity_Mart_EventScript_Clerk2_5
 	pokemart FortreeCity_Mart_Pokemart_Clerk2
-	goto FortreeCity_Mart_EventScript_Clerk2_1
-
-FortreeCity_Mart_EventScript_Clerk2_5:
-	pokemart FortreeCity_Mart_Pokemart_Clerk2_Expanded
 	goto FortreeCity_Mart_EventScript_Clerk2_1
 
 
 	.align 2
 FortreeCity_Mart_Pokemart_Clerk2:
-	.2byte ITEM_POISONIUM_Z
-	.2byte ITEM_STEELIUM_Z
-	.2byte ITEM_SCIZORITE
-	.2byte ITEM_AGGRONITE
-	.2byte ITEM_GENGARITE
-	.2byte ITEM_POISON_GEM
-	.2byte ITEM_STEEL_GEM
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_METAL_COAT
-	.2byte ITEM_LEAF_STONE
-	.2byte ITEM_ICE_STONE
-	.2byte ITEM_GALARICA_WREATH
-	.2byte ITEM_GALARICA_CUFF
-	.2byte ITEM_UTILITY_UMBRELLA
-	.2byte ITEM_PUNCHING_GLOVE
-	.2byte ITEM_BINDING_BAND
-	.2byte ITEM_BLACK_SLUDGE
-	.2byte ITEM_AIR_BALLOON
-	.2byte ITEM_WHITE_HERB
-	.2byte ITEM_RAZOR_CLAW
-	.2byte ITEM_FOCUS_BAND
-	.2byte ITEM_NONE
-
-	.align 2
-FortreeCity_Mart_Pokemart_Clerk2_Expanded:
 	.2byte ITEM_POISON_TERA_SHARD
 	.2byte ITEM_STEEL_TERA_SHARD
-	.2byte ITEM_POISONIUM_Z
-	.2byte ITEM_STEELIUM_Z
 	.2byte ITEM_SCIZORITE
 	.2byte ITEM_AGGRONITE
 	.2byte ITEM_GENGARITE
-	.2byte ITEM_MAWILITE
+	.2byte ITEM_POISONIUM_Z
+	.2byte ITEM_STEELIUM_Z
 	.2byte ITEM_POISON_GEM
 	.2byte ITEM_STEEL_GEM
 	.2byte ITEM_POISON_BARB

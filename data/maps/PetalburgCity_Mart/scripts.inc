@@ -54,7 +54,7 @@ PetalburgCity_Mart_EventScript_Clerk2_1:
 PetalburgCity_Mart_EventScript_Clerk2_2:
 	message gText_HowMayIServeYou
 	waitmessage
-	goto_if_set FLAG_BADGE05_GET, PetalburgCity_Mart_EventScript_Clerk2_5
+	goto_if_set FLAG_BADGE04_GET, PetalburgCity_Mart_EventScript_Clerk2_5
 	pokemart PetalburgCity_Mart_Pokemart_Clerk2
 	goto PetalburgCity_Mart_EventScript_Clerk2_1
 

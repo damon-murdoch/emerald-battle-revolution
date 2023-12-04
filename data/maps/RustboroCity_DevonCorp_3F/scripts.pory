@@ -161,18 +161,6 @@ RustboroCity_DevonCorp_3F_EventScript_MrStone::
 	release
 	end
 
-RustboroCity_DevonCorp_3F_EventScript_GiveExpShare::
-	msgbox RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT
-	giveitem ITEM_EXP_SHARE
-	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
-	setflag FLAG_RECEIVED_EXP_SHARE
-	call RustboroCity_DevonCorp_3F_Text_ExplainExpShare
-	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection
-	waitmovement 0
-	release
-	end
-
 RustboroCity_DevonCorp_3F_EventScript_MrStoneAfterFavor::
 	msgbox RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends, MSGBOX_DEFAULT
 	closemessage
@@ -299,6 +287,26 @@ RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
 	.string "stones assembled by the PRESIDENT.$"
 
 `
+
+script RustboroCity_DevonCorp_3F_EventScript_GiveExpShare {
+	msgbox(RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter, MSGBOX_DEFAULT)
+	if (flag(FLAG_RECEIVED_EXP_SHARE) == false){
+		giveitem(ITEM_EXP_SHARE)
+		goto_if_eq(VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull)
+		setflag(FLAG_RECEIVED_EXP_SHARE)
+		call(RustboroCity_DevonCorp_3F_Text_ExplainExpShare)
+	}
+	else // Already received
+	{
+		giveitem(ITEM_ULTRA_BALL)
+		goto_if_eq(VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull)
+	}
+	closemessage
+	applymovement(VAR_LAST_TALKED, Common_Movement_FaceOriginalDirection)
+	waitmovement(0)
+	release
+	end
+}
 
 script RustboroCity_DevonCorp_3F_Text_ExplainExpShare {
 	msgbox(format("When experience is gained in a POKéMON battle, this item will share experience with your entire party. This effect can be toggled at any time in the KEY ITEMS menu."))

@@ -41,7 +41,7 @@ script RustboroCity_Mart_EventScript_Clerk2 {
 		waitmessage
 		if (flag(FLAG_BADGE02_GET)) {
 			if (flag(FLAG_BADGE04_GET)) {
-				if(flag(FLAG_BADGE08_GET)){
+				if(flag(FLAG_BADGE06_GET)){
 					pokemart(RustboroCity_Mart_Pokemart_Clerk2_Expanded3)
 				}
 				else // Not unlocked
@@ -85,10 +85,8 @@ mart RustboroCity_Mart_Pokemart_Clerk2 {
 }
 
 mart RustboroCity_Mart_Pokemart_Clerk2_Expanded {
-	ITEM_KANGASKHANITE
-	ITEM_PIDGEOTITE
-	ITEM_PINSIRITE
-	ITEM_AUDINITE
+	ITEM_NORMALIUM_Z
+	ITEM_FLYINIUM_Z
 	ITEM_NORMAL_GEM
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF
@@ -105,12 +103,12 @@ mart RustboroCity_Mart_Pokemart_Clerk2_Expanded {
 }
 
 mart RustboroCity_Mart_Pokemart_Clerk2_Expanded2 {
-	ITEM_NORMALIUM_Z
-	ITEM_FLYINIUM_Z
 	ITEM_KANGASKHANITE
 	ITEM_PIDGEOTITE
 	ITEM_PINSIRITE
 	ITEM_AUDINITE
+	ITEM_NORMALIUM_Z
+	ITEM_FLYINIUM_Z
 	ITEM_NORMAL_GEM
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF
@@ -129,12 +127,12 @@ mart RustboroCity_Mart_Pokemart_Clerk2_Expanded2 {
 mart RustboroCity_Mart_Pokemart_Clerk2_Expanded3 {
 	ITEM_NORMAL_TERA_SHARD
 	ITEM_FLYING_TERA_SHARD
-	ITEM_NORMALIUM_Z
-	ITEM_FLYINIUM_Z
 	ITEM_KANGASKHANITE
 	ITEM_PIDGEOTITE
 	ITEM_PINSIRITE
 	ITEM_AUDINITE
+	ITEM_NORMALIUM_Z
+	ITEM_FLYINIUM_Z
 	ITEM_NORMAL_GEM
 	ITEM_FLYING_GEM
 	ITEM_SILK_SCARF

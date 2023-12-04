@@ -51,7 +51,7 @@ MauvilleCity_Mart_EventScript_Clerk2_2:
 	goto MauvilleCity_Mart_EventScript_Clerk2_1
 
 MauvilleCity_Mart_EventScript_Clerk2_5:
-	goto_if_set FLAG_BADGE08_GET, MauvilleCity_Mart_EventScript_Clerk2_8
+	goto_if_set FLAG_BADGE06_GET, MauvilleCity_Mart_EventScript_Clerk2_8
 	pokemart MauvilleCity_Mart_Pokemart_Clerk2_Expanded
 	goto MauvilleCity_Mart_EventScript_Clerk2_1
 
@@ -86,12 +86,12 @@ MauvilleCity_Mart_Pokemart_Clerk2:
 
 	.align 2
 MauvilleCity_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_ELECTRIUM_Z
-	.2byte ITEM_GHOSTIUM_Z
 	.2byte ITEM_MANECTITE
 	.2byte ITEM_SABLENITE
 	.2byte ITEM_BANETTITE
 	.2byte ITEM_MAWILITE
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
 	.2byte ITEM_SPELL_TAG
 	.2byte ITEM_ELECTRIC_GEM
 	.2byte ITEM_GHOST_GEM
@@ -114,12 +114,12 @@ MauvilleCity_Mart_Pokemart_Clerk2_Expanded:
 MauvilleCity_Mart_Pokemart_Clerk2_Expanded2:
 	.2byte ITEM_ELECTRIC_TERA_SHARD
 	.2byte ITEM_GHOST_TERA_SHARD
-	.2byte ITEM_ELECTRIUM_Z
-	.2byte ITEM_GHOSTIUM_Z
 	.2byte ITEM_MANECTITE
 	.2byte ITEM_SABLENITE
 	.2byte ITEM_BANETTITE
 	.2byte ITEM_MAWILITE
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
 	.2byte ITEM_SPELL_TAG
 	.2byte ITEM_ELECTRIC_GEM
 	.2byte ITEM_GHOST_GEM

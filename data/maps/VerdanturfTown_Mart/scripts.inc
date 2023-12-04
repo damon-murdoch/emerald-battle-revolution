@@ -59,7 +59,7 @@ VerdanturfTown_Mart_EventScript_Clerk2_2:
 	goto VerdanturfTown_Mart_EventScript_Clerk2_1
 
 VerdanturfTown_Mart_EventScript_Clerk2_5:
-	goto_if_set FLAG_BADGE08_GET, VerdanturfTown_Mart_EventScript_Clerk2_8
+	goto_if_set FLAG_BADGE06_GET, VerdanturfTown_Mart_EventScript_Clerk2_8
 	pokemart VerdanturfTown_Mart_Pokemart_Clerk2_Expanded
 	goto VerdanturfTown_Mart_EventScript_Clerk2_1
 
@@ -70,10 +70,6 @@ VerdanturfTown_Mart_EventScript_Clerk2_8:
 
 	.align 2
 VerdanturfTown_Mart_Pokemart_Clerk2:
-	.2byte ITEM_GARDEVOIRITE
-	.2byte ITEM_HERACRONITE
-	.2byte ITEM_BEEDRILLITE
-	.2byte ITEM_GALLADITE
 	.2byte ITEM_BUG_GEM
 	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_SILVER_POWDER
@@ -93,12 +89,12 @@ VerdanturfTown_Mart_Pokemart_Clerk2:
 
 	.align 2
 VerdanturfTown_Mart_Pokemart_Clerk2_Expanded:
-	.2byte ITEM_BUGINIUM_Z
-	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_GARDEVOIRITE
 	.2byte ITEM_HERACRONITE
 	.2byte ITEM_BEEDRILLITE
 	.2byte ITEM_GALLADITE
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_BUG_GEM
 	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_SILVER_POWDER
@@ -120,12 +116,12 @@ VerdanturfTown_Mart_Pokemart_Clerk2_Expanded:
 VerdanturfTown_Mart_Pokemart_Clerk2_Expanded2:
 	.2byte ITEM_BUG_TERA_SHARD
 	.2byte ITEM_FAIRY_TERA_SHARD
-	.2byte ITEM_BUGINIUM_Z
-	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_GARDEVOIRITE
 	.2byte ITEM_HERACRONITE
 	.2byte ITEM_BEEDRILLITE
 	.2byte ITEM_GALLADITE
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_FAIRIUM_Z
 	.2byte ITEM_BUG_GEM
 	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_SILVER_POWDER

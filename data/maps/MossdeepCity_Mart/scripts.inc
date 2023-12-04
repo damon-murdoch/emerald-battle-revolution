@@ -46,7 +46,7 @@ MossdeepCity_Mart_Text_NetAndDiveBallsRare:
 MossdeepCity_Mart_EventScript_Clerk2::
 	lock
 	faceplayer
-	goto_if_set FLAG_BADGE07_GET, MossdeepCity_Mart_EventScript_Clerk2_2
+	goto_if_set FLAG_BADGE06_GET, MossdeepCity_Mart_EventScript_Clerk2_2
 	msgbox MossdeepCity_Mart_EventScript_Clerk2_Text_0
 MossdeepCity_Mart_EventScript_Clerk2_1:
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
