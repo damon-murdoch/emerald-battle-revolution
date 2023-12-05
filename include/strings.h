@@ -3057,4 +3057,7 @@ extern const u8 gText_ExpShareOff[];
 
 extern const u8 gText_BasePointsResetToZero[];
 
+// [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
+extern const u8 gText_Moves_Menu[];
+
 #endif // GUARD_STRINGS_H
