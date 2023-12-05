@@ -954,8 +954,10 @@ const u8 gText_CheckMapOfHoenn[] = _("Check the map of the HOENN region.");
 const u8 gText_CheckPokemonInDetail[] = _("Check POKéMON in detail.");
 const u8 gText_CallRegisteredTrainer[] = _("Call a registered TRAINER.");
 const u8 gText_CheckObtainedRibbons[] = _("Check obtained RIBBONS.");
+const u8 gText_Pokenav_Access_PC[] = _("Access your PC.");
 const u8 gText_PutAwayPokenav[] = _("Put away the POKéNAV.");
 const u8 gText_NoRibbonWinners[] = _("There are no RIBBON winners.");
+const u8 gText_Pokenav_Cannot_Access_PC[] = _("No signal - Cannot access PC.");
 const u8 gText_NoTrainersRegistered[] = _("No TRAINERS are registered."); // Unused
 const u8 gText_CheckPartyPokemonInDetail[] = _("Check party POKéMON in detail.");
 const u8 gText_CheckAllPokemonInDetail[] = _("Check all POKéMON in detail.");
@@ -1843,3 +1845,9 @@ const u8 gText_Berries[] = _("BERRIES");
 const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_PRESS}");
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");
 const u8 gText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
+
+// [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
+const u8 gText_Moves_Menu[] = _("MOVES");
+
+ // [LOuroboros] Nickname your Pokémon from the party menu
+const u8 gText_Nickname[] = _("NICKNAME");

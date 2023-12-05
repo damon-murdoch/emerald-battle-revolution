@@ -136,16 +136,6 @@ SlateportCity_Movement_ScottExit:
 	walk_left
 	step_end
 
-SlateportCity_EventScript_EnergyGuru::
-	lock
-	faceplayer
-	message SlateportCity_Text_EnergyGuruSellWhatYouNeed
-	waitmessage
-	pokemart SlateportCity_Pokemart_EnergyGuru
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
 SlateportCity_EventScript_EffortRibbonWoman::
 	lock
 	faceplayer
@@ -1372,8 +1362,45 @@ SlateportCity_Text_TakingBattleTentChallenge:
 	.string "the perfect fit for the BATTLE TENT!\p"
 	.string "Give it your best effort!$"
 
+SlateportCity_EventScript_EnergyGuru::
+	lock
+	faceplayer
+	message SlateportCity_Text_EnergyGuruSellWhatYouNeed
+	waitmessage
+	multichoice2 1, 1, SlateportCity_Text_EnergyGuruOptions
+	switch VAR_RESULT
+	case 0, SlateportCity_EventScript_EnergyGuru_3
+	case 1, SlateportCity_EventScript_EnergyGuru_4
+	case 2, SlateportCity_EventScript_EnergyGuru_5
+	case 3, SlateportCity_EventScript_EnergyGuru_6
+SlateportCity_EventScript_EnergyGuru_1:
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+SlateportCity_EventScript_EnergyGuru_3:
+	msgbox SlateportCity_EventScript_EnergyGuru_Text_0
+	pokemart SlateportCity_Pokemart_EnergyGuruMedicine
+	goto SlateportCity_EventScript_EnergyGuru_1
+
+SlateportCity_EventScript_EnergyGuru_4:
+	msgbox SlateportCity_EventScript_EnergyGuru_Text_1
+	pokemart SlateportCity_Pokemart_EnergyGuruBerries
+	goto SlateportCity_EventScript_EnergyGuru_1
+
+SlateportCity_EventScript_EnergyGuru_5:
+	msgbox SlateportCity_EventScript_EnergyGuru_Text_2
+	pokemart SlateportCity_Pokemart_EnergyGuruMints
+	goto SlateportCity_EventScript_EnergyGuru_1
+
+SlateportCity_EventScript_EnergyGuru_6:
+	msgbox SlateportCity_EventScript_EnergyGuru_Text_3
+	pokemart SlateportCity_Pokemart_EnergyGuruOther
+	goto SlateportCity_EventScript_EnergyGuru_1
+
+
 	.align 2
-SlateportCity_Pokemart_EnergyGuru:
+SlateportCity_Pokemart_EnergyGuruMedicine:
 	.2byte ITEM_HEALTH_MOCHI
 	.2byte ITEM_MUSCLE_MOCHI
 	.2byte ITEM_RESIST_MOCHI
@@ -1381,16 +1408,48 @@ SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_CLEVER_MOCHI
 	.2byte ITEM_SWIFT_MOCHI
 	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_PP_UP
-	.2byte ITEM_PP_MAX
-	.2byte ITEM_ABILITY_CAPSULE
-	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_RESIST_FEATHER
 	.2byte ITEM_GENIUS_FEATHER
 	.2byte ITEM_CLEVER_FEATHER
 	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_IRON
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Pokemart_EnergyGuruBerries:
+	.2byte ITEM_RAZZ_BERRY
+	.2byte ITEM_BLUK_BERRY
+	.2byte ITEM_NANAB_BERRY
+	.2byte ITEM_WEPEAR_BERRY
+	.2byte ITEM_PINAP_BERRY
+	.2byte ITEM_CORNN_BERRY
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
+	.2byte ITEM_MAGOST_BERRY
+	.2byte ITEM_RABUTA_BERRY
+	.2byte ITEM_NOMEL_BERRY
+	.2byte ITEM_SPELON_BERRY
+	.2byte ITEM_PAMTRE_BERRY
+	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Pokemart_EnergyGuruMints:
 	.2byte ITEM_LONELY_MINT
 	.2byte ITEM_ADAMANT_MINT
 	.2byte ITEM_NAUGHTY_MINT
@@ -1412,24 +1471,10 @@ SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_JOLLY_MINT
 	.2byte ITEM_NAIVE_MINT
 	.2byte ITEM_SERIOUS_MINT
-	.2byte ITEM_RAZZ_BERRY
-	.2byte ITEM_BLUK_BERRY
-	.2byte ITEM_NANAB_BERRY
-	.2byte ITEM_WEPEAR_BERRY
-	.2byte ITEM_PINAP_BERRY
-	.2byte ITEM_CORNN_BERRY
-	.2byte ITEM_POMEG_BERRY
-	.2byte ITEM_KELPSY_BERRY
-	.2byte ITEM_QUALOT_BERRY
-	.2byte ITEM_HONDEW_BERRY
-	.2byte ITEM_GREPA_BERRY
-	.2byte ITEM_TAMATO_BERRY
-	.2byte ITEM_MAGOST_BERRY
-	.2byte ITEM_RABUTA_BERRY
-	.2byte ITEM_NOMEL_BERRY
-	.2byte ITEM_SPELON_BERRY
-	.2byte ITEM_PAMTRE_BERRY
-	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+SlateportCity_Pokemart_EnergyGuruOther:
 	.2byte ITEM_MACHO_BRACE
 	.2byte ITEM_POWER_WEIGHT
 	.2byte ITEM_POWER_BRACER
@@ -1438,3 +1483,27 @@ SlateportCity_Pokemart_EnergyGuru:
 	.2byte ITEM_POWER_BAND
 	.2byte ITEM_POWER_ANKLET
 	.2byte ITEM_NONE
+
+SlateportCity_EventScript_EnergyGuru_Text_0:
+	.string "This medicine will make your POKéMON\n"
+	.string "stronger!$"
+
+SlateportCity_EventScript_EnergyGuru_Text_1:
+	.string "These berries will help you train your\n"
+	.string "POKéMON!$"
+
+SlateportCity_EventScript_EnergyGuru_Text_2:
+	.string "These mints will change the nature of a\n"
+	.string "POKéMON$"
+
+SlateportCity_EventScript_EnergyGuru_Text_3:
+	.string "These items will help you train POKéMON\n"
+	.string "in battle!$"
+
+SlateportCity_Text_EnergyGuruOptions::
+	.string "Medicine$"
+	.string "Berries$"
+	.string "Mints$"
+	.string "Other$"
+	.string "Cancel$"
+	.string "$"

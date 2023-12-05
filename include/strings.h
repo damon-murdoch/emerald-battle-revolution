@@ -2985,6 +2985,7 @@ extern const u8 gText_Cancel6[];
 // Pokenav Menu Handler
 extern const u8 gText_CheckMapOfHoenn[];
 extern const u8 gText_CheckPokemonInDetail[];
+extern const u8 gText_Pokenav_Access_PC[];
 extern const u8 gText_CallRegisteredTrainer[];
 extern const u8 gText_CheckObtainedRibbons[];
 extern const u8 gText_PutAwayPokenav[];
@@ -2997,6 +2998,7 @@ extern const u8 gText_FindCutePokemon[];
 extern const u8 gText_FindSmartPokemon[];
 extern const u8 gText_FindToughPokemon[];
 extern const u8 gText_ReturnToConditionMenu[];
+extern const u8 gText_Pokenav_Cannot_Access_PC[];
 extern const u8 gText_NoRibbonWinners[];
 
 // Pokenav
@@ -3054,5 +3056,11 @@ extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
 extern const u8 gText_BasePointsResetToZero[];
+
+// [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
+extern const u8 gText_Moves_Menu[];
+
+// [LOuroboros] Nickname your Pokémon from the party menu
+extern const u8 gText_Nickname[];
 
 #endif // GUARD_STRINGS_H

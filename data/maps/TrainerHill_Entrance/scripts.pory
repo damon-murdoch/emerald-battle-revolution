@@ -422,7 +422,21 @@ script TrainerHill_Entrance_EventScript_Clerk2 {
 	message(gText_HowMayIServeYou)
 	waitmessage
 	if (flag(FLAG_BADGE03_GET)) {
-		pokemart(TrainerHill_Entrance_Mart_Pokemart_Clerk2)
+		multichoice2(1,1,TrainerHill_Entrance_Text_Clerk2Options)
+		switch(var(VAR_RESULT)){
+			case 0: 
+				msgbox(format("This medicine will make your POKéMON stronger!"))
+				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Medicine)
+			case 1: 
+				msgbox(format("These berries will help you train your POKéMON!"))
+				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Berries)
+			case 2: 
+				msgbox(format("These mints will change the nature of a POKéMON"))
+				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Mints)
+			case 3: 
+				msgbox(format("These items will help you train POKéMON in battle!"))
+				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Other)
+		}
 	}
 	else // Not unlocked
 	{
@@ -434,7 +448,16 @@ script TrainerHill_Entrance_EventScript_Clerk2 {
 	end
 }
 
-mart TrainerHill_Entrance_Mart_Pokemart_Clerk2 {
+text TrainerHill_Entrance_Text_Clerk2Options {
+	"Medicine$"
+	"Berries$"
+	"Mints$"
+	"Other$"
+	"Cancel$"
+	""
+}
+
+mart TrainerHill_Entrance_Pokemart_Clerk2Medicine {
 	ITEM_HEALTH_MOCHI
 	ITEM_MUSCLE_MOCHI
 	ITEM_RESIST_MOCHI
@@ -442,43 +465,25 @@ mart TrainerHill_Entrance_Mart_Pokemart_Clerk2 {
 	ITEM_CLEVER_MOCHI
 	ITEM_SWIFT_MOCHI
 	ITEM_FRESH_START_MOCHI
-	// ITEM_PROTEIN
-	// ITEM_CALCIUM
-	// ITEM_IRON
-	// ITEM_ZINC
-	// ITEM_CARBOS
-	// ITEM_HP_UP
-	ITEM_PP_UP
-	ITEM_PP_MAX
-	ITEM_ABILITY_CAPSULE
-	ITEM_ABILITY_PATCH
 	ITEM_HEALTH_FEATHER
 	ITEM_MUSCLE_FEATHER
 	ITEM_RESIST_FEATHER
 	ITEM_GENIUS_FEATHER
 	ITEM_CLEVER_FEATHER
 	ITEM_SWIFT_FEATHER
-	ITEM_LONELY_MINT
-	ITEM_ADAMANT_MINT
-	ITEM_NAUGHTY_MINT
-	ITEM_BRAVE_MINT
-	ITEM_BOLD_MINT
-	ITEM_IMPISH_MINT
-	ITEM_LAX_MINT
-	ITEM_RELAXED_MINT
-	ITEM_MODEST_MINT
-	ITEM_MILD_MINT
-	ITEM_RASH_MINT
-	ITEM_QUIET_MINT
-	ITEM_CALM_MINT
-	ITEM_GENTLE_MINT
-	ITEM_CAREFUL_MINT
-	ITEM_SASSY_MINT
-	ITEM_TIMID_MINT
-	ITEM_HASTY_MINT
-	ITEM_JOLLY_MINT
-	ITEM_NAIVE_MINT
-	ITEM_SERIOUS_MINT
+	ITEM_PROTEIN
+	ITEM_CALCIUM
+	ITEM_IRON
+	ITEM_ZINC
+	ITEM_CARBOS
+	ITEM_HP_UP
+	ITEM_PP_UP
+	ITEM_PP_MAX
+	ITEM_ABILITY_CAPSULE
+	ITEM_ABILITY_PATCH
+}
+
+mart TrainerHill_Entrance_Pokemart_Clerk2Berries {
 	ITEM_RAZZ_BERRY
 	ITEM_BLUK_BERRY
 	ITEM_NANAB_BERRY
@@ -500,6 +505,33 @@ mart TrainerHill_Entrance_Mart_Pokemart_Clerk2 {
 	// For future use
 	// ITEM_DURIN_BERRY
 	// ITEM_BELUE_BERRY
+}
+
+mart TrainerHill_Entrance_Pokemart_Clerk2Mints {
+	ITEM_LONELY_MINT
+	ITEM_ADAMANT_MINT
+	ITEM_NAUGHTY_MINT
+	ITEM_BRAVE_MINT
+	ITEM_BOLD_MINT
+	ITEM_IMPISH_MINT
+	ITEM_LAX_MINT
+	ITEM_RELAXED_MINT
+	ITEM_MODEST_MINT
+	ITEM_MILD_MINT
+	ITEM_RASH_MINT
+	ITEM_QUIET_MINT
+	ITEM_CALM_MINT
+	ITEM_GENTLE_MINT
+	ITEM_CAREFUL_MINT
+	ITEM_SASSY_MINT
+	ITEM_TIMID_MINT
+	ITEM_HASTY_MINT
+	ITEM_JOLLY_MINT
+	ITEM_NAIVE_MINT
+	ITEM_SERIOUS_MINT
+}
+
+mart TrainerHill_Entrance_Pokemart_Clerk2Other {
 	ITEM_MACHO_BRACE
 	ITEM_POWER_WEIGHT
 	ITEM_POWER_BRACER
