@@ -52,6 +52,8 @@ Pokemon easily without the need for modifying save files.
   * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
   * [Infinite TM usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
   * [DPPt Style 2-in-1 Bike](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
+  * [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap)
+  * [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -108,9 +110,7 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 
 ### Ver. 0.4.3
 
-Implemented `voloved`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial, as well as his 
-[Allow Move Relearner to Teach Moves that Pre Evolutions Know](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know) tutorial
-Implemented `Diego Marten`'s [Move Relearner as an option in the Pokémon Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602) tutorial
+Implemented `voloved`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial, as well as [allow Move Relearner to Teach Moves that Pre Evolutions Know](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know). Implemented `Diego Marten`'s [Move Relearner as an option in the Pokémon Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602) tutorial. Implemented `Lunos`'s [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap) tutorial, as well as [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
 
 ### Ver. 0.4.2
 

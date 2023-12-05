@@ -1847,4 +1847,7 @@ const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTI
 const u8 gText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 
 // [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
-const u8 gText_Moves_Menu[] = _("Change Moves");
+const u8 gText_Moves_Menu[] = _("MOVES");
+
+ // [LOuroboros] Nickname your Pokémon from the party menu
+const u8 gText_Nickname[] = _("NICKNAME");

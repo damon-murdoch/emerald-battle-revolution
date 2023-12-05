@@ -3060,4 +3060,7 @@ extern const u8 gText_BasePointsResetToZero[];
 // [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
 extern const u8 gText_Moves_Menu[];
 
+// [LOuroboros] Nickname your Pokémon from the party menu
+extern const u8 gText_Nickname[];
+
 #endif // GUARD_STRINGS_H
