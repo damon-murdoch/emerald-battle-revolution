@@ -51,6 +51,12 @@
 #define P_GEN_8_POKEMON             TRUE        // Generation 8 Pokémon (SwSh, BDSP, LA)
 #define P_GEN_9_POKEMON             TRUE        // Generation 9 Pokémon (SV)
 
+// [voloved] Allow Move Relearner to Teach Moves that Pre-Evolutions Know
+#define P_MAX_LEVEL_DIFF_PRE_EV 5
+
+// [LOuroboros] Nickname your Pokémon from the party menu
+#define P_ALLOW_RENAME_TRADED TRUE // Rename traded Pokemon from party menu
+
 // Go here if you want to disable specific families of Pokémon.
 #include "config/species_families.h"
 

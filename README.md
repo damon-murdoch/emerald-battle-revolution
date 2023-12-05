@@ -52,6 +52,8 @@ Pokemon easily without the need for modifying save files.
   * [Camera Wave Fix](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
   * [Infinite TM usage](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
   * [DPPt Style 2-in-1 Bike](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
+  * [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap)
+  * [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -61,15 +63,16 @@ Pokemon easily without the need for modifying save files.
   * [Keyboard auto switch](https://github.com/pret/pokeemerald/wiki/Automatically-make-the-keyboard-switch-to-lowercase-after-the-first-character/) 
   * [Trade with FRLG without beating the game](https://github.com/pret/pokeemerald/wiki/Enable-trade-with-FRLG-without-beating-the-game)
 
-* `voloved`, for creating the [Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode) tutorial
+* `voloved`, for creating the following tutorials: 
+  * [Add Sleep Mode](https://github.com/pret/pokeemerald/wiki/Add-Sleep-Mode)
+  * [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav)
+  * [Allow Move Relearner to Teach Moves that Pre Evolutions Know](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know)
 
 * `Mkol103`, for creating the [mid-battle test skip](https://www.pokecommunity.com/showpost.php?p=10266925) tutorial
 
 * `DizzyEgg`, for creating the [Coloured Stats by Nature](https://github.com/pret/pokeemerald/wiki/Colored-stats-by-nature-in-summary-screen) tutorial
 
 * `PokemonCrazy`, for creating the [Show EVs / IVs in Summary](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77) tutorial
-
-* `devolov`, for creating the [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial
 
 * `huderlem`, for creating [Poryscript](https://github.com/huderlem/poryscript)
 
@@ -107,7 +110,7 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 
 ### Ver. 0.4.3
 
-Implemented `devolov`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial
+Implemented `voloved`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial, as well as [allow Move Relearner to Teach Moves that Pre Evolutions Know](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know). Implemented `Diego Marten`'s [Move Relearner as an option in the Pokémon Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602) tutorial. Implemented `Lunos`'s [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap) tutorial, as well as [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
 
 ### Ver. 0.4.2
 

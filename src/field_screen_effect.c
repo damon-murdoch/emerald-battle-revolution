@@ -330,8 +330,7 @@ static void Task_ExitDoor(u8 taskId)
         task->tState = 1;
         break;
     case 1:
-        // [devolov] Add PC Access in PokeNav
-        if (WaitForWeatherFadeIn()  && !gSysPcFromPokenav)
+        if (WaitForWeatherFadeIn())
         {
             u8 objEventId;
             SetPlayerVisibility(TRUE);
@@ -412,7 +411,8 @@ static void Task_ExitNonDoor(u8 taskId)
         gTasks[taskId].tState++;
         break;
     case 1:
-        if (WaitForWeatherFadeIn())
+        // [devolov] Add PC Access in PokeNav
+        if (WaitForWeatherFadeIn()  && !gSysPcFromPokenav)
         {
             UnfreezeObjectEvents();
             UnlockPlayerFieldControls();
