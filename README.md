@@ -81,14 +81,30 @@ Pokemon easily without the need for modifying save files.
 ### Main (Release)
 
 This is the main release branch for the software, where the latest stable version
-of the code will be deployed.
+of the code will be deployed. This will be kept up to date with the latest stable 
+`dev` release.
 
 ### Mint (Release)
 
 This is the second main release branch for the software, which has Groulslash's nature
 mints code implemented on top of the other main branch features. This has been added
 to a seperate branch to prevent merge conflicts in the future once the mints are
-implemented on the upstream branch of `PokeEmerald-Expanded.`
+implemented on the upstream branch of `PokeEmerald-Expanded.` This will be kept 
+up to date with the latest stable `dev` release.
+
+### Modified (Release)
+
+This is an offshoot branch of the software, which has modified moves / learn tables / etc.
+for some Pokemon or items which will be notated with the `// Modified` comment after each 
+adjusted line. The `main` or `dev` branches will never directly modify a Pokemon's stats
+or otherwise modify them from how they behave in the main series titles. This will be 
+kept up to date with the latest stable `dev` release.
+
+### Combined (Release)
+
+This is a combined branch of both the `mint` and `modified` releases, so you can use the
+modified Pokemon with the nature mint code together. This will be kept up to date with
+the latest stable `dev` release.
 
 ### Debug (Release)
 
