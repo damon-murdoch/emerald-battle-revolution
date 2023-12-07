@@ -37,6 +37,7 @@
 #include "constants/items.h"
 #include "constants/event_objects.h"
 #include "party_menu.h"
+#include "config/battle_frontier.h"
 
 struct FrontierBrainMon
 {
@@ -1929,25 +1930,39 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species); i++)
-        ;
+    // If banned species checking is enabled
+    if (BF_ALLOW_BANNED_SPECIES == FALSE){
+        for (i = 0; gFrontierBannedSpecies[i] != 0xFFFF && gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species); i++)
+            ;
 
-    if (gFrontierBannedSpecies[i] != 0xFFFF)
-        return;
-    if (lvlMode == FRONTIER_LVL_50 && monLevel > FRONTIER_MAX_LEVEL_50)
-        return;
+        if (gFrontierBannedSpecies[i] != 0xFFFF)
+            return;
+    }
 
-    for (i = 0; i < *count && speciesArray[i] != species; i++)
-        ;
-    if (i != *count)
-        return;
+    // Level scaling is not enabled
+    if (BF_ENABLE_LEVEL_SCALING == FALSE){
+        if (lvlMode == FRONTIER_LVL_50 && monLevel > FRONTIER_MAX_LEVEL_50)
+            return;
+    }
 
-    if (heldItem != 0)
-    {
-        for (i = 0; i < *count && itemsArray[i] != heldItem; i++)
+    // If duplicate species checking is enabled
+    if (BF_ALLOW_DUPLICATE_SPECIES == FALSE){
+        for (i = 0; i < *count && speciesArray[i] != species; i++)
             ;
         if (i != *count)
             return;
+
+    }
+
+    // If duplicate items checking is enabled
+    if (BF_ALLOW_DUPLICATE_ITEMS == FALSE){
+        if (heldItem != 0)
+        {
+            for (i = 0; i < *count && itemsArray[i] != heldItem; i++)
+                ;
+            if (i != *count)
+                return;
+        }
     }
 
     speciesArray[*count] = species;
