@@ -76,6 +76,7 @@
 #include "config/item.h"
 #include "move_relearner.h"
 #include "naming_screen.h"
+#include "config/battle_frontier.h"
 
 enum {
     MENU_SUMMARY,
@@ -6950,18 +6951,26 @@ static u8 CheckBattleEntriesAndGetMessage(void)
     if (facility == FACILITY_UNION_ROOM || facility == FACILITY_MULTI_OR_EREADER)
         return 0xFF;
 
-    maxBattlers = GetMaxBattleEntries();
-    for (i = 0; i < maxBattlers - 1; i++)
-    {
-        u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
-        u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
-        for (j = i + 1; j < maxBattlers; j++)
+    // If either of these flags are set, perform the loop
+    if (BF_ALLOW_DUPLICATE_ITEMS || BF_ALLOW_DUPLICATE_SPECIES){
+        maxBattlers = GetMaxBattleEntries();
+        for (i = 0; i < maxBattlers - 1; i++)
         {
-            if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
-                return PARTY_MSG_MONS_CANT_BE_SAME;
-            if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
-                return PARTY_MSG_NO_SAME_HOLD_ITEMS;
+            u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
+            u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
+            for (j = i + 1; j < maxBattlers; j++)
+            {
+                // Allow duplicate species is set to false
+                if (BF_ALLOW_DUPLICATE_SPECIES == FALSE)
+                    if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
+                        return PARTY_MSG_MONS_CANT_BE_SAME;
+                // Allow duplicate items is set to false
+                if (BF_ALLOW_DUPLICATE_ITEMS == FALSE)
+                    if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
+                        return PARTY_MSG_NO_SAME_HOLD_ITEMS;
+            }
         }
+
     }
 
     return 0xFF;
