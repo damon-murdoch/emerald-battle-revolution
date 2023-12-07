@@ -4677,7 +4677,7 @@ static u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon)
     SetMonData(mon, field, &n);                                 \
 }
 
-void CalculateMonStats(struct Pokemon *mon)
+void CalculateMonStats(struct Pokemon *mon, s32 level = 0)
 {
     s32 oldMaxHP = GetMonData(mon, MON_DATA_MAX_HP, NULL);
     s32 currentHP = GetMonData(mon, MON_DATA_HP, NULL);
@@ -4695,7 +4695,13 @@ void CalculateMonStats(struct Pokemon *mon)
     s32 spDefenseEV = GetMonData(mon, MON_DATA_SPDEF_EV, NULL);
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
-    s32 level = GetLevelFromMonExp(mon);
+
+    // Level is not set
+    if (level == 0){
+        // Get from Pokemon's experience
+        level = GetLevelFromMonExp(mon);
+    }
+
     s32 newMaxHP;
 
     SetMonData(mon, MON_DATA_LEVEL, &level);

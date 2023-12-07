@@ -262,8 +262,13 @@ void ReducePlayerPartyToSelectedMons(void)
 
     // copy the selected pokemon according to the order.
     for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
-        if (gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
+        if (gSelectedOrderFromParty[i]) {
+            // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
             party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
+
+            // Get the Pokemon stats at level 50
+            CalculateMonStats(&party[i], 50);
+        }
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
 
