@@ -1546,7 +1546,7 @@
 #define FLAG_UNUSED_0x90E                           (SYSTEM_FLAGS + 0xAE) // Unused Flag
 #define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
 #define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
-#define FLAG_UNUSED_0x911                           (SYSTEM_FLAGS + 0xB1) // Unused Flag
+#define FLAG_FORCE_FRONTIER_LEVEL_SCALING           (SYSTEM_FLAGS + 0xB1)
 #define FLAG_FORCE_NO_SHINY                         (SYSTEM_FLAGS + 0xB2)
 #define FLAG_FORCE_SHINY                            (SYSTEM_FLAGS + 0xB3)
 #define FLAG_NO_COLLISION                           (SYSTEM_FLAGS + 0xB4)

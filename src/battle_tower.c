@@ -3469,10 +3469,6 @@ static u8 SetTentPtrsGetLevel(void)
         gFacilityTrainerMons = gBattleFrontierMons;
     }
 
-    level = GetHighestLevelInPlayerParty();
-    if (level < TENT_MIN_LEVEL)
-        level = TENT_MIN_LEVEL;
-
     return level;
 }
 
