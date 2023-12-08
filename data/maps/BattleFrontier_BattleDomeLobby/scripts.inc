@@ -41,7 +41,7 @@ BattleFrontier_BattleDomeLobby_EventScript_QuitWithoutSaving::
 	dome_set DOME_DATA_ATTEMPTED_CHALLENGE, TRUE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattleDomeLobby_EventScript_DisableFrontierLevelScaling
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	releaseall
 	end
 
@@ -103,7 +103,7 @@ BattleFrontier_BattleDomeLobby_EventScript_EndChallenge::
 	msgbox BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattleDomeLobby_EventScript_DisableFrontierLevelScaling
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	releaseall
 	end
 
@@ -193,7 +193,7 @@ BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge::
 	dome_settrainers
 	msgbox BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome, MSGBOX_DEFAULT
 	closemessage
-	call BattleFrontier_BattleDomeLobby_EventScript_EnableFrontierLevelScaling
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor
 	special HealPlayerParty
 	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 23, 6
@@ -682,13 +682,3 @@ BattleFrontier_BattleDomeLobby_Text_ExplainDoubleKORules:
 	.string "time--a double KO--in a tournament\l"
 	.string "match, the REFEREES will review\l"
 	.string "the match and declare the winner.$"
-
-BattleFrontier_BattleDomeLobby_EventScript_EnableFrontierLevelScaling::
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-
-
-BattleFrontier_BattleDomeLobby_EventScript_DisableFrontierLevelScaling::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-

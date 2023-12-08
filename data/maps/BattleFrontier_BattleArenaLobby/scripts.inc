@@ -34,7 +34,7 @@ BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving::
 	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattleArenaLobby_EventScript_DisableFrontierLevelScaling
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	releaseall
 	end
 
@@ -79,7 +79,7 @@ BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
 	arena_save 0
 	playse SE_SAVE
 	waitse
-	call BattleFrontier_BattleArenaLobby_EventScript_DisableFrontierLevelScaling
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
@@ -168,7 +168,7 @@ BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge::
 	frontier_get FRONTIER_DATA_LVL_MODE
 	call_if_eq VAR_RESULT, FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
 	call_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
-	call BattleFrontier_BattleArenaLobby_EventScript_EnableFrontierLevelScaling
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
 	waitstate
@@ -577,13 +577,3 @@ BattleFrontier_BattleArenaLobby_Text_PleaseAcceptBattlePoints:
 	.string "My dear challenger, in recognition of\n"
 	.string "your indefatigable spirit, please\l"
 	.string "accept these Battle Point(s).$"
-
-BattleFrontier_BattleArenaLobby_EventScript_EnableFrontierLevelScaling::
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-
-
-BattleFrontier_BattleArenaLobby_EventScript_DisableFrontierLevelScaling::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-
