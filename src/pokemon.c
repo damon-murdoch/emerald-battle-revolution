@@ -4731,7 +4731,7 @@ void CalculateMonStats(struct Pokemon *mon)
             }
 
             // If Pokemon is above level limit, or it is below AND level scaling up is enabled
-            if ((party[i].level > scaleLevel) || (party[i].level < scaleLevel && scaleUp)){
+            if ((level > scaleLevel) || (level < scaleLevel && scaleUp)){
                 // Set level to the scaled level
                 level = scaleLevel;
             }

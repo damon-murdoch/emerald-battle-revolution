@@ -33,6 +33,7 @@ VerdanturfTown_BattleTentLobby_EventScript_QuitWithoutSaving::
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
+	call VerdanturfTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -60,6 +61,7 @@ VerdanturfTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+	call VerdanturfTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -68,6 +70,7 @@ VerdanturfTown_BattleTentLobby_EventScript_NoRoomForPrize::
 	waitmessage
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+	call VerdanturfTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -88,6 +91,7 @@ VerdanturfTown_BattleTentLobby_EventScript_LostChallenge::
 	msgbox VerdanturfTown_BattleTentLobby_Text_ReturnFortified, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+	call VerdanturfTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -157,6 +161,7 @@ VerdanturfTown_BattleTentLobby_EventScript_EnterChallenge::
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox VerdanturfTown_BattleTentLobby_Text_NowFollowMe, MSGBOX_DEFAULT
 	closemessage
+	call VerdanturfTown_BattleTentLobby_EventScript_EnableFrontierLevelScaling
 	call VerdanturfTown_BattleTentLobby_EventScript_WalkToDoor
 	warp MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
@@ -381,3 +386,13 @@ VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"
+
+VerdanturfTown_BattleTentLobby_EventScript_EnableFrontierLevelScaling::
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
+	end
+
+
+VerdanturfTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
+	end
+

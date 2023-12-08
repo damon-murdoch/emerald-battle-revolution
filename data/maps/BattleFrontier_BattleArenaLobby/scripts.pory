@@ -80,7 +80,7 @@ BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
 	arena_save 0
 	playse SE_SAVE
 	waitse
-	call BattleFrontier_BattleArenaLobby_EventScript_DisableFrontierLevelScaling+
+	call BattleFrontier_BattleArenaLobby_EventScript_DisableFrontierLevelScaling
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
