@@ -62,6 +62,7 @@ BattleFrontier_BattleTowerLobby_EventScript_QuitWithoutSaving::
 	tower_set TOWER_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+	call BattleFrontier_BattleTowerLobby_EventScript_DisableFrontierLevelScaling
 	release
 	end
 
@@ -127,6 +128,7 @@ BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle::
 	tower_save 0
 	playse SE_SAVE
 	waitse
+	call BattleFrontier_BattleTowerLobby_EventScript_DisableFrontierLevelScaling
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleTowerLobby_EventScript_EndSaveBattle
 	message BattleFrontier_BattleTowerLobby_Text_RecordLastMatch
@@ -600,6 +602,7 @@ BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad::
 	tower_loadlinkopponents
 	delay 1
 	goto_if_ne VAR_RESULT, 6, BattleFrontier_BattleTowerLobby_EventScript_WaitForLinkOpponentLoad
+	call BattleFrontier_BattleTowerLobby_EventScript_EnableFrontierLevelScaling
 	call BattleFrontier_BattleTowerLobby_EventScript_ShowYouToBattleRoom
 	clearflag FLAG_CANCEL_BATTLE_ROOM_CHALLENGE
 	warp MAP_BATTLE_FRONTIER_BATTLE_TOWER_ELEVATOR, 1, 6
@@ -1399,3 +1402,13 @@ BattleFrontier_BattleTowerLobby_Text_ExplainMultiLinkRules:
 	.string "You may not interrupt this challenge\n"
 	.string "in the middle, unlike other modes.$"
 `
+
+script BattleFrontier_BattleTowerLobby_EventScript_EnableFrontierLevelScaling {
+	setflag(FLAG_FORCE_FRONTIER_LEVEL_SCALING)
+	end
+}
+
+script BattleFrontier_BattleTowerLobby_EventScript_DisableFrontierLevelScaling {
+	clearflag(FLAG_FORCE_FRONTIER_LEVEL_SCALING)
+	end
+}
