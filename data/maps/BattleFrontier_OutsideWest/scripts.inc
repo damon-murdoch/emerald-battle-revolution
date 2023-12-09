@@ -523,3 +523,12 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "It must be adorable. I'm sure of it…\p"
 	.string "Oh, challenges can wait. I feel driven\n"
 	.string "to find the delightful creature!$"
+
+BattleFrontier_OutsideEast_EventScript_BattleResearchFacilitySign::
+	msgbox BattleFrontier_OutsideEast_EventScript_BattleResearchFacilitySign_Text_0, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_OutsideEast_EventScript_BattleResearchFacilitySign_Text_0:
+	.string "BATTLE RESEARCH LAB\n"
+	.string "Powerful trainers needed!$"

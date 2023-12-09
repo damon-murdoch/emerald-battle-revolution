@@ -1,0 +1,22 @@
+raw `
+BattleFrontier_BattleResearchLab_MapScripts::
+	.byte 0
+`
+
+script BattleFrontier_BattleResearchFacility_EventScript_Scientist_Greeter {
+    msgbox(format("Hello World! Greeter"))
+    release
+    end
+}
+
+script BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer1 {
+    msgbox(format("Hello World! Computer1"))
+    release
+    end
+}
+
+script BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer2 {
+    msgbox(format("Hello World! Computer2"))
+    release
+    end
+}

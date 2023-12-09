@@ -583,7 +583,11 @@
     "NavelRock_Down10",
     "NavelRock_Down11",
     "NavelRock_Bottom",
-    "TrainerHill_Elevator"
+    "TrainerHill_Elevator",
+    "BattleFrontier_BattleResearchLab",
+    "BattleFrontier_BattleResearchLab_B1F",
+    "BattleFrontier_BattleResearchLab_B2F",
+    "BattleFrontier_BattleResearchLab_B3F"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",

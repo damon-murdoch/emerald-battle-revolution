@@ -526,3 +526,8 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "to find the delightful creature!$"
 
 `
+
+script BattleFrontier_OutsideEast_EventScript_BattleResearchFacilitySign {
+    msgbox(format("BATTLE RESEARCH LAB\nPowerful trainers needed!"), MSGBOX_SIGN)
+	end
+}

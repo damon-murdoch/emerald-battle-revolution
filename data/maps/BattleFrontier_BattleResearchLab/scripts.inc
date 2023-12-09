@@ -1,0 +1,29 @@
+BattleFrontier_BattleResearchLab_MapScripts::
+	.byte 0
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Greeter::
+	msgbox BattleFrontier_BattleResearchFacility_EventScript_Scientist_Greeter_Text_0
+	release
+	end
+
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer1::
+	msgbox BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer1_Text_0
+	release
+	end
+
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer2::
+	msgbox BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer2_Text_0
+	release
+	end
+
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Greeter_Text_0:
+	.string "Hello World! Greeter$"
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer1_Text_0:
+	.string "Hello World! Computer1$"
+
+BattleFrontier_BattleResearchFacility_EventScript_Scientist_Computer2_Text_0:
+	.string "Hello World! Computer2$"
