@@ -26,6 +26,7 @@ BattleFrontier_BattlePikeLobby_EventScript_GetChallengeStatus::
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	special HealPlayerParty
 	pike_resethelditems
 	lockall
@@ -35,7 +36,6 @@ BattleFrontier_BattlePikeLobby_EventScript_QuitWithoutSaving::
 	pike_set PIKE_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattlePikeLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -51,6 +51,7 @@ BattleFrontier_BattlePikeLobby_EventScript_DefeatedQueen::
 	msgbox BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen, MSGBOX_DEFAULT
 	waitmessage
 BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	msgbox BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints, MSGBOX_DEFAULT
 	frontier_givepoints
 	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
@@ -69,12 +70,12 @@ BattleFrontier_BattlePikeLobby_EventScript_GiveBattlePoints::
 	msgbox BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattlePikeLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
 BattleFrontier_BattlePikeLobby_EventScript_LostChallenge::
 	lockall
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	message BattleFrontier_BattlePikeLobby_Text_ChallengeEndedRecordResults
 	waitmessage
 	frontier_checkairshow
@@ -89,7 +90,6 @@ BattleFrontier_BattlePikeLobby_EventScript_LostChallenge::
 	msgbox BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call BattleFrontier_BattlePikeLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -155,7 +155,7 @@ BattleFrontier_BattlePikeLobby_EventScript_SaveBeforeChallenge::
 	msgbox BattleFrontier_BattlePikeLobby_Text_StepThisWay, MSGBOX_DEFAULT
 	closemessage
 	frontier_settrainers
-	call BattleFrontier_BattlePikeLobby_EventScript_EnableFrontierLevelScaling
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_BattlePikeLobby_EventScript_WalkToCorridor
 	special HealPlayerParty
 	call BattleFrontier_BattlePike_EventScript_CloseCurtain
@@ -434,13 +434,3 @@ BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules:
 	.string "changed.\p"
 	.string "The sequence must be set before\n"
 	.string "starting your challenge.$"
-
-BattleFrontier_BattlePikeLobby_EventScript_EnableFrontierLevelScaling::
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-
-
-BattleFrontier_BattlePikeLobby_EventScript_DisableFrontierLevelScaling::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-

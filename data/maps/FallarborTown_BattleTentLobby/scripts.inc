@@ -28,11 +28,11 @@ FallarborTown_BattleTentLobby_EventScript_GetChallengeStatus::
 
 FallarborTown_BattleTentLobby_EventScript_QuitWithoutSaving::
 	lockall
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	msgbox FallarborTown_BattleTentLobby_Text_DidntSaveBeforeQuitting, MSGBOX_DEFAULT
 	closemessage
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call FallarborTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
 	releaseall
 	end
@@ -49,6 +49,7 @@ FallarborTown_BattleTentLobby_EventScript_WonChallenge::
 	waitse
 
 FallarborTown_BattleTentLobby_EventScript_GivePrize::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	msgbox FallarborTown_BattleTentLobby_Text_PresentYouWithPrize, MSGBOX_DEFAULT
 	fallarbortent_giveprize
 	switch VAR_RESULT
@@ -61,16 +62,15 @@ FallarborTown_BattleTentLobby_EventScript_GivePrize::
 	msgbox FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call FallarborTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
 FallarborTown_BattleTentLobby_EventScript_NoRoomForPrize::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	msgbox FallarborTown_BattleTentLobby_Text_BagFullReturnForPrize, MSGBOX_DEFAULT
 	waitmessage
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call FallarborTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -82,6 +82,7 @@ FallarborTown_BattleTentLobby_EventScript_PrizeWaiting::
 
 FallarborTown_BattleTentLobby_EventScript_LostChallenge::
 	lockall
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	message FallarborTown_BattleTentLobby_Text_ThankYouWaitWhileSaving
 	waitmessage
 	frontier_set FRONTIER_DATA_LVL_MODE, FRONTIER_LVL_50
@@ -91,7 +92,6 @@ FallarborTown_BattleTentLobby_EventScript_LostChallenge::
 	msgbox FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2, MSGBOX_DEFAULT
 	closemessage
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
-	call FallarborTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling
 	releaseall
 	end
 
@@ -160,7 +160,7 @@ FallarborTown_BattleTentLobby_EventScript_EnterChallenge::
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox FallarborTown_BattleTentLobby_Text_GuideYouToBattleTent, MSGBOX_DEFAULT
 	closemessage
-	call FallarborTown_BattleTentLobby_EventScript_EnableFrontierLevelScaling
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call FallarborTown_BattleTentLobby_EventScript_WalkToDoor
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
@@ -350,13 +350,3 @@ FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "SCOTT: Instead of wasting your\n"
 	.string "time with the likes of me, why not\l"
 	.string "make a challenge?$"
-
-FallarborTown_BattleTentLobby_EventScript_EnableFrontierLevelScaling::
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-
-
-FallarborTown_BattleTentLobby_EventScript_DisableFrontierLevelScaling::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
-	end
-

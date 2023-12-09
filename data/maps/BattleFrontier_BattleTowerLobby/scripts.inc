@@ -66,7 +66,6 @@ BattleFrontier_BattleTowerLobby_EventScript_QuitWithoutSaving::
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_WonChallenge::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	lock
 	faceplayer
 	frontier_isbrain
@@ -101,7 +100,6 @@ BattleFrontier_BattleTowerLobby_EventScript_LookForwardToChallenge::
 	end
 
 BattleFrontier_BattleTowerLobby_EventScript_LostChallenge::
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	goto_if_ne VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_MULTIS, BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak
 	goto_if_set FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER, BattleFrontier_BattleTowerLobby_EventScript_CancelWinStreak
 	tower_get TOWER_DATA_WIN_STREAK
@@ -122,6 +120,7 @@ BattleFrontier_BattleTowerLobby_EventScript_LostThanksForPlaying::
 
 BattleFrontier_BattleTowerLobby_EventScript_AskSaveBattle::
 	message BattleFrontier_BattleTowerLobby_Text_RecordWillBeSaved
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	waitmessage
 	frontier_checkairshow
 	special LoadPlayerParty

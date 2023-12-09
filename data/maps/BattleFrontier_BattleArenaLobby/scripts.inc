@@ -73,13 +73,13 @@ BattleFrontier_BattleArenaLobby_EventScript_LostChallenge::
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
 	arena_save 0
 	playse SE_SAVE
 	waitse
-	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_EventScript_GetCantRecordBattle
 	goto_if_eq VAR_RESULT, TRUE, BattleFrontier_BattleArenaLobby_EventScript_EndSaveAfterChallenge
 	message BattleFrontier_BattleArenaLobby_Text_RecordLastMatch
