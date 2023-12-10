@@ -3,54 +3,62 @@ BattleFrontier_Underground_B1F_MapScripts::
 	.byte 0
 `
 
-scripts BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
+script BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
     lock
 	faceplayer
-    msgbox(format(BattleFrontier_Underground_B1F_Text_Welcome))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_BattleDome))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_WelcomeInfo))
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Dome facility."))
+    msgbox(format("You can also get from place to place quickly down here."))
+    msgbox(format("Feel free to use your bike!"))
     release
     end
 }
 
-scripts BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter {
+script BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter {
     lock
 	faceplayer
-    msgbox(format(BattleFrontier_Underground_B1F_Text_Welcome))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_BattlePike))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_WelcomeInfo))
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Factory and Battle Pike facilities."))
+    msgbox(format("You can also get from place to place quickly down here."))
+    msgbox(format("Feel free to use your bike!"))
     release
     end
 }
 
-scripts BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter {
+script BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter {
     lock
 	faceplayer
-    msgbox(format(BattleFrontier_Underground_B1F_Text_Welcome))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_BattleTower))
-    msgbox(format(BattleFrontier_Underground_B1F_Text_WelcomeInfo))
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Tower, Ranking Hall and BP Exchange Service facilities."))
+    msgbox(format("You can also get from place to place quickly down here."))
+    msgbox(format("Feel free to use your bike!"))
     release
     end
 }
 
-string BattleFrontier_Underground_B1F_Text_Welcome {
-    "Welcome to the Battle Frontier Underground mall!"
+script BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Palace, POKéMON Center and POKéMART facilities."))
+    msgbox(format("You can also get from place to place quickly down here."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
 }
 
-string BattleFrontier_Underground_B1F_Text_WelcomeInfo {
-    "You can find anything you need for battling here!"
-    "You can also get from place to place quickly down here."
-    "Feel free to use your bike!"
-}
-
-string BattleFrontier_Underground_B1F_Text_BattleDome {
-    "This is the closest entrance for the Battle Dome."
-}
-
-string BattleFrontier_Underground_B1F_Text_BattlePike {
-    "This is the closest entrance for the Battle Factory and Battle Pike facilities."
-}
-
-string BattleFrontier_Underground_B1F_Text_BattleTower {
-    "This is the closest entrance for the Battle Tower, Ranking Hall and Exchange Service facilities."
+script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the best entrance for the Battle Pyramid and Battle Arena facilities."))
+    msgbox(format("You can also get from place to place quickly down here."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
 }
