@@ -61,6 +61,201 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_1
+	showmoneybox 0, 0
+	checkmoney 5000
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_6
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_1:
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd
+	end
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_2:
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_2
+	waitmessage
+	hidemoneybox
+	multichoice2 1, 1, BattleFrontier_Underground_B1F_Text_CloningShopCloningShopLegendClerkOptions, 0, 3, 0
+	switch VAR_RESULT
+	case 0, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_7
+	case 1, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_8
+	case 2, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_9
+	case 3, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_10
+	case 4, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_11
+	case 5, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_12
+	case 6, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_13
+	case 7, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_14
+	case 8, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_15
+	case 9, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_16
+	case 10, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_17
+	case 11, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_18
+	case 12, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_19
+	case 13, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_20
+	case 14, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_21
+	case 15, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_22
+	case 16, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_23
+	case 17, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_24
+	case 18, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_25
+	case 19, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_26
+	case 20, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_27
+	case 21, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_28
+	case 22, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_29
+	case 23, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_30
+	case 24, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_31
+	case 25, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_32
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5:
+	switch VAR_RESULT
+	case MON_GIVEN_TO_PARTY, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_36
+	case MON_GIVEN_TO_PC, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_37
+	case MON_CANT_GIVE, BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_38
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_34:
+	removemoney 10000
+	showmoneybox 0, 0
+	playse SE_SHOP
+	waitse
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_1
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_7:
+	givemon SPECIES_MEWTWO, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_8:
+	givemon SPECIES_LUGIA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_9:
+	givemon SPECIES_HO_OH, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_10:
+	givemon SPECIES_KYOGRE, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_11:
+	givemon SPECIES_GROUDON, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_12:
+	givemon SPECIES_RAYQUAZA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_13:
+	givemon SPECIES_DIALGA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_14:
+	givemon SPECIES_PALKIA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_15:
+	givemon SPECIES_GIRATINA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_16:
+	givemon SPECIES_RESHIRAM, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_17:
+	givemon SPECIES_ZEKROM, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_18:
+	givemon SPECIES_KYUREM, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_19:
+	givemon SPECIES_XERNEAS, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_20:
+	givemon SPECIES_YVELTAL, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_21:
+	givemon SPECIES_ZYGARDE, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_22:
+	givemon SPECIES_COSMOG, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_23:
+	givemon SPECIES_COSMOEM, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_24:
+	givemon SPECIES_SOLGALEO, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_25:
+	givemon SPECIES_LUNALA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_26:
+	givemon SPECIES_NECROZMA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_27:
+	givemon SPECIES_ZACIAN, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_28:
+	givemon SPECIES_ZAMAZENTA, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_29:
+	givemon SPECIES_ETERNATUS, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_30:
+	givemon SPECIES_CALYREX, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_31:
+	givemon SPECIES_KORAIDON, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_32:
+	givemon SPECIES_MIRAIDON, 5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_5
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_36:
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_3
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_34
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_37:
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_4
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_34
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_38:
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_5
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd
+	goto BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_34
+
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopSubLegendClerk::
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopMythicalClerk::
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopItemClerk::
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd::
+	msgbox BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd_Text_0
+	releaseall
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:
 	.string "Welcome to the Battle Frontier\n"
 	.string "Underground!$"
@@ -99,3 +294,62 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter_Text_0:
 	.string "This is the best entrance for the\n"
 	.string "Battle Pyramid and Battle Arena\l"
 	.string "facilities.$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_0:
+	.string "Welcome to the POKéMON cloning lab\n"
+	.string "storefront!$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_1:
+	.string "This is the counter for legendary\n"
+	.string "POKéMON.$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_2:
+	.string "What are you looking for today?$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_3:
+	.string "You recieved the POKéMON!$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_4:
+	.string "The POKéMON has been sent to your PC\n"
+	.string "boxes!$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_5:
+	.string "Oh, unfortunately it looks like I can't\n"
+	.string "give you this!$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk_Text_6:
+	.string "Oh, you'll need at least ¥10000 to buy\n"
+	.string "anything at this counter - Sorry!$"
+
+BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd_Text_0:
+	.string "Please come again!$"
+
+BattleFrontier_Underground_B1F_Text_CloningShopCloningShopLegendClerkOptions::
+	.string "MEWTWO{CLEAR_TO 0x48}¥10000$"
+	.string "LUGIA{CLEAR_TO 0x48}¥10000$"
+	.string "HO-OH{CLEAR_TO 0x48}¥10000$"
+	.string "KYOGRE{CLEAR_TO 0x48}¥10000$"
+	.string "GROUDON{CLEAR_TO 0x48}¥10000$"
+	.string "RAYQUAZA{CLEAR_TO 0x48}¥10000$"
+	.string "DIALGA{CLEAR_TO 0x48}¥10000$"
+	.string "PALKIA{CLEAR_TO 0x48}¥10000$"
+	.string "GIRATINA{CLEAR_TO 0x48}¥10000$"
+	.string "RESHIRAM{CLEAR_TO 0x48}¥10000$"
+	.string "ZEKROM{CLEAR_TO 0x48}¥10000$"
+	.string "KYUREM{CLEAR_TO 0x48}¥10000$"
+	.string "XERNEAS{CLEAR_TO 0x48}¥10000$"
+	.string "YVELTAL{CLEAR_TO 0x48}¥10000$"
+	.string "ZYGARDE{CLEAR_TO 0x48}¥10000$"
+	.string "COSMOG{CLEAR_TO 0x48}¥10000$"
+	.string "COSMOEM{CLEAR_TO 0x48}¥10000$"
+	.string "SOLGALEO{CLEAR_TO 0x48}¥10000$"
+	.string "LUNALA{CLEAR_TO 0x48}¥10000$"
+	.string "NECROZMA{CLEAR_TO 0x48}¥10000$"
+	.string "ZACIAN{CLEAR_TO 0x48}¥10000$"
+	.string "ZAMAZENTA{CLEAR_TO 0x48}¥10000$"
+	.string "ETERNATUS{CLEAR_TO 0x48}¥10000$"
+	.string "CALYREX{CLEAR_TO 0x48}¥10000$"
+	.string "KORAIDON{CLEAR_TO 0x48}¥10000$"
+	.string "MIRAIDON{CLEAR_TO 0x48}¥10000$"
+	.string "CANCEL$"
+	.string "$"
