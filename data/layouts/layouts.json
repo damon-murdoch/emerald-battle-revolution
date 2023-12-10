@@ -4410,6 +4410,16 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B1F",
+      "name": "BattleFrontier_Underground_B1F_Layout",
+      "width": 104,
+      "height": 72,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/BattleFrontier_Underground_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B1F/map.bin"
     }
   ]
 }
