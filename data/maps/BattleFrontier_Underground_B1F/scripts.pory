@@ -73,12 +73,13 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
 script BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendClerk {
     lock
     faceplayer
-    msgbox(format("Welcome to the POKéMON cloning lab storefront!"))
+    msgbox(format("Welcome to the POKéMON clone storefront!"))
     msgbox(format("This is the counter for legendary POKéMON."))
     showmoneybox(0,0)
-    checkmoney(5000)
+    checkmoney(10000)
     # Player can afford it
     if(var(VAR_RESULT) == TRUE) {
+        msgbox(format("All of the POKéMON at this counter cost ¥10000."))
         msgbox(format("What are you looking for today?"))
         waitmessage
         hidemoneybox
@@ -135,38 +136,168 @@ script BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopLegendCl
 }
 
 text BattleFrontier_Underground_B1F_Text_CloningShopCloningShopLegendClerkOptions {
-    "MEWTWO{CLEAR_TO 0x48}¥10000$"
-    "LUGIA{CLEAR_TO 0x48}¥10000$"
-    "HO-OH{CLEAR_TO 0x48}¥10000$"
-    "KYOGRE{CLEAR_TO 0x48}¥10000$"
-    "GROUDON{CLEAR_TO 0x48}¥10000$"
-    "RAYQUAZA{CLEAR_TO 0x48}¥10000$"
-    "DIALGA{CLEAR_TO 0x48}¥10000$"
-    "PALKIA{CLEAR_TO 0x48}¥10000$"
-    "GIRATINA{CLEAR_TO 0x48}¥10000$"
-    "RESHIRAM{CLEAR_TO 0x48}¥10000$"
-    "ZEKROM{CLEAR_TO 0x48}¥10000$"
-    "KYUREM{CLEAR_TO 0x48}¥10000$"
-    "XERNEAS{CLEAR_TO 0x48}¥10000$"
-    "YVELTAL{CLEAR_TO 0x48}¥10000$"
-    "ZYGARDE{CLEAR_TO 0x48}¥10000$"
-    "COSMOG{CLEAR_TO 0x48}¥10000$"
-    "COSMOEM{CLEAR_TO 0x48}¥10000$"
-    "SOLGALEO{CLEAR_TO 0x48}¥10000$"
-    "LUNALA{CLEAR_TO 0x48}¥10000$"
-    "NECROZMA{CLEAR_TO 0x48}¥10000$"
-    "ZACIAN{CLEAR_TO 0x48}¥10000$"
-    "ZAMAZENTA{CLEAR_TO 0x48}¥10000$"
-    "ETERNATUS{CLEAR_TO 0x48}¥10000$"
-    "CALYREX{CLEAR_TO 0x48}¥10000$"
-    "KORAIDON{CLEAR_TO 0x48}¥10000$"
-    "MIRAIDON{CLEAR_TO 0x48}¥10000$"
+    "MEWTWO$"
+    "LUGIA$"
+    "HO-OH$"
+    "KYOGRE$"
+    "GROUDON$"
+    "RAYQUAZA$"
+    "DIALGA$"
+    "PALKIA$"
+    "GIRATINA$"
+    "RESHIRAM$"
+    "ZEKROM$"
+    "KYUREM$"
+    "XERNEAS$"
+    "YVELTAL$"
+    "ZYGARDE$"
+    "COSMOG$"
+    "COSMOEM$"
+    "SOLGALEO$"
+    "LUNALA$"
+    "NECROZMA$"
+    "ZACIAN$"
+    "ZAMAZENTA$"
+    "ETERNATUS$"
+    "CALYREX$"
+    "KORAIDON$"
+    "MIRAIDON$"
     "CANCEL$"
     ""
 }
 
 # Behind Counter (Right)
-script BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopSubLegendClerk {}
+script BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopSubLegendClerk {
+    lock
+    faceplayer
+    msgbox(format("Welcome to the POKéMON clone storefront!"))
+    msgbox(format("This is the counter for legendary POKéMON."))
+    showmoneybox(0,0)
+    checkmoney(10000)
+    # Player can afford it
+    if(var(VAR_RESULT) == TRUE) {
+        msgbox(format("All of the POKéMON at this counter cost ¥10000."))
+        msgbox(format("What are you looking for today?"))
+        waitmessage
+        hidemoneybox
+        multichoice2(1,1,BattleFrontier_Underground_B1F_Text_CloningShopCloningShopLegendClerkOptions,0,3,0)
+        switch(var(VAR_RESULT)){
+            case 0: givemon(SPECIES_ARTICUNO,5)
+            case 1: givemon(SPECIES_ZAPDOS,5)
+            case 2: givemon(SPECIES_MOLTRES,5)
+            case 3: givemon(SPECIES_RAIKOU,5)
+            case 4: givemon(SPECIES_ENTEI,5)
+            case 5: givemon(SPECIES_SUICUNE,5)
+            case 6: givemon(SPECIES_REGIROCK,5)
+            case 7: givemon(SPECIES_REGICE,5)
+            case 8: givemon(SPECIES_REGISTEEL,5)
+            case 9: givemon(SPECIES_LATIAS,5)
+            case 10: givemon(SPECIES_LATIOS,5)
+            case 11: givemon(SPECIES_UXIE,5)
+            case 12: givemon(SPECIES_MESPRIT,5)
+            case 13: givemon(SPECIES_AZELF,5)
+            case 14: givemon(SPECIES_HEATRAN,5)
+            case 15: givemon(SPECIES_REGIGIGAS,5)
+            case 16: givemon(SPECIES_CRESSELIA,5)
+            case 17: givemon(SPECIES_COBALION,5)
+            case 18: givemon(SPECIES_TERRAKION,5)
+            case 19: givemon(SPECIES_VIRIZION,5)
+            case 20: givemon(SPECIES_TORNADUS,5)
+            case 21: givemon(SPECIES_THUNDURUS,5)
+            case 22: givemon(SPECIES_LANDORUS,5)
+            case 23: givemon(SPECIES_TYPE:NULL,5)
+            case 24: givemon(SPECIES_SILVALLY,5)
+            case 25: givemon(SPECIES_TAPU KOKO,5)
+            case 26: givemon(SPECIES_TAPU LELE,5)
+            case 27: givemon(SPECIES_TAPU FINI,5)
+            case 28: givemon(SPECIES_TAPU BULU,5)
+            case 29: givemon(SPECIES_KUBFU,5)
+            case 30: givemon(SPECIES_REGIELEKI,5)
+            case 31: givemon(SPECIES_REGIDRAGO,5)
+            case 32: givemon(SPECIES_GLASTRIER,5)
+            case 33: givemon(SPECIES_SPECTRIER,5)
+            case 34: givemon(SPECIES_ENAMORUS,5)
+            case 35: givemon(SPECIES_WO-CHIEN,5)
+            case 36: givemon(SPECIES_CHIEN-PAO,5)
+            case 37: givemon(SPECIES_TING-LU,5)
+            case 38: givemon(SPECIES_CHI-YU,5)
+            case 39: givemon(SPECIES_OKIDOGI,5)
+            case 40: givemon(SPECIES_MUNKIDORI,5)
+            case 41: givemon(SPECIES_FEZANDIPITI,5)
+            case 42: givemon(SPECIES_OGERPON,5)
+                    "CANCEL$"
+
+            default: goto(BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd)
+        }
+        switch(var(VAR_RESULT)){
+            case MON_GIVEN_TO_PARTY:
+                msgbox(format("You recieved the POKéMON!"))
+            case MON_GIVEN_TO_PC:
+                msgbox(format("The POKéMON has been sent to your PC boxes!"))
+            case MON_CANT_GIVE:
+                msgbox(format("Oh, unfortunately it looks like I can't give you this!"))
+                goto(BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd)
+        }
+        removemoney(10000)
+        showmoneybox(0,0)
+        playse(SE_SHOP)
+        waitse
+    }
+    else # Player can't afford it
+    {
+        msgbox(format("Oh, you'll need at least ¥10000 to buy anything at this counter - Sorry!"))
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopEnd)
+    end
+}
+
+text BattleFrontier_Underground_B1F_Text_CloningShopCloningShopSubLegendClerk {
+    "ARTICUNO$"
+    "ZAPDOS$"
+    "MOLTRES$"
+    "RAIKOU$"
+    "ENTEI$"
+    "SUICUNE$"
+    "REGIROCK$"
+    "REGICE$"
+    "REGISTEEL$"
+    "LATIAS$"
+    "LATIOS$"
+    "UXIE$"
+    "MESPRIT$"
+    "AZELF$"
+    "HEATRAN$"
+    "REGIGIGAS$"
+    "CRESSELIA$"
+    "COBALION$"
+    "TERRAKION$"
+    "VIRIZION$"
+    "TORNADUS$"
+    "THUNDURUS$"
+    "LANDORUS$"
+    "TYPE:NULL$"
+    "SILVALLY$"
+    "TAPU KOKO$"
+    "TAPU LELE$"
+    "TAPU FINI$"
+    "TAPU BULU$"
+    "KUBFU$"
+    "REGIELEKI$"
+    "REGIDRAGO$"
+    "GLASTRIER$"
+    "SPECTRIER$"
+    "ENAMORUS$"
+    "WO-CHIEN$"
+    "CHIEN-PAO$"
+    "TING-LU$"
+    "CHI-YU$"
+    "OKIDOGI$"
+    "MUNKIDORI$"
+    "FEZANDIPITI$"
+    "OGERPON$"
+    "CANCEL$"
+    ""
+}
 
 # Next To Shelves (Left)
 script BattleFrontier_Underground_B1F_EventScript_CloningShopCloningShopMythicalClerk {}
