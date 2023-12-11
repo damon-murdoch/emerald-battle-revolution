@@ -50,7 +50,7 @@
 #define MAX_STREAK 9999
 
 #define FRONTIER_MAX_LEVEL_50   50
-#define FRONTIER_MIN_LEVEL_OPEN 60
+#define FRONTIER_MIN_LEVEL_OPEN MAX_LEVEL // Default: 60
 #define FRONTIER_MAX_LEVEL_OPEN MAX_LEVEL
 
 // This is the default number of battles (or floors, in Battle Pyramid) per challenge.

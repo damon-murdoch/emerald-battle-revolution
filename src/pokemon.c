@@ -53,6 +53,7 @@
 #include "constants/trainers.h"
 #include "constants/union_room.h"
 #include "constants/weather.h"
+#include "config/battle_frontier.h"
 
 #if P_FRIENDSHIP_EVO_THRESHOLD >= GEN_9
 #define FRIENDSHIP_EVO_THRESHOLD 160
@@ -2209,13 +2210,13 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_BLASTOISE - 1]                    = ANIM_V_SHAKE_TWICE,
     [SPECIES_CATERPIE - 1]                     = ANIM_SWING_CONCAVE,
     [SPECIES_METAPOD - 1]                      = ANIM_SWING_CONCAVE,
-    [SPECIES_BUTTERFREE - 1]                   = ANIM_H_SLIDE_WOBBLE,
+    [SPECIES_BUTTERFREE - 1]                   = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_WEEDLE - 1]                       = ANIM_H_SLIDE_SLOW,
     [SPECIES_KAKUNA - 1]                       = ANIM_GLOW_ORANGE,
     [SPECIES_BEEDRILL - 1]                     = ANIM_ZIGZAG_SLOW,
     [SPECIES_PIDGEY - 1]                       = ANIM_V_STRETCH,
     [SPECIES_PIDGEOTTO - 1]                    = ANIM_V_STRETCH,
-    [SPECIES_PIDGEOT - 1]                      = ANIM_FRONT_FLIP,
+    [SPECIES_PIDGEOT - 1]                      = ANIM_GROW_VIBRATE,
     [SPECIES_RATTATA - 1]                      = ANIM_H_JUMPS,
     [SPECIES_RATICATE - 1]                     = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
     [SPECIES_SPEAROW - 1]                      = ANIM_V_JUMPS_SMALL,
@@ -2270,7 +2271,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_WEEPINBELL - 1]                   = ANIM_SWING_CONVEX,
     [SPECIES_VICTREEBEL - 1]                   = ANIM_H_JUMPS_V_STRETCH,
     [SPECIES_TENTACOOL - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_TENTACRUEL - 1]                   = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_TENTACRUEL - 1]                   = ANIM_V_SLIDE_WOBBLE,
     [SPECIES_GEODUDE - 1]                      = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
     [SPECIES_GRAVELER - 1]                     = ANIM_V_SHAKE,
     [SPECIES_GOLEM - 1]                        = ANIM_ROTATE_UP_SLAM_DOWN,
@@ -2283,35 +2284,35 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_FARFETCHD - 1]                    = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
     [SPECIES_DODUO - 1]                        = ANIM_H_SHAKE_SLOW,
     [SPECIES_DODRIO - 1]                       = ANIM_V_STRETCH,
-    [SPECIES_SEEL - 1]                         = ANIM_H_STRETCH,
+    [SPECIES_SEEL - 1]                         = ANIM_H_SLIDE_SLOW,
     [SPECIES_DEWGONG - 1]                      = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
     [SPECIES_GRIMER - 1]                       = ANIM_H_SLIDE_SLOW,
-    [SPECIES_MUK - 1]                          = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_MUK - 1]                          = ANIM_DEEP_V_SQUISH_AND_BOUNCE,
     [SPECIES_SHELLDER - 1]                     = ANIM_TWIST,
-    [SPECIES_CLOYSTER - 1]                     = ANIM_H_SLIDE_WOBBLE,
-    [SPECIES_GASTLY - 1]                       = ANIM_CIRCLE_C_CLOCKWISE_SLOW,
+    [SPECIES_CLOYSTER - 1]                     = ANIM_V_SHAKE_TWICE,
+    [SPECIES_GASTLY - 1]                       = ANIM_SHRINK_GROW,
     [SPECIES_HAUNTER - 1]                      = ANIM_FLICKER_INCREASING,
     [SPECIES_GENGAR - 1]                       = ANIM_GROW_IN_STAGES,
     [SPECIES_ONIX - 1]                         = ANIM_H_SHAKE,
     [SPECIES_DROWZEE - 1]                      = ANIM_V_STRETCH,
-    [SPECIES_HYPNO - 1]                        = ANIM_H_SLIDE_SLOW,
-    [SPECIES_KRABBY - 1]                       = ANIM_H_SLIDE,
-    [SPECIES_KINGLER - 1]                      = ANIM_H_SLIDE_SLOW,
-    [SPECIES_VOLTORB - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_ELECTRODE - 1]                    = ANIM_V_SQUISH_AND_BOUNCE,
+    [SPECIES_HYPNO - 1]                        = ANIM_GROW_VIBRATE,
+    [SPECIES_KRABBY - 1]                       = ANIM_H_SLIDE_SLOW,
+    [SPECIES_KINGLER - 1]                      = ANIM_V_SHAKE_TWICE,
+    [SPECIES_VOLTORB - 1]                      = ANIM_SWING_CONCAVE,
+    [SPECIES_ELECTRODE - 1]                    = ANIM_SHRINK_GROW_VIBRATE_SLOW,
     [SPECIES_EXEGGCUTE - 1]                    = ANIM_H_SLIDE_SLOW,
     [SPECIES_EXEGGUTOR - 1]                    = ANIM_H_JUMPS_V_STRETCH,
-    [SPECIES_CUBONE - 1]                       = ANIM_V_JUMPS_SMALL,
+    [SPECIES_CUBONE - 1]                       = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_MAROWAK - 1]                      = ANIM_BOUNCE_ROTATE_TO_SIDES,
-    [SPECIES_HITMONLEE - 1]                    = ANIM_H_STRETCH,
+    [SPECIES_HITMONLEE - 1]                    = ANIM_H_JUMPS_V_STRETCH,
     [SPECIES_HITMONCHAN - 1]                   = ANIM_GROW_VIBRATE,
-    [SPECIES_LICKITUNG - 1]                    = ANIM_V_SQUISH_AND_BOUNCE_SLOW,
+    [SPECIES_LICKITUNG - 1]                    = ANIM_V_STRETCH,
     [SPECIES_KOFFING - 1]                      = ANIM_V_SLIDE_WOBBLE_SMALL,
     [SPECIES_WEEZING - 1]                      = ANIM_V_SLIDE,
     [SPECIES_RHYHORN - 1]                      = ANIM_V_SHAKE,
-    [SPECIES_RHYDON - 1]                       = ANIM_H_SHAKE,
+    [SPECIES_RHYDON - 1]                       = ANIM_V_STRETCH,
     [SPECIES_CHANSEY - 1]                      = ANIM_V_SQUISH_AND_BOUNCE,
-    [SPECIES_TANGELA - 1]                      = ANIM_BOUNCE_ROTATE_TO_SIDES_SMALL,
+    [SPECIES_TANGELA - 1]                      = ANIM_H_JUMPS_V_STRETCH,
     [SPECIES_KANGASKHAN - 1]                   = ANIM_V_STRETCH,
     [SPECIES_HORSEA - 1]                       = ANIM_V_JUMPS_SMALL,
     [SPECIES_SEADRA - 1]                       = ANIM_V_SLIDE,
@@ -2437,7 +2438,7 @@ const u8 sMonFrontAnimIdsTable[NUM_SPECIES - 1] =
     [SPECIES_STANTLER - 1]                     = ANIM_V_SQUISH_AND_BOUNCE,
     [SPECIES_SMEARGLE - 1]                     = ANIM_H_JUMPS_V_STRETCH,
     [SPECIES_TYROGUE - 1]                      = ANIM_BACK_AND_LUNGE,
-    [SPECIES_HITMONTOP - 1]                    = ANIM_H_VIBRATE,
+    [SPECIES_HITMONTOP - 1]                    = ANIM_SWING_CONCAVE,
     [SPECIES_SMOOCHUM - 1]                     = ANIM_GROW_VIBRATE,
     [SPECIES_ELEKID - 1]                       = ANIM_FLASH_YELLOW,
     [SPECIES_MAGBY - 1]                        = ANIM_V_SQUISH_AND_BOUNCE,
@@ -3655,7 +3656,8 @@ static const u8 sMonAnimationDelayTable[NUM_SPECIES - 1] =
     [SPECIES_HAUNTER - 1]    = 23,
     [SPECIES_DROWZEE - 1]    = 48,
     [SPECIES_HYPNO - 1]      = 40,
-    [SPECIES_HITMONCHAN - 1] = 25,
+    [SPECIES_KINGLER - 1]    = 4,
+    [SPECIES_CUBONE - 1]     = 30,
     [SPECIES_SCYTHER - 1]    = 10,
     [SPECIES_TAUROS - 1]     = 10,
     [SPECIES_TYPHLOSION - 1] = 20,
@@ -4696,6 +4698,46 @@ void CalculateMonStats(struct Pokemon *mon)
     u16 species = GetMonData(mon, MON_DATA_SPECIES, NULL);
     u8 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP, NULL);
     s32 level = GetLevelFromMonExp(mon);
+
+    // Level scaling is set, and is enabled in image
+    if (BF_ENABLE_LEVEL_SCALING){
+        
+        // Get the battle frontier fixed level
+        s8 scaleLevel = FlagGet(FLAG_FORCE_FRONTIER_LEVEL_SCALING);
+
+        // Level scaling flag is set
+        if (scaleLevel){
+            // Level Scaling Placeholders
+            bool8 scaleUp = FALSE;
+            bool8 scaleLevel = 100;
+
+            // Get the level mode from the frontier save block
+            const u8 levelMode = gSaveBlock2Ptr->frontier.lvlMode;
+
+            // Switch on level mode
+            switch(levelMode){
+                case FRONTIER_LVL_50: // Level 50
+                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_50_SCALE_UP;
+                    scaleLevel = BF_BATTLE_FRONTIER_LEVEL_50_SCALE_LEVEL;
+                    break;
+                case FRONTIER_LVL_OPEN: // Open (Level 100)
+                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_OPEN_SCALE_UP;
+                    scaleLevel = BF_BATTLE_FRONTIER_LEVEL_OPEN_SCALE_LEVEL;
+                    break;
+                case FRONTIER_LVL_TENT: // Battle Tent (Special)
+                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_UP;
+                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_LEVEL;
+                    break;
+            }
+
+            // If Pokemon is above level limit, or it is below AND level scaling up is enabled
+            if ((level > scaleLevel) || (level < scaleLevel && scaleUp)){
+                // Set level to the scaled level
+                level = scaleLevel;
+            }
+        }
+    }
+
     s32 newMaxHP;
 
     SetMonData(mon, MON_DATA_LEVEL, &level);

@@ -76,6 +76,7 @@
 #include "config/item.h"
 #include "move_relearner.h"
 #include "naming_screen.h"
+#include "config/battle_frontier.h"
 
 enum {
     MENU_SUMMARY,
@@ -6901,14 +6902,16 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
-    if (GetMonData(mon, MON_DATA_IS_EGG)
-        || GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap()
-        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-            && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
-    {
+    // If the Pokemon is an egg, or it is holding an item (Battle Pyramid Only)
+    if (GetMonData(mon, MON_DATA_IS_EGG) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
         return FALSE;
-    }
+
+    // If level scaling is disabled
+    if (BF_ENABLE_LEVEL_SCALING == FALSE)
+        if (GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap())
+            return FALSE;
 
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
@@ -6919,11 +6922,14 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     case FACILITY_UNION_ROOM:
         return TRUE;
     default: // Battle Frontier
-        species = GetMonData(mon, MON_DATA_SPECIES);
-        for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-        {
-            if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                return FALSE;
+        // Allow banned species is not set
+        if (BF_ALLOW_BANNED_SPECIES == FALSE){
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+            {
+                if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
+                    return FALSE;
+            }
         }
         return TRUE;
     }
@@ -6950,18 +6956,26 @@ static u8 CheckBattleEntriesAndGetMessage(void)
     if (facility == FACILITY_UNION_ROOM || facility == FACILITY_MULTI_OR_EREADER)
         return 0xFF;
 
-    maxBattlers = GetMaxBattleEntries();
-    for (i = 0; i < maxBattlers - 1; i++)
-    {
-        u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
-        u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
-        for (j = i + 1; j < maxBattlers; j++)
+    // If either of these flags are set, perform the loop
+    if (BF_ALLOW_DUPLICATE_ITEMS || BF_ALLOW_DUPLICATE_SPECIES){
+        maxBattlers = GetMaxBattleEntries();
+        for (i = 0; i < maxBattlers - 1; i++)
         {
-            if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
-                return PARTY_MSG_MONS_CANT_BE_SAME;
-            if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
-                return PARTY_MSG_NO_SAME_HOLD_ITEMS;
+            u16 species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
+            u16 item = GetMonData(&party[order[i] - 1], MON_DATA_HELD_ITEM);
+            for (j = i + 1; j < maxBattlers; j++)
+            {
+                // Allow duplicate species is set to false
+                if (BF_ALLOW_DUPLICATE_SPECIES == FALSE)
+                    if (species == GetMonData(&party[order[j] - 1], MON_DATA_SPECIES))
+                        return PARTY_MSG_MONS_CANT_BE_SAME;
+                // Allow duplicate items is set to false
+                if (BF_ALLOW_DUPLICATE_ITEMS == FALSE)
+                    if (item != ITEM_NONE && item == GetMonData(&party[order[j] - 1], MON_DATA_HELD_ITEM))
+                        return PARTY_MSG_NO_SAME_HOLD_ITEMS;
+            }
         }
+
     }
 
     return 0xFF;

@@ -24,6 +24,7 @@
 #include "wild_encounter.h"
 #include "constants/items.h"
 #include "constants/battle_frontier.h"
+#include "config/battle_frontier.h"
 
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
@@ -249,7 +250,6 @@ static void CB2_ReturnFromChooseBattleFrontierParty(void)
         gSpecialVar_Result = TRUE;
         break;
     }
-
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
@@ -262,8 +262,13 @@ void ReducePlayerPartyToSelectedMons(void)
 
     // copy the selected pokemon according to the order.
     for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
-        if (gSelectedOrderFromParty[i]) // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
+        if (gSelectedOrderFromParty[i]) {
+            // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
             party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
+
+            // Ensure level scaling is met
+            CalculateMonStats(&party[i]);
+        }
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);
 

@@ -34,6 +34,7 @@ BattleFrontier_BattleArenaLobby_EventScript_QuitWithoutSaving::
 	arena_set ARENA_DATA_WIN_STREAK_ACTIVE, FALSE
 	frontier_set FRONTIER_DATA_CHALLENGE_STATUS, 0
 	setvar VAR_TEMP_CHALLENGE_STATUS, 255
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	releaseall
 	end
 
@@ -72,6 +73,7 @@ BattleFrontier_BattleArenaLobby_EventScript_LostChallenge::
 	end
 
 BattleFrontier_BattleArenaLobby_EventScript_SaveAfterChallenge::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_checkairshow
 	special LoadPlayerParty
 	special HealPlayerParty
@@ -166,6 +168,7 @@ BattleFrontier_BattleArenaLobby_EventScript_EnterChallenge::
 	frontier_get FRONTIER_DATA_LVL_MODE
 	call_if_eq VAR_RESULT, FRONTIER_LVL_50, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLv50
 	call_if_eq VAR_RESULT, FRONTIER_LVL_OPEN, BattleFrontier_BattleArenaLobby_EventScript_WalkToDoorLvOpen
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	warp MAP_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR, 9, 13
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0
 	waitstate

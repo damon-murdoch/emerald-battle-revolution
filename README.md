@@ -124,6 +124,12 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.4.4
+
+Implemented level scaling system for Battle Frontier facilities, which allows for Pokemon above level 50 to participate
+in level 50 battles and optionally, pokemon below level 50 can be raised to level 50 or level 100 in Open Battles. As a
+result, the minimum level for Open Battles has been raised to 100 to ensure Pokemon all have the same level.
+
 ### Ver. 0.4.3
 
 Implemented `voloved`'s [PC Access in PokeNav](https://github.com/pret/pokeemerald/wiki/Add-PC-Access-in-PokeNav) tutorial, as well as [allow Move Relearner to Teach Moves that Pre Evolutions Know](https://github.com/pret/pokeemerald/wiki/Allow-Move-Relearner-to-Teach-Moves-that-Pre-Evolutions-Know). Implemented `Diego Marten`'s [Move Relearner as an option in the Pokémon Party Screen](https://www.pokecommunity.com/showpost.php?p=10470602) tutorial. Implemented `Lunos`'s [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap) tutorial, as well as [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
