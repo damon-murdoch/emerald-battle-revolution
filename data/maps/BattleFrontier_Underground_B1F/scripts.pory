@@ -100,6 +100,10 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1 {
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto)
         case 2:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+        case 3:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+        case 4:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
         case 5: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
         default: 
@@ -160,7 +164,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn {
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
 }
-
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennWeatherTrio {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennWeatherTrio)
     switch(var(VAR_RESULT)){
@@ -175,7 +178,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennWeath
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
 }
-
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennRegiTrio {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennRegiTrio)
     switch(var(VAR_RESULT)){
@@ -190,7 +192,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennRegiT
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
 }
-
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennOther {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennOther)
     switch(var(VAR_RESULT)){
@@ -204,6 +205,158 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennOther
             givemon(SPECIES_DEOXYS, 70)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh)
+    switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohCreationTrio)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohMythical)
+        case 2:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohOther)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohCreationTrio {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohCreationTrio)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIALGA, 70)
+        case 1:
+            givemon(SPECIES_PALKIA, 70)
+        case 2:
+            givemon(SPECIES_GIRATINA, 70)
+        default: 
+           goto(BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohMythical {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohMythical)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_PHIONE, 50)
+        case 1:
+            givemon(SPECIES_MANAPHY, 50)
+        case 2:
+            givemon(SPECIES_DARKRAI, 50)
+        case 3: 
+            givemon(SPECIES_SHAYMIN_LAND, 50)
+        case 4:
+            givemon(SPECIES_SHAYMIN_SKY, 50)
+        case 5:
+            givemon(SPECIES_ARCEUS, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohOther {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohOther)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_UXIE, 50)
+        case 1:
+            givemon(SPECIES_MESPRIT, 50)
+        case 2:
+            givemon(SPECIES_AZELF, 50)
+        case 3: 
+            givemon(SPECIES_HEATRAN, 50)
+        case 4:
+            givemon(SPECIES_REGIGIGAS, 50)
+        case 5:
+            givemon(SPECIES_CRESSELIA, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova)
+    switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaLegendaryTrio)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaSwordsOfJustice)
+        case 2:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaForcesOfNature)
+        case 3:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaOther)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaLegendaryTrio {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaLegendaryTrio)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_RESHIRAM, 70)
+        case 1:
+            givemon(SPECIES_ZEKROM, 70)
+        case 2:
+            givemon(SPECIES_KYUREM, 70)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaSwordsOfJustice {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaSwordsOfJustice)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_COBALION, 50)
+        case 1:
+            givemon(SPECIES_TERRAKION, 50)
+        case 2:
+            givemon(SPECIES_VIRIZION, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaForcesOfNature {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaForcesOfNature)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_TORNADUS, 50)
+        case 1:
+            givemon(SPECIES_THUNDURUS, 50)
+        case 2:
+            givemon(SPECIES_LANDORUS, 50)
+        case 3: 
+            givemon(SPECIES_TORNADUS_THERIAN, 50)
+        case 4:
+            givemon(SPECIES_THUNDURUS_THERIAN, 50)
+        case 5:
+            givemon(SPECIES_LANDORUS_THERIAN, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaOther {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaOther)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_VICTINI, 50)
+        case 1:
+            givemon(SPECIES_KELDEO, 50)
+        case 2:
+            givemon(SPECIES_MELOETTA, 50)
+        case 3: 
+            givemon(SPECIES_GENESECT, 50)
+        case 4:
+            givemon(SPECIES_ENAMORUS, 50)
+        case 5:
+            givemon(SPECIES_ENAMORUS_THERIAN, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
 }
@@ -298,7 +451,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto {
 text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn {
     "WEATHER TRIO$"
     "REGI TRIO$"
-    "OTHER$"
+    "OTHERS$"
     ""
 }
 # Weather Trio
@@ -324,7 +477,83 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennOther {
     ""
 }
 
+# Sinnoh
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh {
+    "CREATION TRIO$"
+    "MYTHICALS$"
+    "OTHERS$"
+    ""
+}
+# Creation Trio
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohCreationTrio {
+    "DIALGA$"
+    "PALKIA$"
+    "GIRATINA$"
+    ""
+}
+# Mythicals
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohMythical {
+    "PHIONE$"
+    "MANAPHY$"
+    "DARKRAI$"
+    "SHAYMIN$"
+    "SHAYMIN SKY$"
+    "ARCEUS$"
+    ""
+}
+# Others
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohOther {
+    "UXIE$"
+    "MESPRIT$"
+    "AZELF$"
+    "HEATRAN$"
+    "REGIGIGAS$"
+    "CRESSELIA$"
+    ""
+}
 
+# Unova
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova {
+    "LEGENDARY TRIO$"
+    "SWORDS OF JUSTICE$"
+    "FORCES OF NATURE$"
+    "OTHERS$"
+    ""
+}
+# Legendary Trio
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaLegendaryTrio {
+    "RESHIRAM$"
+    "ZEKROM$"
+    "KYUREM$"
+    ""
+}
+# Swords of Justice
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaSwordsOfJustice {
+    "COBALION$"
+    "TERRAKION$"
+    "VIRIZION$"
+    ""
+}
+# Forces of Nature
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaForcesOfNature {
+    "TORNADUS$"
+    "THUNDURUS$"
+    "LANDORUS$"
+    "TORNADUS THERIAN$"
+    "THUNDURUS THERIAN$"
+    "LANDORUS THERIAN$"
+    ""
+}
+# Others
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaOther {
+    "VICTINI$"
+    "KELDEO$"
+    "MELOETTA$"
+    "GENESECT$"
+    "ENAMORUS$"
+    "ENAMORUS THERIAN$"
+    ""
+}
 
 # Region Set 2
 text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2 {

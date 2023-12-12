@@ -9,33 +9,31 @@ Johto
 
 Hoenn
   - Weather Trio
-    - Groudon/Kyogre/Rayquaza
+    - ~~Groudon/Kyogre/Rayquaza~~
   - Regi Trio
-    - Regirock/Regice/Registeel
+    - ~~Regirock/Regice/Registeel~~
   - Other
-    - Latios/Latias/Jirachi/Deoxys
+    - ~~Latios/Latias/Jirachi/Deoxys~~
 
 Sinnoh
   - Creation Trio
-    - Dialga/Palkia/Giratina
+    - ~~Dialga/Palkia/Giratina~~
   - Lake Guardians
-    - Uxie/Mesprit/Azelf
+    - ~~Uxie/Mesprit/Azelf~~
   - Mythical
-    - Phione/Manaphy/Darkrai/Shaymin/Arceus
+    - ~~Phione/Manaphy/Darkrai/Shaymin/Arceus~~
   - Other
-    - Heatran/Regigigas/Cresselia
+    - ~~Heatran/Regigigas/Cresselia~~
 
 Unova
   - Legendary Trio
-    - Reshiram/Zekrom/Kyurem
+    - ~~Reshiram/Zekrom/Kyurem~~
   - Swords of Justice
-    - Cobalion/Terrakion/Virizion
+    - ~~Cobalion/Terrakion/Virizion~~
   - Forces of Nature
-    - Tornadus/Thundurus/Landorus/Enamorus
-  - Therian Formes
-    - Torn-T/Thund-T/Lando-T/Enam-T
-  - Mythical
-    - Victini / Keldeo / Meloetta / Genesect
+    - ~~Tornadus/Thundurus/Landorus/Torn-T/Thund-T/Lando-T~~
+  - Others
+    - ~~Victini / Keldeo / Meloetta / Genesect / Enamorus / Enam-T~~
 
 ... More
 
