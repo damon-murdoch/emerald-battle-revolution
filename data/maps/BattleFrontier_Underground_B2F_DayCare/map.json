@@ -1,12 +1,12 @@
 {
-  "id": "MAP_ROUTE117_POKEMON_DAY_CARE",
-  "name": "Route117_PokemonDayCare",
-  "layout": "LAYOUT_ROUTE117_POKEMON_DAY_CARE",
-  "music": "MUS_RUSTBORO",
-  "region_map_section": "MAPSEC_ROUTE_117",
+  "id": "MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_DAY_CARE",
+  "name": "BattleFrontier_Underground_B2F_DayCare",
+  "layout": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B2F_DAY_CARE",
+  "music": "MUS_POKE_MART",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
-  "map_type": "MAP_TYPE_INDOOR",
+  "map_type": "MAP_TYPE_NONE",
   "allow_cycling": false,
   "allow_escaping": false,
   "allow_running": false,
@@ -15,11 +15,11 @@
   "connections": 0,
   "object_events": [
     {
-      "graphics_id": "OBJ_EVENT_GFX_OLD_WOMAN",
+      "graphics_id": "OBJ_EVENT_GFX_WOMAN_2",
       "x": 2,
       "y": 2,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -29,20 +29,7 @@
     }
   ],
   "warp_events": [
-    {
-      "x": 2,
-      "y": 8,
-      "elevation": 0,
-      "dest_map": "MAP_ROUTE117",
-      "dest_warp_id": "0"
-    },
-    {
-      "x": 3,
-      "y": 8,
-      "elevation": 0,
-      "dest_map": "MAP_ROUTE117",
-      "dest_warp_id": "0"
-    }
+
   ],
   "coord_events": [
 

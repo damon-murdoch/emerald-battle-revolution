@@ -75,38 +75,194 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk {
     lock
     faceplayer
-    msgbox(format("Welcome to the legendary POKéMON shop!"))
+    msgbox(format("Welcome to the one-and-only legendary POKéMON shop!"))
     msgbox(format("We can track down almost any rare POKéMON for you here!"))
-    msgbox(format("What are you looking for today?"))
-    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    waitmessage
+    showmoneybox(18,0)
+    checkmoney(12000)
+    if (var(VAR_RESULT) == TRUE){
+        msgbox(format("What are you looking for today?"))
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥12000 to buy anything here!"))
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
 }
 
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1 {
-    multichoice2(1,1,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1, 0, 1, 0)
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1)
     switch(var(VAR_RESULT)){
+        case 0: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto)
+        case 2:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
         case 5: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
         default: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
     }
 }
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKanto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_MEWTWO, 70)
+        case 1:
+            givemon(SPECIES_ARTICUNO, 50)
+        case 2:
+            givemon(SPECIES_ZAPDOS, 50)
+        case 3:
+            givemon(SPECIES_MOLTRES, 50)
+        case 4:
+            givemon(SPECIES_MEW, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LUGIA, 70)
+        case 1:
+            givemon(SPECIES_HO_OH, 70)
+        case 2:
+            givemon(SPECIES_RAIKOU, 50)
+        case 3:
+            givemon(SPECIES_ENTEI, 50)
+        case 4: 
+            givemon(SPECIES_SUICUNE, 50)
+        case 5:
+            givemon(SPECIES_CELEBI, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn)
+    switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennWeatherTrio)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennRegiTrio)
+        case 2:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennOther)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennWeatherTrio {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennWeatherTrio)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_GROUDON, 70)
+        case 1:
+            givemon(SPECIES_KYOGRE, 70)
+        case 2:
+            givemon(SPECIES_RAYQUAZA, 70)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennRegiTrio {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennRegiTrio)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_REGIROCK, 50)
+        case 1:
+            givemon(SPECIES_REGICE, 50)
+        case 2:
+            givemon(SPECIES_REGISTEEL, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennOther {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennOther)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LATIOS, 50)
+        case 1:
+            givemon(SPECIES_LATIAS, 50)
+        case 2:
+            givemon(SPECIES_JIRACHI, 50)
+        case 3:
+            givemon(SPECIES_DEOXYS, 70)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2 {
-    multichoice2(1,1,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2, 0, 1, 0)
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2, 0, 1, 0)
     switch(var(VAR_RESULT)){
         default: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
     }
 }
 
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase {
+    msgbox(format("Let's see if we can find one of those for you ..."))
+    hidemoneybox
+    delay(10)
+    fadescreen(FADE_TO_BLACK)
+    delay(20)
+    fadescreen(FADE_FROM_BLACK)
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON has been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON has been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like we can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    playse(SE_SHOP)
+    removemoney(12000)
+    showmoneybox(18,0)
+    waitse
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+}
+
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd {
     msgbox(format("Please come back again soon!"))
+    hidemoneybox
     releaseall
     end
 }
 
 ## Text Blocks
 
-# Regions
+# Region Set 1
 text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1 {
     "KANTO$"
     "JOHTO$"
@@ -114,10 +270,67 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1 {
     "SINNOH$"
     "UNOVA$"
     "...MORE$"
+    ""
 }
+
+# Kanto
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKanto {
+    "MEWTWO{CLEAR_TO 0x48}¥12000$"
+    "ARTICUNO{CLEAR_TO 0x48}¥12000$"
+    "ZAPDOS{CLEAR_TO 0x48}¥12000$"
+    "MOLTRES{CLEAR_TO 0x48}¥12000$"
+    "MEW{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+# Johto
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto {
+    "LUGIA{CLEAR_TO 0x48}¥12000$"
+    "HO-OH{CLEAR_TO 0x48}¥12000$"
+    "RAIKOU{CLEAR_TO 0x48}¥12000$"
+    "ENTEI{CLEAR_TO 0x48}¥12000$"
+    "SUICUNE{CLEAR_TO 0x48}¥12000$"
+    "CELEBI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+# Hoenn
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn {
+    "WEATHER TRIO$"
+    "REGI TRIO$"
+    "OTHER$"
+    ""
+}
+# Weather Trio
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennWeatherTrio {
+    "GROUDON$"
+    "KYOGRE$"
+    "RAYQUAZA$"
+    ""
+}
+# Regi Trio
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennRegiTrio {
+    "REGIROCK$"
+    "REGICE$"
+    "REGISTEEL$"
+    ""
+}
+# Other (Hoenn)
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennOther {
+    "LATIOS$"
+    "LATIAS$"
+    "JIRACHI$"
+    "DEOXYS$"
+    ""
+}
+
+
+
+# Region Set 2
 text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2 {
     "KALOS$"
     "ALOLA$"
     "GALAR$"
     "PALDEA$"
+    ""
 }

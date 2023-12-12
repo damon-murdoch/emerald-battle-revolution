@@ -1069,3 +1069,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/BattleFrontier_Underground_B1F/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_DayCare/scripts.inc"
