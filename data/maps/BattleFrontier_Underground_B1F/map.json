@@ -154,6 +154,13 @@
       "elevation": 0,
       "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
       "dest_warp_id": "16"
+    },
+    {
+      "x": 39,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_DAY_CARE",
+      "dest_warp_id": "0"
     }
   ],
   "coord_events": [

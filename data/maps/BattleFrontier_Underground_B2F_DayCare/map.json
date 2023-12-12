@@ -29,7 +29,20 @@
     }
   ],
   "warp_events": [
-
+    {
+      "x": 2,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_BATTLE_FRONTIER_UNDERGROUND_B1F",
+      "dest_warp_id": "5"
+    },
+    {
+      "x": 3,
+      "y": 8,
+      "elevation": 0,
+      "dest_map": "MAP_BATTLE_FRONTIER_UNDERGROUND_B1F",
+      "dest_warp_id": "5"
+    }
   ],
   "coord_events": [
 
