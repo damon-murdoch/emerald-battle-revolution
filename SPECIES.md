@@ -45,28 +45,28 @@ Kalos
 
 Alola
   - Light Trio
-    - Cosmog / Cosmoem / Solgaleo / Lunala / Necrozma
+    - ~~Cosmog / Cosmoem / Solgaleo / Lunala / Necrozma~~
   - Legendary Tapus
-    - Tapu Koko / Tapu Lele / Tapu Bulu / Tapu Fini
+    - ~~Tapu Koko / Tapu Lele / Tapu Bulu / Tapu Fini~~
   - Ultra Beasts
-    - Nihilego / Buzzwole / Pheromosa / Xurkitree / Celesteela / ... More
-      Kartana / Guzzlord / Poipole / Naganadel / Stakataka / Blacephalon
+    - ~~Nihilego / Buzzwole / Pheromosa / Xurkitree / Celesteela / ... More~~
+      ~~Kartana / Guzzlord / Poipole / Naganadel / Stakataka / Blacephalon~~
   - Mythical
-    - Magearna / Marshadow / Zeraora
+    - ~~Magearna / Marshadow / Zeraora~~
   - Other
-    - Type: Null / Silvally
+    - ~~Type: Null / Silvally~~
 
 Galar
   - Darkest Day Trio
-    - Zacian / Zamazenta / Eternatus
+    - ~~Zacian / Zamazenta / Eternatus~~
   - Isle of Armor
-    - Kubfu / Urshifu-SS / Urshifu-RS
+    - ~~Kubfu / Urshifu-SS / Urshifu-RS~~
   - Crown Tundra Trio
     - Calyrex / Glastrier / Spectrier
   - Mythical
-    - Meltan / Melmetal / Zarude
+    - ~~Meltan / Melmetal / Zarude~~
   - Other
-    - Regieleki / Regidrago / GArticuno / GZapdos / GMoltres
+    - ~~Regieleki / Regidrago / GArticuno / GZapdos / GMoltres~~
 
 Paldea
   - Ride Pokemon
