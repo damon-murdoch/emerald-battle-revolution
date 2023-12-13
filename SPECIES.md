@@ -39,9 +39,9 @@ Unova
 
 Kalos
   - Aura Trio
-    - Xerneas / Yveltal / Zygarde-10 / Zygarde-50
+    - ~~Xerneas / Yveltal / Zygarde-10 / Zygarde-50~~
   - Mythical
-    - Diancie / Hoopa / Volcanion
+    - ~~Diancie / Hoopa / Volcanion~~
 
 Alola
   - Light Trio

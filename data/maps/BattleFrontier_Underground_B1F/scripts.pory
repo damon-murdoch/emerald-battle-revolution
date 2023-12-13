@@ -362,11 +362,61 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaOther
 }
 
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2, 0, 1, 0)
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2)
     switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
         default: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
     }
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos)
+    switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosAuraTrio)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosMythical)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosAuraTrio {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosAuraTrio)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_XERNEAS, 70)
+        case 1:
+            givemon(SPECIES_YVELTAL, 70)
+        case 2:
+            givemon(SPECIES_ZYGARDE_10_AURA_BREAK, 50)
+        case 3:
+            givemon(SPECIES_ZYGARDE_50_AURA_BREAK, 50)
+        case 4:
+            givemon(SPECIES_ZYGARDE_10_POWER_CONSTRUCT, 70)
+        case 5:
+            givemon(SPECIES_ZYGARDE_50_POWER_CONSTRUCT, 70)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosMythical {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosMythical)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIANCIE, 50)
+        case 1:
+            givemon(SPECIES_HOOPA, 50)
+        case 2:
+            givemon(SPECIES_HOOPA_UNBOUND, 50)
+        case 3:
+            givemon(SPECIES_VOLCANION, 50)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase)
 }
 
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase {
@@ -561,5 +611,30 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2 {
     "ALOLA$"
     "GALAR$"
     "PALDEA$"
+    ""
+}
+
+# Kalos
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos {
+    "AURA TRIO$"
+    "MYTHICALS$"
+    ""
+}
+# Aura Trio
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosAuraTrio {
+    "XERNEAS$"
+    "YVELTAL$"
+    "ZYGARDE-10 (AURA BREAK)$"
+    "ZYGARDE-50 (AURA BREAK)$"
+    "ZYGARDE-10 (POWER CONSTRUCT)$"
+    "ZYGARDE-50 (POWER CONSTRUCT)$"
+    ""
+}
+# Mythicals
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosMythicals {
+    "DIANCIE$"
+    "HOOPA$"
+    "HOOPA UNBOUND$"
+    "VOLCANION$"
     ""
 }
