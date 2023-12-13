@@ -799,8 +799,9 @@ BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohOther::
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova::
-	.string "CREATION TRIO$"
-	.string "MYTHICALS$"
+	.string "LEGENDARY TRIO$"
+	.string "SWORDS OF JUSTICE$"
+	.string "FORCES OF NATURE$"
 	.string "OTHERS$"
 	.string "$"
 
