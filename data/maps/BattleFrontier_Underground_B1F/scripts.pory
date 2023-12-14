@@ -3,9 +3,7 @@ BattleFrontier_Underground_B1F_MapScripts::
 	.byte 0
 `
 
-#### Scripts ####
-
-### Greeters ###
+## Greeters ##
 
 script BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
     lock
@@ -67,11 +65,20 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
     end
 }
 
-### Pokemon Shop ###
+## Training Street
+script BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign {
+    msgbox("TRAINING STREET\nThis way for:", MSGBOX_SIGN)
+    msgbox("LEGENDARY POKEMON SHOP\nPOKéMON Day Care", MSGBOX_SIGN)
+    msgbox("Training Berry Shop\nBattle Restaurant", MSGBOX_SIGN)
+    msgbox("Training Item Shop\nBattle Dojo", MSGBOX_SIGN)
+    end
+}
 
-## Event Scripts
-
-# Behind Counter (Left)
+# Pokemon Shop
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopSign {
+    msgbox("Legendary POKéMON Shop\nDownstairs: POKéMON Day Care", MSGBOX_SIGN)
+    end
+}
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk {
     lock
     faceplayer
@@ -727,7 +734,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd {
     releaseall
     end
 }
-
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk {
     lock
 	faceplayer
@@ -735,6 +741,81 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk {
 	waitmessage
 	pokemart(BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk)
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Berry Training Shop (Restaurant)
+script BattleFrontier_Underground_B1F_EventScript_BerryShopSign {
+    msgbox("Training Berry Shop\nDownstairs: Battle Restaurant", MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_BerryShopIVTrainingClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BerryShopEVTrainingClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Training Shop (Dojo)
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopSign {
+    msgbox("Training Item Shop\nDownstairs: Battle Dojo", MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopVitaminClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopMintClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Coming Soon (Placeholder)
+script BattleFrontier_Underground_B1F_EventScript_ComingSoonSign {
+    msgbox(format("COMING SOON"), MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff {
+    lock
+	faceplayer
+    msgbox(format("This area isn't available right now, sorry! Please come back soon!"))
 	release
 	end
 }
@@ -1120,44 +1201,6 @@ mart BattleFrontier_Underground_B1F_Mart_MechanicShopZCrystalClerk {
     ITEM_Z_POWER_RING
 }
 
-mart BattleFrontier_Underground_B1F_Mart_MechanicShopTypeItemClerk {
-    ITEM_SILK_SCARF
-    ITEM_CHARCOAL
-    ITEM_MYSTIC_WATER
-    ITEM_MAGNET
-    ITEM_MIRACLE_SEED
-    ITEM_NEVER_MELT_ICE
-    ITEM_BLACK_BELT
-    ITEM_POISON_BARB
-    ITEM_SOFT_SAND
-    ITEM_SHARP_BEAK
-    ITEM_TWISTED_SPOON
-    ITEM_SILVER_POWDER
-    ITEM_HARD_STONE
-    ITEM_SPELL_TAG
-    ITEM_DRAGON_FANG
-    ITEM_BLACK_GLASSES
-    ITEM_METAL_COAT
-    ITEM_NORMAL_GEM
-    ITEM_FIRE_GEM
-    ITEM_WATER_GEM
-    ITEM_ELECTRIC_GEM
-    ITEM_GRASS_GEM
-    ITEM_ICE_GEM
-    ITEM_FIGHTING_GEM
-    ITEM_POISON_GEM
-    ITEM_GROUND_GEM
-    ITEM_FLYING_GEM
-    ITEM_PSYCHIC_GEM
-    ITEM_BUG_GEM
-    ITEM_ROCK_GEM
-    ITEM_GHOST_GEM
-    ITEM_DRAGON_GEM
-    ITEM_DARK_GEM
-    ITEM_STEEL_GEM
-    ITEM_FAIRY_GEM
-}
-
 mart BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk {
     ITEM_BUG_TERA_SHARD
     ITEM_DARK_TERA_SHARD
@@ -1181,14 +1224,7 @@ mart BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk {
     ITEM_TERA_ORB
 }
 
-mart BattleFrontier_Underground_B1F_Mart_MedicineShopVitaminClerk {
-    ITEM_RARE_CANDY
-    ITEM_EXP_CANDY_XS
-    ITEM_EXP_CANDY_S
-    ITEM_EXP_CANDY_M
-    ITEM_EXP_CANDY_L
-    ITEM_EXP_CANDY_XL
-    ITEM_DYNAMAX_CANDY
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
     ITEM_HEALTH_FEATHER
     ITEM_MUSCLE_FEATHER
     ITEM_RESIST_FEATHER
@@ -1207,7 +1243,7 @@ mart BattleFrontier_Underground_B1F_Mart_MedicineShopVitaminClerk {
     ITEM_ABILITY_PATCH
 }
 
-mart BattleFreontier_Underground_B1F_Mart_MedicineShopMintClerk {
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
     ITEM_LONELY_MINT
     ITEM_ADAMANT_MINT
     ITEM_NAUGHTY_MINT
@@ -1229,6 +1265,23 @@ mart BattleFreontier_Underground_B1F_Mart_MedicineShopMintClerk {
     ITEM_JOLLY_MINT
     ITEM_NAIVE_MINT
     ITEM_SERIOUS_MINT
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk {
+    ITEM_RARE_CANDY
+    ITEM_EXP_CANDY_XS
+    ITEM_EXP_CANDY_S
+    ITEM_EXP_CANDY_M
+    ITEM_EXP_CANDY_L
+    ITEM_EXP_CANDY_XL
+    ITEM_DYNAMAX_CANDY
+    ITEM_MACHO_BRACE
+    ITEM_POWER_WEIGHT
+    ITEM_POWER_BRACER
+    ITEM_POWER_BELT
+    ITEM_POWER_LENS
+    ITEM_POWER_BAND
+    ITEM_POWER_ANKLET
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk {
@@ -1300,12 +1353,6 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
-    ITEM_HEALTH_FEATHER
-    ITEM_MUSCLE_FEATHER
-    ITEM_RESIST_FEATHER
-    ITEM_GENIUS_FEATHER
-    ITEM_CLEVER_FEATHER
-    ITEM_SWIFT_FEATHER
     ITEM_HEALTH_MOCHI
     ITEM_MUSCLE_MOCHI
     ITEM_RESIST_MOCHI
@@ -1319,4 +1366,43 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
     ITEM_HONDEW_BERRY
     ITEM_GREPA_BERRY
     ITEM_TAMATO_BERRY
+}
+
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
+    ITEM_SILK_SCARF
+    ITEM_CHARCOAL
+    ITEM_MYSTIC_WATER
+    ITEM_MAGNET
+    ITEM_MIRACLE_SEED
+    ITEM_NEVER_MELT_ICE
+    ITEM_BLACK_BELT
+    ITEM_POISON_BARB
+    ITEM_SOFT_SAND
+    ITEM_SHARP_BEAK
+    ITEM_TWISTED_SPOON
+    ITEM_SILVER_POWDER
+    ITEM_HARD_STONE
+    ITEM_SPELL_TAG
+    ITEM_DRAGON_FANG
+    ITEM_BLACK_GLASSES
+    ITEM_METAL_COAT
+    ITEM_NORMAL_GEM
+    ITEM_FIRE_GEM
+    ITEM_WATER_GEM
+    ITEM_ELECTRIC_GEM
+    ITEM_GRASS_GEM
+    ITEM_ICE_GEM
+    ITEM_FIGHTING_GEM
+    ITEM_POISON_GEM
+    ITEM_GROUND_GEM
+    ITEM_FLYING_GEM
+    ITEM_PSYCHIC_GEM
+    ITEM_BUG_GEM
+    ITEM_ROCK_GEM
+    ITEM_GHOST_GEM
+    ITEM_DRAGON_GEM
+    ITEM_DARK_GEM
+    ITEM_STEEL_GEM
+    ITEM_FAIRY_GEM
 }

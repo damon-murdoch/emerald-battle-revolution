@@ -61,6 +61,20 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign::
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_0, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_1, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_2, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_3, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopSign::
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_0, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_1, MSGBOX_SIGN
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk::
 	lock
 	faceplayer
@@ -141,7 +155,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto_9
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto_3:
@@ -186,7 +200,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto_3:
@@ -280,7 +294,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2_8
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2_3:
@@ -368,7 +382,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2_3:
@@ -410,11 +424,12 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3::
 	case 0, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_3
 	case 1, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_4
 	case 2, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_5
-	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_6
-	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_7
+	case 3, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_6
+	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_7
+	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_8
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_3:
@@ -430,10 +445,14 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_5:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_6:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2
+	givemon SPECIES_ROTOM, 30
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_7:
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_1
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_8:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3_1
 
@@ -451,7 +470,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova_3:
@@ -500,7 +519,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2_3:
@@ -549,7 +568,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3_3:
@@ -598,7 +617,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos_3:
@@ -645,7 +664,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2_8
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2_3:
@@ -718,7 +737,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola_3:
@@ -767,7 +786,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2_3:
@@ -816,7 +835,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3_3:
@@ -865,7 +884,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4_3:
@@ -914,7 +933,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar_3:
@@ -963,7 +982,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2_3:
@@ -1011,7 +1030,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3_9
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3_3:
@@ -1056,7 +1075,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea_3:
@@ -1105,7 +1124,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2_3:
@@ -1154,7 +1173,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3_3:
@@ -1203,7 +1222,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4::
 	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4_3:
@@ -1244,11 +1263,12 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5::
 	switch VAR_RESULT
 	case 0, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_3
 	case 1, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_4
-	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_5
-	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_6
+	case 2, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_5
+	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_6
+	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_7
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_1:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_3:
@@ -1260,71 +1280,541 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_4:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_5:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4
+	givemon SPECIES_URSALUNA_BLOODMOON, 50
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_6:
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_1
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_7:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_1
 
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase::
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_0
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase::
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_0
 	hidemoneybox
 	delay 10
 	fadescreen FADE_TO_BLACK
 	delay 20
 	fadescreen FADE_FROM_BLACK
 	switch VAR_RESULT
-	case MON_GIVEN_TO_PARTY, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_3
-	case MON_GIVEN_TO_PC, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_4
-	case MON_CANT_GIVE, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_5
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_1:
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_6
+	case MON_GIVEN_TO_PARTY, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_3
+	case MON_GIVEN_TO_PC, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_4
+	case MON_CANT_GIVE, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_5
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_1:
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_6
 	playse SE_SHOP
 	removemoney 12000
 	showmoneybox 18, 0
 	waitse
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_7
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_7
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_8
 	yesnobox 0, 8
 	compare VAR_RESULT, YES
-	goto_if_eq BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_7
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_6:
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_7
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_6:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd
 	return
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_3:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_3:
 	playse SE_SUCCESS
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_1
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_2
 	waitse
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_1
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_1
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_4:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_4:
 	playse SE_SUCCESS
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_4
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_3
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_4
 	waitse
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_1
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_1
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_5:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_5:
 	playse SE_FAILURE
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_5
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_5
 	waitse
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_1
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_1
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_7:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_7:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_6
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_6
 
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_1
 	hidemoneybox
 	releaseall
 	end
 
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BerryShopSign::
+	msgbox BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_0, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_1, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BerryShopIVTrainingClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BerryShopEVTrainingClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopSign::
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_0, MSGBOX_SIGN
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_1, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopVitaminClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopMintClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_ComingSoonSign::
+	msgbox BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff_Text_0
+	release
+	end
+
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
+	.2byte ITEM_FLAME_PLATE
+	.2byte ITEM_SPLASH_PLATE
+	.2byte ITEM_ZAP_PLATE
+	.2byte ITEM_MEADOW_PLATE
+	.2byte ITEM_ICICLE_PLATE
+	.2byte ITEM_FIST_PLATE
+	.2byte ITEM_TOXIC_PLATE
+	.2byte ITEM_EARTH_PLATE
+	.2byte ITEM_SKY_PLATE
+	.2byte ITEM_MIND_PLATE
+	.2byte ITEM_INSECT_PLATE
+	.2byte ITEM_STONE_PLATE
+	.2byte ITEM_SPOOKY_PLATE
+	.2byte ITEM_DRACO_PLATE
+	.2byte ITEM_DREAD_PLATE
+	.2byte ITEM_IRON_PLATE
+	.2byte ITEM_PIXIE_PLATE
+	.2byte ITEM_DOUSE_DRIVE
+	.2byte ITEM_SHOCK_DRIVE
+	.2byte ITEM_BURN_DRIVE
+	.2byte ITEM_CHILL_DRIVE
+	.2byte ITEM_FIRE_MEMORY
+	.2byte ITEM_WATER_MEMORY
+	.2byte ITEM_ELECTRIC_MEMORY
+	.2byte ITEM_GRASS_MEMORY
+	.2byte ITEM_ICE_MEMORY
+	.2byte ITEM_FIGHTING_MEMORY
+	.2byte ITEM_POISON_MEMORY
+	.2byte ITEM_GROUND_MEMORY
+	.2byte ITEM_FLYING_MEMORY
+	.2byte ITEM_PSYCHIC_MEMORY
+	.2byte ITEM_BUG_MEMORY
+	.2byte ITEM_ROCK_MEMORY
+	.2byte ITEM_GHOST_MEMORY
+	.2byte ITEM_DRAGON_MEMORY
+	.2byte ITEM_DARK_MEMORY
+	.2byte ITEM_STEEL_MEMORY
+	.2byte ITEM_FAIRY_MEMORY
+	.2byte ITEM_RUSTED_SWORD
+	.2byte ITEM_RUSTED_SHIELD
+	.2byte ITEM_SOUL_DEW
+	.2byte ITEM_ADAMANT_ORB
+	.2byte ITEM_LUSTROUS_ORB
+	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_SCROLL_OF_DARKNESS
+	.2byte ITEM_SCROLL_OF_WATERS
+	.2byte ITEM_CORNERSTONE_MASK
+	.2byte ITEM_WELLSPRING_MASK
+	.2byte ITEM_HEARTHFLAME_MASK
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
+	.2byte ITEM_ROTOM_CATALOG
+	.2byte ITEM_GRACIDEA
+	.2byte ITEM_REVEAL_GLASS
+	.2byte ITEM_DNA_SPLICERS
+	.2byte ITEM_ZYGARDE_CUBE
+	.2byte ITEM_PRISON_BOTTLE
+	.2byte ITEM_N_SOLARIZER
+	.2byte ITEM_N_LUNARIZER
+	.2byte ITEM_REINS_OF_UNITY
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_MechanicShopMegaStoneClerk:
+	.2byte ITEM_VENUSAURITE
+	.2byte ITEM_CHARIZARDITE_X
+	.2byte ITEM_CHARIZARDITE_Y
+	.2byte ITEM_BLASTOISINITE
+	.2byte ITEM_BEEDRILLITE
+	.2byte ITEM_PIDGEOTITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_GENGARITE
+	.2byte ITEM_KANGASKHANITE
+	.2byte ITEM_PINSIRITE
+	.2byte ITEM_GYARADOSITE
+	.2byte ITEM_AERODACTYLITE
+	.2byte ITEM_MEWTWONITE_X
+	.2byte ITEM_MEWTWONITE_Y
+	.2byte ITEM_AMPHAROSITE
+	.2byte ITEM_STEELIXITE
+	.2byte ITEM_SCIZORITE
+	.2byte ITEM_HERACRONITE
+	.2byte ITEM_HOUNDOOMINITE
+	.2byte ITEM_TYRANITARITE
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_GARDEVOIRITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_AGGRONITE
+	.2byte ITEM_MEDICHAMITE
+	.2byte ITEM_MANECTITE
+	.2byte ITEM_SHARPEDONITE
+	.2byte ITEM_CAMERUPTITE
+	.2byte ITEM_ALTARIANITE
+	.2byte ITEM_BANETTITE
+	.2byte ITEM_ABSOLITE
+	.2byte ITEM_GLALITITE
+	.2byte ITEM_SALAMENCITE
+	.2byte ITEM_METAGROSSITE
+	.2byte ITEM_LATIASITE
+	.2byte ITEM_LATIOSITE
+	.2byte ITEM_LOPUNNITE
+	.2byte ITEM_GARCHOMPITE
+	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_ABOMASITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_AUDINITE
+	.2byte ITEM_DIANCITE
+	.2byte ITEM_RED_ORB
+	.2byte ITEM_BLUE_ORB
+	.2byte ITEM_MEGA_RING
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_MechanicShopZCrystalClerk:
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GRASSIUM_Z
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_POISONIUM_Z
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_FLYINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_ROCKIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
+	.2byte ITEM_DRAGONIUM_Z
+	.2byte ITEM_DARKINIUM_Z
+	.2byte ITEM_STEELIUM_Z
+	.2byte ITEM_FAIRIUM_Z
+	.2byte ITEM_PIKANIUM_Z
+	.2byte ITEM_EEVIUM_Z
+	.2byte ITEM_SNORLIUM_Z
+	.2byte ITEM_MEWNIUM_Z
+	.2byte ITEM_DECIDIUM_Z
+	.2byte ITEM_INCINIUM_Z
+	.2byte ITEM_PRIMARIUM_Z
+	.2byte ITEM_LYCANIUM_Z
+	.2byte ITEM_MIMIKIUM_Z
+	.2byte ITEM_KOMMONIUM_Z
+	.2byte ITEM_TAPUNIUM_Z
+	.2byte ITEM_SOLGANIUM_Z
+	.2byte ITEM_LUNALIUM_Z
+	.2byte ITEM_MARSHADIUM_Z
+	.2byte ITEM_ALORAICHIUM_Z
+	.2byte ITEM_PIKASHUNIUM_Z
+	.2byte ITEM_ULTRANECROZIUM_Z
+	.2byte ITEM_Z_POWER_RING
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk:
+	.2byte ITEM_BUG_TERA_SHARD
+	.2byte ITEM_DARK_TERA_SHARD
+	.2byte ITEM_DRAGON_TERA_SHARD
+	.2byte ITEM_ELECTRIC_TERA_SHARD
+	.2byte ITEM_FAIRY_TERA_SHARD
+	.2byte ITEM_FIGHTING_TERA_SHARD
+	.2byte ITEM_FIRE_TERA_SHARD
+	.2byte ITEM_FLYING_TERA_SHARD
+	.2byte ITEM_GHOST_TERA_SHARD
+	.2byte ITEM_GRASS_TERA_SHARD
+	.2byte ITEM_GROUND_TERA_SHARD
+	.2byte ITEM_ICE_TERA_SHARD
+	.2byte ITEM_NORMAL_TERA_SHARD
+	.2byte ITEM_POISON_TERA_SHARD
+	.2byte ITEM_PSYCHIC_TERA_SHARD
+	.2byte ITEM_ROCK_TERA_SHARD
+	.2byte ITEM_STEEL_TERA_SHARD
+	.2byte ITEM_WATER_TERA_SHARD
+	.2byte ITEM_DYNAMAX_BAND
+	.2byte ITEM_TERA_ORB
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk:
+	.2byte ITEM_HEALTH_FEATHER
+	.2byte ITEM_MUSCLE_FEATHER
+	.2byte ITEM_RESIST_FEATHER
+	.2byte ITEM_GENIUS_FEATHER
+	.2byte ITEM_CLEVER_FEATHER
+	.2byte ITEM_SWIFT_FEATHER
+	.2byte ITEM_HP_UP
+	.2byte ITEM_PROTEIN
+	.2byte ITEM_IRON
+	.2byte ITEM_CALCIUM
+	.2byte ITEM_ZINC
+	.2byte ITEM_CARBOS
+	.2byte ITEM_PP_UP
+	.2byte ITEM_PP_MAX
+	.2byte ITEM_ABILITY_CAPSULE
+	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk:
+	.2byte ITEM_LONELY_MINT
+	.2byte ITEM_ADAMANT_MINT
+	.2byte ITEM_NAUGHTY_MINT
+	.2byte ITEM_BRAVE_MINT
+	.2byte ITEM_BOLD_MINT
+	.2byte ITEM_IMPISH_MINT
+	.2byte ITEM_LAX_MINT
+	.2byte ITEM_RELAXED_MINT
+	.2byte ITEM_MODEST_MINT
+	.2byte ITEM_MILD_MINT
+	.2byte ITEM_RASH_MINT
+	.2byte ITEM_QUIET_MINT
+	.2byte ITEM_CALM_MINT
+	.2byte ITEM_GENTLE_MINT
+	.2byte ITEM_CAREFUL_MINT
+	.2byte ITEM_SASSY_MINT
+	.2byte ITEM_TIMID_MINT
+	.2byte ITEM_HASTY_MINT
+	.2byte ITEM_JOLLY_MINT
+	.2byte ITEM_NAIVE_MINT
+	.2byte ITEM_SERIOUS_MINT
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk:
+	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_EXP_CANDY_XS
+	.2byte ITEM_EXP_CANDY_S
+	.2byte ITEM_EXP_CANDY_M
+	.2byte ITEM_EXP_CANDY_L
+	.2byte ITEM_EXP_CANDY_XL
+	.2byte ITEM_DYNAMAX_CANDY
+	.2byte ITEM_MACHO_BRACE
+	.2byte ITEM_POWER_WEIGHT
+	.2byte ITEM_POWER_BRACER
+	.2byte ITEM_POWER_BELT
+	.2byte ITEM_POWER_LENS
+	.2byte ITEM_POWER_BAND
+	.2byte ITEM_POWER_ANKLET
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk:
+	.2byte ITEM_CHERI_BERRY
+	.2byte ITEM_CHESTO_BERRY
+	.2byte ITEM_PECHA_BERRY
+	.2byte ITEM_RAWST_BERRY
+	.2byte ITEM_ASPEAR_BERRY
+	.2byte ITEM_LEPPA_BERRY
+	.2byte ITEM_ORAN_BERRY
+	.2byte ITEM_PERSIM_BERRY
+	.2byte ITEM_LUM_BERRY
+	.2byte ITEM_SITRUS_BERRY
+	.2byte ITEM_FIGY_BERRY
+	.2byte ITEM_WIKI_BERRY
+	.2byte ITEM_MAGO_BERRY
+	.2byte ITEM_AGUAV_BERRY
+	.2byte ITEM_IAPAPA_BERRY
+	.2byte ITEM_LIECHI_BERRY
+	.2byte ITEM_GANLON_BERRY
+	.2byte ITEM_SALAC_BERRY
+	.2byte ITEM_PETAYA_BERRY
+	.2byte ITEM_APICOT_BERRY
+	.2byte ITEM_LANSAT_BERRY
+	.2byte ITEM_STARF_BERRY
+	.2byte ITEM_ENIGMA_BERRY
+	.2byte ITEM_MICLE_BERRY
+	.2byte ITEM_CUSTAP_BERRY
+	.2byte ITEM_JABOCA_BERRY
+	.2byte ITEM_ROWAP_BERRY
+	.2byte ITEM_KEE_BERRY
+	.2byte ITEM_MARANGA_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BerryShopResistClerk:
+	.2byte ITEM_CHILAN_BERRY
+	.2byte ITEM_OCCA_BERRY
+	.2byte ITEM_PASSHO_BERRY
+	.2byte ITEM_WACAN_BERRY
+	.2byte ITEM_RINDO_BERRY
+	.2byte ITEM_YACHE_BERRY
+	.2byte ITEM_CHOPLE_BERRY
+	.2byte ITEM_KEBIA_BERRY
+	.2byte ITEM_SHUCA_BERRY
+	.2byte ITEM_COBA_BERRY
+	.2byte ITEM_PAYAPA_BERRY
+	.2byte ITEM_TANGA_BERRY
+	.2byte ITEM_CHARTI_BERRY
+	.2byte ITEM_KASIB_BERRY
+	.2byte ITEM_HABAN_BERRY
+	.2byte ITEM_COLBUR_BERRY
+	.2byte ITEM_BABIRI_BERRY
+	.2byte ITEM_ROSELI_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
+	.2byte ITEM_RAZZ_BERRY
+	.2byte ITEM_BLUK_BERRY
+	.2byte ITEM_NANAB_BERRY
+	.2byte ITEM_WEPEAR_BERRY
+	.2byte ITEM_PINAP_BERRY
+	.2byte ITEM_CORNN_BERRY
+	.2byte ITEM_MAGOST_BERRY
+	.2byte ITEM_RABUTA_BERRY
+	.2byte ITEM_NOMEL_BERRY
+	.2byte ITEM_SPELON_BERRY
+	.2byte ITEM_PAMTRE_BERRY
+	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk:
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MAGNET
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_NEVER_MELT_ICE
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_POISON_BARB
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_SHARP_BEAK
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_DRAGON_FANG
+	.2byte ITEM_BLACK_GLASSES
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_NORMAL_GEM
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_ELECTRIC_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_ICE_GEM
+	.2byte ITEM_FIGHTING_GEM
+	.2byte ITEM_POISON_GEM
+	.2byte ITEM_GROUND_GEM
+	.2byte ITEM_FLYING_GEM
+	.2byte ITEM_PSYCHIC_GEM
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_ROCK_GEM
+	.2byte ITEM_GHOST_GEM
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_DARK_GEM
+	.2byte ITEM_STEEL_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:
 	.string "Welcome to the Battle Frontier\n"
@@ -1365,6 +1855,24 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter_Text_0:
 	.string "Battle Pyramid and Battle Arena\l"
 	.string "facilities.$"
 
+BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_0:
+	.string "TRAINING STREET\nThis way for:$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_1:
+	.string "LEGENDARY POKEMON SHOP\nPOKéMON Day Care$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_2:
+	.string "Training Berry Shop\nBattle Restaurant$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_3:
+	.string "Training Item Shop\nBattle Dojo$"
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_0:
+	.string "Legendary POKéMON Shop$"
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_1:
+	.string "Downstairs: POKéMON Day Care$"
+
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_0:
 	.string "Welcome to the one-and-only legendary\n"
 	.string "POKéMON shop!$"
@@ -1383,36 +1891,63 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_4:
 	.string "Oh, sorry! You need at least ¥12000 to\n"
 	.string "buy anything here!$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_0:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_0:
 	.string "Let's see if we can find one of those\n"
 	.string "for you ...$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_1:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_1:
 	.string "Here you go!$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_2:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_2:
 	.string "The POKéMON has been added to your\n"
 	.string "party.$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_3:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_3:
 	.string "All done!$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_4:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_4:
 	.string "The POKéMON has been sent to your PC\n"
 	.string "boxes.$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_5:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_5:
 	.string "It looks like we can't give you any more\n"
 	.string "POKéMON right now - Sorry!$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_6:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_6:
 	.string "I'll take your payment now, please.$"
 
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerCheckPurchase_Text_7:
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_7:
+	.string "Thanks for your business!$"
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_8:
 	.string "Can we help you with anything else?$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_0:
-	.string "Please come back again soon!$"
+	.string "If you need any forme-changing items\n"
+	.string "for these POKéMON, please speak to the\l"
+	.string "man next to me.$"
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_1:
+	.string "Come back again soon!$"
+
+BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_0:
+	.string "Training Berry Shop$"
+
+BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_1:
+	.string "Downstairs: Battle Restaurant$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_0:
+	.string "Training Item Shop$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_1:
+	.string "Downstairs: Battle Dojo$"
+
+BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0:
+	.string "COMING SOON$"
+
+BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff_Text_0:
+	.string "This area isn't available right now,\n"
+	.string "sorry! Please come back soon!$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1::
 	.string "KANTO$"
@@ -1441,86 +1976,87 @@ BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto::
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn::
-	.string "GROUDON$"
-	.string "KYOGRE$"
-	.string "RAYQUAZA$"
-	.string "REGIROCK$"
-	.string "REGICE$"
-	.string "REGISTEEL$"
+	.string "GROUDON{CLEAR_TO 0x48}¥12000$"
+	.string "KYOGRE{CLEAR_TO 0x48}¥12000$"
+	.string "RAYQUAZA{CLEAR_TO 0x48}¥12000$"
+	.string "REGIROCK{CLEAR_TO 0x48}¥12000$"
+	.string "REGICE{CLEAR_TO 0x48}¥12000$"
+	.string "REGISTEEL{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2::
-	.string "LATIOS$"
-	.string "LATIAS$"
-	.string "JIRACHI$"
-	.string "DEOXYS$"
+	.string "LATIOS{CLEAR_TO 0x48}¥12000$"
+	.string "LATIAS{CLEAR_TO 0x48}¥12000$"
+	.string "JIRACHI{CLEAR_TO 0x48}¥12000$"
+	.string "DEOXYS{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh::
-	.string "DIALGA$"
-	.string "PALKIA$"
-	.string "GIRATINA$"
-	.string "HEATRAN$"
-	.string "REGIGIGAS$"
-	.string "CRESSELIA$"
+	.string "DIALGA{CLEAR_TO 0x48}¥12000$"
+	.string "PALKIA{CLEAR_TO 0x48}¥12000$"
+	.string "GIRATINA{CLEAR_TO 0x48}¥12000$"
+	.string "HEATRAN{CLEAR_TO 0x48}¥12000$"
+	.string "REGIGIGAS{CLEAR_TO 0x48}¥12000$"
+	.string "CRESSELIA{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2::
-	.string "UXIE$"
-	.string "MESPRIT$"
-	.string "AZELF$"
-	.string "PHIONE$"
-	.string "MANAPHY$"
-	.string "DARKRAI$"
+	.string "UXIE{CLEAR_TO 0x48}¥12000$"
+	.string "MESPRIT{CLEAR_TO 0x48}¥12000$"
+	.string "AZELF{CLEAR_TO 0x48}¥12000$"
+	.string "PHIONE{CLEAR_TO 0x48}¥12000$"
+	.string "MANAPHY{CLEAR_TO 0x48}¥12000$"
+	.string "DARKRAI{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage3::
-	.string "SHAYMIN$"
-	.string "SHAYMIN SKY$"
-	.string "ARCEUS$"
+	.string "SHAYMIN{CLEAR_TO 0x48}¥12000$"
+	.string "SHAYMIN SKY{CLEAR_TO 0x48}¥12000$"
+	.string "ARCEUS{CLEAR_TO 0x48}¥12000$"
+	.string "ROTOM{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova::
-	.string "RESHIRAM$"
-	.string "ZEKROM$"
-	.string "KYUREM$"
-	.string "COBALION$"
-	.string "TERRAKION$"
-	.string "VIRIZION$"
+	.string "RESHIRAM{CLEAR_TO 0x48}¥12000$"
+	.string "ZEKROM{CLEAR_TO 0x48}¥12000$"
+	.string "KYUREM{CLEAR_TO 0x48}¥12000$"
+	.string "COBALION{CLEAR_TO 0x48}¥12000$"
+	.string "TERRAKION{CLEAR_TO 0x48}¥12000$"
+	.string "VIRIZION{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2::
-	.string "TORNADUS$"
-	.string "THUNDURUS$"
-	.string "LANDORUS$"
-	.string "TORNADUS THERIAN$"
-	.string "THUNDURUS THERIAN$"
-	.string "LANDORUS THERIAN$"
+	.string "TORNADUS{CLEAR_TO 0x48}¥12000$"
+	.string "THUNDURUS{CLEAR_TO 0x48}¥12000$"
+	.string "LANDORUS{CLEAR_TO 0x48}¥12000$"
+	.string "TORNADUS THERIAN{CLEAR_TO 0x48}¥12000$"
+	.string "THUNDURUS THERIAN{CLEAR_TO 0x48}¥12000$"
+	.string "LANDORUS THERIAN{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage3::
-	.string "ENAMORUS$"
-	.string "ENAMORUS THERIAN$"
-	.string "VICTINI$"
-	.string "KELDEO$"
-	.string "MELOETTA$"
-	.string "GENESECT$"
+	.string "ENAMORUS{CLEAR_TO 0x48}¥12000$"
+	.string "ENAMORUS THERIAN{CLEAR_TO 0x48}¥12000$"
+	.string "VICTINI{CLEAR_TO 0x48}¥12000$"
+	.string "KELDEO{CLEAR_TO 0x48}¥12000$"
+	.string "MELOETTA{CLEAR_TO 0x48}¥12000$"
+	.string "GENESECT{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos::
-	.string "XERNEAS$"
-	.string "YVELTAL$"
-	.string "ZYGARDE-10 (AURA BK.)$"
-	.string "ZYGARDE-50 (AURA BK.)$"
-	.string "ZYGARDE-10 (POWER C.)$"
-	.string "ZYGARDE-50 (POWER C.)$"
+	.string "XERNEAS{CLEAR_TO 0x48}¥12000$"
+	.string "YVELTAL{CLEAR_TO 0x48}¥12000$"
+	.string "ZYGARDE-10 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+	.string "ZYGARDE-50 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+	.string "ZYGARDE-10 (POWER C.){CLEAR_TO 0x48}¥12000$"
+	.string "ZYGARDE-50 (POWER C.){CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosPage2::
-	.string "DIANCIE$"
-	.string "HOOPA$"
-	.string "HOOPA UNBOUND$"
-	.string "VOLCANION$"
+	.string "DIANCIE{CLEAR_TO 0x48}¥12000$"
+	.string "HOOPA{CLEAR_TO 0x48}¥12000$"
+	.string "HOOPA UNBOUND{CLEAR_TO 0x48}¥12000$"
+	.string "VOLCANION{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2::
@@ -1530,104 +2066,105 @@ BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2::
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola::
-	.string "COSMOG$"
-	.string "SOLGALEO$"
-	.string "LUNALA$"
-	.string "NECROZMA$"
-	.string "TYPE NULL$"
-	.string "SILVALLY$"
+	.string "COSMOG{CLEAR_TO 0x48}¥12000$"
+	.string "SOLGALEO{CLEAR_TO 0x48}¥12000$"
+	.string "LUNALA{CLEAR_TO 0x48}¥12000$"
+	.string "NECROZMA{CLEAR_TO 0x48}¥12000$"
+	.string "TYPE NULL{CLEAR_TO 0x48}¥12000$"
+	.string "SILVALLY{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2::
-	.string "TAPU KOKO$"
-	.string "TAPU LELE$"
-	.string "TAPU BULU$"
-	.string "TAPU FINI$"
-	.string "NIHILEGO$"
-	.string "BUZZWOLE$"
+	.string "TAPU KOKO{CLEAR_TO 0x48}¥12000$"
+	.string "TAPU LELE{CLEAR_TO 0x48}¥12000$"
+	.string "TAPU BULU{CLEAR_TO 0x48}¥12000$"
+	.string "TAPU FINI{CLEAR_TO 0x48}¥12000$"
+	.string "NIHILEGO{CLEAR_TO 0x48}¥12000$"
+	.string "BUZZWOLE{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3::
-	.string "PHEROMOSA$"
-	.string "XURKITREE$"
-	.string "CELESTEELA$"
-	.string "KARTANA$"
-	.string "GUZZLORD$"
-	.string "STAKATAKA$"
+	.string "PHEROMOSA{CLEAR_TO 0x48}¥12000$"
+	.string "XURKITREE{CLEAR_TO 0x48}¥12000$"
+	.string "CELESTEELA{CLEAR_TO 0x48}¥12000$"
+	.string "KARTANA{CLEAR_TO 0x48}¥12000$"
+	.string "GUZZLORD{CLEAR_TO 0x48}¥12000$"
+	.string "STAKATAKA{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage4::
-	.string "BLACEPHALON$"
-	.string "POIPOLE$"
-	.string "NAGANADEL$"
-	.string "MAGEARNA$"
-	.string "MARSHADOW$"
-	.string "ZERAORA$"
+	.string "BLACEPHALON{CLEAR_TO 0x48}¥12000$"
+	.string "POIPOLE{CLEAR_TO 0x48}¥12000$"
+	.string "NAGANADEL{CLEAR_TO 0x48}¥12000$"
+	.string "MAGEARNA{CLEAR_TO 0x48}¥12000$"
+	.string "MARSHADOW{CLEAR_TO 0x48}¥12000$"
+	.string "ZERAORA{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar::
-	.string "ZACIAN$"
-	.string "ZAMAZENTA$"
-	.string "ETERNATUS$"
-	.string "KUBFU$"
-	.string "URSHIFU SS$"
-	.string "URSHIFU RS$"
+	.string "ZACIAN{CLEAR_TO 0x48}¥12000$"
+	.string "ZAMAZENTA{CLEAR_TO 0x48}¥12000$"
+	.string "ETERNATUS{CLEAR_TO 0x48}¥12000$"
+	.string "KUBFU{CLEAR_TO 0x48}¥12000$"
+	.string "URSHIFU SS{CLEAR_TO 0x48}¥12000$"
+	.string "URSHIFU RS{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2::
-	.string "CALYREX$"
-	.string "GLASTRIER$"
-	.string "SPECTRIER$"
-	.string "ARTICUNO GALAR$"
-	.string "ZAPDOS GALAR$"
-	.string "MOLTRES GALAR$"
+	.string "CALYREX{CLEAR_TO 0x48}¥12000$"
+	.string "GLASTRIER{CLEAR_TO 0x48}¥12000$"
+	.string "SPECTRIER{CLEAR_TO 0x48}¥12000$"
+	.string "ARTICUNO GALAR{CLEAR_TO 0x48}¥12000$"
+	.string "ZAPDOS GALAR{CLEAR_TO 0x48}¥12000$"
+	.string "MOLTRES GALAR{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage3::
-	.string "REGIELEKI$"
-	.string "REGIDRAGO$"
-	.string "MELTAN$"
-	.string "MELMETAL$"
-	.string "ZARUDE$"
+	.string "REGIELEKI{CLEAR_TO 0x48}¥12000$"
+	.string "REGIDRAGO{CLEAR_TO 0x48}¥12000$"
+	.string "MELTAN{CLEAR_TO 0x48}¥12000$"
+	.string "MELMETAL{CLEAR_TO 0x48}¥12000$"
+	.string "ZARUDE{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea::
-	.string "KORAIDON$"
-	.string "MIRAIDON$"
-	.string "WO-CHIEN$"
-	.string "CHIEN-PAO$"
-	.string "TING-LU$"
-	.string "CHI-YU$"
+	.string "KORAIDON{CLEAR_TO 0x48}¥12000$"
+	.string "MIRAIDON{CLEAR_TO 0x48}¥12000$"
+	.string "WO-CHIEN{CLEAR_TO 0x48}¥12000$"
+	.string "CHIEN-PAO{CLEAR_TO 0x48}¥12000$"
+	.string "TING-LU{CLEAR_TO 0x48}¥12000$"
+	.string "CHI-YU{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2::
-	.string "IRON TREADS$"
-	.string "IRON BUNDLE$"
-	.string "IRON HANDS$"
-	.string "IRON JUGULIS$"
-	.string "IRON MOTH$"
-	.string "IRON THORNS$"
+	.string "IRON TREADS{CLEAR_TO 0x48}¥12000$"
+	.string "IRON BUNDLE{CLEAR_TO 0x48}¥12000$"
+	.string "IRON HANDS{CLEAR_TO 0x48}¥12000$"
+	.string "IRON JUGULIS{CLEAR_TO 0x48}¥12000$"
+	.string "IRON MOTH{CLEAR_TO 0x48}¥12000$"
+	.string "IRON THORNS{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3::
-	.string "IRON VALIANT$"
-	.string "IRON LEAVES$"
-	.string "GREAT TUSK$"
-	.string "SCREAM TAIL$"
-	.string "BRUTE BONNET$"
-	.string "FLUTTER MANE$"
+	.string "IRON VALIANT{CLEAR_TO 0x48}¥12000$"
+	.string "IRON LEAVES{CLEAR_TO 0x48}¥12000$"
+	.string "GREAT TUSK{CLEAR_TO 0x48}¥12000$"
+	.string "SCREAM TAIL{CLEAR_TO 0x48}¥12000$"
+	.string "BRUTE BONNET{CLEAR_TO 0x48}¥12000$"
+	.string "FLUTTER MANE{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4::
-	.string "SLITHER WING$"
-	.string "SANDY SHOCKS$"
-	.string "ROARING MOON$"
-	.string "WALKING WAKE$"
-	.string "OKIDOGI$"
-	.string "MUNKIDORI$"
+	.string "SLITHER WING{CLEAR_TO 0x48}¥12000$"
+	.string "SANDY SHOCKS{CLEAR_TO 0x48}¥12000$"
+	.string "ROARING MOON{CLEAR_TO 0x48}¥12000$"
+	.string "WALKING WAKE{CLEAR_TO 0x48}¥12000$"
+	.string "OKIDOGI{CLEAR_TO 0x48}¥12000$"
+	.string "MUNKIDORI{CLEAR_TO 0x48}¥12000$"
 	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage5::
-	.string "FEZANDIPITI$"
-	.string "OGERPON$"
+	.string "FEZANDIPITI{CLEAR_TO 0x48}¥12000$"
+	.string "OGERPON{CLEAR_TO 0x48}¥12000$"
+	.string "URSALUNA BLOODMOON{CLEAR_TO 0x48}¥12000$"
 	.string "$"
