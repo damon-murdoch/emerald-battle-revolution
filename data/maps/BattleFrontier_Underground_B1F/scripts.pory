@@ -65,7 +65,180 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
     end
 }
 
-## Training Street
+## Exchange Machines ##
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverter {
+    msgbox(format("This is a machine for converting currency between BP and ¥!"))
+    msgbox(format("The exchange rate is ¥9800 for every 1 BP."))
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom {
+    msgbox(format("What would you like to do?"))
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom)
+    switch(var(VAR_RESULT)){
+        case 0: // BP to ¥
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions)
+        case 1: // ¥ to BP
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions)
+        default: // Cancel
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd)
+    }
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions {
+    showmoneybox()
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            checkmoney(9800)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 1)
+                removemoney(9800)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 1:
+            checkmoney(49000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 5)
+                removemoney(49000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 2:
+            checkmoney(98000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 10)
+                removemoney(98000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 3:
+            checkmoney(196000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 20)
+                removemoney(196000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 4:
+            checkmoney(490000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 50)
+                removemoney(490000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        default:
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(GiveFrontierBattlePoints)
+    updatemoneybox
+    msgbox(format("BP redeemed successfully!"))
+    waitse
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough ¥!"))
+    waitse
+    closemoneybox
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions {
+    special(ShowBattlePointsWindow)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            if (VAR_TEMP_1 >= 1) {
+                setvar(VAR_0x8004, 1)
+                addmoney(9800)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 1:
+            if (VAR_TEMP_1 >= 5) {
+                setvar(VAR_0x8004, 5)
+                addmoney(49000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 2:
+            if (VAR_TEMP_1 >= 10) {
+                setvar(VAR_0x8004, 10)
+                addmoney(98000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 3:
+            if (VAR_TEMP_1 >= 20) {
+                setvar(VAR_0x8004, 20)
+                addmoney(196000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 4:
+            if (VAR_TEMP_1 >= 50) {
+                setvar(VAR_0x8004, 50)
+                addmoney(490000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        default:
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(TakeFrontierBattlePoints)
+    special(UpdateBattlePointsWindow)
+    msgbox(format("BP exchanged successfully!"))
+    waitse
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough BP!"))
+    waitse
+    special(CloseBattlePointsWindow)
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd {
+    msgbox(format("You decided to stop using the converter."))
+    release
+    end
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom {
+    "Convert BP to ¥$"
+    "Convert ¥ to BP$"
+    "CANCEL$"
+    ""
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions {
+    "¥9800 (1BP)$"
+    "¥49000 (5BP)$"
+    "¥98000 (10BP)$"
+    "¥196000 (20BP)$"
+    "¥490000 (50BP)$"
+    "GO BACK$"
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions {
+    "1BP (¥9800)$"
+    "5BP (¥49000)$"
+    "10BP (¥98000)$"
+    "20BP (¥196000)$"
+    "50BP (¥490000)$"
+    "GO BACK$"
+}
+
+## Training Street ##
 script BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign {
     msgbox("TRAINING STREET\nThis way for:", MSGBOX_SIGN)
     msgbox("LEGENDARY POKEMON SHOP\nPOKéMON Day Care", MSGBOX_SIGN)
@@ -1109,6 +1282,97 @@ mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
     ITEM_REINS_OF_UNITY
 }
 
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
+    ITEM_HEALTH_FEATHER
+    ITEM_MUSCLE_FEATHER
+    ITEM_RESIST_FEATHER
+    ITEM_GENIUS_FEATHER
+    ITEM_CLEVER_FEATHER
+    ITEM_SWIFT_FEATHER
+    ITEM_HP_UP
+    ITEM_PROTEIN
+    ITEM_IRON
+    ITEM_CALCIUM
+    ITEM_ZINC
+    ITEM_CARBOS
+    ITEM_PP_UP
+    ITEM_PP_MAX
+    ITEM_ABILITY_CAPSULE
+    ITEM_ABILITY_PATCH
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
+    ITEM_LONELY_MINT
+    ITEM_ADAMANT_MINT
+    ITEM_NAUGHTY_MINT
+    ITEM_BRAVE_MINT
+    ITEM_BOLD_MINT
+    ITEM_IMPISH_MINT
+    ITEM_LAX_MINT
+    ITEM_RELAXED_MINT
+    ITEM_MODEST_MINT
+    ITEM_MILD_MINT
+    ITEM_RASH_MINT
+    ITEM_QUIET_MINT
+    ITEM_CALM_MINT
+    ITEM_GENTLE_MINT
+    ITEM_CAREFUL_MINT
+    ITEM_SASSY_MINT
+    ITEM_TIMID_MINT
+    ITEM_HASTY_MINT
+    ITEM_JOLLY_MINT
+    ITEM_NAIVE_MINT
+    ITEM_SERIOUS_MINT
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk {
+    ITEM_RARE_CANDY
+    ITEM_EXP_CANDY_XS
+    ITEM_EXP_CANDY_S
+    ITEM_EXP_CANDY_M
+    ITEM_EXP_CANDY_L
+    ITEM_EXP_CANDY_XL
+    ITEM_DYNAMAX_CANDY
+    ITEM_MACHO_BRACE
+    ITEM_POWER_WEIGHT
+    ITEM_POWER_BRACER
+    ITEM_POWER_BELT
+    ITEM_POWER_LENS
+    ITEM_POWER_BAND
+    ITEM_POWER_ANKLET
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
+    ITEM_RAZZ_BERRY
+    ITEM_BLUK_BERRY
+    ITEM_NANAB_BERRY
+    ITEM_WEPEAR_BERRY
+    ITEM_PINAP_BERRY
+    ITEM_CORNN_BERRY
+    ITEM_MAGOST_BERRY
+    ITEM_RABUTA_BERRY
+    ITEM_NOMEL_BERRY
+    ITEM_SPELON_BERRY
+    ITEM_PAMTRE_BERRY
+    ITEM_WATMEL_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
+    ITEM_HEALTH_MOCHI
+    ITEM_MUSCLE_MOCHI
+    ITEM_RESIST_MOCHI
+    ITEM_GENIUS_MOCHI
+    ITEM_CLEVER_MOCHI
+    ITEM_SWIFT_MOCHI
+    ITEM_FRESH_START_MOCHI
+    ITEM_POMEG_BERRY
+    ITEM_KELPSY_BERRY
+    ITEM_QUALOT_BERRY
+    ITEM_HONDEW_BERRY
+    ITEM_GREPA_BERRY
+    ITEM_TAMATO_BERRY
+}
+
 mart BattleFrontier_Underground_B1F_Mart_MechanicShopMegaStoneClerk {
     ITEM_VENUSAURITE
     ITEM_CHARIZARDITE_X
@@ -1224,67 +1488,7 @@ mart BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk {
     ITEM_TERA_ORB
 }
 
-mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
-    ITEM_HEALTH_FEATHER
-    ITEM_MUSCLE_FEATHER
-    ITEM_RESIST_FEATHER
-    ITEM_GENIUS_FEATHER
-    ITEM_CLEVER_FEATHER
-    ITEM_SWIFT_FEATHER
-    ITEM_HP_UP
-    ITEM_PROTEIN
-    ITEM_IRON
-    ITEM_CALCIUM
-    ITEM_ZINC
-    ITEM_CARBOS
-    ITEM_PP_UP
-    ITEM_PP_MAX
-    ITEM_ABILITY_CAPSULE
-    ITEM_ABILITY_PATCH
-}
-
-mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
-    ITEM_LONELY_MINT
-    ITEM_ADAMANT_MINT
-    ITEM_NAUGHTY_MINT
-    ITEM_BRAVE_MINT
-    ITEM_BOLD_MINT
-    ITEM_IMPISH_MINT
-    ITEM_LAX_MINT
-    ITEM_RELAXED_MINT
-    ITEM_MODEST_MINT
-    ITEM_MILD_MINT
-    ITEM_RASH_MINT
-    ITEM_QUIET_MINT
-    ITEM_CALM_MINT
-    ITEM_GENTLE_MINT
-    ITEM_CAREFUL_MINT
-    ITEM_SASSY_MINT
-    ITEM_TIMID_MINT
-    ITEM_HASTY_MINT
-    ITEM_JOLLY_MINT
-    ITEM_NAIVE_MINT
-    ITEM_SERIOUS_MINT
-}
-
-mart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk {
-    ITEM_RARE_CANDY
-    ITEM_EXP_CANDY_XS
-    ITEM_EXP_CANDY_S
-    ITEM_EXP_CANDY_M
-    ITEM_EXP_CANDY_L
-    ITEM_EXP_CANDY_XL
-    ITEM_DYNAMAX_CANDY
-    ITEM_MACHO_BRACE
-    ITEM_POWER_WEIGHT
-    ITEM_POWER_BRACER
-    ITEM_POWER_BELT
-    ITEM_POWER_LENS
-    ITEM_POWER_BAND
-    ITEM_POWER_ANKLET
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleBerryShopMainClerk {
     ITEM_CHERI_BERRY
     ITEM_CHESTO_BERRY
     ITEM_PECHA_BERRY
@@ -1316,7 +1520,7 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk {
     ITEM_MARANGA_BERRY
 }
 
-mart BattleFrontier_Underground_B1F_Mart_BerryShopResistClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleBerryShopResistClerk {
     ITEM_CHILAN_BERRY
     ITEM_OCCA_BERRY
     ITEM_PASSHO_BERRY
@@ -1336,38 +1540,6 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopResistClerk {
     ITEM_BABIRI_BERRY
     ITEM_ROSELI_BERRY
 }
-
-mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
-    ITEM_RAZZ_BERRY
-    ITEM_BLUK_BERRY
-    ITEM_NANAB_BERRY
-    ITEM_WEPEAR_BERRY
-    ITEM_PINAP_BERRY
-    ITEM_CORNN_BERRY
-    ITEM_MAGOST_BERRY
-    ITEM_RABUTA_BERRY
-    ITEM_NOMEL_BERRY
-    ITEM_SPELON_BERRY
-    ITEM_PAMTRE_BERRY
-    ITEM_WATMEL_BERRY
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
-    ITEM_HEALTH_MOCHI
-    ITEM_MUSCLE_MOCHI
-    ITEM_RESIST_MOCHI
-    ITEM_GENIUS_MOCHI
-    ITEM_CLEVER_MOCHI
-    ITEM_SWIFT_MOCHI
-    ITEM_FRESH_START_MOCHI
-    ITEM_POMEG_BERRY
-    ITEM_KELPSY_BERRY
-    ITEM_QUALOT_BERRY
-    ITEM_HONDEW_BERRY
-    ITEM_GREPA_BERRY
-    ITEM_TAMATO_BERRY
-}
-
 
 mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
     ITEM_SILK_SCARF
@@ -1405,4 +1577,95 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
     ITEM_DARK_GEM
     ITEM_STEEL_GEM
     ITEM_FAIRY_GEM
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopCommonItemClerk {
+    ITEM_CHOICE_BAND
+    ITEM_CHOICE_SPECS
+    ITEM_CHOICE_SCARF
+    ITEM_FLAME_ORB
+    ITEM_TOXIC_ORB
+    ITEM_ELECTRIC_SEED
+    ITEM_PSYCHIC_SEED
+    ITEM_MISTY_SEED
+    ITEM_GRASSY_SEED
+    ITEM_MENTAL_HERB
+    ITEM_LEFTOVERS
+    ITEM_EXPERT_BELT
+    ITEM_LIGHT_CLAY
+    ITEM_LIFE_ORB
+    ITEM_POWER_HERB
+    ITEM_FOCUS_SASH
+    ITEM_LAGGING_TAIL
+    ITEM_IRON_BALL
+    ITEM_SHED_SHELL
+    ITEM_EVIOLITE
+    ITEM_ROCKY_HELMET
+    ITEM_AIR_BALLOON
+    ITEM_RED_CARD
+    ITEM_EJECT_BUTTON
+    ITEM_WEAKNESS_POLICY
+    ITEM_ASSAULT_VEST
+    ITEM_SAFETY_GOGGLES
+    ITEM_ADRENALINE_ORB
+    ITEM_TERRAIN_EXTENDER
+    ITEM_PROTECTIVE_PADS
+    ITEM_THROAT_SPRAY
+    ITEM_EJECT_PACK
+    ITEM_HEAVY_DUTY_BOOTS
+    ITEM_BLUNDER_POLICY
+    ITEM_ROOM_SERVICE
+    ITEM_UTILITY_UMBRELLA
+    ITEM_ABILITY_SHIELD
+    ITEM_CLEAR_AMULET
+    ITEM_PUNCHING_GLOVE
+    ITEM_COVERT_CLOAK
+    ITEM_LOADED_DICE
+    ITEM_BOOSTER_ENERGY
+    ITEM_MIRROR_HERB
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonItemClerk {
+    ITEM_DAMP_ROCK
+    ITEM_HEAT_ROCK
+    ITEM_SMOOTH_ROCK
+    ITEM_ICY_ROCK
+    ITEM_ABSORB_BULB
+    ITEM_CELL_BATTERY
+    ITEM_LUMINOUS_MOSS
+    ITEM_SNOWBALL
+    ITEM_BRIGHT_POWDER
+    ITEM_WHITE_HERB
+    ITEM_QUICK_CLAW
+    ITEM_SOOTHE_BELL
+    ITEM_KINGS_ROCK
+    ITEM_AMULET_COIN
+    ITEM_CLEANSE_TAG
+    ITEM_SMOKE_BALL
+    ITEM_FOCUS_BAND
+    ITEM_LUCKY_EGG
+    ITEM_SCOPE_LENS
+    ITEM_SHELL_BELL
+    ITEM_WIDE_LENS
+    ITEM_MUSCLE_BAND
+    ITEM_WISE_GLASSES
+    ITEM_BLACK_SLUDGE
+    ITEM_GRIP_CLAW
+    ITEM_STICKY_BARB
+    ITEM_BIG_ROOT
+    ITEM_RAZOR_CLAW
+    ITEM_RAZOR_FANG
+    ITEM_FLOAT_STONE
+    ITEM_RING_TARGET
+    ITEM_BINDING_BAND
+    ITEM_ZOOM_LENS
+    ITEM_METRONOME
+    ITEM_LIGHT_BALL
+    ITEM_LEEK
+    ITEM_THICK_CLUB
+    ITEM_LUCKY_PUNCH
+    ITEM_METAL_POWDER
+    ITEM_QUICK_POWDER
+    ITEM_DEEP_SEA_SCALE
+    ITEM_DEEP_SEA_TOOTH
 }
