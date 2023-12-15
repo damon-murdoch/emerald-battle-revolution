@@ -356,7 +356,6 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan {
 	waitmessage
     pokemart(BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan)
     msgbox(format("Thanks for your business!"))
-    msgbox(format("If you are looking for any specific POKéMON, please talk to my wife."))
 	release
 	end
 }

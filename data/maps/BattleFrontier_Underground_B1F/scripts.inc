@@ -61,6 +61,218 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverter::
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_1
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom::
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_Text_0
+	multichoice2 18, 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom
+	switch VAR_RESULT
+	case 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_2
+	case 1, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_3
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd
+	return
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_2:
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions
+	return
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_3:
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions::
+	showmoneybox 0, 0
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_Text_0
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	multichoice2 18, 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions
+	switch VAR_RESULT
+	case 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_3
+	case 1, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_4
+	case 2, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_5
+	case 3, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_6
+	case 4, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_7
+	hidemoneybox
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1:
+	playse SE_SHOP
+	special GiveFrontierBattlePoints
+	updatemoneybox
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_Text_1
+	waitse
+	hidemoneybox
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions
+	return
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_3:
+	checkmoney 9800
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_9
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_4:
+	checkmoney 49000
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_12
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_5:
+	checkmoney 98000
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_15
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_6:
+	checkmoney 196000
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_18
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_7:
+	checkmoney 490000
+	compare VAR_RESULT, TRUE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_21
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_9:
+	setvar VAR_0x8004, 1
+	removemoney 9800
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_12:
+	setvar VAR_0x8004, 5
+	removemoney 49000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_15:
+	setvar VAR_0x8004, 10
+	removemoney 98000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_18:
+	setvar VAR_0x8004, 20
+	removemoney 196000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_21:
+	setvar VAR_0x8004, 50
+	removemoney 490000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_1
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford::
+	playse SE_FAILURE
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford_Text_0
+	waitse
+	hidemoneybox
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions::
+	special ShowBattlePointsWindow
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_Text_0
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	multichoice2 18, 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions
+	switch VAR_RESULT
+	case 0, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_3
+	case 1, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_4
+	case 2, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_5
+	case 3, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_6
+	case 4, BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_7
+	special CloseBattlePointsWindow
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1:
+	playse SE_SHOP
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_Text_0
+	waitse
+	special CloseBattlePointsWindow
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions
+	return
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_3:
+	compare VAR_TEMP_1, 1
+	goto_if_ge BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_9
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_4:
+	compare VAR_TEMP_1, 5
+	goto_if_ge BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_12
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_5:
+	compare VAR_TEMP_1, 10
+	goto_if_ge BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_15
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_6:
+	compare VAR_TEMP_1, 20
+	goto_if_ge BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_18
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_7:
+	compare VAR_TEMP_1, 50
+	goto_if_ge BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_21
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_9:
+	setvar VAR_0x8004, 1
+	addmoney 9800
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_12:
+	setvar VAR_0x8004, 5
+	addmoney 49000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_15:
+	setvar VAR_0x8004, 10
+	addmoney 98000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_18:
+	setvar VAR_0x8004, 20
+	addmoney 196000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_21:
+	setvar VAR_0x8004, 50
+	addmoney 490000
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_1
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford::
+	playse SE_FAILURE
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford_Text_0
+	waitse
+	special CloseBattlePointsWindow
+	goto BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom
+	return
+
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd::
+	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd_Text_0
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_0, MSGBOX_SIGN
 	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_1, MSGBOX_SIGN
@@ -71,7 +283,6 @@ BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign::
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_0, MSGBOX_SIGN
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_1, MSGBOX_SIGN
 	end
 
 
@@ -1346,7 +1557,6 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_7:
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_0
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_1
 	hidemoneybox
 	releaseall
 	end
@@ -1365,7 +1575,6 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk::
 
 BattleFrontier_Underground_B1F_EventScript_BerryShopSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_0, MSGBOX_SIGN
-	msgbox BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_1, MSGBOX_SIGN
 	end
 
 
@@ -1388,12 +1597,6 @@ BattleFrontier_Underground_B1F_EventScript_BerryShopEVTrainingClerk::
 	pokemart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
-	end
-
-
-BattleFrontier_Underground_B1F_EventScript_TrainingShopSign::
-	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_0, MSGBOX_SIGN
-	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_1, MSGBOX_SIGN
 	end
 
 
@@ -1425,6 +1628,105 @@ BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk::
 	message gText_HowMayIServeYou
 	waitmessage
 	pokemart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShopTeraClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopMegaClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopZCrystalClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopBerryClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopResistClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopCommonClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopUncommonClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopTypeItemClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleShopGemstoneClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -1509,121 +1811,36 @@ BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
 	.2byte ITEM_NONE
 
 	.align 2
-BattleFrontier_Underground_B1F_Mart_MechanicShopMegaStoneClerk:
-	.2byte ITEM_VENUSAURITE
-	.2byte ITEM_CHARIZARDITE_X
-	.2byte ITEM_CHARIZARDITE_Y
-	.2byte ITEM_BLASTOISINITE
-	.2byte ITEM_BEEDRILLITE
-	.2byte ITEM_PIDGEOTITE
-	.2byte ITEM_ALAKAZITE
-	.2byte ITEM_SLOWBRONITE
-	.2byte ITEM_GENGARITE
-	.2byte ITEM_KANGASKHANITE
-	.2byte ITEM_PINSIRITE
-	.2byte ITEM_GYARADOSITE
-	.2byte ITEM_AERODACTYLITE
-	.2byte ITEM_MEWTWONITE_X
-	.2byte ITEM_MEWTWONITE_Y
-	.2byte ITEM_AMPHAROSITE
-	.2byte ITEM_STEELIXITE
-	.2byte ITEM_SCIZORITE
-	.2byte ITEM_HERACRONITE
-	.2byte ITEM_HOUNDOOMINITE
-	.2byte ITEM_TYRANITARITE
-	.2byte ITEM_SCEPTILITE
-	.2byte ITEM_BLAZIKENITE
-	.2byte ITEM_SWAMPERTITE
-	.2byte ITEM_GARDEVOIRITE
-	.2byte ITEM_SABLENITE
-	.2byte ITEM_MAWILITE
-	.2byte ITEM_AGGRONITE
-	.2byte ITEM_MEDICHAMITE
-	.2byte ITEM_MANECTITE
-	.2byte ITEM_SHARPEDONITE
-	.2byte ITEM_CAMERUPTITE
-	.2byte ITEM_ALTARIANITE
-	.2byte ITEM_BANETTITE
-	.2byte ITEM_ABSOLITE
-	.2byte ITEM_GLALITITE
-	.2byte ITEM_SALAMENCITE
-	.2byte ITEM_METAGROSSITE
-	.2byte ITEM_LATIASITE
-	.2byte ITEM_LATIOSITE
-	.2byte ITEM_LOPUNNITE
-	.2byte ITEM_GARCHOMPITE
-	.2byte ITEM_LUCARIONITE
-	.2byte ITEM_ABOMASITE
-	.2byte ITEM_GALLADITE
-	.2byte ITEM_AUDINITE
-	.2byte ITEM_DIANCITE
-	.2byte ITEM_RED_ORB
-	.2byte ITEM_BLUE_ORB
-	.2byte ITEM_MEGA_RING
+BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
+	.2byte ITEM_RAZZ_BERRY
+	.2byte ITEM_BLUK_BERRY
+	.2byte ITEM_NANAB_BERRY
+	.2byte ITEM_WEPEAR_BERRY
+	.2byte ITEM_PINAP_BERRY
+	.2byte ITEM_CORNN_BERRY
+	.2byte ITEM_MAGOST_BERRY
+	.2byte ITEM_RABUTA_BERRY
+	.2byte ITEM_NOMEL_BERRY
+	.2byte ITEM_SPELON_BERRY
+	.2byte ITEM_PAMTRE_BERRY
+	.2byte ITEM_WATMEL_BERRY
 	.2byte ITEM_NONE
 
 	.align 2
-BattleFrontier_Underground_B1F_Mart_MechanicShopZCrystalClerk:
-	.2byte ITEM_NORMALIUM_Z
-	.2byte ITEM_FIRIUM_Z
-	.2byte ITEM_WATERIUM_Z
-	.2byte ITEM_ELECTRIUM_Z
-	.2byte ITEM_GRASSIUM_Z
-	.2byte ITEM_ICIUM_Z
-	.2byte ITEM_FIGHTINIUM_Z
-	.2byte ITEM_POISONIUM_Z
-	.2byte ITEM_GROUNDIUM_Z
-	.2byte ITEM_FLYINIUM_Z
-	.2byte ITEM_PSYCHIUM_Z
-	.2byte ITEM_BUGINIUM_Z
-	.2byte ITEM_ROCKIUM_Z
-	.2byte ITEM_GHOSTIUM_Z
-	.2byte ITEM_DRAGONIUM_Z
-	.2byte ITEM_DARKINIUM_Z
-	.2byte ITEM_STEELIUM_Z
-	.2byte ITEM_FAIRIUM_Z
-	.2byte ITEM_PIKANIUM_Z
-	.2byte ITEM_EEVIUM_Z
-	.2byte ITEM_SNORLIUM_Z
-	.2byte ITEM_MEWNIUM_Z
-	.2byte ITEM_DECIDIUM_Z
-	.2byte ITEM_INCINIUM_Z
-	.2byte ITEM_PRIMARIUM_Z
-	.2byte ITEM_LYCANIUM_Z
-	.2byte ITEM_MIMIKIUM_Z
-	.2byte ITEM_KOMMONIUM_Z
-	.2byte ITEM_TAPUNIUM_Z
-	.2byte ITEM_SOLGANIUM_Z
-	.2byte ITEM_LUNALIUM_Z
-	.2byte ITEM_MARSHADIUM_Z
-	.2byte ITEM_ALORAICHIUM_Z
-	.2byte ITEM_PIKASHUNIUM_Z
-	.2byte ITEM_ULTRANECROZIUM_Z
-	.2byte ITEM_Z_POWER_RING
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk:
-	.2byte ITEM_BUG_TERA_SHARD
-	.2byte ITEM_DARK_TERA_SHARD
-	.2byte ITEM_DRAGON_TERA_SHARD
-	.2byte ITEM_ELECTRIC_TERA_SHARD
-	.2byte ITEM_FAIRY_TERA_SHARD
-	.2byte ITEM_FIGHTING_TERA_SHARD
-	.2byte ITEM_FIRE_TERA_SHARD
-	.2byte ITEM_FLYING_TERA_SHARD
-	.2byte ITEM_GHOST_TERA_SHARD
-	.2byte ITEM_GRASS_TERA_SHARD
-	.2byte ITEM_GROUND_TERA_SHARD
-	.2byte ITEM_ICE_TERA_SHARD
-	.2byte ITEM_NORMAL_TERA_SHARD
-	.2byte ITEM_POISON_TERA_SHARD
-	.2byte ITEM_PSYCHIC_TERA_SHARD
-	.2byte ITEM_ROCK_TERA_SHARD
-	.2byte ITEM_STEEL_TERA_SHARD
-	.2byte ITEM_WATER_TERA_SHARD
-	.2byte ITEM_DYNAMAX_BAND
-	.2byte ITEM_TERA_ORB
+BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk:
+	.2byte ITEM_HEALTH_MOCHI
+	.2byte ITEM_MUSCLE_MOCHI
+	.2byte ITEM_RESIST_MOCHI
+	.2byte ITEM_GENIUS_MOCHI
+	.2byte ITEM_CLEVER_MOCHI
+	.2byte ITEM_SWIFT_MOCHI
+	.2byte ITEM_FRESH_START_MOCHI
+	.2byte ITEM_POMEG_BERRY
+	.2byte ITEM_KELPSY_BERRY
+	.2byte ITEM_QUALOT_BERRY
+	.2byte ITEM_HONDEW_BERRY
+	.2byte ITEM_GREPA_BERRY
+	.2byte ITEM_TAMATO_BERRY
 	.2byte ITEM_NONE
 
 	.align 2
@@ -1687,10 +1904,263 @@ BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk:
 	.2byte ITEM_POWER_LENS
 	.2byte ITEM_POWER_BAND
 	.2byte ITEM_POWER_ANKLET
+	.2byte ITEM_AMULET_COIN
+	.2byte ITEM_LUCKY_EGG
 	.2byte ITEM_NONE
 
 	.align 2
-BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk:
+BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk:
+	.2byte ITEM_BUG_TERA_SHARD
+	.2byte ITEM_DARK_TERA_SHARD
+	.2byte ITEM_DRAGON_TERA_SHARD
+	.2byte ITEM_ELECTRIC_TERA_SHARD
+	.2byte ITEM_FAIRY_TERA_SHARD
+	.2byte ITEM_FIGHTING_TERA_SHARD
+	.2byte ITEM_FIRE_TERA_SHARD
+	.2byte ITEM_FLYING_TERA_SHARD
+	.2byte ITEM_GHOST_TERA_SHARD
+	.2byte ITEM_GRASS_TERA_SHARD
+	.2byte ITEM_GROUND_TERA_SHARD
+	.2byte ITEM_ICE_TERA_SHARD
+	.2byte ITEM_NORMAL_TERA_SHARD
+	.2byte ITEM_POISON_TERA_SHARD
+	.2byte ITEM_PSYCHIC_TERA_SHARD
+	.2byte ITEM_ROCK_TERA_SHARD
+	.2byte ITEM_STEEL_TERA_SHARD
+	.2byte ITEM_WATER_TERA_SHARD
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk:
+	.2byte ITEM_VENUSAURITE
+	.2byte ITEM_CHARIZARDITE_X
+	.2byte ITEM_CHARIZARDITE_Y
+	.2byte ITEM_BLASTOISINITE
+	.2byte ITEM_BEEDRILLITE
+	.2byte ITEM_PIDGEOTITE
+	.2byte ITEM_ALAKAZITE
+	.2byte ITEM_SLOWBRONITE
+	.2byte ITEM_GENGARITE
+	.2byte ITEM_KANGASKHANITE
+	.2byte ITEM_PINSIRITE
+	.2byte ITEM_GYARADOSITE
+	.2byte ITEM_AERODACTYLITE
+	.2byte ITEM_MEWTWONITE_X
+	.2byte ITEM_MEWTWONITE_Y
+	.2byte ITEM_AMPHAROSITE
+	.2byte ITEM_STEELIXITE
+	.2byte ITEM_SCIZORITE
+	.2byte ITEM_HERACRONITE
+	.2byte ITEM_HOUNDOOMINITE
+	.2byte ITEM_TYRANITARITE
+	.2byte ITEM_SCEPTILITE
+	.2byte ITEM_BLAZIKENITE
+	.2byte ITEM_SWAMPERTITE
+	.2byte ITEM_GARDEVOIRITE
+	.2byte ITEM_SABLENITE
+	.2byte ITEM_MAWILITE
+	.2byte ITEM_AGGRONITE
+	.2byte ITEM_MEDICHAMITE
+	.2byte ITEM_MANECTITE
+	.2byte ITEM_SHARPEDONITE
+	.2byte ITEM_CAMERUPTITE
+	.2byte ITEM_ALTARIANITE
+	.2byte ITEM_BANETTITE
+	.2byte ITEM_ABSOLITE
+	.2byte ITEM_GLALITITE
+	.2byte ITEM_SALAMENCITE
+	.2byte ITEM_METAGROSSITE
+	.2byte ITEM_LATIASITE
+	.2byte ITEM_LATIOSITE
+	.2byte ITEM_LOPUNNITE
+	.2byte ITEM_GARCHOMPITE
+	.2byte ITEM_LUCARIONITE
+	.2byte ITEM_ABOMASITE
+	.2byte ITEM_GALLADITE
+	.2byte ITEM_AUDINITE
+	.2byte ITEM_DIANCITE
+	.2byte ITEM_RED_ORB
+	.2byte ITEM_BLUE_ORB
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk:
+	.2byte ITEM_NORMALIUM_Z
+	.2byte ITEM_FIRIUM_Z
+	.2byte ITEM_WATERIUM_Z
+	.2byte ITEM_ELECTRIUM_Z
+	.2byte ITEM_GRASSIUM_Z
+	.2byte ITEM_ICIUM_Z
+	.2byte ITEM_FIGHTINIUM_Z
+	.2byte ITEM_POISONIUM_Z
+	.2byte ITEM_GROUNDIUM_Z
+	.2byte ITEM_FLYINIUM_Z
+	.2byte ITEM_PSYCHIUM_Z
+	.2byte ITEM_BUGINIUM_Z
+	.2byte ITEM_ROCKIUM_Z
+	.2byte ITEM_GHOSTIUM_Z
+	.2byte ITEM_DRAGONIUM_Z
+	.2byte ITEM_DARKINIUM_Z
+	.2byte ITEM_STEELIUM_Z
+	.2byte ITEM_FAIRIUM_Z
+	.2byte ITEM_PIKANIUM_Z
+	.2byte ITEM_EEVIUM_Z
+	.2byte ITEM_SNORLIUM_Z
+	.2byte ITEM_MEWNIUM_Z
+	.2byte ITEM_DECIDIUM_Z
+	.2byte ITEM_INCINIUM_Z
+	.2byte ITEM_PRIMARIUM_Z
+	.2byte ITEM_LYCANIUM_Z
+	.2byte ITEM_MIMIKIUM_Z
+	.2byte ITEM_KOMMONIUM_Z
+	.2byte ITEM_TAPUNIUM_Z
+	.2byte ITEM_SOLGANIUM_Z
+	.2byte ITEM_LUNALIUM_Z
+	.2byte ITEM_MARSHADIUM_Z
+	.2byte ITEM_ALORAICHIUM_Z
+	.2byte ITEM_PIKASHUNIUM_Z
+	.2byte ITEM_ULTRANECROZIUM_Z
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk:
+	.2byte ITEM_CHOICE_BAND
+	.2byte ITEM_CHOICE_SPECS
+	.2byte ITEM_CHOICE_SCARF
+	.2byte ITEM_FLAME_ORB
+	.2byte ITEM_TOXIC_ORB
+	.2byte ITEM_ELECTRIC_SEED
+	.2byte ITEM_PSYCHIC_SEED
+	.2byte ITEM_MISTY_SEED
+	.2byte ITEM_GRASSY_SEED
+	.2byte ITEM_MENTAL_HERB
+	.2byte ITEM_LEFTOVERS
+	.2byte ITEM_EXPERT_BELT
+	.2byte ITEM_LIGHT_CLAY
+	.2byte ITEM_LIFE_ORB
+	.2byte ITEM_POWER_HERB
+	.2byte ITEM_FOCUS_SASH
+	.2byte ITEM_LAGGING_TAIL
+	.2byte ITEM_IRON_BALL
+	.2byte ITEM_SHED_SHELL
+	.2byte ITEM_EVIOLITE
+	.2byte ITEM_ROCKY_HELMET
+	.2byte ITEM_AIR_BALLOON
+	.2byte ITEM_RED_CARD
+	.2byte ITEM_EJECT_BUTTON
+	.2byte ITEM_WEAKNESS_POLICY
+	.2byte ITEM_ASSAULT_VEST
+	.2byte ITEM_SAFETY_GOGGLES
+	.2byte ITEM_ADRENALINE_ORB
+	.2byte ITEM_TERRAIN_EXTENDER
+	.2byte ITEM_PROTECTIVE_PADS
+	.2byte ITEM_THROAT_SPRAY
+	.2byte ITEM_EJECT_PACK
+	.2byte ITEM_HEAVY_DUTY_BOOTS
+	.2byte ITEM_BLUNDER_POLICY
+	.2byte ITEM_ROOM_SERVICE
+	.2byte ITEM_UTILITY_UMBRELLA
+	.2byte ITEM_ABILITY_SHIELD
+	.2byte ITEM_CLEAR_AMULET
+	.2byte ITEM_PUNCHING_GLOVE
+	.2byte ITEM_COVERT_CLOAK
+	.2byte ITEM_LOADED_DICE
+	.2byte ITEM_BOOSTER_ENERGY
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
+	.2byte ITEM_DAMP_ROCK
+	.2byte ITEM_HEAT_ROCK
+	.2byte ITEM_SMOOTH_ROCK
+	.2byte ITEM_ICY_ROCK
+	.2byte ITEM_ABSORB_BULB
+	.2byte ITEM_CELL_BATTERY
+	.2byte ITEM_LUMINOUS_MOSS
+	.2byte ITEM_SNOWBALL
+	.2byte ITEM_BRIGHT_POWDER
+	.2byte ITEM_WHITE_HERB
+	.2byte ITEM_QUICK_CLAW
+	.2byte ITEM_SOOTHE_BELL
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_AMULET_COIN
+	.2byte ITEM_CLEANSE_TAG
+	.2byte ITEM_SMOKE_BALL
+	.2byte ITEM_FOCUS_BAND
+	.2byte ITEM_LUCKY_EGG
+	.2byte ITEM_SCOPE_LENS
+	.2byte ITEM_SHELL_BELL
+	.2byte ITEM_WIDE_LENS
+	.2byte ITEM_MUSCLE_BAND
+	.2byte ITEM_WISE_GLASSES
+	.2byte ITEM_BLACK_SLUDGE
+	.2byte ITEM_GRIP_CLAW
+	.2byte ITEM_STICKY_BARB
+	.2byte ITEM_BIG_ROOT
+	.2byte ITEM_RAZOR_CLAW
+	.2byte ITEM_RAZOR_FANG
+	.2byte ITEM_FLOAT_STONE
+	.2byte ITEM_RING_TARGET
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_BINDING_BAND
+	.2byte ITEM_ZOOM_LENS
+	.2byte ITEM_METRONOME
+	.2byte ITEM_LIGHT_BALL
+	.2byte ITEM_LEEK
+	.2byte ITEM_THICK_CLUB
+	.2byte ITEM_LUCKY_PUNCH
+	.2byte ITEM_METAL_POWDER
+	.2byte ITEM_QUICK_POWDER
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk:
+	.2byte ITEM_SILK_SCARF
+	.2byte ITEM_CHARCOAL
+	.2byte ITEM_MYSTIC_WATER
+	.2byte ITEM_MAGNET
+	.2byte ITEM_MIRACLE_SEED
+	.2byte ITEM_NEVER_MELT_ICE
+	.2byte ITEM_BLACK_BELT
+	.2byte ITEM_POISON_BARB
+	.2byte ITEM_SOFT_SAND
+	.2byte ITEM_SHARP_BEAK
+	.2byte ITEM_TWISTED_SPOON
+	.2byte ITEM_SILVER_POWDER
+	.2byte ITEM_HARD_STONE
+	.2byte ITEM_SPELL_TAG
+	.2byte ITEM_DRAGON_FANG
+	.2byte ITEM_BLACK_GLASSES
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk:
+	.2byte ITEM_NORMAL_GEM
+	.2byte ITEM_FIRE_GEM
+	.2byte ITEM_WATER_GEM
+	.2byte ITEM_ELECTRIC_GEM
+	.2byte ITEM_GRASS_GEM
+	.2byte ITEM_ICE_GEM
+	.2byte ITEM_FIGHTING_GEM
+	.2byte ITEM_POISON_GEM
+	.2byte ITEM_GROUND_GEM
+	.2byte ITEM_FLYING_GEM
+	.2byte ITEM_PSYCHIC_GEM
+	.2byte ITEM_BUG_GEM
+	.2byte ITEM_ROCK_GEM
+	.2byte ITEM_GHOST_GEM
+	.2byte ITEM_DRAGON_GEM
+	.2byte ITEM_DARK_GEM
+	.2byte ITEM_STEEL_GEM
+	.2byte ITEM_FAIRY_GEM
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk:
 	.2byte ITEM_CHERI_BERRY
 	.2byte ITEM_CHESTO_BERRY
 	.2byte ITEM_PECHA_BERRY
@@ -1723,7 +2193,7 @@ BattleFrontier_Underground_B1F_Mart_BerryShopBattleClerk:
 	.2byte ITEM_NONE
 
 	.align 2
-BattleFrontier_Underground_B1F_Mart_BerryShopResistClerk:
+BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk:
 	.2byte ITEM_CHILAN_BERRY
 	.2byte ITEM_OCCA_BERRY
 	.2byte ITEM_PASSHO_BERRY
@@ -1742,78 +2212,6 @@ BattleFrontier_Underground_B1F_Mart_BerryShopResistClerk:
 	.2byte ITEM_COLBUR_BERRY
 	.2byte ITEM_BABIRI_BERRY
 	.2byte ITEM_ROSELI_BERRY
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
-	.2byte ITEM_RAZZ_BERRY
-	.2byte ITEM_BLUK_BERRY
-	.2byte ITEM_NANAB_BERRY
-	.2byte ITEM_WEPEAR_BERRY
-	.2byte ITEM_PINAP_BERRY
-	.2byte ITEM_CORNN_BERRY
-	.2byte ITEM_MAGOST_BERRY
-	.2byte ITEM_RABUTA_BERRY
-	.2byte ITEM_NOMEL_BERRY
-	.2byte ITEM_SPELON_BERRY
-	.2byte ITEM_PAMTRE_BERRY
-	.2byte ITEM_WATMEL_BERRY
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk:
-	.2byte ITEM_HEALTH_MOCHI
-	.2byte ITEM_MUSCLE_MOCHI
-	.2byte ITEM_RESIST_MOCHI
-	.2byte ITEM_GENIUS_MOCHI
-	.2byte ITEM_CLEVER_MOCHI
-	.2byte ITEM_SWIFT_MOCHI
-	.2byte ITEM_FRESH_START_MOCHI
-	.2byte ITEM_POMEG_BERRY
-	.2byte ITEM_KELPSY_BERRY
-	.2byte ITEM_QUALOT_BERRY
-	.2byte ITEM_HONDEW_BERRY
-	.2byte ITEM_GREPA_BERRY
-	.2byte ITEM_TAMATO_BERRY
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk:
-	.2byte ITEM_SILK_SCARF
-	.2byte ITEM_CHARCOAL
-	.2byte ITEM_MYSTIC_WATER
-	.2byte ITEM_MAGNET
-	.2byte ITEM_MIRACLE_SEED
-	.2byte ITEM_NEVER_MELT_ICE
-	.2byte ITEM_BLACK_BELT
-	.2byte ITEM_POISON_BARB
-	.2byte ITEM_SOFT_SAND
-	.2byte ITEM_SHARP_BEAK
-	.2byte ITEM_TWISTED_SPOON
-	.2byte ITEM_SILVER_POWDER
-	.2byte ITEM_HARD_STONE
-	.2byte ITEM_SPELL_TAG
-	.2byte ITEM_DRAGON_FANG
-	.2byte ITEM_BLACK_GLASSES
-	.2byte ITEM_METAL_COAT
-	.2byte ITEM_NORMAL_GEM
-	.2byte ITEM_FIRE_GEM
-	.2byte ITEM_WATER_GEM
-	.2byte ITEM_ELECTRIC_GEM
-	.2byte ITEM_GRASS_GEM
-	.2byte ITEM_ICE_GEM
-	.2byte ITEM_FIGHTING_GEM
-	.2byte ITEM_POISON_GEM
-	.2byte ITEM_GROUND_GEM
-	.2byte ITEM_FLYING_GEM
-	.2byte ITEM_PSYCHIC_GEM
-	.2byte ITEM_BUG_GEM
-	.2byte ITEM_ROCK_GEM
-	.2byte ITEM_GHOST_GEM
-	.2byte ITEM_DRAGON_GEM
-	.2byte ITEM_DARK_GEM
-	.2byte ITEM_STEEL_GEM
-	.2byte ITEM_FAIRY_GEM
 	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:
@@ -1855,6 +2253,36 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter_Text_0:
 	.string "Battle Pyramid and Battle Arena\l"
 	.string "facilities.$"
 
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0:
+	.string "This is a machine for converting\n"
+	.string "currency between BP and ¥!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_1:
+	.string "The exchange rate is ¥9800 for every 1\n"
+	.string "BP.$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom_Text_0:
+	.string "What would you like to do?$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_Text_0:
+	.string "How much would you like?$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions_Text_1:
+	.string "BP redeemed successfully!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford_Text_0:
+	.string "Not enough ¥!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions_Text_0:
+	.string "BP exchanged successfully!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford_Text_0:
+	.string "Not enough BP!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd_Text_0:
+	.string "You decided to stop using the\n"
+	.string "converter.$"
+
 BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_0:
 	.string "TRAINING STREET\nThis way for:$"
 
@@ -1868,10 +2296,7 @@ BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign_Text_3:
 	.string "Training Item Shop\nBattle Dojo$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_0:
-	.string "Legendary POKéMON Shop$"
-
-BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_1:
-	.string "Downstairs: POKéMON Day Care$"
+	.string "Legendary POKéMON Shop\nDownstairs: POKéMON Day Care$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_0:
 	.string "Welcome to the one-and-only legendary\n"
@@ -1923,24 +2348,10 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Tex
 	.string "Can we help you with anything else?$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_0:
-	.string "If you need any forme-changing items\n"
-	.string "for these POKéMON, please speak to the\l"
-	.string "man next to me.$"
-
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd_Text_1:
 	.string "Come back again soon!$"
 
 BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_0:
-	.string "Training Berry Shop$"
-
-BattleFrontier_Underground_B1F_EventScript_BerryShopSign_Text_1:
-	.string "Downstairs: Battle Restaurant$"
-
-BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_0:
-	.string "Training Item Shop$"
-
-BattleFrontier_Underground_B1F_EventScript_TrainingShopSign_Text_1:
-	.string "Downstairs: Battle Dojo$"
+	.string "Training Berry Shop\nDownstairs: Battle Restaurant$"
 
 BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0:
 	.string "COMING SOON$"
@@ -1948,6 +2359,30 @@ BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0:
 BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff_Text_0:
 	.string "This area isn't available right now,\n"
 	.string "sorry! Please come back soon!$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom::
+	.string "Convert BP to ¥$"
+	.string "Convert ¥ to BP$"
+	.string "CANCEL$"
+	.string "$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions::
+	.string "¥9800 (1BP)$"
+	.string "¥49000 (5BP)$"
+	.string "¥98000 (10BP)$"
+	.string "¥196000 (20BP)$"
+	.string "¥490000 (50BP)$"
+	.string "GO BACK$"
+	.string "$"
+
+BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions::
+	.string "1BP (¥9800)$"
+	.string "5BP (¥49000)$"
+	.string "10BP (¥98000)$"
+	.string "20BP (¥196000)$"
+	.string "50BP (¥490000)$"
+	.string "GO BACK$"
+	.string "$"
 
 BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1::
 	.string "KANTO$"

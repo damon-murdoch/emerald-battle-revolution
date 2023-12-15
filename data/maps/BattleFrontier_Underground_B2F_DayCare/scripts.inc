@@ -656,7 +656,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan::
 	waitmessage
 	pokemart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_7
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_3
 	release
 	end
 
@@ -869,10 +868,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_1:
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_2:
 	.string "What can I help you with?$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_3:
-	.string "If you are looking for any specific\n"
-	.string "POKéMON, please talk to my wife.$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper_Text_0:
 	.string "Hello, nice to meet you! I'm the POKéMON\n"

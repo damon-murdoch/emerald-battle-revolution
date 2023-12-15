@@ -11,7 +11,6 @@ script BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("You can find anything you need for battling here."))
     msgbox(format("This is the closest entrance for the Battle Dome facility."))
-    msgbox(format("You can also get from place to place quickly down here."))
     msgbox(format("Feel free to use your bike!"))
     release
     end
@@ -23,7 +22,6 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter {
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("You can find anything you need for battling here."))
     msgbox(format("This is the closest entrance for the Battle Factory and Battle Pike facilities."))
-    msgbox(format("You can also get from place to place quickly down here."))
     msgbox(format("Feel free to use your bike!"))
     release
     end
@@ -35,7 +33,6 @@ script BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter {
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("You can find anything you need for battling here."))
     msgbox(format("This is the closest entrance for the Battle Tower, Ranking Hall and BP Exchange Service facilities."))
-    msgbox(format("You can also get from place to place quickly down here."))
     msgbox(format("Feel free to use your bike!"))
     release
     end
@@ -47,7 +44,6 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter {
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("You can find anything you need for battling here."))
     msgbox(format("This is the closest entrance for the Battle Palace, POKéMON Center and POKéMART facilities."))
-    msgbox(format("You can also get from place to place quickly down here."))
     msgbox(format("Feel free to use your bike!"))
     release
     end
@@ -59,7 +55,6 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("You can find anything you need for battling here."))
     msgbox(format("This is the best entrance for the Battle Pyramid and Battle Arena facilities."))
-    msgbox(format("You can also get from place to place quickly down here."))
     msgbox(format("Feel free to use your bike!"))
     release
     end
@@ -70,6 +65,7 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverter {
     msgbox(format("This is a machine for converting currency between BP and ¥!"))
     msgbox(format("The exchange rate is ¥9800 for every 1 BP."))
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
 }
 
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom {
@@ -86,7 +82,7 @@ script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom {
 }
 
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions {
-    showmoneybox()
+    showmoneybox(0,0)
     msgbox(format("How much would you like?"))
     specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
     multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions)
@@ -132,6 +128,7 @@ script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
             }
         default:
+            hidemoneybox
             goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
     }
     playse(SE_SHOP)
@@ -139,13 +136,14 @@ script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions {
     updatemoneybox
     msgbox(format("BP redeemed successfully!"))
     waitse
+    hidemoneybox
     goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions)
 }
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford {
     playse(SE_FAILURE)
     msgbox(format("Not enough ¥!"))
     waitse
-    closemoneybox
+    hidemoneybox
     goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
 }
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions {
@@ -155,41 +153,42 @@ script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions {
     multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions)
     switch(var(VAR_RESULT)){
         case 0:
-            if (VAR_TEMP_1 >= 1) {
+            if (var(VAR_TEMP_1) >= 1) {
                 setvar(VAR_0x8004, 1)
                 addmoney(9800)
             } else {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
             }
         case 1:
-            if (VAR_TEMP_1 >= 5) {
+            if (var(VAR_TEMP_1) >= 5) {
                 setvar(VAR_0x8004, 5)
                 addmoney(49000)
             } else {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
             }
         case 2:
-            if (VAR_TEMP_1 >= 10) {
+            if (var(VAR_TEMP_1) >= 10) {
                 setvar(VAR_0x8004, 10)
                 addmoney(98000)
             } else {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
             }
         case 3:
-            if (VAR_TEMP_1 >= 20) {
+            if (var(VAR_TEMP_1) >= 20) {
                 setvar(VAR_0x8004, 20)
                 addmoney(196000)
             } else {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
             }
         case 4:
-            if (VAR_TEMP_1 >= 50) {
+            if (var(VAR_TEMP_1) >= 50) {
                 setvar(VAR_0x8004, 50)
                 addmoney(490000)
             } else {
                 goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
             }
         default:
+            special(CloseBattlePointsWindow)
             goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
     }
     playse(SE_SHOP)
@@ -197,6 +196,7 @@ script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions {
     special(UpdateBattlePointsWindow)
     msgbox(format("BP exchanged successfully!"))
     waitse
+    special(CloseBattlePointsWindow)
     goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions)
 }
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford {
@@ -222,11 +222,12 @@ text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom {
 
 text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions {
     "¥9800 (1BP)$"
-    "¥49000 (5BP)$"
+    "¥49000 (5BP)$" 
     "¥98000 (10BP)$"
     "¥196000 (20BP)$"
     "¥490000 (50BP)$"
     "GO BACK$"
+    ""
 }
 
 text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions {
@@ -236,6 +237,7 @@ text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions {
     "20BP (¥196000)$"
     "50BP (¥490000)$"
     "GO BACK$"
+    ""
 }
 
 ## Training Street ##
@@ -901,7 +903,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurch
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd {
-    msgbox(format("If you need any forme-changing items for these POKéMON, please speak to the man next to me."))
     msgbox(format("Come back again soon!"))
     hidemoneybox
     releaseall
@@ -944,11 +945,7 @@ script BattleFrontier_Underground_B1F_EventScript_BerryShopEVTrainingClerk {
 	end
 }
 
-# Training Shop (Dojo)
-script BattleFrontier_Underground_B1F_EventScript_TrainingShopSign {
-    msgbox("Training Item Shop\nDownstairs: Battle Dojo", MSGBOX_SIGN)
-    end
-}
+# Training Chemist
 script BattleFrontier_Underground_B1F_EventScript_TrainingShopVitaminClerk {
     lock
 	faceplayer
@@ -969,12 +966,109 @@ script BattleFrontier_Underground_B1F_EventScript_TrainingShopMintClerk {
 	release
 	end
 }
+# Training Dojo
 script BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk {
     lock
 	faceplayer
 	message(gText_HowMayIServeYou)
 	waitmessage
 	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopTeraClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+## Middle Laneway (Battle Street) ##
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopMegaClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopZCrystalClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopBerryClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopResistClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopCommonClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopUncommonClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopTypeItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopGemstoneClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk)
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
 	end
@@ -1282,6 +1376,37 @@ mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
     ITEM_REINS_OF_UNITY
 }
 
+mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
+    ITEM_RAZZ_BERRY
+    ITEM_BLUK_BERRY
+    ITEM_NANAB_BERRY
+    ITEM_WEPEAR_BERRY
+    ITEM_PINAP_BERRY
+    ITEM_CORNN_BERRY
+    ITEM_MAGOST_BERRY
+    ITEM_RABUTA_BERRY
+    ITEM_NOMEL_BERRY
+    ITEM_SPELON_BERRY
+    ITEM_PAMTRE_BERRY
+    ITEM_WATMEL_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
+    ITEM_HEALTH_MOCHI
+    ITEM_MUSCLE_MOCHI
+    ITEM_RESIST_MOCHI
+    ITEM_GENIUS_MOCHI
+    ITEM_CLEVER_MOCHI
+    ITEM_SWIFT_MOCHI
+    ITEM_FRESH_START_MOCHI
+    ITEM_POMEG_BERRY
+    ITEM_KELPSY_BERRY
+    ITEM_QUALOT_BERRY
+    ITEM_HONDEW_BERRY
+    ITEM_GREPA_BERRY
+    ITEM_TAMATO_BERRY
+}
+
 mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
     ITEM_HEALTH_FEATHER
     ITEM_MUSCLE_FEATHER
@@ -1340,40 +1465,32 @@ mart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk {
     ITEM_POWER_LENS
     ITEM_POWER_BAND
     ITEM_POWER_ANKLET
+    ITEM_AMULET_COIN
+    ITEM_LUCKY_EGG
 }
 
-mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
-    ITEM_RAZZ_BERRY
-    ITEM_BLUK_BERRY
-    ITEM_NANAB_BERRY
-    ITEM_WEPEAR_BERRY
-    ITEM_PINAP_BERRY
-    ITEM_CORNN_BERRY
-    ITEM_MAGOST_BERRY
-    ITEM_RABUTA_BERRY
-    ITEM_NOMEL_BERRY
-    ITEM_SPELON_BERRY
-    ITEM_PAMTRE_BERRY
-    ITEM_WATMEL_BERRY
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk {
+    ITEM_BUG_TERA_SHARD
+    ITEM_DARK_TERA_SHARD
+    ITEM_DRAGON_TERA_SHARD
+    ITEM_ELECTRIC_TERA_SHARD
+    ITEM_FAIRY_TERA_SHARD
+    ITEM_FIGHTING_TERA_SHARD
+    ITEM_FIRE_TERA_SHARD
+    ITEM_FLYING_TERA_SHARD
+    ITEM_GHOST_TERA_SHARD
+    ITEM_GRASS_TERA_SHARD
+    ITEM_GROUND_TERA_SHARD
+    ITEM_ICE_TERA_SHARD
+    ITEM_NORMAL_TERA_SHARD
+    ITEM_POISON_TERA_SHARD
+    ITEM_PSYCHIC_TERA_SHARD
+    ITEM_ROCK_TERA_SHARD
+    ITEM_STEEL_TERA_SHARD
+    ITEM_WATER_TERA_SHARD
 }
 
-mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
-    ITEM_HEALTH_MOCHI
-    ITEM_MUSCLE_MOCHI
-    ITEM_RESIST_MOCHI
-    ITEM_GENIUS_MOCHI
-    ITEM_CLEVER_MOCHI
-    ITEM_SWIFT_MOCHI
-    ITEM_FRESH_START_MOCHI
-    ITEM_POMEG_BERRY
-    ITEM_KELPSY_BERRY
-    ITEM_QUALOT_BERRY
-    ITEM_HONDEW_BERRY
-    ITEM_GREPA_BERRY
-    ITEM_TAMATO_BERRY
-}
-
-mart BattleFrontier_Underground_B1F_Mart_MechanicShopMegaStoneClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk {
     ITEM_VENUSAURITE
     ITEM_CHARIZARDITE_X
     ITEM_CHARIZARDITE_Y
@@ -1423,10 +1540,9 @@ mart BattleFrontier_Underground_B1F_Mart_MechanicShopMegaStoneClerk {
     ITEM_DIANCITE
     ITEM_RED_ORB
     ITEM_BLUE_ORB
-    ITEM_MEGA_RING
 }
 
-mart BattleFrontier_Underground_B1F_Mart_MechanicShopZCrystalClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk {
     ITEM_NORMALIUM_Z
     ITEM_FIRIUM_Z
     ITEM_WATERIUM_Z
@@ -1462,124 +1578,9 @@ mart BattleFrontier_Underground_B1F_Mart_MechanicShopZCrystalClerk {
     ITEM_ALORAICHIUM_Z
     ITEM_PIKASHUNIUM_Z
     ITEM_ULTRANECROZIUM_Z
-    ITEM_Z_POWER_RING
 }
 
-mart BattleFrontier_Underground_B1F_Mart_MechanicShopOtherClerk {
-    ITEM_BUG_TERA_SHARD
-    ITEM_DARK_TERA_SHARD
-    ITEM_DRAGON_TERA_SHARD
-    ITEM_ELECTRIC_TERA_SHARD
-    ITEM_FAIRY_TERA_SHARD
-    ITEM_FIGHTING_TERA_SHARD
-    ITEM_FIRE_TERA_SHARD
-    ITEM_FLYING_TERA_SHARD
-    ITEM_GHOST_TERA_SHARD
-    ITEM_GRASS_TERA_SHARD
-    ITEM_GROUND_TERA_SHARD
-    ITEM_ICE_TERA_SHARD
-    ITEM_NORMAL_TERA_SHARD
-    ITEM_POISON_TERA_SHARD
-    ITEM_PSYCHIC_TERA_SHARD
-    ITEM_ROCK_TERA_SHARD
-    ITEM_STEEL_TERA_SHARD
-    ITEM_WATER_TERA_SHARD
-    ITEM_DYNAMAX_BAND
-    ITEM_TERA_ORB
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BattleBerryShopMainClerk {
-    ITEM_CHERI_BERRY
-    ITEM_CHESTO_BERRY
-    ITEM_PECHA_BERRY
-    ITEM_RAWST_BERRY
-    ITEM_ASPEAR_BERRY
-    ITEM_LEPPA_BERRY
-    ITEM_ORAN_BERRY
-    ITEM_PERSIM_BERRY
-    ITEM_LUM_BERRY
-    ITEM_SITRUS_BERRY
-    ITEM_FIGY_BERRY
-    ITEM_WIKI_BERRY
-    ITEM_MAGO_BERRY
-    ITEM_AGUAV_BERRY
-    ITEM_IAPAPA_BERRY
-    ITEM_LIECHI_BERRY
-    ITEM_GANLON_BERRY
-    ITEM_SALAC_BERRY
-    ITEM_PETAYA_BERRY
-    ITEM_APICOT_BERRY
-    ITEM_LANSAT_BERRY
-    ITEM_STARF_BERRY
-    ITEM_ENIGMA_BERRY
-    ITEM_MICLE_BERRY
-    ITEM_CUSTAP_BERRY
-    ITEM_JABOCA_BERRY
-    ITEM_ROWAP_BERRY
-    ITEM_KEE_BERRY
-    ITEM_MARANGA_BERRY
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BattleBerryShopResistClerk {
-    ITEM_CHILAN_BERRY
-    ITEM_OCCA_BERRY
-    ITEM_PASSHO_BERRY
-    ITEM_WACAN_BERRY
-    ITEM_RINDO_BERRY
-    ITEM_YACHE_BERRY
-    ITEM_CHOPLE_BERRY
-    ITEM_KEBIA_BERRY
-    ITEM_SHUCA_BERRY
-    ITEM_COBA_BERRY
-    ITEM_PAYAPA_BERRY
-    ITEM_TANGA_BERRY
-    ITEM_CHARTI_BERRY
-    ITEM_KASIB_BERRY
-    ITEM_HABAN_BERRY
-    ITEM_COLBUR_BERRY
-    ITEM_BABIRI_BERRY
-    ITEM_ROSELI_BERRY
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
-    ITEM_SILK_SCARF
-    ITEM_CHARCOAL
-    ITEM_MYSTIC_WATER
-    ITEM_MAGNET
-    ITEM_MIRACLE_SEED
-    ITEM_NEVER_MELT_ICE
-    ITEM_BLACK_BELT
-    ITEM_POISON_BARB
-    ITEM_SOFT_SAND
-    ITEM_SHARP_BEAK
-    ITEM_TWISTED_SPOON
-    ITEM_SILVER_POWDER
-    ITEM_HARD_STONE
-    ITEM_SPELL_TAG
-    ITEM_DRAGON_FANG
-    ITEM_BLACK_GLASSES
-    ITEM_METAL_COAT
-    ITEM_NORMAL_GEM
-    ITEM_FIRE_GEM
-    ITEM_WATER_GEM
-    ITEM_ELECTRIC_GEM
-    ITEM_GRASS_GEM
-    ITEM_ICE_GEM
-    ITEM_FIGHTING_GEM
-    ITEM_POISON_GEM
-    ITEM_GROUND_GEM
-    ITEM_FLYING_GEM
-    ITEM_PSYCHIC_GEM
-    ITEM_BUG_GEM
-    ITEM_ROCK_GEM
-    ITEM_GHOST_GEM
-    ITEM_DRAGON_GEM
-    ITEM_DARK_GEM
-    ITEM_STEEL_GEM
-    ITEM_FAIRY_GEM
-}
-
-mart BattleFrontier_Underground_B1F_Mart_BattleShopCommonItemClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk {
     ITEM_CHOICE_BAND
     ITEM_CHOICE_SPECS
     ITEM_CHOICE_SCARF
@@ -1625,7 +1626,7 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopCommonItemClerk {
     ITEM_MIRROR_HERB
 }
 
-mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonItemClerk {
+mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk {
     ITEM_DAMP_ROCK
     ITEM_HEAT_ROCK
     ITEM_SMOOTH_ROCK
@@ -1657,6 +1658,7 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonItemClerk {
     ITEM_RAZOR_FANG
     ITEM_FLOAT_STONE
     ITEM_RING_TARGET
+    ITEM_DESTINY_KNOT
     ITEM_BINDING_BAND
     ITEM_ZOOM_LENS
     ITEM_METRONOME
@@ -1668,4 +1670,98 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonItemClerk {
     ITEM_QUICK_POWDER
     ITEM_DEEP_SEA_SCALE
     ITEM_DEEP_SEA_TOOTH
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
+    ITEM_SILK_SCARF
+    ITEM_CHARCOAL
+    ITEM_MYSTIC_WATER
+    ITEM_MAGNET
+    ITEM_MIRACLE_SEED
+    ITEM_NEVER_MELT_ICE
+    ITEM_BLACK_BELT
+    ITEM_POISON_BARB
+    ITEM_SOFT_SAND
+    ITEM_SHARP_BEAK
+    ITEM_TWISTED_SPOON
+    ITEM_SILVER_POWDER
+    ITEM_HARD_STONE
+    ITEM_SPELL_TAG
+    ITEM_DRAGON_FANG
+    ITEM_BLACK_GLASSES
+    ITEM_METAL_COAT
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk {
+    ITEM_NORMAL_GEM
+    ITEM_FIRE_GEM
+    ITEM_WATER_GEM
+    ITEM_ELECTRIC_GEM
+    ITEM_GRASS_GEM
+    ITEM_ICE_GEM
+    ITEM_FIGHTING_GEM
+    ITEM_POISON_GEM
+    ITEM_GROUND_GEM
+    ITEM_FLYING_GEM
+    ITEM_PSYCHIC_GEM
+    ITEM_BUG_GEM
+    ITEM_ROCK_GEM
+    ITEM_GHOST_GEM
+    ITEM_DRAGON_GEM
+    ITEM_DARK_GEM
+    ITEM_STEEL_GEM
+    ITEM_FAIRY_GEM
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk {
+    ITEM_CHERI_BERRY
+    ITEM_CHESTO_BERRY
+    ITEM_PECHA_BERRY
+    ITEM_RAWST_BERRY
+    ITEM_ASPEAR_BERRY
+    ITEM_LEPPA_BERRY
+    ITEM_ORAN_BERRY
+    ITEM_PERSIM_BERRY
+    ITEM_LUM_BERRY
+    ITEM_SITRUS_BERRY
+    ITEM_FIGY_BERRY
+    ITEM_WIKI_BERRY
+    ITEM_MAGO_BERRY
+    ITEM_AGUAV_BERRY
+    ITEM_IAPAPA_BERRY
+    ITEM_LIECHI_BERRY
+    ITEM_GANLON_BERRY
+    ITEM_SALAC_BERRY
+    ITEM_PETAYA_BERRY
+    ITEM_APICOT_BERRY
+    ITEM_LANSAT_BERRY
+    ITEM_STARF_BERRY
+    ITEM_ENIGMA_BERRY
+    ITEM_MICLE_BERRY
+    ITEM_CUSTAP_BERRY
+    ITEM_JABOCA_BERRY
+    ITEM_ROWAP_BERRY
+    ITEM_KEE_BERRY
+    ITEM_MARANGA_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk {
+    ITEM_CHILAN_BERRY
+    ITEM_OCCA_BERRY
+    ITEM_PASSHO_BERRY
+    ITEM_WACAN_BERRY
+    ITEM_RINDO_BERRY
+    ITEM_YACHE_BERRY
+    ITEM_CHOPLE_BERRY
+    ITEM_KEBIA_BERRY
+    ITEM_SHUCA_BERRY
+    ITEM_COBA_BERRY
+    ITEM_PAYAPA_BERRY
+    ITEM_TANGA_BERRY
+    ITEM_CHARTI_BERRY
+    ITEM_KASIB_BERRY
+    ITEM_HABAN_BERRY
+    ITEM_COLBUR_BERRY
+    ITEM_BABIRI_BERRY
+    ITEM_ROSELI_BERRY
 }
