@@ -1074,6 +1074,49 @@ script BattleFrontier_Underground_B1F_EventScript_BattleShopGemstoneClerk {
 	end
 }
 
+## Bottom Laneway (Gameplay Street) ##
+
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk1 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk1)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk2 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk2)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk3 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk3)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk4 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk4)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
 # Coming Soon (Placeholder)
 script BattleFrontier_Underground_B1F_EventScript_ComingSoonSign {
     msgbox(format("COMING SOON"), MSGBOX_SIGN)
@@ -1764,4 +1807,121 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk {
     ITEM_COLBUR_BERRY
     ITEM_BABIRI_BERRY
     ITEM_ROSELI_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk1 {
+    ITEM_TM01
+    ITEM_TM02
+    ITEM_TM03
+    ITEM_TM04
+    ITEM_TM05
+    ITEM_TM06
+    ITEM_TM07
+    ITEM_TM08
+    ITEM_TM09
+    ITEM_TM10
+    ITEM_TM11
+    ITEM_TM12
+    ITEM_TM13
+    ITEM_TM14
+    ITEM_TM15
+    ITEM_TM16
+    ITEM_TM17
+    ITEM_TM18
+    ITEM_TM19
+    ITEM_TM20
+    ITEM_TM21
+    ITEM_TM22
+    ITEM_TM23
+    ITEM_TM24
+    ITEM_TM25
+    ITEM_HM01
+    ITEM_HM02
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk2 {
+    ITEM_TM26
+    ITEM_TM27
+    ITEM_TM28
+    ITEM_TM29
+    ITEM_TM30
+    ITEM_TM31
+    ITEM_TM32
+    ITEM_TM33
+    ITEM_TM34
+    ITEM_TM35
+    ITEM_TM36
+    ITEM_TM37
+    ITEM_TM38
+    ITEM_TM39
+    ITEM_TM40
+    ITEM_TM41
+    ITEM_TM42
+    ITEM_TM43
+    ITEM_TM44
+    ITEM_TM45
+    ITEM_TM46
+    ITEM_TM47
+    ITEM_TM48
+    ITEM_TM49
+    ITEM_TM50
+    ITEM_HM03
+    ITEM_HM04
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk3 {
+    ITEM_TM51
+    ITEM_TM52
+    ITEM_TM53
+    ITEM_TM54
+    ITEM_TM55
+    ITEM_TM56
+    ITEM_TM57
+    ITEM_TM58
+    ITEM_TM59
+    ITEM_TM60
+    ITEM_TM61
+    ITEM_TM62
+    ITEM_TM63
+    ITEM_TM64
+    ITEM_TM65
+    ITEM_TM66
+    ITEM_TM67
+    ITEM_TM68
+    ITEM_TM69
+    ITEM_TM70
+    ITEM_TM71
+    ITEM_TM72
+    ITEM_TM73
+    ITEM_TM74
+    ITEM_TM75
+    ITEM_HM05
+    ITEM_HM06
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk4 {
+    ITEM_TM76
+    ITEM_TM77
+    ITEM_TM78
+    ITEM_TM79
+    ITEM_TM80
+    ITEM_TM81
+    ITEM_TM82
+    ITEM_TM83
+    ITEM_TM84
+    ITEM_TM85
+    ITEM_TM86
+    ITEM_TM87
+    ITEM_TM88
+    ITEM_TM89
+    ITEM_TM90
+    ITEM_TM91
+    ITEM_TM92
+    ITEM_TM93
+    ITEM_TM94
+    ITEM_TM95
+    ITEM_TM96
+    ITEM_TM97
+    ITEM_TM98
+    ITEM_TM99
+    ITEM_TM100
+    ITEM_HM07
+    ITEM_HM08
 }

@@ -8,7 +8,6 @@ BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_1
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_2
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4
 	release
 	end
 
@@ -20,7 +19,6 @@ BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_1
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4
 	release
 	end
 
@@ -32,7 +30,6 @@ BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_1
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4
 	release
 	end
 
@@ -44,7 +41,6 @@ BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_1
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4
 	release
 	end
 
@@ -56,7 +52,6 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_1
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3
-	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4
 	release
 	end
 
@@ -1732,6 +1727,50 @@ BattleFrontier_Underground_B1F_EventScript_BattleShopGemstoneClerk::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_TMHMClerk1::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk1
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TMHMClerk2::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk2
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TMHMClerk3::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk3
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TMHMClerk4::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk4
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_ComingSoonSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0, MSGBOX_SIGN
 	end
@@ -2214,6 +2253,130 @@ BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk:
 	.2byte ITEM_ROSELI_BERRY
 	.2byte ITEM_NONE
 
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TMHMClerk1:
+	.2byte ITEM_TM01
+	.2byte ITEM_TM02
+	.2byte ITEM_TM03
+	.2byte ITEM_TM04
+	.2byte ITEM_TM05
+	.2byte ITEM_TM06
+	.2byte ITEM_TM07
+	.2byte ITEM_TM08
+	.2byte ITEM_TM09
+	.2byte ITEM_TM10
+	.2byte ITEM_TM11
+	.2byte ITEM_TM12
+	.2byte ITEM_TM13
+	.2byte ITEM_TM14
+	.2byte ITEM_TM15
+	.2byte ITEM_TM16
+	.2byte ITEM_TM17
+	.2byte ITEM_TM18
+	.2byte ITEM_TM19
+	.2byte ITEM_TM20
+	.2byte ITEM_TM21
+	.2byte ITEM_TM22
+	.2byte ITEM_TM23
+	.2byte ITEM_TM24
+	.2byte ITEM_TM25
+	.2byte ITEM_HM01
+	.2byte ITEM_HM02
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TMHMClerk2:
+	.2byte ITEM_TM26
+	.2byte ITEM_TM27
+	.2byte ITEM_TM28
+	.2byte ITEM_TM29
+	.2byte ITEM_TM30
+	.2byte ITEM_TM31
+	.2byte ITEM_TM32
+	.2byte ITEM_TM33
+	.2byte ITEM_TM34
+	.2byte ITEM_TM35
+	.2byte ITEM_TM36
+	.2byte ITEM_TM37
+	.2byte ITEM_TM38
+	.2byte ITEM_TM39
+	.2byte ITEM_TM40
+	.2byte ITEM_TM41
+	.2byte ITEM_TM42
+	.2byte ITEM_TM43
+	.2byte ITEM_TM44
+	.2byte ITEM_TM45
+	.2byte ITEM_TM46
+	.2byte ITEM_TM47
+	.2byte ITEM_TM48
+	.2byte ITEM_TM49
+	.2byte ITEM_TM50
+	.2byte ITEM_HM03
+	.2byte ITEM_HM04
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TMHMClerk3:
+	.2byte ITEM_TM51
+	.2byte ITEM_TM52
+	.2byte ITEM_TM53
+	.2byte ITEM_TM54
+	.2byte ITEM_TM55
+	.2byte ITEM_TM56
+	.2byte ITEM_TM57
+	.2byte ITEM_TM58
+	.2byte ITEM_TM59
+	.2byte ITEM_TM60
+	.2byte ITEM_TM61
+	.2byte ITEM_TM62
+	.2byte ITEM_TM63
+	.2byte ITEM_TM64
+	.2byte ITEM_TM65
+	.2byte ITEM_TM66
+	.2byte ITEM_TM67
+	.2byte ITEM_TM68
+	.2byte ITEM_TM69
+	.2byte ITEM_TM70
+	.2byte ITEM_TM71
+	.2byte ITEM_TM72
+	.2byte ITEM_TM73
+	.2byte ITEM_TM74
+	.2byte ITEM_TM75
+	.2byte ITEM_HM05
+	.2byte ITEM_HM06
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_TMHMClerk4:
+	.2byte ITEM_TM76
+	.2byte ITEM_TM77
+	.2byte ITEM_TM78
+	.2byte ITEM_TM79
+	.2byte ITEM_TM80
+	.2byte ITEM_TM81
+	.2byte ITEM_TM82
+	.2byte ITEM_TM83
+	.2byte ITEM_TM84
+	.2byte ITEM_TM85
+	.2byte ITEM_TM86
+	.2byte ITEM_TM87
+	.2byte ITEM_TM88
+	.2byte ITEM_TM89
+	.2byte ITEM_TM90
+	.2byte ITEM_TM91
+	.2byte ITEM_TM92
+	.2byte ITEM_TM93
+	.2byte ITEM_TM94
+	.2byte ITEM_TM95
+	.2byte ITEM_TM96
+	.2byte ITEM_TM97
+	.2byte ITEM_TM98
+	.2byte ITEM_TM99
+	.2byte ITEM_TM100
+	.2byte ITEM_HM07
+	.2byte ITEM_HM08
+	.2byte ITEM_NONE
+
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:
 	.string "Welcome to the Battle Frontier\n"
 	.string "Underground!$"
@@ -2227,10 +2390,6 @@ BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_2:
 	.string "Battle Dome facility.$"
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_3:
-	.string "You can also get from place to place\n"
-	.string "quickly down here.$"
-
-BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_4:
 	.string "Feel free to use your bike!$"
 
 BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter_Text_0:
