@@ -266,31 +266,8 @@ void ReducePlayerPartyToSelectedMons(void)
             // as long as the order keeps going (did the player select 1 mon? 2? 3?), do not stop
             party[i] = gPlayerParty[gSelectedOrderFromParty[i] - 1]; // index is 0 based, not literal
 
-            // Level Scaling Placeholders
-            bool8 scaleUp = FALSE;
-            bool8 scaleLevel = 100;
-
-            // Get the level mode from the frontier save block
-            const u8 levelMode = gSaveBlock2Ptr->frontier.lvlMode;
-
-            // Switch on level mode
-            switch(levelMode){
-                case 0: // Level 50
-                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_50_SCALE_UP;
-                    scaleLevel = BF_BATTLE_FRONTIER_LEVEL_50_SCALE_LEVEL;
-                    break;
-                case 1: // Open (Level 100)
-                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_OPEN_SCALE_UP;
-                    scaleLevel = BF_BATTLE_FRONTIER_LEVEL_OPEN_SCALE_LEVEL;
-                    break;
-            }
-
-            // If Pokemon is above level limit, or it is below AND level scaling up is enabled
-            // (Do not run if level is the same to save unnecessary processing)
-            if ((party[i].level > scaleLevel) || (party[i].level < scaleLevel && scaleUp)){
-                // Convert the Pokemon to the level cap for the battle mode
-                CalculateMonStatsAtLevel(&party[i], scaleLevel);
-            }
+            // Ensure level scaling is met
+            CalculateMonStats(&party[i]);
         }
 
     CpuFill32(0, gPlayerParty, sizeof gPlayerParty);

@@ -11,6 +11,9 @@
 // Pokemon below that level should be scaled up, or left as-is.s
 #define BF_ENABLE_LEVEL_SCALING TRUE
 
+#define BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_UP TRUE // Scale pokemon below 'BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_LEVEL' to that level in Battle Tent Facilities 
+#define BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_LEVEL 30 // Scale Pokemon above (or below if set) this level to this level
+
 #define BF_BATTLE_FRONTIER_LEVEL_50_SCALE_UP TRUE // Scale pokemon below 'BATTLE_FRONTIER_LEVEL_50_SCALE_LEVEL' to that level in Level 50 Battle Frontier Facilities 
 #define BF_BATTLE_FRONTIER_LEVEL_50_SCALE_LEVEL 50 // Scale Pokemon above (or below if set) this level to this level
 

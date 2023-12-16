@@ -81,6 +81,14 @@
 #define STAT_SPDEF   5
 #define NUM_STATS    6
 
+// For use with silver bottle cap
+#define STAT_ALL_MAX   6
+
+// For use with min. iv berries
+#define STAT_ATK_MIN   6
+#define STAT_SPE_MIN   7
+
+
 #define STAT_ACC     6 // Only in battles.
 #define STAT_EVASION 7 // Only in battles.
 

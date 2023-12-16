@@ -6902,14 +6902,16 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
-    if (GetMonData(mon, MON_DATA_IS_EGG)
-        || GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap()
-        || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
-            && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
-    {
+    // If the Pokemon is an egg, or it is holding an item (Battle Pyramid Only)
+    if (GetMonData(mon, MON_DATA_IS_EGG) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
+        && GetMonData(mon, MON_DATA_HELD_ITEM) != ITEM_NONE))
         return FALSE;
-    }
+
+    // If level scaling is disabled
+    if (BF_ENABLE_LEVEL_SCALING == FALSE)
+        if (GetMonData(mon, MON_DATA_LEVEL) > GetBattleEntryLevelCap())
+            return FALSE;
 
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
@@ -6920,11 +6922,14 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     case FACILITY_UNION_ROOM:
         return TRUE;
     default: // Battle Frontier
-        species = GetMonData(mon, MON_DATA_SPECIES);
-        for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-        {
-            if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                return FALSE;
+        // Allow banned species is not set
+        if (BF_ALLOW_BANNED_SPECIES == FALSE){
+            species = GetMonData(mon, MON_DATA_SPECIES);
+            for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+            {
+                if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
+                    return FALSE;
+            }
         }
         return TRUE;
     }
@@ -7819,6 +7824,24 @@ void ItemUseCB_ReduceIV(u8 taskId, TaskFunc task)
             didActivate = TRUE;
         }
         break;
+    case STAT_ATK_MIN: // 0 Atk IV
+        if (attack != 0)
+        {
+            modifier = 0;
+            SetMonData(mon, MON_DATA_ATK_IV, &modifier);
+            StringCopy(gStringVar2, gText_Attack3);
+            didActivate = TRUE;
+        }
+        break;
+    case STAT_SPE_MIN: // 0 Spe IV
+        if (speed != 0)
+        {
+            modifier = 0;
+            SetMonData(mon, MON_DATA_SPEED_IV, &modifier);
+            StringCopy(gStringVar2, gText_Speed2);
+            didActivate = TRUE;
+        }
+        break;
     }
 
     if (didActivate)
@@ -7917,6 +7940,40 @@ void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task)
             StringCopy(gStringVar2, gText_SpDef3);
             didActivate = TRUE;
         }
+        break;
+    case STAT_ALL_MAX: // 31iv all stats
+        modifier = 31; // Max iv.
+        if (health != MAX_PER_STAT_IVS){
+            // Max. HP stat
+            SetMonData(mon, MON_DATA_HP_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (attack != MAX_PER_STAT_IVS){
+            // Max Atk. Stat
+            SetMonData(mon, MON_DATA_ATK_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (defense != MAX_PER_STAT_IVS){
+            // Max Def. Stat
+            SetMonData(mon, MON_DATA_DEF_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (speed != MAX_PER_STAT_IVS){
+            // Max Speed Stat
+            SetMonData(mon, MON_DATA_SPEED_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (spAttack != MAX_PER_STAT_IVS){
+            // Max SpAtk Stat
+            SetMonData(mon, MON_DATA_SPATK_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (spDefense != MAX_PER_STAT_IVS){
+            // Max SpDef stat
+            SetMonData(mon, MON_DATA_SPDEF_IV, &modifier);
+            didActivate = TRUE;
+        }
+        StringCopy(gStringVar2, gText_All);
         break;
     }
 
