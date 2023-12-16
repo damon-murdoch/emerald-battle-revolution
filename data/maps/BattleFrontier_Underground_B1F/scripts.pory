@@ -1,0 +1,1927 @@
+raw `
+BattleFrontier_Underground_B1F_MapScripts::
+	.byte 0
+`
+
+## Greeters ##
+
+script BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Dome facility."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Factory and Battle Pike facilities."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Tower, Ranking Hall and BP Exchange Service facilities."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the closest entrance for the Battle Palace, POKéMON Center and POKéMART facilities."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("You can find anything you need for battling here."))
+    msgbox(format("This is the best entrance for the Battle Pyramid and Battle Arena facilities."))
+    msgbox(format("Feel free to use your bike!"))
+    release
+    end
+}
+
+## Exchange Machines ##
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverter {
+    msgbox(format("This is a machine for converting currency between BP and ¥!"))
+    msgbox(format("The exchange rate is ¥9800 for every 1 BP."))
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom {
+    msgbox(format("What would you like to do?"))
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom)
+    switch(var(VAR_RESULT)){
+        case 0: // BP to ¥
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions)
+        case 1: // ¥ to BP
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions)
+        default: // Cancel
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd)
+    }
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions {
+    showmoneybox(0,0)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            checkmoney(9800)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 1)
+                removemoney(9800)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 1:
+            checkmoney(49000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 5)
+                removemoney(49000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 2:
+            checkmoney(98000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 10)
+                removemoney(98000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 3:
+            checkmoney(196000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 20)
+                removemoney(196000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        case 4:
+            checkmoney(490000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 50)
+                removemoney(490000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford)
+            }
+        default:
+            hidemoneybox
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(GiveFrontierBattlePoints)
+    updatemoneybox
+    msgbox(format("BP redeemed successfully!"))
+    waitse
+    hidemoneybox
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOptions)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough ¥!"))
+    waitse
+    hidemoneybox
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions {
+    special(ShowBattlePointsWindow)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            if (var(VAR_TEMP_1) >= 1) {
+                setvar(VAR_0x8004, 1)
+                addmoney(9800)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 1:
+            if (var(VAR_TEMP_1) >= 5) {
+                setvar(VAR_0x8004, 5)
+                addmoney(49000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 2:
+            if (var(VAR_TEMP_1) >= 10) {
+                setvar(VAR_0x8004, 10)
+                addmoney(98000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 3:
+            if (var(VAR_TEMP_1) >= 20) {
+                setvar(VAR_0x8004, 20)
+                addmoney(196000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        case 4:
+            if (var(VAR_TEMP_1) >= 50) {
+                setvar(VAR_0x8004, 50)
+                addmoney(490000)
+            } else {
+                goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford)
+            }
+        default:
+            special(CloseBattlePointsWindow)
+            goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(TakeFrontierBattlePoints)
+    special(UpdateBattlePointsWindow)
+    msgbox(format("BP exchanged successfully!"))
+    waitse
+    special(CloseBattlePointsWindow)
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromOptions)
+}
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterFromCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough BP!"))
+    waitse
+    special(CloseBattlePointsWindow)
+    goto(BattleFrontier_Underground_B1F_EventScript_CurrencyConverterToOrFrom)
+}
+
+script BattleFrontier_Underground_B1F_EventScript_CurrencyConverterEnd {
+    msgbox(format("You decided to stop using the converter."))
+    release
+    end
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOrFrom {
+    "Convert BP to ¥$"
+    "Convert ¥ to BP$"
+    "CANCEL$"
+    ""
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPToOptions {
+    "¥9800 (1BP)$"
+    "¥49000 (5BP)$" 
+    "¥98000 (10BP)$"
+    "¥196000 (20BP)$"
+    "¥490000 (50BP)$"
+    "GO BACK$"
+    ""
+}
+
+text BattleFrontier_Underground_B1F_EventScript_CurrencyConverterBPFromOptions {
+    "1BP (¥9800)$"
+    "5BP (¥49000)$"
+    "10BP (¥98000)$"
+    "20BP (¥196000)$"
+    "50BP (¥490000)$"
+    "GO BACK$"
+    ""
+}
+
+## Training Street ##
+script BattleFrontier_Underground_B1F_EventScript_TrainingStreetSign {
+    msgbox("TRAINING STREET\nThis way for:", MSGBOX_SIGN)
+    msgbox("LEGENDARY POKEMON SHOP\nPOKéMON Day Care", MSGBOX_SIGN)
+    msgbox("Training Berry Shop\nBattle Restaurant", MSGBOX_SIGN)
+    msgbox("Training Item Shop\nBattle Dojo", MSGBOX_SIGN)
+    end
+}
+
+# Pokemon Shop
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopSign {
+    msgbox("Legendary POKéMON Shop\nDownstairs: POKéMON Day Care", MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk {
+    lock
+    faceplayer
+    msgbox(format("Welcome to the one-and-only legendary POKéMON shop!"))
+    msgbox(format("We can track down almost any rare POKéMON for you here!"))
+    waitmessage
+    showmoneybox(18,0)
+    checkmoney(12000)
+    if (var(VAR_RESULT) == TRUE){
+        msgbox(format("What are you looking for today?"))
+        msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥12000 to buy anything here!"))
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto)
+        case 1:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto)
+        case 2:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+        case 3:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+        case 4:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+        case 5:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+        default: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKanto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_MEWTWO, 70)
+        case 1:
+            givemon(SPECIES_ARTICUNO, 50)
+        case 2:
+            givemon(SPECIES_ZAPDOS, 50)
+        case 3:
+            givemon(SPECIES_MOLTRES, 50)
+        case 4:
+            givemon(SPECIES_MEW, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKanto)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LUGIA, 70)
+        case 1:
+            givemon(SPECIES_HO_OH, 70)
+        case 2:
+            givemon(SPECIES_RAIKOU, 50)
+        case 3:
+            givemon(SPECIES_ENTEI, 50)
+        case 4: 
+            givemon(SPECIES_SUICUNE, 50)
+        case 5:
+            givemon(SPECIES_CELEBI, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkJohto)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_GROUDON, 70)
+        case 1:
+            givemon(SPECIES_KYOGRE, 70)
+        case 2:
+            givemon(SPECIES_RAYQUAZA, 70)
+        case 3:
+            givemon(SPECIES_REGIROCK, 50)
+        case 4:
+            givemon(SPECIES_REGICE, 50)
+        case 5:
+            givemon(SPECIES_REGISTEEL, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LATIOS, 50)
+        case 1:
+            givemon(SPECIES_LATIAS, 50)
+        case 2:
+            givemon(SPECIES_JIRACHI, 50)
+        case 3:
+            givemon(SPECIES_DEOXYS, 70)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIALGA, 70)
+        case 1:
+            givemon(SPECIES_PALKIA, 70)
+        case 2:
+            givemon(SPECIES_GIRATINA, 70)
+        case 3: 
+            givemon(SPECIES_HEATRAN, 50)
+        case 4:
+            givemon(SPECIES_REGIGIGAS, 50)
+        case 5:
+            givemon(SPECIES_CRESSELIA, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_UXIE, 50)
+        case 1:
+            givemon(SPECIES_MESPRIT, 50)
+        case 2:
+            givemon(SPECIES_AZELF, 50)
+        case 3:
+            givemon(SPECIES_PHIONE, 50)
+        case 4:
+            givemon(SPECIES_MANAPHY, 50)
+        case 5:
+            givemon(SPECIES_DARKRAI, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage3)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_SHAYMIN_LAND, 50)
+        case 1:
+            givemon(SPECIES_SHAYMIN_SKY, 50)
+        case 2:
+            givemon(SPECIES_ARCEUS, 50)
+        case 3:
+            givemon(SPECIES_ROTOM, 30)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_RESHIRAM, 70)
+        case 1:
+            givemon(SPECIES_ZEKROM, 70)
+        case 2:
+            givemon(SPECIES_KYUREM, 70)
+        case 3:
+            givemon(SPECIES_COBALION, 50)
+        case 4:
+            givemon(SPECIES_TERRAKION, 50)
+        case 5:
+            givemon(SPECIES_VIRIZION, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_TORNADUS, 50)
+        case 1:
+            givemon(SPECIES_THUNDURUS, 50)
+        case 2:
+            givemon(SPECIES_LANDORUS, 50)
+        case 3: 
+            givemon(SPECIES_TORNADUS_THERIAN, 50)
+        case 4:
+            givemon(SPECIES_THUNDURUS_THERIAN, 50)
+        case 5:
+            givemon(SPECIES_LANDORUS_THERIAN, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ENAMORUS, 50)
+        case 1:
+            givemon(SPECIES_ENAMORUS_THERIAN, 50)
+        case 2:
+            givemon(SPECIES_VICTINI, 50)
+        case 3:
+            givemon(SPECIES_KELDEO, 50)
+        case 4:
+            givemon(SPECIES_MELOETTA, 50)
+        case 5: 
+            givemon(SPECIES_GENESECT, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_XERNEAS, 70)
+        case 1:
+            givemon(SPECIES_YVELTAL, 70)
+        case 2:
+            givemon(SPECIES_ZYGARDE_10_AURA_BREAK, 50)
+        case 3:
+            givemon(SPECIES_ZYGARDE_50_AURA_BREAK, 50)
+        case 4:
+            givemon(SPECIES_ZYGARDE_10_POWER_CONSTRUCT, 70)
+        case 5:
+            givemon(SPECIES_ZYGARDE_50_POWER_CONSTRUCT, 70)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIANCIE, 50)
+        case 1:
+            givemon(SPECIES_HOOPA, 50)
+        case 2:
+            givemon(SPECIES_HOOPA_UNBOUND, 50)
+        case 3:
+            givemon(SPECIES_VOLCANION, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola)
+        case 1: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar)
+        case 2: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+        default: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_COSMOG, 30)
+        case 1:
+            givemon(SPECIES_SOLGALEO, 70)
+        case 2:
+            givemon(SPECIES_LUNALA, 70)
+        case 3:
+            givemon(SPECIES_NECROZMA, 70)
+        case 4:
+            givemon(SPECIES_TYPE_NULL, 50)
+        case 5:
+            givemon(SPECIES_SILVALLY, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_TAPU_KOKO, 50)
+        case 1:
+            givemon(SPECIES_TAPU_LELE, 50)
+        case 2:
+            givemon(SPECIES_TAPU_BULU, 50)
+        case 3:
+            givemon(SPECIES_TAPU_FINI, 50)
+        case 4:
+            givemon(SPECIES_NIHILEGO, 50)
+        case 5:
+            givemon(SPECIES_BUZZWOLE, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_PHEROMOSA, 50)
+        case 1:
+            givemon(SPECIES_XURKITREE, 50)
+        case 2:
+            givemon(SPECIES_CELESTEELA, 50)
+        case 3:
+            givemon(SPECIES_KARTANA, 50)
+        case 4:
+            givemon(SPECIES_GUZZLORD, 50)
+        case 5:
+            givemon(SPECIES_STAKATAKA, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage4)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_BLACEPHALON, 50)
+        case 1:
+            givemon(SPECIES_POIPOLE, 50)
+        case 2:
+            givemon(SPECIES_NAGANADEL, 50)
+        case 3:
+            givemon(SPECIES_MAGEARNA, 50)
+        case 4:
+            givemon(SPECIES_MARSHADOW, 50)
+        case 5:
+            givemon(SPECIES_ZERAORA, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ZACIAN, 70)
+        case 1:
+            givemon(SPECIES_ZAMAZENTA, 70)
+        case 2:
+            givemon(SPECIES_ETERNATUS, 70)
+        case 3:
+            givemon(SPECIES_KUBFU, 30)
+        case 4:
+            givemon(SPECIES_URSHIFU_SINGLE_STRIKE_STYLE, 50)
+        case 5:
+            givemon(SPECIES_URSHIFU_RAPID_STRIKE_STYLE, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_CALYREX, 70)
+        case 1:
+            givemon(SPECIES_GLASTRIER, 50)
+        case 2:
+            givemon(SPECIES_SPECTRIER, 50)
+        case 3:
+            givemon(SPECIES_ARTICUNO_GALARIAN, 50)
+        case 4:
+            givemon(SPECIES_ZAPDOS_GALARIAN, 50)
+        case 5:
+            givemon(SPECIES_MOLTRES_GALARIAN, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_REGIELEKI, 50)
+        case 1:
+            givemon(SPECIES_REGIDRAGO, 50)
+        case 2:
+            givemon(SPECIES_MELTAN, 30)
+        case 3:
+            givemon(SPECIES_MELMETAL, 50)
+        case 4:
+            givemon(SPECIES_ZARUDE, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_KORAIDON, 70)
+        case 1:
+            givemon(SPECIES_MIRAIDON, 70)
+        case 2:
+            givemon(SPECIES_WO_CHIEN, 50)
+        case 3:
+            givemon(SPECIES_CHIEN_PAO, 50)
+        case 4:
+            givemon(SPECIES_TING_LU, 50)
+        case 5:
+            givemon(SPECIES_CHI_YU, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_IRON_TREADS, 50)
+        case 1:
+            givemon(SPECIES_IRON_BUNDLE, 50)
+        case 2:
+            givemon(SPECIES_IRON_HANDS, 50)
+        case 3:
+            givemon(SPECIES_IRON_JUGULIS, 50)
+        case 4:
+            givemon(SPECIES_IRON_MOTH, 50)
+        case 5:
+            givemon(SPECIES_IRON_THORNS, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_IRON_VALIANT, 70)
+        case 1:
+            givemon(SPECIES_IRON_LEAVES, 50)
+        case 2:
+            givemon(SPECIES_GREAT_TUSK, 50)
+        case 3:
+            givemon(SPECIES_SCREAM_TAIL, 50)
+        case 4:
+            givemon(SPECIES_BRUTE_BONNET, 50)
+        case 5:
+            givemon(SPECIES_FLUTTER_MANE, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_SLITHER_WING, 50)
+        case 1:
+            givemon(SPECIES_SANDY_SHOCKS, 50)
+        case 2:
+            givemon(SPECIES_ROARING_MOON, 70)
+        case 3:
+            givemon(SPECIES_WALKING_WAKE, 50)
+        case 4:
+            givemon(SPECIES_OKIDOGI, 50)
+        case 5:
+            givemon(SPECIES_MUNKIDORI, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage5)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_FEZANDIPITI, 50)
+        case 1:
+            givemon(SPECIES_OGERPON, 50)
+        case 2:
+            givemon(SPECIES_URSALUNA_BLOODMOON,50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase {
+    msgbox(format("Let's see if we can find one of those for you ..."))
+    hidemoneybox
+    delay(10)
+    fadescreen(FADE_TO_BLACK)
+    delay(20)
+    fadescreen(FADE_FROM_BLACK)
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON has been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON has been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like we can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    playse(SE_SHOP)
+    removemoney(12000)
+    showmoneybox(18,0)
+    waitse
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd {
+    msgbox(format("Come back again soon!"))
+    hidemoneybox
+    releaseall
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Berry Training Shop (Restaurant)
+script BattleFrontier_Underground_B1F_EventScript_BerryShopSign {
+    msgbox("Training Berry Shop\nDownstairs: Battle Restaurant", MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_BerryShopIVTrainingClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BerryShopEVTrainingClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Training Chemist
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopVitaminClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopMintClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+# Training Dojo
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TrainingShopTeraClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+## Middle Laneway (Battle Street) ##
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopMegaClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopZCrystalClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopBerryClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopResistClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopCommonClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopUncommonClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_BattleShopTypeItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_BattleShopGemstoneClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+## Bottom Laneway (Gameplay Street) ##
+
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk1 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk1)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk2 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk2)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk3 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk3)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+script BattleFrontier_Underground_B1F_EventScript_TMHMClerk4 {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_TMHMClerk4)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+# Coming Soon (Placeholder)
+script BattleFrontier_Underground_B1F_EventScript_ComingSoonSign {
+    msgbox(format("COMING SOON"), MSGBOX_SIGN)
+    end
+}
+script BattleFrontier_Underground_B1F_EventScript_ComingSoonStaff {
+    lock
+	faceplayer
+    msgbox(format("This area isn't available right now, sorry! Please come back soon!"))
+	release
+	end
+}
+
+## Text Blocks
+
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1 {
+    "KANTO$"
+    "JOHTO$"
+    "HOENN$"
+    "SINNOH$"
+    "UNOVA$"
+    "KALOS$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKanto {
+    "MEWTWO{CLEAR_TO 0x48}¥12000$"
+    "ARTICUNO{CLEAR_TO 0x48}¥12000$"
+    "ZAPDOS{CLEAR_TO 0x48}¥12000$"
+    "MOLTRES{CLEAR_TO 0x48}¥12000$"
+    "MEW{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkJohto {
+    "LUGIA{CLEAR_TO 0x48}¥12000$"
+    "HO-OH{CLEAR_TO 0x48}¥12000$"
+    "RAIKOU{CLEAR_TO 0x48}¥12000$"
+    "ENTEI{CLEAR_TO 0x48}¥12000$"
+    "SUICUNE{CLEAR_TO 0x48}¥12000$"
+    "CELEBI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn {
+    "GROUDON{CLEAR_TO 0x48}¥12000$"
+    "KYOGRE{CLEAR_TO 0x48}¥12000$"
+    "RAYQUAZA{CLEAR_TO 0x48}¥12000$"
+    "REGIROCK{CLEAR_TO 0x48}¥12000$"
+    "REGICE{CLEAR_TO 0x48}¥12000$"
+    "REGISTEEL{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2 {
+    "LATIOS{CLEAR_TO 0x48}¥12000$"
+    "LATIAS{CLEAR_TO 0x48}¥12000$"
+    "JIRACHI{CLEAR_TO 0x48}¥12000$"
+    "DEOXYS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh {
+    "DIALGA{CLEAR_TO 0x48}¥12000$"
+    "PALKIA{CLEAR_TO 0x48}¥12000$"
+    "GIRATINA{CLEAR_TO 0x48}¥12000$"
+    "HEATRAN{CLEAR_TO 0x48}¥12000$"
+    "REGIGIGAS{CLEAR_TO 0x48}¥12000$"
+    "CRESSELIA{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2 {
+    "UXIE{CLEAR_TO 0x48}¥12000$"
+    "MESPRIT{CLEAR_TO 0x48}¥12000$"
+    "AZELF{CLEAR_TO 0x48}¥12000$"
+    "PHIONE{CLEAR_TO 0x48}¥12000$"
+    "MANAPHY{CLEAR_TO 0x48}¥12000$"
+    "DARKRAI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage3 {
+    "SHAYMIN{CLEAR_TO 0x48}¥12000$"
+    "SHAYMIN SKY{CLEAR_TO 0x48}¥12000$"
+    "ARCEUS{CLEAR_TO 0x48}¥12000$"
+    "ROTOM{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova {
+    "RESHIRAM{CLEAR_TO 0x48}¥12000$"
+    "ZEKROM{CLEAR_TO 0x48}¥12000$"
+    "KYUREM{CLEAR_TO 0x48}¥12000$"
+    "COBALION{CLEAR_TO 0x48}¥12000$"
+    "TERRAKION{CLEAR_TO 0x48}¥12000$"
+    "VIRIZION{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2 {
+    "TORNADUS{CLEAR_TO 0x48}¥12000$"
+    "THUNDURUS{CLEAR_TO 0x48}¥12000$"
+    "LANDORUS{CLEAR_TO 0x48}¥12000$"
+    "TORNADUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "THUNDURUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "LANDORUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage3 {
+    "ENAMORUS{CLEAR_TO 0x48}¥12000$"
+    "ENAMORUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "VICTINI{CLEAR_TO 0x48}¥12000$"
+    "KELDEO{CLEAR_TO 0x48}¥12000$"
+    "MELOETTA{CLEAR_TO 0x48}¥12000$"
+    "GENESECT{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos {
+    "XERNEAS{CLEAR_TO 0x48}¥12000$"
+    "YVELTAL{CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-10 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-50 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-10 (POWER C.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-50 (POWER C.){CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosPage2 {
+    "DIANCIE{CLEAR_TO 0x48}¥12000$"
+    "HOOPA{CLEAR_TO 0x48}¥12000$"
+    "HOOPA UNBOUND{CLEAR_TO 0x48}¥12000$"
+    "VOLCANION{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions2 {
+    "ALOLA$"
+    "GALAR$"
+    "PALDEA$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola {
+    "COSMOG{CLEAR_TO 0x48}¥12000$"
+    "SOLGALEO{CLEAR_TO 0x48}¥12000$"
+    "LUNALA{CLEAR_TO 0x48}¥12000$"
+    "NECROZMA{CLEAR_TO 0x48}¥12000$"
+    "TYPE NULL{CLEAR_TO 0x48}¥12000$"
+    "SILVALLY{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2 {
+    "TAPU KOKO{CLEAR_TO 0x48}¥12000$"
+    "TAPU LELE{CLEAR_TO 0x48}¥12000$"
+    "TAPU BULU{CLEAR_TO 0x48}¥12000$"
+    "TAPU FINI{CLEAR_TO 0x48}¥12000$"
+    "NIHILEGO{CLEAR_TO 0x48}¥12000$"
+    "BUZZWOLE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3 {
+    "PHEROMOSA{CLEAR_TO 0x48}¥12000$"
+    "XURKITREE{CLEAR_TO 0x48}¥12000$"
+    "CELESTEELA{CLEAR_TO 0x48}¥12000$"
+    "KARTANA{CLEAR_TO 0x48}¥12000$"
+    "GUZZLORD{CLEAR_TO 0x48}¥12000$"
+    "STAKATAKA{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage4 {
+    "BLACEPHALON{CLEAR_TO 0x48}¥12000$"
+    "POIPOLE{CLEAR_TO 0x48}¥12000$"
+    "NAGANADEL{CLEAR_TO 0x48}¥12000$"
+    "MAGEARNA{CLEAR_TO 0x48}¥12000$"
+    "MARSHADOW{CLEAR_TO 0x48}¥12000$"
+    "ZERAORA{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar {
+    "ZACIAN{CLEAR_TO 0x48}¥12000$"
+    "ZAMAZENTA{CLEAR_TO 0x48}¥12000$"
+    "ETERNATUS{CLEAR_TO 0x48}¥12000$"
+    "KUBFU{CLEAR_TO 0x48}¥12000$"
+    "URSHIFU SS{CLEAR_TO 0x48}¥12000$"
+    "URSHIFU RS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2 {
+    "CALYREX{CLEAR_TO 0x48}¥12000$"
+    "GLASTRIER{CLEAR_TO 0x48}¥12000$"
+    "SPECTRIER{CLEAR_TO 0x48}¥12000$"
+    "ARTICUNO GALAR{CLEAR_TO 0x48}¥12000$"
+    "ZAPDOS GALAR{CLEAR_TO 0x48}¥12000$"
+    "MOLTRES GALAR{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage3 {
+    "REGIELEKI{CLEAR_TO 0x48}¥12000$"
+    "REGIDRAGO{CLEAR_TO 0x48}¥12000$"
+    "MELTAN{CLEAR_TO 0x48}¥12000$"
+    "MELMETAL{CLEAR_TO 0x48}¥12000$"
+    "ZARUDE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea {
+    "KORAIDON{CLEAR_TO 0x48}¥12000$"
+    "MIRAIDON{CLEAR_TO 0x48}¥12000$"
+    "WO-CHIEN{CLEAR_TO 0x48}¥12000$"
+    "CHIEN-PAO{CLEAR_TO 0x48}¥12000$"
+    "TING-LU{CLEAR_TO 0x48}¥12000$"
+    "CHI-YU{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2 {
+    "IRON TREADS{CLEAR_TO 0x48}¥12000$"
+    "IRON BUNDLE{CLEAR_TO 0x48}¥12000$"
+    "IRON HANDS{CLEAR_TO 0x48}¥12000$"
+    "IRON JUGULIS{CLEAR_TO 0x48}¥12000$"
+    "IRON MOTH{CLEAR_TO 0x48}¥12000$"
+    "IRON THORNS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3 {
+    "IRON VALIANT{CLEAR_TO 0x48}¥12000$"
+    "IRON LEAVES{CLEAR_TO 0x48}¥12000$"
+    "GREAT TUSK{CLEAR_TO 0x48}¥12000$"
+    "SCREAM TAIL{CLEAR_TO 0x48}¥12000$"
+    "BRUTE BONNET{CLEAR_TO 0x48}¥12000$"
+    "FLUTTER MANE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4 {
+    "SLITHER WING{CLEAR_TO 0x48}¥12000$"
+    "SANDY SHOCKS{CLEAR_TO 0x48}¥12000$"
+    "ROARING MOON{CLEAR_TO 0x48}¥12000$"
+    "WALKING WAKE{CLEAR_TO 0x48}¥12000$"
+    "OKIDOGI{CLEAR_TO 0x48}¥12000$"
+    "MUNKIDORI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage5 {
+    "FEZANDIPITI{CLEAR_TO 0x48}¥12000$"
+    "OGERPON{CLEAR_TO 0x48}¥12000$"
+    "URSALUNA BLOODMOON{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+## Mart Blocks 
+
+mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
+    ITEM_FLAME_PLATE
+    ITEM_SPLASH_PLATE
+    ITEM_ZAP_PLATE
+    ITEM_MEADOW_PLATE
+    ITEM_ICICLE_PLATE
+    ITEM_FIST_PLATE
+    ITEM_TOXIC_PLATE
+    ITEM_EARTH_PLATE
+    ITEM_SKY_PLATE
+    ITEM_MIND_PLATE
+    ITEM_INSECT_PLATE
+    ITEM_STONE_PLATE
+    ITEM_SPOOKY_PLATE
+    ITEM_DRACO_PLATE
+    ITEM_DREAD_PLATE
+    ITEM_IRON_PLATE
+    ITEM_PIXIE_PLATE
+    ITEM_DOUSE_DRIVE
+    ITEM_SHOCK_DRIVE
+    ITEM_BURN_DRIVE
+    ITEM_CHILL_DRIVE
+    ITEM_FIRE_MEMORY
+    ITEM_WATER_MEMORY
+    ITEM_ELECTRIC_MEMORY
+    ITEM_GRASS_MEMORY
+    ITEM_ICE_MEMORY
+    ITEM_FIGHTING_MEMORY
+    ITEM_POISON_MEMORY
+    ITEM_GROUND_MEMORY
+    ITEM_FLYING_MEMORY
+    ITEM_PSYCHIC_MEMORY
+    ITEM_BUG_MEMORY
+    ITEM_ROCK_MEMORY
+    ITEM_GHOST_MEMORY
+    ITEM_DRAGON_MEMORY
+    ITEM_DARK_MEMORY
+    ITEM_STEEL_MEMORY
+    ITEM_FAIRY_MEMORY
+    ITEM_RUSTED_SWORD
+    ITEM_RUSTED_SHIELD
+    ITEM_SOUL_DEW
+    ITEM_ADAMANT_ORB
+    ITEM_LUSTROUS_ORB
+    ITEM_GRISEOUS_ORB
+    ITEM_SCROLL_OF_DARKNESS
+	ITEM_SCROLL_OF_WATERS
+    ITEM_CORNERSTONE_MASK
+    ITEM_WELLSPRING_MASK
+    ITEM_HEARTHFLAME_MASK
+    ITEM_ADAMANT_CRYSTAL
+    ITEM_GRISEOUS_CORE
+    ITEM_LUSTROUS_GLOBE
+    ITEM_ROTOM_CATALOG
+    ITEM_GRACIDEA
+    ITEM_REVEAL_GLASS
+    ITEM_DNA_SPLICERS
+    ITEM_ZYGARDE_CUBE
+    ITEM_PRISON_BOTTLE
+    ITEM_N_SOLARIZER
+    ITEM_N_LUNARIZER
+    ITEM_REINS_OF_UNITY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
+    ITEM_RAZZ_BERRY
+    ITEM_BLUK_BERRY
+    ITEM_NANAB_BERRY
+    ITEM_WEPEAR_BERRY
+    ITEM_PINAP_BERRY
+    ITEM_CORNN_BERRY
+    ITEM_MAGOST_BERRY
+    ITEM_RABUTA_BERRY
+    ITEM_NOMEL_BERRY
+    ITEM_SPELON_BERRY
+    ITEM_PAMTRE_BERRY
+    ITEM_WATMEL_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
+    ITEM_HEALTH_MOCHI
+    ITEM_MUSCLE_MOCHI
+    ITEM_RESIST_MOCHI
+    ITEM_GENIUS_MOCHI
+    ITEM_CLEVER_MOCHI
+    ITEM_SWIFT_MOCHI
+    ITEM_FRESH_START_MOCHI
+    ITEM_POMEG_BERRY
+    ITEM_KELPSY_BERRY
+    ITEM_QUALOT_BERRY
+    ITEM_HONDEW_BERRY
+    ITEM_GREPA_BERRY
+    ITEM_TAMATO_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
+    ITEM_HEALTH_FEATHER
+    ITEM_MUSCLE_FEATHER
+    ITEM_RESIST_FEATHER
+    ITEM_GENIUS_FEATHER
+    ITEM_CLEVER_FEATHER
+    ITEM_SWIFT_FEATHER
+    ITEM_HP_UP
+    ITEM_PROTEIN
+    ITEM_IRON
+    ITEM_CALCIUM
+    ITEM_ZINC
+    ITEM_CARBOS
+    ITEM_PP_UP
+    ITEM_PP_MAX
+    ITEM_ABILITY_CAPSULE
+    ITEM_ABILITY_PATCH
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
+    ITEM_LONELY_MINT
+    ITEM_ADAMANT_MINT
+    ITEM_NAUGHTY_MINT
+    ITEM_BRAVE_MINT
+    ITEM_BOLD_MINT
+    ITEM_IMPISH_MINT
+    ITEM_LAX_MINT
+    ITEM_RELAXED_MINT
+    ITEM_MODEST_MINT
+    ITEM_MILD_MINT
+    ITEM_RASH_MINT
+    ITEM_QUIET_MINT
+    ITEM_CALM_MINT
+    ITEM_GENTLE_MINT
+    ITEM_CAREFUL_MINT
+    ITEM_SASSY_MINT
+    ITEM_TIMID_MINT
+    ITEM_HASTY_MINT
+    ITEM_JOLLY_MINT
+    ITEM_NAIVE_MINT
+    ITEM_SERIOUS_MINT
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopOtherClerk {
+    ITEM_RARE_CANDY
+    ITEM_EXP_CANDY_XS
+    ITEM_EXP_CANDY_S
+    ITEM_EXP_CANDY_M
+    ITEM_EXP_CANDY_L
+    ITEM_EXP_CANDY_XL
+    ITEM_DYNAMAX_CANDY
+    ITEM_MACHO_BRACE
+    ITEM_POWER_WEIGHT
+    ITEM_POWER_BRACER
+    ITEM_POWER_BELT
+    ITEM_POWER_LENS
+    ITEM_POWER_BAND
+    ITEM_POWER_ANKLET
+    ITEM_AMULET_COIN
+    ITEM_LUCKY_EGG
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk {
+    ITEM_BUG_TERA_SHARD
+    ITEM_DARK_TERA_SHARD
+    ITEM_DRAGON_TERA_SHARD
+    ITEM_ELECTRIC_TERA_SHARD
+    ITEM_FAIRY_TERA_SHARD
+    ITEM_FIGHTING_TERA_SHARD
+    ITEM_FIRE_TERA_SHARD
+    ITEM_FLYING_TERA_SHARD
+    ITEM_GHOST_TERA_SHARD
+    ITEM_GRASS_TERA_SHARD
+    ITEM_GROUND_TERA_SHARD
+    ITEM_ICE_TERA_SHARD
+    ITEM_NORMAL_TERA_SHARD
+    ITEM_POISON_TERA_SHARD
+    ITEM_PSYCHIC_TERA_SHARD
+    ITEM_ROCK_TERA_SHARD
+    ITEM_STEEL_TERA_SHARD
+    ITEM_WATER_TERA_SHARD
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk {
+    ITEM_VENUSAURITE
+    ITEM_CHARIZARDITE_X
+    ITEM_CHARIZARDITE_Y
+    ITEM_BLASTOISINITE
+    ITEM_BEEDRILLITE
+    ITEM_PIDGEOTITE
+    ITEM_ALAKAZITE
+    ITEM_SLOWBRONITE
+    ITEM_GENGARITE
+    ITEM_KANGASKHANITE
+    ITEM_PINSIRITE
+    ITEM_GYARADOSITE
+    ITEM_AERODACTYLITE
+    ITEM_MEWTWONITE_X
+    ITEM_MEWTWONITE_Y
+    ITEM_AMPHAROSITE
+    ITEM_STEELIXITE
+    ITEM_SCIZORITE
+    ITEM_HERACRONITE
+    ITEM_HOUNDOOMINITE
+    ITEM_TYRANITARITE
+    ITEM_SCEPTILITE
+    ITEM_BLAZIKENITE
+    ITEM_SWAMPERTITE
+    ITEM_GARDEVOIRITE
+    ITEM_SABLENITE
+    ITEM_MAWILITE
+    ITEM_AGGRONITE
+    ITEM_MEDICHAMITE
+    ITEM_MANECTITE
+    ITEM_SHARPEDONITE
+    ITEM_CAMERUPTITE
+    ITEM_ALTARIANITE
+    ITEM_BANETTITE
+    ITEM_ABSOLITE
+    ITEM_GLALITITE
+    ITEM_SALAMENCITE
+    ITEM_METAGROSSITE
+    ITEM_LATIASITE
+    ITEM_LATIOSITE
+    ITEM_LOPUNNITE
+    ITEM_GARCHOMPITE
+    ITEM_LUCARIONITE
+    ITEM_ABOMASITE
+    ITEM_GALLADITE
+    ITEM_AUDINITE
+    ITEM_DIANCITE
+    ITEM_RED_ORB
+    ITEM_BLUE_ORB
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopZCrystalClerk {
+    ITEM_NORMALIUM_Z
+    ITEM_FIRIUM_Z
+    ITEM_WATERIUM_Z
+    ITEM_ELECTRIUM_Z
+    ITEM_GRASSIUM_Z
+    ITEM_ICIUM_Z
+    ITEM_FIGHTINIUM_Z
+    ITEM_POISONIUM_Z
+    ITEM_GROUNDIUM_Z
+    ITEM_FLYINIUM_Z
+    ITEM_PSYCHIUM_Z
+    ITEM_BUGINIUM_Z
+    ITEM_ROCKIUM_Z
+    ITEM_GHOSTIUM_Z
+    ITEM_DRAGONIUM_Z
+    ITEM_DARKINIUM_Z
+    ITEM_STEELIUM_Z
+    ITEM_FAIRIUM_Z
+    ITEM_PIKANIUM_Z
+    ITEM_EEVIUM_Z
+    ITEM_SNORLIUM_Z
+    ITEM_MEWNIUM_Z
+    ITEM_DECIDIUM_Z
+    ITEM_INCINIUM_Z
+    ITEM_PRIMARIUM_Z
+    ITEM_LYCANIUM_Z
+    ITEM_MIMIKIUM_Z
+    ITEM_KOMMONIUM_Z
+    ITEM_TAPUNIUM_Z
+    ITEM_SOLGANIUM_Z
+    ITEM_LUNALIUM_Z
+    ITEM_MARSHADIUM_Z
+    ITEM_ALORAICHIUM_Z
+    ITEM_PIKASHUNIUM_Z
+    ITEM_ULTRANECROZIUM_Z
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopCommonClerk {
+    ITEM_CHOICE_BAND
+    ITEM_CHOICE_SPECS
+    ITEM_CHOICE_SCARF
+    ITEM_FLAME_ORB
+    ITEM_TOXIC_ORB
+    ITEM_ELECTRIC_SEED
+    ITEM_PSYCHIC_SEED
+    ITEM_MISTY_SEED
+    ITEM_GRASSY_SEED
+    ITEM_MENTAL_HERB
+    ITEM_LEFTOVERS
+    ITEM_EXPERT_BELT
+    ITEM_LIGHT_CLAY
+    ITEM_LIFE_ORB
+    ITEM_POWER_HERB
+    ITEM_FOCUS_SASH
+    ITEM_LAGGING_TAIL
+    ITEM_IRON_BALL
+    ITEM_SHED_SHELL
+    ITEM_EVIOLITE
+    ITEM_ROCKY_HELMET
+    ITEM_AIR_BALLOON
+    ITEM_RED_CARD
+    ITEM_EJECT_BUTTON
+    ITEM_WEAKNESS_POLICY
+    ITEM_ASSAULT_VEST
+    ITEM_SAFETY_GOGGLES
+    ITEM_ADRENALINE_ORB
+    ITEM_TERRAIN_EXTENDER
+    ITEM_PROTECTIVE_PADS
+    ITEM_THROAT_SPRAY
+    ITEM_EJECT_PACK
+    ITEM_HEAVY_DUTY_BOOTS
+    ITEM_BLUNDER_POLICY
+    ITEM_ROOM_SERVICE
+    ITEM_UTILITY_UMBRELLA
+    ITEM_ABILITY_SHIELD
+    ITEM_CLEAR_AMULET
+    ITEM_PUNCHING_GLOVE
+    ITEM_COVERT_CLOAK
+    ITEM_LOADED_DICE
+    ITEM_BOOSTER_ENERGY
+    ITEM_MIRROR_HERB
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk {
+    ITEM_DAMP_ROCK
+    ITEM_HEAT_ROCK
+    ITEM_SMOOTH_ROCK
+    ITEM_ICY_ROCK
+    ITEM_ABSORB_BULB
+    ITEM_CELL_BATTERY
+    ITEM_LUMINOUS_MOSS
+    ITEM_SNOWBALL
+    ITEM_BRIGHT_POWDER
+    ITEM_WHITE_HERB
+    ITEM_QUICK_CLAW
+    ITEM_SOOTHE_BELL
+    ITEM_KINGS_ROCK
+    ITEM_AMULET_COIN
+    ITEM_CLEANSE_TAG
+    ITEM_SMOKE_BALL
+    ITEM_FOCUS_BAND
+    ITEM_LUCKY_EGG
+    ITEM_SCOPE_LENS
+    ITEM_SHELL_BELL
+    ITEM_WIDE_LENS
+    ITEM_MUSCLE_BAND
+    ITEM_WISE_GLASSES
+    ITEM_BLACK_SLUDGE
+    ITEM_GRIP_CLAW
+    ITEM_STICKY_BARB
+    ITEM_BIG_ROOT
+    ITEM_RAZOR_CLAW
+    ITEM_RAZOR_FANG
+    ITEM_FLOAT_STONE
+    ITEM_RING_TARGET
+    ITEM_DESTINY_KNOT
+    ITEM_BINDING_BAND
+    ITEM_ZOOM_LENS
+    ITEM_METRONOME
+    ITEM_LIGHT_BALL
+    ITEM_LEEK
+    ITEM_THICK_CLUB
+    ITEM_LUCKY_PUNCH
+    ITEM_METAL_POWDER
+    ITEM_QUICK_POWDER
+    ITEM_DEEP_SEA_SCALE
+    ITEM_DEEP_SEA_TOOTH
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
+    ITEM_SILK_SCARF
+    ITEM_CHARCOAL
+    ITEM_MYSTIC_WATER
+    ITEM_MAGNET
+    ITEM_MIRACLE_SEED
+    ITEM_NEVER_MELT_ICE
+    ITEM_BLACK_BELT
+    ITEM_POISON_BARB
+    ITEM_SOFT_SAND
+    ITEM_SHARP_BEAK
+    ITEM_TWISTED_SPOON
+    ITEM_SILVER_POWDER
+    ITEM_HARD_STONE
+    ITEM_SPELL_TAG
+    ITEM_DRAGON_FANG
+    ITEM_BLACK_GLASSES
+    ITEM_METAL_COAT
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk {
+    ITEM_NORMAL_GEM
+    ITEM_FIRE_GEM
+    ITEM_WATER_GEM
+    ITEM_ELECTRIC_GEM
+    ITEM_GRASS_GEM
+    ITEM_ICE_GEM
+    ITEM_FIGHTING_GEM
+    ITEM_POISON_GEM
+    ITEM_GROUND_GEM
+    ITEM_FLYING_GEM
+    ITEM_PSYCHIC_GEM
+    ITEM_BUG_GEM
+    ITEM_ROCK_GEM
+    ITEM_GHOST_GEM
+    ITEM_DRAGON_GEM
+    ITEM_DARK_GEM
+    ITEM_STEEL_GEM
+    ITEM_FAIRY_GEM
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopBerryClerk {
+    ITEM_CHERI_BERRY
+    ITEM_CHESTO_BERRY
+    ITEM_PECHA_BERRY
+    ITEM_RAWST_BERRY
+    ITEM_ASPEAR_BERRY
+    ITEM_LEPPA_BERRY
+    ITEM_ORAN_BERRY
+    ITEM_PERSIM_BERRY
+    ITEM_LUM_BERRY
+    ITEM_SITRUS_BERRY
+    ITEM_FIGY_BERRY
+    ITEM_WIKI_BERRY
+    ITEM_MAGO_BERRY
+    ITEM_AGUAV_BERRY
+    ITEM_IAPAPA_BERRY
+    ITEM_LIECHI_BERRY
+    ITEM_GANLON_BERRY
+    ITEM_SALAC_BERRY
+    ITEM_PETAYA_BERRY
+    ITEM_APICOT_BERRY
+    ITEM_LANSAT_BERRY
+    ITEM_STARF_BERRY
+    ITEM_ENIGMA_BERRY
+    ITEM_MICLE_BERRY
+    ITEM_CUSTAP_BERRY
+    ITEM_JABOCA_BERRY
+    ITEM_ROWAP_BERRY
+    ITEM_KEE_BERRY
+    ITEM_MARANGA_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_BattleShopResistClerk {
+    ITEM_CHILAN_BERRY
+    ITEM_OCCA_BERRY
+    ITEM_PASSHO_BERRY
+    ITEM_WACAN_BERRY
+    ITEM_RINDO_BERRY
+    ITEM_YACHE_BERRY
+    ITEM_CHOPLE_BERRY
+    ITEM_KEBIA_BERRY
+    ITEM_SHUCA_BERRY
+    ITEM_COBA_BERRY
+    ITEM_PAYAPA_BERRY
+    ITEM_TANGA_BERRY
+    ITEM_CHARTI_BERRY
+    ITEM_KASIB_BERRY
+    ITEM_HABAN_BERRY
+    ITEM_COLBUR_BERRY
+    ITEM_BABIRI_BERRY
+    ITEM_ROSELI_BERRY
+}
+
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk1 {
+    ITEM_TM01
+    ITEM_TM02
+    ITEM_TM03
+    ITEM_TM04
+    ITEM_TM05
+    ITEM_TM06
+    ITEM_TM07
+    ITEM_TM08
+    ITEM_TM09
+    ITEM_TM10
+    ITEM_TM11
+    ITEM_TM12
+    ITEM_TM13
+    ITEM_TM14
+    ITEM_TM15
+    ITEM_TM16
+    ITEM_TM17
+    ITEM_TM18
+    ITEM_TM19
+    ITEM_TM20
+    ITEM_TM21
+    ITEM_TM22
+    ITEM_TM23
+    ITEM_TM24
+    ITEM_TM25
+    ITEM_HM01
+    ITEM_HM02
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk2 {
+    ITEM_TM26
+    ITEM_TM27
+    ITEM_TM28
+    ITEM_TM29
+    ITEM_TM30
+    ITEM_TM31
+    ITEM_TM32
+    ITEM_TM33
+    ITEM_TM34
+    ITEM_TM35
+    ITEM_TM36
+    ITEM_TM37
+    ITEM_TM38
+    ITEM_TM39
+    ITEM_TM40
+    ITEM_TM41
+    ITEM_TM42
+    ITEM_TM43
+    ITEM_TM44
+    ITEM_TM45
+    ITEM_TM46
+    ITEM_TM47
+    ITEM_TM48
+    ITEM_TM49
+    ITEM_TM50
+    ITEM_HM03
+    ITEM_HM04
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk3 {
+    ITEM_TM51
+    ITEM_TM52
+    ITEM_TM53
+    ITEM_TM54
+    ITEM_TM55
+    ITEM_TM56
+    ITEM_TM57
+    ITEM_TM58
+    ITEM_TM59
+    ITEM_TM60
+    ITEM_TM61
+    ITEM_TM62
+    ITEM_TM63
+    ITEM_TM64
+    ITEM_TM65
+    ITEM_TM66
+    ITEM_TM67
+    ITEM_TM68
+    ITEM_TM69
+    ITEM_TM70
+    ITEM_TM71
+    ITEM_TM72
+    ITEM_TM73
+    ITEM_TM74
+    ITEM_TM75
+    ITEM_HM05
+    ITEM_HM06
+}
+mart BattleFrontier_Underground_B1F_Mart_TMHMClerk4 {
+    ITEM_TM76
+    ITEM_TM77
+    ITEM_TM78
+    ITEM_TM79
+    ITEM_TM80
+    ITEM_TM81
+    ITEM_TM82
+    ITEM_TM83
+    ITEM_TM84
+    ITEM_TM85
+    ITEM_TM86
+    ITEM_TM87
+    ITEM_TM88
+    ITEM_TM89
+    ITEM_TM90
+    ITEM_TM91
+    ITEM_TM92
+    ITEM_TM93
+    ITEM_TM94
+    ITEM_TM95
+    ITEM_TM96
+    ITEM_TM97
+    ITEM_TM98
+    ITEM_TM99
+    ITEM_TM100
+    ITEM_HM07
+    ITEM_HM08
+}

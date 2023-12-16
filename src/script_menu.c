@@ -156,7 +156,10 @@ static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, 
 
 static void Task_HandleMultichoiceInput(u8 taskId)
 {
-    s8 selection;
+    // Selection has been made
+    bool8 selected = FALSE;
+
+    s8 selection; 
     s16 *data = gTasks[taskId].data;
 
     if (!gPaletteFade.active)
@@ -177,6 +180,7 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                 DrawLinkServicesMultichoiceMenu(tMultichoiceId);
             }
 
+            // Selection made
             if (selection != MENU_NOTHING_CHOSEN)
             {
                 if (selection == MENU_B_PRESSED)
@@ -185,11 +189,35 @@ static void Task_HandleMultichoiceInput(u8 taskId)
                         return;
                     PlaySE(SE_SELECT);
                     gSpecialVar_Result = MULTI_B_PRESSED;
+                    selected = TRUE;
                 }
                 else
                 {
                     gSpecialVar_Result = selection;
+                    selected = TRUE;
                 }
+            }
+            else // No selection yet
+            {   
+                // Ignore 'b' press
+                if (tIgnoreBPress)
+                    return;
+                else if (JOY_NEW(R_BUTTON)){
+                    // Right button pressed
+                    gSpecialVar_Result = MULTI_R_PRESSED;
+                    PlaySE(SE_SELECT);
+                    selected = TRUE;
+                }
+                else if (JOY_NEW(L_BUTTON)){
+                    // Left button pressed
+                    gSpecialVar_Result = MULTI_L_PRESSED;
+                    PlaySE(SE_SELECT);
+                    selected = TRUE;
+                }
+            }
+
+            // Selection made
+            if (selected){
                 ClearToTransparentAndRemoveWindow(tWindowId);
                 DestroyTask(taskId);
                 ScriptContext_Enable();
