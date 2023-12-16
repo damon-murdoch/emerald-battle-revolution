@@ -734,13 +734,13 @@ static const u8 sMaxMushroomsDesc[] = _(
 // Treasures
 static const u8 sBottleCapDesc[] = _(
     "A beautiful bottle\n"
-    "cap that gives off\n"
-    "a silver gleam.");
+    "cap that maxes all\n"
+    "of a Pokémon's IVs.");
 
 static const u8 sGoldBottleCapDesc[] = _(
     "A beautiful bottle\n"
-    "cap that gives off\n"
-    "a golden gleam.");
+    "cap that turns a\n"
+    "Pokémon shiny.");
 
 static const u8 sNuggetDesc[] = _(
     "A nugget of pure\n"
@@ -2858,13 +2858,13 @@ static const u8 sWatmelBerryDesc[] = _(
 
 static const u8 sDurinBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Durin.");
+    "Sets Attack IVs\n"
+    "to zero.");
 
 static const u8 sBelueBerryDesc[] = _(
     "{POKEBLOCK} ingredient.\n"
-    "Plant in loamy soil\n"
-    "to grow Belue.");
+    "Sets Speed IVs\n"
+    "to zero.");
 
 static const u8 sChilanBerryDesc[] = _(
     "A hold item that\n"
