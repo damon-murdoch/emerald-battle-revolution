@@ -1771,6 +1771,28 @@ BattleFrontier_Underground_B1F_EventScript_TMHMClerk4::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_PokeballClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_PokeballClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_GeneralClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart 0
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_ComingSoonSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0, MSGBOX_SIGN
 	end
@@ -1863,6 +1885,8 @@ BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
 	.2byte ITEM_SPELON_BERRY
 	.2byte ITEM_PAMTRE_BERRY
 	.2byte ITEM_WATMEL_BERRY
+	.2byte ITEM_DURIN_BERRY
+	.2byte ITEM_BELUE_BERRY
 	.2byte ITEM_NONE
 
 	.align 2
@@ -1900,6 +1924,8 @@ BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk:
 	.2byte ITEM_PP_MAX
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
+	.2byte ITEM_BOTTLE_CAP
+	.2byte ITEM_GOLD_BOTTLE_CAP
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2375,6 +2401,37 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk4:
 	.2byte ITEM_TM100
 	.2byte ITEM_HM07
 	.2byte ITEM_HM08
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_PokeballClerk:
+	.2byte ITEM_POKE_BALL
+	.2byte ITEM_GREAT_BALL
+	.2byte ITEM_ULTRA_BALL
+	.2byte ITEM_MASTER_BALL
+	.2byte ITEM_PREMIER_BALL
+	.2byte ITEM_HEAL_BALL
+	.2byte ITEM_NET_BALL
+	.2byte ITEM_NEST_BALL
+	.2byte ITEM_DIVE_BALL
+	.2byte ITEM_DUSK_BALL
+	.2byte ITEM_TIMER_BALL
+	.2byte ITEM_QUICK_BALL
+	.2byte ITEM_REPEAT_BALL
+	.2byte ITEM_LUXURY_BALL
+	.2byte ITEM_LEVEL_BALL
+	.2byte ITEM_LURE_BALL
+	.2byte ITEM_MOON_BALL
+	.2byte ITEM_FRIEND_BALL
+	.2byte ITEM_LOVE_BALL
+	.2byte ITEM_FAST_BALL
+	.2byte ITEM_HEAVY_BALL
+	.2byte ITEM_DREAM_BALL
+	.2byte ITEM_SAFARI_BALL
+	.2byte ITEM_SPORT_BALL
+	.2byte ITEM_PARK_BALL
+	.2byte ITEM_BEAST_BALL
+	.2byte ITEM_CHERISH_BALL
 	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:

@@ -7824,6 +7824,24 @@ void ItemUseCB_ReduceIV(u8 taskId, TaskFunc task)
             didActivate = TRUE;
         }
         break;
+    case STAT_ATK_MIN: // 0 Atk IV
+        if (attack != 0)
+        {
+            modifier = 0;
+            SetMonData(mon, MON_DATA_ATK_IV, &modifier);
+            StringCopy(gStringVar2, gText_Attack3);
+            didActivate = TRUE;
+        }
+        break;
+    case STAT_SPE_MIN: // 0 Spe IV
+        if (speed != 0)
+        {
+            modifier = 0;
+            SetMonData(mon, MON_DATA_SPEED_IV, &modifier);
+            StringCopy(gStringVar2, gText_Speed2);
+            didActivate = TRUE;
+        }
+        break;
     }
 
     if (didActivate)
@@ -7922,6 +7940,40 @@ void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task)
             StringCopy(gStringVar2, gText_SpDef3);
             didActivate = TRUE;
         }
+        break;
+    case STAT_ALL_MAX: // 31iv all stats
+        modifier = 31; // Max iv.
+        if (health != MAX_PER_STAT_IVS){
+            // Max. HP stat
+            SetMonData(mon, MON_DATA_HP_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (attack != MAX_PER_STAT_IVS){
+            // Max Atk. Stat
+            SetMonData(mon, MON_DATA_ATK_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (defense != MAX_PER_STAT_IVS){
+            // Max Def. Stat
+            SetMonData(mon, MON_DATA_DEF_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (speed != MAX_PER_STAT_IVS){
+            // Max Speed Stat
+            SetMonData(mon, MON_DATA_SPEED_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (spAttack != MAX_PER_STAT_IVS){
+            // Max SpAtk Stat
+            SetMonData(mon, MON_DATA_SPATK_IV, &modifier);
+            didActivate = TRUE;
+        }
+        if (spDefense != MAX_PER_STAT_IVS){
+            // Max SpDef stat
+            SetMonData(mon, MON_DATA_SPDEF_IV, &modifier);
+            didActivate = TRUE;
+        }
+        StringCopy(gStringVar2, gText_All);
         break;
     }
 
