@@ -1391,6 +1391,11 @@
 	.4byte \sidestatus
 	.endm
 
+	.macro trycopycat failInstr:req
+	callnative BS_TryCopycat
+	.4byte \failInstr
+	.endm
+
 	.macro setzeffect
 	callnative BS_SetZEffect
 	.endm
@@ -1544,6 +1549,16 @@
 	.macro tryhealpulse failInstr:req
 	callnative BS_TryHealPulse
 	.4byte \failInstr
+	.endm
+
+	.macro trydefog clear:req, failInstr:req
+	callnative BS_TryDefog
+	.byte \clear
+	.4byte \failInstr
+	.endm
+
+	.macro trytriggerstatusform
+	callnative BS_TryTriggerStatusForm
 	.endm
 
 @ various command changed to more readable macros
@@ -1805,23 +1820,12 @@
 	.4byte \jumpInstr
 	.endm
 
-	.macro trycopycat failInstr:req
-	various BS_ATTACKER, VARIOUS_TRY_COPYCAT
-	.4byte \failInstr
-	.endm
-
 	.macro showabilitypopup battler:req
 	various \battler, VARIOUS_ABILITY_POPUP
 	.endm
 
 	.macro updateabilitypopup battler:req
 	various \battler, VARIOUS_UPDATE_ABILITY_POPUP
-	.endm
-
-	.macro defogclear battler:req, clear:req, failInstr:req
-	various \battler, VARIOUS_DEFOG
-	.byte \clear
-	.4byte \failInstr
 	.endm
 
 	.macro jumpiftargetally jumpInstr:req
