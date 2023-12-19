@@ -55,6 +55,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg::
 
 FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT
+	clearflag FLAG_MOVE_TUTOR_LEARNSET
 	releaseall
 	end
 

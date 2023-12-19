@@ -1071,3 +1071,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BattleFrontier_Underground_B1F/scripts.inc"
 
 	.include "data/maps/BattleFrontier_Underground_B2F_DayCare/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_GameCorner/scripts.inc"

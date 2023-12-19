@@ -60,6 +60,16 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
     end
 }
 
+script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("This is the entrance to the Battle Frontier Games Corner."))
+    msgbox(format("I hope you enjoy your stay!"))
+    release
+    end
+}
+
 ## Exchange Machines ##
 
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverter {
@@ -1135,6 +1145,27 @@ script BattleFrontier_Underground_B1F_EventScript_GeneralClerk {
 	pokemart(0)
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_MoveReminder {
+    lock
+	faceplayer
+	goto_if_set(FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
+	msgbox(FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT)
+	setflag(FLAG_TEMP_1)
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_MoveTutor {
+    lock
+	faceplayer
+    setflag(FLAG_MOVE_TUTOR_LEARNSET)
+	goto_if_set(FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
+	msgbox(FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT)
+	setflag(FLAG_TEMP_1)
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove)
 	end
 }
 
