@@ -92,7 +92,7 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 	special(TeachMoveRelearnerMove)
 	waitstate
 	if (var(VAR_0x8004) == 0){
-		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
 	}
 	msgbox(format("I'll accept your payment now, please."))
 	removemoney(2000)

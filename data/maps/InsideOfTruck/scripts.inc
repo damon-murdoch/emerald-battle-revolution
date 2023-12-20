@@ -59,6 +59,8 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 InsideOfTruck_EventScript_Introduction::
 	msgbox InsideOfTruck_EventScript_Introduction_Text_0
 	msgbox InsideOfTruck_EventScript_Introduction_Text_1
+	msgbox InsideOfTruck_EventScript_Introduction_Text_2
+	msgbox InsideOfTruck_EventScript_Introduction_Text_3
 	goto InsideOfTruck_EventScript_AskSandboxMode
 	return
 
@@ -69,20 +71,16 @@ InsideOfTruck_EventScript_AskSandboxMode::
 	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_2
 	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_3
 	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_4
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_5
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_6
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_7
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_0
 	yesnobox 0, 8
 	compare VAR_RESULT, YES
 	goto_if_eq InsideOfTruck_EventScript_AskSandboxMode_2
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_9
+	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_6
 InsideOfTruck_EventScript_AskSandboxMode_1:
 	releaseall
 	end
 
 InsideOfTruck_EventScript_AskSandboxMode_2:
-	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_8
+	msgbox InsideOfTruck_EventScript_AskSandboxMode_Text_5
 	goto InsideOfTruck_EventScript_SetupSandboxMode
 	goto InsideOfTruck_EventScript_AskSandboxMode_1
 
@@ -125,7 +123,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_DELIVERED_DEVON_GOODS
 	setflag FLAG_RECEIVED_CASTFORM
-	setflag FLAG_RECEIVED_SUPER_ROD
 	setflag FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
 	setflag FLAG_RECEIVED_TM_ROCK_TOMB
@@ -156,7 +153,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_MET_WAILMER_TRAINER
 	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	setflag FLAG_RECEIVED_GOOD_ROD
 	setflag FLAG_RECEIVED_TM_RETURN
 	setflag FLAG_RECEIVED_TM_SLUDGE_BOMB
 	setflag FLAG_RECEIVED_TM_ROAR
@@ -326,7 +322,7 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_HIDE_SOOTOPOLIS_CITY_RESIDENTS
 	setflag FLAG_HIDE_SKY_PILLAR_WALLACE
 	setflag FLAG_HIDE_MT_PYRE_SUMMIT_MAXIE
-	setflag FLAG_HIDE_MT_PYFLAG_HIDE_MAGMA_HIDEOUT_GRUNTSRE_SUMMIT_MAXIE
+	setflag FLAG_HIDE_MAGMA_HIDEOUT_GRUNTS
 	setflag FLAG_HIDE_VICTORY_ROAD_ENTRANCE_WALLY
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
@@ -429,8 +425,7 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_DEFEATED_FORTREE_GYM
 	setflag FLAG_DEFEATED_MOSSDEEP_GYM
 	setflag FLAG_DEFEATED_SOOTOPOLIS_GYM
-	setflag FLAG_DEFEATED_ELITE_4_SIDNEY
-	setflag FLAG_DEFEATED_ELITE_4_SIDNEY
+	setflag FLAG_SYS_POKEMON_GET
 	setflag FLAG_SYS_POKEDEX_GET
 	setflag FLAG_SYS_POKENAV_GET
 	setflag FLAG_SYS_GAME_CLEAR
@@ -554,49 +549,26 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 10
 	setvar VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250
 	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_2
-	giveitem ITEM_MASTER_BALL
-	giveitem ITEM_HM01
-	giveitem ITEM_HM02
-	giveitem ITEM_HM03
-	giveitem ITEM_HM04
-	giveitem ITEM_HM05
-	giveitem ITEM_HM06
-	giveitem ITEM_HM07
-	giveitem ITEM_HM08
-	giveitem ITEM_CATCHING_CHARM
-	giveitem ITEM_ROTOM_CATALOG
-	giveitem ITEM_GRACIDEA
-	giveitem ITEM_REVEAL_GLASS
-	giveitem ITEM_DNA_SPLICERS
-	giveitem ITEM_ZYGARDE_CUBE
-	giveitem ITEM_PRISON_BOTTLE
-	giveitem ITEM_N_SOLARIZER
-	giveitem ITEM_N_LUNARIZER
-	giveitem ITEM_REINS_OF_UNITY
+	special EnableNationalPokedex
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_3
 	giveitem ITEM_MEGA_RING
 	giveitem ITEM_Z_POWER_RING
 	giveitem ITEM_DYNAMAX_BAND
-	giveitem ITEM_BICYCLE
+	giveitem ITEM_TERA_ORB
 	giveitem ITEM_ACRO_BIKE
-	giveitem ITEM_OLD_ROD
-	giveitem ITEM_GOOD_ROD
-	giveitem ITEM_SUPER_ROD
 	giveitem ITEM_DOWSING_MACHINE
 	giveitem ITEM_POKE_RADAR
+	giveitem ITEM_EXP_SHARE
 	giveitem ITEM_SS_TICKET
-	giveitem ITEM_LETTER
-	giveitem ITEM_DEVON_PARTS
 	giveitem ITEM_GO_GOGGLES
 	giveitem ITEM_DEVON_SCOPE
-	giveitem ITEM_MAGMA_EMBLEM
-	giveitem ITEM_TERA_ORB
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_3
-	addmoney 500000
 	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_4
+	addmoney 500000
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_5
 	givemon SPECIES_SWAMPERT, 50
 	givemon SPECIES_TALONFLAME, 50
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_5
-	warpwhitefade MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 8
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_6
+	warpwhitefade MAP_BATTLE_FRONTIER_OUTSIDE_EAST, 0
 	return
 
 
@@ -604,44 +576,47 @@ InsideOfTruck_EventScript_Introduction_Text_0:
 	.string "Welcome to Emerald Battle Revolution!$"
 
 InsideOfTruck_EventScript_Introduction_Text_1:
-	.string "Current Version: x.x.x$"
+	.string "Created by Damon Murdoch (Twitter:\n"
+	.string "SirScrubbington)$"
+
+InsideOfTruck_EventScript_Introduction_Text_2:
+	.string "Based on RHHideout's\n"
+	.string "PokeEmerald-Expanded Project$"
+
+InsideOfTruck_EventScript_Introduction_Text_3:
+	.string "Current Version: 1.0.0$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_0:
 	.string "Would you like to start the game in\n"
-	.string "sandbox mode?$"
+	.string "sandbox mode? The game will be started\l"
+	.string "at the Battle Frontier, with the game\l"
+	.string "completed up until after the Elite Four.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_1:
-	.string "The game will be started at the Battle\n"
-	.string "Frontier, with$"
+	.string "You will be given ¥500,000 to start the\n"
+	.string "game, and all essential items you would\l"
+	.string "normally pick up on the way.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_2:
-	.string "the game completed up until after the\n"
-	.string "Elite Four.$"
-
-InsideOfTruck_EventScript_AskSandboxMode_Text_3:
-	.string "You will be given ¥500,000 to start the\n"
-	.string "game, and all$"
-
-InsideOfTruck_EventScript_AskSandboxMode_Text_4:
-	.string "essential items you would normally pick\n"
-	.string "up on the way.$"
-
-InsideOfTruck_EventScript_AskSandboxMode_Text_5:
 	.string "Otherwise, the game will be played\n"
-	.string "normally and you will$"
-
-InsideOfTruck_EventScript_AskSandboxMode_Text_6:
-	.string "unlock access to new mechanics such as\n"
-	.string "Mega Evolution,$"
-
-InsideOfTruck_EventScript_AskSandboxMode_Text_7:
-	.string "Z-Moves and New Pokemon and abilities\n"
+	.string "normally and you will unlock access to\l"
+	.string "new mechanics such as Mega Evolution,\l"
+	.string "Z-Moves and New POKéMON and abilities\l"
 	.string "as you play.$"
 
-InsideOfTruck_EventScript_AskSandboxMode_Text_8:
+InsideOfTruck_EventScript_AskSandboxMode_Text_3:
+	.string "Please note, this feature is still being\n"
+	.string "tested - you may encounter some minor\l"
+	.string "issues while playing.$"
+
+InsideOfTruck_EventScript_AskSandboxMode_Text_4:
+	.string "Would you like to start the game in\n"
+	.string "sandbox mode?$"
+
+InsideOfTruck_EventScript_AskSandboxMode_Text_5:
 	.string "Sandbox mode selected. Configuring ...$"
 
-InsideOfTruck_EventScript_AskSandboxMode_Text_9:
+InsideOfTruck_EventScript_AskSandboxMode_Text_6:
 	.string "The game will be played normally. Enjoy!$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_0:
@@ -651,13 +626,17 @@ InsideOfTruck_EventScript_SetupSandboxMode_Text_1:
 	.string "Setting variables ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_2:
-	.string "Giving key items ...$"
+	.string "Enabling national POKéDEX ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_3:
-	.string "Updating money ...$"
+	.string "Giving key items - warning, this step\n"
+	.string "may take awhile!$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_4:
-	.string "Giving starter Pokemon ...$"
+	.string "Updating money ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_5:
-	.string "Done!$"
+	.string "Giving POKéMON ...$"
+
+InsideOfTruck_EventScript_SetupSandboxMode_Text_6:
+	.string "Done! Enjoy the game!$"

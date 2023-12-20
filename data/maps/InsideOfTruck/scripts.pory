@@ -61,19 +61,17 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 
 script InsideOfTruck_EventScript_Introduction {
 	msgbox(format("Welcome to Emerald Battle Revolution!"))
-	msgbox(format("Current Version: x.x.x"))
+	msgbox(format("Created by Damon Murdoch (Twitter: SirScrubbington)"))
+	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
+	msgbox(format("Current Version: 1.0.0"))
 	goto(InsideOfTruck_EventScript_AskSandboxMode)
 }
 
 script InsideOfTruck_EventScript_AskSandboxMode {
-	msgbox(format("Would you like to start the game in sandbox mode?"))
-	msgbox(format("The game will be started at the Battle Frontier, with"))
-	msgbox(format("the game completed up until after the Elite Four."))
-	msgbox(format("You will be given ¥500,000 to start the game, and all"))
-	msgbox(format("essential items you would normally pick up on the way."))
-	msgbox(format("Otherwise, the game will be played normally and you will"))
-	msgbox(format("unlock access to new mechanics such as Mega Evolution,"))
-	msgbox(format("Z-Moves and New Pokemon and abilities as you play."))
+	msgbox(format("Would you like to start the game in sandbox mode? The game will be started at the Battle Frontier, with the game completed up until after the Elite Four."))
+	msgbox(format("You will be given ¥500,000 to start the game, and all essential items you would normally pick up on the way."))
+	msgbox(format("Otherwise, the game will be played normally and you will unlock access to new mechanics such as Mega Evolution, Z-Moves and New POKéMON and abilities as you play."))
+	msgbox(format("Please note, this feature is still being tested - you may encounter some minor issues while playing."))
 	msgbox(format("Would you like to start the game in sandbox mode?"))
 	yesnobox(0, 8)
     if (var(VAR_RESULT) == YES) {
@@ -130,7 +128,6 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setflag(FLAG_DOCK_REJECTED_DEVON_GOODS)
 	setflag(FLAG_DELIVERED_DEVON_GOODS)
 	setflag(FLAG_RECEIVED_CASTFORM)
-	setflag(FLAG_RECEIVED_SUPER_ROD)
 	setflag(FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE)
 	setflag(FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN)
 	setflag(FLAG_RECEIVED_TM_ROCK_TOMB)
@@ -161,7 +158,6 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setflag(FLAG_MET_WAILMER_TRAINER)
 	setflag(FLAG_EVIL_LEADER_PLEASE_STOP)
 	setflag(FLAG_RECEIVED_GO_GOGGLES)
-	setflag(FLAG_RECEIVED_GOOD_ROD)
 	setflag(FLAG_RECEIVED_TM_RETURN)
 	setflag(FLAG_RECEIVED_TM_SLUDGE_BOMB)
 	setflag(FLAG_RECEIVED_TM_ROAR)
@@ -440,10 +436,9 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setflag(FLAG_DEFEATED_FORTREE_GYM)
 	setflag(FLAG_DEFEATED_MOSSDEEP_GYM)
 	setflag(FLAG_DEFEATED_SOOTOPOLIS_GYM)
-	setflag(FLAG_DEFEATED_ELITE_4_SIDNEY)
-	setflag(FLAG_DEFEATED_ELITE_4_SIDNEY)
 
 	# System Flags
+	setflag(FLAG_SYS_POKEMON_GET)
 	setflag(FLAG_SYS_POKEDEX_GET)
 	setflag(FLAG_SYS_POKENAV_GET)
 	setflag(FLAG_SYS_GAME_CLEAR)
@@ -586,68 +581,43 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setvar(VAR_SCOTT_BF_CALL_STEP_COUNTER, 10)
 	setvar(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250)
 
-	msgbox(format("Giving key items ..."))
+	msgbox(format("Enabling national POKéDEX ..."))
+
+	special(EnableNationalPokedex)
+
+	msgbox(format("Giving key items - warning, this step may take awhile!"))
 
 	# Give items
 
-	# Master Ball
-	giveitem(ITEM_MASTER_BALL)
-
-	# HMs 
-	giveitem(ITEM_HM01)
-	giveitem(ITEM_HM02)
-	giveitem(ITEM_HM03)
-	giveitem(ITEM_HM04)
-	giveitem(ITEM_HM05)
-	giveitem(ITEM_HM06)
-	giveitem(ITEM_HM07)
-	giveitem(ITEM_HM08)
-
 	# New Key Items
-	giveitem(ITEM_CATCHING_CHARM)
-	giveitem(ITEM_ROTOM_CATALOG)
-	giveitem(ITEM_GRACIDEA)
-	giveitem(ITEM_REVEAL_GLASS)
-	giveitem(ITEM_DNA_SPLICERS)
-	giveitem(ITEM_ZYGARDE_CUBE)
-	giveitem(ITEM_PRISON_BOTTLE)
-	giveitem(ITEM_N_SOLARIZER)
-	giveitem(ITEM_N_LUNARIZER)
-	giveitem(ITEM_REINS_OF_UNITY)
 	giveitem(ITEM_MEGA_RING)
 	giveitem(ITEM_Z_POWER_RING)
 	giveitem(ITEM_DYNAMAX_BAND)
+	giveitem(ITEM_TERA_ORB)
 
 	# Original Key Items
-	giveitem(ITEM_BICYCLE)
 	giveitem(ITEM_ACRO_BIKE)
-	giveitem(ITEM_OLD_ROD)
-	giveitem(ITEM_GOOD_ROD)
-	giveitem(ITEM_SUPER_ROD)
 	giveitem(ITEM_DOWSING_MACHINE)
 	giveitem(ITEM_POKE_RADAR)
+	giveitem(ITEM_EXP_SHARE)
 
 	# Story Key Items
 	giveitem(ITEM_SS_TICKET)
-	giveitem(ITEM_LETTER)
-	giveitem(ITEM_DEVON_PARTS)
 	giveitem(ITEM_GO_GOGGLES)
 	giveitem(ITEM_DEVON_SCOPE)
-	giveitem(ITEM_MAGMA_EMBLEM)
-	giveitem(ITEM_TERA_ORB)
 
 	msgbox(format("Updating money ..."))
 
 	# Give player ¥500,000
 	addmoney(500000)
 
-	msgbox(format("Giving starter Pokemon ..."))
+	msgbox(format("Giving POKéMON ..."))
 
 	givemon(SPECIES_SWAMPERT, 50) # Surf Bot
 	givemon(SPECIES_TALONFLAME, 50) # Fly Bot
 
-	msgbox(format("Done!"))
+	msgbox(format("Done! Enjoy the game!"))
 
 	# Warp to Battle Frontier
-	warpwhitefade(MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 8)
+	warpwhitefade(MAP_BATTLE_FRONTIER_OUTSIDE_EAST, 0)
 }
