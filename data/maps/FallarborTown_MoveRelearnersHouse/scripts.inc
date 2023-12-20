@@ -1,79 +1,18 @@
-.set LOCALID_MOVE_RELEARNER, 1
-
 FallarborTown_MoveRelearnersHouse_MapScripts::
 	.byte 0
 
-FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
-	lockall
-	applymovement LOCALID_MOVE_RELEARNER, Common_Movement_FacePlayer
-	waitmovement 0
-	goto_if_set FLAG_TEMP_1, FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor, MSGBOX_DEFAULT
-	setflag FLAG_TEMP_1
-	goto FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_AskTeachMove::
-	checkitem ITEM_HEART_SCALE
-	goto_if_eq VAR_RESULT, FALSE, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove, MSGBOX_YESNO
-	switch VAR_RESULT
-	case NO, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
-	end
-
 FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
-	special ChooseMonForMoveRelearner
-	waitstate
-	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	special IsSelectedMonEgg
-	goto_if_eq VAR_RESULT, TRUE, FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
-	goto_if_eq VAR_0x8005, 0, FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove
-	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_ChooseMove::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
-	special TeachMoveRelearnerMove
-	waitstate
-	goto_if_eq VAR_0x8004, 0, FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
-	msgbox FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale, MSGBOX_DEFAULT
-	removeitem ITEM_HEART_SCALE
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale
-	end
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
 
 FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon, MSGBOX_DEFAULT
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
 	end
 
 FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg::
 	msgbox FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg, MSGBOX_DEFAULT
-	goto FallarborTown_MoveRelearnersHouse_EventScript_ChooseMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
 	end
-
-FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
-	msgbox FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale, MSGBOX_DEFAULT
-	clearflag FLAG_MOVE_TUTOR_LEARNSET
-	releaseall
-	end
-
-FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
-	.string "I'm the MOVE TUTOR.\p"
-	.string "I know all the moves that POKéMON\n"
-	.string "learn--every one of them--and I can\l"
-	.string "teach POKéMON those moves.\p"
-	.string "I can teach a move to a POKéMON\n"
-	.string "of yours if you'd like.\p"
-	.string "I'll do it for a HEART SCALE.\n"
-	.string "I'm collecting those now.$"
-
-FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
-	.string "Oh! That's it! That's an honest to\n"
-	.string "goodness HEART SCALE!\p"
-	.string "Let me guess, you want me to teach\n"
-	.string "a move?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
 	.string "Which POKéMON needs tutoring?$"
@@ -86,14 +25,152 @@ FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
 	.string "It doesn't appear as if I have any move\n"
 	.string "I can teach that POKéMON.$"
 
-FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
-	.string "{PLAYER} handed over one HEART SCALE\n"
-	.string "in exchange.$"
-
-FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
-	.string "If your POKéMON need to learn a move,\n"
-	.string "come back with a HEART SCALE.$"
-
 FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
 	.string "Hunh? There isn't a single move that\n"
 	.string "I can teach an EGG.$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
+	lock
+	faceplayer
+	setflag FLAG_MOVE_TUTOR_IGNORE_LEVEL
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_0
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_1
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
+	return
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor::
+	lock
+	faceplayer
+	setflag FLAG_MOVE_TUTOR_LEARNSET
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_0
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_1
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
+	return
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon::
+	showmoneybox 0, 0
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_Text_0
+	checkmoney 2000
+	compare VAR_RESULT, FALSE
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_2
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_1:
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon, MSGBOX_DEFAULT
+	special ChooseMonForMoveRelearner
+	waitstate
+	compare VAR_0x8004, PARTY_NOTHING_CHOSEN
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_5
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_4:
+	special IsSelectedMonEgg
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_8
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_7:
+	compare VAR_0x8005, 0
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_11
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_10:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove
+	return
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_2:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_1
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_5:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_4
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_8:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_CantTeachEgg
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_7
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_11:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_NoMoveToTeachMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_10
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove::
+	msgbox FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove, MSGBOX_DEFAULT
+	special TeachMoveRelearnerMove
+	waitstate
+	compare VAR_0x8004, 0
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_1:
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_Text_0
+	removemoney 2000
+	playse SE_SHOP
+	updatemoneybox
+	waitse
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk
+	end
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_1
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk::
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_Text_0
+	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
+	switch VAR_RESULT
+	case TRUE, FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_2
+	case FALSE, FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_3
+	return
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_2:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
+	return
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_3:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
+	return
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford::
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford_Text_0
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
+	return
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd::
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd_Text_0
+	clearflag FLAG_MOVE_TUTOR_IGNORE_LEVEL
+	clearflag FLAG_MOVE_TUTOR_LEARNSET
+	hidemoneybox
+	release
+	end
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_0:
+	.string "I'm the POKéMON move teacher!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_1:
+	.string "I can teach a POKéMON any move they\n"
+	.string "learn as they grow stronger - even\l"
+	.string "those they haven't learned yet!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_0:
+	.string "I'm the POKéMON move tutor!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_1:
+	.string "I can teach a POKéMON moves which they\n"
+	.string "can't learn normally - even those they\l"
+	.string "learn from other POKéMON!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_Text_0:
+	.string "This service costs a mere ¥2000 per\n"
+	.string "move!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_Text_0:
+	.string "I'll accept your payment now, please.$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_Text_0:
+	.string "Would you like me to teach anything\n"
+	.string "else?$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford_Text_0:
+	.string "Sorry, you need ¥2000 for me to teach\n"
+	.string "your POKéMON a move!$"
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd_Text_0:
+	.string "Please come back again soon!$"
