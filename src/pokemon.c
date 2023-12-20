@@ -88,7 +88,9 @@ EWRAM_DATA struct SpriteTemplate gMultiuseSpriteTemplate = {0};
 EWRAM_DATA static struct MonSpritesGfxManager *sMonSpritesGfxManager = NULL;
 EWRAM_DATA static u8 sTriedEvolving = 0;
 
+// static const data
 #include "data/battle_moves.h"
+#include "data/tmhm_moves.h"
 
 // Used in an unreferenced function in RS.
 // Unreferenced here and in FRLG.
@@ -4872,9 +4874,9 @@ u8 CanLearnTeachableMove(u16 species, u16 move)
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 {
-    u16 learnedMoves[4];
+    u16 learnedMoves[MAX_MON_MOVES];
     u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
     u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
     
     // [voloved] Allow Move Relearner to Teach Moves that Pre-Evolutions Know
@@ -4884,7 +4886,12 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     const u16 *teachable = GetSpeciesTeachableLearnset(species);
     bool8 mode = FlagGet(FLAG_MOVE_TUTOR_LEARNSET);
 
-    int i, j, k, l;
+    // Iterators
+    int i, j, k, l, m;
+
+    // If egg, no relearner moves
+    if (species == SPECIES_EGG)
+        return 0;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
@@ -4912,8 +4919,15 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                     for (l = 0; l < MAX_LEVEL_UP_MOVES && learnset[l].move != teachable[i]; l++);
 
                     // Not in the relearn moves list
-                    if (l == MAX_LEVEL_UP_MOVES)
-                        moves[numMoves++] = teachable[i];
+                    if (l == MAX_LEVEL_UP_MOVES){
+
+                        // Check if the move is not in the tm/hm moves list
+                        for(m = 0; m < TMHM_COUNT && sTMHMMoves[m] != teachable[i]; m++); 
+
+                        // Not in tm/hm list
+                        if (m == TMHM_COUNT)
+                            moves[numMoves++] = teachable[i];
+                    }
                 }
             }
         }
@@ -4968,89 +4982,10 @@ u8 GetLevelUpMovesBySpecies(u16 species, u16 *moves)
 
 u8 GetNumberOfRelearnableMoves(struct Pokemon *mon)
 {
-    u16 learnedMoves[MAX_MON_MOVES];
+    // Max relearner moves placeholder
     u16 moves[MAX_RELEARNER_MOVES];
-    u8 numMoves = 0;
-    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
-    u8 level = GetMonData(mon, MON_DATA_LEVEL, 0);
-    u8 preEvLvl = (level > P_MAX_LEVEL_DIFF_PRE_EV) ? (level - P_MAX_LEVEL_DIFF_PRE_EV) : 1;
-    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
-        
-    const u16 *teachable = GetSpeciesTeachableLearnset(species);
-    bool8 mode = FlagGet(FLAG_MOVE_TUTOR_LEARNSET);
 
-    int i, j, k, l;
-
-    if (species == SPECIES_EGG)
-        return 0;
-
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        learnedMoves[i] = GetMonData(mon, MON_DATA_MOVE1 + i, 0);
-
-    // Teachable Moves
-    if (mode == TRUE){
-        for (i=0; i < MAX_RELEARNER_MOVES; i++){
-            // End of teachable move set
-            if (teachable[i] == MOVE_UNAVAILABLE)
-                break;
-
-            // Check if the mon already knows the move
-            for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != teachable[i]; j++);
-
-            // Move not already known
-            if (j == MAX_MON_MOVES)
-            {
-                // Check if move is already in the moves list
-                for (k = 0; k < numMoves && moves[k] != teachable[i]; k++);
-
-                // Not in the list
-                if (k == numMoves){
-
-                    // Check if the move is not in the relearnable moves list
-                    for (l = 0; l < MAX_LEVEL_UP_MOVES && learnset[l].move != teachable[i]; l++);
-
-                    // Not in the relearn moves list
-                    if (l == MAX_LEVEL_UP_MOVES)
-                        moves[numMoves++] = teachable[i];
-                }
-            }
-        }
-    } 
-    else // Relearn Moves
-    {
-        for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
-        {
-            u16 moveLevel;
-
-            if (learnset[i].move == LEVEL_UP_MOVE_END){
-                i = 0;
-                level = preEvLvl;
-                species = GetSpeciesPreEvolution(species);
-            }
-            
-            // No species found, exit
-            if (species == SPECIES_NONE)
-                break;
-
-            moveLevel = learnset[i].level;
-
-            if (moveLevel <= level)
-            {
-                for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++)
-                    ;
-
-                if (j == MAX_MON_MOVES)
-                {
-                    for (k = 0; k < numMoves && moves[k] != learnset[i].move; k++)
-                        ;
-
-                    if (k == numMoves)
-                        moves[numMoves++] = learnset[i].move;
-                }
-            }
-        }
-    }
-    return numMoves;
+    return GetMoveRelearnerMoves(mon, (u16*)(&moves));
 }
 
 u16 SpeciesToPokedexNum(u16 species)

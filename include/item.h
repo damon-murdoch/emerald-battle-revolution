@@ -76,6 +76,11 @@ u32 ItemId_GetFlingPower(u32 itemId);
 u32 GetItemStatus1Mask(u16 itemId);
 u32 GetItemStatus2Mask(u16 itemId);
 
+// Hard-coded TM/HM counters
+#define TM_COUNT 50
+#define HM_COUNT 8
+#define TMHM_COUNT TM_COUNT + HM_COUNT
+
 /* Expands to:
  * enum
  * {
