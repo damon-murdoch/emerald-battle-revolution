@@ -56,6 +56,16 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter::
 	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_1
@@ -2468,6 +2478,13 @@ BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter_Text_0:
 	.string "This is the best entrance for the\n"
 	.string "Battle Pyramid and Battle Arena\l"
 	.string "facilities.$"
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0:
+	.string "This is the entrance to the Battle\n"
+	.string "Frontier Games Corner.$"
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1:
+	.string "I hope you enjoy your stay!$"
 
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0:
 	.string "This is a machine for converting\n"

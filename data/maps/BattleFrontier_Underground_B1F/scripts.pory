@@ -60,6 +60,16 @@ script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
     end
 }
 
+script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
+    lock
+	faceplayer
+    msgbox(format("Welcome to the Battle Frontier Underground!"))
+    msgbox(format("This is the entrance to the Battle Frontier Games Corner."))
+    msgbox(format("I hope you enjoy your stay!"))
+    release
+    end
+}
+
 ## Exchange Machines ##
 
 script BattleFrontier_Underground_B1F_EventScript_CurrencyConverter {
