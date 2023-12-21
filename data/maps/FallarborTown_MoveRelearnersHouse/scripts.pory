@@ -106,11 +106,11 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk {
 	msgbox(format("Would you like me to teach anything else?"))
 	multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-	switch(var(VAR_RESULT)){
-		case TRUE: 
-			goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
-		case FALSE:
-			goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
+	if (var(VAR_RESULT) == TRUE) {
+		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+	}
+	else {
+		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
 	}
 }
 

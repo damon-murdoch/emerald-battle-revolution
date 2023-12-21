@@ -4931,7 +4931,13 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
 
     const u16 *teachable = GetSpeciesTeachableLearnset(species);
+
+    // Move Relearner Mode
+    // 0: Relearn Moves, 1: Tutor / Egg Moves Only
     bool8 mode = FlagGet(FLAG_MOVE_TUTOR_LEARNSET);
+
+    // 0: Normal Behavior, 1: Ignore Level Requirements
+    bool8 ignoreLevel = FlagGet(FLAG_MOVE_TUTOR_IGNORE_LEVEL);
 
     // Iterators
     int i, j, k, l, m;
@@ -4945,10 +4951,8 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 
     // Teachable Moves
     if (mode == TRUE){
-        for (i=0; i < MAX_RELEARNER_MOVES; i++){
-            // End of teachable move set
-            if (teachable[i] == MOVE_UNAVAILABLE)
-                break;
+        // Loop until we reach the end of the teachable list
+        for (i = 0; (numMoves < MAX_TUTOR_MOVES) && (teachable[i] != MOVE_UNAVAILABLE); i++){
 
             // Check if the mon already knows the move
             for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != teachable[i]; j++);
@@ -4963,10 +4967,10 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
                 if (k == numMoves){
 
                     // Check if the move is not in the relearnable moves list
-                    for (l = 0; l < MAX_LEVEL_UP_MOVES && learnset[l].move != teachable[i]; l++);
+                    for (l = 0; (learnset[l].move != LEVEL_UP_MOVE_END && learnset[l].move != teachable[i]); l++);
 
                     // Not in the relearn moves list
-                    if (l == MAX_LEVEL_UP_MOVES){
+                    if (learnset[l].move == LEVEL_UP_MOVE_END){
 
                         // Check if the move is not in the tm/hm moves list
                         for(m = 0; m < TMHM_COUNT && sTMHMMoves[m] != teachable[i]; m++); 
@@ -4981,7 +4985,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     } 
     else // Relearn Moves
     {
-        for (i = 0; i < MAX_LEVEL_UP_MOVES; i++)
+        for (i = 0; (numMoves < MAX_TUTOR_MOVES) && (i < MAX_LEVEL_UP_MOVES); i++)
         {
             u16 moveLevel;
 
@@ -4997,7 +5001,8 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
 
             moveLevel = learnset[i].level;
 
-            if (moveLevel <= level)
+            // Ignore level is set, or level requirement is met
+            if ((ignoreLevel == TRUE) || (moveLevel <= level))
             {
                 for (j = 0; j < MAX_MON_MOVES && learnedMoves[j] != learnset[i].move; j++);
 

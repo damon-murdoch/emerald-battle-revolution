@@ -87,6 +87,19 @@ InsideOfTruck_EventScript_AskSandboxMode_2:
 
 InsideOfTruck_EventScript_SetupSandboxMode::
 	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_0
+	checkplayergender
+	compare VAR_RESULT, MALE
+	goto_if_eq InsideOfTruck_EventScript_SetupSandboxMode_2
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_2
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_MOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_POKE_BALL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_2F_PICHU_DOLL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM
+InsideOfTruck_EventScript_SetupSandboxMode_1:
 	setflag FLAG_HIDE_SKY_PILLAR_TOP_RAYQUAZA_STILL
 	setflag FLAG_SET_WALL_CLOCK
 	setflag FLAG_RESCUED_BIRCH
@@ -95,46 +108,26 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_BIRCH_AIDE_MET
 	setflag FLAG_RECEIVED_BIKE
 	setflag FLAG_WATTSON_REMATCH_AVAILABLE
-	setflag FLAG_RECEIVED_SECRET_POWER
 	setflag FLAG_MET_TEAM_AQUA_HARBOR
 	setflag FLAG_TV_EXPLAINED
-	setflag FLAG_EXP_SHARE_ENABLED
-	setflag FLAG_RECEIVED_HM_STRENGTH
-	setflag FLAG_RECEIVED_HM_ROCK_SMASH
 	setflag FLAG_WHITEOUT_TO_LAVARIDGE
-	setflag FLAG_RECEIVED_HM_FLASH
-	setflag FLAG_RECEIVED_HM_FLY
 	setflag FLAG_GROUDON_AWAKENED_MAGMA_HIDEOUT
 	setflag FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE
 	setflag FLAG_TEAM_AQUA_ESCAPED_IN_SUBMARINE
 	setflag FLAG_RECEIVED_METEORITE
 	setflag FLAG_MET_HIDDEN_POWER_GIVER
-	setflag FLAG_RECEIVED_TM_BRICK_BREAK
-	setflag FLAG_RECEIVED_HM_SURF
-	setflag FLAG_RECEIVED_HM_DIVE
 	setflag FLAG_DEFEATED_WALLY_VICTORY_ROAD
 	setflag FLAG_KYOGRE_ESCAPED_SEAFLOOR_CAVERN
 	setflag FLAG_DEFEATED_RIVAL_ROUTE103
-	setflag FLAG_RECEIVED_AMULET_COIN
 	setflag FLAG_DEFEATED_EVIL_TEAM_MT_CHIMNEY
 	setflag FLAG_RECOVERED_DEVON_GOODS
 	setflag FLAG_RETURNED_DEVON_GOODS
 	setflag FLAG_MR_BRINEY_SAILING_INTRO
 	setflag FLAG_DOCK_REJECTED_DEVON_GOODS
 	setflag FLAG_DELIVERED_DEVON_GOODS
-	setflag FLAG_RECEIVED_CASTFORM
 	setflag FLAG_SOOTOPOLIS_ARCHIE_MAXIE_LEAVE
 	setflag FLAG_INTERACTED_WITH_DEVON_EMPLOYEE_GOODS_STOLEN
-	setflag FLAG_RECEIVED_TM_ROCK_TOMB
-	setflag FLAG_RECEIVED_TM_BULK_UP
-	setflag FLAG_RECEIVED_TM_SHOCK_WAVE
-	setflag FLAG_RECEIVED_TM_OVERHEAT
-	setflag FLAG_RECEIVED_TM_FACADE
-	setflag FLAG_RECEIVED_TM_AERIAL_ACE
-	setflag FLAG_RECEIVED_TM_CALM_MIND
-	setflag FLAG_RECEIVED_TM_WATER_PULSE
 	setflag FLAG_HIDE_SECRET_BASE_TRAINER
-	setflag FLAG_RECEIVED_TM_FACADE
 	setflag FLAG_RECEIVED_POKENAV
 	setflag FLAG_DELIVERED_STEVEN_LETTER
 	setflag FLAG_DEFEATED_WALLY_MAUVILLE
@@ -153,22 +146,10 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_MET_WAILMER_TRAINER
 	setflag FLAG_EVIL_LEADER_PLEASE_STOP
 	setflag FLAG_RECEIVED_GO_GOGGLES
-	setflag FLAG_RECEIVED_TM_RETURN
-	setflag FLAG_RECEIVED_TM_SLUDGE_BOMB
-	setflag FLAG_RECEIVED_TM_ROAR
-	setflag FLAG_RECEIVED_TM_GIGA_DRAIN
-	setflag FLAG_RECEIVED_TM_REST
-	setflag FLAG_RECEIVED_TM_ATTRACT
 	setflag FLAG_MET_PROF_COZMO
 	setflag FLAG_ENABLE_RIVAL_MATCH_CALL
 	setflag FLAG_LATIOS_OR_LATIAS_ROAMING
-	setflag FLAG_RECEIVED_TM_SNATCH
-	setflag FLAG_RECEIVED_TM_DIG
-	setflag FLAG_RECEIVED_TM_BULLET_SEED
 	setflag FLAG_ENTERED_ELITE_FOUR
-	setflag FLAG_RECEIVED_TM_HIDDEN_POWER
-	setflag FLAG_RECEIVED_TM_TORMENT
-	setflag FLAG_RECEIVED_TM_THIEF
 	setflag FLAG_EVIL_TEAM_ESCAPED_STERN_SPOKE
 	setflag FLAG_RECEIVED_RUNNING_SHOES
 	setflag FLAG_ENABLE_PROF_BIRCH_MATCH_CALL
@@ -188,7 +169,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_MET_ARCHIE_SOOTOPOLIS
 	setflag FLAG_MET_MAXIE_SOOTOPOLIS
 	setflag FLAG_WALLACE_GOES_TO_SKY_PILLAR
-	setflag FLAG_RECEIVED_HM_WATERFALL
 	setflag FLAG_BEAT_MAGMA_GRUNT_JAGGED_PASS
 	setflag FLAG_MIRAGE_TOWER_VISIBLE
 	setflag FLAG_ENABLE_MR_STONE_POKENAV
@@ -221,7 +201,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_HIDE_RUSTBORO_CITY_DEVON_EMPLOYEE_1
 	setflag FLAG_HIDE_SEAFLOOR_CAVERN_ROOM_9_KYOGRE_ASLEEP
 	setflag FLAG_HIDE_PLAYERS_HOUSE_DAD
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_MAGMA_NOTE
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY
 	setflag FLAG_HIDE_BRINEYS_HOUSE_MR_BRINEY
@@ -230,8 +209,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_HIDE_ROUTE_104_MR_BRINEY_BOAT
 	setflag FLAG_HIDE_MR_BRINEY_BOAT_DEWFORD_TOWN
 	setflag FLAG_HIDE_ROUTE_109_MR_BRINEY_BOAT
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
 	setflag FLAG_HIDE_LILYCOVE_HARBOR_EVENT_TICKET_TAKER
 	setflag FLAG_HIDE_SLATEPORT_CITY_SCOTT
 	setflag FLAG_HIDE_ROUTE_101_ZIGZAGOON
@@ -241,11 +218,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_HOUSE_VIGOROTH_2
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_1F_TEAM_MAGMA
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_PLAYERS_BEDROOM_MOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_MOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
-	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
 	setflag FLAG_HIDE_DEOXYS
 	setflag FLAG_HIDE_BIRTH_ISLAND_DEOXYS_TRIANGLE
 	setflag FLAG_HIDE_MAUVILLE_CITY_SCOTT
@@ -328,7 +300,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_TEAM_MAGMA
 	setflag FLAG_HIDE_MOSSDEEP_CITY_SPACE_CENTER_2F_STEVEN
 	setflag FLAG_HIDE_PETALBURG_GYM_WALLY
-	setflag FLAG_UNKNOWN_0x363
 	setflag FLAG_HIDE_SLATEPORT_CITY_STERNS_SHIPYARD_MR_BRINEY
 	setflag FLAG_HIDE_LANETTES_HOUSE_LANETTE
 	setflag FLAG_HIDE_TRICK_HOUSE_ENTRANCE_MAN
@@ -458,7 +429,6 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_SYS_TV_HOME
 	setflag FLAG_SYS_TV_WATCH
 	setflag FLAG_SYS_TV_START
-	setflag FLAG_SYS_TV_START
 	setflag FLAG_SYS_CLOCK_SET
 	setflag FLAG_SYS_NATIONAL_DEX
 	setflag FLAG_SYS_RIBBON_GET
@@ -471,19 +441,15 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setflag FLAG_LANDMARK_FIERY_PATH
 	setflag FLAG_LANDMARK_POKEMON_LEAGUE
 	setflag FLAG_LANDMARK_TUNNELERS_REST_HOUSE
+	setflag FLAG_LANDMARK_BERRY_MASTERS_HOUSE
 	setflag FLAG_LANDMARK_SKY_PILLAR
+	setflag FLAG_SYS_FRONTIER_PASS
 	setflag FLAG_SYS_SHOAL_ITEM
 	setflag FLAG_SYS_B_DASH
 	setflag FLAG_ARRIVED_ON_FARAWAY_ISLAND
 	setflag FLAG_LANDMARK_TRAINER_HILL
-	setflag FLAG_LANDMARK_TRAINER_HILL
-	setflag FLAG_RECEIVED_BATTLE_MECHANIC_ITEMS
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	setflag FLAG_ITEM_MEGA_RING_OBTAINED
-	setflag FLAG_ITEM_Z_POWER_RING_OBTAINED
-	setflag FLAG_ITEM_DYNAMAX_BAND_OBTAINED
-	setflag FLAG_ITEM_TERA_ORB_OBTAINED
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_1
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_3
 	setvar VAR_BIRCH_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	setvar VAR_OLDALE_TOWN_STATE, 1
@@ -548,28 +514,31 @@ InsideOfTruck_EventScript_SetupSandboxMode::
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 250
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 10
 	setvar VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_2
-	special EnableNationalPokedex
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_3
-	giveitem ITEM_MEGA_RING
-	giveitem ITEM_Z_POWER_RING
-	giveitem ITEM_DYNAMAX_BAND
-	giveitem ITEM_TERA_ORB
-	giveitem ITEM_ACRO_BIKE
-	giveitem ITEM_DOWSING_MACHINE
-	giveitem ITEM_POKE_RADAR
-	giveitem ITEM_EXP_SHARE
-	giveitem ITEM_SS_TICKET
-	giveitem ITEM_GO_GOGGLES
-	giveitem ITEM_DEVON_SCOPE
 	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_4
-	addmoney 500000
+	special EnableNationalPokedex
 	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_5
+	giveitem ITEM_SS_TICKET
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_6
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_7
+	addmoney 500000
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_8
 	givemon SPECIES_SWAMPERT, 50
 	givemon SPECIES_TALONFLAME, 50
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_6
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_9
 	warpwhitefade MAP_BATTLE_FRONTIER_OUTSIDE_EAST, 0
 	return
+
+InsideOfTruck_EventScript_SetupSandboxMode_2:
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_1
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_MOM
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_SWABLU_DOLL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F_POKE_BALL
+	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MOM
+	goto InsideOfTruck_EventScript_SetupSandboxMode_1
 
 
 InsideOfTruck_EventScript_Introduction_Text_0:
@@ -623,20 +592,31 @@ InsideOfTruck_EventScript_SetupSandboxMode_Text_0:
 	.string "Setting flags ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_1:
-	.string "Setting variables ...$"
+	.string "Setting male-specific gendered flags ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_2:
-	.string "Enabling national POKéDEX ...$"
+	.string "Setting female-specific gendered flags\n"
+	.string "...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_3:
-	.string "Giving key items - warning, this step\n"
-	.string "may take awhile!$"
+	.string "Setting variables ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_4:
-	.string "Updating money ...$"
+	.string "Enabling national POKéDEX ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_5:
-	.string "Giving POKéMON ...$"
+	.string "Giving SS Ticket ...$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_6:
+	.string "All other key items can be purchased in\n"
+	.string "the Battle Frontier Underground, or\l"
+	.string "obtained using normal methods.$"
+
+InsideOfTruck_EventScript_SetupSandboxMode_Text_7:
+	.string "Updating money ...$"
+
+InsideOfTruck_EventScript_SetupSandboxMode_Text_8:
+	.string "Giving POKéMON ...$"
+
+InsideOfTruck_EventScript_SetupSandboxMode_Text_9:
 	.string "Done! Enjoy the game!$"

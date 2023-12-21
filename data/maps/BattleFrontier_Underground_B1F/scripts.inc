@@ -1803,6 +1803,28 @@ BattleFrontier_Underground_B1F_EventScript_GeneralClerk::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_OldKeyItemClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_NewKeyItemClerk::
+	lock
+	faceplayer
+	message gText_HowMayIServeYou
+	waitmessage
+	pokemart BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_ComingSoonSign::
 	msgbox BattleFrontier_Underground_B1F_EventScript_ComingSoonSign_Text_0, MSGBOX_SIGN
 	end
@@ -1867,18 +1889,6 @@ BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
 	.2byte ITEM_CORNERSTONE_MASK
 	.2byte ITEM_WELLSPRING_MASK
 	.2byte ITEM_HEARTHFLAME_MASK
-	.2byte ITEM_ADAMANT_CRYSTAL
-	.2byte ITEM_GRISEOUS_CORE
-	.2byte ITEM_LUSTROUS_GLOBE
-	.2byte ITEM_ROTOM_CATALOG
-	.2byte ITEM_GRACIDEA
-	.2byte ITEM_REVEAL_GLASS
-	.2byte ITEM_DNA_SPLICERS
-	.2byte ITEM_ZYGARDE_CUBE
-	.2byte ITEM_PRISON_BOTTLE
-	.2byte ITEM_N_SOLARIZER
-	.2byte ITEM_N_LUNARIZER
-	.2byte ITEM_REINS_OF_UNITY
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2411,6 +2421,42 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk4:
 	.2byte ITEM_TM100
 	.2byte ITEM_HM07
 	.2byte ITEM_HM08
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk:
+	.2byte ITEM_ACRO_BIKE
+	.2byte ITEM_OLD_ROD
+	.2byte ITEM_GOOD_ROD
+	.2byte ITEM_SUPER_ROD
+	.2byte ITEM_DOWSING_MACHINE
+	.2byte ITEM_EON_TICKET
+	.2byte ITEM_MYSTIC_TICKET
+	.2byte ITEM_AURORA_TICKET
+	.2byte ITEM_OLD_SEA_MAP
+	.2byte ITEM_GO_GOGGLES
+	.2byte ITEM_DEVON_SCOPE
+	.2byte ITEM_METEORITE
+	.2byte ITEM_NONE
+
+	.align 2
+BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk:
+	.2byte ITEM_MEGA_RING
+	.2byte ITEM_Z_POWER_RING
+	.2byte ITEM_DYNAMAX_BAND
+	.2byte ITEM_TERA_ORB
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
+	.2byte ITEM_ROTOM_CATALOG
+	.2byte ITEM_GRACIDEA
+	.2byte ITEM_REVEAL_GLASS
+	.2byte ITEM_DNA_SPLICERS
+	.2byte ITEM_ZYGARDE_CUBE
+	.2byte ITEM_PRISON_BOTTLE
+	.2byte ITEM_N_SOLARIZER
+	.2byte ITEM_N_LUNARIZER
+	.2byte ITEM_REINS_OF_UNITY
 	.2byte ITEM_NONE
 
 	.align 2

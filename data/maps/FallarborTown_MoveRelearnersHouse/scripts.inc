@@ -112,17 +112,13 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2:
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk::
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_Text_0
 	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	switch VAR_RESULT
-	case TRUE, FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_2
-	case FALSE, FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_3
-	return
-
-FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_2:
-	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
-	return
-
-FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_3:
+	compare VAR_RESULT, TRUE
+	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_1
 	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
+	return
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_1:
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
 	return
 
 
