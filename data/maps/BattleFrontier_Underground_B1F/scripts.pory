@@ -1148,6 +1148,28 @@ script BattleFrontier_Underground_B1F_EventScript_GeneralClerk {
 	end
 }
 
+script BattleFrontier_Underground_B1F_EventScript_OldKeyItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_NewKeyItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
 # Coming Soon (Placeholder)
 script BattleFrontier_Underground_B1F_EventScript_ComingSoonSign {
     msgbox(format("COMING SOON"), MSGBOX_SIGN)
@@ -1436,18 +1458,6 @@ mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
     ITEM_CORNERSTONE_MASK
     ITEM_WELLSPRING_MASK
     ITEM_HEARTHFLAME_MASK
-    ITEM_ADAMANT_CRYSTAL
-    ITEM_GRISEOUS_CORE
-    ITEM_LUSTROUS_GLOBE
-    ITEM_ROTOM_CATALOG
-    ITEM_GRACIDEA
-    ITEM_REVEAL_GLASS
-    ITEM_DNA_SPLICERS
-    ITEM_ZYGARDE_CUBE
-    ITEM_PRISON_BOTTLE
-    ITEM_N_SOLARIZER
-    ITEM_N_LUNARIZER
-    ITEM_REINS_OF_UNITY
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
@@ -1959,6 +1969,40 @@ mart BattleFrontier_Underground_B1F_Mart_TMHMClerk4 {
     ITEM_TM100
     ITEM_HM07
     ITEM_HM08
+}
+
+mart BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk {
+    ITEM_ACRO_BIKE
+    ITEM_OLD_ROD
+    ITEM_GOOD_ROD
+    ITEM_SUPER_ROD
+    ITEM_DOWSING_MACHINE
+    ITEM_EON_TICKET
+    ITEM_MYSTIC_TICKET
+    ITEM_AURORA_TICKET
+    ITEM_OLD_SEA_MAP
+    ITEM_GO_GOGGLES
+    ITEM_DEVON_SCOPE
+    ITEM_METEORITE
+}
+
+mart BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk {
+    ITEM_MEGA_RING
+    ITEM_Z_POWER_RING
+    ITEM_DYNAMAX_BAND
+    ITEM_TERA_ORB
+    ITEM_ADAMANT_CRYSTAL
+    ITEM_GRISEOUS_CORE
+    ITEM_LUSTROUS_GLOBE
+    ITEM_ROTOM_CATALOG
+    ITEM_GRACIDEA
+    ITEM_REVEAL_GLASS
+    ITEM_DNA_SPLICERS
+    ITEM_ZYGARDE_CUBE
+    ITEM_PRISON_BOTTLE
+    ITEM_N_SOLARIZER
+    ITEM_N_LUNARIZER
+    ITEM_REINS_OF_UNITY
 }
 
 mart BattleFrontier_Underground_B1F_Mart_PokeballClerk {
