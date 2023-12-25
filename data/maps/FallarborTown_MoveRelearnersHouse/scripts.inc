@@ -35,7 +35,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner::
 	setflag FLAG_MOVE_TUTOR_IGNORE_LEVEL
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_0
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner_Text_1
-	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice
 	return
 
 
@@ -45,13 +45,18 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor::
 	setflag FLAG_MOVE_TUTOR_LEARNSET
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_0
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_1
+	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice
+	return
+
+
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice::
+	showmoneybox 0, 0
+	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice_Text_0
 	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon
 	return
 
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon::
-	showmoneybox 0, 0
-	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_Text_0
 	checkmoney 2000
 	compare VAR_RESULT, FALSE
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_2
@@ -96,6 +101,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove::
 	compare VAR_0x8004, 0
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_1:
+	showmoneybox 0, 0
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_Text_0
 	removemoney 2000
 	playse SE_SHOP
@@ -111,8 +117,8 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2:
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk::
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_Text_0
-	multichoicedefault 20, 8, MULTI_YESNO, 1, FALSE
-	compare VAR_RESULT, TRUE
+	yesnobox 0, 8
+	compare VAR_RESULT, YES
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_1
 	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
 	return
@@ -153,7 +159,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_1:
 	.string "can't learn normally - even those they\l"
 	.string "learn from other POKéMON!$"
 
-FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_Text_0:
+FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice_Text_0:
 	.string "This service costs a mere ¥2000 per\n"
 	.string "move!$"
 

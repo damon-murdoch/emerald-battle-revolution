@@ -38,7 +38,7 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveRelearner {
 	setflag(FLAG_MOVE_TUTOR_IGNORE_LEVEL)
 	msgbox(format("I'm the POKéMON move teacher!"))
 	msgbox(format("I can teach a POKéMON any move they learn as they grow stronger - even those they haven't learned yet!"))
-	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice)
 }
 
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor {
@@ -47,12 +47,15 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor {
 	setflag(FLAG_MOVE_TUTOR_LEARNSET)
 	msgbox(format("I'm the POKéMON move tutor!"))
 	msgbox(format("I can teach a POKéMON moves which they can't learn normally - even those they learn from other POKéMON!"))
-	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice)
 }
 
-script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon {
+script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice {
 	showmoneybox(0,0)
 	msgbox(format("This service costs a mere ¥2000 per move!"))
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+}
+script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon {
 	
 	# Check player can afford
 	checkmoney(2000)
@@ -94,6 +97,7 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 	if (var(VAR_0x8004) == 0){
 		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
 	}
+	showmoneybox(0,0)
 	msgbox(format("I'll accept your payment now, please."))
 	removemoney(2000)
 	playse(SE_SHOP)
@@ -105,11 +109,10 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk {
 	msgbox(format("Would you like me to teach anything else?"))
-	multichoicedefault(20, 8, MULTI_YESNO, 1, FALSE)
-	if (var(VAR_RESULT) == TRUE) {
-		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
-	}
-	else {
+	yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
+    } else {
 		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
 	}
 }

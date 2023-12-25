@@ -209,6 +209,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         if (gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_MACH_BIKE)
         {
+            FlagClear(FLAG_LAST_USED_BIKE); // Acro Bike
             gPlayerAvatar.flags -= PLAYER_AVATAR_FLAG_MACH_BIKE;
             gPlayerAvatar.flags += PLAYER_AVATAR_FLAG_ACRO_BIKE;
             SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ACRO_BIKE);
@@ -216,6 +217,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
         }
         else
         {
+            FlagSet(FLAG_LAST_USED_BIKE); // Mach Bike
             gPlayerAvatar.flags -= PLAYER_AVATAR_FLAG_ACRO_BIKE;
             gPlayerAvatar.flags += PLAYER_AVATAR_FLAG_MACH_BIKE;
             SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_MACH_BIKE);
