@@ -1506,7 +1506,7 @@
 #define FLAG_ITEM_Z_POWER_RING_OBTAINED             (SYSTEM_FLAGS + 0x86)
 #define FLAG_ITEM_DYNAMAX_BAND_OBTAINED             (SYSTEM_FLAGS + 0x87)
 #define FLAG_ITEM_TERA_ORB_OBTAINED                 (SYSTEM_FLAGS + 0x88)
-#define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
+#define FLAG_LAST_USED_BIKE                         (SYSTEM_FLAGS + 0x89) // 0: Acro Bike, 1: Mach Bike
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
 #define FLAG_UNUSED_0x8EC                           (SYSTEM_FLAGS + 0x8C) // Unused Flag
