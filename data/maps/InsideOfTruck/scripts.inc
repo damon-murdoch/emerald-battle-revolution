@@ -61,6 +61,7 @@ InsideOfTruck_EventScript_Introduction::
 	msgbox InsideOfTruck_EventScript_Introduction_Text_1
 	msgbox InsideOfTruck_EventScript_Introduction_Text_2
 	msgbox InsideOfTruck_EventScript_Introduction_Text_3
+	msgbox InsideOfTruck_EventScript_Introduction_Text_4
 	goto InsideOfTruck_EventScript_AskSandboxMode
 	return
 
@@ -86,11 +87,9 @@ InsideOfTruck_EventScript_AskSandboxMode_2:
 
 
 InsideOfTruck_EventScript_SetupSandboxMode::
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_0
 	checkplayergender
 	compare VAR_RESULT, MALE
 	goto_if_eq InsideOfTruck_EventScript_SetupSandboxMode_2
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_2
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_MAY
@@ -449,7 +448,6 @@ InsideOfTruck_EventScript_SetupSandboxMode_1:
 	setflag FLAG_ARRIVED_ON_FARAWAY_ISLAND
 	setflag FLAG_LANDMARK_TRAINER_HILL
 	setflag FLAG_RECEIVED_POKEDEX_FROM_BIRCH
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_3
 	setvar VAR_BIRCH_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 4
 	setvar VAR_OLDALE_TOWN_STATE, 1
@@ -514,22 +512,17 @@ InsideOfTruck_EventScript_SetupSandboxMode_1:
 	setvar VAR_ROXANNE_CALL_STEP_COUNTER, 250
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 10
 	setvar VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_4
 	special EnableNationalPokedex
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_5
 	giveitem ITEM_SS_TICKET
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_6
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_7
-	addmoney 500000
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_8
-	givemon SPECIES_SWAMPERT, 50
+	addmoney 300000
 	givemon SPECIES_TALONFLAME, 50
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_9
+	givemon SPECIES_SWAMPERT, 50
+	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_0
+	playse SE_M_FLY
 	warpwhitefade MAP_BATTLE_FRONTIER_OUTSIDE_EAST, 0
 	return
 
 InsideOfTruck_EventScript_SetupSandboxMode_2:
-	msgbox InsideOfTruck_EventScript_SetupSandboxMode_Text_1
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING
 	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_BRENDAN
@@ -545,15 +538,19 @@ InsideOfTruck_EventScript_Introduction_Text_0:
 	.string "Welcome to Emerald Battle Revolution!$"
 
 InsideOfTruck_EventScript_Introduction_Text_1:
-	.string "Created by Damon Murdoch (Twitter:\n"
-	.string "SirScrubbington)$"
+	.string "Created by Damon Murdoch\n(Twitter: SirScrubbington)$"
 
 InsideOfTruck_EventScript_Introduction_Text_2:
 	.string "Based on RHHideout's\n"
 	.string "PokeEmerald-Expanded Project$"
 
 InsideOfTruck_EventScript_Introduction_Text_3:
-	.string "Current Version: 1.0.0$"
+	.string "Current Version: 0.7.1$"
+
+InsideOfTruck_EventScript_Introduction_Text_4:
+	.string "For more information, please visit our\n"
+	.string "website:\l"
+	.string "https://www.dragapult.xyz/ebr$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_0:
 	.string "Would you like to start the game in\n"
@@ -562,21 +559,20 @@ InsideOfTruck_EventScript_AskSandboxMode_Text_0:
 	.string "completed up until after the Elite Four.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_1:
-	.string "You will be given ¥500,000 to start the\n"
-	.string "game, and all essential items you would\l"
-	.string "normally pick up on the way.$"
+	.string "You will be given ¥300,000 to start, as\n"
+	.string "well as a Swampert and Talonflame for\l"
+	.string "using important HMs.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_2:
-	.string "Otherwise, the game will be played\n"
-	.string "normally and you will unlock access to\l"
-	.string "new mechanics such as Mega Evolution,\l"
-	.string "Z-Moves and New POKéMON and abilities\l"
-	.string "as you play.$"
+	.string "All key items except for the SS Ticket\n"
+	.string "will be available for purchase in the\l"
+	.string "Battle Frontier Underground.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_3:
-	.string "Please note, this feature is still being\n"
-	.string "tested - you may encounter some minor\l"
-	.string "issues while playing.$"
+	.string "Please note, the Sandbox Mode feature\n"
+	.string "is still being developed - you may\l"
+	.string "encounter some minor issues while\l"
+	.string "playing.$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_4:
 	.string "Would you like to start the game in\n"
@@ -589,34 +585,4 @@ InsideOfTruck_EventScript_AskSandboxMode_Text_6:
 	.string "The game will be played normally. Enjoy!$"
 
 InsideOfTruck_EventScript_SetupSandboxMode_Text_0:
-	.string "Setting flags ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_1:
-	.string "Setting male-specific gendered flags ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_2:
-	.string "Setting female-specific gendered flags\n"
-	.string "...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_3:
-	.string "Setting variables ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_4:
-	.string "Enabling national POKéDEX ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_5:
-	.string "Giving SS Ticket ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_6:
-	.string "All other key items can be purchased in\n"
-	.string "the Battle Frontier Underground, or\l"
-	.string "obtained using normal methods.$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_7:
-	.string "Updating money ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_8:
-	.string "Giving POKéMON ...$"
-
-InsideOfTruck_EventScript_SetupSandboxMode_Text_9:
 	.string "Done! Enjoy the game!$"

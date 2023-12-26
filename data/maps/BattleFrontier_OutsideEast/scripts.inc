@@ -437,3 +437,12 @@ BattleFrontier_OutsideEast_Text_StickyMonWithLongTail:
 	.string "with a long tail up ahead!\p"
 	.string "It was hiding under a boulder, and\n"
 	.string "it kept staring at me!$"
+
+BattleFrontier_OutsideEast_EventScript_UndergroundSign::
+	msgbox BattleFrontier_OutsideEast_Text_UndergroundSign, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_OutsideEast_Text_UndergroundSign::
+	.string "BATTLE FRONTIER UNDERGROUND\n"
+	.string "Find everything a trainer could need!$"
