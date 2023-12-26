@@ -4938,7 +4938,7 @@ u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
     } 
     else // Relearn Moves
     {
-        for (i = 0; (numMoves < MAX_TUTOR_MOVES) && (i < MAX_LEVEL_UP_MOVES); i++)
+        for (i = 0; (numMoves < MAX_TUTOR_MOVES); i++)
         {
             u16 moveLevel;
 

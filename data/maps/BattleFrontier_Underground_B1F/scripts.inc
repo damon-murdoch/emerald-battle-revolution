@@ -1759,28 +1759,6 @@ BattleFrontier_Underground_B1F_EventScript_TMHMClerk2::
 	end
 
 
-BattleFrontier_Underground_B1F_EventScript_TMHMClerk3::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk3
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-
-BattleFrontier_Underground_B1F_EventScript_TMHMClerk4::
-	lock
-	faceplayer
-	message gText_HowMayIServeYou
-	waitmessage
-	pokemart BattleFrontier_Underground_B1F_Mart_TMHMClerk4
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-
 BattleFrontier_Underground_B1F_EventScript_PokeballClerk::
 	lock
 	faceplayer
@@ -2328,6 +2306,8 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk1:
 	.2byte ITEM_TM25
 	.2byte ITEM_HM01
 	.2byte ITEM_HM02
+	.2byte ITEM_HM03
+	.2byte ITEM_HM04
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2357,68 +2337,8 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk2:
 	.2byte ITEM_TM48
 	.2byte ITEM_TM49
 	.2byte ITEM_TM50
-	.2byte ITEM_HM03
-	.2byte ITEM_HM04
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_TMHMClerk3:
-	.2byte ITEM_TM51
-	.2byte ITEM_TM52
-	.2byte ITEM_TM53
-	.2byte ITEM_TM54
-	.2byte ITEM_TM55
-	.2byte ITEM_TM56
-	.2byte ITEM_TM57
-	.2byte ITEM_TM58
-	.2byte ITEM_TM59
-	.2byte ITEM_TM60
-	.2byte ITEM_TM61
-	.2byte ITEM_TM62
-	.2byte ITEM_TM63
-	.2byte ITEM_TM64
-	.2byte ITEM_TM65
-	.2byte ITEM_TM66
-	.2byte ITEM_TM67
-	.2byte ITEM_TM68
-	.2byte ITEM_TM69
-	.2byte ITEM_TM70
-	.2byte ITEM_TM71
-	.2byte ITEM_TM72
-	.2byte ITEM_TM73
-	.2byte ITEM_TM74
-	.2byte ITEM_TM75
 	.2byte ITEM_HM05
 	.2byte ITEM_HM06
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B1F_Mart_TMHMClerk4:
-	.2byte ITEM_TM76
-	.2byte ITEM_TM77
-	.2byte ITEM_TM78
-	.2byte ITEM_TM79
-	.2byte ITEM_TM80
-	.2byte ITEM_TM81
-	.2byte ITEM_TM82
-	.2byte ITEM_TM83
-	.2byte ITEM_TM84
-	.2byte ITEM_TM85
-	.2byte ITEM_TM86
-	.2byte ITEM_TM87
-	.2byte ITEM_TM88
-	.2byte ITEM_TM89
-	.2byte ITEM_TM90
-	.2byte ITEM_TM91
-	.2byte ITEM_TM92
-	.2byte ITEM_TM93
-	.2byte ITEM_TM94
-	.2byte ITEM_TM95
-	.2byte ITEM_TM96
-	.2byte ITEM_TM97
-	.2byte ITEM_TM98
-	.2byte ITEM_TM99
-	.2byte ITEM_TM100
 	.2byte ITEM_HM07
 	.2byte ITEM_HM08
 	.2byte ITEM_NONE
@@ -2426,6 +2346,7 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk4:
 	.align 2
 BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk:
 	.2byte ITEM_ACRO_BIKE
+	.2byte ITEM_COIN_CASE
 	.2byte ITEM_OLD_ROD
 	.2byte ITEM_GOOD_ROD
 	.2byte ITEM_SUPER_ROD
