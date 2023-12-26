@@ -61,17 +61,18 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 
 script InsideOfTruck_EventScript_Introduction {
 	msgbox(format("Welcome to Emerald Battle Revolution!"))
-	msgbox(format("Created by Damon Murdoch (Twitter: SirScrubbington)"))
+	msgbox("Created by Damon Murdoch\n(Twitter: SirScrubbington)")
 	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
-	msgbox(format("Current Version: 1.0.0"))
+	msgbox(format("Current Version: 0.7.1"))
+	msgbox(format("For more information, please visit our website: https://www.dragapult.xyz/ebr"))
 	goto(InsideOfTruck_EventScript_AskSandboxMode)
 }
 
 script InsideOfTruck_EventScript_AskSandboxMode {
 	msgbox(format("Would you like to start the game in sandbox mode? The game will be started at the Battle Frontier, with the game completed up until after the Elite Four."))
-	msgbox(format("You will be given ¥500,000 to start the game, and all essential items you would normally pick up on the way."))
-	msgbox(format("Otherwise, the game will be played normally and you will unlock access to new mechanics such as Mega Evolution, Z-Moves and New POKéMON and abilities as you play."))
-	msgbox(format("Please note, this feature is still being tested - you may encounter some minor issues while playing."))
+	msgbox(format("You will be given ¥300,000 to start, as well as a Swampert and Talonflame for using important HMs."))
+	msgbox(format("All key items except for the SS Ticket will be available for purchase in the Battle Frontier Underground."))
+	msgbox(format("Please note, the Sandbox Mode feature is still being developed - you may encounter some minor issues while playing."))
 	msgbox(format("Would you like to start the game in sandbox mode?"))
 	yesnobox(0, 8)
     if (var(VAR_RESULT) == YES) {
@@ -87,15 +88,11 @@ script InsideOfTruck_EventScript_AskSandboxMode {
 
 script InsideOfTruck_EventScript_SetupSandboxMode {
 
-	msgbox(format("Setting flags ..."))
-
 	# Set story flags
 
 	# Check player gender
 	checkplayergender
 	if(var(VAR_RESULT) == MALE){
-		msgbox(format("Setting male-specific gendered flags ..."))
-
 		# Player (Brendan) Flags
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_BEDROOM)
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_RIVAL_SIBLING)
@@ -110,8 +107,6 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	}
 	else # Female
 	{
-		msgbox(format("Setting female-specific gendered flags ..."))
-
 		# Player (May) Flags
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_BEDROOM)
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_RIVAL_SIBLING)
@@ -494,8 +489,6 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setflag(FLAG_LANDMARK_TRAINER_HILL)
 	setflag(FLAG_RECEIVED_POKEDEX_FROM_BIRCH)
 
-	msgbox(format("Setting variables ..."))
-
 	# Location States
 	setvar(VAR_BIRCH_STATE, 4)
 	setvar(VAR_LITTLEROOT_TOWN_STATE, 4)
@@ -564,28 +557,21 @@ script InsideOfTruck_EventScript_SetupSandboxMode {
 	setvar(VAR_SCOTT_BF_CALL_STEP_COUNTER, 10)
 	setvar(VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250)
 
-	msgbox(format("Enabling national POKéDEX ..."))
-
+	# Enable national Pokedex
 	special(EnableNationalPokedex)
-
-	msgbox(format("Giving SS Ticket ..."))
 
 	# Story Key Items
 	giveitem(ITEM_SS_TICKET)
 
-	msgbox(format("All other key items can be purchased in the Battle Frontier Underground, or obtained using normal methods."))
+	# Give player ¥300,000
+	addmoney(300000)
 
-	msgbox(format("Updating money ..."))
-
-	# Give player ¥500,000
-	addmoney(500000)
-
-	msgbox(format("Giving POKéMON ..."))
-
-	givemon(SPECIES_SWAMPERT, 50) # Surf Bot
 	givemon(SPECIES_TALONFLAME, 50) # Fly Bot
+	givemon(SPECIES_SWAMPERT, 50) # Surf Bot
 
 	msgbox(format("Done! Enjoy the game!"))
+
+	playse(SE_M_FLY)
 
 	# Warp to Battle Frontier
 	warpwhitefade(MAP_BATTLE_FRONTIER_OUTSIDE_EAST, 0)
