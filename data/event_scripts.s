@@ -1067,3 +1067,9 @@ EventScript_VsSeekerChargingDone::
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B1F/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_DayCare/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_GameCorner/scripts.inc"

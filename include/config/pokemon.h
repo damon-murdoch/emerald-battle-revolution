@@ -31,25 +31,13 @@
 #define P_CUSTOM_GENDER_DIFF_ICONS  TRUE        // If TRUE, will give more Pokémon custom icons for their female forms, i.e. Hippopotas and Hippowdon
 #define P_LEGENDARY_PERFECT_IVS     GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
 #define P_EV_CAP                    GEN_LATEST  // Since Gen 6, the max EVs per stat is 252 instead of 255.
+#define P_CATCH_CURVE               GEN_LATEST  // Since Gen 6, the capture rate curve was changed to make pokeballs more effective on lower level pokemon
 
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
 #define P_FLAG_FORCE_SHINY      FLAG_FORCE_SHINY       // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
 #define P_FLAG_FORCE_NO_SHINY   FLAG_FORCE_NO_SHINY    // If this flag is set, all wild and gift Pokémon will forced into NOT being Shiny.
-
-// Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
-// Generations of Pokémon are defined by the first member introduced.
-// Eg: If P_GEN_2_POKEMON is set to FALSE, all members of the Sneasel Family will be disabled (Sneasel + Hisuian, Weavile and Sneasler).
-#define P_GEN_1_POKEMON             TRUE        // Generation 1 Pokémon (RGBY)
-#define P_GEN_2_POKEMON             TRUE        // Generation 2 Pokémon (GSC)
-#define P_GEN_3_POKEMON             TRUE        // Generation 3 Pokémon (RSE, FRLG)
-#define P_GEN_4_POKEMON             TRUE        // Generation 4 Pokémon (DPPt, HGSS)
-#define P_GEN_5_POKEMON             TRUE        // Generation 5 Pokémon (BW, B2W2)
-#define P_GEN_6_POKEMON             TRUE        // Generation 6 Pokémon (XY, ORAS)
-#define P_GEN_7_POKEMON             TRUE        // Generation 7 Pokémon (SM, USUM, LGPE)
-#define P_GEN_8_POKEMON             TRUE        // Generation 8 Pokémon (SwSh, BDSP, LA)
-#define P_GEN_9_POKEMON             TRUE        // Generation 9 Pokémon (SV)
 
 // [voloved] Allow Move Relearner to Teach Moves that Pre-Evolutions Know
 #define P_MAX_LEVEL_DIFF_PRE_EV 5
@@ -58,6 +46,6 @@
 #define P_ALLOW_RENAME_TRADED TRUE // Rename traded Pokemon from party menu
 
 // Go here if you want to disable specific families of Pokémon.
-#include "config/species_families.h"
+#include "config/species_enabled.h"
 
 #endif // GUARD_CONFIG_POKEMON_H

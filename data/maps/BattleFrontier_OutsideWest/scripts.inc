@@ -523,3 +523,12 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "It must be adorable. I'm sure of it…\p"
 	.string "Oh, challenges can wait. I feel driven\n"
 	.string "to find the delightful creature!$"
+
+BattleFrontier_OutsideWest_EventScript_UndergroundSign::
+	msgbox BattleFrontier_OutsideWest_Text_UndergroundSign, MSGBOX_SIGN
+	end
+
+
+BattleFrontier_OutsideWest_Text_UndergroundSign::
+	.string "BATTLE FRONTIER UNDERGROUND\n"
+	.string "Find everything a trainer could need!$"

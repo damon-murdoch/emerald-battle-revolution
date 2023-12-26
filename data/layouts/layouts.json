@@ -4410,6 +4410,36 @@
       "secondary_tileset": "gTileset_MysteryEventsHouse",
       "border_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/border.bin",
       "blockdata_filepath": "data/layouts/SootopolisCity_MysteryEventsHouse_1F_StairsUnblocked/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B1F",
+      "name": "BattleFrontier_Underground_B1F_Layout",
+      "width": 85,
+      "height": 35,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/BattleFrontier_Underground_B1F/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B1F/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B2F_DAY_CARE",
+      "name": "BattleFrontier_Underground_B2F_DayCare_Layout",
+      "width": 12,
+      "height": 9,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonDayCare",
+      "border_filepath": "data/layouts/BattleFrontier_Underground_B2F_DayCare/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B2F_DayCare/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B2F_GAME_CORNER",
+      "name": "BattleFrontier_Underground_B2F_GameCorner_Layout",
+      "width": 22,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_MauvilleGameCorner",
+      "border_filepath": "data/layouts/BattleFrontier_Underground_B2F_GameCorner/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B2F_GameCorner/map.bin"
     }
   ]
 }

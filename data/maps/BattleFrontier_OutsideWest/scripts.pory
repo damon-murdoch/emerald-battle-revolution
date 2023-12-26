@@ -526,3 +526,13 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "to find the delightful creature!$"
 
 `
+
+script BattleFrontier_OutsideWest_EventScript_UndergroundSign {
+	msgbox(BattleFrontier_OutsideWest_Text_UndergroundSign, MSGBOX_SIGN)
+	end
+}
+
+text BattleFrontier_OutsideWest_Text_UndergroundSign {
+	"BATTLE FRONTIER UNDERGROUND\n"
+	"Find everything a trainer could need!"
+}

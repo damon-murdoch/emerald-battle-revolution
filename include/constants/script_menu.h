@@ -5,6 +5,8 @@
 
 #define MAX_MULTICHOICE_WIDTH 28
 
+#define MULTI_L_PRESSED  125
+#define MULTI_R_PRESSED  126
 #define MULTI_B_PRESSED  127
 
 // Multichoice Ids

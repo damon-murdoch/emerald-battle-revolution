@@ -1,0 +1,605 @@
+raw `
+BattleFrontier_Underground_B2F_DayCare_MapScripts::
+	.byte 0
+`
+
+# Scripts
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder {
+    lock
+    faceplayer
+    msgbox(format("Hello there! I'm a POKéMON breeder!"))
+    msgbox(format("I can breed almost any POKéMON you like."))
+    waitmessage
+    showmoneybox(18,0)
+    checkmoney(4000)
+    if (var(VAR_RESULT) == TRUE){
+        msgbox(format("What are you looking for today?"))
+        msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+        goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥4000 to buy anything here!"))
+        goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
+    }
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1 {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederRegions1)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKanto)
+        case 1:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederJohto)
+        case 2:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHoenn)
+        case 3:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederSinnoh)
+        case 4:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederUnova)
+        case 5:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKalos)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+        default: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
+    }
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKanto {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_BULBASAUR,1)
+        case 1:
+            givemon(SPECIES_CHARMANDER,1)
+        case 2:
+            givemon(SPECIES_SQUIRTLE,1)
+        case 3:
+            givemon(SPECIES_CATERPIE,1)
+        case 4:
+            givemon(SPECIES_WEEDLE,1)
+        case 5:
+            givemon(SPECIES_PIDGEY,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKanto)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKanto)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederJohto {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_CHIKORITA,1)
+        case 1:
+            givemon(SPECIES_CYNDAQUIL,1)
+        case 2:
+            givemon(SPECIES_TOTODILE,1)
+        case 3:
+            givemon(SPECIES_SENTRET,1)
+        case 4:
+            givemon(SPECIES_HOOTHOOT,1)
+        case 5:
+            givemon(SPECIES_LEDYBA,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederJohto)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederJohto)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHoenn {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_TREECKO,1)
+        case 1:
+            givemon(SPECIES_TORCHIC,1)
+        case 2:
+            givemon(SPECIES_MUDKIP,1)
+        case 3:
+            givemon(SPECIES_POOCHYENA,1)
+        case 4:
+            givemon(SPECIES_ZIGZAGOON,1)
+        case 5:
+            givemon(SPECIES_WURMPLE,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHoenn)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHoenn)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederSinnoh {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_TURTWIG,1)
+        case 1:
+            givemon(SPECIES_CHIMCHAR,1)
+        case 2:
+            givemon(SPECIES_PIPLUP,1)
+        case 3:
+            givemon(SPECIES_STARLY,1)
+        case 4:
+            givemon(SPECIES_BIDOOF,1)
+        case 5:
+            givemon(SPECIES_KRICKETOT,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederSinnoh)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederSinnoh)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederUnova {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_SNIVY,1)
+        case 1:
+            givemon(SPECIES_TEPIG,1)
+        case 2:
+            givemon(SPECIES_OSHAWOTT,1)
+        case 3:
+            givemon(SPECIES_PATRAT,1)
+        case 4:
+            givemon(SPECIES_LILLIPUP,1)
+        case 5:
+            givemon(SPECIES_PURRLOIN,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederUnova)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederUnova)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKalos {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_CHESPIN,1)
+        case 1:
+            givemon(SPECIES_FENNEKIN,1)
+        case 2:
+            givemon(SPECIES_FROAKIE,1)
+        case 3:
+            givemon(SPECIES_BUNNELBY,1)
+        case 4:
+            givemon(SPECIES_FLETCHLING,1)
+        case 5:
+            givemon(SPECIES_SCATTERBUG,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKalos)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederKalos)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2 {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederRegions2)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederAlola)
+        case 1: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederGalar)
+        case 2:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHisui)
+        case 3: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+        default: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
+    }
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederAlola {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_ROWLET,1)
+        case 1:
+            givemon(SPECIES_LITTEN,1)
+        case 2:
+            givemon(SPECIES_POPPLIO,1)
+        case 3:
+            givemon(SPECIES_PIKIPEK,1)
+        case 4:
+            givemon(SPECIES_YUNGOOS,1)
+        case 5:
+            givemon(SPECIES_GRUBBIN,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederAlola)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederAlola)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederGalar {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_GROOKEY,1)
+        case 1:
+            givemon(SPECIES_SCORBUNNY,1)
+        case 2:
+            givemon(SPECIES_SOBBLE,1)
+        case 3:
+            givemon(SPECIES_SKWOVET,1)
+        case 4:
+            givemon(SPECIES_ROOKIDEE,1)
+        case 5:
+            givemon(SPECIES_BLIPBUG,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederGalar)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederGalar)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHisui {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHisui)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_GROWLITHE_HISUIAN,1)
+        case 1:
+            givemon(SPECIES_VOLTORB_HISUIAN,1)
+        case 2:
+            givemon(SPECIES_QWILFISH_HISUIAN,1)
+        case 3:
+            givemon(SPECIES_SNEASEL_HISUIAN,1)
+        case 4:
+            givemon(SPECIES_ZORUA_HISUIAN,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHisui)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederHisui)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea {
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_SPRIGATITO,1)
+        case 1:
+            givemon(SPECIES_FUECOCO,1)
+        case 2:
+            givemon(SPECIES_QUAXLY,1)
+        case 3:
+            givemon(SPECIES_LECHONK,1)
+        case 4:
+            givemon(SPECIES_TAROUNTULA,1)
+        case 5:
+            givemon(SPECIES_NYMBLE,1)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea)
+        default: 
+           goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions2)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase {
+    msgbox(format("Sure! Let's see if I can get one of those for you ..."))
+    hidemoneybox
+    delay(10)
+    fadescreen(FADE_TO_BLACK)
+    delay(20)
+    fadescreen(FADE_FROM_BLACK)
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON has been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON has been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like I can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    playse(SE_SHOP)
+    removemoney(4000)
+    showmoneybox(18,0)
+    waitse
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
+}
+script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd {
+    msgbox(format("If you need any forme-changing or evolution items for these POKéMON, please speak to my husband."))
+    msgbox(format("Come back again soon!"))
+    hidemoneybox
+    releaseall
+    end
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan {
+	lock
+	faceplayer
+	msgbox(format("Hello there! I'm the POKéMON breeder's husband."))
+    msgbox(format("I sell all kinds of items for evolving and changing the forms of POKéMON!"))
+    msgbox(format("What can I help you with?"))
+	waitmessage
+    pokemart(BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan)
+    msgbox(format("Thanks for your business!"))
+	release
+	end
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper {
+	lock
+	faceplayer
+	msgbox(format("Hello, nice to meet you! I'm the POKéMON breeding helper."))
+    msgbox(format("I can teach you how to breed POKéMON effectively, as well as sell you some of the items you will need."))
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice)
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice {
+    msgbox(format("What can I help you with?"))
+    multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips)
+        case 1:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop)
+        default:
+            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd)
+    }
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips {
+    msgbox(format("Sure! To start with, you will need two compatible POKéMON - One male and one female."))
+    msgbox(format("These can either be two POKéMON of the same egg group, or of the same species."))
+    msgbox(format("Ditto can also be used to breed with almost any POKéMON of any gender!"))
+    msgbox(format("You will almost always want to give one of the POKéMON a Destiny Knot - This will make the child inherit five stats instead of one!"))
+    msgbox(format("Breeding parents with high stats will result in children with strong stats as well."))
+    msgbox(format("Each stat will either be inherited from one of the parents, or chosen randomly."))
+    msgbox(format("You can also give an Everstone to the second POKéMON to pass down its nature to all children!"))
+    msgbox(format("Certain Pokemon can be given an incense to hold when breeding to cause the children to hatch into POKéMON they normally wouldn't."))
+    msgbox(format("For example, breeding an Azumarill holding a Sea Incense will result in an Azurill hatching rather than a Marill!"))
+    msgbox(format("Breeding can also be used to pass down special moves from parents to the children which they may not be able to learn otherwise."))
+    msgbox(format("Once you've placed both of your POKéMON in the care of the day care lady, go for a walk and check back with the day care man upstairs every now and then."))
+    msgbox(format("After a certain number of steps, the Day Care worker should have an Egg for you!"))
+    msgbox(format("The frequency of eggs will increase with higher compatibility between the two POKéMON."))
+    msgbox(format("Be careful, though - if he says that they would rather play with other POKéMON than each other, you will never get any eggs from them!"))
+    msgbox(format("Well, that's the basics. I hope that helped!"))
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse)
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop {
+    pokemart(BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper)
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse)
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse {
+    msgbox(format("Can I help with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice)
+    }
+    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd)
+}
+
+script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd {
+    msgbox(format("Come back if you need anything!"))
+	release
+	end
+}
+
+# Text Blocks
+
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederRegions1 {
+    "KANTO$"
+    "JOHTO$"
+    "HOENN$"
+    "SINNOH$"
+    "UNOVA$"
+    "KALOS$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto {
+    "BULBASAUR{CLEAR_TO 0x48}¥4000$"
+    "CHARMANDER{CLEAR_TO 0x48}¥4000$"
+    "SQUIRTLE{CLEAR_TO 0x48}¥4000$"
+    "CATERPIE{CLEAR_TO 0x48}¥4000$"
+    "WEEDLE{CLEAR_TO 0x48}¥4000$"
+    "PIDGEY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto {
+    "CHIKORITA{CLEAR_TO 0x48}¥4000$"
+    "CYNDAQUIL{CLEAR_TO 0x48}¥4000$"
+    "TOTADILE{CLEAR_TO 0x48}¥4000$"
+    "SENTRET{CLEAR_TO 0x48}¥4000$"
+    "HOOTHOOT{CLEAR_TO 0x48}¥4000$"
+    "LEDYBA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn {
+    "TREECKO{CLEAR_TO 0x48}¥4000$"
+    "TORCHIC{CLEAR_TO 0x48}¥4000$"
+    "MUDKIP{CLEAR_TO 0x48}¥4000$"
+    "POOCHYENA{CLEAR_TO 0x48}¥4000$"
+    "ZIGZAGOON{CLEAR_TO 0x48}¥4000$"
+    "WURMPLE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh {
+    "TURTWIG{CLEAR_TO 0x48}¥4000$"
+    "CHIMCHAR{CLEAR_TO 0x48}¥4000$"
+    "PIPLUP{CLEAR_TO 0x48}¥4000$"
+    "STARLY{CLEAR_TO 0x48}¥4000$"
+    "BIDOOF{CLEAR_TO 0x48}¥4000$"
+    "KRICKETOT{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova {
+    "SNIVY{CLEAR_TO 0x48}¥4000$"
+    "TEPIG{CLEAR_TO 0x48}¥4000$"
+    "OSHAWOTT{CLEAR_TO 0x48}¥4000$"
+    "PATRAT{CLEAR_TO 0x48}¥4000$"
+    "LILLIPUP{CLEAR_TO 0x48}¥4000$"
+    "PURRLOIN{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos {
+    "CHESPIN{CLEAR_TO 0x48}¥4000$"
+    "FENNEKIN{CLEAR_TO 0x48}¥4000$"
+    "FROAKIE{CLEAR_TO 0x48}¥4000$"
+    "BUNNELBY{CLEAR_TO 0x48}¥4000$"
+    "FLETCHLING{CLEAR_TO 0x48}¥4000$"
+    "SCATTERBUG{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederRegions2 {
+    "ALOLA$"
+    "GALAR$"
+    "HISUI$"
+    "PALDEA$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola {
+    "ROWLET{CLEAR_TO 0x48}¥4000$"
+    "LITTEN{CLEAR_TO 0x48}¥4000$"
+    "POPPLIO{CLEAR_TO 0x48}¥4000$"
+    "PIKIPEK{CLEAR_TO 0x48}¥4000$"
+    "YUNGOOS{CLEAR_TO 0x48}¥4000$"
+    "GRUBBIN{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar {
+    "GROOKEY{CLEAR_TO 0x48}¥4000$"
+    "SCORBUNNY{CLEAR_TO 0x48}¥4000$"
+    "SOBBLE{CLEAR_TO 0x48}¥4000$"
+    "SKWOVET{CLEAR_TO 0x48}¥4000$"
+    "ROOKIDEE{CLEAR_TO 0x48}¥4000$"
+    "BLIPBUG{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHisui {
+    "GROWLITHE{CLEAR_TO 0x48}¥4000$"
+    "VOLTORB{CLEAR_TO 0x48}¥4000$"
+    "QWILFISH{CLEAR_TO 0x48}¥4000$"
+    "SNEASEL{CLEAR_TO 0x48}¥4000$"
+    "ZORUA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea {
+    "SPRIGATITO{CLEAR_TO 0x48}¥4000$"
+    "FUECOCO{CLEAR_TO 0x48}¥4000$"
+    "QUAXLY{CLEAR_TO 0x48}¥4000$"
+    "LECHONK{CLEAR_TO 0x48}¥4000$"
+    "TAROUNTULA{CLEAR_TO 0x48}¥4000$"
+    "NYMBLE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+
+text BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions {
+    "BREEDING TIPS$"
+    "VIEW SHOP$"
+    "NOTHING$"
+    ""
+}
+
+# Marts
+
+mart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan {
+	ITEM_FIRE_STONE
+    ITEM_WATER_STONE
+    ITEM_THUNDER_STONE
+    ITEM_LEAF_STONE
+    ITEM_ICE_STONE
+    ITEM_SUN_STONE
+    ITEM_MOON_STONE
+    ITEM_SHINY_STONE
+    ITEM_DUSK_STONE
+    ITEM_DAWN_STONE
+    ITEM_SWEET_APPLE
+    ITEM_TART_APPLE
+    ITEM_CRACKED_POT
+    ITEM_CHIPPED_POT
+    ITEM_GALARICA_CUFF
+    ITEM_GALARICA_WREATH
+    ITEM_DRAGON_SCALE
+    ITEM_UPGRADE
+    ITEM_PROTECTOR
+    ITEM_ELECTIRIZER
+    ITEM_MAGMARIZER
+    ITEM_DUBIOUS_DISC
+    ITEM_REAPER_CLOTH
+    ITEM_PRISM_SCALE
+    ITEM_WHIPPED_DREAM
+    ITEM_SACHET
+    ITEM_OVAL_STONE
+    ITEM_STRAWBERRY_SWEET
+    ITEM_LOVE_SWEET
+    ITEM_BERRY_SWEET
+    ITEM_CLOVER_SWEET
+    ITEM_FLOWER_SWEET
+    ITEM_STAR_SWEET
+    ITEM_RIBBON_SWEET
+	ITEM_RED_NECTAR
+	ITEM_YELLOW_NECTAR
+	ITEM_PINK_NECTAR
+	ITEM_PURPLE_NECTAR
+	ITEM_BLACK_AUGURITE 
+	ITEM_LINKING_CORD
+	ITEM_PEAT_BLOCK
+	ITEM_BERSERK_GENE
+	ITEM_AUSPICIOUS_ARMOR
+	ITEM_MALICIOUS_ARMOR
+	ITEM_GIMMIGHOUL_COIN
+	ITEM_LEADERS_CREST
+	ITEM_FAIRY_FEATHER
+	ITEM_SYRUPY_APPLE
+	ITEM_UNREMARKABLE_TEACUP
+	ITEM_MASTERPIECE_TEACUP
+}
+
+mart BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper {
+	ITEM_DESTINY_KNOT
+	ITEM_EVERSTONE
+	ITEM_SEA_INCENSE
+	ITEM_LAX_INCENSE
+	ITEM_ODD_INCENSE
+	ITEM_ROCK_INCENSE
+	ITEM_FULL_INCENSE
+	ITEM_WAVE_INCENSE
+	ITEM_ROSE_INCENSE
+	ITEM_LUCK_INCENSE
+	ITEM_PURE_INCENSE
+}

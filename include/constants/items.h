@@ -986,8 +986,10 @@
 #define ITEM_SWIFT_MOCHI 811
 #define ITEM_FRESH_START_MOCHI 812
 #define ITEM_GLIMMERING_CHARM 813
+#define ITEM_814 814 // TWV0YWwgQWxsb3k=
+#define ITEM_815 815 // U3RlbGxhciBUZXJhIFNoYXJk
 
-#define ITEMS_COUNT 814
+#define ITEMS_COUNT 816
 #define ITEM_FIELD_ARROW ITEMS_COUNT
 
 // A special item id associated with "Cancel"/"Exit" etc. in a list of items or decorations
@@ -1063,6 +1065,10 @@
 #define EFFECT_ITEM_REVIVE                  9
 #define EFFECT_ITEM_RESTORE_PP              10
 #define EFFECT_ITEM_INCREASE_ALL_STATS      11
+
+// For use with FLAG_ITEM_BIKE_MODE
+#define LAST_USED_ACRO_BIKE 0
+#define LAST_USED_MACH_BIKE 1
 
 // Enigma Berry dummy constant
 #define EFFECT_ITEM_ENIGMA_BERRY_EREADER    1

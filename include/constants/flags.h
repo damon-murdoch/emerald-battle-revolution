@@ -46,8 +46,8 @@
 #define FLAG_RECEIVED_SHINY_CHARM      0x21 // Shiny Charm Obtained
 #define FLAG_RECEIVED_CATCHING_CHARM   0x22 // Catching Charm Obtained
 #define FLAG_RECEIVED_EXP_CHARM        0x23 // Experience Charm Obtained
-#define FLAG_UNUSED_0x024    0x24 // Unused Flag
-#define FLAG_UNUSED_0x025    0x25 // Unused Flag
+#define FLAG_MOVE_TUTOR_LEARNSET       0x24 // Learn egg/tutor moves instead of relearn moves
+#define FLAG_MOVE_TUTOR_IGNORE_LEVEL   0x25 // Reteach any moves regardless of level
 #define FLAG_UNUSED_0x026    0x26 // Unused Flag
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
@@ -1506,7 +1506,7 @@
 #define FLAG_ITEM_Z_POWER_RING_OBTAINED             (SYSTEM_FLAGS + 0x86)
 #define FLAG_ITEM_DYNAMAX_BAND_OBTAINED             (SYSTEM_FLAGS + 0x87)
 #define FLAG_ITEM_TERA_ORB_OBTAINED                 (SYSTEM_FLAGS + 0x88)
-#define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag
+#define FLAG_LAST_USED_BIKE                         (SYSTEM_FLAGS + 0x89) // 0: Acro Bike, 1: Mach Bike
 #define FLAG_UNUSED_0x8EA                           (SYSTEM_FLAGS + 0x8A) // Unused Flag
 #define FLAG_UNUSED_0x8EB                           (SYSTEM_FLAGS + 0x8B) // Unused Flag
 #define FLAG_UNUSED_0x8EC                           (SYSTEM_FLAGS + 0x8C) // Unused Flag
