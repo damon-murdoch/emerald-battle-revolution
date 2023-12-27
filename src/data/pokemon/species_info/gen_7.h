@@ -99,7 +99,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .footprint = gMonFootprint_Dartrix,
         LEARNSETS(Dartrix),
         .evolutions = EVOLUTION({EVO_LEVEL, 34, SPECIES_DECIDUEYE},
-                                {EVO_NONE, 0, SPECIES_DECIDUEYE_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_DECIDUEYE_HISUIAN}),
     },
 
 #define DECIDUEYE_MISC_INFO                                     \

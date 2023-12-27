@@ -439,7 +439,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .footprint = gMonFootprint_Dewott,
         LEARNSETS(Dewott),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_SAMUROTT},
-                                {EVO_NONE, 0, SPECIES_SAMUROTT_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_SAMUROTT_HISUIAN}),
     },
 
 #define SAMUROTT_MISC_INFO                                                  \
@@ -2804,7 +2804,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .footprint = gMonFootprint_Petilil,
         LEARNSETS(Petilil),
         .evolutions = EVOLUTION({EVO_ITEM, ITEM_SUN_STONE, SPECIES_LILLIGANT},
-                                {EVO_NONE, 0, SPECIES_LILLIGANT_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_LILLIGANT_HISUIAN}),
     },
 
 #define LILLIGANT_MISC_INFO                                 \
@@ -3000,8 +3000,8 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         PALETTES(BasculinWhiteStriped),
         ICON(BasculinWhiteStriped, 0),
         LEARNSETS(BasculinWhiteStriped),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_BASCULEGION_MALE},
-                                {EVO_NONE, 0, SPECIES_BASCULEGION_FEMALE}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LINKING_CORD, SPECIES_BASCULEGION_MALE},
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_BASCULEGION_FEMALE}),
     },
 
 #define BASCULEGION_MISC_INFO                                                               \
@@ -7249,7 +7249,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         ICON(Bisharp, 0),
         .footprint = gMonFootprint_Bisharp,
         LEARNSETS(Bisharp),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_KINGAMBIT}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_LEADERS_CREST, SPECIES_KINGAMBIT}),
     },
 
 #if P_GEN_9_CROSS_EVOS
@@ -7398,7 +7398,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .footprint = gMonFootprint_Rufflet,
         LEARNSETS(Rufflet),
         .evolutions = EVOLUTION({EVO_LEVEL, 54, SPECIES_BRAVIARY},
-                                {EVO_NONE, 0, SPECIES_BRAVIARY_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_BRAVIARY_HISUIAN}),
     },
 
 #define BRAVIARY_MISC_INFO                                      \

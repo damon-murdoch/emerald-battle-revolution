@@ -248,7 +248,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .footprint = gMonFootprint_Quilava,
         LEARNSETS(Quilava),
         .evolutions = EVOLUTION({EVO_LEVEL, 36, SPECIES_TYPHLOSION},
-                                {EVO_NONE, 0, SPECIES_TYPHLOSION_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_TYPHLOSION_HISUIAN}),
     },
 
 #define TYPHLOSION_MISC_INFO                                            \
@@ -3997,7 +3997,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .footprint = gMonFootprint_Ursaring,
         LEARNSETS(Ursaring),
         .evolutions = EVOLUTION({EVO_ITEM_NIGHT, ITEM_PEAT_BLOCK, SPECIES_URSALUNA},
-                                {EVO_NONE, 0, SPECIES_URSALUNA_BLOODMOON}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_URSALUNA_BLOODMOON}),
     },
 
 #if P_GEN_8_CROSS_EVOS
