@@ -12,10 +12,10 @@ ASSUMPTIONS
     ASSUME(gBattleMoves[MOVE_QUICK_GUARD].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_CRAFTY_SHIELD].effect == EFFECT_PROTECT);
     ASSUME(gBattleMoves[MOVE_BANEFUL_BUNKER].effect == EFFECT_PROTECT);
-    ASSUME(gBattleMoves[MOVE_TACKLE].split == SPLIT_PHYSICAL);
+    ASSUME(gBattleMoves[MOVE_TACKLE].category == BATTLE_CATEGORY_PHYSICAL);
     ASSUME(gBattleMoves[MOVE_TACKLE].makesContact);
-    ASSUME(gBattleMoves[MOVE_LEER].split == SPLIT_STATUS);
-    ASSUME(gBattleMoves[MOVE_WATER_GUN].split == SPLIT_SPECIAL);
+    ASSUME(gBattleMoves[MOVE_LEER].category == BATTLE_CATEGORY_STATUS);
+    ASSUME(gBattleMoves[MOVE_WATER_GUN].category == BATTLE_CATEGORY_SPECIAL);
     ASSUME(!(gBattleMoves[MOVE_WATER_GUN].makesContact));
 }
 
@@ -206,10 +206,10 @@ SINGLE_BATTLE_TEST("Recoil damage is not applied if target was protected")
 
 
     GIVEN {
-        ASSUME(gBattleMoves[MOVE_VOLT_TACKLE].effect == EFFECT_RECOIL_33_STATUS);
-        ASSUME(gBattleMoves[MOVE_HEAD_SMASH].effect == EFFECT_RECOIL_50);
-        ASSUME(gBattleMoves[MOVE_TAKE_DOWN].effect == EFFECT_RECOIL_25);
-        ASSUME(gBattleMoves[MOVE_DOUBLE_EDGE].effect == EFFECT_RECOIL_33);
+        ASSUME(gBattleMoves[MOVE_VOLT_TACKLE].effect == EFFECT_RECOIL);
+        ASSUME(gBattleMoves[MOVE_HEAD_SMASH].effect == EFFECT_RECOIL);
+        ASSUME(gBattleMoves[MOVE_TAKE_DOWN].effect == EFFECT_RECOIL);
+        ASSUME(gBattleMoves[MOVE_DOUBLE_EDGE].effect == EFFECT_RECOIL);
         PLAYER(SPECIES_RAPIDASH);
         OPPONENT(SPECIES_BEAUTIFLY);
     } WHEN {
@@ -421,7 +421,7 @@ DOUBLE_BATTLE_TEST("Crafty Shield protects self and ally from status moves")
     GIVEN {
         ASSUME(gBattleMoves[MOVE_LEER].target == MOVE_TARGET_BOTH);
         ASSUME(gBattleMoves[MOVE_HYPER_VOICE].target == MOVE_TARGET_BOTH);
-        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].split == SPLIT_SPECIAL);
+        ASSUME(gBattleMoves[MOVE_HYPER_VOICE].category == BATTLE_CATEGORY_SPECIAL);
         PLAYER(SPECIES_WOBBUFFET);
         PLAYER(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WOBBUFFET);
