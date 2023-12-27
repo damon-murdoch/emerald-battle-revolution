@@ -10814,7 +10814,7 @@ const struct Item gItems[] =
                                        "curious coins."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone,
     },
 
     [ITEM_LEADERS_CREST] =
@@ -10826,7 +10826,7 @@ const struct Item gItems[] =
                                        "Held by Bisharp."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .fieldUseFunc = ItemUseOutOfBattle_EvolutionStone
     },
 
     [ITEM_MALICIOUS_ARMOR] =
