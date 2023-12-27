@@ -45,6 +45,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_script_commands.h"
+#include "constants/battle_partner.h"
 #include "constants/cries.h"
 #include "constants/form_change_types.h"
 #include "constants/hold_effects.h"
@@ -863,7 +864,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
             SetBoxMonData(boxMon, MON_DATA_SPATK_IV, &iv);
             SetBoxMonData(boxMon, MON_DATA_SPDEF_IV, &iv);
         }
-        else if (P_LEGENDARY_PERFECT_IVS >= GEN_6 
+        else if (P_LEGENDARY_PERFECT_IVS >= GEN_6
          && (gSpeciesInfo[species].isLegendary
           || gSpeciesInfo[species].isMythical
           || gSpeciesInfo[species].isUltraBeast))
@@ -1866,11 +1867,11 @@ void SetMultiuseSpriteTemplateToPokemon(u16 speciesTag, u8 battlerPosition)
     gMultiuseSpriteTemplate.paletteTag = speciesTag;
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
         gMultiuseSpriteTemplate.anims = gAnims_MonPic;
-    else 
+    else
     {
         if (speciesTag > SPECIES_SHINY_TAG)
             speciesTag = speciesTag - SPECIES_SHINY_TAG;
-        
+
         speciesTag = SanitizeSpeciesId(speciesTag);
         if (gSpeciesInfo[speciesTag].frontAnimFrames != NULL)
             gMultiuseSpriteTemplate.anims = gSpeciesInfo[speciesTag].frontAnimFrames;
@@ -1885,7 +1886,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition
     if (battlerPosition == B_POSITION_PLAYER_LEFT || battlerPosition == B_POSITION_PLAYER_RIGHT)
     {
         gMultiuseSpriteTemplate = sTrainerBackSpriteTemplates[trainerPicId];
-        gMultiuseSpriteTemplate.anims = gTrainerBackAnimsPtrTable[trainerPicId];
+        gMultiuseSpriteTemplate.anims = gTrainerBacksprites[trainerPicId].animation;
     }
     else
     {
@@ -1893,7 +1894,7 @@ void SetMultiuseSpriteTemplateToTrainerBack(u16 trainerPicId, u8 battlerPosition
             gMultiuseSpriteTemplate = gMonSpritesGfxPtr->templates[battlerPosition];
         else
             gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
-        gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerPicId];
+        gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
     }
 }
 
@@ -1905,7 +1906,7 @@ void SetMultiuseSpriteTemplateToTrainerFront(u16 trainerPicId, u8 battlerPositio
         gMultiuseSpriteTemplate = gBattlerSpriteTemplates[battlerPosition];
 
     gMultiuseSpriteTemplate.paletteTag = trainerPicId;
-    gMultiuseSpriteTemplate.anims = gTrainerFrontAnimsPtrTable[trainerPicId];
+    gMultiuseSpriteTemplate.anims = gTrainerSprites[trainerPicId].animation;
 }
 
 static void EncryptBoxMon(struct BoxPokemon *boxMon)
@@ -5362,7 +5363,7 @@ const u8 *GetTrainerPartnerName(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (gPartnerTrainerId == TRAINER_STEVEN_PARTNER)
+        if (gPartnerTrainerId == TRAINER_PARTNER(PARTNER_STEVEN))
         {
             return gTrainers[TRAINER_STEVEN].trainerName;
         }
@@ -5585,16 +5586,22 @@ void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
 
 const u8 *GetTrainerClassNameFromId(u16 trainerId)
 {
-    if (trainerId >= TRAINERS_COUNT)
-        trainerId = TRAINER_NONE;
-    return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+        return gTrainerClassNames[gBattlePartners[trainerId].trainerClass];
+    else if (trainerId < TRAINERS_COUNT)
+        return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+
+    return gTrainerClassNames[gTrainers[TRAINER_NONE].trainerClass];
 }
 
 const u8 *GetTrainerNameFromId(u16 trainerId)
 {
-    if (trainerId >= TRAINERS_COUNT)
-        trainerId = TRAINER_NONE;
-    return gTrainers[trainerId].trainerName;
+    if (trainerId > TRAINER_PARTNER(PARTNER_NONE))
+        return gBattlePartners[trainerId].trainerName;
+    else if (trainerId < TRAINERS_COUNT)
+        return gTrainers[trainerId].trainerName;
+
+    return gTrainers[TRAINER_NONE].trainerName;
 }
 
 bool8 HasTwoFramesAnimation(u16 species)

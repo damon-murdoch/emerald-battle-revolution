@@ -833,9 +833,11 @@ static const u8 sText_HurtByTheSeaOfFire[] = _("{B_ATK_TEAM1} {B_ATK_NAME_WITH_P
 static const u8 sText_TheSeaOfFireDisappeared[] = _("The sea of fire around {B_ATK_TEAM2}\nteam disappeared!");
 static const u8 sText_SwampEnvelopedSide[] = _("A swamp enveloped\n{B_DEF_TEAM2} team!");
 static const u8 sText_TheSwampDisappeared[] = _("The swamp around {B_ATK_TEAM2}\nteam disappeared!");
+static const u8 sText_HospitalityRestoration[] = _("The {B_ATK_PARTNER_NAME} drank down all\nthe matcha that Sinistcha made!");
 
 const u8 *const gBattleStringsTable[BATTLESTRINGS_COUNT] =
 {
+    [STRINGID_HOSPITALITYRESTORATION - BATTLESTRINGS_TABLE_START] = sText_HospitalityRestoration,
     [STRINGID_THESWAMPDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSwampDisappeared,
     [STRINGID_SWAMPENVELOPEDSIDE - BATTLESTRINGS_TABLE_START] = sText_SwampEnvelopedSide,
     [STRINGID_THESEAOFFIREDISAPPEARED - BATTLESTRINGS_TABLE_START] = sText_TheSeaOfFireDisappeared,
@@ -2920,7 +2922,7 @@ void BufferStringBattle(u16 stringID, u32 battler)
         }
         break;
     case STRINGID_USEDMOVE: // pokemon used a move msg
-        if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeSplit != SPLIT_STATUS)
+        if (gBattleStruct->zmove.active && gBattleStruct->zmove.activeCategory != BATTLE_CATEGORY_STATUS)
             StringCopy(gBattleTextBuff3, GetZMoveName(gBattleMsgDataPtr->currentMove));
         else if (IsMaxMove(gBattleMsgDataPtr->currentMove))
             StringCopy(gBattleTextBuff3, GetMaxMoveName(gBattleMsgDataPtr->currentMove));
