@@ -1492,4 +1492,11 @@ void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId)
     Task_CloseCantUseKeyItemMessage(taskId);
 }
 
+// For swapping a Pokemon's ball
+void ItemUseOutOfBattle_Pokeball(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_Pokeball;
+    SetUpItemUseCallback(taskId);
+}
+
 #undef tUsingRegisteredKeyItem

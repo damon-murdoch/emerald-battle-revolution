@@ -7932,3 +7932,59 @@ void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task)
         gTasks[taskId].func = task;
     }
 }
+
+// For swapping a Pokemon's ball
+void ItemUseCB_Pokeball(u8 taskId, TaskFunc task){
+    
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 item = gSpecialVar_ItemId;
+    bool8 didActivate = FALSE;
+
+    // Get the id for the current ball
+    u8 oldBall = GetMonData(mon, MON_DATA_POKEBALL);
+
+    // Get the id for the new ball
+    u8 newBall = (ItemId_GetSecondaryId(item) + FIRST_BALL);
+
+    // New and old balls don't match
+    if (newBall != oldBall){
+        // Switch on the old ball
+        switch(oldBall){
+            case ITEM_CHERISH_BALL:
+                if (I_REPLACE_CHERISH_BALL)
+                    didActivate = TRUE; // Allow replacement
+                break;
+            case ITEM_MASTER_BALL:
+                if (I_REPLACE_MASTER_BALL)
+                    didActivate = TRUE; // Allow replacement
+                break;
+            default:
+                didActivate = TRUE; // Allow replacement
+        }
+    }
+
+    // Item activated
+    if (didActivate) {
+        // Update the ball for the pokemon
+        SetMonData(mon, MON_DATA_POKEBALL, &newBall);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, 1);
+        GetMonNickname(mon, gStringVar1);
+        // StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
+        // DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        // Return the old ball
+        if (I_RETURN_OLD_BALL)
+            AddBagItem(oldBall, 1);
+        gTasks[taskId].func = task;
+    }
+    else // Item not activated
+    { 
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}

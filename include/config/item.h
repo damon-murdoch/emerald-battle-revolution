@@ -36,4 +36,17 @@
 // Vs. Seeker
 #define I_VS_SEEKER_CHARGING        0     // If this flag is assigned, the Vs Seeker functionality will be enabled. When the player has the Vs. Seeker, Match Call rematch functions will stop working.
 
+// Pokeball Replacements
+
+// Allow replacing Cherish Ball
+#define I_REPLACE_CHERISH_BALL FALSE
+
+// Allow replacing Master Ball
+#define I_REPLACE_MASTER_BALL FALSE
+
+// If this is set to true, the player will
+// get back a copy of the original ball when
+// it is replaced with the new ball
+#define I_RETURN_OLD_BALL TRUE
+
 #endif // GUARD_CONFIG_ITEM_H
