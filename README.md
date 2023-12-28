@@ -124,6 +124,13 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.7.2
+
+Merged code from pokeemerald-expanded upcoming branch into dev, updated evolution methods for 
+all unobtainable evolutions (i.e. Hisuian formes, etc.) using a linking cable, new Paldean 
+Pokemon with unimplemented evolution methods have been given item evolutions. Updated 
+item prices, underground item shop layouts, and pokemon breeding helper messages.
+
 ### Ver. 0.7.1
 
 Last used bike is now remembered, and will not be reset back to Acro bike each time you
