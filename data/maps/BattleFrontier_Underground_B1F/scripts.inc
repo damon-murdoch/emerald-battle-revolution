@@ -1511,7 +1511,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_7:
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_0
 	hidemoneybox
-	delay 10
+	delay 20
 	fadescreen FADE_TO_BLACK
 	delay 20
 	fadescreen FADE_FROM_BLACK
@@ -1862,6 +1862,9 @@ BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
 	.2byte ITEM_ADAMANT_ORB
 	.2byte ITEM_LUSTROUS_ORB
 	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
 	.2byte ITEM_SCROLL_OF_DARKNESS
 	.2byte ITEM_SCROLL_OF_WATERS
 	.2byte ITEM_CORNERSTONE_MASK
@@ -2146,7 +2149,6 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_WHITE_HERB
 	.2byte ITEM_QUICK_CLAW
 	.2byte ITEM_SOOTHE_BELL
-	.2byte ITEM_KINGS_ROCK
 	.2byte ITEM_AMULET_COIN
 	.2byte ITEM_CLEANSE_TAG
 	.2byte ITEM_SMOKE_BALL
@@ -2161,8 +2163,6 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_GRIP_CLAW
 	.2byte ITEM_STICKY_BARB
 	.2byte ITEM_BIG_ROOT
-	.2byte ITEM_RAZOR_CLAW
-	.2byte ITEM_RAZOR_FANG
 	.2byte ITEM_FLOAT_STONE
 	.2byte ITEM_RING_TARGET
 	.2byte ITEM_DESTINY_KNOT
@@ -2173,10 +2173,18 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_LEEK
 	.2byte ITEM_THICK_CLUB
 	.2byte ITEM_LUCKY_PUNCH
+	.2byte ITEM_BERSERK_GENE
 	.2byte ITEM_METAL_POWDER
 	.2byte ITEM_QUICK_POWDER
-	.2byte ITEM_DEEP_SEA_SCALE
-	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_PURE_INCENSE
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2198,6 +2206,7 @@ BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk:
 	.2byte ITEM_DRAGON_FANG
 	.2byte ITEM_BLACK_GLASSES
 	.2byte ITEM_METAL_COAT
+	.2byte ITEM_FAIRY_FEATHER
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2345,12 +2354,18 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk2:
 
 	.align 2
 BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk:
+	.2byte ITEM_EXP_SHARE
 	.2byte ITEM_ACRO_BIKE
 	.2byte ITEM_COIN_CASE
+	.2byte ITEM_SOOT_SACK
 	.2byte ITEM_OLD_ROD
 	.2byte ITEM_GOOD_ROD
 	.2byte ITEM_SUPER_ROD
+	.2byte ITEM_POWDER_JAR
+	.2byte ITEM_WAILMER_PAIL
+	.2byte ITEM_POKEBLOCK_CASE
 	.2byte ITEM_DOWSING_MACHINE
+	.2byte ITEM_SS_TICKET
 	.2byte ITEM_EON_TICKET
 	.2byte ITEM_MYSTIC_TICKET
 	.2byte ITEM_AURORA_TICKET
@@ -2366,9 +2381,6 @@ BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk:
 	.2byte ITEM_Z_POWER_RING
 	.2byte ITEM_DYNAMAX_BAND
 	.2byte ITEM_TERA_ORB
-	.2byte ITEM_ADAMANT_CRYSTAL
-	.2byte ITEM_GRISEOUS_CORE
-	.2byte ITEM_LUSTROUS_GLOBE
 	.2byte ITEM_ROTOM_CATALOG
 	.2byte ITEM_GRACIDEA
 	.2byte ITEM_REVEAL_GLASS

@@ -3168,7 +3168,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Goomy,
         LEARNSETS(Goomy),
         .evolutions = EVOLUTION({EVO_LEVEL, 40, SPECIES_SLIGGOO},
-                                {EVO_NONE, 0, SPECIES_SLIGGOO_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_SLIGGOO_HISUIAN}),
     },
 
 #define SLIGGOO_MISC_INFO                                       \
@@ -3831,7 +3831,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .footprint = gMonFootprint_Bergmite,
         LEARNSETS(Bergmite),
         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_AVALUGG},
-                                {EVO_NONE, 0, SPECIES_AVALUGG_HISUIAN}),
+                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_AVALUGG_HISUIAN}),
     },
 
 #define AVALUGG_MISC_INFO                               \

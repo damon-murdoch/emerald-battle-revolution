@@ -6,18 +6,19 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder::
 	faceplayer
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_0
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_1
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_2
 	waitmessage
 	showmoneybox 18, 0
 	checkmoney 4000
 	compare VAR_RESULT, TRUE
 	goto_if_eq BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_1
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_4
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_5
 	goto BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd
 	return
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_1:
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_2
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_3
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_4
 	goto BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederRegions1
 	return
 
@@ -590,7 +591,7 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea_10:
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase::
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_0
 	hidemoneybox
-	delay 10
+	delay 20
 	fadescreen FADE_TO_BLACK
 	delay 20
 	fadescreen FADE_FROM_BLACK
@@ -641,7 +642,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_7
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd::
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd_Text_0
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd_Text_1
 	hidemoneybox
 	releaseall
 	end
@@ -652,7 +652,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan::
 	faceplayer
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_0
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_1
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_2
 	waitmessage
 	pokemart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_7
@@ -670,47 +669,45 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper::
 
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice::
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_2
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_1
 	multichoice2 0, 0, BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions
 	switch VAR_RESULT
-	case 0, BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_2
-	case 1, BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_3
+	case 0, BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_3
+	case 1, BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_4
+	case 2, BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_5
 	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd
-	return
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_2:
-	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_1:
+	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse
 	return
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_3:
-	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop
-	return
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_0
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_1
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_2
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_3
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_4
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_5
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_6
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_7
+	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_1
 
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_4:
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_8
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_9
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_10
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_11
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_12
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_13
+	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_1
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips::
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_0
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_1
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_2
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_3
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_4
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_5
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_6
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_7
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_8
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_9
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_10
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_11
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_12
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_13
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_14
-	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse
-	return
-
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop::
-	pokemart BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper
-	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse
-	return
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_5:
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_14
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_15
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_16
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_17
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_18
+	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_19
+	goto BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_1
 
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse::
@@ -735,6 +732,9 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd::
 
 	.align 2
 BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan:
+	.2byte ITEM_DESTINY_KNOT
+	.2byte ITEM_MIRROR_HERB
+	.2byte ITEM_EVERSTONE
 	.2byte ITEM_FIRE_STONE
 	.2byte ITEM_WATER_STONE
 	.2byte ITEM_THUNDER_STONE
@@ -751,6 +751,11 @@ BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan:
 	.2byte ITEM_CHIPPED_POT
 	.2byte ITEM_GALARICA_CUFF
 	.2byte ITEM_GALARICA_WREATH
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_RAZOR_CLAW
+	.2byte ITEM_RAZOR_FANG
+	.2byte ITEM_KINGS_ROCK
 	.2byte ITEM_DRAGON_SCALE
 	.2byte ITEM_UPGRADE
 	.2byte ITEM_PROTECTOR
@@ -776,46 +781,33 @@ BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan:
 	.2byte ITEM_BLACK_AUGURITE
 	.2byte ITEM_LINKING_CORD
 	.2byte ITEM_PEAT_BLOCK
-	.2byte ITEM_BERSERK_GENE
 	.2byte ITEM_AUSPICIOUS_ARMOR
 	.2byte ITEM_MALICIOUS_ARMOR
 	.2byte ITEM_GIMMIGHOUL_COIN
 	.2byte ITEM_LEADERS_CREST
-	.2byte ITEM_FAIRY_FEATHER
 	.2byte ITEM_SYRUPY_APPLE
 	.2byte ITEM_UNREMARKABLE_TEACUP
 	.2byte ITEM_MASTERPIECE_TEACUP
-	.2byte ITEM_NONE
-
-	.align 2
-BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper:
-	.2byte ITEM_DESTINY_KNOT
-	.2byte ITEM_EVERSTONE
-	.2byte ITEM_SEA_INCENSE
-	.2byte ITEM_LAX_INCENSE
-	.2byte ITEM_ODD_INCENSE
-	.2byte ITEM_ROCK_INCENSE
-	.2byte ITEM_FULL_INCENSE
-	.2byte ITEM_WAVE_INCENSE
-	.2byte ITEM_ROSE_INCENSE
-	.2byte ITEM_LUCK_INCENSE
-	.2byte ITEM_PURE_INCENSE
 	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_0:
 	.string "Hello there! I'm a POKéMON breeder!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_1:
-	.string "I can breed almost any POKéMON you\n"
-	.string "like.$"
+	.string "If you need a certain species of\n"
+	.string "POKéMON, I can breed it for you!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_2:
-	.string "What are you looking for today?$"
+	.string "Our selection is currently limited, but\n"
+	.string "we will be expanding soon!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_3:
-	.string "L: Previous Page                    R: Next Page\nB: Go Back$"
+	.string "What are you looking for today?$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_4:
+	.string "L: Previous Page                    R: Next Page\nB: Go Back$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_5:
 	.string "Oh, sorry! You need at least ¥4000 to\n"
 	.string "buy anything here!$"
 
@@ -851,22 +843,13 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_T
 	.string "Can we help you with anything else?$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd_Text_0:
-	.string "If you need any forme-changing or\n"
-	.string "evolution items for these POKéMON,\l"
-	.string "please speak to my husband.$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd_Text_1:
 	.string "Come back again soon!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_0:
-	.string "Hello there! I'm the POKéMON breeder's\n"
-	.string "husband.$"
+	.string "Hello there! I sell items for breeding\n"
+	.string "and raising POKéMON!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_1:
-	.string "I sell all kinds of items for evolving\n"
-	.string "and changing the forms of POKéMON!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan_Text_2:
 	.string "What can I help you with?$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper_Text_0:
@@ -875,85 +858,110 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper_Text_0:
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper_Text_1:
 	.string "I can teach you how to breed POKéMON\n"
-	.string "effectively, as well as sell you some of\l"
-	.string "the items you will need.$"
+	.string "effectively.$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_0:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_0:
 	.string "Sure! To start with, you will need two\n"
 	.string "compatible POKéMON - One male and one\l"
 	.string "female.$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_1:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_1:
 	.string "These can either be two POKéMON of the\n"
 	.string "same egg group, or of the same species.$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_2:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_2:
 	.string "Ditto can also be used to breed with\n"
 	.string "almost any POKéMON of any gender!$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_3:
-	.string "You will almost always want to give one\n"
-	.string "of the POKéMON a Destiny Knot - This\l"
-	.string "will make the child inherit five stats\l"
-	.string "instead of one!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_4:
-	.string "Breeding parents with high stats will\n"
-	.string "result in children with strong stats as\l"
-	.string "well.$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_5:
-	.string "Each stat will either be inherited from\n"
-	.string "one of the parents, or chosen randomly.$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_6:
-	.string "You can also give an Everstone to the\n"
-	.string "second POKéMON to pass down its nature\l"
-	.string "to all children!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_7:
-	.string "Certain Pokemon can be given an\n"
-	.string "incense to hold when breeding to cause\l"
-	.string "the children to hatch into POKéMON\l"
-	.string "they normally wouldn't.$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_8:
-	.string "For example, breeding an Azumarill\n"
-	.string "holding a Sea Incense will result in an\l"
-	.string "Azurill hatching rather than a Marill!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_9:
-	.string "Breeding can also be used to pass down\n"
-	.string "special moves from parents to the\l"
-	.string "children which they may not be able to\l"
-	.string "learn otherwise.$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_10:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_3:
 	.string "Once you've placed both of your\n"
 	.string "POKéMON in the care of the day care\l"
 	.string "lady, go for a walk and check back with\l"
 	.string "the day care man upstairs every now and\l"
 	.string "then.$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_11:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_4:
 	.string "After a certain number of steps, the\n"
 	.string "Day Care worker should have an Egg for\l"
 	.string "you!$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_12:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_5:
 	.string "The frequency of eggs will increase\n"
 	.string "with higher compatibility between the\l"
 	.string "two POKéMON.$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_13:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_6:
 	.string "Be careful, though - if he says that\n"
 	.string "they would rather play with other\l"
 	.string "POKéMON than each other, you will never\l"
 	.string "get any eggs from them!$"
 
-BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips_Text_14:
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_7:
 	.string "Well, that's the basics. I hope that\n"
-	.string "helped!$"
+	.string "helps!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_8:
+	.string "Sure! Once you have the learnt the\n"
+	.string "basics, you might want to start\l"
+	.string "breeding Pokemon with better stats.$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_9:
+	.string "Normally, the parents will randomly pass\n"
+	.string "down one stat between them - the\l"
+	.string "others will all be random.$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_10:
+	.string "However, when you give one of the\n"
+	.string "parents a destiny knot, this will make\l"
+	.string "the child inherit five stats instead!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_11:
+	.string "This means that generally, breeding\n"
+	.string "parents with high stats will result in\l"
+	.string "children with strong stats as well.$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_12:
+	.string "You can also give an Everstone to the\n"
+	.string "other parent to pass down its nature to\l"
+	.string "all children as well!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_13:
+	.string "Well, that's about all I can teach you\n"
+	.string "about stats. I hope that helps!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_14:
+	.string "Sure! Some POKéMON have moves called\n"
+	.string "Egg Moves which they don't normally\l"
+	.string "learn - They can be taught these moves\l"
+	.string "by breeding with other POKéMON$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_15:
+	.string "These moves can be passed down from\n"
+	.string "either parent, as long as at least one\l"
+	.string "of them knows the move being passed\l"
+	.string "down.$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_16:
+	.string "You can also use this method to share\n"
+	.string "moves between POKéMON without\l"
+	.string "breeding!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_17:
+	.string "By giving the mirror herb item to the\n"
+	.string "Pokemon which has the move you want to\l"
+	.string "share, and then putting it in the day\l"
+	.string "care with a Pokemon which is able to\l"
+	.string "learn it, the second Pokemon will learn\l"
+	.string "the move instantly.$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_18:
+	.string "The two Pokemon do not even need to\n"
+	.string "share an egg group, and the mirror herb\l"
+	.string "is not consumed!$"
+
+BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice_Text_19:
+	.string "Well, that's about all I can teach you\n"
+	.string "about sharing moves. I hope that helps!$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse_Text_0:
 	.string "Can I help with anything else?$"
@@ -1067,7 +1075,8 @@ BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea::
 	.string "$"
 
 BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions::
-	.string "BREEDING TIPS$"
-	.string "VIEW SHOP$"
+	.string "BASICS$"
+	.string "STATS$"
+	.string "MOVES$"
 	.string "NOTHING$"
 	.string "$"
