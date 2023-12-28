@@ -61,9 +61,18 @@ BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter::
 	faceplayer
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0
-	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1
+	checkitem ITEM_COIN_CASE
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_2
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_1:
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_2
 	release
 	end
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_2:
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1
+	giveitem ITEM_COIN_CASE
+	goto BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_1
 
 
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter::
@@ -2356,7 +2365,6 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk2:
 BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk:
 	.2byte ITEM_EXP_SHARE
 	.2byte ITEM_ACRO_BIKE
-	.2byte ITEM_COIN_CASE
 	.2byte ITEM_SOOT_SACK
 	.2byte ITEM_OLD_ROD
 	.2byte ITEM_GOOD_ROD
@@ -2463,6 +2471,10 @@ BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0:
 	.string "Frontier Games Corner.$"
 
 BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1:
+	.string "You will need a coin case to play here.\n"
+	.string "Here you go!$"
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_2:
 	.string "I hope you enjoy your stay!$"
 
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0:
