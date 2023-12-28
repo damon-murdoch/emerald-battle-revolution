@@ -39,10 +39,10 @@
 // Pokeball Replacements
 
 // Allow replacing Cherish Ball
-#define I_REPLACE_CHERISH_BALL FALSE
+#define I_REPLACE_CHERISH_BALL TRUE
 
 // Allow replacing Master Ball
-#define I_REPLACE_MASTER_BALL FALSE
+#define I_REPLACE_MASTER_BALL TRUE
 
 // If this is set to true, the player will
 // get back a copy of the original ball when

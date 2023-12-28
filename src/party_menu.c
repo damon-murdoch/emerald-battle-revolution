@@ -7971,8 +7971,8 @@ void ItemUseCB_Pokeball(u8 taskId, TaskFunc task){
         PlaySE(SE_USE_ITEM);
         RemoveBagItem(item, 1);
         GetMonNickname(mon, gStringVar1);
-        // StringExpandPlaceholders(gStringVar4, gText_PkmnBaseVar2StatIncreased);
-        // DisplayPartyMenuMessage(gStringVar4, TRUE);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBallChanged);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
         ScheduleBgCopyTilemapToVram(2);
         // Return the old ball
         if (I_RETURN_OLD_BALL)
