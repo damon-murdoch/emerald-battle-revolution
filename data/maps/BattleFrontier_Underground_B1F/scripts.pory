@@ -65,6 +65,11 @@ script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
 	faceplayer
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("This is the entrance to the Battle Frontier Games Corner."))
+    checkitem(ITEM_COIN_CASE)
+    if (var(VAR_RESULT) == FALSE){
+        msgbox(format("You will need a coin case to play here. Here you go!"))
+        giveitem(ITEM_COIN_CASE)
+    }
     msgbox(format("I hope you enjoy your stay!"))
     release
     end
@@ -1909,7 +1914,6 @@ mart BattleFrontier_Underground_B1F_Mart_TMHMClerk2 {
 mart BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk {
     ITEM_EXP_SHARE
     ITEM_ACRO_BIKE
-    ITEM_COIN_CASE
     ITEM_SOOT_SACK
     ITEM_OLD_ROD
     ITEM_GOOD_ROD
