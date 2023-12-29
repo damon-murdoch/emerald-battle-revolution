@@ -6830,6 +6830,12 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
+    // Check banned species true/false
+    bool8 checkBannedSpecies = TRUE;
+
+    // Get the level mode for the format
+    u16 lvlMode = gSpecialVar_0x8004;
+
     // If the Pokemon is an egg, or it is holding an item (Battle Pyramid Only)
     if (GetMonData(mon, MON_DATA_IS_EGG) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
@@ -6850,8 +6856,16 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     case FACILITY_UNION_ROOM:
         return TRUE;
     default: // Battle Frontier
+    
+        if (lvlMode == FRONTIER_LVL_50 && BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+        else if (lvlMode == FRONTIER_LVL_OPEN && BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+        else if (lvlMode == FRONTIER_LVL_TENT && BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+
         // Allow banned species is not set
-        if (BF_ALLOW_BANNED_SPECIES == FALSE){
+        if (checkBannedSpecies){
             species = GetMonData(mon, MON_DATA_SPECIES);
             for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
             {

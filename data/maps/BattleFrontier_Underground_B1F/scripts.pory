@@ -422,6 +422,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh {
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2 {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2)
