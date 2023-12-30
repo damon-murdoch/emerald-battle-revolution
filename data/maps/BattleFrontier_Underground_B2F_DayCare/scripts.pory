@@ -9,7 +9,8 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder {
     lock
     faceplayer
     msgbox(format("Hello there! I'm a POKéMON breeder!"))
-    msgbox(format("I can breed almost any POKéMON you like."))
+    msgbox(format("If you need a certain species of POKéMON, I can breed it for you!"))
+    msgbox(format("Our selection is currently limited, but we will be expanding soon!"))
     waitmessage
     showmoneybox(18,0)
     checkmoney(4000)
@@ -305,7 +306,7 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea {
 script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase {
     msgbox(format("Sure! Let's see if I can get one of those for you ..."))
     hidemoneybox
-    delay(10)
+    delay(20)
     fadescreen(FADE_TO_BLACK)
     delay(20)
     fadescreen(FADE_FROM_BLACK)
@@ -340,7 +341,6 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPur
     goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd)
 }
 script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd {
-    msgbox(format("If you need any forme-changing or evolution items for these POKéMON, please speak to my husband."))
     msgbox(format("Come back again soon!"))
     hidemoneybox
     releaseall
@@ -350,8 +350,7 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederEnd {
 script BattleFrontier_Underground_B2F_DayCare_EventScript_EvolutionMan {
 	lock
 	faceplayer
-	msgbox(format("Hello there! I'm the POKéMON breeder's husband."))
-    msgbox(format("I sell all kinds of items for evolving and changing the forms of POKéMON!"))
+	msgbox(format("Hello there! I sell items for breeding and raising POKéMON!"))
     msgbox(format("What can I help you with?"))
 	waitmessage
     pokemart(BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan)
@@ -364,7 +363,7 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelper {
 	lock
 	faceplayer
 	msgbox(format("Hello, nice to meet you! I'm the POKéMON breeding helper."))
-    msgbox(format("I can teach you how to breed POKéMON effectively, as well as sell you some of the items you will need."))
+    msgbox(format("I can teach you how to breed POKéMON effectively."))
     goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice)
 }
 
@@ -372,36 +371,32 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperChoice {
     msgbox(format("What can I help you with?"))
     multichoice2(0,0,BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions)
     switch(var(VAR_RESULT)){
-        case 0:
-            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips)
-        case 1:
-            goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop)
+        case 0: # Basics
+            msgbox(format("Sure! To start with, you will need two compatible POKéMON - One male and one female."))
+            msgbox(format("These can either be two POKéMON of the same egg group, or of the same species."))
+            msgbox(format("Ditto can also be used to breed with almost any POKéMON of any gender!"))
+            msgbox(format("Once you've placed both of your POKéMON in the care of the day care lady, go for a walk and check back with the day care man upstairs every now and then."))
+            msgbox(format("After a certain number of steps, the Day Care worker should have an Egg for you!"))
+            msgbox(format("The frequency of eggs will increase with higher compatibility between the two POKéMON."))
+            msgbox(format("Be careful, though - if he says that they would rather play with other POKéMON than each other, you will never get any eggs from them!"))
+            msgbox(format("Well, that's the basics. I hope that helps!"))
+        case 1: # Stats
+            msgbox(format("Sure! Once you have the learnt the basics, you might want to start breeding Pokemon with better stats."))
+            msgbox(format("Normally, the parents will randomly pass down one stat between them - the others will all be random."))
+            msgbox(format("However, when you give one of the parents a destiny knot, this will make the child inherit five stats instead!"))
+            msgbox(format("This means that generally, breeding parents with high stats will result in children with strong stats as well."))
+            msgbox(format("You can also give an Everstone to the other parent to pass down its nature to all children as well!"))
+            msgbox(format("Well, that's about all I can teach you about stats. I hope that helps!"))
+        case 2: # Moves
+            msgbox(format("Sure! Some POKéMON have moves called Egg Moves which they don't normally learn - They can be taught these moves by breeding with other POKéMON"))
+            msgbox(format("These moves can be passed down from either parent, as long as at least one of them knows the move being passed down."))
+            msgbox(format("You can also use this method to share moves between POKéMON without breeding!"))
+            msgbox(format("By giving the mirror herb item to the Pokemon which has the move you want to share, and then putting it in the day care with a Pokemon which is able to learn it, the second Pokemon will learn the move instantly."))
+            msgbox(format("The two Pokemon do not even need to share an egg group, and the mirror herb is not consumed!"))
+            msgbox(format("Well, that's about all I can teach you about sharing moves. I hope that helps!"))
         default:
             goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperEnd)
     }
-}
-
-script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperTips {
-    msgbox(format("Sure! To start with, you will need two compatible POKéMON - One male and one female."))
-    msgbox(format("These can either be two POKéMON of the same egg group, or of the same species."))
-    msgbox(format("Ditto can also be used to breed with almost any POKéMON of any gender!"))
-    msgbox(format("You will almost always want to give one of the POKéMON a Destiny Knot - This will make the child inherit five stats instead of one!"))
-    msgbox(format("Breeding parents with high stats will result in children with strong stats as well."))
-    msgbox(format("Each stat will either be inherited from one of the parents, or chosen randomly."))
-    msgbox(format("You can also give an Everstone to the second POKéMON to pass down its nature to all children!"))
-    msgbox(format("Certain Pokemon can be given an incense to hold when breeding to cause the children to hatch into POKéMON they normally wouldn't."))
-    msgbox(format("For example, breeding an Azumarill holding a Sea Incense will result in an Azurill hatching rather than a Marill!"))
-    msgbox(format("Breeding can also be used to pass down special moves from parents to the children which they may not be able to learn otherwise."))
-    msgbox(format("Once you've placed both of your POKéMON in the care of the day care lady, go for a walk and check back with the day care man upstairs every now and then."))
-    msgbox(format("After a certain number of steps, the Day Care worker should have an Egg for you!"))
-    msgbox(format("The frequency of eggs will increase with higher compatibility between the two POKéMON."))
-    msgbox(format("Be careful, though - if he says that they would rather play with other POKéMON than each other, you will never get any eggs from them!"))
-    msgbox(format("Well, that's the basics. I hope that helped!"))
-    goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse)
-}
-
-script BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperShop {
-    pokemart(BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper)
     goto(BattleFrontier_Underground_B2F_DayCare_EventScript_BreedingHelperAnythingElse)
 }
 
@@ -529,8 +524,9 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea {
 }
 
 text BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions {
-    "BREEDING TIPS$"
-    "VIEW SHOP$"
+    "BASICS$"
+    "STATS$"
+    "MOVES$"
     "NOTHING$"
     ""
 }
@@ -538,6 +534,9 @@ text BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions {
 # Marts
 
 mart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan {
+	ITEM_DESTINY_KNOT
+    ITEM_MIRROR_HERB
+	ITEM_EVERSTONE
 	ITEM_FIRE_STONE
     ITEM_WATER_STONE
     ITEM_THUNDER_STONE
@@ -554,6 +553,11 @@ mart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan {
     ITEM_CHIPPED_POT
     ITEM_GALARICA_CUFF
     ITEM_GALARICA_WREATH
+    ITEM_DEEP_SEA_SCALE
+    ITEM_DEEP_SEA_TOOTH
+    ITEM_RAZOR_CLAW
+    ITEM_RAZOR_FANG
+    ITEM_KINGS_ROCK
     ITEM_DRAGON_SCALE
     ITEM_UPGRADE
     ITEM_PROTECTOR
@@ -579,27 +583,11 @@ mart BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan {
 	ITEM_BLACK_AUGURITE 
 	ITEM_LINKING_CORD
 	ITEM_PEAT_BLOCK
-	ITEM_BERSERK_GENE
 	ITEM_AUSPICIOUS_ARMOR
 	ITEM_MALICIOUS_ARMOR
 	ITEM_GIMMIGHOUL_COIN
 	ITEM_LEADERS_CREST
-	ITEM_FAIRY_FEATHER
 	ITEM_SYRUPY_APPLE
 	ITEM_UNREMARKABLE_TEACUP
 	ITEM_MASTERPIECE_TEACUP
-}
-
-mart BattleFrontier_Underground_B2F_DayCare_Mart_BreedingHelper {
-	ITEM_DESTINY_KNOT
-	ITEM_EVERSTONE
-	ITEM_SEA_INCENSE
-	ITEM_LAX_INCENSE
-	ITEM_ODD_INCENSE
-	ITEM_ROCK_INCENSE
-	ITEM_FULL_INCENSE
-	ITEM_WAVE_INCENSE
-	ITEM_ROSE_INCENSE
-	ITEM_LUCK_INCENSE
-	ITEM_PURE_INCENSE
 }

@@ -102,6 +102,7 @@ void GetNumMovesSelectedMonHas(void);
 void MoveDeleterChooseMoveToForget(void);
 void ItemUseCB_ReduceIV(u8 taskId, TaskFunc task);
 void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task);
+void ItemUseCB_Pokeball(u8 taskId, TaskFunc task);
 
 // [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
 void CB2_ReturnToPartyMenuFromSummaryScreen(void);

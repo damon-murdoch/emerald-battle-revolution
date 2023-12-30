@@ -1918,11 +1918,21 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
 
-    // If banned species checking is enabled
-    if (BF_ALLOW_BANNED_SPECIES == FALSE){
+    // Check banned species true/false
+    bool8 checkBannedSpecies = TRUE;
+
+    if (lvlMode == FRONTIER_LVL_50 && BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+        checkBannedSpecies = FALSE;
+    else if (lvlMode == FRONTIER_LVL_OPEN && BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+        checkBannedSpecies = FALSE;
+    else if (lvlMode == FRONTIER_LVL_TENT && BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+        checkBannedSpecies = FALSE;
+
+    // Banned species check enabled
+    if (checkBannedSpecies){
         for (i = 0; (gFrontierBannedSpecies[i] != 0xFFFF) && (gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)) && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++);
-            if (gFrontierBannedSpecies[i] != 0xFFFF)
-                return;
+        if (gFrontierBannedSpecies[i] != 0xFFFF)
+            return;
     }
 
     // Level scaling is not enabled
@@ -1933,19 +1943,16 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
     // If duplicate species checking is enabled
     if (BF_ALLOW_DUPLICATE_SPECIES == FALSE){
-        for (i = 0; i < *count && speciesArray[i] != species; i++)
-            ;
+        for (i = 0; i < *count && speciesArray[i] != species; i++);
         if (i != *count)
             return;
-
     }
 
     // If duplicate items checking is enabled
     if (BF_ALLOW_DUPLICATE_ITEMS == FALSE){
         if (heldItem != 0)
         {
-            for (i = 0; i < *count && itemsArray[i] != heldItem; i++)
-                ;
+            for (i = 0; i < *count && itemsArray[i] != heldItem; i++);
             if (i != *count)
                 return;
         }

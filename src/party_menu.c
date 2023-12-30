@@ -511,7 +511,6 @@ static bool8 SetUpFieldMove_Dive(void);
 void TryItemHoldFormChange(struct Pokemon *mon);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
-static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon);
 static void ChangePokemonNicknamePartyScreen_CB(void);
 
 // static const data
@@ -4646,70 +4645,11 @@ static bool8 IsItemFlute(u16 item)
     return FALSE;
 }
 
-static bool32 CannotUsePartyBattleItem(u16 itemId, struct Pokemon* mon)
-{
-    u8 i;
-    u8 cannotUse = FALSE;
-    u16 battleUsage = ItemId_GetBattleUsage(itemId);
-    u16 hp = GetMonData(mon, MON_DATA_HP);
-
-    // Embargo Check
-    if ((gPartyMenu.slotId == 0 && gStatuses3[B_POSITION_PLAYER_LEFT] & STATUS3_EMBARGO)
-        || (gPartyMenu.slotId == 1 && gStatuses3[B_POSITION_PLAYER_RIGHT] & STATUS3_EMBARGO))
-    {
-        return FALSE;
-    }
-    // Items that restore HP (Potions, Sitrus Berry, etc.)
-    if (battleUsage == EFFECT_ITEM_RESTORE_HP && (hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP)))
-    {
-        cannotUse++;
-    }
-    // Items that cure status (Burn Heal, Awakening, etc.)
-    if (battleUsage == EFFECT_ITEM_CURE_STATUS
-        && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-        || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
-    {
-        cannotUse++;
-    }
-    // Items that restore HP and cure status (Full Restore)
-    if (battleUsage == EFFECT_ITEM_HEAL_AND_CURE_STATUS
-        && (hp == 0 || hp == GetMonData(mon, MON_DATA_MAX_HP))
-        && !((GetMonData(mon, MON_DATA_STATUS) & GetItemStatus1Mask(itemId))
-        || (gPartyMenu.slotId == 0 && gBattleMons[gBattlerInMenuId].status2 & GetItemStatus2Mask(itemId))))
-    {
-        cannotUse++;
-    }
-    // Items that revive a party member
-    if (battleUsage == EFFECT_ITEM_REVIVE && hp != 0)
-    {
-        cannotUse++;
-    }
-    // Items that restore PP (Elixir, Ether, Leppa Berry)
-    if (battleUsage == EFFECT_ITEM_RESTORE_PP)
-    {
-        if (GetItemEffect(itemId)[6] == ITEM4_HEAL_PP)
-        {
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                if (GetMonData(mon, MON_DATA_PP1 + i) < CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + i), GetMonData(mon, MON_DATA_PP_BONUSES), i));
-                    break;
-            }
-            if (i == MAX_MON_MOVES)
-                cannotUse++;
-        }
-        else if (GetMonData(mon, MON_DATA_PP1 + gPartyMenu.data1) == CalculatePPWithBonus(GetMonData(mon, MON_DATA_MOVE1 + gPartyMenu.data1), GetMonData(mon, MON_DATA_PP_BONUSES), gPartyMenu.data1))
-        {
-            cannotUse++;
-        }
-    }
-    return cannotUse;
-}
-
 // Battle scripts called in HandleAction_UseItem
 void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
 {
     struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
-    if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
+    if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
@@ -5218,7 +5158,7 @@ static void TryUseItemOnMove(u8 taskId)
     // In battle, set appropriate variables to be used in battle script.
     if (gMain.inBattle)
     {
-        if (CannotUsePartyBattleItem(gSpecialVar_ItemId, mon))
+        if (CannotUseItemsInBattle(gSpecialVar_ItemId, mon))
         {
             gPartyMenuUseExitCallback = FALSE;
             PlaySE(SE_SELECT);
@@ -6890,6 +6830,12 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     u16 i = 0;
     u16 species;
 
+    // Check banned species true/false
+    bool8 checkBannedSpecies = TRUE;
+
+    // Get the level mode for the format
+    u16 lvlMode = gSpecialVar_0x8004;
+
     // If the Pokemon is an egg, or it is holding an item (Battle Pyramid Only)
     if (GetMonData(mon, MON_DATA_IS_EGG) || (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY)
@@ -6910,8 +6856,16 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     case FACILITY_UNION_ROOM:
         return TRUE;
     default: // Battle Frontier
+    
+        if (lvlMode == FRONTIER_LVL_50 && BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+        else if (lvlMode == FRONTIER_LVL_OPEN && BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+        else if (lvlMode == FRONTIER_LVL_TENT && BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+            checkBannedSpecies = FALSE;
+
         // Allow banned species is not set
-        if (BF_ALLOW_BANNED_SPECIES == FALSE){
+        if (checkBannedSpecies){
             species = GetMonData(mon, MON_DATA_SPECIES);
             for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
             {
@@ -7985,6 +7939,62 @@ void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task)
     }
     else
     {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}
+
+// For swapping a Pokemon's ball
+void ItemUseCB_Pokeball(u8 taskId, TaskFunc task){
+    
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 item = gSpecialVar_ItemId;
+    bool8 didActivate = FALSE;
+
+    // Get the id for the current ball
+    u8 oldBall = GetMonData(mon, MON_DATA_POKEBALL);
+
+    // Get the id for the new ball
+    u8 newBall = (ItemId_GetSecondaryId(item) + FIRST_BALL);
+
+    // New and old balls don't match
+    if (newBall != oldBall){
+        // Switch on the old ball
+        switch(oldBall){
+            case ITEM_CHERISH_BALL:
+                if (I_REPLACE_CHERISH_BALL)
+                    didActivate = TRUE; // Allow replacement
+                break;
+            case ITEM_MASTER_BALL:
+                if (I_REPLACE_MASTER_BALL)
+                    didActivate = TRUE; // Allow replacement
+                break;
+            default:
+                didActivate = TRUE; // Allow replacement
+        }
+    }
+
+    // Item activated
+    if (didActivate) {
+        // Update the ball for the pokemon
+        SetMonData(mon, MON_DATA_POKEBALL, &newBall);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, 1);
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnBallChanged);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        // Return the old ball
+        if (I_RETURN_OLD_BALL)
+            AddBagItem(oldBall, 1);
+        gTasks[taskId].func = task;
+    }
+    else // Item not activated
+    { 
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
         DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);

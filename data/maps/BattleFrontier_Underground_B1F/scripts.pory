@@ -65,6 +65,11 @@ script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
 	faceplayer
     msgbox(format("Welcome to the Battle Frontier Underground!"))
     msgbox(format("This is the entrance to the Battle Frontier Games Corner."))
+    checkitem(ITEM_COIN_CASE)
+    if (var(VAR_RESULT) == FALSE){
+        msgbox(format("You will need a coin case to play here. Here you go!"))
+        giveitem(ITEM_COIN_CASE)
+    }
     msgbox(format("I hope you enjoy your stay!"))
     release
     end
@@ -417,6 +422,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh {
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2 {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2)
@@ -878,7 +884,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase {
     msgbox(format("Let's see if we can find one of those for you ..."))
     hidemoneybox
-    delay(10)
+    delay(20)
     fadescreen(FADE_TO_BLACK)
     delay(20)
     fadescreen(FADE_FROM_BLACK)
@@ -1433,6 +1439,9 @@ mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
     ITEM_ADAMANT_ORB
     ITEM_LUSTROUS_ORB
     ITEM_GRISEOUS_ORB
+    ITEM_ADAMANT_CRYSTAL
+    ITEM_GRISEOUS_CORE
+    ITEM_LUSTROUS_GLOBE
     ITEM_SCROLL_OF_DARKNESS
 	ITEM_SCROLL_OF_WATERS
     ITEM_CORNERSTONE_MASK
@@ -1707,7 +1716,6 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk {
     ITEM_WHITE_HERB
     ITEM_QUICK_CLAW
     ITEM_SOOTHE_BELL
-    ITEM_KINGS_ROCK
     ITEM_AMULET_COIN
     ITEM_CLEANSE_TAG
     ITEM_SMOKE_BALL
@@ -1722,8 +1730,6 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk {
     ITEM_GRIP_CLAW
     ITEM_STICKY_BARB
     ITEM_BIG_ROOT
-    ITEM_RAZOR_CLAW
-    ITEM_RAZOR_FANG
     ITEM_FLOAT_STONE
     ITEM_RING_TARGET
     ITEM_DESTINY_KNOT
@@ -1734,10 +1740,18 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk {
     ITEM_LEEK
     ITEM_THICK_CLUB
     ITEM_LUCKY_PUNCH
+	ITEM_BERSERK_GENE
     ITEM_METAL_POWDER
     ITEM_QUICK_POWDER
-    ITEM_DEEP_SEA_SCALE
-    ITEM_DEEP_SEA_TOOTH
+	ITEM_SEA_INCENSE
+	ITEM_LAX_INCENSE
+	ITEM_ODD_INCENSE
+	ITEM_ROCK_INCENSE
+	ITEM_FULL_INCENSE
+	ITEM_WAVE_INCENSE
+	ITEM_ROSE_INCENSE
+	ITEM_LUCK_INCENSE
+	ITEM_PURE_INCENSE
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
@@ -1758,6 +1772,7 @@ mart BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk {
     ITEM_DRAGON_FANG
     ITEM_BLACK_GLASSES
     ITEM_METAL_COAT
+	ITEM_FAIRY_FEATHER
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BattleShopGemstoneClerk {
@@ -1898,12 +1913,18 @@ mart BattleFrontier_Underground_B1F_Mart_TMHMClerk2 {
 }
 
 mart BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk {
+    ITEM_EXP_SHARE
     ITEM_ACRO_BIKE
-    ITEM_COIN_CASE
+    ITEM_SOOT_SACK
     ITEM_OLD_ROD
     ITEM_GOOD_ROD
     ITEM_SUPER_ROD
+    ITEM_POWDER_JAR
+    ITEM_WAILMER_PAIL
+    ITEM_POKEBLOCK_CASE
     ITEM_DOWSING_MACHINE
+    # ITEM_POKEMON_BOX_LINK
+    ITEM_SS_TICKET
     ITEM_EON_TICKET
     ITEM_MYSTIC_TICKET
     ITEM_AURORA_TICKET
@@ -1918,9 +1939,6 @@ mart BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk {
     ITEM_Z_POWER_RING
     ITEM_DYNAMAX_BAND
     ITEM_TERA_ORB
-    ITEM_ADAMANT_CRYSTAL
-    ITEM_GRISEOUS_CORE
-    ITEM_LUSTROUS_GLOBE
     ITEM_ROTOM_CATALOG
     ITEM_GRACIDEA
     ITEM_REVEAL_GLASS

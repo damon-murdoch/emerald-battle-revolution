@@ -61,9 +61,18 @@ BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter::
 	faceplayer
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0
-	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1
+	checkitem ITEM_COIN_CASE
+	compare VAR_RESULT, FALSE
+	goto_if_eq BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_2
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_1:
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_2
 	release
 	end
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_2:
+	msgbox BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1
+	giveitem ITEM_COIN_CASE
+	goto BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_1
 
 
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter::
@@ -541,48 +550,50 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2_8:
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh::
 	multichoice2 0, 0, BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh
 	switch VAR_RESULT
-	case 0, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_2
-	case 1, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_3
-	case 2, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_4
-	case 3, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_5
-	case 4, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_6
-	case 5, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_7
-	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_8
-	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_9
+	case 0, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_3
+	case 1, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_4
+	case 2, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_5
+	case 3, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_6
+	case 4, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_7
+	case 5, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_8
+	case MULTI_L_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_9
+	case MULTI_R_PRESSED, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_10
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1
-	return
-
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_2:
-	givemon SPECIES_DIALGA, 70
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1:
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase
 	return
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_3:
-	givemon SPECIES_PALKIA, 70
-	return
+	givemon SPECIES_DIALGA, 70
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_4:
-	givemon SPECIES_GIRATINA, 70
-	return
+	givemon SPECIES_PALKIA, 70
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_5:
-	givemon SPECIES_HEATRAN, 50
-	return
+	givemon SPECIES_GIRATINA, 70
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_6:
-	givemon SPECIES_REGIGIGAS, 50
-	return
+	givemon SPECIES_HEATRAN, 50
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_7:
-	givemon SPECIES_CRESSELIA, 50
-	return
+	givemon SPECIES_REGIGIGAS, 50
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_8:
-	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3
-	return
+	givemon SPECIES_CRESSELIA, 50
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_9:
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
+
+BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_10:
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2
-	return
+	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh_1
 
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2::
@@ -1511,7 +1522,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_7:
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_0
 	hidemoneybox
-	delay 10
+	delay 20
 	fadescreen FADE_TO_BLACK
 	delay 20
 	fadescreen FADE_FROM_BLACK
@@ -1862,6 +1873,9 @@ BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
 	.2byte ITEM_ADAMANT_ORB
 	.2byte ITEM_LUSTROUS_ORB
 	.2byte ITEM_GRISEOUS_ORB
+	.2byte ITEM_ADAMANT_CRYSTAL
+	.2byte ITEM_GRISEOUS_CORE
+	.2byte ITEM_LUSTROUS_GLOBE
 	.2byte ITEM_SCROLL_OF_DARKNESS
 	.2byte ITEM_SCROLL_OF_WATERS
 	.2byte ITEM_CORNERSTONE_MASK
@@ -2146,7 +2160,6 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_WHITE_HERB
 	.2byte ITEM_QUICK_CLAW
 	.2byte ITEM_SOOTHE_BELL
-	.2byte ITEM_KINGS_ROCK
 	.2byte ITEM_AMULET_COIN
 	.2byte ITEM_CLEANSE_TAG
 	.2byte ITEM_SMOKE_BALL
@@ -2161,8 +2174,6 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_GRIP_CLAW
 	.2byte ITEM_STICKY_BARB
 	.2byte ITEM_BIG_ROOT
-	.2byte ITEM_RAZOR_CLAW
-	.2byte ITEM_RAZOR_FANG
 	.2byte ITEM_FLOAT_STONE
 	.2byte ITEM_RING_TARGET
 	.2byte ITEM_DESTINY_KNOT
@@ -2173,10 +2184,18 @@ BattleFrontier_Underground_B1F_Mart_BattleShopUncommonClerk:
 	.2byte ITEM_LEEK
 	.2byte ITEM_THICK_CLUB
 	.2byte ITEM_LUCKY_PUNCH
+	.2byte ITEM_BERSERK_GENE
 	.2byte ITEM_METAL_POWDER
 	.2byte ITEM_QUICK_POWDER
-	.2byte ITEM_DEEP_SEA_SCALE
-	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_SEA_INCENSE
+	.2byte ITEM_LAX_INCENSE
+	.2byte ITEM_ODD_INCENSE
+	.2byte ITEM_ROCK_INCENSE
+	.2byte ITEM_FULL_INCENSE
+	.2byte ITEM_WAVE_INCENSE
+	.2byte ITEM_ROSE_INCENSE
+	.2byte ITEM_LUCK_INCENSE
+	.2byte ITEM_PURE_INCENSE
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2198,6 +2217,7 @@ BattleFrontier_Underground_B1F_Mart_BattleShopTypeItemClerk:
 	.2byte ITEM_DRAGON_FANG
 	.2byte ITEM_BLACK_GLASSES
 	.2byte ITEM_METAL_COAT
+	.2byte ITEM_FAIRY_FEATHER
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2345,12 +2365,17 @@ BattleFrontier_Underground_B1F_Mart_TMHMClerk2:
 
 	.align 2
 BattleFrontier_Underground_B1F_Mart_OldKeyItemClerk:
+	.2byte ITEM_EXP_SHARE
 	.2byte ITEM_ACRO_BIKE
-	.2byte ITEM_COIN_CASE
+	.2byte ITEM_SOOT_SACK
 	.2byte ITEM_OLD_ROD
 	.2byte ITEM_GOOD_ROD
 	.2byte ITEM_SUPER_ROD
+	.2byte ITEM_POWDER_JAR
+	.2byte ITEM_WAILMER_PAIL
+	.2byte ITEM_POKEBLOCK_CASE
 	.2byte ITEM_DOWSING_MACHINE
+	.2byte ITEM_SS_TICKET
 	.2byte ITEM_EON_TICKET
 	.2byte ITEM_MYSTIC_TICKET
 	.2byte ITEM_AURORA_TICKET
@@ -2366,9 +2391,6 @@ BattleFrontier_Underground_B1F_Mart_NewKeyItemClerk:
 	.2byte ITEM_Z_POWER_RING
 	.2byte ITEM_DYNAMAX_BAND
 	.2byte ITEM_TERA_ORB
-	.2byte ITEM_ADAMANT_CRYSTAL
-	.2byte ITEM_GRISEOUS_CORE
-	.2byte ITEM_LUSTROUS_GLOBE
 	.2byte ITEM_ROTOM_CATALOG
 	.2byte ITEM_GRACIDEA
 	.2byte ITEM_REVEAL_GLASS
@@ -2451,6 +2473,10 @@ BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_0:
 	.string "Frontier Games Corner.$"
 
 BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_1:
+	.string "You will need a coin case to play here.\n"
+	.string "Here you go!$"
+
+BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter_Text_2:
 	.string "I hope you enjoy your stay!$"
 
 BattleFrontier_Underground_B1F_EventScript_CurrencyConverter_Text_0:

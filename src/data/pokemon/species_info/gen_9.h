@@ -858,7 +858,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         ICON(Pawmo, 3),
         //.footprint = gMonFootprint_Pawmo,
         LEARNSETS(Pawmo),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_PAWMOT}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_PAWMOT}),
     },
 
     [SPECIES_PAWMOT] =
@@ -2087,7 +2087,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         ICON(Bramblin, 3),
         //.footprint = gMonFootprint_Bramblin,
         LEARNSETS(Bramblin),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_BRAMBLEGHAST}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DUSK_STONE, SPECIES_BRAMBLEGHAST}),
     },
 
     [SPECIES_BRAMBLEGHAST] =
@@ -2427,7 +2427,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         ICON(Rellor, 5),
         //.footprint = gMonFootprint_Rellor,
         LEARNSETS(Rellor),
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_RABSCA}),
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_DAWN_STONE, SPECIES_RABSCA}),
     },
 
     [SPECIES_RABSCA] =
@@ -2755,7 +2755,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .trainerScale = 256,
         .trainerOffset = 0,
         FRONT_PIC(Wiglett, 64, 64),
-        .frontPicYOffset = 19,
+        .frontPicYOffset = 10,
         .frontAnimFrames = sAnims_Wiglett,
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         BACK_PIC(Wiglett, 64, 64),
@@ -3702,6 +3702,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
     {
         TATSUGIRI_MISC_INFO,
         .bodyColor = BODY_COLOR_YELLOW,
+        .cryId = CRY_TATSUGIRI_STRETCHY,
         .description = COMPOUND_STRING(
             "It's one of the most intelligent\n"
             "dragon Pokémon. It camouflages itself\n"
@@ -4479,7 +4480,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .frontAnimFrames = sAnims_Gimmighoul,                                           \
         LEARNSETS(Gimmighoul),                                                          \
         .formSpeciesIdTable = sGimmighoulFormSpeciesIdTable,                            \
-        .evolutions = EVOLUTION({EVO_NONE, 0, SPECIES_GHOLDENGO})
+        .evolutions = EVOLUTION({EVO_ITEM, ITEM_GIMMIGHOUL_COIN, SPECIES_GHOLDENGO})
         //.frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
         //.backAnimId = BACK_ANIM_NONE,
         //.footprint = gMonFootprint_Gimmighoul,
