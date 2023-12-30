@@ -274,19 +274,42 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk {
     faceplayer
     msgbox(format("Welcome to the one-and-only legendary POKéMON shop!"))
     msgbox(format("We can track down almost any rare POKéMON for you here!"))
-    waitmessage
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney {
     showmoneybox(18,0)
     checkmoney(12000)
     if (var(VAR_RESULT) == TRUE){
-        msgbox(format("What are you looking for today?"))
-        msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
-        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckGoldBottleCap)
     }
     else # Player does not have enough money
     {
         msgbox(format("Oh, sorry! You need at least ¥12000 to buy anything here!"))
         goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
     }
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckGoldBottleCap {
+    checkitem(ITEM_GOLD_BOTTLE_CAP)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Oh, you have a gold bottle cap! Would you redeem it for a shiny Pokemon?"))
+        yesnobox(0, 8)
+        if (var(VAR_RESULT) == TRUE) {
+            clearflag(P_FLAG_FORCE_NO_SHINY)
+            setflag(P_FLAG_FORCE_SHINY)
+        }
+        else {
+            setflag(P_FLAG_FORCE_NO_SHINY)
+            clearflag(P_FLAG_FORCE_SHINY)
+        }
+    }
+    else {
+        setflag(P_FLAG_FORCE_NO_SHINY)
+        clearflag(P_FLAG_FORCE_SHINY)
+    }
+
+    msgbox(format("What are you looking for today?"))
+    msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1 {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkRegions1)
@@ -379,6 +402,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn {
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2 {
     multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2)
@@ -906,20 +930,26 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurch
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
     }
     msgbox(format("I'll take your payment now, please."))
-    playse(SE_SHOP)
     removemoney(12000)
     showmoneybox(18,0)
+    playse(SE_SHOP)
     waitse
+    if (flag(P_FLAG_FORCE_SHINY) == TRUE){
+        msgbox(format("You gave a Gold Bottle Cap to the salesman."))
+        removeitem(ITEM_GOLD_BOTTLE_CAP, 1)
+    }
     msgbox(format("Thanks for your business!"))
     msgbox(format("Can we help you with anything else?"))
     yesnobox(0, 8)
     if (var(VAR_RESULT) == YES){
-        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
+        goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkEnd {
     msgbox(format("Come back again soon!"))
+    clearflag(P_FLAG_FORCE_NO_SHINY)
+    clearflag(P_FLAG_FORCE_SHINY)
     hidemoneybox
     releaseall
     end
