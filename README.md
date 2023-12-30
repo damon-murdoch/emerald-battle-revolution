@@ -54,6 +54,9 @@ Pokemon easily without the need for modifying save files.
   * [DPPt Style 2-in-1 Bike](https://www.pokecommunity.com/showpost.php?p=10217718&postcount=172)
   * [Party swap with select](https://github.com/pret/pokeemerald/compare/master...LOuroboros:partyScrQuickSwap)
   * [Nicknaming as an option in the Pokémon Party Screen](https://github.com/pret/pokeemerald/wiki/Nickname-your-Pok%C3%A9mon-from-the-party-menu)
+  * [Hidden Power type in battle menu](https://www.pokecommunity.com/showpost.php?p=10269149)
+
+* `Jirachii`, for creating the [Hidden Power type in summary screen](https://www.pokecommunity.com/threads/simple-modifications-directory.416647/post-10269132) tutorial.
 
 * `EllaBrella`, for creating the [Increase Text Speed Beyond Fast](https://www.pokecommunity.com/showpost.php?p=10400198) tutorial
 
@@ -123,6 +126,19 @@ when committed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.8.1
+
+Hidden Power type is now displayed accurately in the summary menu, move teacher menu, and in battle. Code has been
+developed based on the guides provided by [LOuroboros](https://www.pokecommunity.com/showpost.php?p=10269149) and [Jirachii](https://www.pokecommunity.com/threads/simple-modifications-directory.416647/post-10269132).
+
+### Ver. 0.8.0
+
+Added fully working Game Corner to Battle Frontier Underground, where the greeter outside gives
+you a coin case if you do not already own one. Balls can now be used on a Pokemon from the bag
+menu to swap the ball the Pokemon is in. The original ball is returned to the player's inventory. 
+Battle frontier species checks have now been disabled for the open rules mode, allowing all Pokemon
+(incl. Mythicals) to be allowed. The level cap has also been reduced to level 50.
 
 ### Ver. 0.7.2
 

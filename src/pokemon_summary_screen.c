@@ -4098,14 +4098,22 @@ static void SetMoveTypeIcons(void)
 {
     u8 i;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
+    struct Pokemon *mon = &sMonSummaryScreen->currentMon;
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
         {
+            u8 type;
             if (summary->moves[i] == MOVE_IVY_CUDGEL && ItemId_GetHoldEffect(summary->item) == HOLD_EFFECT_MASK)
-                SetTypeSpritePosAndPal(ItemId_GetSecondaryId(summary->item), 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+                type = ItemId_GetSecondaryId(summary->item);
+            else if (summary->moves[i] == MOVE_HIDDEN_POWER){
+                type = GetMonHiddenPowerType(mon);
+                type = ((type | 0xC0) & 0x3F);    
+            }
             else
-                SetTypeSpritePosAndPal(gBattleMoves[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+                type = gBattleMoves[summary->moves[i]].type;
+            
+            SetTypeSpritePosAndPal(type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
         }
         else
             SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
@@ -4127,16 +4135,33 @@ static void SetContestMoveTypeIcons(void)
 
 static void SetNewMoveTypeIcon(void)
 {
+    struct Pokemon *mon = &sMonSummaryScreen->currentMon;
+    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
+    u16 newMove = sMonSummaryScreen->newMove;
+
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
         SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 4, TRUE);
     }
     else
     {
-        if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
-            SetTypeSpritePosAndPal(gBattleMoves[sMonSummaryScreen->newMove].type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
-        else
-            SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gContestMoves[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
+        u8 type;
+        if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES) {
+            if (newMove == MOVE_IVY_CUDGEL && ItemId_GetHoldEffect(heldItem) == HOLD_EFFECT_MASK) {
+                type = ItemId_GetSecondaryId(heldItem);
+            }
+            else if (newMove == MOVE_HIDDEN_POWER) {
+                type = GetMonHiddenPowerType(mon);
+                type = ((type | 0xC0) & 0x3F);
+            }
+            else {
+                type = gBattleMoves[sMonSummaryScreen->newMove].type;
+            }
+        }
+        else {
+            type = NUMBER_OF_MON_TYPES + gContestMoves[sMonSummaryScreen->newMove].contestCategory;
+        }
+        SetTypeSpritePosAndPal(type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
     }
 }
 
