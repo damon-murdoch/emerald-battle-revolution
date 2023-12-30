@@ -7,6 +7,9 @@
 // Allow duplicate species
 #define BF_ALLOW_DUPLICATE_SPECIES FALSE 
 
+// Allow Z-Moves to be used
+#define BF_ALLOW_Z_MOVES TRUE
+
 // If this is set to true, lvl. 50 facilities will be level-scaled 
 // down if above lvl. 50, instead of banning the Pokemon. If this
 // is set to true, the below values will be referenced for if 
