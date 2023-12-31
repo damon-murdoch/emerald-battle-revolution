@@ -1,6 +1,9 @@
 #ifndef GUARD_CONFIG_FRONTIER_H
 #define GUARD_CONFIG_FRONTIER_H
 
+// Allow Z-Moves to be used
+#define BF_ALLOW_Z_MOVES TRUE
+
 // Allow duplicate held items
 #define BF_ALLOW_DUPLICATE_ITEMS FALSE 
 
