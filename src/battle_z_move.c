@@ -171,7 +171,7 @@ bool32 IsViableZMove(u8 battler, u16 move)
 
     if (gBattleStruct->zmove.used[battler])
         return FALSE;
-    
+
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
         return FALSE;
 
