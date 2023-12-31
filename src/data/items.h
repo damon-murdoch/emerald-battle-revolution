@@ -2056,9 +2056,9 @@ const struct Item gItems[] =
     {
         .name = _("Bottle Cap"),
         .price = 2500,
-        .description = COMPOUND_STRING("A beautiful bottle\n"
-                                       "cap that gives off\n"
-                                       "a silver gleam."),
+        .description = COMPOUND_STRING("A bottle cap which\n"
+                                       "raises all of a\n"
+                                       "Pokémon's stats."),
         .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7656,8 +7656,8 @@ const struct Item gItems[] =
         .name = _("Razz Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Razz."),
+                                       "Raises a Pokémon's HP\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7670,8 +7670,8 @@ const struct Item gItems[] =
         .name = _("Bluk Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Bluk."),
+                                       "Raises a Pokémon's Atk\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7684,8 +7684,8 @@ const struct Item gItems[] =
         .name = _("Nanab Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Nanab."),
+                                       "Raises a Pokémon's Def\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7698,8 +7698,8 @@ const struct Item gItems[] =
         .name = _("Wepear Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Wepear."),
+                                       "Raises a Pokémon's SpA\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7712,8 +7712,8 @@ const struct Item gItems[] =
         .name = _("Pinap Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Pinap."),
+                                       "Raises a Pokémon's SpD\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7804,8 +7804,8 @@ const struct Item gItems[] =
         .name = _("Cornn Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Cornn."),
+                                       "Raises a Pokémon's Spe\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_IncreaseIV,
@@ -7818,8 +7818,8 @@ const struct Item gItems[] =
         .name = _("Magost Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Magost."),
+                                       "Lowers a Pokémon's HP\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7832,8 +7832,8 @@ const struct Item gItems[] =
         .name = _("Rabuta Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Rabuta."),
+                                       "Lowers a Pokémon's Atk\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7846,8 +7846,8 @@ const struct Item gItems[] =
         .name = _("Nomel Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Nomel."),
+                                       "Lowers a Pokémon's Def\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7860,8 +7860,8 @@ const struct Item gItems[] =
         .name = _("Spelon Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Spelon."),
+                                       "Lowers a Pokémon's SpA\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7874,8 +7874,8 @@ const struct Item gItems[] =
         .name = _("Pamtre Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Pamtre."),
+                                       "Lowers a Pokémon's SpD\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7888,8 +7888,8 @@ const struct Item gItems[] =
         .name = _("Watmel Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Watmel."),
+                                       "Lowers a Pokémon's Spe\n"
+                                       "IVs by one."),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7902,8 +7902,8 @@ const struct Item gItems[] =
         .name = _("Durin Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Durin."),
+                                       "Lowers a Pokémon's Atk\n"
+                                       "IVs to zero"),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,
@@ -7916,8 +7916,8 @@ const struct Item gItems[] =
         .name = _("Belue Berry"),
         .price = 150,
         .description = COMPOUND_STRING("{POKEBLOCK} ingredient.\n"
-                                       "Plant in loamy soil\n"
-                                       "to grow Belue."),
+                                       "Lowers a Pokémon's Spe\n"
+                                       "IVs to zero"),
         .pocket = POCKET_BERRIES,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ReduceIV,

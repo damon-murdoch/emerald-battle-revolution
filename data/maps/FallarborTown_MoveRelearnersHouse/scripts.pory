@@ -52,13 +52,13 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor {
 
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice {
 	showmoneybox(0,0)
-	msgbox(format("This service costs a mere ¥2000 per move!"))
+	msgbox(format("This service costs a mere ¥500 per move!"))
 	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon)
 }
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon {
 	
 	# Check player can afford
-	checkmoney(2000)
+	checkmoney(500)
 	if (var(VAR_RESULT) == FALSE){
 		goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford)
 	}
@@ -99,7 +99,7 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 	}
 	showmoneybox(0,0)
 	msgbox(format("I'll accept your payment now, please."))
-	removemoney(2000)
+	removemoney(500)
 	playse(SE_SHOP)
 	updatemoneybox
 	waitse
