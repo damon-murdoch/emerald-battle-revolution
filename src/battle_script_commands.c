@@ -1591,11 +1591,14 @@ static bool32 AccuracyCalcHelper(u16 move)
 
     if (WEATHER_HAS_EFFECT)
     {
-        if ((IsBattlerWeatherAffected(gBattlerTarget, B_WEATHER_RAIN) && (gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE)))
-        {
-            // thunder/hurricane ignore acc checks in rain unless target is holding utility umbrella
-            JumpIfMoveFailed(7, move);
-            return TRUE;
+        if (IsBattlerWeatherAffected(gBattlerTarget, B_WEATHER_RAIN)){
+            if ((gBattleMoves[move].effect == EFFECT_THUNDER || gBattleMoves[move].effect == EFFECT_HURRICANE) || 
+                (move == MOVE_BLEAKWIND_STORM || move == MOVE_WILDBOLT_STORM || move == MOVE_SANDSEAR_STORM))
+            {
+                // thunder/hurricane ignore acc checks in rain unless target is holding utility umbrella
+                JumpIfMoveFailed(7, move);
+                return TRUE;
+            }
         }
         else if (B_BLIZZARD_HAIL >= GEN_4 && (gBattleWeather & (B_WEATHER_HAIL | B_WEATHER_SNOW)) && move == MOVE_BLIZZARD)
         {
