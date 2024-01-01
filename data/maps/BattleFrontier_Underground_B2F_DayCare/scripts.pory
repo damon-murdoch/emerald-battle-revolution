@@ -332,11 +332,6 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea {
 }
 script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase {
     msgbox(format("Sure! Let's see if I can get one of those for you ..."))
-    hidemoneybox
-    delay(20)
-    fadescreen(FADE_TO_BLACK)
-    delay(20)
-    fadescreen(FADE_FROM_BLACK)
     switch(var(VAR_RESULT)){
         case MON_GIVEN_TO_PARTY:
             playse(SE_SUCCESS)
@@ -356,11 +351,11 @@ script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPur
     }
     msgbox(format("I'll take your payment now, please."))
     removemoney(4000)
-    showmoneybox(18,0)
+    updatemoneybox
     playse(SE_SHOP)
     waitse
     if (flag(P_FLAG_FORCE_SHINY) == TRUE){
-        msgbox(format("You gave a Gold Bottle Cap to the breeder."))
+        msgbox(format("You also gave a Gold Bottle Cap in exchange."))
         removeitem(ITEM_GOLD_BOTTLE_CAP, 1)
     }
     msgbox(format("Thanks for your business!"))

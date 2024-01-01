@@ -907,11 +907,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase {
     msgbox(format("Let's see if we can find one of those for you ..."))
-    hidemoneybox
-    delay(20)
-    fadescreen(FADE_TO_BLACK)
-    delay(20)
-    fadescreen(FADE_FROM_BLACK)
     switch(var(VAR_RESULT)){
         case MON_GIVEN_TO_PARTY:
             playse(SE_SUCCESS)
@@ -931,11 +926,11 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurch
     }
     msgbox(format("I'll take your payment now, please."))
     removemoney(12000)
-    showmoneybox(18,0)
+    updatemoneybox
     playse(SE_SHOP)
     waitse
     if (flag(P_FLAG_FORCE_SHINY) == TRUE){
-        msgbox(format("You gave a Gold Bottle Cap to the salesman."))
+        msgbox(format("You also gave a Gold Bottle Cap in exchange."))
         removeitem(ITEM_GOLD_BOTTLE_CAP, 1)
     }
     msgbox(format("Thanks for your business!"))

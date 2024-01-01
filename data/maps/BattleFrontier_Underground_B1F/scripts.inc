@@ -1552,11 +1552,6 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5_7:
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase::
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_0
-	hidemoneybox
-	delay 20
-	fadescreen FADE_TO_BLACK
-	delay 20
-	fadescreen FADE_FROM_BLACK
 	switch VAR_RESULT
 	case MON_GIVEN_TO_PARTY, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_3
 	case MON_GIVEN_TO_PC, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_4
@@ -1564,7 +1559,7 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase::
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_1:
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_6
 	removemoney 12000
-	showmoneybox 18, 0
+	updatemoneybox
 	playse SE_SHOP
 	waitse
 	goto_if_set P_FLAG_FORCE_SHINY, BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_7
@@ -2612,8 +2607,8 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Tex
 	.string "I'll take your payment now, please.$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_7:
-	.string "You gave a Gold Bottle Cap to the\n"
-	.string "salesman.$"
+	.string "You also gave a Gold Bottle Cap in\n"
+	.string "exchange.$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase_Text_8:
 	.string "Thanks for your business!$"

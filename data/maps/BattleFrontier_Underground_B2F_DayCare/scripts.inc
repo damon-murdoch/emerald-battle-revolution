@@ -628,11 +628,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederPaldea_10:
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase::
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_0
-	hidemoneybox
-	delay 20
-	fadescreen FADE_TO_BLACK
-	delay 20
-	fadescreen FADE_FROM_BLACK
 	switch VAR_RESULT
 	case MON_GIVEN_TO_PARTY, BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_3
 	case MON_GIVEN_TO_PC, BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_4
@@ -640,7 +635,7 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase::
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_1:
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_6
 	removemoney 4000
-	showmoneybox 18, 0
+	updatemoneybox
 	playse SE_SHOP
 	waitse
 	goto_if_set P_FLAG_FORCE_SHINY, BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_7
@@ -888,8 +883,8 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_T
 	.string "I'll take your payment now, please.$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_7:
-	.string "You gave a Gold Bottle Cap to the\n"
-	.string "breeder.$"
+	.string "You also gave a Gold Bottle Cap in\n"
+	.string "exchange.$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckPurchase_Text_8:
 	.string "Thanks for your business!$"
