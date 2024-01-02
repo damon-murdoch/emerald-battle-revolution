@@ -463,6 +463,105 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto {
     "PIDGEY{CLEAR_TO 0x48}¥4000$"
     ""
 }
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto2 {
+    "RATATTA{CLEAR_TO 0x48}¥4000$"
+    "SPEAROW{CLEAR_TO 0x48}¥4000$"
+    "EKANS{CLEAR_TO 0x48}¥4000$"
+    "PIKACHU{CLEAR_TO 0x48}¥4000$"
+    "SANDSHREW{CLEAR_TO 0x48}¥4000$"
+    "NIDORAN(F){CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto3 {
+    "NIDORAN(M){CLEAR_TO 0x48}¥4000$"
+    "CLEFAIRY{CLEAR_TO 0x48}¥4000$"
+    "VULPIX{CLEAR_TO 0x48}¥4000$"
+    "JIGGLYPUFF{CLEAR_TO 0x48}¥4000$"
+    "ZUBAT{CLEAR_TO 0x48}¥4000$"
+    "ODDISH{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto4 {
+    "PARAS{CLEAR_TO 0x48}¥4000$"
+    "VENONAT{CLEAR_TO 0x48}¥4000$"
+    "DIGLETT{CLEAR_TO 0x48}¥4000$"
+    "MEOWTH{CLEAR_TO 0x48}¥4000$"
+    "PSYDUCK{CLEAR_TO 0x48}¥4000$"
+    "MANKEY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto5 {
+    "GROWLITHE{CLEAR_TO 0x48}¥4000$"
+    "POLIWAG{CLEAR_TO 0x48}¥4000$"
+    "ABRA{CLEAR_TO 0x48}¥4000$"
+    "MACHOP{CLEAR_TO 0x48}¥4000$"
+    "BELLSPROUT{CLEAR_TO 0x48}¥4000$"
+    "TENTACOOL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto6 {
+    "GEODUDE{CLEAR_TO 0x48}¥4000$"
+    "PONYTA{CLEAR_TO 0x48}¥4000$"
+    "SLOWPOKE{CLEAR_TO 0x48}¥4000$"
+    "FATFETCHD{CLEAR_TO 0x48}¥4000$"
+    "DODUO{CLEAR_TO 0x48}¥4000$"
+    "SEEL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto7 {
+    "GRIMER{CLEAR_TO 0x48}¥4000$"
+    "SHELLDER{CLEAR_TO 0x48}¥4000$"
+    "GASTLY{CLEAR_TO 0x48}¥4000$"
+    "ONIX{CLEAR_TO 0x48}¥4000$"
+    "DROWZEE{CLEAR_TO 0x48}¥4000$"
+    "KRABBY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto8 {
+    "VOLTORB{CLEAR_TO 0x48}¥4000$"
+    "EXEGGCUTE{CLEAR_TO 0x48}¥4000$"
+    "HITMONLEE{CLEAR_TO 0x48}¥4000$"
+    "HITMONCHAN{CLEAR_TO 0x48}¥4000$"
+    "LICKITUNG{CLEAR_TO 0x48}¥4000$"
+    "KOFFING{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto9 {
+    "RHYHORN{CLEAR_TO 0x48}¥4000$"
+    "CHANSEY{CLEAR_TO 0x48}¥4000$"
+    "TANGELA{CLEAR_TO 0x48}¥4000$"
+    "KANGASKHAN{CLEAR_TO 0x48}¥4000$"
+    "HORSEA{CLEAR_TO 0x48}¥4000$"
+    "GOLDEEN{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto10 {
+    "STARYU{CLEAR_TO 0x48}¥4000$"
+    "MR.MIME{CLEAR_TO 0x48}¥4000$"
+    "SCYTHER{CLEAR_TO 0x48}¥4000$"
+    "JYNX{CLEAR_TO 0x48}¥4000$"
+    "ELECTABUZZ{CLEAR_TO 0x48}¥4000$"
+    "MAGMAR{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto11 {
+    "PINSIR{CLEAR_TO 0x48}¥4000$"
+    "TAUROS{CLEAR_TO 0x48}¥4000$"
+    "MAGIKARP{CLEAR_TO 0x48}¥4000$"
+    "LAPRAS{CLEAR_TO 0x48}¥4000$"
+    "DITTO{CLEAR_TO 0x48}¥4000$"
+    "EEVEE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKanto12 {
+    "PORYGON{CLEAR_TO 0x48}¥4000$"
+    "OMANYTE{CLEAR_TO 0x48}¥4000$"
+    "KABUTO{CLEAR_TO 0x48}¥4000$"
+    "AERODACTYL{CLEAR_TO 0x48}¥4000$"
+    "SNORLAX{CLEAR_TO 0x48}¥4000$"
+    "DRATINI{CLEAR_TO 0x48}¥4000$"
+    ""
+}
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto {
     "CHIKORITA{CLEAR_TO 0x48}¥4000$"
     "CYNDAQUIL{CLEAR_TO 0x48}¥4000$"
@@ -470,6 +569,75 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto {
     "SENTRET{CLEAR_TO 0x48}¥4000$"
     "HOOTHOOT{CLEAR_TO 0x48}¥4000$"
     "LEDYBA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto2 {
+    "SPINARAK{CLEAR_TO 0x48}¥4000$"
+    "CHINCHOU{CLEAR_TO 0x48}¥4000$"
+    "PICHU{CLEAR_TO 0x48}¥4000$"
+    "CLEFFA{CLEAR_TO 0x48}¥4000$"
+    "IGGLYBUFF{CLEAR_TO 0x48}¥4000$"
+    "TOGEPI{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto3 {
+    "NATU{CLEAR_TO 0x48}¥4000$"
+    "MAREEP{CLEAR_TO 0x48}¥4000$"
+    "MARILL{CLEAR_TO 0x48}¥4000$"
+    "SUDOWOODO{CLEAR_TO 0x48}¥4000$"
+    "HOPPIP{CLEAR_TO 0x48}¥4000$"
+    "AIPOM{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto4 {
+    "YANMA{CLEAR_TO 0x48}¥4000$"
+    "WOOPER{CLEAR_TO 0x48}¥4000$"
+    "MURKROW{CLEAR_TO 0x48}¥4000$"
+    "MISDREAVUS{CLEAR_TO 0x48}¥4000$"
+    "UNOWN{CLEAR_TO 0x48}¥4000$"
+    "WOBBUFFET{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto5 {
+    "GIRAFARIG{CLEAR_TO 0x48}¥4000$"
+    "PINECO{CLEAR_TO 0x48}¥4000$"
+    "DUNSPARCE{CLEAR_TO 0x48}¥4000$"
+    "GLIGAR{CLEAR_TO 0x48}¥4000$"
+    "SNUBBUL{CLEAR_TO 0x48}¥4000$"
+    "QWILFISH{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto6 {
+    "SHUCKLE{CLEAR_TO 0x48}¥4000$"
+    "HERACROSS{CLEAR_TO 0x48}¥4000$"
+    "SNEASEL{CLEAR_TO 0x48}¥4000$"
+    "TEDDIURSA{CLEAR_TO 0x48}¥4000$"
+    "SLUGMA{CLEAR_TO 0x48}¥4000$"
+    "SWINUB{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto7 {
+    "CORSOLA{CLEAR_TO 0x48}¥4000$"
+    "REMORAID{CLEAR_TO 0x48}¥4000$"
+    "DELIBIRD{CLEAR_TO 0x48}¥4000$"
+    "SKARMORY{CLEAR_TO 0x48}¥4000$"
+    "HOUNDOR{CLEAR_TO 0x48}¥4000$"
+    "PHANPHY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto8 {
+    "STANTLER{CLEAR_TO 0x48}¥4000$"
+    "SMEARGLE{CLEAR_TO 0x48}¥4000$"
+    "TYROGUE{CLEAR_TO 0x48}¥4000$"
+    "HITMONTOP{CLEAR_TO 0x48}¥4000$"
+    "SMOOCHUM{CLEAR_TO 0x48}¥4000$"
+    "ELEKID{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederJohto9 {
+    "MAGBY{CLEAR_TO 0x48}¥4000$"
+    "MILTANK{CLEAR_TO 0x48}¥4000$"
+    "LARVITAR{CLEAR_TO 0x48}¥4000$"
     ""
 }
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn {
@@ -481,6 +649,96 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn {
     "WURMPLE{CLEAR_TO 0x48}¥4000$"
     ""
 }
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn2 {
+    "LOTAD{CLEAR_TO 0x48}¥4000$"
+    "SEEDOT{CLEAR_TO 0x48}¥4000$"
+    "TAILLOW{CLEAR_TO 0x48}¥4000$"
+    "WINGULL{CLEAR_TO 0x48}¥4000$"
+    "RALTS{CLEAR_TO 0x48}¥4000$"
+    "SURSKIT{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn3 {
+    "SHROOMISH{CLEAR_TO 0x48}¥4000$"
+    "SLAKOTH{CLEAR_TO 0x48}¥4000$"
+    "NINCADA{CLEAR_TO 0x48}¥4000$"
+    "WHISMUR{CLEAR_TO 0x48}¥4000$"
+    "MAKUHITA{CLEAR_TO 0x48}¥4000$"
+    "AZURILL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn4 {
+    "NOSEPASS{CLEAR_TO 0x48}¥4000$"
+    "SKITTY{CLEAR_TO 0x48}¥4000$"
+    "SABLEYE{CLEAR_TO 0x48}¥4000$"
+    "MAWILE{CLEAR_TO 0x48}¥4000$"
+    "ARON{CLEAR_TO 0x48}¥4000$"
+    "MEDITITE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn5 {
+    "ELECTRIKE{CLEAR_TO 0x48}¥4000$"
+    "PLUSTLE{CLEAR_TO 0x48}¥4000$"
+    "MINUN{CLEAR_TO 0x48}¥4000$"
+    "VOLBEAT{CLEAR_TO 0x48}¥4000$"
+    "ILLUMISE{CLEAR_TO 0x48}¥4000$"
+    "ROSELIA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn6 {
+    "GULPIN{CLEAR_TO 0x48}¥4000$"
+    "CARVANHA{CLEAR_TO 0x48}¥4000$"
+    "WAILMER{CLEAR_TO 0x48}¥4000$"
+    "NUMEL{CLEAR_TO 0x48}¥4000$"
+    "TORKOAL{CLEAR_TO 0x48}¥4000$"
+    "SPOINK{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn7 {
+    "SPINDA{CLEAR_TO 0x48}¥4000$"
+    "TRAPINCH{CLEAR_TO 0x48}¥4000$"
+    "CACNEA{CLEAR_TO 0x48}¥4000$"
+    "SWABLU{CLEAR_TO 0x48}¥4000$"
+    "ZANGOOSE{CLEAR_TO 0x48}¥4000$"
+    "SEVIPER{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn8 {
+    "LUNATONE{CLEAR_TO 0x48}¥4000$"
+    "SOLROCK{CLEAR_TO 0x48}¥4000$"
+    "BARBOACH{CLEAR_TO 0x48}¥4000$"
+    "CORPHISH{CLEAR_TO 0x48}¥4000$"
+    "BALTOY{CLEAR_TO 0x48}¥4000$"
+    "LILEEP{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn9 {
+    "ANORITH{CLEAR_TO 0x48}¥4000$"
+    "FEEBAS{CLEAR_TO 0x48}¥4000$"
+    "CASTFORM{CLEAR_TO 0x48}¥4000$"
+    "KEKLEON{CLEAR_TO 0x48}¥4000$"
+    "SHUPPET{CLEAR_TO 0x48}¥4000$"
+    "DUSKULL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn10 {
+    "TROPIUS{CLEAR_TO 0x48}¥4000$"
+    "CHIMECO{CLEAR_TO 0x48}¥4000$"
+    "ABSOL{CLEAR_TO 0x48}¥4000$"
+    "WYNAUT{CLEAR_TO 0x48}¥4000$"
+    "SNORUNT{CLEAR_TO 0x48}¥4000$"
+    "SPHEAL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHoenn11 {
+    "CLAMPERL{CLEAR_TO 0x48}¥4000$"
+    "GOREBYSS{CLEAR_TO 0x48}¥4000$"
+    "RELICANTH{CLEAR_TO 0x48}¥4000$"
+    "LUVDISC{CLEAR_TO 0x48}¥4000$"
+    "BAGON{CLEAR_TO 0x48}¥4000$"
+    "BELDUM{CLEAR_TO 0x48}¥4000$"
+    ""
+}
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh {
     "TURTWIG{CLEAR_TO 0x48}¥4000$"
     "CHIMCHAR{CLEAR_TO 0x48}¥4000$"
@@ -488,6 +746,59 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh {
     "STARLY{CLEAR_TO 0x48}¥4000$"
     "BIDOOF{CLEAR_TO 0x48}¥4000$"
     "KRICKETOT{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh2 {
+    "SHINX{CLEAR_TO 0x48}¥4000$"
+    "BUDEW{CLEAR_TO 0x48}¥4000$"
+    "CRANIDOS{CLEAR_TO 0x48}¥4000$"
+    "SHIELDON{CLEAR_TO 0x48}¥4000$"
+    "BURMY{CLEAR_TO 0x48}¥4000$"
+    "COMBEE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh3 {
+    "PACHIRISU{CLEAR_TO 0x48}¥4000$"
+    "BUIZEL{CLEAR_TO 0x48}¥4000$"
+    "CHERUBI{CLEAR_TO 0x48}¥4000$"
+    "SHELLOS{CLEAR_TO 0x48}¥4000$"
+    "AMBIPOM{CLEAR_TO 0x48}¥4000$"
+    "DRIFLOON{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh4 {
+    "BUNEARY{CLEAR_TO 0x48}¥4000$"
+    "GLAMEOW{CLEAR_TO 0x48}¥4000$"
+    "CHINGLING{CLEAR_TO 0x48}¥4000$"
+    "STUNKY{CLEAR_TO 0x48}¥4000$"
+    "BRONZOR{CLEAR_TO 0x48}¥4000$"
+    "BONSLY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh5 {
+    "MIME JR.{CLEAR_TO 0x48}¥4000$"
+    "HAPPINY{CLEAR_TO 0x48}¥4000$"
+    "CHATOT{CLEAR_TO 0x48}¥4000$"
+    "SPIRITOMB{CLEAR_TO 0x48}¥4000$"
+    "GIBLE{CLEAR_TO 0x48}¥4000$"
+    "MUNCHLAX{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh6 {
+    "RIOLU{CLEAR_TO 0x48}¥4000$"
+    "HIPPOPOTAS{CLEAR_TO 0x48}¥4000$"
+    "SKORUPI{CLEAR_TO 0x48}¥4000$"
+    "CROAGUNK{CLEAR_TO 0x48}¥4000$"
+    "CARNIVINE{CLEAR_TO 0x48}¥4000$"
+    "FINNEON{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederSinnoh7 {
+    "MANTYKE{CLEAR_TO 0x48}¥4000$"
+    "SNOVER{CLEAR_TO 0x48}¥4000$"
+    "ROTOM{CLEAR_TO 0x48}¥4000$"
+    "BURMY-SANDY{CLEAR_TO 0x48}¥4000$"
+    "BURMY-TRASH{CLEAR_TO 0x48}¥4000$"
     ""
 }
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova {
@@ -499,6 +810,102 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova {
     "PURRLOIN{CLEAR_TO 0x48}¥4000$"
     ""
 }
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova2 {
+    "PANSAGE{CLEAR_TO 0x48}¥4000$"
+    "PANSEAR{CLEAR_TO 0x48}¥4000$"
+    "PANPOUR{CLEAR_TO 0x48}¥4000$"
+    "MUNNA{CLEAR_TO 0x48}¥4000$"
+    "PIDOVE{CLEAR_TO 0x48}¥4000$"
+    "BLITZLE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova3 {
+    "ROGGENROLA{CLEAR_TO 0x48}¥4000$"
+    "WOOBAT{CLEAR_TO 0x48}¥4000$"
+    "DRILBUR{CLEAR_TO 0x48}¥4000$"
+    "AUDINO{CLEAR_TO 0x48}¥4000$"
+    "TIMBURR{CLEAR_TO 0x48}¥4000$"
+    "TYMPOLE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova4 {
+    "THROH{CLEAR_TO 0x48}¥4000$"
+    "SAWK{CLEAR_TO 0x48}¥4000$"
+    "SEWADDLE{CLEAR_TO 0x48}¥4000$"
+    "VENIPEDE{CLEAR_TO 0x48}¥4000$"
+    "COTTONEE{CLEAR_TO 0x48}¥4000$"
+    "PETILIL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova5 {
+    "BASCULIN{CLEAR_TO 0x48}¥4000$"
+    "SANDILE{CLEAR_TO 0x48}¥4000$"
+    "DARUMAKA{CLEAR_TO 0x48}¥4000$"
+    "MARACTUS{CLEAR_TO 0x48}¥4000$"
+    "DWEBBLE{CLEAR_TO 0x48}¥4000$"
+    "SCRAGGY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova6 {
+    "SIGILYPH{CLEAR_TO 0x48}¥4000$"
+    "YAMASK{CLEAR_TO 0x48}¥4000$"
+    "TIRTOUGA{CLEAR_TO 0x48}¥4000$"
+    "ARCHEN{CLEAR_TO 0x48}¥4000$"
+    "TRUBBISH{CLEAR_TO 0x48}¥4000$"
+    "ZORUA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova7 {
+    "MINCCINO{CLEAR_TO 0x48}¥4000$"
+    "GOTHITA{CLEAR_TO 0x48}¥4000$"
+    "SOLOSIS{CLEAR_TO 0x48}¥4000$"
+    "DUCKLETT{CLEAR_TO 0x48}¥4000$"
+    "VANILLITE{CLEAR_TO 0x48}¥4000$"
+    "DEERLING{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova8 {
+    "EMOLGA{CLEAR_TO 0x48}¥4000$"
+    "KARRABLAST{CLEAR_TO 0x48}¥4000$"
+    "FOONGUSS{CLEAR_TO 0x48}¥4000$"
+    "FRILLISH{CLEAR_TO 0x48}¥4000$"
+    "ALOMOMOLA{CLEAR_TO 0x48}¥4000$"
+    "JOLTIK{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova9 {
+    "FERROSEED{CLEAR_TO 0x48}¥4000$"
+    "KLINK{CLEAR_TO 0x48}¥4000$"
+    "TYNAMO{CLEAR_TO 0x48}¥4000$"
+    "ELYGEM{CLEAR_TO 0x48}¥4000$"
+    "LITWICK{CLEAR_TO 0x48}¥4000$"
+    "AXEW{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova10 {
+    "CUBCHOO{CLEAR_TO 0x48}¥4000$"
+    "CRYOGONAL{CLEAR_TO 0x48}¥4000$"
+    "SHELMET{CLEAR_TO 0x48}¥4000$"
+    "STUNFISK{CLEAR_TO 0x48}¥4000$"
+    "MEINFOO{CLEAR_TO 0x48}¥4000$"
+    "DRUDDIGON{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova11 {
+    "GOLETT{CLEAR_TO 0x48}¥4000$"
+    "PAWNIARD{CLEAR_TO 0x48}¥4000$"
+    "BOUFFALANT{CLEAR_TO 0x48}¥4000$"
+    "RUFFLET{CLEAR_TO 0x48}¥4000$"
+    "VULLABY{CLEAR_TO 0x48}¥4000$"
+    "HEATMOR{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederUnova12 {
+    "DURANT{CLEAR_TO 0x48}¥4000$"
+    "DEINO{CLEAR_TO 0x48}¥4000$"
+    "LARVESTA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos {
     "CHESPIN{CLEAR_TO 0x48}¥4000$"
     "FENNEKIN{CLEAR_TO 0x48}¥4000$"
@@ -506,6 +913,49 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos {
     "BUNNELBY{CLEAR_TO 0x48}¥4000$"
     "FLETCHLING{CLEAR_TO 0x48}¥4000$"
     "SCATTERBUG{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos2 {
+    "LITLEO{CLEAR_TO 0x48}¥4000$"
+    "FLABEBE{CLEAR_TO 0x48}¥4000$"
+    "SKIDDO{CLEAR_TO 0x48}¥4000$"
+    "PANCHAM{CLEAR_TO 0x48}¥4000$"
+    "FURFROU{CLEAR_TO 0x48}¥4000$"
+    "ESPURR{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos3 {
+    "HONEDGE{CLEAR_TO 0x48}¥4000$"
+    "SPRITZEE{CLEAR_TO 0x48}¥4000$"
+    "SWIRLIX{CLEAR_TO 0x48}¥4000$"
+    "INKAY{CLEAR_TO 0x48}¥4000$"
+    "BINACLE{CLEAR_TO 0x48}¥4000$"
+    "SKRELP{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos4 {
+    "CLAUNCHER{CLEAR_TO 0x48}¥4000$"
+    "HELIOPTILE{CLEAR_TO 0x48}¥4000$"
+    "TYRUNT{CLEAR_TO 0x48}¥4000$"
+    "AMAURA{CLEAR_TO 0x48}¥4000$"
+    "HAWLUCHA{CLEAR_TO 0x48}¥4000$"
+    "DEDENNE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos5 {
+    "CARBINK{CLEAR_TO 0x48}¥4000$"
+    "GOOMY{CLEAR_TO 0x48}¥4000$"
+    "KLEFKI{CLEAR_TO 0x48}¥4000$"
+    "PHANTUMP{CLEAR_TO 0x48}¥4000$"
+    "PUMPKABOO{CLEAR_TO 0x48}¥4000$"
+    "BERGMITE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederKalos6 {
+    "NOIBAT{CLEAR_TO 0x48}¥4000$"
+    "PUMPKABOO-SM{CLEAR_TO 0x48}¥4000$"
+    "PUMPKABOO-LG{CLEAR_TO 0x48}¥4000$"
+    "PUMPKABOO-XL{CLEAR_TO 0x48}¥4000$"
     ""
 }
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederRegions2 {
@@ -524,6 +974,49 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola {
     "GRUBBIN{CLEAR_TO 0x48}¥4000$"
     ""
 }
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola2 {
+    "CRABRAWLER{CLEAR_TO 0x48}¥4000$"
+    "ORICORIO{CLEAR_TO 0x48}¥4000$"
+    "CUTIEFLY{CLEAR_TO 0x48}¥4000$"
+    "ROCKRUFF{CLEAR_TO 0x48}¥4000$"
+    "WISHIWASHI{CLEAR_TO 0x48}¥4000$"
+    "MAREANIE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola3 {
+    "MUDBRAY{CLEAR_TO 0x48}¥4000$"
+    "DEWPIDER{CLEAR_TO 0x48}¥4000$"
+    "FOMANTIS{CLEAR_TO 0x48}¥4000$"
+    "MORELULL{CLEAR_TO 0x48}¥4000$"
+    "SALANDIT{CLEAR_TO 0x48}¥4000$"
+    "STUFFUL{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola4 {
+    "BOUNSWEET{CLEAR_TO 0x48}¥4000$"
+    "COMFEY{CLEAR_TO 0x48}¥4000$"
+    "ORANGURU{CLEAR_TO 0x48}¥4000$"
+    "PASSIMIAN{CLEAR_TO 0x48}¥4000$"
+    "WIMPOD{CLEAR_TO 0x48}¥4000$"
+    "SANDYGAST{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola5 {
+    "PYUKUMUKU{CLEAR_TO 0x48}¥4000$"
+    "MINIOR{CLEAR_TO 0x48}¥4000$"
+    "KOMALA{CLEAR_TO 0x48}¥4000$"
+    "TURTONATOR{CLEAR_TO 0x48}¥4000$"
+    "TOGEDEMARU{CLEAR_TO 0x48}¥4000$"
+    "MIMIKYU{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederAlola6 {
+    "BRUXISH{CLEAR_TO 0x48}¥4000$"
+    "DRAMPA{CLEAR_TO 0x48}¥4000$"
+    "DHELMISE{CLEAR_TO 0x48}¥4000$"
+    "JANGMO-O{CLEAR_TO 0x48}¥4000$"
+    ""
+}
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar {
     "GROOKEY{CLEAR_TO 0x48}¥4000$"
     "SCORBUNNY{CLEAR_TO 0x48}¥4000$"
@@ -531,6 +1024,55 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar {
     "SKWOVET{CLEAR_TO 0x48}¥4000$"
     "ROOKIDEE{CLEAR_TO 0x48}¥4000$"
     "BLIPBUG{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar2 {
+    "NICKIT{CLEAR_TO 0x48}¥4000$"
+    "GOSSIFLEUR{CLEAR_TO 0x48}¥4000$"
+    "WOOLOO{CLEAR_TO 0x48}¥4000$"
+    "CHEWTLE{CLEAR_TO 0x48}¥4000$"
+    "YAMPER{CLEAR_TO 0x48}¥4000$"
+    "ROLYCOLY{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar3 {
+    "APPLIN{CLEAR_TO 0x48}¥4000$"
+    "SILICOBRA{CLEAR_TO 0x48}¥4000$"
+    "CRAMORANT{CLEAR_TO 0x48}¥4000$"
+    "ARROKUDA{CLEAR_TO 0x48}¥4000$"
+    "TOXEL{CLEAR_TO 0x48}¥4000$"
+    "SIZZLIPEDE{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar4 {
+    "CLOBBOPUS{CLEAR_TO 0x48}¥4000$"
+    "SINISTEA{CLEAR_TO 0x48}¥4000$"
+    "HATENNA{CLEAR_TO 0x48}¥4000$"
+    "IMPIDIMP{CLEAR_TO 0x48}¥4000$"
+    "MILCERY{CLEAR_TO 0x48}¥4000$"
+    "FALINKS{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar5 {
+    "PINCHURCHIN{CLEAR_TO 0x48}¥4000$"
+    "SNOM{CLEAR_TO 0x48}¥4000$"
+    "STONJOURNER{CLEAR_TO 0x48}¥4000$"
+    "EISCUE{CLEAR_TO 0x48}¥4000$"
+    "INDEEDEE{CLEAR_TO 0x48}¥4000$"
+    "INDEEDEE-F{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar6 {
+    "MORPEKO{CLEAR_TO 0x48}¥4000$"
+    "CUFANT{CLEAR_TO 0x48}¥4000$"
+    "DRACOZOLT{CLEAR_TO 0x48}¥4000$"
+    "ARCTOZOLT{CLEAR_TO 0x48}¥4000$"
+    "DRACOVISH{CLEAR_TO 0x48}¥4000$"
+    "ARCTOVISH{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederGalar7 {
+    "DREEPY{CLEAR_TO 0x48}¥4000$"
     ""
 }
 text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederHisui {
@@ -551,6 +1093,67 @@ text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea {
     "NYMBLE{CLEAR_TO 0x48}¥4000$"
     ""
 }
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea2 {
+    "PAWMI{CLEAR_TO 0x48}¥4000$"
+    "TANDEMAUS{CLEAR_TO 0x48}¥4000$"
+    "FIDOUGH{CLEAR_TO 0x48}¥4000$"
+    "SMOLIV{CLEAR_TO 0x48}¥4000$"
+    "SQUAWKABILLY{CLEAR_TO 0x48}¥4000$"
+    "NACLI{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea3 {
+    "CHARCADET{CLEAR_TO 0x48}¥4000$"
+    "TADBULB{CLEAR_TO 0x48}¥4000$"
+    "WATTREL{CLEAR_TO 0x48}¥4000$"
+    "MASCHIFF{CLEAR_TO 0x48}¥4000$"
+    "SHROODLE{CLEAR_TO 0x48}¥4000$"
+    "BRAMBLIN{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea4 {
+    "TOEDSCOOL{CLEAR_TO 0x48}¥4000$"
+    "KLAWF{CLEAR_TO 0x48}¥4000$"
+    "RELLOR{CLEAR_TO 0x48}¥4000$"
+    "FLITTLE{CLEAR_TO 0x48}¥4000$"
+    "TINKATINK{CLEAR_TO 0x48}¥4000$"
+    "TINKATON{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea5 {
+    "WIGLETT{CLEAR_TO 0x48}¥4000$"
+    "BOMBARDIER{CLEAR_TO 0x48}¥4000$"
+    "FINIZEN{CLEAR_TO 0x48}¥4000$"
+    "VAROOM{CLEAR_TO 0x48}¥4000$"
+    "CYCLIZAR{CLEAR_TO 0x48}¥4000$"
+    "ORTHWORM{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea6 {
+    "GLIMMET{CLEAR_TO 0x48}¥4000$"
+    "GREAVARD{CLEAR_TO 0x48}¥4000$"
+    "FLAMIGO{CLEAR_TO 0x48}¥4000$"
+    "CETODDLE{CLEAR_TO 0x48}¥4000$"
+    "VELUZA{CLEAR_TO 0x48}¥4000$"
+    "DONDOZO{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea7 {
+    "TATSUGIRI-C{CLEAR_TO 0x48}¥4000$"
+    "TATSUGIRI-D{CLEAR_TO 0x48}¥4000$"
+    "TATSUGIRI-S{CLEAR_TO 0x48}¥4000$"
+    "FRIGIBAX{CLEAR_TO 0x48}¥4000$"
+    "GIMMIGHOUL{CLEAR_TO 0x48}¥4000$"
+    "POLTCHAGEIST{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+text BattleFrontier_Underground_B2F_DayCare_Text_PokemonBreederPaldea8 {
+    "TAUROS COMBAT{CLEAR_TO 0x48}¥4000$"
+    "TAUROS BLAZE{CLEAR_TO 0x48}¥4000$"
+    "TAUROS AQUA{CLEAR_TO 0x48}¥4000$"
+    ""
+}
+
 
 text BattleFrontier_Underground_B2F_DayCare_Text_BreedingHelperOptions {
     "BASICS$"
