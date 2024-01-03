@@ -396,16 +396,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn {
         case 5:
             givemon(SPECIES_REGISTEEL, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn2)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoennPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkHoenn2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_LATIOS, 50)
@@ -440,16 +440,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh {
         case 5:
             givemon(SPECIES_CRESSELIA, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh3)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_UXIE, 50)
@@ -466,14 +466,14 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage
         case MULTI_L_PRESSED: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh3)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage3 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage3)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh3)
     switch(var(VAR_RESULT)){
         case 0: 
             givemon(SPECIES_SHAYMIN_LAND, 50)
@@ -484,7 +484,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage
         case 3:
             givemon(SPECIES_ROTOM, 30)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnohPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh2)
         case MULTI_R_PRESSED:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkSinnoh)
         default: 
@@ -508,16 +508,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova {
         case 5:
             givemon(SPECIES_VIRIZION, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova3)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_TORNADUS, 50)
@@ -534,14 +534,14 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2
         case MULTI_L_PRESSED: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova3)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage3)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova3)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_ENAMORUS, 50)
@@ -556,7 +556,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage3
         case 5: 
             givemon(SPECIES_GENESECT, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnovaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova2)
         case MULTI_R_PRESSED:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkUnova)
         default: 
@@ -580,16 +580,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos {
         case 5:
             givemon(SPECIES_ZYGARDE_50_POWER_CONSTRUCT, 70)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos2)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions1)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalosPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkKalos2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_DIANCIE, 50)
@@ -641,16 +641,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola {
         case 5:
             givemon(SPECIES_SILVALLY, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola5)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_TAPU_KOKO, 50)
@@ -667,14 +667,14 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2
         case MULTI_L_PRESSED: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola3)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola3)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_PHEROMOSA, 50)
@@ -689,16 +689,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3
         case 5:
             givemon(SPECIES_STAKATAKA, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola2)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola4)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage4)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola4 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola4)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_BLACEPHALON, 50)
@@ -709,11 +709,29 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage4
         case 3:
             givemon(SPECIES_MAGEARNA, 50)
         case 4:
-            givemon(SPECIES_MARSHADOW, 50)
+            givemon(SPECIES_MAGEARNA_ORIGINAL_COLOR, 50)
         case 5:
-            givemon(SPECIES_ZERAORA, 50)
+            givemon(SPECIES_MARSHADOW, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlolaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola3)
+        case MULTI_R_PRESSED:
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola5)
+        default: 
+           goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
+    }
+    goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
+}
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola5 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola5)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ZERAORA, 50)
+        case 1:
+            givemon(SPECIES_GRENINJA_BATTLE_BOND, 50)
+        case 2:
+            givemon(SPECIES_ROCKRUFF_OWN_TEMPO, 50)
+        case MULTI_L_PRESSED: 
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola4)
         case MULTI_R_PRESSED:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkAlola)
         default: 
@@ -737,16 +755,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar {
         case 5:
             givemon(SPECIES_URSHIFU_RAPID_STRIKE_STYLE, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar3)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_CALYREX, 70)
@@ -763,14 +781,14 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2
         case MULTI_L_PRESSED: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar3)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage3)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar3)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_REGIELEKI, 50)
@@ -783,7 +801,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage3
         case 4:
             givemon(SPECIES_ZARUDE, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalarPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar2)
         case MULTI_R_PRESSED:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkGalar)
         default: 
@@ -807,16 +825,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea {
         case 5:
             givemon(SPECIES_CHI_YU, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea5)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea2)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea2 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea2)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_IRON_TREADS, 50)
@@ -833,14 +851,14 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
         case MULTI_L_PRESSED: 
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea3)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea3 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea3)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_IRON_VALIANT, 70)
@@ -855,16 +873,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
         case 5:
             givemon(SPECIES_FLUTTER_MANE, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage2)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea2)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea4)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea4 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea4)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_SLITHER_WING, 50)
@@ -879,16 +897,16 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
         case 5:
             givemon(SPECIES_MUNKIDORI, 50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage3)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea3)
         case MULTI_R_PRESSED:
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea5)
         default: 
            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkRegions2)
     }
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckPurchase)
 }
-script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage5 {
-    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage5)
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea5 {
+    multichoice2(0,0,BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea5)
     switch(var(VAR_RESULT)){
         case 0:
             givemon(SPECIES_FEZANDIPITI, 50)
@@ -897,7 +915,7 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage
         case 2:
             givemon(SPECIES_URSALUNA_BLOODMOON,50)
         case MULTI_L_PRESSED: 
-            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldeaPage4)
+            goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea4)
         case MULTI_R_PRESSED:
             goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkPaldea)
         default: 
@@ -1231,7 +1249,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn {
     "REGISTEEL{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoennPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkHoenn2 {
     "LATIOS{CLEAR_TO 0x48}¥12000$"
     "LATIAS{CLEAR_TO 0x48}¥12000$"
     "JIRACHI{CLEAR_TO 0x48}¥12000$"
@@ -1247,7 +1265,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh {
     "CRESSELIA{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh2 {
     "UXIE{CLEAR_TO 0x48}¥12000$"
     "MESPRIT{CLEAR_TO 0x48}¥12000$"
     "AZELF{CLEAR_TO 0x48}¥12000$"
@@ -1256,7 +1274,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage2 {
     "DARKRAI{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnohPage3 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkSinnoh3 {
     "SHAYMIN{CLEAR_TO 0x48}¥12000$"
     "SHAYMIN SKY{CLEAR_TO 0x48}¥12000$"
     "ARCEUS{CLEAR_TO 0x48}¥12000$"
@@ -1272,7 +1290,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova {
     "VIRIZION{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova2 {
     "TORNADUS{CLEAR_TO 0x48}¥12000$"
     "THUNDURUS{CLEAR_TO 0x48}¥12000$"
     "LANDORUS{CLEAR_TO 0x48}¥12000$"
@@ -1281,7 +1299,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage2 {
     "LANDORUS THERIAN{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnovaPage3 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkUnova3 {
     "ENAMORUS{CLEAR_TO 0x48}¥12000$"
     "ENAMORUS THERIAN{CLEAR_TO 0x48}¥12000$"
     "VICTINI{CLEAR_TO 0x48}¥12000$"
@@ -1299,7 +1317,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos {
     "ZYGARDE-50 (POWER C.){CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalosPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkKalos2 {
     "DIANCIE{CLEAR_TO 0x48}¥12000$"
     "HOOPA{CLEAR_TO 0x48}¥12000$"
     "HOOPA UNBOUND{CLEAR_TO 0x48}¥12000$"
@@ -1321,7 +1339,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola {
     "SILVALLY{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola2 {
     "TAPU KOKO{CLEAR_TO 0x48}¥12000$"
     "TAPU LELE{CLEAR_TO 0x48}¥12000$"
     "TAPU BULU{CLEAR_TO 0x48}¥12000$"
@@ -1330,7 +1348,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage2 {
     "BUZZWOLE{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola3 {
     "PHEROMOSA{CLEAR_TO 0x48}¥12000$"
     "XURKITREE{CLEAR_TO 0x48}¥12000$"
     "CELESTEELA{CLEAR_TO 0x48}¥12000$"
@@ -1339,13 +1357,19 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage3 {
     "STAKATAKA{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlolaPage4 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola4 {
     "BLACEPHALON{CLEAR_TO 0x48}¥12000$"
     "POIPOLE{CLEAR_TO 0x48}¥12000$"
     "NAGANADEL{CLEAR_TO 0x48}¥12000$"
     "MAGEARNA{CLEAR_TO 0x48}¥12000$"
+    "MAGEARNA OC{CLEAR_TO 0x48}¥12000$"
     "MARSHADOW{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkAlola5 {
     "ZERAORA{CLEAR_TO 0x48}¥12000$"
+    "ASH GRENINJA{CLEAR_TO 0x48}¥12000$"
+    "ROCKRUFF{CLEAR_TO 0x48}¥12000$"
     ""
 }
 text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar {
@@ -1357,7 +1381,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar {
     "URSHIFU RS{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar2 {
     "CALYREX{CLEAR_TO 0x48}¥12000$"
     "GLASTRIER{CLEAR_TO 0x48}¥12000$"
     "SPECTRIER{CLEAR_TO 0x48}¥12000$"
@@ -1366,7 +1390,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage2 {
     "MOLTRES GALAR{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalarPage3 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkGalar3 {
     "REGIELEKI{CLEAR_TO 0x48}¥12000$"
     "REGIDRAGO{CLEAR_TO 0x48}¥12000$"
     "MELTAN{CLEAR_TO 0x48}¥12000$"
@@ -1383,7 +1407,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea {
     "CHI-YU{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea2 {
     "IRON TREADS{CLEAR_TO 0x48}¥12000$"
     "IRON BUNDLE{CLEAR_TO 0x48}¥12000$"
     "IRON HANDS{CLEAR_TO 0x48}¥12000$"
@@ -1392,7 +1416,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage2 {
     "IRON THORNS{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea3 {
     "IRON VALIANT{CLEAR_TO 0x48}¥12000$"
     "IRON LEAVES{CLEAR_TO 0x48}¥12000$"
     "GREAT TUSK{CLEAR_TO 0x48}¥12000$"
@@ -1401,7 +1425,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage3 {
     "FLUTTER MANE{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea4 {
     "SLITHER WING{CLEAR_TO 0x48}¥12000$"
     "SANDY SHOCKS{CLEAR_TO 0x48}¥12000$"
     "ROARING MOON{CLEAR_TO 0x48}¥12000$"
@@ -1410,7 +1434,7 @@ text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage4 {
     "MUNKIDORI{CLEAR_TO 0x48}¥12000$"
     ""
 }
-text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldeaPage5 {
+text BattleFrontier_Underground_B1F_Text_PokemonShopMainClerkPaldea5 {
     "FEZANDIPITI{CLEAR_TO 0x48}¥12000$"
     "OGERPON{CLEAR_TO 0x48}¥12000$"
     "URSALUNA BLOODMOON{CLEAR_TO 0x48}¥12000$"
