@@ -143,7 +143,7 @@ static u32 GetWildAiFlags(void)
 static u32 GetAiFlags(u16 trainerId)
 {
     u32 flags = 0;
-    
+
     if (!(gBattleTypeFlags & BATTLE_TYPE_HAS_AI) && !IsWildMonSmart())
         return 0;
     if (trainerId == 0xFFFF)
@@ -167,26 +167,26 @@ static u32 GetAiFlags(u16 trainerId)
         else
             flags = gTrainers[trainerId].aiFlags;
     }
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
         flags |= AI_FLAG_DOUBLE_BATTLE;
-    
+
     return flags;
 }
 
 void BattleAI_SetupFlags(void)
 {
     AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_LEFT] = 0; // player has no AI
-    
+
 #if DEBUG_OVERWORLD_MENU == TRUE
     if (gIsDebugBattle)
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT] = gDebugAIFlags;
         AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = gDebugAIFlags;
         return;
-    }   
+    }
 #endif
-    
+
     if (IsWildMonSmart() && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_TRAINER)))
     {
         // smart wild AI
@@ -201,7 +201,7 @@ void BattleAI_SetupFlags(void)
         else
             AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_RIGHT] = AI_THINKING_STRUCT->aiFlags[B_POSITION_OPPONENT_LEFT];
     }
-    
+
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
         AI_THINKING_STRUCT->aiFlags[B_POSITION_PLAYER_RIGHT] = GetAiFlags(gPartnerTrainerId - TRAINER_PARTNER(PARTNER_NONE));
@@ -1699,6 +1699,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
                 ADJUST_SCORE(-6);
             break;
         case EFFECT_BELLY_DRUM:
+        case EFFECT_FILLET_AWAY:
             if (aiData->abilities[battlerAtk] == ABILITY_CONTRARY)
                 ADJUST_SCORE(-10);
             else if (aiData->hpPercents[battlerAtk] <= 60)
@@ -2152,8 +2153,8 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
         case EFFECT_ROLE_PLAY:
             if (aiData->abilities[battlerAtk] == aiData->abilities[battlerDef]
               || aiData->abilities[battlerDef] == ABILITY_NONE
-              || IsRolePlayDoodleBannedAbilityAttacker(aiData->abilities[battlerAtk])
-              || IsRolePlayDoodleBannedAbility(aiData->abilities[battlerDef]))
+              || gAbilities[aiData->abilities[battlerAtk]].cantBeSuppressed
+              || gAbilities[aiData->abilities[battlerDef]].cantBeCopied)
                 ADJUST_SCORE(-10);
             else if (IsAbilityOfRating(aiData->abilities[battlerAtk], 5))
                 ADJUST_SCORE(-4);
@@ -2182,25 +2183,26 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_SKILL_SWAP:
             if (aiData->abilities[battlerAtk] == ABILITY_NONE || aiData->abilities[battlerDef] == ABILITY_NONE
-              || IsSkillSwapBannedAbility(aiData->abilities[battlerAtk]) || IsSkillSwapBannedAbility(aiData->abilities[battlerDef])
+              || gAbilities[aiData->abilities[battlerAtk]].cantBeSwapped
+              || gAbilities[aiData->abilities[battlerDef]].cantBeSwapped
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_WORRY_SEED:
             if (aiData->abilities[battlerDef] == ABILITY_INSOMNIA
-              || IsWorrySeedBannedAbility(aiData->abilities[battlerDef])
+              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_GASTRO_ACID:
             if (gStatuses3[battlerDef] & STATUS3_GASTRO_ACID
-              || IsGastroAcidBannedAbility(aiData->abilities[battlerDef]))
+              || gAbilities[aiData->abilities[battlerDef]].cantBeSuppressed)
                 ADJUST_SCORE(-10);
             break;
         case EFFECT_ENTRAINMENT:
             if (aiData->abilities[battlerAtk] == ABILITY_NONE
-              || IsEntrainmentBannedAbilityAttacker(aiData->abilities[battlerAtk])
-              || IsEntrainmentBannedAbility(aiData->abilities[battlerDef])
+              || gAbilities[aiData->abilities[battlerAtk]].cantBeCopied
+              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerAtk] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
@@ -2208,7 +2210,7 @@ static s32 AI_CheckBadMove(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             break;
         case EFFECT_SIMPLE_BEAM:
             if (aiData->abilities[battlerDef] == ABILITY_SIMPLE
-              || IsSimpleBeamBannedAbility(aiData->abilities[battlerDef])
+              || gAbilities[aiData->abilities[battlerDef]].cantBeOverwritten
               || aiData->holdEffects[battlerDef] == HOLD_EFFECT_ABILITY_SHIELD)
                 ADJUST_SCORE(-10);
             break;
@@ -2729,8 +2731,8 @@ static s32 AI_DoubleBattle(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     u32 atkPartnerAbility = aiData->abilities[BATTLE_PARTNER(battlerAtk)];
     u32 atkPartnerHoldEffect = aiData->holdEffects[BATTLE_PARTNER(battlerAtk)];
     bool32 partnerProtecting = (gBattleMoves[aiData->partnerMove].effect == EFFECT_PROTECT);
-    bool32 attackerHasBadAbility = (GetAbilityRating(aiData->abilities[battlerAtk]) < 0);
-    bool32 partnerHasBadAbility = (GetAbilityRating(atkPartnerAbility) < 0);
+    bool32 attackerHasBadAbility = (gAbilities[aiData->abilities[battlerAtk]].aiRating < 0);
+    bool32 partnerHasBadAbility = (gAbilities[atkPartnerAbility].aiRating < 0);
     u32 predictedMove = aiData->predictedMoves[battlerDef];
 
     SetTypeBeforeUsingMove(move, battlerAtk);
@@ -4376,8 +4378,8 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         }
         break;
     case EFFECT_ROLE_PLAY:
-        if (!IsRolePlayDoodleBannedAbilityAttacker(aiData->abilities[battlerAtk])
-          && !IsRolePlayDoodleBannedAbility(aiData->abilities[battlerDef])
+        if (!gAbilities[aiData->abilities[battlerAtk]].cantBeSuppressed
+          && !gAbilities[aiData->abilities[battlerDef]].cantBeCopied
           && !IsAbilityOfRating(aiData->abilities[battlerAtk], 5)
           && IsAbilityOfRating(aiData->abilities[battlerDef], 5))
             ADJUST_SCORE(2);
@@ -4443,7 +4445,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
         }
         break;
     case EFFECT_SKILL_SWAP:
-        if (GetAbilityRating(aiData->abilities[battlerDef]) > GetAbilityRating(aiData->abilities[battlerAtk]))
+        if (gAbilities[aiData->abilities[battlerDef]].aiRating > gAbilities[aiData->abilities[battlerAtk]].aiRating)
             ADJUST_SCORE(1);
         break;
     case EFFECT_WORRY_SEED:
@@ -4453,7 +4455,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(2);
         break;
     case EFFECT_ENTRAINMENT:
-        if (IsAbilityOfRating(aiData->abilities[battlerDef], 5) || GetAbilityRating(aiData->abilities[battlerAtk]) <= 0)
+        if (IsAbilityOfRating(aiData->abilities[battlerDef], 5) || gAbilities[aiData->abilities[battlerAtk]].aiRating <= 0)
         {
             if (aiData->abilities[battlerDef] != aiData->abilities[battlerAtk] && !(gStatuses3[battlerDef] & STATUS3_GASTRO_ACID))
                 ADJUST_SCORE(2);
@@ -4739,7 +4741,7 @@ static s32 AI_CheckViability(u32 battlerAtk, u32 battlerDef, u32 move, s32 score
             ADJUST_SCORE(3);
         break;
     case EFFECT_HEAL_BLOCK:
-        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && predictedMove != MOVE_NONE && IsHealingMoveEffect(gBattleMoves[predictedMove].effect))
+        if (AI_WhoStrikesFirst(battlerAtk, battlerDef, move) == AI_IS_FASTER && predictedMove != MOVE_NONE && IsHealingMove(predictedMove))
             ADJUST_SCORE(3); // Try to cancel healing move
         else if (HasHealingEffect(battlerDef) || aiData->holdEffects[battlerDef] == HOLD_EFFECT_LEFTOVERS
           || (aiData->holdEffects[battlerDef] == HOLD_EFFECT_BLACK_SLUDGE && IS_BATTLER_OF_TYPE(battlerDef, TYPE_POISON)))
@@ -5043,6 +5045,7 @@ static s32 AI_Risky(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
     case EFFECT_FOCUS_PUNCH:
     case EFFECT_REVENGE:
     case EFFECT_TEETER_DANCE:
+    case EFFECT_FILLET_AWAY:
         if (Random() & 1)
             ADJUST_SCORE(2);
         break;
@@ -5193,6 +5196,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_CONVERSION_2:
             case EFFECT_SAFEGUARD:
             case EFFECT_BELLY_DRUM:
+            case EFFECT_FILLET_AWAY:
                 ADJUST_SCORE(-2);
                 break;
             default:
@@ -5228,6 +5232,7 @@ static s32 AI_HPAware(u32 battlerAtk, u32 battlerDef, u32 move, s32 score)
             case EFFECT_HAIL:
             case EFFECT_SNOWSCAPE:
             case EFFECT_RAIN_DANCE:
+            case EFFECT_FILLET_AWAY:
                 ADJUST_SCORE(-2);
                 break;
             default:

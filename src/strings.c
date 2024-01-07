@@ -267,7 +267,8 @@ const u8 *const gBagMenu_ReturnToStrings[] =
     [ITEMMENULOCATION_QUIZ_LADY]           = gText_TheField,
     [ITEMMENULOCATION_APPRENTICE]          = gText_TheField,
     [ITEMMENULOCATION_WALLY]               = gText_TheBattle,
-    [ITEMMENULOCATION_PCBOX]               = gText_ThePC
+    [ITEMMENULOCATION_PCBOX]               = gText_ThePC,
+    [ITEMMENULOCATION_BERRY_TREE_MULCH]    = gText_TheField,
 };
 
 const u8 *const gPyramidBagMenu_ReturnToStrings[] =
@@ -1853,3 +1854,6 @@ const u8 gText_Moves_Menu[] = _("MOVES");
 
  // [LOuroboros] Nickname your Pokémon from the party menu
 const u8 gText_Nickname[] = _("NICKNAME");
+
+const u8 gText_Fertilize[] = _("FERTILIZE");
+const u8 gText_PlantBerry[] = _("PLANT BERRY");

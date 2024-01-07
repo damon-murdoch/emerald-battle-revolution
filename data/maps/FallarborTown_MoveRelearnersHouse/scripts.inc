@@ -57,7 +57,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice::
 
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon::
-	checkmoney 2000
+	checkmoney 500
 	compare VAR_RESULT, FALSE
 	goto_if_eq FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_2
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMon_1:
@@ -103,7 +103,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove::
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_1:
 	showmoneybox 0, 0
 	msgbox FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_Text_0
-	removemoney 2000
+	removemoney 500
 	playse SE_SHOP
 	updatemoneybox
 	waitse
@@ -160,7 +160,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutor_Text_1:
 	.string "learn from other POKéMON!$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorDisplayPrice_Text_0:
-	.string "This service costs a mere ¥2000 per\n"
+	.string "This service costs a mere ¥500 per\n"
 	.string "move!$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_Text_0:
