@@ -304,7 +304,6 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk::
 	lock
 	faceplayer
 	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_0
-	msgbox BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_1
 	goto BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney
 	return
 
@@ -2596,10 +2595,6 @@ BattleFrontier_Underground_B1F_EventScript_PokemonShopSign_Text_0:
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_0:
 	.string "Welcome to the one-and-only legendary\n"
 	.string "POKéMON shop!$"
-
-BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk_Text_1:
-	.string "We can track down almost any rare\n"
-	.string "POKéMON for you here!$"
 
 BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney_Text_0:
 	.string "Oh, sorry! You need at least ¥12000 to\n"

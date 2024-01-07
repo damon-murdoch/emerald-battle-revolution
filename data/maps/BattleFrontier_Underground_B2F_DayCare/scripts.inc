@@ -5,8 +5,6 @@ BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder::
 	lock
 	faceplayer
 	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_0
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_1
-	msgbox BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_2
 	goto BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckMoney
 	return
 
@@ -4404,15 +4402,8 @@ BattleFrontier_Underground_B2F_DayCare_Mart_EvolutionMan:
 	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_0:
-	.string "Hello there! I'm a POKéMON breeder!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_1:
-	.string "If you need a certain species of\n"
-	.string "POKéMON, I can breed it for you!$"
-
-BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder_Text_2:
-	.string "Our selection is currently limited, but\n"
-	.string "we will be expanding soon!$"
+	.string "Hello there! I'm the POKéMON breeder!\n"
+	.string "What are you looking for today?$"
 
 BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckMoney_Text_0:
 	.string "Oh, sorry! You need at least ¥4000 to\n"

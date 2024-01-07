@@ -8,9 +8,7 @@ BattleFrontier_Underground_B2F_DayCare_MapScripts::
 script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreeder {
     lock
     faceplayer
-    msgbox(format("Hello there! I'm a POKéMON breeder!"))
-    msgbox(format("If you need a certain species of POKéMON, I can breed it for you!"))
-    msgbox(format("Our selection is currently limited, but we will be expanding soon!"))
+    msgbox(format("Hello there! I'm the POKéMON breeder! What are you looking for today?"))
     goto(BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckMoney)
 }
 script BattleFrontier_Underground_B2F_DayCare_EventScript_PokemonBreederCheckMoney {

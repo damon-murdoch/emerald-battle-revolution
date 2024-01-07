@@ -273,7 +273,6 @@ script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerk {
     lock
     faceplayer
     msgbox(format("Welcome to the one-and-only legendary POKéMON shop!"))
-    msgbox(format("We can track down almost any rare POKéMON for you here!"))
     goto(BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney)
 }
 script BattleFrontier_Underground_B1F_EventScript_PokemonShopMainClerkCheckMoney {
