@@ -2075,7 +2075,8 @@
 	.byte \ignoreBPress
 	.byte \per_row
 	.byte \cursorPos
-	
+	.endm
+
 	@ Sets VAR_RESULT to TRUE if stat can be hyper trained, or to
 	@ FALSE otherwise.
 	.macro canhypertrain stat:req, slot:req

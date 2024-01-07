@@ -1731,7 +1731,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
     u8 *txtPtr;
     u8 type;
     u32 speciesId;
-    struct Pokemon *mon;
+    struct Pokemon * mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
     txtPtr = StringCopy(gDisplayedStringBattle, gText_MoveInterfaceType);
@@ -1741,7 +1741,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
 
     switch(moveInfo->moves[gMoveSelectionCursor[battler]]){
         case MOVE_IVY_CUDGEL: {
-            mon = &GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]];
+
             speciesId = GetMonData(mon, MON_DATA_SPECIES);
 
             if (speciesId == SPECIES_OGERPON_WELLSPRING_MASK || speciesId == SPECIES_OGERPON_WELLSPRING_MASK_TERA

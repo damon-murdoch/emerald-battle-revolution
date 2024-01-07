@@ -3616,8 +3616,6 @@ static void BufferLeftColumnStats(void)
 	u8 atkEV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK_EV);
 	u8 defEV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_DEF_EV);
 
-	const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
-
 	DynamicPlaceholderTextUtil_Reset();
 
 	if (gMain.heldKeys & R_BUTTON) {
@@ -4131,19 +4129,6 @@ static void SetMoveTypeIcons(void)
         {
             u8 type;
 
-            /*
-                case MOVE_IVY_CUDGEL: {
-                    speciesId = GetMonData(mon, MON_DATA_SPECIES);
-
-                    if (speciesId == SPECIES_OGERPON_WELLSPRING_MASK || speciesId == SPECIES_OGERPON_WELLSPRING_MASK_TERA
-                        || speciesId == SPECIES_OGERPON_HEARTHFLAME_MASK || speciesId == SPECIES_OGERPON_HEARTHFLAME_MASK_TERA
-                        || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK || speciesId == SPECIES_OGERPON_CORNERSTONE_MASK_TERA)
-                        type = gBattleMons[battler].type2;
-                    else
-                        type = gBattleMoves[MOVE_IVY_CUDGEL].type;
-                }; break;
-            */
-
             switch(summary->moves[i]){
                 case MOVE_IVY_CUDGEL: {
                     speciesId = GetMonData(mon, MON_DATA_SPECIES);
@@ -4198,8 +4183,8 @@ static void SetContestMoveTypeIcons(void)
 static void SetNewMoveTypeIcon(void)
 {
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-    u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM);
     u16 newMove = sMonSummaryScreen->newMove;
+    u32 speciesId;
 
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
@@ -4209,15 +4194,35 @@ static void SetNewMoveTypeIcon(void)
     {
         u8 type;
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES) {
-            if (newMove == MOVE_IVY_CUDGEL && ItemId_GetHoldEffect(heldItem) == HOLD_EFFECT_MASK) {
-                type = ItemId_GetSecondaryId(heldItem);
-            }
-            else if (newMove == MOVE_HIDDEN_POWER) {
-                type = GetMonHiddenPowerType(mon);
-                type = ((type | 0xC0) & 0x3F);
-            }
-            else {
-                type = gBattleMoves[sMonSummaryScreen->newMove].type;
+            switch(newMove){
+                case MOVE_IVY_CUDGEL: {
+                    speciesId = GetMonData(mon, MON_DATA_SPECIES);
+
+                    switch (speciesId){
+                        case SPECIES_OGERPON_WELLSPRING_MASK:
+                        case SPECIES_OGERPON_WELLSPRING_MASK_TERA: {
+                            type = TYPE_WATER;
+                        }; break;
+                        case SPECIES_OGERPON_HEARTHFLAME_MASK:
+                        case SPECIES_OGERPON_HEARTHFLAME_MASK_TERA: {
+                            type = TYPE_FIRE;
+                        }; break;
+                        case SPECIES_OGERPON_CORNERSTONE_MASK:
+                        case SPECIES_OGERPON_CORNERSTONE_MASK_TERA: {
+                            type = TYPE_ROCK;
+                        }; break;
+                        default: {
+                            type = TYPE_GRASS;
+                        }
+                    } 
+                }; break;
+                case MOVE_HIDDEN_POWER: {
+                    type = GetMonHiddenPowerType(mon);
+                    type = ((type | 0xC0) & 0x3F);
+                }; break;
+                default: {
+                    type = gBattleMoves[sMonSummaryScreen->newMove].type;
+                }; break;
             }
         }
         else {

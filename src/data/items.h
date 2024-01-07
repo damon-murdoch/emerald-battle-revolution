@@ -6731,12 +6731,10 @@ const struct Item gItems[] =
         .price = 1000,
         .holdEffect = HOLD_EFFECT_EXP_SHARE,
         #if I_EXP_SHARE_ITEM >= GEN_6
-            .price = 0,
             .description = COMPOUND_STRING("This device gives\n"
                                            "exp. to other\n"
                                            "party members."),
         #else
-            .price = 3000,
             .description = COMPOUND_STRING("A hold item that\n"
                                            "gets Exp. points\n"
                                            "from battles."),
