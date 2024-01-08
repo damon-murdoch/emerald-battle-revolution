@@ -4083,7 +4083,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .backPicYOffset = 3,
         //.backAnimId = BACK_ANIM_NONE,
         PALETTES(UrsalunaBloodmoon),
-        //ICON(UrsalunaBloodmoon, 0),
+        ICON(Ursaluna, 2), // ICON(UrsalunaBloodmoon, 0),
         //FOOTPRINT(UrsalunaBloodmoon)
         LEARNSETS(UrsalunaBloodmoon),
     },
