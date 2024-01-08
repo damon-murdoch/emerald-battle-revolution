@@ -557,6 +557,8 @@
 #define MAP_BATTLE_FRONTIER_UNDERGROUND_B1F                 (89 | (26 << 8))
 #define MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_DAY_CARE        (90 | (26 << 8))
 #define MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_GAME_CORNER     (91 | (26 << 8))
+#define MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_POKE_CENTER_1F  (92 | (26 << 8))
+#define MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_POKE_CENTER_2F  (93 | (26 << 8))
 
 // gMapGroup_IndoorRoute104Prototype
 #define MAP_ROUTE104_PROTOTYPE                          (0 | (27 << 8))

@@ -586,7 +586,9 @@
     "TrainerHill_Elevator",
     "BattleFrontier_Underground_B1F",
     "BattleFrontier_Underground_B2F_DayCare",
-    "BattleFrontier_Underground_B2F_GameCorner"
+    "BattleFrontier_Underground_B2F_GameCorner",
+    "BattleFrontier_Underground_B2F_PokeCenter_1F",
+    "BattleFrontier_Underground_B2F_PokeCenter_2F"
   ],
   "gMapGroup_IndoorRoute104Prototype": [
     "Route104_Prototype",
