@@ -1,7 +1,7 @@
 {
-  "id": "MAP_BATTLE_FRONTIER_POKEMON_CENTER_2F",
-  "name": "BattleFrontier_PokemonCenter_2F",
-  "layout": "LAYOUT_POKEMON_CENTER_2F",
+  "id": "MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_POKE_CENTER_2F",
+  "name": "BattleFrontier_Underground_B2F_PokeCenter_2F",
+  "layout": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B2F_POKE_CENTER_2F",
   "music": "MUS_POKE_CENTER",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
@@ -20,24 +20,11 @@
       "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_range_x": 0,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Common_EventScript_UnionRoomAttendant",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_TEALA",
-      "x": 2,
-      "y": 2,
-      "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "Common_EventScript_WirelessClubAttendant",
       "flag": "0"
     },
     {
@@ -46,11 +33,24 @@
       "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_range_x": 0,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "Common_EventScript_DirectCornerAttendant",
+      "flag": "0"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_TEALA",
+      "x": 2,
+      "y": 2,
+      "elevation": 0,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Common_EventScript_WirelessClubAttendant",
       "flag": "0"
     },
     {
@@ -59,8 +59,8 @@
       "y": 2,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
+      "movement_range_x": 0,
+      "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
       "script": "CableClub_EventScript_MysteryGiftMan",
@@ -71,21 +71,21 @@
     {
       "x": 1,
       "y": 6,
-      "elevation": 4,
-      "dest_map": "MAP_BATTLE_FRONTIER_POKEMON_CENTER_1F",
+      "elevation": 0,
+      "dest_map": "MAP_BATTLE_FRONTIER_UNDERGROUND_B2F_POKE_CENTER_1F",
       "dest_warp_id": "2"
     },
     {
       "x": 5,
       "y": 1,
-      "elevation": 3,
+      "elevation": 0,
       "dest_map": "MAP_UNION_ROOM",
       "dest_warp_id": "0"
     },
     {
       "x": 9,
       "y": 1,
-      "elevation": 3,
+      "elevation": 0,
       "dest_map": "MAP_TRADE_CENTER",
       "dest_warp_id": "0"
     }

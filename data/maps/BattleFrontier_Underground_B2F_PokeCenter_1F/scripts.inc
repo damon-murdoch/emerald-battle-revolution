@@ -1,0 +1,18 @@
+.set LOCALID_NURSE, 1
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_Underground_B2F_PokeCenter_1F_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, CableClub_OnResume
+	.byte 0
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_OnTransition:
+	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_UNDERGROUND
+	end
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Nurse::
+	setvar VAR_0x800B, LOCALID_NURSE
+	call Common_EventScript_PkmnCenterNurse
+	waitmessage
+	waitbuttonpress
+	release
+	end
