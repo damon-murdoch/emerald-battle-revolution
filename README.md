@@ -127,6 +127,36 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.9.3
+
+Added fully working Pokemon Centre to (with respawn point) to Battle Frontier Underground, 
+added Gimmighoul Coin / Leaders Crest item effects
+
+### Ver. 0.9.2
+
+Resolved merge conflicts, new teachable moves, text improvements, updated rom name, 
+changed Ursaluna-BM to use standard Ursaluna sprite temporarily
+
+### Ver. 0.9.1
+
+Created Game Corner Currency Converter, added to the top left of both the Mauville Game Corner
+and the Battle Frontier Underground Game Corner
+
+### Ver. 0.9.0
+
+Removed fade to black from pokemon salespeople, added multichoice text for all breeder options, 
+implemented pokemon breeder for all species, minor refractor to add some missing species
+
+### Ver. 0.8.3
+
+Updated move tutor prices, fixed berry/bottle cap descriptions, made photon geyser single target, 
+fixed bleakwind/wildbolt/sandsear storm accuracy, 
+
+### Ver. 0.8.2
+
+Implemented system for exchanging Gold Bottle Caps for shiny Pokemon in both the legendary Pokemon counter and
+the Pokemon breeder, added optional allow battle z-moves in battle frontier switch, reduce held item animation time
+
 ### Ver. 0.8.1
 
 Hidden Power type is now displayed accurately in the summary menu, move teacher menu, and in battle. Code has been
