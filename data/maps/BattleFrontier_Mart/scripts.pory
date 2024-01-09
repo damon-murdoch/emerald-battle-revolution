@@ -63,7 +63,6 @@ script BattleFrontier_Mart_EventScript_Clerk2 {
 }
 
 mart BattleFrontier_Mart_Pokemart_Clerk2 {
-	ITEM_CHERISH_BALL
 	ITEM_MASTER_BALL
 	ITEM_BEAST_BALL
 	ITEM_SOUL_DEW

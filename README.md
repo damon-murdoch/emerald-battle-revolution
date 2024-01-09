@@ -127,6 +127,11 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.9.4
+
+Removed Cherish Ball / Gold Bottle Cap from stores, added NPC for exchanging Battle Points
+for those items (50 each) to Battle Frontier Underground Pokemon Centre
+
 ### Ver. 0.9.3
 
 Added fully working Pokemon Centre to (with respawn point) to Battle Frontier Underground, 
