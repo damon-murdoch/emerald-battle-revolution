@@ -109,11 +109,11 @@ static const struct CombinedMove sCombinedMoves[2] =
     {0xFFFF, 0xFFFF, 0xFFFF}
 };
 
-#define NUM_CUSTOM_FRONTIER_SONGS 19
+#define FRONTIER_BGM_COUNT 19
 
 // Songs which can be selected by the player
 // to play during matches at the Battle Frontier
-static const u16 customFrontierSongs[NUM_CUSTOM_FRONTIER_SONGS] = {
+static const u16 customFrontierSongs[FRONTIER_BGM_COUNT] = {
     // RBY Music
     MUS_VS_FRONTIER_BRAIN,
     MUS_VS_MEW,
@@ -5333,16 +5333,16 @@ bool32 IsSpeciesInHoennDex(u16 species)
 u16 GetBattleBGM(void)
 {
     // Get custom battle frontier bgm
-    const u16 customFrontierSong = VarGet(VAR_CUSTOM_BATTLE_MUSIC);
+    const u16 frontierBGM = VarGet(VAR_FRONTIER_BGM);
 
     // Custom battle frontier bgm is set
-    if (customFrontierSong > 0 && 
-        customFrontierSong <= NUM_CUSTOM_FRONTIER_SONGS && (
+    if (frontierBGM > 0 && 
+        frontierBGM <= FRONTIER_BGM_COUNT && (
         gBattleTypeFlags & BATTLE_TYPE_FRONTIER || 
         gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL
     )){
         // Return the selected custom battle frontier song
-        return customFrontierSongs[customFrontierSong - 1];
+        return customFrontierSongs[frontierBGM - 1];
     }
     else if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {

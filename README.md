@@ -127,6 +127,12 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.9.5
+
+Added an NPC to all battle facilities (Frontier Facilities and Trainer Tower) which allows
+you to change the battle music within the facility. NPCs still need to be added for the battle
+tents located throughout the game.
+
 ### Ver. 0.9.4
 
 Removed Cherish Ball / Gold Bottle Cap from stores, added NPC for exchanging Battle Points
