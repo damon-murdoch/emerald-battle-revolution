@@ -1963,6 +1963,8 @@ BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk:
 
 	.align 2
 BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
+	.2byte ITEM_DURIN_BERRY
+	.2byte ITEM_BELUE_BERRY
 	.2byte ITEM_RAZZ_BERRY
 	.2byte ITEM_BLUK_BERRY
 	.2byte ITEM_NANAB_BERRY
@@ -1975,8 +1977,6 @@ BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk:
 	.2byte ITEM_SPELON_BERRY
 	.2byte ITEM_PAMTRE_BERRY
 	.2byte ITEM_WATMEL_BERRY
-	.2byte ITEM_DURIN_BERRY
-	.2byte ITEM_BELUE_BERRY
 	.2byte ITEM_NONE
 
 	.align 2
@@ -1998,23 +1998,23 @@ BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk:
 
 	.align 2
 BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk:
-	.2byte ITEM_HEALTH_FEATHER
-	.2byte ITEM_MUSCLE_FEATHER
-	.2byte ITEM_RESIST_FEATHER
-	.2byte ITEM_GENIUS_FEATHER
-	.2byte ITEM_CLEVER_FEATHER
-	.2byte ITEM_SWIFT_FEATHER
 	.2byte ITEM_HP_UP
+	.2byte ITEM_HEALTH_FEATHER
 	.2byte ITEM_PROTEIN
+	.2byte ITEM_MUSCLE_FEATHER
 	.2byte ITEM_IRON
+	.2byte ITEM_RESIST_FEATHER
 	.2byte ITEM_CALCIUM
+	.2byte ITEM_GENIUS_FEATHER
 	.2byte ITEM_ZINC
+	.2byte ITEM_CLEVER_FEATHER
 	.2byte ITEM_CARBOS
+	.2byte ITEM_SWIFT_FEATHER
 	.2byte ITEM_PP_UP
 	.2byte ITEM_PP_MAX
+	.2byte ITEM_BOTTLE_CAP
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
-	.2byte ITEM_BOTTLE_CAP
 	.2byte ITEM_NONE
 
 	.align 2
