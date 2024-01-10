@@ -414,6 +414,21 @@ TrainerHill_Elevator_Text_ReturnToReception:
 	.string "Would you like to return to\n"
 	.string "the reception counter?$"
 
+TrainerHill_Entrance_EventScript_MusicAttendant::
+	msgbox TrainerHill_Entrance_EventScript_MusicAttendant_Text_0
+	goto_if_set FLAG_IS_CHAMPION, TrainerHill_Entrance_EventScript_MusicAttendant_2
+TrainerHill_Entrance_EventScript_MusicAttendant_1:
+	msgbox TrainerHill_Entrance_EventScript_MusicAttendant_Text_3
+	goto BattleFrontier_Generic_EventScript_MusicAttendantEnd
+	return
+
+TrainerHill_Entrance_EventScript_MusicAttendant_2:
+	msgbox TrainerHill_Entrance_EventScript_MusicAttendant_Text_1
+	msgbox TrainerHill_Entrance_EventScript_MusicAttendant_Text_2
+	goto BattleFrontier_Generic_EventScript_MusicAttendantPage1
+	goto TrainerHill_Entrance_EventScript_MusicAttendant_1
+
+
 TrainerHill_Entrance_EventScript_Clerk2::
 	lock
 	faceplayer
@@ -540,6 +555,20 @@ TrainerHill_Entrance_Pokemart_Clerk2Other:
 	.2byte ITEM_POWER_BAND
 	.2byte ITEM_POWER_ANKLET
 	.2byte ITEM_NONE
+
+TrainerHill_Entrance_EventScript_MusicAttendant_Text_0:
+	.string "Welcome to TRAINER HILL!$"
+
+TrainerHill_Entrance_EventScript_MusicAttendant_Text_1:
+	.string "I can help you change the battle music.\n"
+	.string "What would like to listen to?$"
+
+TrainerHill_Entrance_EventScript_MusicAttendant_Text_2:
+	.string "L: Previous Page                    R: Next Page\nB: Go Back$"
+
+TrainerHill_Entrance_EventScript_MusicAttendant_Text_3:
+	.string "We haven't finished getting everything\n"
+	.string "ready yet.$"
 
 TrainerHill_Entrance_EventScript_Clerk2_Text_0:
 	.string "This medicine will make your POKéMON\n"
