@@ -545,7 +545,7 @@ InsideOfTruck_EventScript_Introduction_Text_2:
 	.string "PokeEmerald-Expanded Project$"
 
 InsideOfTruck_EventScript_Introduction_Text_3:
-	.string "Current Version: 0.9.4$"
+	.string "Current Version: 0.9.5$"
 
 InsideOfTruck_EventScript_Introduction_Text_4:
 	.string "For more information, please visit our\n"
