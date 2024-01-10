@@ -18,3 +18,59 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Nurse::
 	release
 	end
 `
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Gentleman {
+    lock
+	faceplayer
+	msgbox(format("Good to see you. I offer rare items in exchange for battle points."))
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckBattlePoints)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckBattlePoints {
+	specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+	if(var(VAR_TEMP_1) >= 50) {
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckSelection)
+	}
+	msgbox(format("You'll need at least 50 BP before you can buy anything from me."))
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckSelection {
+	msgbox(format("What would you like?"))
+	special(ShowBattlePointsWindow)
+	multichoice2(18,0,BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman)
+	switch(var(VAR_RESULT)) {
+		case 0:
+			giveitem(ITEM_CHERISH_BALL)
+		case 1: 
+			giveitem(ITEM_GOLD_BOTTLE_CAP)
+		default: 
+			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd)
+	}
+	setvar(VAR_0x8004, 50)
+	msgbox(format("I'll take your payment now, please."))
+	special(TakeFrontierBattlePoints)
+	playse(SE_SHOP)
+	special(UpdateBattlePointsWindow)
+	waitse
+	special(CloseBattlePointsWindow)
+    msgbox(format("Thank you for that."))
+    msgbox(format("Would you like anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES) {
+        goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckBattlePoints)
+    }
+    goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd {
+	msgbox(format("Please come see me again."))
+    release
+    end
+}
+
+text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman {
+	"CHERISH BALL{CLEAR_TO 0x48}50BP$"
+	"GOLD BOTTLE CAP{CLEAR_TO 0x48}50BP$"
+	""
+}

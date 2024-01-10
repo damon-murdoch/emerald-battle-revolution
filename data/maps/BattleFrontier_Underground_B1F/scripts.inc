@@ -2015,7 +2015,6 @@ BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk:
 	.2byte ITEM_ABILITY_CAPSULE
 	.2byte ITEM_ABILITY_PATCH
 	.2byte ITEM_BOTTLE_CAP
-	.2byte ITEM_GOLD_BOTTLE_CAP
 	.2byte ITEM_NONE
 
 	.align 2
@@ -2508,7 +2507,6 @@ BattleFrontier_Underground_B1F_Mart_PokeballClerk:
 	.2byte ITEM_SPORT_BALL
 	.2byte ITEM_PARK_BALL
 	.2byte ITEM_BEAST_BALL
-	.2byte ITEM_CHERISH_BALL
 	.2byte ITEM_NONE
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter_Text_0:

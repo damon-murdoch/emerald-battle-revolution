@@ -1558,7 +1558,6 @@ mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
     ITEM_ABILITY_CAPSULE
     ITEM_ABILITY_PATCH
     ITEM_BOTTLE_CAP
-    ITEM_GOLD_BOTTLE_CAP
 }
 
 mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
@@ -2035,5 +2034,4 @@ mart BattleFrontier_Underground_B1F_Mart_PokeballClerk {
     ITEM_SPORT_BALL
     ITEM_PARK_BALL
     ITEM_BEAST_BALL
-    ITEM_CHERISH_BALL
 }

@@ -61,7 +61,6 @@ BattleFrontier_Mart_EventScript_Clerk2::
 
 	.align 2
 BattleFrontier_Mart_Pokemart_Clerk2:
-	.2byte ITEM_CHERISH_BALL
 	.2byte ITEM_MASTER_BALL
 	.2byte ITEM_BEAST_BALL
 	.2byte ITEM_SOUL_DEW
