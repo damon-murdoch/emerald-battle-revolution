@@ -1508,6 +1508,8 @@ mart BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk {
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
+    ITEM_DURIN_BERRY
+    ITEM_BELUE_BERRY
     ITEM_RAZZ_BERRY
     ITEM_BLUK_BERRY
     ITEM_NANAB_BERRY
@@ -1520,8 +1522,6 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopIVTrainingClerk {
     ITEM_SPELON_BERRY
     ITEM_PAMTRE_BERRY
     ITEM_WATMEL_BERRY
-    ITEM_DURIN_BERRY
-    ITEM_BELUE_BERRY
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
@@ -1541,23 +1541,23 @@ mart BattleFrontier_Underground_B1F_Mart_BerryShopEVTrainingClerk {
 }
 
 mart BattleFrontier_Underground_B1F_Mart_TrainingShopVitaminClerk {
-    ITEM_HEALTH_FEATHER
-    ITEM_MUSCLE_FEATHER
-    ITEM_RESIST_FEATHER
-    ITEM_GENIUS_FEATHER
-    ITEM_CLEVER_FEATHER
-    ITEM_SWIFT_FEATHER
     ITEM_HP_UP
+    ITEM_HEALTH_FEATHER
     ITEM_PROTEIN
+    ITEM_MUSCLE_FEATHER
     ITEM_IRON
+    ITEM_RESIST_FEATHER
     ITEM_CALCIUM
+    ITEM_GENIUS_FEATHER
     ITEM_ZINC
+    ITEM_CLEVER_FEATHER
     ITEM_CARBOS
+    ITEM_SWIFT_FEATHER
     ITEM_PP_UP
     ITEM_PP_MAX
+    ITEM_BOTTLE_CAP
     ITEM_ABILITY_CAPSULE
     ITEM_ABILITY_PATCH
-    ITEM_BOTTLE_CAP
 }
 
 mart BattleFrontier_Underground_B1F_Mart_TrainingShopMintClerk {
