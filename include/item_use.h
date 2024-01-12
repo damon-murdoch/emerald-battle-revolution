@@ -47,6 +47,7 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void ItemUseOutOfBattle_ReduceIV(u8);
 void ItemUseOutOfBattle_IncreaseIV(u8);
 void ItemUseOutOfBattle_Pokeball(u8);
+void ItemUseOutOfBattle_DynamaxBand(u8);
 void FieldUseFunc_VsSeeker(u8 taskId);
 void Task_ItemUse_CloseMessageBoxAndReturnToField_VsSeeker(u8 taskId);
 void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField);

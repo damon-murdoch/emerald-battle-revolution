@@ -329,6 +329,7 @@ SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_1:
 	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_2
 	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_3
 	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_4
+	msgbox SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_5
 	setflag FLAG_ITEM_DYNAMAX_BAND_OBTAINED
 	return
 
@@ -349,10 +350,19 @@ SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_2:
 	.string "gigantamax formes!$"
 
 SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_3:
-	.string "Although, dynamaxing is only available\n"
-	.string "in certain areas.$"
+	.string "To enable dynamaxing, you'll need to use\n"
+	.string "the dynamax band in your bag - But, you\l"
+	.string "won't be able to use megas, z-moves or\l"
+	.string "tera formes while it's turned on.$"
 
 SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_4:
-	.string "Dynamax candy will now be available at\n"
-	.string "most POKéMARTs - Even those you've\l"
+	.string "You may also encounter opponents who\n"
+	.string "dynamax their POKéMON while your band\l"
+	.string "is enabled. If you want to use megas,\l"
+	.string "z-moves and tera again simply turn the\l"
+	.string "dynamax band off.$"
+
+SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand_Text_5:
+	.string "Dynamax candy will also now be available\n"
+	.string "at most POKéMARTs - Even those you've\l"
 	.string "already visited.$"

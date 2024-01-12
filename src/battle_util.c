@@ -47,6 +47,7 @@
 #include "constants/trainers.h"
 #include "constants/weather.h"
 #include "constants/pokemon.h"
+#include "config/dynamax.h"
 
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
@@ -10031,6 +10032,10 @@ bool32 CanMegaEvolve(u32 battler)
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
     struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]))->mega);
 
+    // Check if Mega Evolution is blocked by dynamax battle
+    if (!DB_ALLOW_MEGA_EVOLUTION && FlagGet(FLAG_DYNAMAX_BATTLE))
+        return FALSE;
+
     // Check if Player has a Mega Ring
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))
      && !CheckBagHasItem(ITEM_MEGA_RING, 1))
@@ -10092,6 +10097,10 @@ bool32 CanUltraBurst(u32 battler)
     struct Pokemon *mon;
     u32 battlerPosition = GetBattlerPosition(battler);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
+
+    // Check if Z Moves are blocked by dynamax battle
+    if (!DB_ALLOW_Z_MOVES && FlagGet(FLAG_DYNAMAX_BATTLE))
+        return FALSE;
 
     // Check if Player has a Z Ring
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))

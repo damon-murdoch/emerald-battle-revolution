@@ -127,6 +127,14 @@ when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.9.6
+
+Added a toggle to the dynamax band which allows you to enable or disable dynamax battles, you
+will be unable to use megas/zmoves/tera during dynamax battles and dynamax will be unavailable
+outside of them. Ingame text has been updated to reflect this behavior. A new configuration
+header file has been added to control dynamax battle behavior (i.e. controlling if mega/z/tera
+can be used, setting if opponents can dynamax, etc.)
+
 ### Ver. 0.9.5
 
 Added an NPC to all battle facilities (Frontier Facilities and Trainer Tower) which allows
