@@ -87,40 +87,12 @@ This is the main release branch for the software, where the latest stable versio
 of the code will be deployed. This will be kept up to date with the latest stable 
 `dev` release.
 
-### Mint (Release)
-
-This is the second main release branch for the software, which has Groulslash's nature
-mints code implemented on top of the other main branch features. This has been added
-to a seperate branch to prevent merge conflicts in the future once the mints are
-implemented on the upstream branch of `PokeEmerald-Expanded.` This will be kept 
-up to date with the latest stable `dev` release.
-
-### Modified (Release)
-
-This is an offshoot branch of the software, which has modified moves / learn tables / etc.
-for some Pokemon or items which will be notated with the `// Modified` comment after each 
-adjusted line. The `main` or `dev` branches will never directly modify a Pokemon's stats
-or otherwise modify them from how they behave in the main series titles. This will be 
-kept up to date with the latest stable `dev` release.
-
-### Combined (Release)
-
-This is a combined branch of both the `mint` and `modified` releases, so you can use the
-modified Pokemon with the nature mint code together. This will be kept up to date with
-the latest stable `dev` release.
-
-### Debug (Release)
-
-This is the third release branch for the software, which has all of the main branch
-features with debug code (i.e. debug menu) added for testing purposes. 
-
 ### Dev (Development)
 
 This is the main development branch for the software, which is where code which is actively
-being worked on is stored. The `Main` and `Mint` branches are both merged from this branch
-once the software has been tested and verified as working. This branch is generally not
-advised to be used for a genuine playthrough, and may not always be in a compiling state
-when committed.
+being worked on is stored. This branch has the debug menu enabled, as well as other debugging
+features. This branch is generally not advised to be used for a genuine playthrough, and may 
+not always be in a compiling state when committed.
 
 ## Changelog
 
