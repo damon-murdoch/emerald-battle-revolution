@@ -430,7 +430,8 @@ struct SpeciesInfo /*0x8C*/
             u32 isPaldeanForm:1;
             u32 cannotBeTraded:1;
             u32 allPerfectIVs:1;
-            u32 padding4:18;
+            u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
+            u32 padding4:17;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
@@ -449,8 +450,9 @@ struct BattleMove
     u16 accuracy:7;
     u16 recoil:7;
     u16 criticalHitStage:2;
+    u8 padding:6; // coming soon...
+    u8 numAdditionalEffects:2; // limited to 3 - don't want to get too crazy
     u8 pp;
-    u8 secondaryEffectChance;
 
     u16 target;
     s8 priority;
@@ -506,7 +508,22 @@ struct BattleMove
     u32 skyBattleBanned:1;
     u32 sketchBanned:1;
 
-    u16 argument;
+    u32 argument; // also coming soon
+
+    // primary/secondary effects
+    const struct AdditionalEffect *additionalEffects;
+};
+
+#define EFFECTS_ARR(...) (const struct AdditionalEffect[]) {__VA_ARGS__}
+#define ADDITIONAL_EFFECTS(...) EFFECTS_ARR( __VA_ARGS__ ), .numAdditionalEffects = ARRAY_COUNT(EFFECTS_ARR( __VA_ARGS__ ))
+
+struct AdditionalEffect
+{
+    u8 self:1;
+    u8 onlyIfTargetRaisedStats:1;
+    u8 onChargeTurnOnly:1;
+    u8 chance; // 0% = effect certain, primary effect
+    u16 moveEffect;
 };
 
 struct Ability

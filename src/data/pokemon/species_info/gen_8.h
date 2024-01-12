@@ -1951,7 +1951,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpDefense = 80,
         .types = { TYPE_GRASS, TYPE_DRAGON },
         .catchRate = 10,
-        .expYield = 170, //Currently unknown
+        .expYield = 270,
         .evYield_SpAttack = 3,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 20,
@@ -2097,8 +2097,10 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .height = 220,
         .weight = 0,
         .description = COMPOUND_STRING(
-            "")
-,
+            "Its sand pouch has grown to tremendous\n"
+            "proportions. More than 1,000,000 tons of\n"
+            "sand now swirl around its body with enough\n"
+            "speed and power to pulverize a skyscraper."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 610,
@@ -3372,7 +3374,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
 #if P_GIGANTAMAX_FORMS
     [SPECIES_ALCREMIE_GIGANTAMAX] =
     {
-        ALCREMIE_MISC_INFO(BODY_COLOR_PINK),
+        ALCREMIE_MISC_INFO(BODY_COLOR_YELLOW),
         .isGigantamax = TRUE,
         .speciesName = _("Alcremie"),
         .cryId = CRY_ALCREMIE,
@@ -4305,7 +4307,7 @@ const struct SpeciesInfo gSpeciesInfoGen8[] =
         .baseSpDefense = 65,
         .types = { TYPE_STEEL, TYPE_DRAGON },
         .catchRate = 10,
-        .expYield = 187, //Currently unknown
+        .expYield = 300,
         .evYield_Defense = 3,
         .genderRatio = PERCENT_FEMALE(50),
         .eggCycles = 30,
