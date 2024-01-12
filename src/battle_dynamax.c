@@ -110,12 +110,9 @@ bool32 CanDynamax(u16 battlerId)
     u16 species = gBattleMons[battlerId].species;
     u16 holdEffect = ItemId_GetHoldEffect(gBattleMons[battlerId].item);
 
-    // Check if Dynamax battle flag is set. This needs to be defined in include/config/battle.h
-    #if B_FLAG_DYNAMAX_BATTLE != 0
-    if (!FlagGet(B_FLAG_DYNAMAX_BATTLE))
-    #endif
+    // Check if Dynamax battle flag is set.
+    if (!FlagGet(FLAG_DYNAMAX_BATTLE))
         return FALSE;
-
 
     // Check if Player has a Dynamax Band.
     if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))

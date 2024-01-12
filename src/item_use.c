@@ -1524,4 +1524,30 @@ void ItemUseOutOfBattle_Pokeball(u8 taskId)
     SetUpItemUseCallback(taskId);
 }
 
+void ItemUseOutOfBattle_DynamaxBand(u8 taskId) {
+    // Check if the dynamax battle flag is set
+    const bool8 canDynamax = FlagGet(FLAG_DYNAMAX_BATTLE);
+
+    // Dynamaxing is enabled
+    if (canDynamax) {
+        // Turn dynamax off
+        PlaySE(SE_PC_OFF);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gText_DynamaxBandOff, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_DynamaxBandOff, CloseItemMessage);
+    } 
+    else // Dynamaxing is disabled
+    {
+        // Turn dynamax on
+        PlaySE(SE_SELECT);
+        if (!gTasks[taskId].data[2]) // to account for pressing select in the overworld
+            DisplayItemMessageOnField(taskId, gText_DynamaxBandOn, Task_CloseCantUseKeyItemMessage);
+        else
+            DisplayItemMessage(taskId, FONT_NORMAL, gText_DynamaxBandOn, CloseItemMessage);
+    }
+
+    FlagToggle(FLAG_DYNAMAX_BATTLE);
+}
+
 #undef tUsingRegisteredKeyItem

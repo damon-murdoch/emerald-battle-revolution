@@ -3056,6 +3056,10 @@ extern const u8 gText_TellHimTheWords[];
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
+// Dynamax Band (Dynamax On/Off)
+extern const u8 gText_DynamaxBandOn[];
+extern const u8 gText_DynamaxBandOff[];
+
 extern const u8 gText_BasePointsResetToZero[];
 extern const u8 gText_PkmnBallChanged[];
 

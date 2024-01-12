@@ -327,8 +327,9 @@ script SootopolisCity_Gym_1F_EventScript_GiveDynamaxBand {
 		giveitem(ITEM_DYNAMAX_BAND)
 		msgbox(format("This item will allow your POKéMON to transform into a powerful Dynamax form for three turns, once per battle."))
 		msgbox(format("This will increase their hit points, and change moves into their MAX move type. Some POKéMON even have unique gigantamax formes!"))
-		msgbox(format("Although, dynamaxing is only available in certain areas."))
-		msgbox(format("Dynamax candy will now be available at most POKéMARTs - Even those you've already visited."))
+		msgbox(format("To enable dynamaxing, you'll need to use the dynamax band in your bag - But, you won't be able to use megas, z-moves or tera formes while it's turned on."))
+		msgbox(format("You may also encounter opponents who dynamax their POKéMON while your band is enabled. If you want to use megas, z-moves and tera again simply turn the dynamax band off."))
+		msgbox(format("Dynamax candy will also now be available at most POKéMARTs - Even those you've already visited."))
 		setflag(FLAG_ITEM_DYNAMAX_BAND_OBTAINED)
 	}
 }
