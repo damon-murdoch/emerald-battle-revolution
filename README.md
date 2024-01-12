@@ -21,7 +21,7 @@ Pokemon easily without the need for modifying save files.
 
 ## Useful Links 
 
-* [PokeEmerald Expansion Readme](./EXPANSION.md)
+* [PokeEmerald Expansion Repository](https://github.com/rh-hideout/pokeemerald-expansion)
 * [PokeEmerald Install / Build Guide](./INSTALL.md)
 * [PokeEmerald Tutorials](https://github.com/pret/pokeemerald/wiki/Tutorials)
 * [Dragapult.xyz Main Site](https://www.dragapult.xyz)
