@@ -550,7 +550,7 @@ InsideOfTruck_EventScript_Introduction_Text_3:
 InsideOfTruck_EventScript_Introduction_Text_4:
 	.string "For more information, please visit our\n"
 	.string "website:\l"
-	.string "https://www.dragapult.xyz/ebr$"
+	.string "https://www.dragapult.xyz?ebr$"
 
 InsideOfTruck_EventScript_AskSandboxMode_Text_0:
 	.string "Would you like to start the game in\n"
