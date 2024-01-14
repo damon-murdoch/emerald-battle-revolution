@@ -432,22 +432,8 @@ script TrainerHill_Entrance_EventScript_Clerk2 {
 	faceplayer
 	message(gText_HowMayIServeYou)
 	waitmessage
-	if (flag(FLAG_BADGE03_GET)) {
-		multichoice2(1,1,TrainerHill_Entrance_Text_Clerk2Options)
-		switch(var(VAR_RESULT)){
-			case 0: 
-				msgbox(format("This medicine will make your POKéMON stronger!"))
-				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Medicine)
-			case 1: 
-				msgbox(format("These berries will help you train your POKéMON!"))
-				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Berries)
-			case 2: 
-				msgbox(format("These mints will change the nature of a POKéMON"))
-				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Mints)
-			case 3: 
-				msgbox(format("These items will help you train POKéMON in battle!"))
-				pokemart(TrainerHill_Entrance_Pokemart_Clerk2Other)
-		}
+	if (flag(FLAG_IS_CHAMPION)) {
+		pokemart(TrainerHill_Entrance_Pokemart_Clerk2)
 	}
 	else // Not unlocked
 	{
@@ -459,66 +445,26 @@ script TrainerHill_Entrance_EventScript_Clerk2 {
 	end
 }
 
-text TrainerHill_Entrance_Text_Clerk2Options {
-	"Medicine$"
-	"Berries$"
-	"Mints$"
-	"Other$"
-	"Cancel$"
-	""
-}
-
-mart TrainerHill_Entrance_Pokemart_Clerk2Medicine {
-	ITEM_HEALTH_MOCHI
-	ITEM_MUSCLE_MOCHI
-	ITEM_RESIST_MOCHI
-	ITEM_GENIUS_MOCHI
-	ITEM_CLEVER_MOCHI
-	ITEM_SWIFT_MOCHI
+mart TrainerHill_Entrance_Pokemart_Clerk2 {
 	ITEM_FRESH_START_MOCHI
+	ITEM_HEALTH_MOCHI
 	ITEM_HEALTH_FEATHER
+	ITEM_MUSCLE_MOCHI
 	ITEM_MUSCLE_FEATHER
+	ITEM_RESIST_MOCHI
 	ITEM_RESIST_FEATHER
+	ITEM_GENIUS_MOCHI
 	ITEM_GENIUS_FEATHER
+	ITEM_CLEVER_MOCHI
 	ITEM_CLEVER_FEATHER
+	ITEM_SWIFT_MOCHI
 	ITEM_SWIFT_FEATHER
-	ITEM_PROTEIN
-	ITEM_CALCIUM
-	ITEM_IRON
-	ITEM_ZINC
-	ITEM_CARBOS
-	ITEM_HP_UP
 	ITEM_PP_UP
 	ITEM_PP_MAX
 	ITEM_ABILITY_CAPSULE
 	ITEM_ABILITY_PATCH
-}
-
-mart TrainerHill_Entrance_Pokemart_Clerk2Berries {
-	ITEM_RAZZ_BERRY
-	ITEM_BLUK_BERRY
-	ITEM_NANAB_BERRY
-	ITEM_WEPEAR_BERRY
-	ITEM_PINAP_BERRY
-	ITEM_CORNN_BERRY
-	ITEM_POMEG_BERRY
-	ITEM_KELPSY_BERRY
-	ITEM_QUALOT_BERRY
-	ITEM_HONDEW_BERRY
-	ITEM_GREPA_BERRY
-	ITEM_TAMATO_BERRY
-	ITEM_MAGOST_BERRY
-	ITEM_RABUTA_BERRY
-	ITEM_NOMEL_BERRY
-	ITEM_SPELON_BERRY
-	ITEM_PAMTRE_BERRY
-	ITEM_WATMEL_BERRY
-	// For future use
-	// ITEM_DURIN_BERRY
-	// ITEM_BELUE_BERRY
-}
-
-mart TrainerHill_Entrance_Pokemart_Clerk2Mints {
+	ITEM_DURIN_BERRY
+	ITEM_BELUE_BERRY
 	ITEM_LONELY_MINT
 	ITEM_ADAMANT_MINT
 	ITEM_NAUGHTY_MINT
@@ -540,14 +486,4 @@ mart TrainerHill_Entrance_Pokemart_Clerk2Mints {
 	ITEM_JOLLY_MINT
 	ITEM_NAIVE_MINT
 	ITEM_SERIOUS_MINT
-}
-
-mart TrainerHill_Entrance_Pokemart_Clerk2Other {
-	ITEM_MACHO_BRACE
-	ITEM_POWER_WEIGHT
-	ITEM_POWER_BRACER
-	ITEM_POWER_BELT
-	ITEM_POWER_LENS
-	ITEM_POWER_BAND
-	ITEM_POWER_ANKLET
 }

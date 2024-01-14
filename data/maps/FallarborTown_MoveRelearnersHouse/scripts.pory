@@ -104,7 +104,6 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove {
 	updatemoneybox
 	waitse
 	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk)
-	end
 }
 
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk {
@@ -118,7 +117,7 @@ script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk {
 }
 
 script FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford {
-	msgbox(format("Sorry, you need ¥2000 for me to teach your POKéMON a move!"))
+	msgbox(format("Sorry, you need ¥500 for me to teach your POKéMON a move!"))
 	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
 }
 
