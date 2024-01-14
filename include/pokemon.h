@@ -495,7 +495,7 @@ struct BattleMove
     u32 forcePressure:1;
     u32 cantUseTwice:1;
     u32 gravityBanned:1;
-    u32 healBlockBanned:1;
+    u32 healingMove:1;
     u32 meFirstBanned:1;
     u32 mimicBanned:1;
     u32 metronomeBanned:1;
@@ -598,7 +598,6 @@ extern const struct BattleMove gBattleMoves[];
 extern const u8 gFacilityClassToPicIndex[];
 extern const u8 gFacilityClassToTrainerClass[];
 extern const struct SpeciesInfo gSpeciesInfo[];
-extern const u8 *const gItemEffectTable[ITEMS_COUNT];
 extern const u32 gExperienceTables[][MAX_LEVEL + 1];
 extern const u8 gPPUpGetMask[];
 extern const u8 gPPUpClearMask[];
