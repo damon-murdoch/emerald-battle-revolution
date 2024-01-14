@@ -108,7 +108,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_1:
 	updatemoneybox
 	waitse
 	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk
-	end
+	return
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorSelectMove_2:
 	goto FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd
@@ -171,7 +171,7 @@ FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorAsk_Text_0:
 	.string "else?$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorCantAfford_Text_0:
-	.string "Sorry, you need ¥2000 for me to teach\n"
+	.string "Sorry, you need ¥500 for me to teach\n"
 	.string "your POKéMON a move!$"
 
 FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd_Text_0:

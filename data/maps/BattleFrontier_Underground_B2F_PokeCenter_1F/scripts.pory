@@ -36,7 +36,7 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckBa
 }
 
 script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckSelection {
-	msgbox(format("What would you like?"))
+	msgbox(format("What would you like? All of my items cost 50 BP."))
 	special(ShowBattlePointsWindow)
 	multichoice2(18,0,BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman)
 	switch(var(VAR_RESULT)) {
@@ -45,6 +45,7 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanCheckSe
 		case 1: 
 			giveitem(ITEM_GOLD_BOTTLE_CAP)
 		default: 
+			special(CloseBattlePointsWindow)
 			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd)
 	}
 	setvar(VAR_0x8004, 50)
@@ -69,8 +70,107 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GentlemanEnd {
     end
 }
 
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpert {
+	lock
+	faceplayer
+	msgbox(format("Hello, I'm the Gigantamax Expert! I can change the gigantamax factor of your POKéMON."))
+	msgbox(format("My services cost a mere ¥500 per POKéMON."))
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCheckMoney)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCheckMoney {
+	showmoneybox(0,0)
+	checkmoney(500)
+	if(var(VAR_RESULT) == TRUE) {
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertSelectMon)
+	}
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCantAfford)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertSelectMon {
+	msgbox(format("Which POKéMON would you like me to change?"))
+	special(ChooseMonForMoveRelearner)
+	waitstate
+
+	# Gets hidden after mon selection
+	showmoneybox(0,0)
+
+	# No party Pokemon chosen
+	if (var(VAR_0x8004) == PARTY_NOTHING_CHOSEN) {
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertEnd)
+	}
+
+	# Check if pokemon is egg
+	special(IsSelectedMonEgg)
+	
+	# Pokemon is egg
+	if (var(VAR_RESULT) == TRUE) {
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCantTeachEgg)
+	}
+
+	// Check if the pokemon is gigantamax
+	hasgigantamaxfactor(VAR_0x8004)
+
+	if (var(VAR_RESULT) == TRUE) {
+		msgbox(format("Would you like me to remove the Gigantamax factor from this POKéMON?"))
+	}
+	else {
+		msgbox(format("Would you like me to add the Gigantamax factor to this POKéMON?"))
+	}
+	yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+
+        // Toggle gigantamax factor for pokemon
+		togglegigantamaxfactor(VAR_0x8004)
+
+		if (var(VAR_RESULT) == TRUE) {
+			msgbox(format("Done! Your POKéMON's gigantamax factor has been changed."))
+			msgbox(format("I'll accept your payment now, please."))
+			removemoney(500)
+			playse(SE_SHOP)
+			updatemoneybox
+			waitse
+		} 
+		else // Failed to change gigantamax factor
+		{
+			msgbox(format("Sorry, I was unable to change the gigantamax factor of this POKéMON!"))
+		}
+    } else {
+		hidemoneybox
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertEnd)
+	}
+	hidemoneybox
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertAsk)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertAsk {
+	msgbox(format("Would you like me to teach anything else?"))
+	yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCheckMoney)
+    } else {
+		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertEnd)
+	}
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCantAfford {
+	msgbox(format("Sorry, you need ¥500 for me to change your POKéMON's gigantamax state!"))
+	goto(FallarborTown_MoveRelearnersHouse_EventScript_MoveTutorEnd)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCantTeachEgg {
+	msgbox(format("I can't change the gigantamax status of an egg!"))
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertEnd)
+}
+
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertEnd {
+	msgbox(format("Please come back again soon!"))
+	release
+	end
+}
+
 text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman {
-	"CHERISH BALL{CLEAR_TO 0x48}50BP$"
-	"GOLD BOTTLE CAP{CLEAR_TO 0x48}50BP$"
+	"CHERISH BALL$"
+	"GOLD BOTTLE CAP$"
 	""
 }

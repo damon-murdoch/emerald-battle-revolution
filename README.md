@@ -56,6 +56,7 @@ could need for making a competitive team. This includes, but is not limited to:
 
 * Pokemon Center, containing the following:
   * High-value item trader (Cherish/Gold Bottle Caps for BP)
+  * Gigantamax Expert (Change Pokemon Gigantamax Factor)
 
 * IV Berry Shop (IV Increasing / Decreasing Berries)
 * EV Berry Shop (EV Mochi / EV Decreasing Berries)
@@ -234,6 +235,12 @@ not always be in a compiling state when committed.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 0.9.7
+
+Added an NPC to the Battle Frontier Underground Pokemon Center which is
+able to change the Gigantamax Factor of a Pokemon for $500. Music-changing
+NPCs have also been added to the Battle Tent facilities.
 
 ### Ver. 0.9.6
 
