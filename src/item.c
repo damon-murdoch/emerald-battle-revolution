@@ -88,7 +88,13 @@ const u8 sText_s[] =_("s");
 
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)
 {
-    u8 *end = StringCopy(dst, ItemId_GetName(itemId)) - 1;
+    if (itemId == ITEM_POKE_BALL)
+    {
+        if (quantity < 2)
+            StringCopy(dst, ItemId_GetName(ITEM_POKE_BALL));
+        else
+            StringCopy(dst, gText_PokeBalls);
+    }
 
     if (quantity < 2)
         return;
