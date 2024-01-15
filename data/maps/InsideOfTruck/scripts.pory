@@ -60,6 +60,12 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 `
 
 script InsideOfTruck_EventScript_Introduction {
+
+	# Give Running Shoes
+	setflag(FLAG_SYS_B_DASH)
+	setflag(FLAG_RECEIVED_RUNNING_SHOES)
+
+	# Introduction Sequence
 	msgbox(format("Welcome to Emerald Battle Revolution!"))
 	msgbox("Created by Damon Murdoch\n(Twitter: SirScrubbington)")
 	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
