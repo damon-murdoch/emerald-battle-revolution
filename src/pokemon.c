@@ -5961,24 +5961,6 @@ static void InitMonSpritesGfx_Battle(struct MonSpritesGfxManager* gfx)
     }
 }
 
-// Unused??
-
-/*
-static void InitMonSpritesGfx_FullParty(struct MonSpritesGfxManager* gfx)
-{
-    u16 i, j;
-    for (i = 0; i < gfx->numSprites; i++)
-    {
-        gfx->templates[i] = sSpriteTemplate_64x64;
-        for (j = 0; j < gfx->numFrames; j++)
-            gfx->frameImages[i * gfx->numSprites + j].data = &gfx->spritePointers[i][j * MON_PIC_SIZE];
-
-        gfx->templates[i].images = &gfx->frameImages[i * gfx->numSprites];
-        gfx->templates[i].anims = gAnims_MonPic;
-        gfx->templates[i].paletteTag = i;
-    }
-}
-*/
 
 struct MonSpritesGfxManager *CreateMonSpritesGfxManager(void)
 {
