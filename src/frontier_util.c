@@ -1931,7 +1931,8 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
     // Banned species check enabled
     if (checkBannedSpecies){
-        for (i = 0; (gFrontierBannedSpecies[i] != 0xFFFF) && (gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)) && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++);
+        for (i = 0; (gFrontierBannedSpecies[i] != 0xFFFF) && (gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)) && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
+            ;
         if (gFrontierBannedSpecies[i] != 0xFFFF)
             return;
     }
@@ -1944,7 +1945,8 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
     // If duplicate species checking is enabled
     if (BF_ALLOW_DUPLICATE_SPECIES == FALSE){
-        for (i = 0; i < *count && speciesArray[i] != species; i++);
+        for (i = 0; i < *count && speciesArray[i] != species; i++)
+            ;
         if (i != *count)
             return;
     }
@@ -1953,7 +1955,8 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
     if (BF_ALLOW_DUPLICATE_ITEMS == FALSE){
         if (heldItem != 0)
         {
-            for (i = 0; i < *count && itemsArray[i] != heldItem; i++);
+            for (i = 0; i < *count && itemsArray[i] != heldItem; i++)
+                ;
             if (i != *count)
                 return;
         }
@@ -2171,8 +2174,6 @@ static void ResetSketchedMoves(void)
                 if (k == MAX_MON_MOVES)
                     SetMonMoveSlot(&gPlayerParty[i], MOVE_SKETCH, j);
             }
-            
-            // gSaveBlock1Ptr->playerParty[gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1] = gPlayerParty[i];
         }
     }
 }

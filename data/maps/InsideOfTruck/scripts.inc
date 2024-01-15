@@ -57,6 +57,8 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 	.string "delivery service.$"
 
 InsideOfTruck_EventScript_Introduction::
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_RECEIVED_RUNNING_SHOES
 	msgbox InsideOfTruck_EventScript_Introduction_Text_0
 	msgbox InsideOfTruck_EventScript_Introduction_Text_1
 	msgbox InsideOfTruck_EventScript_Introduction_Text_2
@@ -545,7 +547,7 @@ InsideOfTruck_EventScript_Introduction_Text_2:
 	.string "PokeEmerald-Expanded Project$"
 
 InsideOfTruck_EventScript_Introduction_Text_3:
-	.string "Current Version: 0.9.6$"
+	.string "Current Version: 0.9.7$"
 
 InsideOfTruck_EventScript_Introduction_Text_4:
 	.string "For more information, please visit our\n"
