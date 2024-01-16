@@ -38,6 +38,8 @@
 #include "constants/event_objects.h"
 #include "constants/moves.h"
 
+#include "config/battle_frontier_generator.h"
+
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer[];
 
@@ -1641,7 +1643,7 @@ static void FillTentTrainerParty(u8 monsCount)
 }
 
 static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
-{
+{  
     s32 i, j;
     u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
     u8 friendship = MAX_FRIENDSHIP;
@@ -1653,6 +1655,14 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
+        // Use Frontier Generator (If flag set)
+        #if BFG_FLAG_USE_FRONTIER_GENERATOR != 0
+        if (FlagGet(BFG_FLAG_USE_FRONTIER_GENERATOR)) {
+            GenerateTrainerParty(trainerId, firstMonId, monCount);
+            return;
+        }
+        #endif
+        
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
         monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
