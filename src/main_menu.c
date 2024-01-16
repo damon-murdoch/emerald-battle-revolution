@@ -286,7 +286,7 @@ static const u16 sBirchSpeechPlatformBlackPal[] = {RGB_BLACK, RGB_BLACK, RGB_BLA
 #define MENU_SCROLL_SHIFT WIN_RANGE(32, 32)
 
 // Pokemon Displayed by Professor Birch
-#define SPECIES_INTRO SPECIES_ZORUA_HISUIAN
+#define SPECIES_INTRO SPECIES_OSHAWOTT
 
 static const struct WindowTemplate sWindowTemplates_MainMenu[] =
 {
