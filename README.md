@@ -236,6 +236,12 @@ not always be in a compiling state when committed.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 0.9.8
+
+Merged upstream changes, removed unused poryscripts, reviewed and fixed code differences, 
+reverted upstream plural string changes due to text issues, gigantamax-flagged Pokemon
+can no longer evolve, and Pokemon without Gigantamax formes can no longer have the flag set.
+
 ### Ver. 0.9.7
 
 Added an NPC to the Battle Frontier Underground Pokemon Center which is
