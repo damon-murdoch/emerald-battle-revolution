@@ -39,6 +39,7 @@
 #include "constants/moves.h"
 
 #include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
 
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_MaxieTrainer[];
 extern const u8 MossdeepCity_SpaceCenter_2F_EventScript_TabithaTrainer[];
@@ -77,7 +78,6 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount);
 static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount);
 static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId);
 static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId);
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId);
 static void FillPartnerParty(u16 trainerId);
 static void SetEReaderTrainerChecksum(struct BattleTowerEReaderTrainer *ereaderTrainer);
 static u8 SetTentPtrsGetLevel(void);
@@ -1655,10 +1655,12 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
+        DebugPrintf("Generating frontier trainer team ...");
+
         // Use Frontier Generator (If flag set)
         #if BFG_FLAG_USE_FRONTIER_GENERATOR != 0
-        if (FlagGet(BFG_FLAG_USE_FRONTIER_GENERATOR)) {
-            GenerateTrainerParty(trainerId, firstMonId, monCount);
+        if (!FlagGet(BFG_FLAG_USE_FRONTIER_GENERATOR)) {
+            GenerateTrainerParty(trainerId, firstMonId, monCount, level);
             return;
         }
         #endif
@@ -3413,7 +3415,7 @@ s32 GetHighestLevelInPlayerParty(void)
 
 // Frontier Trainer parties are roughly scaled in difficulty with higher trainer IDs, so scale IVs as well
 // Duplicated in Battle Dome as GetDomeTrainerMonIvs
-static u8 GetFrontierTrainerFixedIvs(u16 trainerId)
+u8 GetFrontierTrainerFixedIvs(u16 trainerId)
 {
     u8 fixedIv;
 
