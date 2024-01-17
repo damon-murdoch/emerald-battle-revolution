@@ -4115,6 +4115,7 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    bool32 gigantamax = GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, 0);
     u8 level;
     u16 friendship;
     u8 beauty = GetMonData(mon, MON_DATA_BEAUTY, 0);
@@ -4123,7 +4124,8 @@ u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, s
     bool32 consumeItem = FALSE;
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
 
-    if (evolutions == NULL)
+    // No evolutions, or species is gigantamax
+    if (evolutions == NULL || gigantamax == TRUE)
         return SPECIES_NONE;
 
     if (tradePartner != NULL)
