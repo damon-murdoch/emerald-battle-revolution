@@ -312,9 +312,44 @@ void HasGigantamaxFactor(struct ScriptContext *ctx)
         gSpecialVar_Result = FALSE;
 }
 
-static const u16 sGigantaxFactorLockedSpecies[] =
-{
+#define GIGANTAMAX_ALLOWED_SPECIES 34
+
+// Species which are allowed to be gigantamaxed
+static const u16 sGigantamaxFactorAllowedSpecies[GIGANTAMAX_ALLOWED_SPECIES] = {
+    SPECIES_VENUSAUR,
+    SPECIES_BLASTOISE,
+    SPECIES_CHARIZARD,
+    SPECIES_BUTTERFREE,
+    SPECIES_PIKACHU,
+    SPECIES_MEOWTH,
+    SPECIES_MACHAMP,
+    SPECIES_GENGAR,
+    SPECIES_KINGLER,
+    SPECIES_LAPRAS,
+    SPECIES_EEVEE,
+    SPECIES_SNORLAX,
+    SPECIES_GARBODOR,
     SPECIES_MELMETAL,
+    SPECIES_RILLABOOM,
+    SPECIES_CINDERACE,
+    SPECIES_INTELEON,
+    SPECIES_CORVIKNIGHT,
+    SPECIES_ORBEETLE,
+    SPECIES_DREDNAW,
+    SPECIES_COALOSSAL,
+    SPECIES_FLAPPLE,
+    SPECIES_APPLETUN,
+    SPECIES_SANDACONDA,
+    SPECIES_TOXTRICITY_AMPED,
+    SPECIES_TOXTRICITY_LOW_KEY,
+    SPECIES_CENTISKORCH,
+    SPECIES_HATTERENE,
+    SPECIES_GRIMMSNARL,
+    SPECIES_ALCREMIE,
+    SPECIES_COPPERAJAH,
+    SPECIES_DURALUDON,
+    SPECIES_URSHIFU_SINGLE_STRIKE_STYLE,
+    SPECIES_URSHIFU_RAPID_STRIKE_STYLE,
 };
 
 void ToggleGigantamaxFactor(struct ScriptContext *ctx)
@@ -328,17 +363,23 @@ void ToggleGigantamaxFactor(struct ScriptContext *ctx)
     if (partyIndex < PARTY_SIZE)
     {
         bool32 gigantamaxFactor;
+        bool32 canGigantamax = FALSE;
 
         species = GetMonData(&gPlayerParty[partyIndex], MON_DATA_SPECIES);
-        for (i = 0; i < ARRAY_COUNT(sGigantaxFactorLockedSpecies); i++)
+        for (i = 0; i < GIGANTAMAX_ALLOWED_SPECIES; i++)
         {
-            if (species == sGigantaxFactorLockedSpecies[i])
-                return;
+            if (species == sGigantamaxFactorAllowedSpecies[i]) {
+                canGigantamax = TRUE;
+                break;
+            }
         }
 
-        gigantamaxFactor = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
-        gigantamaxFactor = !gigantamaxFactor;
-        SetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
-        gSpecialVar_Result = TRUE;
+        // Gigantamax-enabled species
+        if (canGigantamax) {
+            gigantamaxFactor = GetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
+            gigantamaxFactor = !gigantamaxFactor;
+            SetMonData(&gPlayerParty[partyIndex], MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
+            gSpecialVar_Result = TRUE;
+        }
     }
 }
