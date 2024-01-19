@@ -10,6 +10,21 @@
 #include "constants/trainers.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
+#include "constants/form_change_types.h"
+
+#define FORME_DEFAULT 0xFF // No alternate forme
+
+#ifdef BFG_RANDOM_BOOL_FIXED
+#define RANDOM_BOOL() (BFG_RANDOM_BOOL_FIXED)
+#else
+#define RANDOM_BOOL() ((bool8)(Random() % 2))
+#endif
+
+#ifdef BFG_RANDOM_OFFSET
+#define RANDOM_OFFSET() (Random() % BFG_RANDOM_OFFSET)
+#else
+#define RANDOM_OFFSET() (0)
+#endif
 
 #define IS_TYPE(x,y,type) (x == type || y == type)
 #define IS_FWG(x,y) (IS_TYPE(x,y,TYPE_FIRE) || IS_TYPE(x,y,TYPE_WATER) || IS_TYPE(x,y,TYPE_GRASS))
@@ -108,13 +123,10 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, const struct SpeciesIn
     u16 a1 = species->abilities[0];
     u16 a2 = species->abilities[1];
 
-    // Calculate base stat total
-    u16 bst = GetBaseStatTotal(species);
-
     // Switch on trainer class
     switch(trainerClass) {
         case TRAINER_CLASS_RUIN_MANIAC: {
-            if (IS_REGI(speciesId))
+            if ((species->isHisuianForm) || (species->isParadoxForm) || IS_REGI(speciesId))
                 return TRUE;
         } // Flow through to TRAINER_CLASS_HIKER
         case TRAINER_CLASS_HIKER: {
@@ -122,7 +134,7 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, const struct SpeciesIn
                 return TRUE;
         }; break;
         case TRAINER_CLASS_AQUA_LEADER: 
-            if (bst >= 600)
+            if ((species->isMythical) || (species->isLegendary)) 
                 return TRUE;
         case TRAINER_CLASS_TEAM_AQUA: {
             if (IS_TYPE(t1,t2,TYPE_WATER) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_DARK))
@@ -156,7 +168,7 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, const struct SpeciesIn
                 return TRUE;
         }; break;
         case TRAINER_CLASS_MAGMA_LEADER: 
-            if (bst >= 600)
+            if (species->isLegendary)
                 return TRUE;
         case TRAINER_CLASS_TEAM_MAGMA: {
             if (IS_TYPE(t1,t2,TYPE_GROUND) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_DARK))
@@ -220,7 +232,7 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, const struct SpeciesIn
         }; break;
         case TRAINER_CLASS_COOLTRAINER:
         case TRAINER_CLASS_GENTLEMAN: {
-            if (bst >= 600 || IS_FWG(t1,t2) || IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_FIGHTING))
+            if ((species->isLegendary) || IS_FWG(t1,t2) || IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_FIGHTING))
                 return TRUE;
         }; break;
         case TRAINER_CLASS_SCHOOL_KID: {
@@ -297,11 +309,14 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
     u8 negStat = 0;
     u8 negStatValue = 0;
 
+    u16 temp1 = ((species->baseAttack) + RANDOM_OFFSET());
+    u16 temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
+
     // If both attack and special attack stats match
-    if (species->baseAttack == species->baseSpAttack)
+    if (temp1 == temp2)
     {
         // prioritise special attack
-        if (BFG_PRIORITISE_SPA_OVER_ATK)
+        if (RANDOM_BOOL())
         {
             negStat = STAT_ATK;
             negStatValue = species->baseAttack;
@@ -312,7 +327,7 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
             negStatValue = species->baseSpAttack;
         }
     }
-    else if (species->baseAttack > species->baseSpAttack) 
+    else if (temp1 > temp2) 
     {
         negStat = STAT_SPATK;
         negStatValue = species->baseSpAttack;
@@ -330,16 +345,16 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
     }
 
     // Loop over the stats (pick best stat)
-    for(i = STAT_ATK; i < STAT_SPDEF; i++){
-        // Skip reduced stat
+    for(i = STAT_ATK; i < NUM_STATS; i++){
         if (i == negStat)
             continue; 
 
-        // Switch on stat
+        temp1 = (posStatValue + RANDOM_OFFSET());
+
         switch(i) {
             case STAT_ATK: {
-                if ((posStatValue < species->baseAttack) || (
-                    (posStatValue == species->baseAttack) && (
+                temp2 = ((species->baseAttack) + RANDOM_OFFSET());
+                if ((temp2 > temp1) || ((temp2 == temp1) && (
                     ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
                     (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
                 ))) 
@@ -349,9 +364,10 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
                 }
             }; break;
             case STAT_DEF: {
-                if ((posStatValue < species->baseDefense) || (
-                    (posStatValue == species->baseDefense) && (
-                    ((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE))
+                temp2 = ((species->baseDefense) + RANDOM_OFFSET());
+                if ((temp2 > temp1) || ((temp2 == temp1) && (
+                    (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
+                    (posStat == STAT_SPDEF && RANDOM_BOOL()))
                 ))) 
                 {
                     posStat = STAT_DEF;
@@ -359,8 +375,8 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
                 }
             }; break;
             case STAT_SPATK: {
-                if ((posStatValue < species->baseSpAttack) || (
-                    (posStatValue == species->baseSpAttack) && (
+                temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
+                if ((temp2 > temp1) || ((temp2 == temp1) && (
                     ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
                     (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
                 ))) 
@@ -370,9 +386,10 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
                 }
             }; break;
             case STAT_SPDEF: {
-                if ((posStatValue < species->baseSpDefense) || (
-                    (posStatValue == species->baseSpDefense) && (
-                    ((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE))
+                temp2 = ((species->baseSpDefense) + RANDOM_OFFSET());
+                if ((temp2 > temp1) || ((temp2 == temp1) && (
+                    (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
+                    (posStat == STAT_DEF && RANDOM_BOOL()))
                 ))) 
                 {
                     posStat = STAT_SPDEF;
@@ -380,10 +397,11 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
                 }
             }; break;
             case STAT_SPEED: {
-                if ((posStatValue < species->baseSpeed) || (
+                temp2 = ((species->baseSpeed) + RANDOM_OFFSET());
+                if ((temp2 > temp1) || ((temp2 == temp1) && (
                     ((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_SPE == FALSE)) || 
                     (posStat == STAT_DEF || posStat == STAT_SPDEF)
-                ))
+                )))
                 {
                     posStat = STAT_SPEED;
                     posStatValue = species->baseSpeed;
@@ -398,46 +416,257 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
     #endif
 }
 
-/*
 static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
-    // F_EV_SPREAD_HP | F_EV_SPREAD_SPEED
-}
-*/
 
-static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level) {
+    u8 evs = 0;
+    u8 stat1, stat2;
+
+    #if BFG_EV_SELECT_RANDOM
+    stat1 = Random() % NUM_STATS;
+    stat2 = stat1;
+    while(stat2 == stat1)
+        stat2 = Random() % NUM_STATS;
+    #else
+    s32 i;
+    u16 val1 = 0; 
+    u16 val2 = 0; 
+    u16 valT, valR;
+
+    const struct Nature * natureInfo = &(natureLookup[nature]);
+
+    // Default Values
+    stat1 = 0xFF;
+    stat2 = 0xFF;
+
+    for(i = STAT_HP; i < NUM_STATS; i++)
+    {
+        if (i == natureInfo->negStat)
+            continue;
+        switch(i)
+        {
+            case STAT_HP:
+                valT = (species->baseHP) + BFG_HP_OFFSET;
+                break;
+            case STAT_ATK:
+                valT = species->baseAttack;
+                break;
+            case STAT_DEF:
+                valT = species->baseDefense;
+                break;
+            case STAT_SPATK:
+                valT = species->baseSpAttack;
+                break;
+            case STAT_SPDEF:
+                valT = species->baseSpDefense;
+                break;
+            case STAT_SPEED:
+                valT = species->baseSpeed;
+                break;
+        }
+
+        // For calculating with offset
+        valR = (valT + RANDOM_OFFSET());
+
+        // If stat 1 is undefined, or new stat is greater
+        if (stat1 == 0xFF || ((val2 > val1) && (valR > (val1 + RANDOM_OFFSET())))) {
+            stat1 = i; 
+            val1 = valT;
+        }
+        // If stat 2 is undefined, or new stat is greater
+        else if (stat2 == 0xFF || ((val2 < val1) && (valR > (val2 + RANDOM_OFFSET())))) {
+            stat2 = i; 
+            val2 = valT;
+        }
+        // Both stat 1 and stat 2 match
+        else if ((val2 == val1) && (valR > (val2 + RANDOM_OFFSET()))) {
+            // Replace stat1
+            if (RANDOM_BOOL()) {
+                stat1 = i; 
+                val1 = valT;
+            }
+            else // Replace stat2
+            {
+                stat2 = i; 
+                val2 = valT;
+            }
+        }
+    }
+    #endif
+
+    // Apply stat bitmasks to evs
+    if (stat1 == STAT_HP || stat2 == STAT_HP)
+        evs |= F_EV_SPREAD_HP;
+    if (stat1 == STAT_ATK || stat2 == STAT_ATK)
+        evs |= F_EV_SPREAD_ATTACK;
+    if (stat1 == STAT_DEF || stat2 == STAT_DEF)
+        evs |= F_EV_SPREAD_DEFENSE;
+    if (stat1 == STAT_SPATK || stat2 == STAT_SPATK)
+        evs |= F_EV_SPREAD_SP_ATTACK;
+    if (stat1 == STAT_SPDEF || stat2 == STAT_SPDEF)
+        evs |= F_EV_SPREAD_SP_DEFENSE;
+    if (stat1 == STAT_SPEED || stat2 == STAT_SPEED)
+        evs |= F_EV_SPREAD_SPEED;
+
+    return evs;
+}
+
+static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 nature, u8 evs, u16 requiredMove, u16 speciesId) {
+
+    s32 i,j,k;
+    u8 friendship = FRIENDSHIP_MAX;
+    u16 moveId, levelUpMoves, teachableMoves, totalMoves;
+
+    u16 moves[MAX_MON_MOVES] = {
+        MOVE_NONE,
+        MOVE_NONE,
+        MOVE_NONE,
+        MOVE_NONE,
+    };
+
+    const struct LevelUpMove* levelUpLearnset;
+    const u16 * teachableLearnset;
+
+    levelUpMoves = 0;
+    teachableMoves = 0;
+
+    #if BFG_ALLOW_LEVEL_UP_MOVES == TRUE
+    levelUpLearnset = GetSpeciesLevelUpLearnset(speciesId);
+    while(levelUpLearnset[levelUpMoves].move != LEVEL_UP_MOVE_END)
+        levelUpMoves++;
+    #endif
+
+    #if BFG_ALLOW_TEACHABLE_MOVES == TRUE
+    teachableLearnset = GetSpeciesTeachableLearnset(speciesId);
+    while(teachableLearnset[teachableMoves] != MOVE_UNAVAILABLE)
+        teachableMoves++;
+    #endif
+
+    DebugPrintf("%d level up moves, %d teachable moves ...", levelUpMoves, teachableMoves);
+
+    // Get the total number of moves
+    totalMoves = teachableMoves + levelUpMoves;
+
+    // Duplicate move tracker
+    u16 failures = 0;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        moveId = MOVE_NONE;
+
+        // First move index, and required move is set
+        if (i == 0 && requiredMove != MOVE_NONE) {
+            moveId = requiredMove;
+        }
+        else if (totalMoves > (i + failures)) // General case
+        {
+            #if BFG_MOVE_SELECT_RANDOM == TRUE
+            while(moveId == MOVE_NONE) {
+                k = Random() % totalMoves;
+                // Teachable learnset
+                if (k >= levelUpMoves) 
+                {
+                    k %= levelUpMoves;
+
+                    moveId = teachableLearnset[k];
+                }
+                else // Level-up learnset
+                {
+                    moveId = levelUpLearnset[k].move;
+                }
+
+                // Check previous moves
+                for(j = 0; j < i; j++) {
+                    if (moves[j] == moveId) {
+                        moveId = MOVE_NONE;
+                        failures++;
+                        break;
+                    }
+                }
+            }
+            #else
+            // TODO
+            #endif
+        }
+
+        // Otherwise, left as MOVE_NONE
+        
+        // Set the move slot data
+        SetMonMoveSlot(&gEnemyParty[index], moveId, i);
+        moves[i] = moveId;
+
+        // Frustration is more powerful the
+        // lower the pokemon's friendship is.
+        if (moveId == MOVE_FRUSTRATION)
+            friendship = 0;  
+    }
+
+    return friendship;
+}
+
+static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeId) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
-    u8 friendship = MAX_FRIENDSHIP;
-    u8 nature = GetSpeciesNature(species);
-    u16 item = ITEM_CHOICE_SCARF;
+    const struct FormChange * formChanges;
+    const struct SpeciesInfo * forme;
+
+    u8 evs, nature, abilityNum, friendship;
+
+    // Move / item placeholder
+    u16 move = MOVE_NONE;
+    u16 item = ITEM_NONE;
+
+    // Forme is not default
+    if (formeId != FORME_DEFAULT) {
+        // Get the species form change table
+        formChanges = GetSpeciesFormChanges(speciesId);
+
+        // switch on the form change method
+        switch(formChanges[formeId].method) {
+            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: 
+            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: 
+            case FORM_CHANGE_BATTLE_ULTRA_BURST: {
+                item = formChanges[formeId].param1; // ItemId
+            }; break;
+            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
+                move = formChanges[formeId].param1; // MoveId 
+            }; break;
+        }
+
+        // Get the target species from the forme
+        forme = &(gSpeciesInfo[(formChanges[formeId]).targetSpecies]);
+    } 
+    else // Forme is default
+    {
+        // Same as species
+        forme = species;
+    }
+
+    nature = GetSpeciesNature(forme);
+    evs = GetSpeciesEVs(forme, nature);
 
     // Place the chosen pokemon into the trainer's party
-    CreateMonWithEVSpreadNatureOTID(&gEnemyParty[index],
-                                            speciesId, 
-                                            level,
-                                            nature,
-                                            fixedIV,
-                                            F_EV_SPREAD_HP | F_EV_SPREAD_SPEED, // 255 HP/SPEED
-                                            otID);
+    CreateMonWithEVSpreadNatureOTID(
+        &gEnemyParty[index], speciesId, level, 
+        nature, fixedIV, evs, otID
+    );
 
     // Give the chosen pokemon its specified moves.
-    friendship = MAX_FRIENDSHIP;
-    
-    /*
-    for (j = 0; j < MAX_MON_MOVES; j++)
-    {
-        SetMonMoveSlot(&gEnemyParty[i + firstMonId], MOVE_TACKLE);
-        if (gFacilityTrainerMons[monId].moves[j] == MOVE_FRUSTRATION)
-            friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
-    }
-    */
+    // Returns FRIENDSHIP_MAX unless the moveset
+    // contains 'FRUSTRATION'. 
+    friendship = GetSpeciesMoves(
+        forme, index, nature, evs, move, speciesId
+    );
 
-    // [PLACEHOLDER] Test move code
-    SetMonMoveSlot(&gEnemyParty[index], MOVE_MEMENTO, 0);
-    SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, 1);
-    SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, 2);
-    SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, 3);
+    // If this species has a hidden ability
+    if (
+        (species->abilities[2] != ABILITY_NONE) && 
+        (BFG_HA_SELECTION_CHANCE != 0) && 
+        ((Random() % BFG_HA_SELECTION_CHANCE) == 0)
+    ) {
+        abilityNum = 3; // Hidden ability index
+        SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
+    }
 
     // Set friendship / held item
     SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
@@ -446,9 +675,13 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
 
+    u8 forme;
+    u16 speciesId, bst;
+    bool32 hasMega,hasZMove;
+
     s32 i, j;
     u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
-    u32 otID = 0;
+    u32 otID = Random32();
         
     // Normal battle frontier trainer.
     u8 fixedIV = GetFrontierTrainerFixedIvs(trainerId);
@@ -457,30 +690,28 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
     u16 minBST = fixedIVMinBSTLookup[fixedIV];
     u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
 
+    u16 bfMonCount = 0;
+
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
-    const struct SpeciesInfo * species;
 
-    u16 bst;
-    otID = Random32();
-    u16 bfMonCount = 0;
+    const struct SpeciesInfo * species;
+    const struct FormChange * formChanges;
+
+    DebugPrintf("Finding sets for trainer class %d ...", trainerClass);
 
     // Loop over all species
     for(i = 0; i < NUM_SPECIES; i++) {
 
         // Break loop if mon limit reached
-        if (bfMonCount == BFG_TRAINER_CLASS_MON_LIMIT)
+        if (bfMonCount == BFG_TRAINER_CLASS_MON_LIMIT) {
+            DebugPrintf("Trainer Class Mon %d Count limit reached: %d, modifying limit/constraints ...", trainerClass, bfMonCount);
             break;
+        }
 
         // Pointer to species info
         species = &(gSpeciesInfo[i]);
-
-        bst = GetBaseStatTotal(species);
-
-        // Skip above/below bst limits
-        if (bst < minBST || bst > maxBST)
-            continue;
 
         // Skip species if banned in frontier level
         if (SpeciesValidForFrontierLevel(species, i) == FALSE)
@@ -490,9 +721,22 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         if (SpeciesValidForTrainerClass(trainerClass, species, i) == FALSE)
             continue;
 
+        // Skip gigantamax, mega, primal or ultra burst formes
+        if (species->isGigantamax || species->isMegaEvolution || species->isPrimalReversion || species->isUltraBurst)
+            continue;
+
+        // Get base stat total
+        bst = GetBaseStatTotal(species);
+
+        // Skip above/below bst limits
+        if (bst < minBST || bst > maxBST)
+            continue;
+
         // Add species to mon set
         monSet[bfMonCount++] = i;
     }
+
+    DebugPrintf("Possible species found: %d ...", bfMonCount);
 
     // Regular battle frontier trainer.
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
@@ -501,8 +745,20 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
 
     i = 0;
     while(i != monCount) {
+
+        DebugPrintf("Generating mon number %d ...", i);
+
         // Sample random species from the mon count
-        u16 speciesId = monSet[Random() % bfMonCount];
+        speciesId = monSet[Random() % bfMonCount];
+
+        // Pointer to species info
+        species = &(gSpeciesInfo[i]);
+
+        // Get base stat total
+        bst = GetBaseStatTotal(species);
+
+        // Alt. Forme (e.g. mega, ultra burst)
+        forme = FORME_DEFAULT; // Default
 
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
@@ -511,9 +767,49 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         if (j != i + firstMonId)
             continue;
 
+        // Get species forme change table
+        formChanges = GetSpeciesFormChanges(speciesId);
+        if (formChanges != NULL) {
+                
+            DebugPrintf("Checking for megas/z/other formes ...");
+
+            for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) {
+                switch(formChanges[j].method) {
+                    #if B_FLAG_DYNAMAX_BATTLE != 0
+                    case FORM_CHANGE_BATTLE_GIGANTAMAX: {
+                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_TRAINER_ALLOW_GMAX)
+                            forme = j;
+                    }; break;
+                    #endif
+                    case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
+                        if (BFG_TRAINER_ALLOW_MEGA && (bst + 100 <= maxBST))
+                            forme = j;
+                    }; break;
+                    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
+                    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
+                        if (BFG_TRAINER_ALLOW_MEGA && (bst + 100 <= maxBST) && (hasMega == FALSE))
+                            hasMega = TRUE;
+                            forme = j;
+                    }; break;
+                    case FORM_CHANGE_BATTLE_ULTRA_BURST: {
+                        if (BFG_TRAINER_ALLOW_ZMOVE && (bst + 76 <= maxBST) && (hasZMove == FALSE)) {
+                            hasZMove = TRUE;
+                            forme = j;
+                        }
+                    }; break;
+                }
+                if (forme == j) {
+                    DebugPrintf("Forme found: %d ...", forme);
+                    break; // Break if forme found
+                }
+            }
+        }
+
+        DebugPrintf("Generating set for species %d ...", speciesId);
+
         // Generate trainer Pokemon and add it to the team
-        GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level);
-        
+        GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme);
+
         // If the pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
         i++;
