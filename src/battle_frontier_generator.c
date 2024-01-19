@@ -26,6 +26,8 @@
 #define RANDOM_OFFSET() (0)
 #endif
 
+#define RANDOM_CHANCE(x) ((x != 0) && ((Random() % x) == 0))
+
 #define IS_TYPE(x,y,type) (x == type || y == type)
 #define IS_FWG(x,y) (IS_TYPE(x,y,TYPE_FIRE) || IS_TYPE(x,y,TYPE_WATER) || IS_TYPE(x,y,TYPE_GRASS))
 #define IS_FDS(x,y) (IS_TYPE(x,y,TYPE_FAIRY) || IS_TYPE(x,y,TYPE_DRAGON) || IS_TYPE(x,y,TYPE_STEEL))
@@ -81,6 +83,11 @@ const struct Nature natureLookup[NUM_NATURES] = {
     [NATURE_CAREFUL] = {STAT_SPDEF,STAT_SPATK}, 
     [NATURE_QUIRKY] = {STAT_SPDEF,STAT_SPDEF}, 
 };
+
+const u16 customItemsList[] = {
+    BFG_CUSTOM_ITEMS_LIST, 
+    ITEM_NONE // End of list
+}; 
 
 const u16 fixedIVMinBSTLookup[] = {
     [3] = 180,
@@ -603,6 +610,10 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
     return friendship;
 }
 
+static u16 GetSpeciesItem(const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId) {
+    return ITEM_NONE; // TODO
+}
+
 static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeId) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
@@ -659,14 +670,14 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
     );
 
     // If this species has a hidden ability
-    if (
-        (species->abilities[2] != ABILITY_NONE) && 
-        (BFG_HA_SELECTION_CHANCE != 0) && 
-        ((Random() % BFG_HA_SELECTION_CHANCE) == 0)
-    ) {
+    if ((species->abilities[2] != ABILITY_NONE) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) {
         abilityNum = 3; // Hidden ability index
         SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
     }
+
+    // Currently has no held item
+    if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
+        item = GetSpeciesItem(forme, index, nature, evs, speciesId);
 
     // Set friendship / held item
     SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
@@ -777,22 +788,22 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                 switch(formChanges[j].method) {
                     #if B_FLAG_DYNAMAX_BATTLE != 0
                     case FORM_CHANGE_BATTLE_GIGANTAMAX: {
-                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_TRAINER_ALLOW_GMAX)
+                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_ALLOW_GMAX)
                             forme = j;
                     }; break;
                     #endif
                     case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                        if (BFG_TRAINER_ALLOW_MEGA && (bst + 100 <= maxBST))
+                        if (BFG_ITEM_ALLOW_MEGA && (bst + 100 <= maxBST))
                             forme = j;
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                        if (BFG_TRAINER_ALLOW_MEGA && (bst + 100 <= maxBST) && (hasMega == FALSE))
+                        if (BFG_ITEM_ALLOW_MEGA && (bst + 100 <= maxBST) && (hasMega == FALSE))
                             hasMega = TRUE;
                             forme = j;
                     }; break;
                     case FORM_CHANGE_BATTLE_ULTRA_BURST: {
-                        if (BFG_TRAINER_ALLOW_ZMOVE && (bst + 76 <= maxBST) && (hasZMove == FALSE)) {
+                        if (BFG_ITEM_ALLOW_ZMOVE && (bst + 76 <= maxBST) && (hasZMove == FALSE)) {
                             hasZMove = TRUE;
                             forme = j;
                         }
