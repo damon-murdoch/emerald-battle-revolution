@@ -4,6 +4,16 @@
 // Flag to enable or disable random generator
 #define BFG_FLAG_USE_FRONTIER_GENERATOR FLAG_UNUSED_0x020
 
+// If the following value(s) are set to true, that 
+// value will be completely randomly selected for 
+// each mon without using any optimisation. 
+// Otherwise, a heuristic will be used to attempt 
+// to pick the best options per species.
+#define BFG_EV_SELECT_RANDOM FALSE
+#define BFG_MOVE_SELECT_RANDOM FALSE
+#define BFG_ITEM_SELECT_RANDOM FALSE
+#define BFG_NATURE_SELECT_RANDOM FALSE
+
 // Maximum number of mons available for a given trainer 
 // class - The default value is 0x1FF (511), setting this 
 // number too high may result in the game running out of 
@@ -67,10 +77,112 @@
 
 #define BFG_HA_SELECTION_CHANCE 5 // 1/5 Chance
 
-#define BFG_EV_SELECT_RANDOM FALSE
-#define BFG_MOVE_SELECT_RANDOM TRUE
-#define BFG_ITEM_SELECT_RANDOM FALSE
-#define BFG_NATURE_SELECT_RANDOM FALSE
+// The following section of configs is used
+// when BFG_MOVE_SELECT_RANDOM is set to false, 
+// and acts as a set of rules for how moves 
+// should be selected.
+
+// Baseline rating for all moves
+#define BFG_MOVE_BASE_RATING 10
+
+// Base modifier for move effects
+#define BFG_MOVE_BASE_MODIFIER 100
+
+// Maximum number of moves per-type
+// This does NOT include status moves
+#define BFG_MOVE_MAX_PER_TYPE 2
+
+// Maximum number of offensive moves
+#define BFG_MOVE_MAX_OFFENSIVE 4
+
+// Maximum number of status moves
+#define BFG_MOVE_MAX_STATUS 3
+
+// Modifier for doubles moves
+#define BFG_MOVE_DOUBLES_MULTIPLIER 150
+
+// Modifier for self stat-boosting moves
+// This will be used for the following: 
+// 100 + (x * num_of_boosts)
+#define BFG_MOVE_SELF_STAT_UP_MODIFIER 10
+
+// Modifier for Opponent stat-reducing moves
+// This will be used for the following: 
+// 100 + (x * num_of_boosts)
+#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 10
+
+// Modifier for luck-based stat moves 
+// e.g. accuracy up, evasion down, etc.
+#define BFG_MOVE_LUCK_UP_MULTIPLIER 0
+
+// Modifier for luck-based stat moves 
+// e.g. accuracy down, evasion up, etc.
+#define BFG_MOVE_LUCK_DOWN_MULTIPLIER 0
+
+// Modifier for weather setting moves
+// e.g. rain dance, sunny day, etc.
+#define BFG_MOVE_WEATHER_MULTIPLIER 0
+
+// Modifier for terrain setting moves
+// e.g. electric terrain, etc.
+#define BFG_MOVE_TERRAIN_MULTIPLIER 0
+
+// Modifier for status moves, e.g.
+// Will-o-Wisp, Thunder Wave, etc.
+#define BFG_MOVE_STATUS_MULTIPLIER 130
+
+// Modifier for volatile status moves, 
+// e.g. Confusion, Attract, etc.
+#define BFG_MOVE_VOLATILE_MODIFIER 120
+
+// Modifier for countering status moves, 
+// e.g. metal burst, shell trap, etc.
+#define BFG_MOVE_COUNTER_MODIFIER 100
+
+// Modifier for self recovery moves, e.g.
+// Revival Blessing, Morning Sun, etc.
+#define BFG_MOVE_SELF_RECOVERY_MODIFIER 120
+
+// Modifier for party support moves, e.g. 
+// Light Screen, Aurora Veil, Safeguard, etc.
+#define BFG_MOVE_PARTY_SUPPORT_MODIFIER 110
+
+// Modifier for health-absorbing moves, 
+// e.g. Giga Drain, Strength Sap, etc.
+#define BFG_MOVE_ABSORB_MODIFIER 150
+
+// Modifier for pivoting moves, e.g.
+// Parting Shot, U-Turn, etc.
+#define BFG_MOVE_PIVOT_MODIFIER 150
+
+// Moves of the same type as the
+// Pokemon will have this amount
+// added to their selection chance.
+// e.g. 150 = 1.5x
+#define BFG_MOVE_STAB_MODIFIER 150
+
+// If this is set to any value above 0, 
+// ohko moves will have this modifier
+// applied to them. If the value is 0, 
+// they will not have any chance to be
+// selected at all.
+#define BFG_MOVE_OHKO_MODIFIER 0
+
+// If this is set to any value above 0, 
+// moves that use a stat with a negative
+// nature will have this modifier applied
+// to them. If the value is 0, they will
+// not have any chance to be selected at all.
+// e.g. 60 = 0.6x
+#define BFG_NEG_NATURE_MULTIPLIER 0
+
+// If this is set to any value above 0,
+// moves that use a stat with a positive
+// nature will have this modifier applied
+// to them. If the value is 0, they will 
+// not have any chance to be selected at all.
+// e.g. 110 = 1.1x
+#define BFG_POS_NATURE_MULTIPLIER 110
 
 // If this is set to TRUE, opposing trainers will
 // be allowed to mega-evolve their Pokemon. If a 

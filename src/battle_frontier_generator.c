@@ -2,15 +2,16 @@
 #include "random.h"
 #include "pokemon.h"
 #include "battle_tower.h"
-#include "constants/moves.h"
-#include "constants/pokemon.h"
 #include "battle_frontier_generator.h"
 #include "config/battle_frontier_generator.h"
 
-#include "constants/trainers.h"
+#include "constants/battle_move_effects.h"
+#include "constants/form_change_types.h"
 #include "constants/battle_frontier.h"
 #include "constants/abilities.h"
-#include "constants/form_change_types.h"
+#include "constants/trainers.h"
+#include "constants/pokemon.h"
+#include "constants/moves.h"
 
 #define FORME_DEFAULT 0xFF // No alternate forme
 
@@ -27,6 +28,9 @@
 #endif
 
 #define RANDOM_CHANCE(x) ((x != 0) && ((Random() % x) == 0))
+
+#define MULTIPLY(x,y) ((u16)(x * (((double)(y)) / 100)))
+#define MODIFY(x,y) ((u16)(x == BFG_MOVE_BASE_MODIFIER ? y : x))
 
 #define IS_TYPE(x,y,type) (x == type || y == type)
 #define IS_FWG(x,y) (IS_TYPE(x,y,TYPE_FIRE) || IS_TYPE(x,y,TYPE_WATER) || IS_TYPE(x,y,TYPE_GRASS))
@@ -517,9 +521,537 @@ static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
     return evs;
 }
 
+#if BFG_MOVE_SELECT_RANDOM == FALSE // Change this
+static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId, u16 * moves) {
+
+    u8 numPhysical, numSpecial, numStatus, numOffensive, numOfType;
+    
+    const struct Nature * natureInfo = &(natureLookup[nature]);
+    const struct BattleMove * move, * moveTemp;
+    s32 i;
+
+    // Move for calculating rating
+    move = &(gBattleMoves[moveId]);
+
+    // Move rating
+    u16 rating = BFG_MOVE_BASE_RATING;
+
+    // Number of move hits
+    u8 hits = 1;
+
+    // Effect modifier
+    // Used by effects with 
+    // multiple different scales
+    u16 modifier = BFG_MOVE_BASE_MODIFIER;
+
+    // Status moves
+    if (move->split == SPLIT_STATUS) {
+
+        // Check existing moves (skip last)
+        for(i = 0; i < MAX_MON_MOVES - 1; i++) 
+        {
+            if (moves[i] != MOVE_NONE) 
+            {
+                moveTemp = &(gBattleMoves[moves[i]]);
+
+                switch(moveTemp->split) {
+                    case SPLIT_PHYSICAL:
+                        numPhysical++;
+                    break;
+                    case SPLIT_SPECIAL:
+                        numSpecial++;
+                    break;
+                    case SPLIT_STATUS:
+                        numStatus++;
+                    break;
+                }
+            }
+        }
+
+        // Check if Max. Status moves is reached
+        if (numStatus >= BFG_MOVE_MAX_STATUS)
+            return 0;
+
+        // Switch on move effect
+        switch(move->effect) {
+            // Attack Boosting
+            case EFFECT_BELLY_DRUM: 
+                modifier = MODIFY(modifier, (100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 3)));
+            case EFFECT_DRAGON_DANCE: 
+            case EFFECT_ATTACK_UP_2:
+                modifier = MODIFY(modifier, (100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2)));
+            case EFFECT_ATTACK_UP:
+                if (numPhysical == 0)
+                    return 0; // No physical moves to boost
+                modifier = MODIFY(modifier, (100 + BFG_MOVE_SELF_STAT_UP_MODIFIER));
+                if (natureInfo->negStat == STAT_ATK)
+                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                else if (natureInfo->posStat == STAT_ATK)
+                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+            break;
+            // Defense Boosting
+            case EFFECT_DEFENSE_UP_3:
+                modifier = MODIFY(modifier, (100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 3)));
+            case EFFECT_DEFENSE_UP_2:
+                modifier = MODIFY(modifier, (100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2)));
+            case EFFECT_DEFENSE_CURL:
+            case EFFECT_DEFENSE_UP:
+                modifier = MODIFY(modifier, (100 + BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+                if (natureInfo->negStat == STAT_DEF)
+                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                else if (natureInfo->posStat == STAT_DEF)
+                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+            break;
+            // Special Attack Boosting
+            case EFFECT_GEOMANCY: 
+                #if BFG_ITEM_OTHER_SELECTION_CHANCE != 0
+                modifier = MODIFY(modifier, ((100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 6)) / BFG_ITEM_OTHER_SELECTION_CHANCE));
+                #else
+                mod = BFG_ITEM_OTHER_SELECTION_CHANCE; // TODO
+                #endif
+            case EFFECT_SPECIAL_ATTACK_UP_3:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 3));
+            case EFFECT_SPECIAL_ATTACK_UP_2:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+            case EFFECT_ATTACK_UP_USER_ALLY: 
+            case EFFECT_SPECIAL_ATTACK_UP:
+                if (numSpecial == 0)
+                    return 0; // No special moves to boost
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
+                if (natureInfo->negStat == STAT_SPATK)
+                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                else if (natureInfo->posStat == STAT_SPATK)
+                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+            break;
+            // Special Defense Boosting
+            case EFFECT_SPECIAL_DEFENSE_UP_2: 
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+            case EFFECT_SPECIAL_DEFENSE_UP: 
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
+                if (natureInfo->negStat == STAT_SPDEF)
+                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                else if (natureInfo->posStat == STAT_SPDEF)
+                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+            break;
+            // Speed Boosting
+            case EFFECT_SHIFT_GEAR: 
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 3));
+            case EFFECT_AUTOTOMIZE: 
+            case EFFECT_SPEED_UP_2: 
+            case EFFECT_TAILWIND:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+            case EFFECT_SPEED_UP: 
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
+                if (natureInfo->negStat == STAT_SPEED)
+                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                else if (natureInfo->posStat == STAT_SPEED)
+                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+            break;
+            case EFFECT_ATTACK_DOWN_2:
+            case EFFECT_DEFENSE_DOWN_2:
+            case EFFECT_SPECIAL_ATTACK_DOWN_2:
+            case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+            case EFFECT_SPEED_DOWN_2:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_OPP_STAT_DOWN_MODIFIER * 2));
+            break;
+            case EFFECT_ATTACK_DOWN:
+            case EFFECT_DEFENSE_DOWN:
+            case EFFECT_SPECIAL_ATTACK_DOWN:
+            case EFFECT_SPECIAL_DEFENSE_DOWN:
+            case EFFECT_SPEED_DOWN:
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_OPP_STAT_DOWN_MODIFIER);
+            break;
+            // Luck Increasing Moves
+            case EFFECT_ACCURACY_UP_2:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+            case EFFECT_ACCURACY_UP:
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
+            case EFFECT_EVASION_DOWN_2:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_OPP_STAT_DOWN_MODIFIER * 2));
+            case EFFECT_EVASION_DOWN:
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_OPP_STAT_DOWN_MODIFIER);
+            case EFFECT_GRAVITY: 
+            case EFFECT_DEFOG:
+                modifier = MULTIPLY(modifier, BFG_MOVE_LUCK_UP_MULTIPLIER);
+            break;
+            // Luck Reducing Moves
+            case EFFECT_ACCURACY_DOWN_2:
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_OPP_STAT_DOWN_MODIFIER * 2));
+            case EFFECT_ACCURACY_DOWN: 
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_OPP_STAT_DOWN_MODIFIER);
+            case EFFECT_EVASION_UP_2:
+            case EFFECT_MINIMIZE: 
+                modifier = MODIFY(modifier, 100 + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
+            case EFFECT_EVASION_UP:
+                modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
+
+                modifier = MULTIPLY(modifier, BFG_MOVE_LUCK_DOWN_MULTIPLIER);
+            break;
+            // Weather Setting Moves
+            case EFFECT_RAIN_DANCE:
+            case EFFECT_SUNNY_DAY:
+            case EFFECT_SANDSTORM: 
+            case EFFECT_SNOWSCAPE:
+            case EFFECT_HAIL:
+                modifier = MULTIPLY(modifier, BFG_MOVE_WEATHER_MULTIPLIER);
+            break;
+            // Terrain Setting Moves
+            case EFFECT_ELECTRIC_TERRAIN: 
+            case EFFECT_PSYCHIC_TERRAIN:
+            case EFFECT_GRASSY_TERRAIN:
+            case EFFECT_MISTY_TERRAIN:
+                modifier = MULTIPLY(modifier, BFG_MOVE_TERRAIN_MULTIPLIER);
+            break;
+            // Status Afflicting Moves
+            case EFFECT_WILL_O_WISP: 
+            case EFFECT_DARK_VOID: 
+            case EFFECT_PARALYZE: 
+            case EFFECT_POISON: 
+            case EFFECT_TOXIC: 
+            case EFFECT_SLEEP: 
+            case EFFECT_YAWN:
+                modifier = MULTIPLY(modifier, BFG_MOVE_STATUS_MULTIPLIER);
+            break;
+            // Volatile Status Moves
+            case EFFECT_TEETER_DANCE: 
+            case EFFECT_ENTRAINMENT:
+            case EFFECT_LEECH_SEED:
+            case EFFECT_WORRY_SEED:
+            case EFFECT_HEAL_BLOCK:
+            case EFFECT_MEAN_LOOK: 
+            case EFFECT_TORMENT: 
+            case EFFECT_CONFUSE: 
+            case EFFECT_DISABLE: 
+            case EFFECT_SWAGGER: 
+            case EFFECT_ATTRACT: 
+            case EFFECT_FLATTER: 
+            case EFFECT_ENCORE: 
+            case EFFECT_TAUNT:
+                modifier = MULTIPLY(modifier, BFG_MOVE_VOLATILE_MODIFIER);
+            break;
+            // Self-Recovery Moves
+            case EFFECT_MORNING_SUN: 
+            case EFFECT_RESTORE_HP: 
+            case EFFECT_SOFTBOILED: 
+            case EFFECT_SYNTHESIS: 
+            case EFFECT_MOONLIGHT: 
+            case EFFECT_SHORE_UP: 
+            case EFFECT_INGRAIN: 
+            case EFFECT_ROOST: 
+            case EFFECT_WISH: 
+            case EFFECT_REST:
+                modifier = MULTIPLY(modifier, BFG_MOVE_SELF_RECOVERY_MODIFIER);
+            break;
+            case EFFECT_REVIVAL_BLESSING: 
+            case EFFECT_LIGHT_SCREEN:
+            case EFFECT_AURORA_VEIL: 
+            case EFFECT_MAGIC_COAT: 
+            case EFFECT_HEAL_BELL: 
+            case EFFECT_SAFEGUARD: 
+            case EFFECT_REFLECT: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_PARTY_SUPPORT_MODIFIER);
+            break;
+            case EFFECT_PARTING_SHOT: 
+            case EFFECT_BATON_PASS:
+            case EFFECT_TELEPORT:
+                modifier = MULTIPLY(modifier, BFG_MOVE_PIVOT_MODIFIER);
+            break;
+            // Offensive Counter Effects
+            case EFFECT_METAL_BURST: 
+            case EFFECT_SHELL_TRAP:
+            case EFFECT_MIRROR_COAT: 
+            case EFFECT_COUNTER: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_COUNTER_MODIFIER);
+            break;
+            // Health absorb moves
+            case EFFECT_STRENGTH_SAP: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_ABSORB_MODIFIER);
+            break;
+            /*
+            case EFFECT_ROAR: 
+                // TODO
+            break;
+            case EFFECT_DO_NOTHING: 
+                // TODO
+            break;
+            case EFFECT_SUBSTITUTE: 
+                // TODO
+            break;
+            case EFFECT_SKILL_SWAP:
+            case EFFECT_ROLE_PLAY:
+                // TODO
+            break;
+            case EFFECT_TRICK:
+                // TODO
+            break;
+            case EFFECT_TRICK_ROOM:
+                // TODO
+            break;
+            case EFFECT_HIT_ENEMY_HEAL_ALLY: 
+            case EFFECT_JUNGLE_HEALING: 
+            case EFFECT_HELPING_HAND: 
+            case EFFECT_ALLY_SWITCH:
+            case EFFECT_HEAL_PULSE: 
+            case EFFECT_AFTER_YOU:
+            case EFFECT_FOLLOW_ME:
+            case EFFECT_MAT_BLOCK: 
+            case EFFECT_INSTRUCT: 
+            case EFFECT_DECORATE: 
+            case EFFECT_COACHING:
+            case EFFECT_PSYCH_UP: 
+            case EFFECT_PROTECT:
+            case EFFECT_ENDURE:
+            case EFFECT_QUASH:
+                // TODO
+            break;
+            */
+            default: // Unhandled
+                DebugPrintf("Unhandled effect: %d", move->effect);
+            break;
+        }
+    }
+    else // Physical / Special
+    {
+        // Number of same-typed moves
+        numOfType = 0;
+
+        // Check existing moves (skip last)
+        for(i = 0; i < MAX_MON_MOVES - 1; i++) 
+        {
+            if (moves[i] != MOVE_NONE) 
+            {
+                moveTemp = &(gBattleMoves[moves[i]]);
+
+                // Move is physical/special
+                if (moveTemp->split != SPLIT_STATUS) {
+
+                    // Check for same-type offensive moves
+                    if (move->type == moveTemp->type) {
+                        
+                        // Check if move is a duplicate
+                        if (
+                            (move->split == moveTemp->split) && 
+                            // (move->target == moveTemp->target) && TODO: Make this column check for doubles
+                            (move->priority == moveTemp->priority)
+                        )
+                            return 0; // No duplicate moves
+                        
+                        numOfType++;
+                    }
+
+                    numOffensive++;
+                }
+            }
+        }
+
+        // If we already have max. offensive moves, or max. offensive moves of type
+        if (numOffensive >= BFG_MOVE_MAX_OFFENSIVE || numOfType >= BFG_MOVE_MAX_PER_TYPE)
+            return 0;
+
+        if (move->split == SPLIT_PHYSICAL) 
+        {
+            if (natureInfo->negStat == STAT_ATK)
+                rating = MULTIPLY(rating, BFG_NEG_NATURE_MULTIPLIER);
+            else if (natureInfo->posStat == STAT_ATK)
+                rating = MULTIPLY(rating, BFG_POS_NATURE_MULTIPLIER);
+        }
+        else // move->split == SPLIT_SPECIAL
+        {
+            if (natureInfo->negStat == STAT_SPATK)
+                rating = MULTIPLY(rating, BFG_NEG_NATURE_MULTIPLIER);
+            else if (natureInfo->posStat == STAT_SPATK)
+                rating = MULTIPLY(rating, BFG_POS_NATURE_MULTIPLIER);
+        }
+
+        // Stop if rating is zero
+        if (rating == 0)
+            return 0;
+
+        // Switch on move effect
+        switch(move->effect) {
+            case EFFECT_MULTI_HIT:
+                #if BFG_ITEM_OTHER_SELECTION_CHANCE != 0
+                hits = 5; // For Loaded Dice
+                #else
+                hits = 3; // Avg. Multi-Hit
+                #endif
+            break;
+            case EFFECT_BURN_HIT: 
+            #if B_USE_FROSTBITE == TRUE
+            case EFFECT_FROSTBITE_HIT: 
+            #else
+            case EFFECT_FREEZE_HIT: 
+            #endif
+            case EFFECT_PARALYZE_HIT: 
+            case EFFECT_MORTAL_SPIN:
+            case EFFECT_POISON_FANG:  
+            case EFFECT_POISON_HIT: 
+            case EFFECT_DIRE_CLAW: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_STATUS_MULTIPLIER);
+            break;
+            case EFFECT_FLINCH_STATUS: 
+            case EFFECT_CONFUSE_HIT: 
+            case EFFECT_FLINCH_HIT: 
+            case EFFECT_SYRUP_BOMB: 
+            case EFFECT_SALT_CURE: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_VOLATILE_MODIFIER);
+            break;
+            case EFFECT_OHKO: 
+                modifier = MULTIPLY(modifier, BFG_MOVE_OHKO_MODIFIER); 
+            break;
+            case EFFECT_METEOR_BEAM:
+                // TODO 
+            case EFFECT_SEMI_INVULNERABLE:
+            case EFFECT_TWO_TURNS_ATTACK: 
+            case EFFECT_SOLAR_BEAM:
+                // TODO
+            break;
+            case EFFECT_HIT_ESCAPE: 
+                // TODO
+            break;
+            case EFFECT_TRAP: 
+                // TODO
+            break;
+            case EFFECT_RECOIL_IF_MISS: 
+                // TODO
+            break;
+            case EFFECT_EXPLOSION:
+                // TODO
+            break;
+            case EFFECT_MIND_BLOWN: 
+            case EFFECT_STEEL_BEAM: 
+                // TODO
+            break;
+            case EFFECT_RECOIL_50:
+            case EFFECT_RECOIL_33_STATUS:
+            case EFFECT_RECOIL_33:
+            case EFFECT_RECOIL_25:
+            case EFFECT_RECOIL_HP_25:
+                // TODO
+            break;
+            case EFFECT_RAMPAGE: 
+                // TODO
+            break;
+            case EFFECT_ATTACK_UP_HIT:
+            case EFFECT_DEFENSE_UP_HIT:
+            case EFFECT_DEFENSE_UP2_HIT: 
+            case EFFECT_SPECIAL_ATTACK_UP_HIT:
+            // case EFFECT_SPECIAL_DEFENSE_UP_HIT:
+            case EFFECT_SPEED_UP_HIT: 
+            case EFFECT_RAPID_SPIN:
+                // TODO
+            break;
+            case EFFECT_ALL_STATS_UP_HIT: 
+                // TODO
+            break;
+            case EFFECT_ATTACK_DOWN_HIT:
+            case EFFECT_DEFENSE_DOWN_HIT:
+            case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
+            case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
+            case EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2:
+            case EFFECT_SPEED_DOWN_HIT:
+            case EFFECT_BULLDOZE: 
+                // TODO
+            break;
+            case EFFECT_CLOSE_COMBAT: 
+            case EFFECT_OVERHEAT:
+                // TODO
+            break;
+            case EFFECT_RECHARGE:
+                // TODO
+            break;
+            case EFFECT_MATCHA_GOTCHA: 
+            case EFFECT_ABSORB: 
+                // TODO
+            break;
+            case EFFECT_SUPER_FANG: 
+                // TODO
+            break;
+            case EFFECT_LEVEL_DAMAGE: 
+            case EFFECT_DRAGON_RAGE:
+                // TODO
+            break;
+            case EFFECT_RETURN:
+            case EFFECT_FRUSTRATION: 
+                // TODO
+            break;
+            case EFFECT_FOCUS_PUNCH:
+                // TODO
+            break;
+            case EFFECT_FAKE_OUT: 
+                // TODO
+            break;
+            case EFFECT_INCINERATE: 
+            case EFFECT_BUG_BITE: 
+            case EFFECT_THIEF:
+                // TODO
+            break;
+            case EFFECT_HIT_PREVENT_ESCAPE:
+                // TODO
+            break;
+            case EFFECT_HIT_SWITCH_TARGET: 
+                // TODO
+            break;
+            case EFFECT_ALWAYS_CRIT:
+                // TODO
+            break;
+            case EFFECT_KNOCK_OFF:
+                // TODO
+            break;
+            case EFFECT_ERUPTION:
+                // TODO
+            break;
+            case EFFECT_SKY_DROP: 
+                // TODO
+            break;
+            case EFFECT_FEINT:
+                // TODO
+            break;
+            case EFFECT_DYNAMAX_DOUBLE_DMG:
+                // TODO
+            break;
+            case EFFECT_HIT: 
+                // Nothing special
+            break;
+            default: // Unhandled
+                DebugPrintf("Unhandled effect: %d", move->effect);
+            break;
+        }
+
+        // Stop if rating is zero
+        if (rating == 0)
+            return 0;
+
+        // If either one of the species's types matches the move
+        if (IS_TYPE(species->types[1],species->types[2], move->type)) 
+        {
+            // 1.5x boost
+            rating = MULTIPLY(rating, BFG_MOVE_STAB_MODIFIER);
+        }
+
+        // Apply secondary effect modifier
+        if (move->secondaryEffectChance > 0)
+            rating = MULTIPLY(rating, (100 + move->secondaryEffectChance));
+
+        // If strike count is defined, update hits
+        if (move->strikeCount > 1 && hits == 1)
+            hits = move->strikeCount;
+
+        // Add power (* hits count) to move rating
+        rating = MULTIPLY(rating, ((move->power) * hits));
+    }
+
+    // Apply accuracy mod
+    if (move->accuracy > 0)
+        rating = MULTIPLY(rating, move->accuracy);
+
+    return rating;
+}
+#endif
+
 static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 nature, u8 evs, u16 requiredMove, u16 speciesId) {
 
-    s32 i,j,k;
+    s32 i,j;
     u8 friendship = FRIENDSHIP_MAX;
     u16 moveId, levelUpMoves, teachableMoves, totalMoves;
 
@@ -535,6 +1067,12 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
 
     levelUpMoves = 0;
     teachableMoves = 0;
+
+    #if BFG_MOVE_SELECT_RANDOM == TRUE
+    u16 moveIndex;
+    #else
+    u16 rating, bestRating; // For heuristic
+    #endif
 
     #if BFG_ALLOW_LEVEL_UP_MOVES == TRUE
     levelUpLearnset = GetSpeciesLevelUpLearnset(speciesId);
@@ -566,21 +1104,20 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
         }
         else if (totalMoves > (i + failures)) // General case
         {
-            #if BFG_MOVE_SELECT_RANDOM == TRUE
             while(moveId == MOVE_NONE) {
-                k = Random() % totalMoves;
+                #if BFG_MOVE_SELECT_RANDOM == TRUE
+                moveIndex = Random() % totalMoves;
                 // Teachable learnset
-                if (k >= levelUpMoves) 
+                if (moveIndex >= levelUpMoves) 
                 {
-                    k %= levelUpMoves;
+                    moveIndex %= levelUpMoves;
 
-                    moveId = teachableLearnset[k];
+                    moveId = teachableLearnset[moveIndex];
                 }
                 else // Level-up learnset
                 {
-                    moveId = levelUpLearnset[k].move;
+                    moveId = levelUpLearnset[moveIndex].move;
                 }
-
                 // Check previous moves
                 for(j = 0; j < i; j++) {
                     if (moves[j] == moveId) {
@@ -589,10 +1126,32 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
                         break;
                     }
                 }
+                #else
+                // Default rating
+                bestRating = 0;
+
+                for(j=0; j < levelUpMoves; j++) 
+                {
+                    rating = GetMoveRating(levelUpLearnset[j].move, 
+                        species, nature, evs, speciesId, moves);
+
+                    if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
+                        moveId = levelUpLearnset[j].move;
+                        rating = bestRating;
+                    }
+                }
+                for(j=0; j < teachableMoves; j++)
+                {
+                    rating = GetMoveRating(teachableLearnset[j], 
+                        species, nature, evs, speciesId, moves);
+
+                    if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
+                        moveId = levelUpLearnset[j].move;
+                        rating = bestRating;
+                    }
+                }
+                #endif
             }
-            #else
-            // TODO
-            #endif
         }
 
         // Otherwise, left as MOVE_NONE
@@ -677,7 +1236,7 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
 
     // Currently has no held item
     if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
-        item = GetSpeciesItem(forme, index, nature, evs, speciesId);
+        item = GetSpeciesItem(forme, nature, evs, speciesId);
 
     // Set friendship / held item
     SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
