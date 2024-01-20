@@ -83,10 +83,10 @@
 // should be selected.
 
 // Baseline rating for all moves
-#define BFG_MOVE_BASE_RATING 10
+#define BFG_MOVE_BASE_RATING 1.0f
 
 // Base modifier for move effects
-#define BFG_MOVE_BASE_MODIFIER 100
+#define BFG_MOVE_BASE_MODIFIER 1.0f
 
 // Maximum number of moves per-type
 // This does NOT include status moves
@@ -99,17 +99,23 @@
 #define BFG_MOVE_MAX_STATUS 3
 
 // Modifier for doubles moves
-#define BFG_MOVE_DOUBLES_MULTIPLIER 150
+#define BFG_MOVE_DOUBLES_MULTIPLIER 1.5f
+
+// If the following value is set to true, the
+// below effect modifiers will be processed. 
+// Otherwise, they will be ignored.
+#define BFG_MOVE_ENABLE_EFFECT_MODIFIERS FALSE
+#if BFG_MOVE_ENABLE_EFFECT_MODIFIERS
 
 // Modifier for self stat-boosting moves
 // This will be used for the following: 
-// 100 + (x * num_of_boosts)
-#define BFG_MOVE_SELF_STAT_UP_MODIFIER 10
+// 1.0f + (x * num_of_boosts)
+#define BFG_MOVE_SELF_STAT_UP_MODIFIER 0.1f
 
 // Modifier for Opponent stat-reducing moves
 // This will be used for the following: 
-// 100 + (x * num_of_boosts)
-#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 10
+// 1.0f + (x * num_of_boosts)
+#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 0.1f
 
 // Modifier for luck-based stat moves 
 // e.g. accuracy up, evasion down, etc.
@@ -129,37 +135,31 @@
 
 // Modifier for status moves, e.g.
 // Will-o-Wisp, Thunder Wave, etc.
-#define BFG_MOVE_STATUS_MULTIPLIER 130
+#define BFG_MOVE_STATUS_MULTIPLIER 1.3f
 
 // Modifier for volatile status moves, 
 // e.g. Confusion, Attract, etc.
-#define BFG_MOVE_VOLATILE_MODIFIER 120
+#define BFG_MOVE_VOLATILE_MODIFIER 1.2f
 
 // Modifier for countering status moves, 
 // e.g. metal burst, shell trap, etc.
-#define BFG_MOVE_COUNTER_MODIFIER 100
+#define BFG_MOVE_COUNTER_MODIFIER 0
 
 // Modifier for self recovery moves, e.g.
 // Revival Blessing, Morning Sun, etc.
-#define BFG_MOVE_SELF_RECOVERY_MODIFIER 120
+#define BFG_MOVE_SELF_RECOVERY_MODIFIER 1.2f
 
 // Modifier for party support moves, e.g. 
 // Light Screen, Aurora Veil, Safeguard, etc.
-#define BFG_MOVE_PARTY_SUPPORT_MODIFIER 110
+#define BFG_MOVE_PARTY_SUPPORT_MODIFIER 1.1f
 
 // Modifier for health-absorbing moves, 
 // e.g. Giga Drain, Strength Sap, etc.
-#define BFG_MOVE_ABSORB_MODIFIER 150
+#define BFG_MOVE_ABSORB_MODIFIER 1.5f
 
 // Modifier for pivoting moves, e.g.
 // Parting Shot, U-Turn, etc.
-#define BFG_MOVE_PIVOT_MODIFIER 150
-
-// Moves of the same type as the
-// Pokemon will have this amount
-// added to their selection chance.
-// e.g. 150 = 1.5x
-#define BFG_MOVE_STAB_MODIFIER 150
+#define BFG_MOVE_PIVOT_MODIFIER 1.5f
 
 // If this is set to any value above 0, 
 // ohko moves will have this modifier
@@ -167,6 +167,13 @@
 // they will not have any chance to be
 // selected at all.
 #define BFG_MOVE_OHKO_MODIFIER 0
+#endif 
+
+// Moves of the same type as the
+// Pokemon will have this amount
+// added to their selection chance.
+// e.g. 150 = 1.5x
+#define BFG_MOVE_STAB_MODIFIER 1.5f
 
 // If this is set to any value above 0, 
 // moves that use a stat with a negative
@@ -182,7 +189,7 @@
 // to them. If the value is 0, they will 
 // not have any chance to be selected at all.
 // e.g. 110 = 1.1x
-#define BFG_POS_NATURE_MULTIPLIER 110
+#define BFG_POS_NATURE_MULTIPLIER 1.1f
 
 // If this is set to TRUE, opposing trainers will
 // be allowed to mega-evolve their Pokemon. If a 

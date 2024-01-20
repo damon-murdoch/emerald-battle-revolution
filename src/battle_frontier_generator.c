@@ -29,8 +29,8 @@
 
 #define RANDOM_CHANCE(x) ((x != 0) && ((Random() % x) == 0))
 
-#define MULTIPLY(x,y) ((u16)(x * (((double)(y)) / 100)))
-#define MODIFY(x,y) ((u16)(x == BFG_MOVE_BASE_MODIFIER ? y : x))
+#define NORMALISE(x) (((float)(x)) / 100.0f)
+#define SET_MODIFIER(x,y) ((x == BFG_MOVE_BASE_MODIFIER) ? y : x)
 
 #define IS_TYPE(x,y,type) (x == type || y == type)
 #define IS_FWG(x,y) (IS_TYPE(x,y,TYPE_FIRE) || IS_TYPE(x,y,TYPE_WATER) || IS_TYPE(x,y,TYPE_GRASS))
@@ -522,10 +522,8 @@ static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
 }
 
 #if BFG_MOVE_SELECT_RANDOM == FALSE // Change this
-static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId, u16 * moves) {
+static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId, u16 * moves) {
 
-    u8 numPhysical, numSpecial, numStatus, numOffensive, numOfType;
-    
     const struct Nature * natureInfo = &(natureLookup[nature]);
     const struct BattleMove * move, * moveTemp;
     s32 i;
@@ -533,25 +531,33 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
     // Move for calculating rating
     move = &(gBattleMoves[moveId]);
 
-    // Move rating
-    u16 rating = BFG_MOVE_BASE_RATING;
+    // Move rating (Casted to u16 at the end)
+    float rating = BFG_MOVE_BASE_RATING;
 
-    // Number of move hits
-    u8 hits = 1;
+    // Move counters
+    u8 numPhysical = 0;
+    u8 numSpecial = 0;
 
-    // Effect modifier
-    // Used by effects with 
-    // multiple different scales
-    u16 modifier = BFG_MOVE_BASE_MODIFIER;
+    #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS == TRUE
+    // Used by moves with additional effects
+    float modifier = BFG_MOVE_BASE_MODIFIER;
+    #endif
 
     // Status moves
     if (move->split == SPLIT_STATUS) {
+
+        // Status counter
+        u8 numStatus = 0;
 
         // Check existing moves (skip last)
         for(i = 0; i < MAX_MON_MOVES - 1; i++) 
         {
             if (moves[i] != MOVE_NONE) 
             {
+                // Double-up move
+                if (moves[i] == moveId)
+                    return 0; // Reject duplicate
+
                 moveTemp = &(gBattleMoves[moves[i]]);
 
                 switch(moveTemp->split) {
@@ -572,6 +578,7 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
         if (numStatus >= BFG_MOVE_MAX_STATUS)
             return 0;
 
+        #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
             // Attack Boosting
@@ -809,25 +816,41 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
                 DebugPrintf("Unhandled effect: %d", move->effect);
             break;
         }
+
+        // Apply the modifier to the rating
+        rating = MULTIPLY(rating, modifier);
+
+        // Stop if rating is zero
+        if (rating <= 0)
+            return 0;
+        #endif
     }
     else // Physical / Special
     {
+        // Number of move hits
+        u8 hits = 1;
+
         // Number of same-typed moves
-        numOfType = 0;
+        u8 numOfType = 0;
+        
+        // Offensive move count
+        u8 numOffensive = 0;
 
         // Check existing moves (skip last)
         for(i = 0; i < MAX_MON_MOVES - 1; i++) 
         {
-            if (moves[i] != MOVE_NONE) 
+            if (moves[i] != MOVE_NONE)
             {
+                // Double-up move
+                if (moves[i] == moveId)
+                    return 0; // Reject duplicate
+
                 moveTemp = &(gBattleMoves[moves[i]]);
 
                 // Move is physical/special
-                if (moveTemp->split != SPLIT_STATUS) {
+                if ((moveTemp->split != SPLIT_STATUS)) {
 
-                    // Check for same-type offensive moves
                     if (move->type == moveTemp->type) {
-                        
                         // Check if move is a duplicate
                         if (
                             (move->split == moveTemp->split) && 
@@ -835,7 +858,7 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
                             (move->priority == moveTemp->priority)
                         )
                             return 0; // No duplicate moves
-                        
+
                         numOfType++;
                     }
 
@@ -845,28 +868,29 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
         }
 
         // If we already have max. offensive moves, or max. offensive moves of type
-        if (numOffensive >= BFG_MOVE_MAX_OFFENSIVE || numOfType >= BFG_MOVE_MAX_PER_TYPE)
+        if ((numOfType >= BFG_MOVE_MAX_PER_TYPE) || (numOffensive >= BFG_MOVE_MAX_OFFENSIVE))
             return 0;
 
         if (move->split == SPLIT_PHYSICAL) 
         {
             if (natureInfo->negStat == STAT_ATK)
-                rating = MULTIPLY(rating, BFG_NEG_NATURE_MULTIPLIER);
+                rating *= BFG_NEG_NATURE_MULTIPLIER;
             else if (natureInfo->posStat == STAT_ATK)
-                rating = MULTIPLY(rating, BFG_POS_NATURE_MULTIPLIER);
+                rating *= BFG_POS_NATURE_MULTIPLIER;
         }
         else // move->split == SPLIT_SPECIAL
         {
             if (natureInfo->negStat == STAT_SPATK)
-                rating = MULTIPLY(rating, BFG_NEG_NATURE_MULTIPLIER);
+                rating *= BFG_NEG_NATURE_MULTIPLIER;
             else if (natureInfo->posStat == STAT_SPATK)
-                rating = MULTIPLY(rating, BFG_POS_NATURE_MULTIPLIER);
+                rating *= BFG_POS_NATURE_MULTIPLIER;
         }
 
         // Stop if rating is zero
-        if (rating == 0)
+        if (rating <= 0)
             return 0;
 
+        #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
             case EFFECT_MULTI_HIT:
@@ -1017,34 +1041,38 @@ static u16 GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 natu
                 DebugPrintf("Unhandled effect: %d", move->effect);
             break;
         }
+        // Apply the modifier to the rating
+        rating = MULTIPLY(rating, modifier);
 
         // Stop if rating is zero
-        if (rating == 0)
+        if (rating <= 0)
             return 0;
+        #endif
 
         // If either one of the species's types matches the move
-        if (IS_TYPE(species->types[1],species->types[2], move->type)) 
+        if (IS_TYPE(species->types[0],species->types[1], move->type)) 
         {
             // 1.5x boost
-            rating = MULTIPLY(rating, BFG_MOVE_STAB_MODIFIER);
+            rating *= BFG_MOVE_STAB_MODIFIER;
         }
 
         // Apply secondary effect modifier
         if (move->secondaryEffectChance > 0)
-            rating = MULTIPLY(rating, (100 + move->secondaryEffectChance));
+            rating *= NORMALISE(100.0f + move->secondaryEffectChance);
 
         // If strike count is defined, update hits
         if (move->strikeCount > 1 && hits == 1)
             hits = move->strikeCount;
 
         // Add power (* hits count) to move rating
-        rating = MULTIPLY(rating, ((move->power) * hits));
+        rating *= NORMALISE((move->power) * hits);
     }
 
     // Apply accuracy mod
     if (move->accuracy > 0)
-        rating = MULTIPLY(rating, move->accuracy);
+        rating *= NORMALISE(move->accuracy);
 
+    // Return the rating
     return rating;
 }
 #endif
@@ -1071,7 +1099,7 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
     #if BFG_MOVE_SELECT_RANDOM == TRUE
     u16 moveIndex;
     #else
-    u16 rating, bestRating; // For heuristic
+    float rating, bestRating; // For heuristic
     #endif
 
     #if BFG_ALLOW_LEVEL_UP_MOVES == TRUE
@@ -1096,6 +1124,8 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
+        DebugPrintf("Selecting move %d ...", i);
+
         moveId = MOVE_NONE;
 
         // First move index, and required move is set
@@ -1130,6 +1160,8 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
                 // Default rating
                 bestRating = 0;
 
+                DebugPrintf("Processing level up moves ...");
+
                 for(j=0; j < levelUpMoves; j++) 
                 {
                     rating = GetMoveRating(levelUpLearnset[j].move, 
@@ -1137,19 +1169,24 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
                         moveId = levelUpLearnset[j].move;
-                        rating = bestRating;
+                        bestRating = rating;
                     }
                 }
+
+                DebugPrintf("Processing teachable moves ...");
+
                 for(j=0; j < teachableMoves; j++)
                 {
                     rating = GetMoveRating(teachableLearnset[j], 
                         species, nature, evs, speciesId, moves);
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
-                        moveId = levelUpLearnset[j].move;
-                        rating = bestRating;
+                        moveId = teachableLearnset[j];
+                        bestRating = rating;
                     }
                 }
+
+                DebugPrintf("Done. Best move: %d (rating: %d)", moveId, (u16)(bestRating*100));
                 #endif
             }
         }
