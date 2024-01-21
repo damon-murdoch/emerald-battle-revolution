@@ -66,40 +66,50 @@
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
 #define BFG_MOVE_MAX_STATUS 3       // Maximum number of status moves
 
-#define BFG_MOVE_DOUBLES_MULTIPLIER 1.5f    // Modifier for doubles moves
+#define BFG_MOVE_ALLY_HIT_MULTIPLIER FALSE  // Modifier for ally-damaging moves
+#define BFG_MOVE_DOUBLES_MULTIPLIER 1.2f    // Modifier for doubles moves
 
 // Use move effect modifiers
-#define BFG_MOVE_EFFECT_MODIFIERS FALSE
+#define BFG_MOVE_EFFECT_MODIFIERS TRUE
 #if BFG_MOVE_EFFECT_MODIFIERS == TRUE
 
-// Modifier for self stat-boosting moves
-// This will be used for the following: 
-// 1.0f + (x * num_of_boosts)
-#define BFG_MOVE_SELF_STAT_UP_MODIFIER 0.1f
+#define BFG_MOVE_DEFAULT_MODIFIER 1.0f // Unchanged
 
-// Modifier for Opponent stat-reducing moves
-// This will be used for the following: 
-// 1.0f + (x * num_of_boosts)
-#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 0.1f
+#define BFG_MOVE_SPEED_CONTROL_MODIFIER BFG_MOVE_DEFAULT_MODIFIER
+#define BFG_MOVE_LUCK_DOWN_HIT_MULTIPLIER BFG_MOVE_DEFAULT_MODIFIER
+#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 1.1f
+#define BFG_MOVE_SELF_STAT_UP_MODIFIER 1.1f
+#define BFG_MOVE_LUCK_DOWN_MULTIPLIER FALSE
+#define BFG_MOVE_LUCK_UP_MULTIPLIER FALSE
+#define BFG_MOVE_WEATHER_MULTIPLIER FALSE
+#define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
+#define BFG_MOVE_STATUS_MULTIPLIER 1.3f 
+#define BFG_MOVE_VOLATILE_MODIFIER 1.2f
+#define BFG_MOVE_RECOVERY_MODIFIER 1.2f
+#define BFG_MOVE_SUPPORT_MODIFIER 1.1f
+#define BFG_MOVE_PROTECT_MODIFIER FALSE
+#define BFG_MOVE_ABSORB_MODIFIER 1.5f
+#define BFG_MOVE_PIVOT_MODIFIER 1.5f
+#define BFG_MOVE_CRIT_MODIFIER 1.5f
+#define BFG_MOVE_THEIF_MODIFIER BFG_MOVE_DEFAULT_MODIFIER
+#define BFG_MOVE_PHASE_MODIFIER BFG_MOVE_DEFAULT_MODIFIER
+#define BFG_MOVE_OHKO_MODIFIER FALSE
 
-#define BFG_MOVE_LUCK_UP_MULTIPLIER 0   // Modifier for luck-based stat moves 
-#define BFG_MOVE_LUCK_DOWN_MULTIPLIER 0 // Modifier for luck-based stat moves 
-#define BFG_MOVE_WEATHER_MULTIPLIER 0   // Modifier for weather setting moves
-#define BFG_MOVE_TERRAIN_MULTIPLIER 0   // Modifier for terrain setting moves
-#define BFG_MOVE_STATUS_MULTIPLIER 1.3f // Modifier for standard status moves
-#define BFG_MOVE_VOLATILE_MODIFIER 1.2f // Modifier for volatile status moves
-#define BFG_MOVE_COUNTER_MODIFIER 0     // Modifier for countering status moves
-#define BFG_MOVE_RECOVERY_MODIFIER 1.2f // Modifier for self recovery moves
-#define BFG_MOVE_SUPPORT_MODIFIER 1.1f  // Modifier for party support moves
-#define BFG_MOVE_ABSORB_MODIFIER 1.5f   // Modifier for health-absorbing moves
-#define BFG_MOVE_PIVOT_MODIFIER 1.5f    // Modifier for pivoting moves
-#define BFG_MOVE_OHKO_MODIFIER 0        // Modifier for OHKO moves
+#define BFG_MOVE_SELF_STAT_DOWN_MODIFIER 0.9f
+#define BFG_MOVE_MULTI_TURN_MODIFIER FALSE
+#define BFG_MOVE_RECHARGE_MODIFIER FALSE
+#define BFG_MOVE_SELF_KO_MODIFIER FALSE
+#define BFG_MOVE_RAMPAGE_MODIFIER 0.6f
+#define BFG_MOVE_RECOIL_MODIFIER 0.9f
+
+#define BFG_MOVE_UNHANDLED_MODIFIER FALSE
 
 #endif // BFG_MOVE_EFFECT_MODIFIERS
 
-#define BFG_MOVE_STAB_MODIFIER 1.5f         // STAB Move Multiplier (Offensive Only)
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0    // Negative nature multiplier
-#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f // Positive nature multiplier
+#define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
+#define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
+#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.0f     // Negative nature multiplier
+#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f     // Positive nature multiplier
 
 #endif // BFG_MOVE_SELECT_RANDOM
 
