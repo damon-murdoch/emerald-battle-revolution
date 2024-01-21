@@ -2,6 +2,7 @@
 #include "random.h"
 #include "pokemon.h"
 #include "battle_tower.h"
+#include "frontier_util.h"
 #include "battle_frontier_generator.h"
 #include "config/battle_frontier_generator.h"
 
@@ -13,85 +14,68 @@
 #include "constants/pokemon.h"
 #include "constants/moves.h"
 
-#define FORME_DEFAULT 0xFF // No alternate forme
+#include "data/pokemon/natures.h"
 
+// *** RANDOM ***
 #ifdef BFG_RANDOM_BOOL_FIXED
 #define RANDOM_BOOL() (BFG_RANDOM_BOOL_FIXED)
 #else
 #define RANDOM_BOOL() ((bool8)(Random() % 2))
 #endif
 
-#ifdef BFG_RANDOM_OFFSET
-#define RANDOM_OFFSET() (Random() % BFG_RANDOM_OFFSET)
+#if BFG_RANDOM_OFFSET != 0
+#define RANDOM_OFFSET() (Random() % (BFG_RANDOM_OFFSET))
 #else
 #define RANDOM_OFFSET() (0)
 #endif
 
-#define RANDOM_CHANCE(x) ((x != 0) && ((Random() % x) == 0))
+#define RANDOM_CHANCE(x) (((x) != 0) && ((Random() % (x)) == 0))
 
+// *** FORMAT ***
+#define IS_DOUBLES(x) (((x) == FRONTIER_DOUBLES_PARTY_SIZE) || ((x) == FRONTIER_MULTI_PARTY_SIZE))
+#define GET_LVL_MODE() (gSaveBlock2Ptr->frontier.lvlMode)
+
+// *** MOVE ***
 #define NORMALISE(x) (((float)(x)) / 100.0f)
-#define SET_MODIFIER(x,y) ((x == BFG_MOVE_BASE_MODIFIER) ? y : x)
+#define SET_MODIFIER(x,y) (((x) == BFG_MOVE_BASE_MODIFIER) ? (y) : (x))
 
-#define IS_TYPE(x,y,type) (x == type || y == type)
-#define IS_FWG(x,y) (IS_TYPE(x,y,TYPE_FIRE) || IS_TYPE(x,y,TYPE_WATER) || IS_TYPE(x,y,TYPE_GRASS))
-#define IS_FDS(x,y) (IS_TYPE(x,y,TYPE_FAIRY) || IS_TYPE(x,y,TYPE_DRAGON) || IS_TYPE(x,y,TYPE_STEEL))
-#define IS_PGD(x,y) (IS_TYPE(x,y,TYPE_PSYCHIC) || IS_TYPE(x,y,TYPE_GHOST) || IS_TYPE(x,y,TYPE_DARK))
+// *** TYPE ***
+#define IS_TYPE(x,y,type) ((x) == (type) || (y) == (type))
+#define IS_FWG(x,y) (IS_TYPE((x),(y),TYPE_FIRE) || IS_TYPE((x),(y),TYPE_WATER) || IS_TYPE((x),(y),TYPE_GRASS))
+#define IS_FDS(x,y) (IS_TYPE((x),(y),TYPE_FAIRY) || IS_TYPE((x),(y),TYPE_DRAGON) || IS_TYPE((x),(y),TYPE_STEEL))
+#define IS_PGD(x,y) (IS_TYPE((x),(y),TYPE_PSYCHIC) || IS_TYPE((x),(y),TYPE_GHOST) || IS_TYPE((x),(y),TYPE_DARK))
 
-#define HAS_ABILITY(x,y,ability) (x == ability || y == ability)
-#define IS_ABILITY(x,y,ability) (x == ability && y == ABILITY_NONE)
+// *** ABILITY ***
+#define HAS_ABILITY(x,y,ability) ((x) == (ability) || (y) == (ability))
+#define IS_ABILITY(x,y,ability) ((x) == (ability) && (y) == ABILITY_NONE)
 
-#define IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) (IS_TYPE(t1,t2,TYPE_FLYING) || IS_ABILITY(a1,a2, ABILITY_LEVITATE))
+#define IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) (IS_TYPE((t1),(t2),TYPE_FLYING) || IS_ABILITY((a1),(a2), ABILITY_LEVITATE))
 
-#define IS_EEVEE(s) (s == SPECIES_EEVEE || s == SPECIES_VAPOREON || s == SPECIES_JOLTEON || s == SPECIES_FLAREON || s == SPECIES_ESPEON || s == SPECIES_UMBREON || s == SPECIES_LEAFEON || s == SPECIES_GLACEON || s == SPECIES_SYLVEON)
-#define IS_REGI(s) (s == SPECIES_REGIROCK || s == SPECIES_REGICE || s == SPECIES_REGISTEEL || s == SPECIES_REGIDRAGO || s == SPECIES_REGIELEKI || s == SPECIES_REGIGIGAS)
+// *** SPECIES ***
+#define IS_EEVEE(s) ((s) == SPECIES_EEVEE || (s) == SPECIES_VAPOREON || (s) == SPECIES_JOLTEON || (s) == SPECIES_FLAREON || (s) == SPECIES_ESPEON || (s) == SPECIES_UMBREON || (s) == SPECIES_LEAFEON || (s) == SPECIES_GLACEON || (s) == SPECIES_SYLVEON)
+#define IS_REGI(s) ((s) == SPECIES_REGIROCK || (s) == SPECIES_REGICE || (s) == SPECIES_REGISTEEL || (s) == SPECIES_REGIDRAGO || (s) == SPECIES_REGIELEKI || (s) == SPECIES_REGIGIGAS)
 #define IS_STARTER(s) ( \
-    (s >= SPECIES_BULBASAUR && s <= SPECIES_BLASTOISE) || \
-    (s >= SPECIES_CHIKORITA && s <= SPECIES_FERALIGATR) || \
-    (s >= SPECIES_TREECKO && s <= SPECIES_SWAMPERT) || \
-    (s >= SPECIES_TURTWIG && s <= SPECIES_EMPOLEON) || \
-    (s >= SPECIES_SNIVY && s <= SPECIES_SAMUROTT) || \
-    (s >= SPECIES_CHESPIN && s <= SPECIES_GRENINJA) || \
-    (s >= SPECIES_ROWLET && s <= SPECIES_PRIMARINA) || \
-    (s >= SPECIES_GROOKEY && s <= SPECIES_INTELEON) || \
-    (s >= SPECIES_SPRIGATITO && s <= SPECIES_QUAQUAVAL))
+    ((s) >= SPECIES_BULBASAUR && (s) <= SPECIES_BLASTOISE) || \
+    ((s) >= SPECIES_CHIKORITA && (s) <= SPECIES_FERALIGATR) || \
+    ((s) >= SPECIES_TREECKO && (s) <= SPECIES_SWAMPERT) || \
+    ((s) >= SPECIES_TURTWIG && (s) <= SPECIES_EMPOLEON) || \
+    ((s) >= SPECIES_SNIVY && (s) <= SPECIES_SAMUROTT) || \
+    ((s) >= SPECIES_CHESPIN && (s) <= SPECIES_GRENINJA) || \
+    ((s) >= SPECIES_ROWLET && (s) <= SPECIES_PRIMARINA) || \
+    ((s) >= SPECIES_GROOKEY && (s) <= SPECIES_INTELEON) || \
+    ((s) >= SPECIES_SPRIGATITO && (s) <= SPECIES_QUAQUAVAL))
 
-const struct Nature natureLookup[NUM_NATURES] = {
-    // Attack Boosting
-    [NATURE_HARDY] = {STAT_ATK,STAT_ATK}, 
-    [NATURE_LONELY] = {STAT_ATK,STAT_DEF}, 
-    [NATURE_BRAVE] = {STAT_ATK,STAT_SPEED}, 
-    [NATURE_ADAMANT] = {STAT_ATK,STAT_SPATK}, 
-    [NATURE_NAUGHTY] = {STAT_ATK,STAT_SPDEF}, 
-    // Defense Boosting
-    [NATURE_BOLD] = {STAT_DEF,STAT_ATK}, 
-    [NATURE_DOCILE] = {STAT_DEF,STAT_DEF}, 
-    [NATURE_RELAXED] = {STAT_DEF,STAT_SPEED}, 
-    [NATURE_IMPISH] = {STAT_DEF,STAT_SPATK}, 
-    [NATURE_LAX] = {STAT_DEF,STAT_SPDEF}, 
-    // Speed Boosting
-    [NATURE_TIMID] = {STAT_SPEED,STAT_ATK}, 
-    [NATURE_HASTY] = {STAT_SPEED,STAT_DEF}, 
-    [NATURE_SERIOUS] = {STAT_SPEED,STAT_SPEED}, 
-    [NATURE_JOLLY] = {STAT_SPEED,STAT_SPATK}, 
-    [NATURE_NAIVE] = {STAT_SPEED,STAT_SPDEF}, 
-    // Sp. Attack Boosting
-    [NATURE_MODEST] = {STAT_SPATK,STAT_ATK}, 
-    [NATURE_MILD] = {STAT_SPATK,STAT_DEF}, 
-    [NATURE_QUIET] = {STAT_SPATK,STAT_SPEED}, 
-    [NATURE_BASHFUL] = {STAT_SPATK,STAT_SPATK}, 
-    [NATURE_RASH] = {STAT_SPATK,STAT_SPDEF}, 
-    // Sp. Defense Boosting
-    [NATURE_CALM] = {STAT_SPDEF,STAT_ATK}, 
-    [NATURE_GENTLE] = {STAT_SPDEF,STAT_DEF}, 
-    [NATURE_SASSY] = {STAT_SPDEF,STAT_SPEED}, 
-    [NATURE_CAREFUL] = {STAT_SPDEF,STAT_SPATK}, 
-    [NATURE_QUIRKY] = {STAT_SPDEF,STAT_SPDEF}, 
-};
-
+// *** ITEM ***
+#if BFG_NO_ITEM_SELECTION_CHANCE != 1
 const u16 customItemsList[] = {
     BFG_CUSTOM_ITEMS_LIST, 
     ITEM_NONE // End of list
 }; 
+#endif
+
+// *** CONSTANTS ***
+#define SPECIES_END 0xFFFF
+#define FORME_DEFAULT 0xFF
 
 const u16 fixedIVMinBSTLookup[] = {
     [3] = 180,
@@ -115,7 +99,12 @@ const u16 fixedIVMaxBSTLookup [] = {
     [MAX_PER_STAT_IVS] = 720,
 };
 
-static u16 GetBaseStatTotal(const struct SpeciesInfo * species) {
+// *** FUNCTIONS ***
+static u16 GetBaseStatTotal(u16 speciesId) {
+
+    // Pointer to species info
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+
     return (
         species->baseHP + species->baseAttack + 
         species->baseDefense + species->baseSpAttack + 
@@ -123,11 +112,80 @@ static u16 GetBaseStatTotal(const struct SpeciesInfo * species) {
     );
 }
 
-static bool8 SpeciesValidForFrontierLevel(const struct SpeciesInfo * species, u16 speciesId) {
-    return TRUE; // Placeholder
+// Allow custom species banlists
+#if BFG_USE_CUSTOM_BANNED_SPECIES == TRUE
+
+const u16 customBannedSpeciesLvl50[] = {
+    BFG_LVL_50_CUSTOM_BANNED_SPECIES
+};
+
+const u16 customBannedSpeciesLvlOpen[] = {
+    BFG_LVL_OPEN_CUSTOM_BANNED_SPECIES
+};
+
+const u16 customBannedSpeciesLvlTent[] = {
+    BFG_LVL_TENT_CUSTOM_BANNED_SPECIES
+};
+
+#endif
+
+static bool8 SpeciesValidForFrontierLevel(u16 speciesId) {
+
+    s32 i;
+
+    // Get the level mode for the frontier
+    u8 lvlMode = GET_LVL_MODE();
+
+    // Switch on level mode
+    switch(lvlMode) {
+        case FRONTIER_LVL_50: {
+            #if BFG_LVL_50_ALLOW_BANNED_SPECIES == FALSE
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+                if (gFrontierBannedSpecies[i] == speciesId)
+                    return FALSE; // Species banned
+            }
+            #endif
+            #if BFG_USE_CUSTOM_BANNED_SPECIES
+            for(i=0; customBannedSpeciesLvl50[i] != SPECIES_NONE; i++)
+                if (customBannedSpeciesLvl50[i] == speciesId)
+                    return FALSE; // Species banned
+            #endif
+        }; break;
+        case FRONTIER_LVL_OPEN: {
+            #if BFG_LVL_OPEN_ALLOW_BANNED_SPECIES == FALSE
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+                if (gFrontierBannedSpecies[i] == speciesId)
+                    return FALSE; // Species banned
+            }
+            #endif
+            #if BFG_USE_CUSTOM_BANNED_SPECIES
+            for(i=0; customBannedSpeciesLvlOpen[i] != SPECIES_NONE; i++)
+                if (customBannedSpeciesLvlOpen[i] == speciesId)
+                    return FALSE; // Species banned
+            #endif
+        }; break;
+        case FRONTIER_LVL_TENT: {
+            #if BFG_LVL_TENT_ALLOW_BANNED_SPECIES == FALSE
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+                if (gFrontierBannedSpecies[i] == speciesId)
+                    return FALSE; // Species banned
+            }
+            #endif
+            #if BFG_USE_CUSTOM_BANNED_SPECIES
+            for(i=0; customBannedSpeciesLvlTent[i] != SPECIES_NONE; i++)
+                if (customBannedSpeciesLvlTent[i] == speciesId)
+                    return FALSE; // Species banned
+            #endif
+        }; break;
+    }
+
+    return TRUE;
 }
 
-static bool8 SpeciesValidForTrainerClass(u8 trainerClass, const struct SpeciesInfo * species, u16 speciesId) {
+static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) {
+
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+    
     // Dereference types/abilities
     u8 t1 = species->types[0];
     u8 t2 = species->types[1];
@@ -299,15 +357,17 @@ static u8 GetNatureFromStats(u8 posStat, u8 negStat) {
     // Loop over the natures
     for(i=0; i<NUM_NATURES; i++) { 
         // Return matching nature (if found)
-        if ((natureLookup[i].posStat == posStat) && 
-        (natureLookup[i].negStat == negStat))
+        if ((gNatureInfo[i].posStat == posStat) && 
+        (gNatureInfo[i].negStat == negStat))
             return i;
     }
     // Default (neutral)
     return NATURE_HARDY;
 }
 
-static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
+static u8 GetSpeciesNature(u16 speciesId) {
+
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
     #if BFG_NATURE_SELECT_RANDOM == TRUE
     return Random() % NUM_NATURES;
@@ -427,7 +487,9 @@ static u8 GetSpeciesNature(const struct SpeciesInfo * species) {
     #endif
 }
 
-static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
+static u8 GetSpeciesEVs(u16 speciesId, u8 nature) {
+
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
     u8 evs = 0;
     u8 stat1, stat2;
@@ -443,7 +505,7 @@ static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
     u16 val2 = 0; 
     u16 valT, valR;
 
-    const struct Nature * natureInfo = &(natureLookup[nature]);
+    const struct Nature * natureInfo = &(gNatureInfo[nature]);
 
     // Default Values
     stat1 = 0xFF;
@@ -456,7 +518,7 @@ static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
         switch(i)
         {
             case STAT_HP:
-                valT = (species->baseHP) + BFG_HP_OFFSET;
+                valT = (species->baseHP) + BFG_EV_HP_OFFSET;
                 break;
             case STAT_ATK:
                 valT = species->baseAttack;
@@ -521,11 +583,12 @@ static u8 GetSpeciesEVs(const struct SpeciesInfo * species, u8 nature) {
     return evs;
 }
 
-#if BFG_MOVE_SELECT_RANDOM == FALSE // Change this
-static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId, u16 * moves) {
+#if BFG_MOVE_SELECT_RANDOM == FALSE
+static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 abilityNum, u16 * currentMoves) {
 
-    const struct Nature * natureInfo = &(natureLookup[nature]);
-    const struct BattleMove * move, * moveTemp;
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+    const struct Nature * nature = &(gNatureInfo[natureId]);
+    const struct BattleMove * move, * currentMove;
     s32 i;
 
     // Move for calculating rating
@@ -538,7 +601,7 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
     u8 numPhysical = 0;
     u8 numSpecial = 0;
 
-    #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS == TRUE
+    #if BFG_MOVE_EFFECT_MODIFIERS == TRUE
     // Used by moves with additional effects
     float modifier = BFG_MOVE_BASE_MODIFIER;
     #endif
@@ -552,15 +615,15 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
         // Check existing moves (skip last)
         for(i = 0; i < MAX_MON_MOVES - 1; i++) 
         {
-            if (moves[i] != MOVE_NONE) 
+            if (currentMoves[i] != MOVE_NONE)
             {
                 // Double-up move
-                if (moves[i] == moveId)
+                if (currentMoves[i] == moveId)
                     return 0; // Reject duplicate
 
-                moveTemp = &(gBattleMoves[moves[i]]);
+                currentMove = &(gBattleMoves[currentMoves[i]]);
 
-                switch(moveTemp->split) {
+                switch(currentMove->split) {
                     case SPLIT_PHYSICAL:
                         numPhysical++;
                     break;
@@ -578,7 +641,7 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
         if (numStatus >= BFG_MOVE_MAX_STATUS)
             return 0;
 
-        #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS
+        #if BFG_MOVE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
             // Attack Boosting
@@ -592,9 +655,9 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
                     return 0; // No physical moves to boost
                 modifier = MODIFY(modifier, (100 + BFG_MOVE_SELF_STAT_UP_MODIFIER));
                 if (natureInfo->negStat == STAT_ATK)
-                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_NEG_NATURE_MULTIPLIER);
                 else if (natureInfo->posStat == STAT_ATK)
-                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_POS_NATURE_MULTIPLIER);
             break;
             // Defense Boosting
             case EFFECT_DEFENSE_UP_3:
@@ -605,9 +668,9 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
             case EFFECT_DEFENSE_UP:
                 modifier = MODIFY(modifier, (100 + BFG_MOVE_SELF_STAT_UP_MODIFIER * 2));
                 if (natureInfo->negStat == STAT_DEF)
-                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_NEG_NATURE_MULTIPLIER);
                 else if (natureInfo->posStat == STAT_DEF)
-                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_POS_NATURE_MULTIPLIER);
             break;
             // Special Attack Boosting
             case EFFECT_GEOMANCY: 
@@ -626,9 +689,9 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
                     return 0; // No special moves to boost
                 modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
                 if (natureInfo->negStat == STAT_SPATK)
-                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_NEG_NATURE_MULTIPLIER);
                 else if (natureInfo->posStat == STAT_SPATK)
-                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_POS_NATURE_MULTIPLIER);
             break;
             // Special Defense Boosting
             case EFFECT_SPECIAL_DEFENSE_UP_2: 
@@ -636,9 +699,9 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
             case EFFECT_SPECIAL_DEFENSE_UP: 
                 modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
                 if (natureInfo->negStat == STAT_SPDEF)
-                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_NEG_NATURE_MULTIPLIER);
                 else if (natureInfo->posStat == STAT_SPDEF)
-                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_POS_NATURE_MULTIPLIER);
             break;
             // Speed Boosting
             case EFFECT_SHIFT_GEAR: 
@@ -650,9 +713,9 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
             case EFFECT_SPEED_UP: 
                 modifier = MODIFY(modifier, 100 + BFG_MOVE_SELF_STAT_UP_MODIFIER);
                 if (natureInfo->negStat == STAT_SPEED)
-                    modifier = MULTIPLY(modifier, BFG_NEG_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_NEG_NATURE_MULTIPLIER);
                 else if (natureInfo->posStat == STAT_SPEED)
-                    modifier = MULTIPLY(modifier, BFG_POS_NATURE_MULTIPLIER);
+                    modifier = MULTIPLY(modifier, BFG_MOVE_POS_NATURE_MULTIPLIER);
             break;
             case EFFECT_ATTACK_DOWN_2:
             case EFFECT_DEFENSE_DOWN_2:
@@ -747,7 +810,7 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
             case EFFECT_ROOST: 
             case EFFECT_WISH: 
             case EFFECT_REST:
-                modifier = MULTIPLY(modifier, BFG_MOVE_SELF_RECOVERY_MODIFIER);
+                modifier = MULTIPLY(modifier, BFG_MOVE_RECOVERY_MODIFIER);
             break;
             case EFFECT_REVIVAL_BLESSING: 
             case EFFECT_LIGHT_SCREEN:
@@ -756,7 +819,7 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
             case EFFECT_HEAL_BELL: 
             case EFFECT_SAFEGUARD: 
             case EFFECT_REFLECT: 
-                modifier = MULTIPLY(modifier, BFG_MOVE_PARTY_SUPPORT_MODIFIER);
+                modifier = MULTIPLY(modifier, BFG_MOVE_SUPPORT_MODIFIER);
             break;
             case EFFECT_PARTING_SHOT: 
             case EFFECT_BATON_PASS:
@@ -839,23 +902,23 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
         // Check existing moves (skip last)
         for(i = 0; i < MAX_MON_MOVES - 1; i++) 
         {
-            if (moves[i] != MOVE_NONE)
+            if (currentMoves[i] != MOVE_NONE)
             {
                 // Double-up move
-                if (moves[i] == moveId)
+                if (currentMoves[i] == moveId)
                     return 0; // Reject duplicate
 
-                moveTemp = &(gBattleMoves[moves[i]]);
+                currentMove = &(gBattleMoves[currentMoves[i]]);
 
                 // Move is physical/special
-                if ((moveTemp->split != SPLIT_STATUS)) {
+                if ((currentMove->split != SPLIT_STATUS)) {
 
-                    if (move->type == moveTemp->type) {
+                    if (move->type == currentMove->type) {
                         // Check if move is a duplicate
                         if (
-                            (move->split == moveTemp->split) && 
+                            (move->split == currentMove->split) && 
                             // (move->target == moveTemp->target) && TODO: Make this column check for doubles
-                            (move->priority == moveTemp->priority)
+                            (move->priority == currentMove->priority)
                         )
                             return 0; // No duplicate moves
 
@@ -873,24 +936,24 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
 
         if (move->split == SPLIT_PHYSICAL) 
         {
-            if (natureInfo->negStat == STAT_ATK)
-                rating *= BFG_NEG_NATURE_MULTIPLIER;
-            else if (natureInfo->posStat == STAT_ATK)
-                rating *= BFG_POS_NATURE_MULTIPLIER;
+            if (nature->negStat == STAT_ATK)
+                rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
+            else if (nature->posStat == STAT_ATK)
+                rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
         }
         else // move->split == SPLIT_SPECIAL
         {
-            if (natureInfo->negStat == STAT_SPATK)
-                rating *= BFG_NEG_NATURE_MULTIPLIER;
-            else if (natureInfo->posStat == STAT_SPATK)
-                rating *= BFG_POS_NATURE_MULTIPLIER;
+            if (nature->negStat == STAT_SPATK)
+                rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
+            else if (nature->posStat == STAT_SPATK)
+                rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
         }
 
         // Stop if rating is zero
         if (rating <= 0)
             return 0;
 
-        #if BFG_MOVE_ENABLE_EFFECT_MODIFIERS
+        #if BFG_MOVE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
             case EFFECT_MULTI_HIT:
@@ -1077,7 +1140,10 @@ static float GetMoveRating(u16 moveId, const struct SpeciesInfo * species, u8 na
 }
 #endif
 
-static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 nature, u8 evs, u16 requiredMove, u16 speciesId) {
+static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) {
+
+    // const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+    // u16 ability = species->abilities[abilityNum];
 
     s32 i,j;
     u8 friendship = FRIENDSHIP_MAX;
@@ -1102,13 +1168,13 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
     float rating, bestRating; // For heuristic
     #endif
 
-    #if BFG_ALLOW_LEVEL_UP_MOVES == TRUE
+    #if BFG_MOVE_ALLOW_LEVEL_UP == TRUE
     levelUpLearnset = GetSpeciesLevelUpLearnset(speciesId);
     while(levelUpLearnset[levelUpMoves].move != LEVEL_UP_MOVE_END)
         levelUpMoves++;
     #endif
 
-    #if BFG_ALLOW_TEACHABLE_MOVES == TRUE
+    #if BFG_MOVE_ALLOW_TEACHABLE == TRUE
     teachableLearnset = GetSpeciesTeachableLearnset(speciesId);
     while(teachableLearnset[teachableMoves] != MOVE_UNAVAILABLE)
         teachableMoves++;
@@ -1165,7 +1231,7 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
                 for(j=0; j < levelUpMoves; j++) 
                 {
                     rating = GetMoveRating(levelUpLearnset[j].move, 
-                        species, nature, evs, speciesId, moves);
+                        speciesId, nature, evs, abilityNum, moves);
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
                         moveId = levelUpLearnset[j].move;
@@ -1178,7 +1244,7 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
                 for(j=0; j < teachableMoves; j++)
                 {
                     rating = GetMoveRating(teachableLearnset[j], 
-                        species, nature, evs, speciesId, moves);
+                        speciesId, nature, evs, abilityNum, moves);
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
                         moveId = teachableLearnset[j];
@@ -1206,16 +1272,16 @@ static u8 GetSpeciesMoves(const struct SpeciesInfo * species, u8 index, u8 natur
     return friendship;
 }
 
-static u16 GetSpeciesItem(const struct SpeciesInfo * species, u8 nature, u8 evs, u16 speciesId) {
+#if BFG_NO_ITEM_SELECTION_CHANCE != 1
+static u16 GetSpeciesItem(u16 speciesId, u8 nature, u8 evs, u8 abilityNum) {
     return ITEM_NONE; // TODO
 }
+#endif 
 
-static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeId) {
+static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
-
     const struct FormChange * formChanges;
-    const struct SpeciesInfo * forme;
 
     u8 evs, nature, abilityNum, friendship;
 
@@ -1223,46 +1289,38 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
     u16 move = MOVE_NONE;
     u16 item = ITEM_NONE;
 
+    // Forme ID placeholder
+    u16 formeId = speciesId;
+
     // Forme is not default
-    if (formeId != FORME_DEFAULT) {
+    if (formeIndex != FORME_DEFAULT) {
         // Get the species form change table
         formChanges = GetSpeciesFormChanges(speciesId);
 
+        // Get the forme change target species
+        formeId = formChanges[formeIndex].targetSpecies;
+
         // switch on the form change method
-        switch(formChanges[formeId].method) {
+        switch(formChanges[formeIndex].method) {
             case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: 
             case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: 
             case FORM_CHANGE_BATTLE_ULTRA_BURST: {
-                item = formChanges[formeId].param1; // ItemId
+                item = formChanges[formeIndex].param1; // ItemId
             }; break;
             case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                move = formChanges[formeId].param1; // MoveId 
+                move = formChanges[formeIndex].param1; // MoveId 
             }; break;
         }
-
-        // Get the target species from the forme
-        forme = &(gSpeciesInfo[(formChanges[formeId]).targetSpecies]);
-    } 
-    else // Forme is default
-    {
-        // Same as species
-        forme = species;
     }
 
-    nature = GetSpeciesNature(forme);
-    evs = GetSpeciesEVs(forme, nature);
+    // Calculate species nature, evs
+    nature = GetSpeciesNature(formeId);
+    evs = GetSpeciesEVs(formeId, nature);
 
     // Place the chosen pokemon into the trainer's party
     CreateMonWithEVSpreadNatureOTID(
         &gEnemyParty[index], speciesId, level, 
         nature, fixedIV, evs, otID
-    );
-
-    // Give the chosen pokemon its specified moves.
-    // Returns FRIENDSHIP_MAX unless the moveset
-    // contains 'FRUSTRATION'. 
-    friendship = GetSpeciesMoves(
-        forme, index, nature, evs, move, speciesId
     );
 
     // If this species has a hidden ability
@@ -1271,9 +1329,26 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
         SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
     }
 
+    // No forme change
+    if (formeId == speciesId) {
+        // Get the actual selected ability for the species
+        abilityNum = GetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM);
+    }
+    else // Forme change
+    {
+        abilityNum = 0;
+    }
+
+    // Give the chosen pokemon its specified moves.
+    // Returns FRIENDSHIP_MAX unless the moveset
+    // contains 'FRUSTRATION'. 
+    friendship = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
+
+    #if BFG_NO_ITEM_SELECTION_CHANCE != 1
     // Currently has no held item
     if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
-        item = GetSpeciesItem(forme, nature, evs, speciesId);
+        item = GetSpeciesItem(formeId, nature, evs, abilityNum);
+    #endif 
 
     // Set friendship / held item
     SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
@@ -1297,6 +1372,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
     u16 minBST = fixedIVMinBSTLookup[fixedIV];
     u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
 
+    // bool32 isDoubles = IS_DOUBLES(monCount);
+
     u16 bfMonCount = 0;
 
     // Dereference the battle frontier trainer data
@@ -1317,23 +1394,23 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
             break;
         }
 
-        // Pointer to species info
-        species = &(gSpeciesInfo[i]);
-
         // Skip species if banned in frontier level
-        if (SpeciesValidForFrontierLevel(species, i) == FALSE)
+        if (SpeciesValidForFrontierLevel(i) == FALSE)
             continue;
 
         // Skip species if not valid for trainer class
-        if (SpeciesValidForTrainerClass(trainerClass, species, i) == FALSE)
+        if (SpeciesValidForTrainerClass(trainerClass, i) == FALSE)
             continue;
+
+        // Pointer to species info
+        species = &(gSpeciesInfo[i]);
 
         // Skip gigantamax, mega, primal or ultra burst formes
         if (species->isGigantamax || species->isMegaEvolution || species->isPrimalReversion || species->isUltraBurst)
             continue;
 
         // Get base stat total
-        bst = GetBaseStatTotal(species);
+        bst = GetBaseStatTotal(i);
 
         // Skip above/below bst limits
         if (bst < minBST || bst > maxBST)
@@ -1358,11 +1435,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         // Sample random species from the mon count
         speciesId = monSet[Random() % bfMonCount];
 
-        // Pointer to species info
-        species = &(gSpeciesInfo[i]);
-
         // Get base stat total
-        bst = GetBaseStatTotal(species);
+        bst = GetBaseStatTotal(speciesId);
 
         // Alt. Forme (e.g. mega, ultra burst)
         forme = FORME_DEFAULT; // Default

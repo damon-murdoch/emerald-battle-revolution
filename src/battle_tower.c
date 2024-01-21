@@ -1658,8 +1658,8 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         DebugPrintf("Generating frontier trainer team ...");
 
         // Use Frontier Generator (If flag set)
-        #if BFG_FLAG_USE_FRONTIER_GENERATOR != 0
-        if (!FlagGet(BFG_FLAG_USE_FRONTIER_GENERATOR)) {
+        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+        if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
             GenerateTrainerParty(trainerId, firstMonId, monCount, level);
             return;
         }
