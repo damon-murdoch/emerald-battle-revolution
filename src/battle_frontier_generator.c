@@ -1,6 +1,7 @@
 #include "global.h"
 #include "random.h"
 #include "pokemon.h"
+#include "event_data.h"
 #include "battle_tower.h"
 #include "frontier_util.h"
 #include "battle_frontier_generator.h"
@@ -33,12 +34,37 @@
 #define RANDOM_CHANCE(x) (((x) != 0) && ((Random() % (x)) == 0))
 
 // *** FORMAT ***
-#define IS_DOUBLES(x) (((x) == FRONTIER_DOUBLES_PARTY_SIZE) || ((x) == FRONTIER_MULTI_PARTY_SIZE))
+#define IS_DOUBLES() (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
 #define GET_LVL_MODE() (gSaveBlock2Ptr->frontier.lvlMode)
+
+// *** STATS ***
+#define CHECK_EVS(evs,stat) ((evs) & (stat))
 
 // *** MOVE ***
 #define NORMALISE(x) (((float)(x)) / 100.0f)
 #define SET_MODIFIER(x,y) (((x) == BFG_MOVE_BASE_MODIFIER) ? (y) : (x))
+
+// Apply positive / negative nature modifiers for moves
+#define GET_NEG_NATURE_MULTIPLIER(n, s) ((n->negStat == s) ? BFG_MOVE_NEG_NATURE_MULTIPLIER : 1.0f)
+#define GET_POS_NATURE_MULTIPLIER(n, s) ((n->posStat == s) ? BFG_MOVE_POS_NATURE_MULTIPLIER : 1.0f)
+#define GET_NATURE_MULTIPLIER(n, s) ((GET_NEG_NATURE_MULTIPLIER(n,s)) * (GET_POS_NATURE_MULTIPLIER(n,s)))
+
+// Apply positive / negative modifiers for evs
+// GET_NEG_EV_MULTIPLIER should be used in the case of having a lower score with EV investment, for
+// example Trick Room as a correlation to speed
+// GET_POS_EV_MULTIPLIER is more useful in most other cases
+#define GET_NEG_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f / BFG_MOVE_EV_INVEST_MODIFIER) : 1.0f)
+#define GET_POS_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f * BFG_MOVE_EV_INVEST_MODIFIER) : 1.0f)
+
+#define GET_ATK_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_ATK)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_ATTACK)))
+#define GET_DEF_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_DEF)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_DEFENSE)))
+#define GET_SPATK_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_SPATK)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_SP_ATTACK)))
+#define GET_SPDEF_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_SPDEF)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_SP_DEFENSE)))
+#define GET_SPEED_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_SPEED)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_SPEED)))
+
+#define GET_SPEED_NEG_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_SPEED)) * (GET_NEG_EV_MULTIPLIER(e, F_EV_SPREAD_SPEED)))
+
+// rating *= BFG_MOVE_EV_INVEST_MODIFIER;
 
 // *** TYPE ***
 #define IS_TYPE(x,y,type) ((x) == (type) || (y) == (type))
@@ -65,9 +91,6 @@
     ((s) >= SPECIES_ROWLET && (s) <= SPECIES_PRIMARINA) || \
     ((s) >= SPECIES_GROOKEY && (s) <= SPECIES_INTELEON) || \
     ((s) >= SPECIES_SPRIGATITO && (s) <= SPECIES_QUAQUAVAL))
-
-// *** STATS ***
-#define CHECK_EVS(evs,stat) ((evs) & (stat))
 
 // *** ITEM ***
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
@@ -104,6 +127,18 @@ const u16 fixedIVMaxBSTLookup [] = {
 };
 
 // *** FUNCTIONS ***
+
+#if BFG_MOVE_EFFECT_MODIFIERS == TRUE
+static float fpow(float x, s32 n) {
+    s32 i; 
+    float product = 1;
+    for(i = 0; i < n; i++){
+        product *= x;
+    }
+    return product;
+}
+#endif
+
 static u16 GetBaseStatTotal(u16 speciesId) {
 
     // Pointer to species info
@@ -588,7 +623,7 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) {
 }
 
 #if BFG_MOVE_SELECT_RANDOM == FALSE
-static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 abilityNum, u16 * currentMoves, bool32 isDoubles) {
+static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 abilityNum, u16 * currentMoves) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct Nature * nature = &(gNatureInfo[natureId]);
@@ -598,6 +633,9 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     // Move for calculating rating
     move = &(gBattleMoves[moveId]);
 
+    // Might be updated by pixilate/refridgerate/etc.
+    u8 type = move->type;
+
     // Move rating (Casted to u16 at the end)
     float rating = BFG_MOVE_BASE_RATING;
 
@@ -606,7 +644,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     u8 numSpecial = 0;
 
     // Battle is doubles
-    if (isDoubles) {
+    if (IS_DOUBLES()) {
         // Switch on move target mode
         switch(move->target){
             // Ally-damaging move
@@ -626,6 +664,77 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         if (move->target == MOVE_TARGET_ALLY) 
             return 0; // Cannot be used
     }
+
+    #if BFG_MOVE_ABILITY_MODIFIERS == TRUE
+    // Get the ability for the species
+    u16 ability = species->abilities[abilityNum];
+
+    switch(ability) {
+        // Type-Changing
+        case ABILITY_NORMALIZE: 
+            type = TYPE_NORMAL;
+        break;
+        case ABILITY_AERILATE: 
+            if (move->type == TYPE_NORMAL)
+                type = TYPE_FLYING;
+        break;
+        case ABILITY_PIXILATE: 
+            if (move->type == TYPE_NORMAL)
+                type = TYPE_FAIRY;
+        break;
+        case ABILITY_REFRIGERATE: 
+            if (move->type == TYPE_NORMAL)
+                type = TYPE_ICE;
+        break;
+        case ABILITY_GALVANIZE: 
+            if (move->type == TYPE_NORMAL)
+                type = TYPE_ELECTRIC;
+        break;
+        case ABILITY_LIQUID_VOICE: 
+            if (move->soundMove == TRUE)
+                type = TYPE_WATER;
+        break;
+        // Rating Changing
+        case ABILITY_PUNK_ROCK:
+            if (move->soundMove == TRUE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_STEELWORKER:
+            if (move->type == TYPE_STEEL)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_STRONG_JAW: 
+            if (move->bitingMove == TRUE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_MEGA_LAUNCHER: 
+            if (move->ballisticMove == TRUE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_TOUGH_CLAWS: 
+            if (move->makesContact == TRUE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_TECHNICIAN: 
+            if (move->power <= 60)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_IRON_FIST: 
+            if (move->punchingMove == TRUE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        case ABILITY_HUGE_POWER: 
+            if (move->split == SPLIT_PHYSICAL)
+                rating *= fpow(BFG_MOVE_ABILITY_MODIFIER, 2);
+        break;
+        case ABILITY_LIBERO:
+        case ABILITY_PROTEAN: 
+            // If move does not have STAB bonus, apply it
+            if (!(IS_TYPE(species->types[0], species->types[1], type)))
+                rating *= BFG_MOVE_STAB_MODIFIER;
+        break;
+    }
+    #endif
 
     // Status moves
     if (move->split == SPLIT_STATUS) {
@@ -662,125 +771,161 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         if (numStatus >= BFG_MOVE_MAX_STATUS)
             return 0;
 
+        // Increase selection chance if invested in def/spdef
+        rating *= GET_POS_EV_MULTIPLIER(evs, F_EV_SPREAD_HP);
+        rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs);
+        rating *= GET_DEF_STAT_MULTIPLIER(nature,evs);
+
         #if BFG_MOVE_EFFECT_MODIFIERS == TRUE
         // Switch on move effect
         switch(move->effect) {
+            // Multi-Stat Boosters
+            case EFFECT_NO_RETREAT: 
+                rating *= GET_ATK_STAT_MULTIPLIER(nature, evs);
+                rating *= GET_DEF_STAT_MULTIPLIER(nature, evs);
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature, evs);
+                rating *= GET_SPDEF_STAT_MULTIPLIER(nature, evs);
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature, evs);
+            break;
+            case EFFECT_BULK_UP:
+            case EFFECT_COIL: 
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs);
+                rating *= GET_DEF_STAT_MULTIPLIER(nature,evs);
+            break; 
+            case EFFECT_CURSE: 
+                if (!(IS_TYPE(species->types[0], species->types[1], TYPE_GHOST))) {
+                    rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+                    rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
+                    rating *= GET_SPEED_NEG_MULTIPLIER(nature,evs); // -1
+                }
+            break;
+            case EFFECT_VICTORY_DANCE: 
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
+            break;
             case EFFECT_DRAGON_DANCE:
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            case EFFECT_SHELL_SMASH: 
+                rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= fpow(GET_SPEED_NEG_MULTIPLIER(nature,evs), 2); // +2
+            break;
+            case EFFECT_ATTACK_SPATK_UP:
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            case EFFECT_GEOMANCY:
+                rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= fpow(GET_SPDEF_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= fpow(GET_SPEED_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
+            break;
+            case EFFECT_QUIVER_DANCE: 
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            case EFFECT_SHIFT_GEAR: 
+                rating *= fpow(GET_SPEED_STAT_MULTIPLIER(nature,evs), 2); // +2
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            case EFFECT_TAKE_HEART:
+            case EFFECT_CALM_MIND: 
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            case EFFECT_COSMIC_POWER: 
+            case EFFECT_STOCKPILE: 
+                rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
+                rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
+            break;
+            // Attack Boosting
+            case EFFECT_BELLY_DRUM: 
+                rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature, evs), 6);
+            break;
             case EFFECT_ATTACK_UP_2:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature,evs), 2); // +2
+            break;
+            case EFFECT_ATTACK_UP_USER_ALLY:
+            case EFFECT_ATTACK_ACCURACY_UP:
             case EFFECT_ATTACK_UP:
-                if (numPhysical == 0)
-                    return 0; // No physical moves to boost
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_ATK)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_ATK)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_ATTACK))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
             // Defense Boosting
             case EFFECT_DEFENSE_UP_3:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_DEF_STAT_MULTIPLIER(nature,evs), 3); // +3
+            break;
             case EFFECT_DEFENSE_UP_2:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_DEF_STAT_MULTIPLIER(nature,evs), 2); // +2
+            break;
             case EFFECT_DEFENSE_CURL:
             case EFFECT_DEFENSE_UP:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_DEF)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_DEF)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_DEFENSE))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
             break;
             // Special Attack Boosting
-            case EFFECT_GEOMANCY:
-                rating *= (1.0f + (BFG_MOVE_SELF_STAT_UP_MODIFIER * 3)); // +6
-                rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             case EFFECT_SPECIAL_ATTACK_UP_3:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 3); // +3
+            break;
             case EFFECT_SPECIAL_ATTACK_UP_2:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-            case EFFECT_ATTACK_UP_USER_ALLY: 
+                rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
+            break;
             case EFFECT_SPECIAL_ATTACK_UP:
-                if (numSpecial == 0)
-                    return 0; // No special moves to boost
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_SPATK)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPATK)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SP_ATTACK))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
             // Special Defense Boosting
             case EFFECT_SPECIAL_DEFENSE_UP_2: 
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_SPDEF_STAT_MULTIPLIER(nature,evs), 2); // +2
+            break;
             case EFFECT_SPECIAL_DEFENSE_UP: 
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_SPDEF)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPDEF)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SP_DEFENSE))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
             break;
             // Speed Boosting
-            case EFFECT_SHIFT_GEAR: 
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
             case EFFECT_AUTOTOMIZE:
             case EFFECT_SPEED_UP_2:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_SPEED_STAT_MULTIPLIER(nature,evs), 2); // +2
+            break;
             case EFFECT_SPEED_UP: 
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_SPEED)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPEED)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SPEED))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
-            case EFFECT_ATTACK_DOWN_2:
-            case EFFECT_DEFENSE_DOWN_2:
-            case EFFECT_SPECIAL_ATTACK_DOWN_2:
-            case EFFECT_SPECIAL_DEFENSE_DOWN_2:
-            case EFFECT_SPEED_DOWN_2:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-            break;
-            case EFFECT_ATTACK_DOWN:
-            case EFFECT_DEFENSE_DOWN:
-            case EFFECT_SPECIAL_ATTACK_DOWN:
-            case EFFECT_SPECIAL_DEFENSE_DOWN:
-            case EFFECT_SPEED_DOWN:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-            break;
-            // Luck Increasing Moves
-            case EFFECT_ACCURACY_UP_2:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-            case EFFECT_ACCURACY_UP:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                rating *= BFG_MOVE_LUCK_UP_MULTIPLIER;
-            break;
-            case EFFECT_EVASION_DOWN_2:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-            case EFFECT_EVASION_DOWN:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-                rating *= BFG_MOVE_LUCK_UP_MULTIPLIER;
-            break;
-            // Luck Reducing Moves
+            // Luck Based Moves
             case EFFECT_ACCURACY_DOWN_2:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
             case EFFECT_ACCURACY_DOWN: 
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-                rating *= BFG_MOVE_LUCK_DOWN_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
             break;
             case EFFECT_EVASION_UP_2:
             case EFFECT_MINIMIZE: 
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
             case EFFECT_EVASION_UP:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                rating *= BFG_MOVE_LUCK_DOWN_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            break;
+            // Status Afflicting Moves
+            case EFFECT_DARK_VOID: 
+            case EFFECT_PARALYZE: 
+            case EFFECT_SLEEP: 
+            case EFFECT_YAWN:
+                // Luck-based status moves
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_WILL_O_WISP: 
+            case EFFECT_POISON: 
+            case EFFECT_TOXIC: 
+                rating *= BFG_MOVE_STATUS_MULTIPLIER;
+            break;
+            // Volatile Status Moves
+            case EFFECT_SWAGGER:
+            case EFFECT_CONFUSE:
+            case EFFECT_ATTRACT:
+            case EFFECT_FLATTER:
+                // Luck-based volatile status moves
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_LEECH_SEED:
+            case EFFECT_MEAN_LOOK: 
+            case EFFECT_DISABLE: 
+            case EFFECT_ENCORE: 
+                rating *= BFG_MOVE_STATUS_MULTIPLIER;
             break;
             // Weather Setting Moves
             case EFFECT_RAIN_DANCE:
@@ -797,32 +942,10 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_MISTY_TERRAIN:
                 rating *= BFG_MOVE_TERRAIN_MULTIPLIER;
             break;
-            // Status Afflicting Moves
-            case EFFECT_DARK_VOID: 
-            case EFFECT_PARALYZE: 
-            case EFFECT_SLEEP: 
-            case EFFECT_YAWN:
-                // Luck-based status moves
-                rating *= BFG_MOVE_LUCK_DOWN_MULTIPLIER;
-            case EFFECT_WILL_O_WISP: 
-            case EFFECT_POISON: 
-            case EFFECT_TOXIC: 
-                rating *= BFG_MOVE_STATUS_MULTIPLIER;
-            break;
-            // Volatile Status Moves
-            case EFFECT_CONFUSE:
-            case EFFECT_SWAGGER:
-            case EFFECT_ATTRACT:
-            case EFFECT_FLATTER:
-                // Luck-based volatile status moves
-                rating *= BFG_MOVE_LUCK_DOWN_MULTIPLIER;
-            case EFFECT_LEECH_SEED:
-                rating *= BFG_MOVE_VOLATILE_MODIFIER;
-            break;
-            // Self-Recovery Moves
-            case EFFECT_HEAL_PULSE: 
+            // Recovery Moves
             case EFFECT_JUNGLE_HEALING:
-                if (isDoubles)
+            case EFFECT_HEAL_PULSE: 
+                if (IS_DOUBLES())
                     rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
                 else
                     break;
@@ -835,64 +958,32 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_ROOST: 
                 rating *= BFG_MOVE_RECOVERY_MODIFIER;
             break;
-            case EFFECT_LIGHT_SCREEN:
-            case EFFECT_AURORA_VEIL: 
-            case EFFECT_SAFEGUARD: 
-            case EFFECT_REFLECT: 
-                rating *= BFG_MOVE_SUPPORT_MODIFIER;
-            break;
-            case EFFECT_PARTING_SHOT: 
-            case EFFECT_BATON_PASS:
-            case EFFECT_TELEPORT:
-                rating *= BFG_MOVE_PIVOT_MODIFIER;
-            break;
-            // Health absorb moves
             case EFFECT_STRENGTH_SAP: 
                 rating *= BFG_MOVE_ABSORB_MODIFIER;
             break;
-            case EFFECT_ROAR: 
-                rating *= BFG_MOVE_PHASE_MODIFIER;
+            // Pivoting Moves
+            case EFFECT_PARTING_SHOT: 
+            case EFFECT_BATON_PASS:
+                rating *= BFG_MOVE_PIVOT_MODIFIER;
             break;
-            case EFFECT_TRICK_ROOM: 
-                rating *= (1.0f + BFG_MOVE_SPEED_CONTROL_MODIFIER);
-                if (nature->negStat == STAT_SPEED)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPEED)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SPEED))
-                    rating /= BFG_MOVE_EV_INVEST_MODIFIER;
+            // Speed Control Moves
+            case EFFECT_TRICK_ROOM:
+                rating *= GET_SPEED_NEG_MULTIPLIER(nature,evs);
             break;
             case EFFECT_TAILWIND:
-                rating *= (1.0f + BFG_MOVE_SPEED_CONTROL_MODIFIER);
-                if (nature->negStat == STAT_SPEED)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPEED)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SPEED))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs);
             break;
             // Protect moves
-            case EFFECT_MAT_BLOCK: 
+            case EFFECT_MAT_BLOCK:
             case EFFECT_PROTECT:
             case EFFECT_ENDURE:
-                if (isDoubles)
+                if (IS_DOUBLES())
                     rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
                 rating *= BFG_MOVE_PROTECT_MODIFIER;
             break;
-            // Doubles moves
-            case EFFECT_HELPING_HAND: 
-            case EFFECT_ALLY_SWITCH:
-            case EFFECT_FOLLOW_ME:
-            case EFFECT_INSTRUCT: 
-            case EFFECT_DECORATE: 
-                if (isDoubles)
-                    rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
-                else
-                    break;
-            break;
             default: // Unhandled
                 DebugPrintf("Unhandled effect: %d", move->effect);
-                rating *= BFG_MOVE_UNHANDLED_MODIFIER;
+                rating *= BFG_MOVE_GENERIC_MODIFIER;
             break;
         }
 
@@ -949,17 +1040,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
 
         if (move->split == SPLIT_PHYSICAL) 
         {
-            if (nature->negStat == STAT_ATK)
-                rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-            else if (nature->posStat == STAT_ATK)
-                rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
+           rating *= GET_ATK_STAT_MULTIPLIER(nature,evs);
         }
         else // move->split == SPLIT_SPECIAL
         {
-            if (nature->negStat == STAT_SPATK)
-                rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-            else if (nature->posStat == STAT_SPATK)
-                rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
+            rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs);
         }
 
         // Stop if rating is zero
@@ -972,60 +1057,19 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         #if BFG_MOVE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
-            case EFFECT_MULTI_HIT:
-                hits = 3; // Avg. Multi-Hit
-            break;
-            case EFFECT_BURN_HIT: 
-            #if B_USE_FROSTBITE == TRUE
-            case EFFECT_FROSTBITE_HIT: 
-            #else
-            case EFFECT_FREEZE_HIT: 
-            #endif
-            case EFFECT_PARALYZE_HIT: 
-            case EFFECT_DIRE_CLAW: 
-                rating *= BFG_MOVE_LUCK_DOWN_HIT_MULTIPLIER;
-            case EFFECT_MORTAL_SPIN:
-            case EFFECT_POISON_FANG:  
-            case EFFECT_POISON_HIT: 
-            break;
-            case EFFECT_FLINCH_STATUS: 
-            case EFFECT_CONFUSE_HIT: 
-            case EFFECT_FLINCH_HIT: 
-                rating *= BFG_MOVE_LUCK_DOWN_HIT_MULTIPLIER;
-            case EFFECT_SYRUP_BOMB: 
-            case EFFECT_SALT_CURE: 
-                rating *= BFG_MOVE_VOLATILE_MODIFIER;
-            break;
+            // Rating Modifiers
             case EFFECT_OHKO: 
-                rating *= BFG_MOVE_OHKO_MODIFIER; 
+                rating *= BFG_MOVE_LUCK_MULTIPLIER; 
             break;
             case EFFECT_METEOR_BEAM:
-                // TODO 
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature, evs);
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_TWO_TURNS_ATTACK: 
-            case EFFECT_FOCUS_PUNCH:
-                // Doesn't quite count, but idk where else to put it
             case EFFECT_SOLAR_BEAM:
                 rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             break;
-            case EFFECT_HIT_ESCAPE: 
-                rating *= BFG_MOVE_PIVOT_MODIFIER;
-            break;
-            case EFFECT_RECOIL_IF_MISS: 
-            case EFFECT_MIND_BLOWN: 
-            case EFFECT_STEEL_BEAM: 
-                rating *= BFG_MOVE_RECOIL_MODIFIER; // 4x
-            case EFFECT_RECOIL_50:
-                rating *= BFG_MOVE_RECOIL_MODIFIER; // 3x
-            case EFFECT_RECOIL_33_STATUS:
-            case EFFECT_RECOIL_33:
-                rating *= BFG_MOVE_RECOIL_MODIFIER; // 2x
-            case EFFECT_RECOIL_25:
-            case EFFECT_RECOIL_HP_25:
-                rating *= BFG_MOVE_RECOIL_MODIFIER; // 1x
-            break;
-            case EFFECT_EXPLOSION:
-                rating *= BFG_MOVE_SELF_KO_MODIFIER;
+            case EFFECT_FOCUS_PUNCH:
+                rating *= BFG_MOVE_INTERRUPT_MODIFIER;
             break;
             case EFFECT_RECHARGE:
                 rating *= BFG_MOVE_RECHARGE_MODIFIER;
@@ -1033,93 +1077,57 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_RAMPAGE:
                 rating *= BFG_MOVE_RAMPAGE_MODIFIER;
             break;
-            case EFFECT_OVERHEAT: 
-                rating *= BFG_MOVE_RECOIL_MODIFIER;
-            case EFFECT_CLOSE_COMBAT:
-                rating *= BFG_MOVE_RECOIL_MODIFIER;
+            case EFFECT_EXPLOSION:
+                rating *= BFG_MOVE_SELF_KO_MODIFIER;
+            break;
+            case EFFECT_HIT_ESCAPE: 
+                rating *= BFG_MOVE_PIVOT_MODIFIER;
+            break;
             case EFFECT_ATTACK_UP_HIT:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_ATK)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_ATK)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_ATTACK))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
-                break;
+                rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
+            break;
             case EFFECT_DEFENSE_UP2_HIT:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
+                rating *= fpow(GET_DEF_STAT_MULTIPLIER(nature,evs),2); // +2
+            break;
             case EFFECT_DEFENSE_UP_HIT:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_DEF)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_DEF)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_DEFENSE))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
-                break;
+                rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
+            break;
             case EFFECT_SPECIAL_ATTACK_UP_HIT:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_SPATK)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPATK)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SP_ATTACK))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
-                break;
+                rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
+            break;
             // case EFFECT_SPECIAL_DEFENSE_UP_HIT:
             case EFFECT_SPEED_UP_HIT: 
             case EFFECT_RAPID_SPIN:
-                rating *= BFG_MOVE_SELF_STAT_UP_MODIFIER;
-                if (nature->negStat == STAT_SPEED)
-                    rating *= BFG_MOVE_NEG_NATURE_MULTIPLIER;
-                else if (nature->posStat == STAT_SPEED)
-                    rating *= BFG_MOVE_POS_NATURE_MULTIPLIER;
-                if (CHECK_EVS(evs, F_EV_SPREAD_SPEED))
-                    rating *= BFG_MOVE_EV_INVEST_MODIFIER;
-                break;
-            break;
-            case EFFECT_SPECIAL_DEFENSE_DOWN_HIT_2:
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
-            case EFFECT_ATTACK_DOWN_HIT:
-            case EFFECT_DEFENSE_DOWN_HIT:
-            case EFFECT_SPECIAL_ATTACK_DOWN_HIT:
-            case EFFECT_SPECIAL_DEFENSE_DOWN_HIT:
-            case EFFECT_SPEED_DOWN_HIT:
-            case EFFECT_BULLDOZE: 
-                rating *= BFG_MOVE_OPP_STAT_DOWN_MODIFIER;
+                rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_MATCHA_GOTCHA: 
-            case EFFECT_ABSORB: 
+            case EFFECT_ABSORB:
                 rating *= BFG_MOVE_ABSORB_MODIFIER;
             break;
-            case EFFECT_FRUSTRATION: 
+            case EFFECT_ALWAYS_CRIT:
+                rating *= 1.5f; // Crit damage bonus
+            // Power / etc. Fixes
+            case EFFECT_MULTI_HIT:
+                hits = 3; // Avg. Multi-Hit
+            break;
+            case EFFECT_FRUSTRATION:
             case EFFECT_RETURN:
                 power = 102;
             break;
-            case EFFECT_FAKE_OUT:
-                rating *= BFG_MOVE_VOLATILE_MODIFIER;
-            break;
             case EFFECT_KNOCK_OFF:
                 power = 97; // 50% boost from item
-            case EFFECT_INCINERATE: 
-            case EFFECT_BUG_BITE: 
-            case EFFECT_THIEF:
-                rating *= BFG_MOVE_THEIF_MODIFIER;
-            break;
-            case EFFECT_ALWAYS_CRIT:
-                rating *= BFG_MOVE_CRIT_MODIFIER;
             break;
             case EFFECT_HIT_ENEMY_HEAL_ALLY: 
-                if (isDoubles)
+                if (IS_DOUBLES())
                     rating *= (BFG_MOVE_RECOVERY_MODIFIER * BFG_MOVE_DOUBLES_MULTIPLIER);
                 // Otherwise, just a normal attack
             break;
             case EFFECT_HIT: 
-                rating *= BFG_MOVE_DEFAULT_MODIFIER;
+                rating *= BFG_MOVE_GENERIC_MODIFIER;
             break;
             default: // Unhandled
                 DebugPrintf("Unhandled effect: %d", move->effect);
-                rating *= BFG_MOVE_UNHANDLED_MODIFIER;
+                rating *= BFG_MOVE_GENERIC_MODIFIER;
             break;
         }
 
@@ -1129,7 +1137,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         #endif
 
         // If either one of the species's types matches the move
-        if (IS_TYPE(species->types[0],species->types[1], move->type)) 
+        if (IS_TYPE(species->types[0],species->types[1], type)) 
         {
             // 1.5x boost
             rating *= BFG_MOVE_STAB_MODIFIER;
@@ -1151,19 +1159,23 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     if (move->accuracy > 0)
         rating *= NORMALISE(move->accuracy);
 
+    // Apply priority mod
+    if (move->priority > 0) 
+        rating *= fpow(MOVE_PRIORITY_MULTIPLIER, move->priority);
+
     // Return the rating
     return rating;
 }
 #endif
 
-static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove, bool32 isDoubles) {
+static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) {
 
     // const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     // u16 ability = species->abilities[abilityNum];
 
     s32 i,j;
     u8 friendship = FRIENDSHIP_MAX;
-    u16 moveId, levelUpMoves, teachableMoves, totalMoves;
+    u16 moveId, levelUpMoves, teachableMoves;
 
     u16 moves[MAX_MON_MOVES] = {
         MOVE_NONE,
@@ -1198,9 +1210,6 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
 
     DebugPrintf("%d level up moves, %d teachable moves ...", levelUpMoves, teachableMoves);
 
-    // Get the total number of moves
-    totalMoves = teachableMoves + levelUpMoves;
-
     // Duplicate move tracker
     u16 failures = 0;
 
@@ -1214,11 +1223,12 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         if (i == 0 && requiredMove != MOVE_NONE) {
             moveId = requiredMove;
         }
-        else if (totalMoves > (i + failures)) // General case
+        else  // General case
         {
-            while(moveId == MOVE_NONE) {
+            // While no move found, and failure limit has not been reached
+            while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) {
                 #if BFG_MOVE_SELECT_RANDOM == TRUE
-                moveIndex = Random() % totalMoves;
+                moveIndex = Random() % (teachableMoves + levelUpMoves);
                 // Teachable learnset
                 if (moveIndex >= levelUpMoves) 
                 {
@@ -1247,7 +1257,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 for(j=0; j < levelUpMoves; j++) 
                 {
                     rating = GetMoveRating(levelUpLearnset[j].move, 
-                        speciesId, nature, evs, abilityNum, moves, isDoubles);
+                        speciesId, nature, evs, abilityNum, moves);
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
                         moveId = levelUpLearnset[j].move;
@@ -1260,7 +1270,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 for(j=0; j < teachableMoves; j++)
                 {
                     rating = GetMoveRating(teachableLearnset[j], 
-                        speciesId, nature, evs, abilityNum, moves, isDoubles);
+                        speciesId, nature, evs, abilityNum, moves);
 
                     if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
                         moveId = teachableLearnset[j];
@@ -1268,7 +1278,15 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                     }
                 }
 
-                DebugPrintf("Done. Best move: %d (rating: %d)", moveId, (u16)(bestRating*100));
+                // Failed to find move
+                if (bestRating == 0) {
+                    moveId = MOVE_NONE;
+                    failures++;
+
+                    DebugPrintf("Failed to find move! Failures: %d ...",failures);
+                }
+                else 
+                    DebugPrintf("Done. Best move: %d (rating: %d)", moveId, (u16)(bestRating*100));
                 #endif
             }
         }
@@ -1294,7 +1312,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 nature, u8 evs, u8 abilityNum) {
 }
 #endif 
 
-static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex, bool32 isDoubles) {
+static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
@@ -1358,7 +1376,7 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
     // Give the chosen pokemon its specified moves.
     // Returns FRIENDSHIP_MAX unless the moveset
     // contains 'FRUSTRATION'. 
-    friendship = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move, isDoubles);
+    friendship = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
 
     #if BFG_NO_ITEM_SELECTION_CHANCE != 1
     // Currently has no held item
@@ -1387,8 +1405,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
     // Min/Max BST Value Lookup Table
     u16 minBST = fixedIVMinBSTLookup[fixedIV];
     u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
-
-    bool32 isDoubles = IS_DOUBLES(monCount);
 
     u16 bfMonCount = 0;
 
@@ -1505,7 +1521,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         DebugPrintf("Generating set for species %d ...", speciesId);
 
         // Generate trainer Pokemon and add it to the team
-        GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme, isDoubles);
+        GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme);
 
         // If the pokemon was successfully added to the trainer's party, so it's safe to move on to
         // the next party slot.
