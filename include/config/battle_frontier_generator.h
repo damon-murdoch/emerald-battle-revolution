@@ -5,7 +5,7 @@
 #define BFG_FLAG_FRONTIER_GENERATOR FLAG_UNUSED_0x020 // Flag to enable or disable random generator
 
 #define BFG_RANDOM_BOOL_FIXED FALSE // Fixed value for RANDOM_BOOL()
-#define BFG_RANDOM_OFFSET 0         // Max Value for RANDOM_OFFSET()
+#define BFG_RANDOM_OFFSET 0        // Max Value for RANDOM_OFFSET()
 
 // *** SPECIES ***
 #define BFG_TRAINER_CLASS_MON_LIMIT 0x1FF   // Maximum number of mons available per trainer class
@@ -50,7 +50,7 @@
 #endif
 
 // *** ABILITIES ***
-#define BFG_HA_SELECTION_CHANCE 5 // Hidden ability selection chance
+#define BFG_HA_SELECTION_CHANCE 5 // Hidden ability selection chance (5 = 1/5)
 
 // *** MOVES *** 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
@@ -68,49 +68,66 @@
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
 #define BFG_MOVE_MAX_STATUS 3       // Maximum number of status moves
 
-#define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f   // Modifier for ally-damaging moves
-#define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f    // Modifier for doubles moves
-#define MOVE_PRIORITY_MULTIPLIER 1.2f       // Multiplier per-stage for doubles moves
-#define BFG_MOVE_LUCK_MULTIPLIER 0.0f       // Status moves that induce luck-based effects
+#define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f   // Doubles modifier for random targeting moves
+#define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f   // Doubles modifier for ally-damaging moves
+#define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f    // Doubles modifier for spread moves in doubles
+
+#define BFG_MOVE_PRIORITY_MULTIPLIER 1.1f   // Multiplier per-stage for doubles moves
+#define BFG_MOVE_HAZARD_MULTIPLIER FALSE    // Modifier for entry hazards (e.g. Stealth Rock)
+#define BFG_MOVE_FIELD_MULTIPLIER FALSE     // Modifier for field effects (e.g. Haze, Perish Song)
+#define BFG_MOVE_LUCK_MULTIPLIER 1.0f       // Status / OHKO moves with luck-based effects
+
+#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.0f     // Negative nature multiplier
+#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f     // Positive nature multiplier
+#define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
+#define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
+
+#define BFG_MOVE_MISC_STAT_MODIFIER FALSE  // Multiplier for misc. stat changing moves
 
 // Use ability effect modifiers
 #define BFG_MOVE_ABILITY_MODIFIERS TRUE
 #if BFG_MOVE_ABILITY_MODIFIERS == TRUE
 
-#define BFG_MOVE_ABILITY_MODIFIER 1.5f
+#define BFG_MOVE_ABILITY_MODIFIER 1.5f      // Modifier to increase chance for moves affected by abilities
 
 #endif // BFG_MOVE_ABILITY_MODIFIERS == TRUE
+
+#define BFG_MOVE_EFFECT_CHANCE_MULTIPLIER 0.25f  // Secondary effect chance multiplier
 
 // Use move effect modifiers
 #define BFG_MOVE_EFFECT_MODIFIERS TRUE
 #if BFG_MOVE_EFFECT_MODIFIERS == TRUE
 
-#define BFG_MOVE_SPEED_CONTROL_MODIFIER 1.0f
-
+// Neutral / Positive Modifiers
+#define BFG_MOVE_SPEED_CONTROL_MODIFIER 1.2f    // Trick Room, Tailwind
 #define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
 #define BFG_MOVE_WEATHER_MULTIPLIER FALSE
-#define BFG_MOVE_STATUS_MULTIPLIER 1.2f 
+#define BFG_MOVE_STATUS_MULTIPLIER 1.2f
 #define BFG_MOVE_RECOVERY_MODIFIER 1.2f
 #define BFG_MOVE_PROTECT_MODIFIER FALSE
 #define BFG_MOVE_ABSORB_MODIFIER 1.2f
 #define BFG_MOVE_PIVOT_MODIFIER 1.2f
 
-#define BFG_MOVE_MULTI_TURN_MODIFIER FALSE
-#define BFG_MOVE_INTERRUPT_MODIFIER FALSE
-#define BFG_MOVE_RECHARGE_MODIFIER FALSE
-#define BFG_MOVE_SELF_KO_MODIFIER FALSE
+// Negative Modifiers
+#define BFG_MOVE_MULTI_TURN_MODIFIER 0.6f
+#define BFG_MOVE_INTERRUPT_MODIFIER FALSE   // Focus Punch
+#define BFG_MOVE_RECHARGE_MODIFIER 0.6f
 #define BFG_MOVE_RAMPAGE_MODIFIER 0.6f
-#define BFG_MOVE_RECOIL_MODIFIER 0.9f
+#define BFG_MOVE_SELF_KO_MODIFIER FALSE     // Self Destruct, Explosion
+#define BFG_MOVE_LIMITED_MODIFIER FALSE     // Dream Eater, Synchronoise
 
-#define BFG_MOVE_GENERIC_MODIFIER 1.0f
+#define BFG_MOVE_GENERIC_MODIFIER 1.0f  // Unhandled / General Case
+
+// Moves which will always be selected
+#define BFG_MOVE_ALWAYS_SELECT \
+    MOVE_FAKE_OUT, \
+    MOVE_NONE,
+
+// Moves which will never be selected
+#define BFG_MOVE_NEVER_SELECT \
+    MOVE_NONE,
 
 #endif // BFG_MOVE_EFFECT_MODIFIERS
-
-#define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
-#define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.0f     // Negative nature multiplier
-#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f     // Positive nature multiplier
-
 #endif // BFG_MOVE_SELECT_RANDOM
 
 // *** ITEMS ***

@@ -15,6 +15,7 @@
 #include "constants/pokemon.h"
 #include "constants/battle.h"
 #include "constants/moves.h"
+#include "constants/items.h"
 
 #include "data/pokemon/natures.h"
 
@@ -623,6 +624,15 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) {
 }
 
 #if BFG_MOVE_SELECT_RANDOM == FALSE
+
+const u16 moveAlwaysSelectList[] = {
+    BFG_MOVE_ALWAYS_SELECT
+};
+
+const u16 moveNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT
+}; 
+
 static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 abilityNum, u16 * currentMoves) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
@@ -630,8 +640,65 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     const struct BattleMove * move, * currentMove;
     s32 i;
 
+    // Move counters
+    u8 numPhysical = 0;
+    u8 numSpecial = 0;
+    u8 numStatus = 0;
+    u8 numOfType = 0;
+    
     // Move for calculating rating
     move = &(gBattleMoves[moveId]);
+
+    // Check existing moves (skip last)
+    for(i = 0; i < MAX_MON_MOVES - 1; i++) 
+    {
+        // Move is not null
+        if (currentMoves[i] != MOVE_NONE)
+        {
+            // Reject duplicates
+            if (currentMoves[i] == moveId)
+                return 0; 
+
+            currentMove = &(gBattleMoves[currentMoves[i]]);
+
+            // Status Move (Fake Out is also considered a status move)
+            if ((currentMove->split == SPLIT_STATUS) || (currentMoves[i] == MOVE_FAKE_OUT)) {
+                numStatus++;
+            }
+            else // Physical / Special Move
+            {
+                // Physical move
+                if (currentMove->split == SPLIT_PHYSICAL)
+                    numPhysical++;
+                else // Special move
+                    numSpecial++;
+
+                if (move->type == currentMove->type) {
+                    // Check if move is a duplicate
+                    if (
+                        (move->split == currentMove->split) && 
+                        // (move->target == moveTemp->target) && TODO: Make this column check for doubles
+                        (move->priority == currentMove->priority)
+                    )
+                        return 0; // No duplicate moves
+
+                    numOfType++;
+                }
+            }
+        }
+    }
+
+    // Check if move is in never select list
+    for(i=0; moveNeverSelectList[i] != MOVE_NONE; i++) {
+        if (moveNeverSelectList[i] == moveId)
+            return 0; // Never select
+    }
+
+    // Check if move is in always select list
+    for(i=0; moveAlwaysSelectList[i] != MOVE_NONE; i++) {
+        if (moveAlwaysSelectList[i] == moveId)
+            return 999; // Always select
+    }
 
     // Might be updated by pixilate/refridgerate/etc.
     u8 type = move->type;
@@ -639,30 +706,40 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     // Move rating (Casted to u16 at the end)
     float rating = BFG_MOVE_BASE_RATING;
 
-    // Move counters
-    u8 numPhysical = 0;
-    u8 numSpecial = 0;
-
-    // Battle is doubles
-    if (IS_DOUBLES()) {
-        // Switch on move target mode
-        switch(move->target){
-            // Ally-damaging move
-            case MOVE_TARGET_FOES_AND_ALLY: 
-                rating *= BFG_MOVE_ALLY_HIT_MULTIPLIER;
-            // Spread move
-            case MOVE_TARGET_OPPONENTS_FIELD:
-            case MOVE_TARGET_ALL_BATTLERS:
-            case MOVE_TARGET_ALLY: 
-            case MOVE_TARGET_BOTH:
-                // Apply doubles rating bonus
+    // Switch on move target
+    switch(move->target) {
+        // Entry Hazards
+        case MOVE_TARGET_OPPONENTS_FIELD: {
+            rating *= BFG_MOVE_HAZARD_MULTIPLIER;
+        }; 
+        break;
+        // Random targeting move
+        case MOVE_TARGET_RANDOM: 
+            if (IS_DOUBLES())
+                rating *= BFG_MOVE_RANDOM_HIT_MULTIPLIER;
+        // Ally-targeting move
+        case MOVE_TARGET_ALLY: 
+            if (IS_DOUBLES())
                 rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
-        }
-    }
-    else // Battle is singles
-    {
-        if (move->target == MOVE_TARGET_ALLY) 
-            return 0; // Cannot be used
+            else // Singles
+                return 0; // Cannot be used
+        break;
+        // Ally-damaging spread move
+        case MOVE_TARGET_FOES_AND_ALLY:
+            if (IS_DOUBLES()) {
+                rating *= BFG_MOVE_ALLY_HIT_MULTIPLIER;
+                rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
+            }
+        break;
+        // Field effects
+        case MOVE_TARGET_ALL_BATTLERS:
+                rating *= BFG_MOVE_FIELD_MULTIPLIER;
+        // Standard spread move
+        case MOVE_TARGET_BOTH:
+            if (IS_DOUBLES())
+                if (move->split != SPLIT_STATUS)
+                    rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
+        break;
     }
 
     #if BFG_MOVE_ABILITY_MODIFIERS == TRUE
@@ -675,24 +752,36 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             type = TYPE_NORMAL;
         break;
         case ABILITY_AERILATE: 
-            if (move->type == TYPE_NORMAL)
+            if (move->type == TYPE_NORMAL) {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
                 type = TYPE_FLYING;
+            }
         break;
         case ABILITY_PIXILATE: 
-            if (move->type == TYPE_NORMAL)
+            if (move->type == TYPE_NORMAL)  {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
                 type = TYPE_FAIRY;
+            }
         break;
         case ABILITY_REFRIGERATE: 
-            if (move->type == TYPE_NORMAL)
+            if (move->type == TYPE_NORMAL) {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
                 type = TYPE_ICE;
+            }
         break;
         case ABILITY_GALVANIZE: 
-            if (move->type == TYPE_NORMAL)
+            if (move->type == TYPE_NORMAL) {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
                 type = TYPE_ELECTRIC;
+            }
         break;
         case ABILITY_LIQUID_VOICE: 
-            if (move->soundMove == TRUE)
+            if (move->soundMove == TRUE) {
+                // This doesn't actually increase damage aside from STAB, but
+                // we might as well increase the chances anyway :)
+                rating *= BFG_MOVE_ABILITY_MODIFIER; 
                 type = TYPE_WATER;
+            }
         break;
         // Rating Changing
         case ABILITY_PUNK_ROCK:
@@ -726,9 +815,22 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         case ABILITY_HUGE_POWER: 
             if (move->split == SPLIT_PHYSICAL)
                 rating *= fpow(BFG_MOVE_ABILITY_MODIFIER, 2);
+        case ABILITY_WATER_BUBBLE: 
+            if (move->type == TYPE_WATER)
+                rating *= fpow(BFG_MOVE_ABILITY_MODIFIER, 2);
         break;
-        case ABILITY_LIBERO:
+        case ABILITY_PRANKSTER:
+            if (move->split == SPLIT_STATUS)
+                rating *= BFG_MOVE_PRIORITY_MULTIPLIER;
+        case ABILITY_ELECTRIC_SURGE:
+        case ABILITY_VITAL_SPIRIT:
+        case ABILITY_MISTY_SURGE:
+        case ABILITY_SWEET_VEIL:
+        case ABILITY_INSOMNIA:
+            if (moveId == MOVE_REST)
+                return 0; // Cannot fall asleep
         case ABILITY_PROTEAN: 
+        case ABILITY_LIBERO:
             // If move does not have STAB bonus, apply it
             if (!(IS_TYPE(species->types[0], species->types[1], type)))
                 rating *= BFG_MOVE_STAB_MODIFIER;
@@ -737,35 +839,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     #endif
 
     // Status moves
-    if (move->split == SPLIT_STATUS) {
-
-        // Status counter
-        u8 numStatus = 0;
-
-        // Check existing moves (skip last)
-        for(i = 0; i < MAX_MON_MOVES - 1; i++) 
-        {
-            if (currentMoves[i] != MOVE_NONE)
-            {
-                // Double-up move
-                if (currentMoves[i] == moveId)
-                    return 0; // Reject duplicate
-
-                currentMove = &(gBattleMoves[currentMoves[i]]);
-
-                switch(currentMove->split) {
-                    case SPLIT_PHYSICAL:
-                        numPhysical++;
-                    break;
-                    case SPLIT_SPECIAL:
-                        numSpecial++;
-                    break;
-                    case SPLIT_STATUS:
-                        numStatus++;
-                    break;
-                }
-            }
-        }
+    if ((move->split == SPLIT_STATUS) || (moveId == MOVE_FAKE_OUT)) {
 
         // Check if Max. Status moves is reached
         if (numStatus >= BFG_MOVE_MAX_STATUS)
@@ -850,6 +924,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature,evs), 2); // +2
             break;
             case EFFECT_ATTACK_UP_USER_ALLY:
+                if (IS_DOUBLES())
+                    rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
             case EFFECT_ATTACK_ACCURACY_UP:
             case EFFECT_ATTACK_UP:
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
@@ -890,17 +966,32 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_SPEED_UP: 
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
-            // Luck Based Moves
+            // Misc. Stat Changes (2 Stages)
             case EFFECT_ACCURACY_DOWN_2:
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
-            case EFFECT_ACCURACY_DOWN: 
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
-            break;
             case EFFECT_EVASION_UP_2:
             case EFFECT_MINIMIZE: 
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= fpow(BFG_MOVE_LUCK_MULTIPLIER, 2);
+            case EFFECT_ACCURACY_UP_2:
+            case EFFECT_ATTACK_DOWN_2:
+            case EFFECT_DEFENSE_DOWN_2:
+            case EFFECT_SPECIAL_ATTACK_DOWN_2:
+            case EFFECT_SPECIAL_DEFENSE_DOWN_2:
+            case EFFECT_SPEED_DOWN_2:
+            case EFFECT_EVASION_DOWN_2:
+                rating *= fpow(BFG_MOVE_MISC_STAT_MODIFIER, 2);
+            break;
+            // Misc. Stat Changes
+            case EFFECT_ACCURACY_DOWN: 
             case EFFECT_EVASION_UP:
                 rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_ACCURACY_UP:
+            case EFFECT_ATTACK_DOWN:
+            case EFFECT_DEFENSE_DOWN:
+            case EFFECT_SPECIAL_ATTACK_DOWN:
+            case EFFECT_SPECIAL_DEFENSE_DOWN:
+            case EFFECT_SPEED_DOWN:
+            case EFFECT_EVASION_DOWN:
+                rating *= BFG_MOVE_MISC_STAT_MODIFIER;
             break;
             // Status Afflicting Moves
             case EFFECT_DARK_VOID: 
@@ -915,16 +1006,22 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 rating *= BFG_MOVE_STATUS_MULTIPLIER;
             break;
             // Volatile Status Moves
+            case EFFECT_ATTRACT:
+                // Only effects opposite gender
+                rating *= BFG_MOVE_LIMITED_MODIFIER;
             case EFFECT_SWAGGER:
             case EFFECT_CONFUSE:
-            case EFFECT_ATTRACT:
             case EFFECT_FLATTER:
                 // Luck-based volatile status moves
                 rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_WORRY_SEED:
             case EFFECT_LEECH_SEED:
+            case EFFECT_HEAL_BLOCK: 
             case EFFECT_MEAN_LOOK: 
+            case EFFECT_FAKE_OUT:
             case EFFECT_DISABLE: 
             case EFFECT_ENCORE: 
+            case EFFECT_TAUNT: 
                 rating *= BFG_MOVE_STATUS_MULTIPLIER;
             break;
             // Weather Setting Moves
@@ -958,6 +1055,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_ROOST: 
                 rating *= BFG_MOVE_RECOVERY_MODIFIER;
             break;
+            // Rest (Multi-Turn Move)
+            case EFFECT_REST: 
+                rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
+                rating *= BFG_MOVE_RECOVERY_MODIFIER;
+            break;
             case EFFECT_STRENGTH_SAP: 
                 rating *= BFG_MOVE_ABSORB_MODIFIER;
             break;
@@ -972,6 +1074,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             break;
             case EFFECT_TAILWIND:
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs);
+            break;
+            // Limited-target moves
+            case EFFECT_SLEEP_TALK:
+            case EFFECT_SNATCH: 
+                rating *= BFG_MOVE_LIMITED_MODIFIER;
             break;
             // Protect moves
             case EFFECT_MAT_BLOCK:
@@ -997,42 +1104,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         // Number of move hits
         u8 hits = 1;
 
-        // Number of same-typed moves
-        u8 numOfType = 0;
-        
         // Offensive move count
-        u8 numOffensive = 0;
-
-        // Check existing moves (skip last)
-        for(i = 0; i < MAX_MON_MOVES - 1; i++) 
-        {
-            if (currentMoves[i] != MOVE_NONE)
-            {
-                // Double-up move
-                if (currentMoves[i] == moveId)
-                    return 0; // Reject duplicate
-
-                currentMove = &(gBattleMoves[currentMoves[i]]);
-
-                // Move is physical/special
-                if ((currentMove->split != SPLIT_STATUS)) {
-
-                    if (move->type == currentMove->type) {
-                        // Check if move is a duplicate
-                        if (
-                            (move->split == currentMove->split) && 
-                            // (move->target == moveTemp->target) && TODO: Make this column check for doubles
-                            (move->priority == currentMove->priority)
-                        )
-                            return 0; // No duplicate moves
-
-                        numOfType++;
-                    }
-
-                    numOffensive++;
-                }
-            }
-        }
+        u8 numOffensive = numPhysical + numSpecial;
 
         // If we already have max. offensive moves, or max. offensive moves of type
         if ((numOfType >= BFG_MOVE_MAX_PER_TYPE) || (numOffensive >= BFG_MOVE_MAX_OFFENSIVE))
@@ -1061,6 +1134,13 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_OHKO: 
                 rating *= BFG_MOVE_LUCK_MULTIPLIER; 
             break;
+            // Multi-Turn Moves
+            case EFFECT_FUTURE_SIGHT: 
+            case EFFECT_BIDE: 
+                // These moves suck lmao
+                rating *= fpow(BFG_MOVE_MULTI_TURN_MODIFIER, 3);
+            break;
+            // Two-Turn Moves
             case EFFECT_METEOR_BEAM:
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature, evs);
             case EFFECT_SEMI_INVULNERABLE:
@@ -1068,21 +1148,59 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_SOLAR_BEAM:
                 rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             break;
+            // Interruptable Moves
             case EFFECT_FOCUS_PUNCH:
                 rating *= BFG_MOVE_INTERRUPT_MODIFIER;
             break;
+            // Recharging Moves
             case EFFECT_RECHARGE:
                 rating *= BFG_MOVE_RECHARGE_MODIFIER;
             break;
+            // Limited Effect Moves
+            case EFFECT_SYNCHRONOISE: 
+            case EFFECT_LAST_RESORT:
+            case EFFECT_DREAM_EATER: 
+            case EFFECT_SLEEP_HIT:
+            case EFFECT_SNORE:
+                rating *= BFG_MOVE_LIMITED_MODIFIER;
+            break;
+            // Rampaging Moves
             case EFFECT_RAMPAGE:
                 rating *= BFG_MOVE_RAMPAGE_MODIFIER;
             break;
+            // Self-KOing moves
             case EFFECT_EXPLOSION:
                 rating *= BFG_MOVE_SELF_KO_MODIFIER;
             break;
+            // Pivoting Moves
             case EFFECT_HIT_ESCAPE: 
                 rating *= BFG_MOVE_PIVOT_MODIFIER;
             break;
+            // Status Effects
+            case EFFECT_BURN_HIT: 
+            #if B_USE_FROSTBITE == TRUE
+            case EFFECT_FROSTBITE_HIT: 
+            #else
+            case EFFECT_FREEZE_HIT: 
+            #endif
+            case EFFECT_PARALYZE_HIT: 
+            case EFFECT_DIRE_CLAW: 
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_MORTAL_SPIN:
+            case EFFECT_POISON_FANG:  
+            case EFFECT_POISON_HIT: 
+                rating *= BFG_MOVE_STATUS_MULTIPLIER;
+            break;
+            // Volatile Status Effects
+            case EFFECT_FLINCH_STATUS: 
+            case EFFECT_CONFUSE_HIT: 
+            case EFFECT_FLINCH_HIT: 
+                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+            case EFFECT_SYRUP_BOMB: 
+            case EFFECT_SALT_CURE: 
+                rating *= BFG_MOVE_STATUS_MULTIPLIER;
+            break;
+            // Stat Changing Effects
             case EFFECT_ATTACK_UP_HIT:
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
@@ -1100,10 +1218,12 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_RAPID_SPIN:
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
+            // Healing Moves
             case EFFECT_MATCHA_GOTCHA: 
             case EFFECT_ABSORB:
                 rating *= BFG_MOVE_ABSORB_MODIFIER;
             break;
+            // Always Crit Moves
             case EFFECT_ALWAYS_CRIT:
                 rating *= 1.5f; // Crit damage bonus
             // Power / etc. Fixes
@@ -1144,8 +1264,10 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         }
 
         // Apply secondary effect rating
-        if (move->secondaryEffectChance > 0)
-            rating *= NORMALISE(100.0f + move->secondaryEffectChance);
+        if (move->secondaryEffectChance > 0) {
+            // Parse secondary effect chance (e.g. 60% -> 0.6), and apply modifier
+            rating *= 1.0f + (NORMALISE(move->secondaryEffectChance) * BFG_MOVE_EFFECT_CHANCE_MULTIPLIER);
+        }
 
         // If strike count is defined, update hits
         if (move->strikeCount > 1 && hits == 1)
@@ -1161,7 +1283,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
 
     // Apply priority mod
     if (move->priority > 0) 
-        rating *= fpow(MOVE_PRIORITY_MULTIPLIER, move->priority);
+        rating *= fpow(BFG_MOVE_PRIORITY_MULTIPLIER, move->priority);
 
     // Return the rating
     return rating;
@@ -1170,12 +1292,9 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) {
 
-    // const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
-    // u16 ability = species->abilities[abilityNum];
-
-    s32 i,j;
-    u8 friendship = FRIENDSHIP_MAX;
+    s32 i,j, moveCount;
     u16 moveId, levelUpMoves, teachableMoves;
+    u8 friendship = FRIENDSHIP_MAX;
 
     u16 moves[MAX_MON_MOVES] = {
         MOVE_NONE,
@@ -1187,6 +1306,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     const struct LevelUpMove* levelUpLearnset;
     const u16 * teachableLearnset;
 
+    moveCount = 0;
     levelUpMoves = 0;
     teachableMoves = 0;
 
@@ -1248,6 +1368,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         break;
                     }
                 }
+
+                // Move found
+                if moveId != MOVE_NONE:
+                    moveCount++;
                 #else
                 // Default rating
                 bestRating = 0;
@@ -1282,11 +1406,9 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 if (bestRating == 0) {
                     moveId = MOVE_NONE;
                     failures++;
-
-                    DebugPrintf("Failed to find move! Failures: %d ...",failures);
                 }
-                else 
-                    DebugPrintf("Done. Best move: %d (rating: %d)", moveId, (u16)(bestRating*100));
+                else // Found move
+                    moveCount++;
                 #endif
             }
         }
@@ -1302,8 +1424,11 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         if (moveId == MOVE_FRUSTRATION)
             friendship = 0;  
     }
+    
+    // Set friendship / held item
+    SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
 
-    return friendship;
+    return moveCount; // Move count
 }
 
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
@@ -1312,12 +1437,12 @@ static u16 GetSpeciesItem(u16 speciesId, u8 nature, u8 evs, u8 abilityNum) {
 }
 #endif 
 
-static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex) {
+static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
 
-    u8 evs, nature, abilityNum, friendship;
+    u8 evs, nature, abilityNum, moveCount;
 
     // Move / item placeholder
     u16 move = MOVE_NONE;
@@ -1376,17 +1501,24 @@ static void GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV
     // Give the chosen pokemon its specified moves.
     // Returns FRIENDSHIP_MAX unless the moveset
     // contains 'FRUSTRATION'. 
-    friendship = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
+    moveCount = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
 
-    #if BFG_NO_ITEM_SELECTION_CHANCE != 1
-    // Currently has no held item
-    if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
-        item = GetSpeciesItem(formeId, nature, evs, abilityNum);
-    #endif 
+    // At least one move
+    if (moveCount > 0) {
+        #if BFG_NO_ITEM_SELECTION_CHANCE != 1
+        // Currently has no held item
+        if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
+            item = GetSpeciesItem(formeId, nature, evs, abilityNum);
+        #endif 
 
-    // Set friendship / held item
-    SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
-    SetMonData(&gEnemyParty[index], MON_DATA_HELD_ITEM, &item);
+        SetMonData(&gEnemyParty[index], MON_DATA_HELD_ITEM, &item);
+
+        // Set generated successfully
+        return TRUE;
+    }
+
+    // No moves, generation failed
+    return FALSE;
 }
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
@@ -1521,10 +1653,9 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         DebugPrintf("Generating set for species %d ...", speciesId);
 
         // Generate trainer Pokemon and add it to the team
-        GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme);
 
-        // If the pokemon was successfully added to the trainer's party, so it's safe to move on to
-        // the next party slot.
-        i++;
+        // If the pokemon was successfully added to the trainer's party, move on to the next party slot.
+        if (GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme) == TRUE)
+            i++;
     }
 }
