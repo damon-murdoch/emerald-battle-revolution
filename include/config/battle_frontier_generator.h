@@ -55,8 +55,11 @@
 // *** MOVES *** 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
 
+#define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
-#define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level up moves to be used
+
+#define BFG_MOVE_ATK_BOOST_REQUIRE_ATK TRUE     // Require Physical Attacks to use Physical attack boosts
+#define BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK TRUE // Require Special Attacks to use Special Attack Stat Boosts
 
 #define BFG_MOVE_SELECT_RANDOM FALSE    // Randomly select moves with no heuristic
 #if BFG_MOVE_SELECT_RANDOM == FALSE
@@ -68,6 +71,10 @@
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
 #define BFG_MOVE_MAX_STATUS 3       // Maximum number of status moves
 
+#define BFG_MOVE_MAX_STAT_CHANGING_EFFECT 1 // Maximum number of stat-changing effects
+#define BFG_MOVE_MAX_STATUS_EFFECT 1 // Maximum number of status effects
+#define BFG_MOVE_MAX_FIELD_TARGET 1 // Maximum number of field targets
+
 #define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f   // Doubles modifier for random targeting moves
 #define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f   // Doubles modifier for ally-damaging moves
 #define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f    // Doubles modifier for spread moves in doubles
@@ -77,7 +84,7 @@
 #define BFG_MOVE_FIELD_MULTIPLIER FALSE     // Modifier for field effects (e.g. Haze, Perish Song)
 #define BFG_MOVE_LUCK_MULTIPLIER 1.0f       // Status / OHKO moves with luck-based effects
 
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.0f     // Negative nature multiplier
+#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.9f     // Negative nature multiplier
 #define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f     // Positive nature multiplier
 #define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
 #define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
@@ -144,60 +151,59 @@
 
 #define BFG_ITEM_GEM_SELECTION_CHANCE 4
 #define BFG_ITEM_TYPE_SELECTION_CHANCE 4
-#define BFG_ITEM_CHOICE_SELECTION_CHANCE 4
 
 // Unique Items (e.g. Rusted Sword, Light Ball)
 #define BFG_ITEM_UNIQUE_SELECTION_CHANCE 1
 
-// This is a catch-all for items which are useful in 
-// a single situation, but pointless to have individual 
-// cases for. 
-// No Status Moves: ITEM_ASSAULT_VEST
-// Not Fully Evolved: ITEM_EVIOLITE
-// Overheat/Draco Meteor: ITEM_WHITE_HERB / ITEM_EJECT_PACK
-// Two-Turn Move(s): ITEM_POWER_HERB
-// Crit Raising Moves: ITEM_SCOPE_LENS
-// Screens/Other Moves: ITEM_LIGHT_CLAY
-// Low Defensive Stats: ITEM_FOCUS_SASH
-// Poison Type: ITEM_BLACK_SLUDGE
-// Ground Weakness: ITEM_AIR_BALLOON
-// Competitive / Defiant: ITEM_ADRENALINE_ORB
-// Sound Moves: ITEM_THROAT_SPRAY
-// Rest: ITEM_CHESTO_BERRY
-// Punches: ITEM_PUNCHING_GLOVE
-// Multi-Hits: ITEM_LOADED_DICE
-#define BFG_ITEM_OTHER_SELECTION_CHANCE 1
+// Items with specific use-cases
+#define BFG_ITEM_ADRENALINE_ORB 1   // Competitive / Defiant
+#define BFG_ITEM_PUNCHING_GLOVE 1   // Punching moves
+#define BFG_ITEM_ASSAULT_VEST 1     // No Status Moves
+#define BFG_ITEM_CHOICE_SCARF 1     // Fast, only attacking moves
+#define BFG_ITEM_CHOICE_SPECS 1     // Only special attacks
+#define BFG_ITEM_BLACK_SLUDGE 1     // Bulky Poison Type
+#define BFG_ITEM_THROAT_SPRAY 1     // Sound Moves
+#define BFG_ITEM_CHESTO_BERRY 1     // Rest
+#define BFG_ITEM_LOADED_DICE 1      // Multi-Hits
+#define BFG_ITEM_AIR_BALLOON 1      // Ground Weakness
+#define BFG_ITEM_CHOICE_BAND 1     // Only physical attacks
+#define BFG_ITEM_WHITE_HERB 1       // Overheat / Draco Meteor
+#define BFG_ITEM_EJECT_PACK 1       // Overheat / Draco Meteor
+#define BFG_ITEM_POWER_HERB 1       // Two-Turn Move(s)
+#define BFG_ITEM_SCOPE_LENS 1       // Crit Raising Moves
+#define BFG_ITEM_LIGHT_CLAY 1       // Screens/Other Moves
+#define BFG_ITEM_FOCUS_SASH 1       // Low Defensive Stats
+#define BFG_ITEM_EVIOLITE 1         // Not Fully Evolved
+#define BFG_ITEM_LIFE_ORB 1         // Offensive invested
 
 // Custom list of items which can be selected, in 
 // addition to the flags set above. A random item 
 // from this list will be chosen if none of the 
 // above flags are matched.
 #define BFG_CUSTOM_ITEMS_LIST \
-    ITEM_LEFTOVERS, \
-    ITEM_SHELL_BELL, \
-    ITEM_WIDE_LENS, \
-    ITEM_LIFE_ORB, \
-    ITEM_ROCKY_HELMET, \
-    ITEM_EJECT_BUTTON, \
-    ITEM_RED_CARD, \
+    ITEM_UTILITY_UMBRELLA, \
+    ITEM_HEAVY_DUTY_BOOTS, \
     ITEM_WEAKNESS_POLICY, \
-    ITEM_HEAVY_DUTY_BOOTS, \
-    ITEM_HEAVY_DUTY_BOOTS, \
     ITEM_PROTECTIVE_PADS, \
     ITEM_BLUNDER_POLICY, \
-    ITEM_UTILITY_UMBRELLA, \
-    ITEM_LUM_BERRY, \
+    ITEM_ABILITY_SHIELD, \
+    ITEM_MARANGA_BERRY, \
     ITEM_SITRUS_BERRY, \
-    ITEM_MICLE_BERRY, \
     ITEM_CUSTAP_BERRY, \
     ITEM_JABOCA_BERRY, \
-    ITEM_ROWAP_BERRY, \
-    ITEM_KEE_BERRY, \
-    ITEM_MARANGA_BERRY, \
-    ITEM_ABILITY_SHIELD, \
     ITEM_CLEAR_AMULET, \
     ITEM_COVERT_CLOAK, \
-    ITEM_MIRROR_HERB
+    ITEM_EJECT_BUTTON, \
+    ITEM_ROCKY_HELMET, \
+    ITEM_MIRROR_HERB, \
+    ITEM_MICLE_BERRY, \
+    ITEM_ROWAP_BERRY, \
+    ITEM_SHELL_BELL, \
+    ITEM_WIDE_LENS, \
+    ITEM_LUM_BERRY, \
+    ITEM_KEE_BERRY, \
+    ITEM_LEFTOVERS, \
+    ITEM_RED_CARD
 
 // Here are some other *fun* items you can add :)
 // ITEM_BRIGHT_POWDER, \
