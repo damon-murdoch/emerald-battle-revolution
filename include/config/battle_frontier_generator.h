@@ -58,8 +58,8 @@
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
 
-#define BFG_MOVE_ATK_BOOST_REQUIRE_ATK TRUE     // Require Physical Attacks to use Physical attack boosts
-#define BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK TRUE // Require Special Attacks to use Special Attack Stat Boosts
+#define BFG_MOVE_ATK_BOOST_REQUIRE_ATK 2     // Required physical attacks to use Physical attack boosts
+#define BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK 2 // Required special attacks to use Special Attack boosts
 
 #define BFG_MOVE_SELECT_RANDOM FALSE    // Randomly select moves with no heuristic
 #if BFG_MOVE_SELECT_RANDOM == FALSE
@@ -75,17 +75,21 @@
 #define BFG_MOVE_MAX_STATUS_EFFECT 1 // Maximum number of status effects
 #define BFG_MOVE_MAX_FIELD_TARGET 1 // Maximum number of field targets
 
+#define BFG_MOVE_BATON_PASS_MINIMUM 1 // Minimum stat boosting moves for baton pass
+
 #define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f   // Doubles modifier for random targeting moves
 #define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f   // Doubles modifier for ally-damaging moves
 #define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f    // Doubles modifier for spread moves in doubles
 
-#define BFG_MOVE_PRIORITY_MULTIPLIER 1.1f   // Multiplier per-stage for doubles moves
+#define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f // Modifier for moves which switch the user and opponent's item
+#define BFG_MOVE_ITEM_REMOVE_MODIFIER 1.0f // Modifier for moves which remove the opponent's item (and / or item effects)
+#define BFG_MOVE_PRIORITY_MULTIPLIER 1.2f   // Multiplier per-stage for priority moves
 #define BFG_MOVE_HAZARD_MULTIPLIER FALSE    // Modifier for entry hazards (e.g. Stealth Rock)
-#define BFG_MOVE_FIELD_MULTIPLIER FALSE     // Modifier for field effects (e.g. Haze, Perish Song)
+#define BFG_MOVE_FIELD_MULTIPLIER 0.6f     // Modifier for field effects (e.g. Haze, Perish Song)
 #define BFG_MOVE_LUCK_MULTIPLIER 1.0f       // Status / OHKO moves with luck-based effects
 
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.9f     // Negative nature multiplier
-#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.1f     // Positive nature multiplier
+#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.7f     // Negative nature multiplier
+#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.3f     // Positive nature multiplier
 #define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
 #define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
 
@@ -107,6 +111,7 @@
 
 // Neutral / Positive Modifiers
 #define BFG_MOVE_SPEED_CONTROL_MODIFIER 1.2f    // Trick Room, Tailwind
+#define BFG_MOVE_DO_NOTHING_MODIFIER FALSE      // Splash, Celebrate
 #define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
 #define BFG_MOVE_WEATHER_MULTIPLIER FALSE
 #define BFG_MOVE_STATUS_MULTIPLIER 1.2f
@@ -173,6 +178,8 @@
 #define BFG_ITEM_SCOPE_LENS 1       // Crit Raising Moves
 #define BFG_ITEM_LIGHT_CLAY 1       // Screens/Other Moves
 #define BFG_ITEM_FOCUS_SASH 1       // Low Defensive Stats
+#define BFG_ITEM_TOXIC_ORB 1       // Poison heal
+#define BFG_ITEM_FLAME_ORB 1       // Guts
 #define BFG_ITEM_EVIOLITE 1         // Not Fully Evolved
 #define BFG_ITEM_LIFE_ORB 1         // Offensive invested
 

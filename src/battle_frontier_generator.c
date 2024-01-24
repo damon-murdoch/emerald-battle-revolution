@@ -85,6 +85,8 @@
 #define IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) (IS_TYPE((t1),(t2),TYPE_FLYING) || IS_ABILITY((a1),(a2), ABILITY_LEVITATE))
 
 // *** SPECIES ***
+#define IS_BASE_SPECIES(x) (x == GET_BASE_SPECIES_ID(x))
+#define IS_REGIONAL_FORME(s) ((s->isAlolanForm == TRUE) || (s->isGalarianForm == TRUE) || (s->isHisuianForm == TRUE) || (s->isPaldeanForm))
 #define IS_EEVEE(s) ((s) == SPECIES_EEVEE || (s) == SPECIES_VAPOREON || (s) == SPECIES_JOLTEON || (s) == SPECIES_FLAREON || (s) == SPECIES_ESPEON || (s) == SPECIES_UMBREON || (s) == SPECIES_LEAFEON || (s) == SPECIES_GLACEON || (s) == SPECIES_SYLVEON)
 #define IS_REGI(s) ((s) == SPECIES_REGIROCK || (s) == SPECIES_REGICE || (s) == SPECIES_REGISTEEL || (s) == SPECIES_REGIDRAGO || (s) == SPECIES_REGIELEKI || (s) == SPECIES_REGIGIGAS)
 #define IS_STARTER(s) ( \
@@ -890,7 +892,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         switch(move->effect) {
             // Multi-Stat Boosters
             case EFFECT_NO_RETREAT:
-                if ((numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE) || (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE))
+                if ((numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK) || (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK))
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature, evs);
                 rating *= GET_DEF_STAT_MULTIPLIER(nature, evs);
@@ -900,14 +902,14 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             break;
             case EFFECT_BULK_UP:
             case EFFECT_COIL: 
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs);
                 rating *= GET_DEF_STAT_MULTIPLIER(nature,evs);
             break; 
             case EFFECT_CURSE: 
                 if (!(IS_TYPE(species->types[0], species->types[1], TYPE_GHOST))) {
-                    if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                    if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                         return 0;
                     rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
                     rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
@@ -915,33 +917,33 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 }
             break;
             case EFFECT_VICTORY_DANCE: 
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_DEF_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_DRAGON_DANCE:
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_SHELL_SMASH: 
-                if ((numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE) || (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE))
+                if ((numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK) || (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK))
                     return 0;
                 rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature,evs), 2); // +2
                 rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
                 rating *= fpow(GET_SPEED_NEG_MULTIPLIER(nature,evs), 2); // +2
             break;
             case EFFECT_ATTACK_SPATK_UP:
-                if ((numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE) || (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE))
+                if ((numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK) || (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK))
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_GEOMANCY:
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
                 rating *= fpow(GET_SPDEF_STAT_MULTIPLIER(nature,evs), 2); // +2
@@ -949,21 +951,21 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             break;
             case EFFECT_QUIVER_DANCE: 
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_SHIFT_GEAR: 
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= fpow(GET_SPEED_STAT_MULTIPLIER(nature,evs), 2); // +2
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
             case EFFECT_TAKE_HEART:
             case EFFECT_CALM_MIND: 
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
                 rating *= GET_SPDEF_STAT_MULTIPLIER(nature,evs); // +1
@@ -975,12 +977,12 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             break;
             // Attack Boosting
             case EFFECT_BELLY_DRUM: 
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature, evs), 6);
             break;
             case EFFECT_ATTACK_UP_2:
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= fpow(GET_ATK_STAT_MULTIPLIER(nature,evs), 2); // +2
             break;
@@ -989,7 +991,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                     rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
             case EFFECT_ATTACK_ACCURACY_UP:
             case EFFECT_ATTACK_UP:
-                if (numPhysical == 0 && BFG_MOVE_ATK_BOOST_REQUIRE_ATK == TRUE)
+                if (numPhysical < BFG_MOVE_ATK_BOOST_REQUIRE_ATK)
                     return 0;
                 rating *= GET_ATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
@@ -1006,17 +1008,17 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             break;
             // Special Attack Boosting
             case EFFECT_SPECIAL_ATTACK_UP_3:
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 3); // +3
             break;
             case EFFECT_SPECIAL_ATTACK_UP_2:
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= fpow(GET_SPATK_STAT_MULTIPLIER(nature,evs), 2); // +2
             break;
             case EFFECT_SPECIAL_ATTACK_UP:
-                if (numSpecial == 0 && BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK == TRUE)
+                if (numSpecial < BFG_MOVE_SPATK_BOOST_REQUIRE_SPATK)
                     return 0;
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature,evs); // +1
             break;
@@ -1133,8 +1135,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 rating *= BFG_MOVE_ABSORB_MODIFIER;
             break;
             // Pivoting Moves
-            case EFFECT_PARTING_SHOT: 
             case EFFECT_BATON_PASS:
+                // Less stat-changing moves than required for baton pass
+                if (numStatChangingEffect < BFG_MOVE_BATON_PASS_MINIMUM)
+                    return 0;
+            case EFFECT_PARTING_SHOT: 
                 rating *= BFG_MOVE_PIVOT_MODIFIER;
             break;
             // Speed Control Moves
@@ -1144,12 +1149,20 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_TAILWIND:
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs);
             break;
+            // Item Stealing / Blocking Moves
+            case EFFECT_MAGIC_ROOM: 
+            case EFFECT_EMBARGO: 
+                rating *= BFG_MOVE_ITEM_REMOVE_MODIFIER;
+            // Item Switching Moves
+            case EFFECT_TRICK: 
+                rating *= BFG_MOVE_ITEM_SWITCH_MODIFIER;
             // Limited-target moves
             case EFFECT_SLEEP_TALK:
             case EFFECT_SNATCH: 
                 rating *= BFG_MOVE_LIMITED_MODIFIER;
             break;
             // Protect moves
+            case EFFECT_SUBSTITUTE:
             case EFFECT_MAT_BLOCK:
             case EFFECT_PROTECT:
             case EFFECT_ENDURE:
@@ -1157,6 +1170,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                     rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
                 rating *= BFG_MOVE_PROTECT_MODIFIER;
             break;
+            case EFFECT_DO_NOTHING:
+                rating *= BFG_MOVE_DO_NOTHING_MODIFIER;
             default: // Unhandled
                 DebugPrintf("Unhandled effect: %d", move->effect);
                 rating *= BFG_MOVE_GENERIC_MODIFIER;
@@ -1214,8 +1229,13 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 rating *= GET_SPATK_STAT_MULTIPLIER(nature, evs);
             case EFFECT_SEMI_INVULNERABLE:
             case EFFECT_TWO_TURNS_ATTACK: 
-            case EFFECT_SOLAR_BEAM:
                 rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
+            break;
+            // Solar Beam
+            case EFFECT_SOLAR_BEAM:
+                // Only apply multi-turn modifier if ability is not drought or desolate land
+                if (!(ability == ABILITY_DROUGHT || ability == ABILITY_DESOLATE_LAND))
+                    rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             break;
             // Interruptable Moves
             case EFFECT_FOCUS_PUNCH:
@@ -1287,6 +1307,10 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_RAPID_SPIN:
                 rating *= GET_SPEED_STAT_MULTIPLIER(nature,evs); // +1
             break;
+            // Item Stealing Moves
+            case EFFECT_BUG_BITE:
+            case EFFECT_THIEF:
+                rating *= BFG_MOVE_ITEM_REMOVE_MODIFIER;
             // Healing Moves
             case EFFECT_MATCHA_GOTCHA: 
             case EFFECT_ABSORB:
@@ -1627,19 +1651,19 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
             break;
         }
 
+        // Pointer to species info
+        species = &(gSpeciesInfo[i]);
+
+        // Skip if not base species, or regional variant
+        if (!(IS_BASE_SPECIES(i)) || (IS_REGIONAL_FORME(species)))
+            continue;
+
         // Skip species if banned in frontier level
         if (SpeciesValidForFrontierLevel(i) == FALSE)
             continue;
 
         // Skip species if not valid for trainer class
         if (SpeciesValidForTrainerClass(trainerClass, i) == FALSE)
-            continue;
-
-        // Pointer to species info
-        species = &(gSpeciesInfo[i]);
-
-        // Skip gigantamax, mega, primal or ultra burst formes
-        if (species->isGigantamax || species->isMegaEvolution || species->isPrimalReversion || species->isUltraBurst)
             continue;
 
         // Get base stat total
