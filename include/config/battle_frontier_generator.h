@@ -7,6 +7,26 @@
 #define BFG_RANDOM_BOOL_FIXED FALSE // Fixed value for RANDOM_BOOL()
 #define BFG_RANDOM_OFFSET 0        // Max Value for RANDOM_OFFSET()
 
+// *** BASE STATS ***
+
+#define BFG_IV_MIN_BST_3 180
+#define BFG_IV_MIN_BST_6 225
+#define BFG_IV_MIN_BST_9 270
+#define BFG_IV_MIN_BST_12 315
+#define BFG_IV_MIN_BST_15 360
+#define BFG_IV_MIN_BST_18 405
+#define BFG_IV_MIN_BST_21 450
+#define BFG_IV_MIN_BST_MAX 495
+
+#define BFG_IV_MAX_BST_3 405
+#define BFG_IV_MAX_BST_6 450
+#define BFG_IV_MAX_BST_9 495
+#define BFG_IV_MAX_BST_12 540
+#define BFG_IV_MAX_BST_15 585
+#define BFG_IV_MAX_BST_18 630
+#define BFG_IV_MAX_BST_21 675
+#define BFG_IV_MAX_BST_MAX 720
+
 // *** SPECIES ***
 #define BFG_TRAINER_CLASS_MON_LIMIT 0x1FF   // Maximum number of mons available per trainer class
 
@@ -77,21 +97,15 @@
 
 #define BFG_MOVE_BATON_PASS_MINIMUM 1 // Minimum stat boosting moves for baton pass
 
-#define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f   // Doubles modifier for random targeting moves
-#define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f   // Doubles modifier for ally-damaging moves
-#define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f    // Doubles modifier for spread moves in doubles
+#define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f  // Doubles modifier for random targeting moves
+#define BFG_MOVE_ALLY_HIT_MULTIPLIER 1.0f    // Doubles modifier for ally-damaging moves
+#define BFG_MOVE_PRIORITY_MULTIPLIER 1.2f    // Multiplier per-stage for priority moves
+#define BFG_MOVE_DOUBLES_MULTIPLIER 1.1f     // Doubles modifier for spread moves in doubles
 
-#define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f // Modifier for moves which switch the user and opponent's item
-#define BFG_MOVE_ITEM_REMOVE_MODIFIER 1.0f // Modifier for moves which remove the opponent's item (and / or item effects)
-#define BFG_MOVE_PRIORITY_MULTIPLIER 1.2f   // Multiplier per-stage for priority moves
-#define BFG_MOVE_HAZARD_MULTIPLIER FALSE    // Modifier for entry hazards (e.g. Stealth Rock)
-#define BFG_MOVE_FIELD_MULTIPLIER 0.6f     // Modifier for field effects (e.g. Haze, Perish Song)
-#define BFG_MOVE_LUCK_MULTIPLIER 1.0f       // Status / OHKO moves with luck-based effects
-
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.7f     // Negative nature multiplier
-#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.3f     // Positive nature multiplier
-#define BFG_MOVE_EV_INVEST_MODIFIER 1.5f        // EV investment modifier
-#define BFG_MOVE_STAB_MODIFIER 1.5f             // STAB move multiplier (Offensive Only)
+#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.7f  // Negative nature multiplier
+#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.3f  // Positive nature multiplier
+#define BFG_MOVE_EV_INVEST_MULTIPLIER 1.5f     // EV investment modifier
+#define BFG_MOVE_STAB_MULTIPLIER 1.5f          // STAB move multiplier (Offensive Only)
 
 #define BFG_MOVE_MISC_STAT_MODIFIER FALSE  // Multiplier for misc. stat changing moves
 
@@ -112,13 +126,21 @@
 // Neutral / Positive Modifiers
 #define BFG_MOVE_SPEED_CONTROL_MODIFIER 1.2f    // Trick Room, Tailwind
 #define BFG_MOVE_DO_NOTHING_MODIFIER FALSE      // Splash, Celebrate
-#define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
-#define BFG_MOVE_WEATHER_MULTIPLIER FALSE
+#define BFG_MOVE_TERRAIN_MULTIPLIER 1.0f
+#define BFG_MOVE_WEATHER_MULTIPLIER 1.0f
 #define BFG_MOVE_STATUS_MULTIPLIER 1.2f
 #define BFG_MOVE_RECOVERY_MODIFIER 1.2f
 #define BFG_MOVE_PROTECT_MODIFIER FALSE
 #define BFG_MOVE_ABSORB_MODIFIER 1.2f
 #define BFG_MOVE_PIVOT_MODIFIER 1.2f
+
+#define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f   // Modifier for moves which switch the user and opponent's item
+#define BFG_MOVE_ITEM_REMOVE_MODIFIER 1.0f   // Modifier for moves which remove the opponent's item (and / or item effects)
+
+#define BFG_MOVE_COUNTER_MODIFIER 1.0f       // Multiplier for countering moves (e.g. Counter, Mirror Coat)
+#define BFG_MOVE_HAZARD_MODIFIER FALSE     // Modifier for entry hazards (e.g. Stealth Rock)
+#define BFG_MOVE_FIELD_MODIFIER 1.0f       // Modifier for field effects (e.g. Haze, Perish Song)
+#define BFG_MOVE_LUCK_MODIFIER 1.0f        // Status / OHKO moves with luck-based effects
 
 // Negative Modifiers
 #define BFG_MOVE_MULTI_TURN_MODIFIER 0.6f
@@ -132,6 +154,7 @@
 
 // Moves which will always be selected
 #define BFG_MOVE_ALWAYS_SELECT \
+    MOVE_KINGS_SHIELD, \
     MOVE_FAKE_OUT, \
     MOVE_NONE,
 
@@ -143,9 +166,12 @@
 #endif // BFG_MOVE_SELECT_RANDOM
 
 // *** ITEMS ***
-#define BFG_ITEM_ALLOW_MEGA TRUE    // Allow Mega Evolutions
-#define BFG_ITEM_ALLOW_ZMOVE TRUE   // Allow Z-Moves
-#define BFG_ITEM_ALLOW_GMAX TRUE    // Allow Gigantamax (In Dynamax Battles Only)
+
+// Set any of these values to 32 or above to disable them entirely
+
+#define BFG_ITEM_IV_ALLOW_MEGA 31   // Min. IVs required for Mega Evolution
+#define BFG_ITEM_IV_ALLOW_ZMOVE 31  // Min. IVs required for Z-Moves
+#define BFG_ITEM_IV_ALLOW_GMAX 31   // Min. IVs required for Gigantamax
 
 #define BFG_NO_ITEM_SELECTION_CHANCE 1
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1

@@ -46,7 +46,8 @@
 #define SET_MODIFIER(x,y) (((x) == BFG_MOVE_BASE_MODIFIER) ? (y) : (x))
 
 // These lists need to be maintained manually :(
-#define IS_SUPPORT_ATTACK(x) ((x) == MOVE_FAKE_OUT)
+#define IS_COUNTER_ATTACK(x) (((x) == MOVE_COUNTER) || ((x) == MOVE_MIRROR_COAT) || ((x) == MOVE_METAL_BURST))
+#define IS_SUPPORT_ATTACK(x) ((x) == MOVE_FAKE_OUT || IS_COUNTER_ATTACK(x))
 #define IS_STAT_CHANGING_EFFECT(e) (((e == EFFECT_NO_RETREAT) || (e == EFFECT_BULK_UP) || (e == EFFECT_COIL)) || ((e == EFFECT_CURSE) || (e == EFFECT_VICTORY_DANCE) || (e == EFFECT_DRAGON_DANCE)) || ((e == EFFECT_SHELL_SMASH) || (e == EFFECT_ATTACK_SPATK_UP) || (e == EFFECT_GEOMANCY)) || ((e == EFFECT_QUIVER_DANCE) || (e == EFFECT_SHIFT_GEAR) || (e == EFFECT_TAKE_HEART)) || ((e == EFFECT_CALM_MIND) || (e == EFFECT_COSMIC_POWER) || (e == EFFECT_STOCKPILE)) || ((e == EFFECT_BELLY_DRUM) || (e == EFFECT_ATTACK_UP_2) || (e == EFFECT_ATTACK_UP_USER_ALLY)) || ((e == EFFECT_ATTACK_ACCURACY_UP) || (e == EFFECT_ATTACK_UP) || (e == EFFECT_DEFENSE_UP_3)) || ((e == EFFECT_DEFENSE_UP_2) || (e == EFFECT_DEFENSE_CURL) || (e == EFFECT_DEFENSE_UP)) || ((e == EFFECT_SPECIAL_ATTACK_UP_3) || (e == EFFECT_SPECIAL_ATTACK_UP_2) || (e == EFFECT_SPECIAL_ATTACK_UP)) || ((e == EFFECT_SPECIAL_DEFENSE_UP_2) || (e == EFFECT_SPECIAL_DEFENSE_UP) || (e == EFFECT_AUTOTOMIZE)) || ((e == EFFECT_SPEED_UP_2) || (e == EFFECT_SPEED_UP) || (e == EFFECT_ACCURACY_DOWN_2)) || ((e == EFFECT_EVASION_UP_2) || (e == EFFECT_MINIMIZE) || (e == EFFECT_ACCURACY_UP_2)) || ((e == EFFECT_ATTACK_DOWN_2) || (e == EFFECT_DEFENSE_DOWN_2) || (e == EFFECT_SPECIAL_ATTACK_DOWN_2)) || ((e == EFFECT_SPECIAL_DEFENSE_DOWN_2) || (e == EFFECT_SPEED_DOWN_2) || (e == EFFECT_EVASION_DOWN_2)) || ((e == EFFECT_ACCURACY_DOWN) || (e == EFFECT_EVASION_UP) || (e == EFFECT_ATTACK_DOWN)) || ((e == EFFECT_DEFENSE_DOWN) || (e == EFFECT_SPECIAL_ATTACK_DOWN) || (e == EFFECT_SPECIAL_DEFENSE_DOWN)) || ((e == EFFECT_SPEED_DOWN) || (e == EFFECT_EVASION_DOWN)) || ((e == EFFECT_TRICK_ROOM) || (e == EFFECT_TAILWIND)))
 #define IS_STATUS_EFFECT(e) ((e == EFFECT_DARK_VOID) || (e == EFFECT_PARALYZE) || (e == EFFECT_SLEEP) || (e == EFFECT_YAWN) || (e == EFFECT_WILL_O_WISP) || (e == EFFECT_POISON) || (e == EFFECT_TOXIC))
 
@@ -59,8 +60,8 @@
 // GET_NEG_EV_MULTIPLIER should be used in the case of having a lower score with EV investment, for
 // example Trick Room as a correlation to speed
 // GET_POS_EV_MULTIPLIER is more useful in most other cases
-#define GET_NEG_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f / BFG_MOVE_EV_INVEST_MODIFIER) : 1.0f)
-#define GET_POS_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f * BFG_MOVE_EV_INVEST_MODIFIER) : 1.0f)
+#define GET_NEG_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f / BFG_MOVE_EV_INVEST_MULTIPLIER) : 1.0f)
+#define GET_POS_EV_MULTIPLIER(e,s) (CHECK_EVS(e,s) ? (1.0f * BFG_MOVE_EV_INVEST_MULTIPLIER) : 1.0f)
 
 #define GET_ATK_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_ATK)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_ATTACK)))
 #define GET_DEF_STAT_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_DEF)) * (GET_POS_EV_MULTIPLIER(e, F_EV_SPREAD_DEFENSE)))
@@ -70,7 +71,7 @@
 
 #define GET_SPEED_NEG_MULTIPLIER(n,e) ((GET_NATURE_MULTIPLIER(n,STAT_SPEED)) * (GET_NEG_EV_MULTIPLIER(e, F_EV_SPREAD_SPEED)))
 
-// rating *= BFG_MOVE_EV_INVEST_MODIFIER;
+// rating *= BFG_MOVE_EV_INVEST_MULTIPLIER;
 
 // *** TYPE ***
 #define IS_TYPE(x,y,type) ((x) == (type) || (y) == (type))
@@ -100,6 +101,19 @@
     ((s) >= SPECIES_GROOKEY && (s) <= SPECIES_INTELEON) || \
     ((s) >= SPECIES_SPRIGATITO && (s) <= SPECIES_QUAQUAVAL))
 
+#define HAS_MEGA_EVOLUTION(x) ((x == SPECIES_VENUSAUR) || (x == SPECIES_CHARIZARD) || (x == SPECIES_BLASTOISE) || \
+    (x == SPECIES_BEEDRILL) || (x == SPECIES_PIDGEOT) || (x == SPECIES_ALAKAZAM) || (x == SPECIES_SLOWBRO) || \
+    (x == SPECIES_GENGAR) || (x == SPECIES_KANGASKHAN) || (x == SPECIES_PINSIR) || (x == SPECIES_GYARADOS) || \
+    (x == SPECIES_AERODACTYL) || (x == SPECIES_MEWTWO) || (x == SPECIES_AMPHAROS) || (x == SPECIES_STEELIX) || \
+    (x == SPECIES_SCIZOR) || (x == SPECIES_HERACROSS) || (x == SPECIES_HOUNDOOM) || (x == SPECIES_TYRANITAR) || \
+    (x == SPECIES_SCEPTILE) || (x == SPECIES_BLAZIKEN) || (x == SPECIES_SWAMPERT) || (x == SPECIES_GARDEVOIR) || \
+    (x == SPECIES_SABLEYE) || (x == SPECIES_MAWILE) || (x == SPECIES_AGGRON) || (x == SPECIES_MEDICHAM) || \
+    (x == SPECIES_MANECTRIC) || (x == SPECIES_SHARPEDO) || (x == SPECIES_CAMERUPT) || (x == SPECIES_ALTARIA) || \
+    (x == SPECIES_BANETTE) || (x == SPECIES_ABSOL) || (x == SPECIES_GLALIE) || (x == SPECIES_SALAMENCE) || \
+    (x == SPECIES_METAGROSS) || (x == SPECIES_LATIAS) || (x == SPECIES_LATIOS) || (x == SPECIES_GARCHOMP) || \
+    (x == SPECIES_LUCARIO) || (x == SPECIES_ABOMASNOW) || (x == SPECIES_GALLADE) || (x == SPECIES_AUDINO) || \
+    (x == SPECIES_DIANCIE) || (x == SPECIES_RAYQUAZA))
+
 // *** ITEM ***
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 const u16 customItemsList[] = {
@@ -113,25 +127,25 @@ const u16 customItemsList[] = {
 #define FORME_DEFAULT 0xFF
 
 const u16 fixedIVMinBSTLookup[] = {
-    [3] = 180,
-    [6] = 225,
-    [9] = 270,
-    [12] = 315,
-    [15] = 360,
-    [18] = 405,
-    [21] = 450,
-    [MAX_PER_STAT_IVS] = 495,
+    [3] = BFG_IV_MIN_BST_3,
+    [6] = BFG_IV_MIN_BST_6,
+    [9] = BFG_IV_MIN_BST_9,
+    [12] = BFG_IV_MIN_BST_12,
+    [15] = BFG_IV_MIN_BST_15,
+    [18] = BFG_IV_MIN_BST_18,
+    [21] = BFG_IV_MIN_BST_21,
+    [MAX_PER_STAT_IVS] = BFG_IV_MIN_BST_MAX,
 };
 
 const u16 fixedIVMaxBSTLookup [] = {
-    [3] = 405,
-    [6] = 450,
-    [9] = 495,
-    [12] = 540,
-    [15] = 585,
-    [18] = 630,
-    [21] = 675,
-    [MAX_PER_STAT_IVS] = 720,
+    [3] = BFG_IV_MAX_BST_3,
+    [6] = BFG_IV_MAX_BST_6,
+    [9] = BFG_IV_MAX_BST_9,
+    [12] = BFG_IV_MAX_BST_12,
+    [15] = BFG_IV_MAX_BST_15,
+    [18] = BFG_IV_MAX_BST_18,
+    [21] = BFG_IV_MAX_BST_21,
+    [MAX_PER_STAT_IVS] = BFG_IV_MAX_BST_MAX,
 };
 
 // *** FUNCTIONS ***
@@ -640,6 +654,28 @@ const u16 moveNeverSelectList[] = {
     BFG_MOVE_NEVER_SELECT
 }; 
 
+#define IS_SUN_EFFECT(e) ((e == EFFECT_SUNNY_DAY))
+#define IS_RAIN_EFFECT(e) ((e == EFFECT_RAIN_DANCE))
+#define IS_SAND_EFFECT(e) ((e == EFFECT_SANDSTORM))
+#define IS_HAIL_EFFECT(e) ((e == EFFECT_HAIL) || (e == EFFECT_SNOWSCAPE))
+
+#define IS_WEATHER_EFFECT(e) (IS_SUN_EFFECT(e) || IS_RAIN_EFFECT(e) || IS_SAND_EFFECT(e) || IS_HAIL_EFFECT(e))
+#define IS_TERRAIN_EFFECT(e) ((e == EFFECT_MISTY_TERRAIN) || (e == EFFECT_GRASSY_TERRAIN) || (e == EFFECT_PSYCHIC_TERRAIN) || (e == EFFECT_ELECTRIC_TERRAIN))
+
+#define IS_SUN_ABILITY(a) ((a == ABILITY_DROUGHT) || (a == ABILITY_DESOLATE_LAND) || (a == ABILITY_ORICHALCUM_PULSE))
+#define IS_RAIN_ABILITY(a) ((a == ABILITY_DRIZZLE) || (a == ABILITY_PRIMORDIAL_SEA))
+#define IS_SAND_ABILITY(a) ((a == ABILITY_SAND_STREAM) || (a == ABILITY_SAND_SPIT))
+#define IS_HAIL_ABILITY(a) ((a == ABILITY_SNOW_WARNING) || (a == ABILITY_DESOLATE_LAND) || (a == ABILITY_ORICHALCUM_PULSE))
+
+#define IS_WEATHER_ABILITY(a) (IS_SUN_ABILITY(a) || IS_RAIN_ABILITY(a) || IS_SAND_ABILITY(a) || IS_HAIL_ABILITY(a))
+
+#define IS_MISTY_ABILITY(a) (a == ABILITY_MISTY_SURGE)
+#define IS_GRASSY_ABILITY(a) ((a == ABILITY_GRASSY_SURGE) || (a == ABILITY_SEED_SOWER))
+#define IS_PSYCHIC_ABILITY(a) (a == ABILITY_PSYCHIC_SURGE)
+#define IS_ELECTRIC_ABILITY(a) (a == ABILITY_ELECTRIC_SURGE)
+
+#define IS_TERRAIN_ABILITY(a) (IS_MISTY_ABILITY(a) || IS_GRASSY_ABILITY(a) || IS_PSYCHIC_ABILITY(a) || IS_ELECTRIC_ABILITY(a))
+
 static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 abilityNum, u16 * currentMoves) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
@@ -657,7 +693,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     u8 numStatChangingEffect = 0;
     u8 numStatusEffect = 0;
     u8 numFieldTarget = 0;
-    
+
+    // Move weather/terrain effects
+    u16 weatherEffect = 0;
+    u16 terrainEffect = 0;
+
     // Move for calculating rating
     move = &(gBattleMoves[moveId]);
 
@@ -676,6 +716,14 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             // Status Move (Fake Out is also considered a status move)
             if ((currentMove->split == SPLIT_STATUS) || IS_SUPPORT_ATTACK(currentMoves[i]))
             {
+                // Check if move has weather effect
+                if (weatherEffect == 0 && IS_WEATHER_EFFECT(currentMove->effect))
+                    weatherEffect = currentMove->effect;
+
+                // Check if move has terrain effect
+                else if (terrainEffect == 0 && IS_TERRAIN_EFFECT(currentMove->effect))
+                    terrainEffect = currentMove->effect;
+
                 // If the move is a field effect (both opponents and all players)
                 if ((move->target == MOVE_TARGET_OPPONENTS_FIELD) || (move->target == MOVE_TARGET_ALL_BATTLERS))
                     numFieldTarget++;
@@ -723,8 +771,13 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             return 999; // Always select
     }
 
-    // Might be updated by pixilate/refridgerate/etc.
+    // Might be updated
     u8 type = move->type;
+    u8 accuracy = move->accuracy;
+    u8 priority = move->priority;
+
+    // Move power (if modified)
+    u16 power = move->power;
 
     // Move rating (Casted to u16 at the end)
     float rating = BFG_MOVE_BASE_RATING;
@@ -734,7 +787,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         // Entry Hazards
         case MOVE_TARGET_OPPONENTS_FIELD: {
             if (numFieldTarget < BFG_MOVE_MAX_FIELD_TARGET)
-                rating *= BFG_MOVE_HAZARD_MULTIPLIER;
+                rating *= BFG_MOVE_HAZARD_MODIFIER;
             else 
                 return 0; // Skip
         }; 
@@ -760,7 +813,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         // Field effects
         case MOVE_TARGET_ALL_BATTLERS:
             if (numFieldTarget < BFG_MOVE_MAX_FIELD_TARGET)
-                rating *= BFG_MOVE_FIELD_MULTIPLIER;
+                rating *= BFG_MOVE_FIELD_MODIFIER;
             else 
                 return 0; // Skip
         // Standard spread move
@@ -812,6 +865,40 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                 type = TYPE_WATER;
             }
         break;
+        // Rain Affected Abilities
+        case ABILITY_SWIFT_SWIM:
+        case ABILITY_RAIN_DISH:
+        case ABILITY_HYDRATION:
+        case ABILITY_DRY_SKIN: 
+            // Move has rain effect
+            if (IS_RAIN_EFFECT(move->effect))
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        // Sun Affected Abilities
+        case ABILITY_CHLOROPHYLL:
+        case ABILITY_SOLAR_POWER: 
+        case ABILITY_HARVEST: 
+            // Move has sun effect
+            if (IS_SUN_EFFECT(move->effect))
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        // Sand Affected Abilities
+        case ABILITY_SAND_RUSH: 
+        case ABILITY_SAND_FORCE: 
+        case ABILITY_SAND_VEIL: 
+            // Move has sand effect
+            if (IS_SAND_EFFECT(move->effect))
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
+        // Hail Affected Abilities
+        case ABILITY_ICE_BODY: 
+        case ABILITY_ICE_FACE: 
+        case ABILITY_SNOW_CLOAK:
+        case ABILITY_SLUSH_RUSH: 
+            // Move has hail effect
+            if (IS_HAIL_EFFECT(move->effect))
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+        break;
         // Rating Changing
         case ABILITY_PUNK_ROCK:
             if (move->soundMove == TRUE)
@@ -850,7 +937,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         break;
         case ABILITY_PRANKSTER:
             if (move->split == SPLIT_STATUS)
-                rating *= BFG_MOVE_PRIORITY_MULTIPLIER;
+                priority += 1; // +1 Priority
         case ABILITY_ELECTRIC_SURGE:
         case ABILITY_VITAL_SPIRIT:
         case ABILITY_MISTY_SURGE:
@@ -862,10 +949,83 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         case ABILITY_LIBERO:
             // If move does not have STAB bonus, apply it
             if (!(IS_TYPE(species->types[0], species->types[1], type)))
-                rating *= BFG_MOVE_STAB_MODIFIER;
+                rating *= BFG_MOVE_STAB_MULTIPLIER;
         break;
     }
     #endif
+
+    // Apply general weather changes
+
+    // Rain effect / ability
+    if (IS_RAIN_EFFECT(weatherEffect) || IS_RAIN_ABILITY(ability)) {
+        if ((moveId == MOVE_THUNDER) || (moveId == MOVE_HURRICANE) || (moveId == MOVE_BLEAKWIND_STORM) || (moveId == MOVE_WILDBOLT_STORM) || (moveId == MOVE_SANDSEAR_STORM))
+            accuracy = 100; // 100% Accurate in rain
+        if (move->split != SPLIT_STATUS) {
+            if (move->type == TYPE_WATER)
+                rating *= BFG_MOVE_STAB_MULTIPLIER; // 50% boost in rain
+            else if (move->type == TYPE_FIRE)
+                rating /= BFG_MOVE_STAB_MULTIPLIER; // 50% reduction in rain
+        }
+    } 
+    // Sun Effect / Ability
+    else if (IS_SUN_EFFECT(weatherEffect) || IS_SUN_ABILITY(ability)) {
+        if ((moveId == MOVE_THUNDER) || (moveId == MOVE_HURRICANE))
+            accuracy = 50; // 50% Accurate in sun
+        if (move->split != SPLIT_STATUS) {
+            if (move->type == TYPE_FIRE)
+                rating *= BFG_MOVE_STAB_MULTIPLIER; // 50% boost in sun
+            else if (move->type == TYPE_WATER)
+                rating /= BFG_MOVE_STAB_MULTIPLIER; // 50% reduction in sun
+        }
+    } 
+    // // Sand Effect / Ability
+    // else if (IS_SAND_EFFECT(weatherEffect) || IS_SAND_ABILITY(ability)) {
+    // } 
+    // Hail Effect / Ability
+    else if (IS_HAIL_EFFECT(weatherEffect) || IS_HAIL_ABILITY(ability)) {
+        if (moveId == MOVE_BLIZZARD)
+            accuracy = 100; // 100% accurate in hail / snow
+    }
+
+    // Apply general terrain changes
+    if ((!(IS_TYPE(species->types[0], species->types[1], TYPE_FLYING)) || (ability == ABILITY_LEVITATE))) {
+        // Grassy Terrain Effect / Ability
+        if (terrainEffect == EFFECT_GRASSY_TERRAIN || IS_GRASSY_ABILITY(ability)) {
+            if ((move->split != SPLIT_STATUS) && (move->type == TYPE_GRASS))
+                rating *= BFG_MOVE_STAB_MULTIPLIER; // 50% boost in grassy terrain
+            if (moveId == MOVE_GRASSY_GLIDE) {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+                priority += 1; // +1 priority
+            }
+        }
+        // Misty Terrain Effect / Ability
+        else if (terrainEffect == EFFECT_MISTY_TERRAIN || IS_GRASSY_ABILITY(ability)) {
+            if ((move->split != SPLIT_STATUS) && (move->type == TYPE_DRAGON))
+                rating /= BFG_MOVE_STAB_MULTIPLIER; // 50% reduction in misty terrain
+
+            // Status / confusion afflicting moves will be blocked below
+        }
+        // Psychic Terrain Effect / Ability
+        else if (terrainEffect == EFFECT_PSYCHIC_TERRAIN || IS_PSYCHIC_ABILITY(ability)) {
+            if (move->type == TYPE_PSYCHIC)
+                rating *= BFG_MOVE_STAB_MULTIPLIER; // 50% boost in psychic terrain
+            if (IS_DOUBLES()) {
+                rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
+                power += power; // x2
+            }
+            rating *= BFG_MOVE_ABILITY_MODIFIER;
+        }
+        // Electric Terrain Effect / Ability
+        else if (terrainEffect == EFFECT_ELECTRIC_TERRAIN || IS_ELECTRIC_ABILITY(ability)) {
+            if (move->type == TYPE_ELECTRIC)
+                rating *= BFG_MOVE_STAB_MULTIPLIER; // 50% boost in electric terrain
+
+            if (moveId == MOVE_RISING_VOLTAGE) {
+                rating *= BFG_MOVE_ABILITY_MODIFIER;
+                power += power; // x2 
+            }
+        }
+    }
 
     // Status moves
     if ((move->split == SPLIT_STATUS) || IS_SUPPORT_ATTACK(moveId)) {
@@ -1041,7 +1201,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_ACCURACY_DOWN_2:
             case EFFECT_EVASION_UP_2:
             case EFFECT_MINIMIZE: 
-                rating *= fpow(BFG_MOVE_LUCK_MULTIPLIER, 2);
+                rating *= fpow(BFG_MOVE_LUCK_MODIFIER, 2);
             case EFFECT_ACCURACY_UP_2:
             case EFFECT_ATTACK_DOWN_2:
             case EFFECT_DEFENSE_DOWN_2:
@@ -1054,7 +1214,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             // Misc. Stat Changes
             case EFFECT_ACCURACY_DOWN: 
             case EFFECT_EVASION_UP:
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MODIFIER;
             case EFFECT_ACCURACY_UP:
             case EFFECT_ATTACK_DOWN:
             case EFFECT_DEFENSE_DOWN:
@@ -1070,7 +1230,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_SLEEP: 
             case EFFECT_YAWN:
                 // Luck-based status moves
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MODIFIER;
             case EFFECT_WILL_O_WISP: 
             case EFFECT_POISON: 
             case EFFECT_TOXIC: 
@@ -1084,7 +1244,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_CONFUSE:
             case EFFECT_FLATTER:
                 // Luck-based volatile status moves
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MODIFIER;
             case EFFECT_WORRY_SEED:
             case EFFECT_LEECH_SEED:
             case EFFECT_HEAL_BLOCK: 
@@ -1101,6 +1261,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_SANDSTORM: 
             case EFFECT_SNOWSCAPE:
             case EFFECT_HAIL:
+                if (weatherEffect > 0 || IS_WEATHER_ABILITY(ability))
+                    return 0; // Already have weather effect / ability
                 rating *= BFG_MOVE_WEATHER_MULTIPLIER;
             break;
             // Terrain Setting Moves
@@ -1108,20 +1270,30 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_PSYCHIC_TERRAIN:
             case EFFECT_GRASSY_TERRAIN:
             case EFFECT_MISTY_TERRAIN:
+                if (terrainEffect > 0 || IS_TERRAIN_ABILITY(ability))
+                    return 0; // Already have terrain effect / ability
                 rating *= BFG_MOVE_TERRAIN_MULTIPLIER;
             break;
-            // Recovery Moves
+            // Doubles Recovery Moves
             case EFFECT_JUNGLE_HEALING:
             case EFFECT_HEAL_PULSE: 
-                if (IS_DOUBLES())
-                    rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
-                else
-                    break;
+                if (!IS_DOUBLES())
+                    break; // Not doubles
+                rating *= BFG_MOVE_DOUBLES_MULTIPLIER * BFG_MOVE_RECOVERY_MODIFIER;
+            break;
+            // Sun Boosted Recovery Moves
             case EFFECT_MORNING_SUN: 
+            case EFFECT_SYNTHESIS: 
+            case EFFECT_MOONLIGHT:
+                if (IS_WEATHER_EFFECT(weatherEffect) || IS_WEATHER_ABILITY(ability)){
+                    if ((weatherEffect == EFFECT_SUNNY_DAY) || IS_SUN_ABILITY(ability))
+                        rating *= BFG_MOVE_ABILITY_MODIFIER; // 75% in Sun
+                    else
+                        rating /= BFG_MOVE_ABILITY_MODIFIER; // 25% Elsewhere
+                }
+            // Recovery Moves
             case EFFECT_RESTORE_HP: 
             case EFFECT_SOFTBOILED: 
-            case EFFECT_SYNTHESIS: 
-            case EFFECT_MOONLIGHT: 
             case EFFECT_SHORE_UP: 
             case EFFECT_ROOST: 
                 rating *= BFG_MOVE_RECOVERY_MODIFIER;
@@ -1138,8 +1310,13 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_BATON_PASS:
                 // Less stat-changing moves than required for baton pass
                 if (numStatChangingEffect < BFG_MOVE_BATON_PASS_MINIMUM)
-                    return 0;
+                    return 0; // No baton pass without status moves
+                rating *= BFG_MOVE_PIVOT_MODIFIER;
+            break;
+            case EFFECT_TELEPORT: 
             case EFFECT_PARTING_SHOT: 
+                if (numStatChangingEffect > 0)
+                    return 0; // No pivots with stat changing effects
                 rating *= BFG_MOVE_PIVOT_MODIFIER;
             break;
             // Speed Control Moves
@@ -1153,9 +1330,11 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_MAGIC_ROOM: 
             case EFFECT_EMBARGO: 
                 rating *= BFG_MOVE_ITEM_REMOVE_MODIFIER;
+            break;
             // Item Switching Moves
             case EFFECT_TRICK: 
                 rating *= BFG_MOVE_ITEM_SWITCH_MODIFIER;
+            break;
             // Limited-target moves
             case EFFECT_SLEEP_TALK:
             case EFFECT_SNATCH: 
@@ -1170,8 +1349,18 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                     rating *= BFG_MOVE_DOUBLES_MULTIPLIER;
                 rating *= BFG_MOVE_PROTECT_MODIFIER;
             break;
+            // Counter Attacks
+            // These aren't status moves, but work best on bulky 
+            // Pokemon and should NOT be the only attack
+            case EFFECT_COUNTER: 
+            case EFFECT_MIRROR_COAT: 
+            case EFFECT_METAL_BURST: 
+                rating *= BFG_MOVE_COUNTER_MODIFIER;
+            break;
+            // Joke moves (The ultimate flex)
             case EFFECT_DO_NOTHING:
                 rating *= BFG_MOVE_DO_NOTHING_MODIFIER;
+            break;
             default: // Unhandled
                 DebugPrintf("Unhandled effect: %d", move->effect);
                 rating *= BFG_MOVE_GENERIC_MODIFIER;
@@ -1208,15 +1397,13 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         if (rating <= 0)
             return 0;
 
-        // Move power (if modified)
-        u8 power = move->power;
-
         #if BFG_MOVE_EFFECT_MODIFIERS
         // Switch on move effect
         switch(move->effect) {
             // Rating Modifiers
             case EFFECT_OHKO: 
-                rating *= BFG_MOVE_LUCK_MULTIPLIER; 
+                rating *= BFG_MOVE_LUCK_MODIFIER; 
+            break;
             break;
             // Multi-Turn Moves
             case EFFECT_FUTURE_SIGHT: 
@@ -1234,7 +1421,9 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             // Solar Beam
             case EFFECT_SOLAR_BEAM:
                 // Only apply multi-turn modifier if ability is not drought or desolate land
-                if (!(ability == ABILITY_DROUGHT || ability == ABILITY_DESOLATE_LAND))
+                if ((weatherEffect == EFFECT_SUNNY_DAY) || IS_SUN_ABILITY(ability))
+                    rating *= BFG_MOVE_ABILITY_MODIFIER;
+                else
                     rating *= BFG_MOVE_MULTI_TURN_MODIFIER;
             break;
             // Interruptable Moves
@@ -1263,6 +1452,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             break;
             // Pivoting Moves
             case EFFECT_HIT_ESCAPE: 
+                if (numStatChangingEffect > 0)
+                    return 0; // No pivots with stat changing effects
                 rating *= BFG_MOVE_PIVOT_MODIFIER;
             break;
             // Status Effects
@@ -1274,7 +1465,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             #endif
             case EFFECT_PARALYZE_HIT: 
             case EFFECT_DIRE_CLAW: 
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MODIFIER;
             case EFFECT_MORTAL_SPIN:
             case EFFECT_POISON_FANG:  
             case EFFECT_POISON_HIT: 
@@ -1284,7 +1475,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             case EFFECT_FLINCH_STATUS: 
             case EFFECT_CONFUSE_HIT: 
             case EFFECT_FLINCH_HIT: 
-                rating *= BFG_MOVE_LUCK_MULTIPLIER;
+                rating *= BFG_MOVE_LUCK_MODIFIER;
             case EFFECT_SYRUP_BOMB: 
             case EFFECT_SALT_CURE: 
                 rating *= BFG_MOVE_STATUS_MULTIPLIER;
@@ -1353,7 +1544,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
         if (IS_TYPE(species->types[0],species->types[1], type)) 
         {
             // 1.5x boost
-            rating *= BFG_MOVE_STAB_MODIFIER;
+            rating *= BFG_MOVE_STAB_MULTIPLIER;
         }
 
         // Apply secondary effect rating
@@ -1371,12 +1562,12 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     }
 
     // Apply accuracy mod
-    if (move->accuracy > 0)
-        rating *= NORMALISE(move->accuracy);
+    if (accuracy > 0)
+        rating *= NORMALISE(accuracy);
 
     // Apply priority mod
-    if (move->priority > 0) 
-        rating *= fpow(BFG_MOVE_PRIORITY_MULTIPLIER, move->priority);
+    if (priority > 0) 
+        rating *= fpow(BFG_MOVE_PRIORITY_MULTIPLIER, priority);
 
     // Return the rating
     return rating;
@@ -1669,9 +1860,9 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         // Get base stat total
         bst = GetBaseStatTotal(i);
 
-        // Skip above/below bst limits
-        if (bst < minBST || bst > maxBST)
-            continue;
+        // If species is above bst limit, or below than the minimum, and does not have a mega (or megas are not enabled)
+        if ((bst > maxBST) || ((bst < minBST) && (!((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && HAS_MEGA_EVOLUTION(i)))))
+            continue; 
 
         // Add species to mon set
         monSet[bfMonCount++] = i;
@@ -1720,17 +1911,18 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     }; break;
                     #endif
                     case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                        if (BFG_ITEM_ALLOW_MEGA && (bst + 100 <= maxBST))
+                        if ((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST))
                             forme = j;
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE:
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                        if (BFG_ITEM_ALLOW_MEGA && (bst + 100 <= maxBST) && (hasMega == FALSE))
+                        if ((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE)) {
                             hasMega = TRUE;
                             forme = j;
+                        }
                     }; break;
                     case FORM_CHANGE_BATTLE_ULTRA_BURST: {
-                        if (BFG_ITEM_ALLOW_ZMOVE && (bst + 76 <= maxBST) && (hasZMove == FALSE)) {
+                        if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (bst + 76 <= maxBST) && (hasZMove == FALSE)) {
                             hasZMove = TRUE;
                             forme = j;
                         }
