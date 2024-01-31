@@ -137,7 +137,7 @@
 #define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f   // Modifier for moves which switch the user and opponent's item
 #define BFG_MOVE_ITEM_REMOVE_MODIFIER 1.0f   // Modifier for moves which remove the opponent's item (and / or item effects)
 
-#define BFG_MOVE_COUNTER_MODIFIER 1.0f       // Multiplier for countering moves (e.g. Counter, Mirror Coat)
+#define BFG_MOVE_COUNTER_MODIFIER 0.6f       // Multiplier for countering moves (e.g. Counter, Mirror Coat)
 #define BFG_MOVE_HAZARD_MODIFIER FALSE     // Modifier for entry hazards (e.g. Stealth Rock)
 #define BFG_MOVE_FIELD_MODIFIER 1.0f       // Modifier for field effects (e.g. Haze, Perish Song)
 #define BFG_MOVE_LUCK_MODIFIER 1.0f        // Status / OHKO moves with luck-based effects

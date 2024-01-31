@@ -19,6 +19,11 @@
 
 #include "data/pokemon/natures.h"
 
+// *** UTILITY ***
+
+#define MIN(x,y) ((x) < (y) ? (x) : (y))
+#define MAX(x,y) ((x) > (y) ? (x) : (y))
+
 // *** RANDOM ***
 #ifdef BFG_RANDOM_BOOL_FIXED
 #define RANDOM_BOOL() (BFG_RANDOM_BOOL_FIXED)
@@ -749,7 +754,7 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
                     if (
                         (move->split == currentMove->split) && 
                         // (move->target == moveTemp->target) && TODO: Make this column check for doubles
-                        (move->priority == currentMove->priority)
+                        (MAX(move->priority,0) == MAX(currentMove->priority,0))
                     )
                         return 0; // No duplicate moves
 
@@ -774,7 +779,8 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     // Might be updated
     u8 type = move->type;
     u8 accuracy = move->accuracy;
-    u8 priority = move->priority;
+    u8 priority = MAX(move->priority, 0); // At least 0
+    u8 hits = MAX(move->strikeCount, 1); // At least 1
 
     // Move power (if modified)
     u16 power = move->power;
@@ -1374,9 +1380,6 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     }
     else // Physical / Special
     {
-        // Number of move hits
-        u8 hits = 1;
-
         // Offensive move count
         u8 numOffensive = numPhysical + numSpecial;
 
@@ -1553,12 +1556,9 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             rating *= 1.0f + (NORMALISE(move->secondaryEffectChance) * BFG_MOVE_EFFECT_CHANCE_MULTIPLIER);
         }
 
-        // If strike count is defined, update hits
-        if (move->strikeCount > 1 && hits == 1)
-            hits = move->strikeCount;
-
         // Add power (* hits count) to move rating
-        rating *= NORMALISE(power * hits);
+        if (power > 0 && hits > 0)
+            rating *= NORMALISE(power * hits);
     }
 
     // Apply accuracy mod
