@@ -34,12 +34,66 @@
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
 #define BFG_LVL_TENT_ALLOW_BANNED_SPECIES FALSE // Allow banned species (e.g. Kyogre,Groudon) in Battle Tent
 
+#define BFG_FORME_CHANCE_PIKACHU 3
+#define BFG_FORME_CHANCE_PICHU 2
+#define BFG_FORME_CHANCE_TAUROS_PALDEA 2
+#define BFG_FORME_CHANCE_UNOWN 2
+#define BFG_FORME_CHANCE_CASTFORM 2
+#define BFG_FORME_CHANCE_DEOXYS 2
+#define BFG_FORME_CHANCE_BURMY_WORMADAM 2
+#define BFG_FORME_CHANCE_SHELLOS_GASTRODON 2
+#define BFG_FORME_CHANCE_ROTOM 1
+#define BFG_FORME_CHANCE_DIALGA 2
+#define BFG_FORME_CHANCE_PALKIA 2
+#define BFG_FORME_CHANCE_GIRATINA 2
+#define BFG_FORME_CHANCE_SHAYMIN 2
+#define BFG_FORME_CHANCE_ARCEUS 2
+#define BFG_FORME_CHANCE_BASCULIN 2
+#define BFG_FORME_CHANCE_DEERLING_SAWSBUCK 2
+#define BFG_FORME_CHANCE_TORNADUS_THERIAN 2
+#define BFG_FORME_CHANCE_THUNDURUS_THERIAN 2
+#define BFG_FORME_CHANCE_LANDORUS_THERIAN 2
+#define BFG_FORME_CHANCE_ENAMORUS_THERIAN 2
+#define BFG_FORME_CHANCE_KYUREM 2
+#define BFG_FORME_CHANCE_KELDEO 2
+#define BFG_FORME_CHANCE_GENESECT 2
+#define BFG_FORME_CHANCE_GRENINJA 2
+#define BFG_FORME_CHANCE_VIVILLON 2
+#define BFG_FORME_CHANCE_FLABEBE_FLOETTE_FLORGES 2
+#define BFG_FORME_CHANCE_FURFROU 2
+#define BFG_FORME_CHANCE_MEOWSTIC 2
+#define BFG_FORME_CHANCE_PUMPKABOO_GOURGEIST 2
+#define BFG_FORME_CHANCE_ZYGARDE 2
+#define BFG_FORME_CHANCE_HOOPA 2
+#define BFG_FORME_CHANCE_ORICORIO 2
+#define BFG_FORME_CHANCE_ROCKRUFF_LYCANROC 2
+#define BFG_FORME_CHANCE_SILVALLY 2
+#define BFG_FORME_CHANCE_MINIOR 2
+#define BFG_FORME_CHANCE_NECROZMA 2
+#define BFG_FORME_CHANCE_MAGEARNA 2
+#define BFG_FORME_CHANCE_ALCREMIE 2
+#define BFG_FORME_CHANCE_INDEEDEE 2
+#define BFG_FORME_CHANCE_URSHIFU 2
+#define BFG_FORME_CHANCE_CALYREX 2
+#define BFG_FORME_CHANCE_BASCULEGION 2
+#define BFG_FORME_CHANCE_OINKOLOGNE 2
+#define BFG_FORME_CHANCE_MAUSHOLD 2
+#define BFG_FORME_CHANCE_SQUAWKABILLY 2
+#define BFG_FORME_CHANCE_TATSUGIRI 2
+#define BFG_FORME_CHANCE_DUDUNSPARCE 2
+#define BFG_FORME_CHANCE_GIMMIGHOUL 2
+#define BFG_FORME_CHANCE_OGERPON 2
+#define BFG_FORME_CHANCE_URSALUNA 2
+
+#define BFG_ZMOVE_CHANCE_ULTRA_BURST 2
+
 // Allow custom species banlists
 #define BFG_USE_CUSTOM_BANNED_SPECIES TRUE
 #if BFG_USE_CUSTOM_BANNED_SPECIES == TRUE
 
 // Custom list of common banned species
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
+    SPECIES_WOBBUFFET, \
     SPECIES_SHEDINJA, \
     SPECIES_SMEARGLE, \
     SPECIES_UNOWN, \
@@ -85,6 +139,12 @@
 
 #define BFG_MOVE_BASE_RATING 1.0f   // Baseline rating for all moves
 #define BFG_MOVE_BASE_MODIFIER 1.0f // Base modifier for move effects
+
+// Accuracy modifier will be multiplied
+// by itself 'n' times, in order to punish
+// lower accuracy moves compared to fully
+// accurate moves.
+#define BFG_MOVE_ACCURACY_POWER 1.5 // ~70% -> 0.58%
 
 #define BFG_MOVE_MAX_OFFENSIVE 4    // Maximum number of offensive moves
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
@@ -148,16 +208,17 @@
 
 #define BFG_MOVE_VOLATILE_MULTIPLIER 1.1f // Worry Seed, Leech Seed, etc.
 #define BFG_MOVE_STATUS_MULTIPLIER 1.2f
+#define BFG_MOVE_SCREEN_MULTIPLIER 1.1f // Reflect, Light Screen, etc.
 
 #define BFG_MOVE_RECOVERY_MODIFIER 1.1f
 #define BFG_MOVE_ABSORB_MODIFIER 1.5f
 #define BFG_MOVE_PIVOT_MODIFIER 1.5f
 
 #define BFG_MOVE_DOUBLES_PROTECT_MODIFIER 1.5f   // Wide Guard, Quick Guard, etc.
-#define BFG_MOVE_SPECIAL_PROTECT_MODIFIER 1.5f   // Detect, Spiky Shield, etc.
-#define BFG_MOVE_SUBSTITUTE_MODIFIER 1.2f        // Substitute, Shed Tail
+#define BFG_MOVE_SPECIAL_PROTECT_MODIFIER FALSE  // Detect, Spiky Shield, etc.
+#define BFG_MOVE_SUBSTITUTE_MODIFIER 1.0f        // Substitute, Shed Tail
 #define BFG_MOVE_PROTECT_MODIFIER FALSE          // Normal Protect
-#define BFG_MOVE_ENDURE_MODIFIER 1.0f            // Normal Endure
+#define BFG_MOVE_ENDURE_MODIFIER 0.5f            // Normal Endure
 
 #define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f   // Modifier for moves which switch the user and opponent's item
 #define BFG_MOVE_ITEM_REMOVE_MODIFIER 0.8f   // Modifier for moves which remove the opponent's item (and / or item effects)
