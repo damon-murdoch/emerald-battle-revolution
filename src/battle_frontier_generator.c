@@ -1820,7 +1820,6 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
             rating *= fpow(NORMALISE(accuracy), BFG_MOVE_ACCURACY_POWER); // Apply accuracy power
     }
         
-
     // Apply priority mod
     if (priority != 0) 
         rating *= fpow(BFG_MOVE_PRIORITY_MULTIPLIER, priority);
@@ -1972,8 +1971,48 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
 }
 
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
-static u16 GetSpeciesItem(u16 speciesId, u8 nature, u8 evs, u8 abilityNum) {
-    return ITEM_NONE; // TODO
+
+static bool32 GetSpeciesItemCheckUnique(u16 itemId, u8 index) {
+    s32 i;
+    for(i=0; i < index; i++) {
+        if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM) == itemId)
+            return FALSE; // Duplicate itemId
+    }
+    return TRUE; // Unique itemId
+}
+
+static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum) {
+    // const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+    
+    s32 i,f;
+
+    // Selected item
+    u16 itemId;
+
+    // Loop over the custom items list
+    for(i=0; customItemsList[i] != ITEM_NONE; i++) {
+        }
+
+    // Length of custom items
+    u16 customItemsLength = i;
+
+    // Loop until failure limit is reached (or item found)
+    for(f=0; f < BFG_ITEM_SELECT_FAILURE_LIMIT; f++) {
+
+        // Default item id
+        // itemId = ITEM_NONE;
+
+        // Sample a random item from the list
+        itemId = customItemsList[Random() % customItemsLength];
+
+        if (GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // Otherwise, continue looping
+    }
+
+    // No item found
+    return ITEM_NONE;
 }
 #endif 
 
@@ -2031,8 +2070,8 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     if (moveCount > 0) {
         #if BFG_NO_ITEM_SELECTION_CHANCE != 1
         // Currently has no held item
-        if (item == ITEM_NONE && (!RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE)))
-            item = GetSpeciesItem(formeId, nature, evs, abilityNum);
+        if (item == ITEM_NONE && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+            item = GetSpeciesItem(formeId, index, nature, evs, abilityNum);
         #endif 
 
         SetMonData(&gEnemyParty[index], MON_DATA_HELD_ITEM, &item);

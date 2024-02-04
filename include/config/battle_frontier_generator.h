@@ -93,6 +93,7 @@
 
 // Custom list of common banned species
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
+    SPECIES_WYNAUT, \
     SPECIES_WOBBUFFET, \
     SPECIES_SHEDINJA, \
     SPECIES_SMEARGLE, \
@@ -144,7 +145,7 @@
 // by itself 'n' times, in order to punish
 // lower accuracy moves compared to fully
 // accurate moves.
-#define BFG_MOVE_ACCURACY_POWER 1.5 // ~70% -> 0.58%
+#define BFG_MOVE_ACCURACY_POWER 2
 
 #define BFG_MOVE_MAX_OFFENSIVE 4    // Maximum number of offensive moves
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
@@ -208,7 +209,7 @@
 
 #define BFG_MOVE_VOLATILE_MULTIPLIER 1.1f // Worry Seed, Leech Seed, etc.
 #define BFG_MOVE_STATUS_MULTIPLIER 1.2f
-#define BFG_MOVE_SCREEN_MULTIPLIER 1.1f // Reflect, Light Screen, etc.
+#define BFG_MOVE_SCREEN_MULTIPLIER 0.9f // Reflect, Light Screen, etc.
 
 #define BFG_MOVE_RECOVERY_MODIFIER 1.1f
 #define BFG_MOVE_ABSORB_MODIFIER 1.5f
@@ -254,13 +255,17 @@
 
 // *** ITEMS ***
 
+// Number of times item can fail to be found
+// before 'ITEM_NONE' will be returned
+#define BFG_ITEM_SELECT_FAILURE_LIMIT 4
+
 // Set any of these values to 32 or above to disable them entirely
 
 #define BFG_ITEM_IV_ALLOW_MEGA 31   // Min. IVs required for Mega Evolution
 #define BFG_ITEM_IV_ALLOW_ZMOVE 31  // Min. IVs required for Z-Moves
 #define BFG_ITEM_IV_ALLOW_GMAX 31   // Min. IVs required for Gigantamax
 
-#define BFG_NO_ITEM_SELECTION_CHANCE 1
+#define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 
 #define BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE 4
@@ -295,6 +300,7 @@
 #define BFG_ITEM_FLAME_ORB 1       // Guts
 #define BFG_ITEM_EVIOLITE 1         // Not Fully Evolved
 #define BFG_ITEM_LIFE_ORB 1         // Offensive invested
+#define BFG_ITEM_WIDE_LENS 1        // Inaccurate moves
 
 // Custom list of items which can be selected, in 
 // addition to the flags set above. A random item 
@@ -319,7 +325,6 @@
     ITEM_MICLE_BERRY, \
     ITEM_ROWAP_BERRY, \
     ITEM_SHELL_BELL, \
-    ITEM_WIDE_LENS, \
     ITEM_LUM_BERRY, \
     ITEM_KEE_BERRY, \
     ITEM_LEFTOVERS, \
