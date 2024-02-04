@@ -101,7 +101,7 @@
 #define BFG_MOVE_SPEED_CONTROL_ALLOW_SUPPORT TRUE   // Allow mons with speed control moves to use support/self-target moves
 #define BFG_MOVE_SPEED_BOOST_ALLOW_SUPPORT FALSE    // Allow mons with speed-boosting moves to use support/self-target moves
 #define BFG_MOVE_OFF_BOOST_ALLOW_SUPPORT FALSE      // Allow mons with offensive-boosting moves to use support/self-target moves
-#define BFG_MOVE_DEF_BOOST_ALLOW_SUPPORT True       // Allow mons with defensive-boosting moves to use support/self-target moves
+#define BFG_MOVE_DEF_BOOST_ALLOW_SUPPORT TRUE       // Allow mons with defensive-boosting moves to use support/self-target moves
 
 #define BFG_MOVE_MAX_CONFUSION_EFFECT 1     // Maximum number of confusion effects
 #define BFG_MOVE_MAX_STATUS_EFFECT 1        // Maximum number of status effects
