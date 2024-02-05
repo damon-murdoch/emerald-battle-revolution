@@ -268,39 +268,62 @@
 #define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 
-#define BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE 4
-#define BFG_ITEM_RESIST_BERRY_SELECTION_CHANCE 4
-#define BFG_ITEM_BOOST_BERRY_SELECTION_CHANCE 8
+// Moves required for certain items to be eligible
+#define BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED 3
+#define BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED 4
+#define BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED 2
+#define BFG_ITEM_TYPE_ITEM_STAB_REQUIRED TRUE
+#define BFG_ITEM_TOXIC_ORB_MOVES_REQUIRED 2
+#define BFG_ITEM_FLAME_ORB_MOVES_REQUIRED 1
 
+// Common Items
+#define BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE 1
+#define BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE 1
+#define BFG_ITEM_LIFE_ORB_SELECTION_CHANCE 1
+#define BFG_ITEM_EVIOLITE_SELECTION_CHANCE 1
+
+// Choice Items
+#define BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE 1
+#define BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE 1
+#define BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE 1
+
+// Ability-Specific Items
+#define BFG_ITEM_TERRAIN_EXTENDER_SELECTION_CHANCE 4
+#define BFG_ITEM_WEATHER_EXTENDER_SELECTION_CHANCE 4
+#define BFG_ITEM_ADRENALINE_ORB_SELECTION_CHANCE 4
+#define BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE 2
+#define BFG_ITEM_FLAME_ORB_SELECTION_CHANCE 2
+
+// Move-Specific Items
+#define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 2  // hasPunch
+#define BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE 2    // hasRest
+#define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // hasSound
+#define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 2     // hasMultiHit
+#define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 2      // hasStatDrop
+#define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 2      // hasStatDrop
+#define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 2      // hasScreens
+#define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 2      // hasCritBoost
+#define BFG_ITEM_POWER_HERB_SELECTION_CHANCE 1      // hasMultiTurn
+#define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 2       // hasInaccurate
+
+// Other Items
+#define BFG_ITEM_AIR_BALLOON_4X_SELECTION_CHANCE 4
+#define BFG_ITEM_AIR_BALLOON_2X_SELECTION_CHANCE 8
+#define BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE 1
+
+// Type-Specific Items
 #define BFG_ITEM_GEM_SELECTION_CHANCE 4
 #define BFG_ITEM_TYPE_SELECTION_CHANCE 4
+#define BFG_ITEM_ZMOVE_SELECTION_CHANCE 4
 
-// Unique Items (e.g. Rusted Sword, Light Ball)
-#define BFG_ITEM_UNIQUE_SELECTION_CHANCE 1
+// Resist / Weakness Berries
+#define BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE 4
+#define BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE 8
 
-// Items with specific use-cases
-#define BFG_ITEM_ADRENALINE_ORB 1   // Competitive / Defiant
-#define BFG_ITEM_PUNCHING_GLOVE 1   // Punching moves
-#define BFG_ITEM_ASSAULT_VEST 1     // No Status Moves
-#define BFG_ITEM_CHOICE_SCARF 1     // Fast, only attacking moves
-#define BFG_ITEM_CHOICE_SPECS 1     // Only special attacks
-#define BFG_ITEM_BLACK_SLUDGE 1     // Bulky Poison Type
-#define BFG_ITEM_THROAT_SPRAY 1     // Sound Moves
-#define BFG_ITEM_CHESTO_BERRY 1     // Rest
-#define BFG_ITEM_LOADED_DICE 1      // Multi-Hits
-#define BFG_ITEM_AIR_BALLOON 1      // Ground Weakness
-#define BFG_ITEM_CHOICE_BAND 1     // Only physical attacks
-#define BFG_ITEM_WHITE_HERB 1       // Overheat / Draco Meteor
-#define BFG_ITEM_EJECT_PACK 1       // Overheat / Draco Meteor
-#define BFG_ITEM_POWER_HERB 1       // Two-Turn Move(s)
-#define BFG_ITEM_SCOPE_LENS 1       // Crit Raising Moves
-#define BFG_ITEM_LIGHT_CLAY 1       // Screens/Other Moves
-#define BFG_ITEM_FOCUS_SASH 1       // Low Defensive Stats
-#define BFG_ITEM_TOXIC_ORB 1       // Poison heal
-#define BFG_ITEM_FLAME_ORB 1       // Guts
-#define BFG_ITEM_EVIOLITE 1         // Not Fully Evolved
-#define BFG_ITEM_LIFE_ORB 1         // Offensive invested
-#define BFG_ITEM_WIDE_LENS 1        // Inaccurate moves
+#define BFG_ITEM_RANDOM_BOOST_BERRY_SELECTION_CHANCE 8
+#define BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE 8
+#define BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE 4
+
 
 // Custom list of items which can be selected, in 
 // addition to the flags set above. A random item 
@@ -321,6 +344,8 @@
     ITEM_COVERT_CLOAK, \
     ITEM_EJECT_BUTTON, \
     ITEM_ROCKY_HELMET, \
+    ITEM_LANSAT_BERRY, \
+    ITEM_STARF_BERRY, \
     ITEM_MIRROR_HERB, \
     ITEM_MICLE_BERRY, \
     ITEM_ROWAP_BERRY, \

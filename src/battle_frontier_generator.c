@@ -63,6 +63,7 @@
 #define IS_DEF_BOOSTING_EFFECT(e) (((e) == EFFECT_COSMIC_POWER) || ((e) == EFFECT_STOCKPILE) || ((e) == EFFECT_DEFENSE_UP_3) || ((e) == EFFECT_DEFENSE_UP_2) || ((e) == EFFECT_DEFENSE_CURL) || ((e) == EFFECT_DEFENSE_UP) || (e == EFFECT_SPECIAL_DEFENSE_UP_2) || (e == EFFECT_SPECIAL_DEFENSE_UP))
 #define IS_SPEED_BOOSTING_EFFECT(e) (((e) == EFFECT_AUTOTOMIZE) || ((e) == EFFECT_SPEED_UP_2) || ((e) == EFFECT_SPEED_UP))
 #define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
+#define IS_STAT_DROP_EFFECT(e) ((e) == EFFECT_OVERHEAT || (e) == EFFECT_CLOSE_COMBAT || (e) == EFFECT_MAKE_IT_RAIN || (e) == EFFECT_SHELL_SMASH || (e) == EFFECT_SUPERPOWER || (e) == EFFECT_V_CREATE || (e) == EFFECT_ATTACKER_DEFENSE_DOWN_HIT)
 
 #define IS_STAT_BOOSTING_EFFECT(e) (IS_OFF_BOOSTING_EFFECT(e) || IS_DEF_BOOSTING_EFFECT(e) || IS_SPEED_BOOSTING_EFFECT(e))
 #define IS_STAT_CHANGING_EFFECT(e) (IS_STAT_BOOSTING_EFFECT(e) || ((e) == EFFECT_ACCURACY_DOWN_2) || ((e) == EFFECT_EVASION_UP_2) || ((e) == EFFECT_MINIMIZE) || ((e) == EFFECT_ACCURACY_UP_2)) || (((e) == EFFECT_ATTACK_DOWN_2) || ((e) == EFFECT_DEFENSE_DOWN_2) || ((e) == EFFECT_SPECIAL_ATTACK_DOWN_2)) || (((e) == EFFECT_SPECIAL_DEFENSE_DOWN_2) || ((e) == EFFECT_SPEED_DOWN_2) || ((e) == EFFECT_EVASION_DOWN_2) || ((e) == EFFECT_ACCURACY_DOWN) || ((e) == EFFECT_EVASION_UP) || ((e) == EFFECT_ATTACK_DOWN) || (((e) == EFFECT_DEFENSE_DOWN) || ((e) == EFFECT_SPECIAL_ATTACK_DOWN) || ((e) == EFFECT_SPECIAL_DEFENSE_DOWN)) || ((e) == EFFECT_SPEED_DOWN) || ((e) == EFFECT_EVASION_DOWN))
@@ -102,6 +103,8 @@
 #define IS_FWG(x,y) (IS_TYPE((x),(y),TYPE_FIRE) || IS_TYPE((x),(y),TYPE_WATER) || IS_TYPE((x),(y),TYPE_GRASS))
 #define IS_FDS(x,y) (IS_TYPE((x),(y),TYPE_FAIRY) || IS_TYPE((x),(y),TYPE_DRAGON) || IS_TYPE((x),(y),TYPE_STEEL))
 #define IS_PGD(x,y) (IS_TYPE((x),(y),TYPE_PSYCHIC) || IS_TYPE((x),(y),TYPE_GHOST) || IS_TYPE((x),(y),TYPE_DARK))
+
+#define GET_TYPE_EFFECTIVENESS(attacking,defending) (sTypeEffectivenessTable[attacking][defending])
 
 // *** ABILITY ***
 #define HAS_ABILITY(x,y,ability) ((x) == (ability) || (y) == (ability))
@@ -894,6 +897,12 @@ static float GetMoveRating(u16 moveId, u16 speciesId, u8 natureId, u8 evs, u8 ab
     u16 ability = species->abilities[abilityNum];
 
     switch(ability) {
+        // status Modifier
+        case ABILITY_GUTS:
+        case ABILITY_TOXIC_BOOST:
+            if (moveId == MOVE_FACADE)
+                rating *= BFG_MOVE_ABILITY_MODIFIER; // Boosted attack when burned/etc.
+        break;
         // Crit Modifier
         case ABILITY_SNIPER:
         case ABILITY_SUPER_LUCK:
@@ -1982,16 +1991,186 @@ static bool32 GetSpeciesItemCheckUnique(u16 itemId, u8 index) {
 }
 
 static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum) {
-    // const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
-    
-    s32 i,f;
 
-    // Selected item
-    u16 itemId;
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
+    const struct Nature natureInfo = gNatureInfo[nature];
+    const struct BattleMove * move; 
+
+    s32 i,f;
+    u16 itemId, moveId, abilityId;
+    u8 numPhysical, numSpecial, numStatus, numOffensive;
+    u8 currentType;
+
+    // Move flags
+    bool8 hasInaccurate = FALSE;
+    bool8 hasEvolution = FALSE;
+    bool8 hasMultiHit = FALSE; 
+    bool8 hasStatDrop = FALSE; 
+    bool8 hasTerrain = FALSE;
+    bool8 hasScreens = FALSE; 
+    bool8 hasTwoTurn = FALSE; 
+    bool8 hasPunch = FALSE; 
+    bool8 hasSound = FALSE; 
+    bool8 hasCritBoost = FALSE; 
+    bool8 hasCritRatio = FALSE; 
+    bool8 hasRest = FALSE;
+
+    // Weather effect placeholder
+    u16 hasWeather = MOVE_NONE;
+
+    // Check for species evolutions
+    const struct Evolution * evolutions = GetSpeciesEvolutions(speciesId);
+    if (evolutions != NULL)
+        hasEvolution = TRUE;
+
+    u8 moveTypeCount[NUMBER_OF_MON_TYPES] = {};
+
+    // Pokemon Weaknesses for use with resist berries
+    uq4_12_t typeModifier[NUMBER_OF_MON_TYPES] = {};
+
+    // Loop over all of the (attacking) types
+    for(i = 0; i < NUMBER_OF_MON_TYPES; i++) {
+
+        // Initialise move counter
+        moveTypeCount[i] = 0;
+
+        // Apply primary type modifier
+        typeModifier[i] = uq4_12_multiply(UQ_4_12(1.0), GetTypeModifier(i, species->types[0]));
+
+        // If the species is not a mono-type Pokemon
+        if ((species->types[0]) != (species->types[1])) {
+
+            // Apply secondary type modifier
+            typeModifier[i] = uq4_12_multiply(typeModifier[i], GetTypeModifier(i, species->types[1]));
+        }
+    }
+
+    // Loop over the species moves
+    for (i = 0; i < MAX_MON_MOVES; i++) {
+
+        moveId = GetMonData(&gEnemyParty[index], (MON_DATA_MOVE1 + i));
+        move = &(gBattleMoves[moveId]);
+
+        // Set move flags (offensive and status)
+
+        // Move accuracy
+        if (move->accuracy != 0 && move->accuracy < 100)
+            hasInaccurate = TRUE;
+        
+        // Multi-turn moves
+        if (move->twoTurnMove == TRUE)
+            hasTwoTurn = TRUE; 
+
+        // Sound-based moves
+        if (move->soundMove == TRUE)
+            hasSound = TRUE; 
+
+        // Status Move
+        if (move->split == SPLIT_STATUS) 
+        {
+            // Increment status counter
+            numStatus++; 
+
+            // Weather effects
+            if IS_RAIN_EFFECT(move->effect)
+                hasWeather = MOVE_RAIN_DANCE;
+            else if IS_SUN_EFFECT(move->effect)
+                hasWeather = MOVE_SUNNY_DAY;
+            else if IS_SAND_EFFECT(move->effect)
+                hasWeather = MOVE_SANDSTORM;
+            else if IS_HAIL_EFFECT(move->effect)
+                hasWeather = MOVE_HAIL;
+            else // Other cases
+            {
+                // Terrain
+                if (IS_TERRAIN_EFFECT(move->effect))
+                    hasTerrain = TRUE; 
+
+                // Screens
+                if (moveId == MOVE_LIGHT_SCREEN || moveId == MOVE_REFLECT || moveId == MOVE_AURORA_VEIL)
+                    hasScreens = TRUE; 
+
+                // Crit rate up
+                if (move->effect == EFFECT_FOCUS_ENERGY)
+                    hasCritBoost = TRUE;
+
+                // Rest
+                if (moveId == MOVE_REST)
+                    hasRest = TRUE;
+            }
+        } 
+        else // Non-Status Move
+        {
+            // Multi-hit moves
+            if (move->effect == EFFECT_MULTI_HIT)
+                hasMultiHit = TRUE; 
+
+            // Stat-dropping moves
+            if (IS_STAT_DROP_EFFECT(move->effect))
+                hasStatDrop = TRUE;
+
+            // Punching moves
+            if (move->punchingMove == TRUE)
+                hasPunch = TRUE; 
+
+            // High-crit ratio moves
+            if (move->highCritRatio == TRUE)
+                hasCritRatio = TRUE; 
+
+            // Offensive split-changing attacks
+            if (IS_DYNAMIC_ATTACK(moveId))
+            {
+                // Get both attack, special attack modifiers
+                float atkMod = GET_ATK_STAT_MULTIPLIER(nature, evs);
+                float spaMod = GET_SPATK_STAT_MULTIPLIER(nature, evs);
+
+                // Boost highest stat
+                if (spaMod > atkMod)
+                    numSpecial++; // Increment special counter
+                else
+                    numPhysical++; // Increment physical counter
+            }
+            else // General Case
+            {
+                // Physical move
+                if (move->split == SPLIT_PHYSICAL) 
+                {
+                    numPhysical++; // Increment physical counter
+                }
+                else // move->split == SPLIT_SPECIAL
+                {
+                    numSpecial++; // Increment special counter
+                }
+            }
+
+            // Increment type counter
+            moveTypeCount[move->type]++;
+        }
+    }
+
+    // Get total number of offensive moves
+    numOffensive = numPhysical + numSpecial;
+
+    // Get the ability id for the species
+    abilityId = species->abilities[abilityNum];
+
+    // No weather moves found
+    if (hasWeather != MOVE_NONE)
+    {
+        // Check weather ability
+        if (IS_RAIN_ABILITY(abilityId))
+            hasWeather = MOVE_RAIN_DANCE;
+        else if (IS_SUN_ABILITY(abilityId))
+            hasWeather = MOVE_SUNNY_DAY;
+        else if (IS_SAND_ABILITY(abilityId))
+            hasWeather = MOVE_SANDSTORM;
+        else if (IS_HAIL_ABILITY(abilityId))
+            hasWeather = MOVE_HAIL;
+    }
 
     // Loop over the custom items list
-    for(i=0; customItemsList[i] != ITEM_NONE; i++) {
-        }
+    for(i=0; customItemsList[i] != ITEM_NONE; i++)
+        ;
 
     // Length of custom items
     u16 customItemsLength = i;
@@ -2000,12 +2179,291 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     for(f=0; f < BFG_ITEM_SELECT_FAILURE_LIMIT; f++) {
 
         // Default item id
-        // itemId = ITEM_NONE;
+        itemId = ITEM_NONE;
+
+        // *** Competitive items with specific use cases ***
+
+        // Focus Sash (No investment in HP/Def/SpDef)
+        if ((CHECK_EVS(evs,F_EV_SPREAD_HP) == FALSE) && (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) == FALSE) && (CHECK_EVS(evs,F_EV_SPREAD_SP_DEFENSE)) && RANDOM_CHANCE(BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE))
+            itemId = ITEM_FOCUS_SASH;
+
+        // Assault Vest (4 offensive moves)
+        if (numOffensive == 4 && RANDOM_CHANCE(BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE))
+            itemId = ITEM_ASSAULT_VEST;
+
+        // Choice Items
+        if (itemId == ITEM_NONE && (numPhysical >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE))
+            itemId = ITEM_CHOICE_BAND;
+
+        if (itemId == ITEM_NONE && (numSpecial >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE))
+            itemId = ITEM_CHOICE_SPECS;
+
+        if (itemId == ITEM_NONE && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
+            itemId = ITEM_CHOICE_SCARF;        
+
+        // Life Orb
+        if (itemId == ITEM_NONE && (numOffensive = BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
+            itemId = ITEM_LIFE_ORB;
+
+        // Eviolite
+        if (hasEvolution == TRUE && RANDOM_CHANCE(BFG_ITEM_EVIOLITE_SELECTION_CHANCE))
+            itemId = ITEM_EVIOLITE;
+
+        // Power Herb (Multi-turn moves)
+        if (itemId == ITEM_NONE && hasTwoTurn && RANDOM_CHANCE(BFG_ITEM_POWER_HERB_SELECTION_CHANCE))
+            itemId = ITEM_POWER_HERB;
+
+        // Throat Spray (Sound-based moves)
+        if (itemId == ITEM_NONE && hasSound && RANDOM_CHANCE(BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE))
+            itemId = ITEM_THROAT_SPRAY;
+
+        // Loaded Dice (Multi-hit moves)
+        if (itemId == ITEM_NONE && hasMultiHit && RANDOM_CHANCE(BFG_ITEM_LOADED_DICE_SELECTION_CHANCE))
+            itemId = ITEM_LOADED_DICE;
+
+        // Flame Orb (Guts, with at least one Physical attack)
+        if (itemId == ITEM_NONE && (abilityId == ABILITY_GUTS && numPhysical >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) || (abilityId == ABILITY_FLARE_BOOST && numSpecial >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_FLAME_ORB_SELECTION_CHANCE))
+            itemId = ITEM_FLAME_ORB;
+
+        // Toxic Orb (Toxic Heal / Toxic Boost)
+        if (itemId == ITEM_NONE && ((abilityId == ABILITY_TOXIC_BOOST && numPhysical >= BFG_ITEM_TOXIC_ORB_MOVES_REQUIRED) || abilityId == ABILITY_POISON_HEAL) && RANDOM_CHANCE(BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE))
+            itemId = ITEM_TOXIC_ORB;
+
+        // Light Clay (Has screens)
+        if (itemId == ITEM_NONE && (hasScreens == TRUE) && RANDOM_CHANCE(BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE))
+            itemId = ITEM_LIGHT_CLAY;
+
+        // Scope Lens (Raised Crit Ratio)
+        if (numOffensive > 0 && ((hasCritBoost == TRUE && RANDOM_CHANCE(ITEM_SCOPE_LENS)) || (hasCritRatio == TRUE && RANDOM_CHANCE(ITEM_SCOPE_LENS)))) 
+            itemId = ITEM_SCOPE_LENS;
+
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // *** Type-Specific Items ***
+
+        // Random chance to use type items / gems / z-moves
+        if (BFG_ITEM_TYPE_SELECTION_CHANCE || BFG_ITEM_GEM_SELECTION_CHANCE || BFG_ITEM_ZMOVE_SELECTION_CHANCE) 
+        {
+            // Placeholders
+            currentType = TYPE_NONE;
+            bool8 currentStab = FALSE;
+
+            // Loop over the types
+            for(i = 0; i < NUMBER_OF_MON_TYPES; i++) 
+            {
+                // At least one move of this type
+                if (moveTypeCount[i] > 0) {
+                    
+                    // Check if move type is the same type as the species
+                    bool8 isStabType = IS_TYPE(species->types[0], species->types[1], i);
+
+                    // Current type has STAB boost, and new type does not
+                    if (currentStab == TRUE && isStabType == FALSE)
+                        continue; // Do not replace STAB type
+
+                    // If stab types are not required, or the type is a STAB type
+                    if ((!(BFG_ITEM_TYPE_ITEM_STAB_REQUIRED) || isStabType))
+                    {
+                        // Type Item (e.g. Mystic Water) Check
+                        if ((moveTypeCount >= BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED) && 
+                        (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_TYPE_SELECTION_CHANCE))) 
+                        {
+                            currentType = i; // Update current type
+                            currentStab = isStabType;
+
+                            // Switch on current type
+                            switch(currentType) {
+                                // TODO
+                                default: 
+                                    ITEM_NONE; 
+                                break;
+                            }
+                        }
+
+                        // Z-Move (e.g. Electrium Z) Check
+                        if (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_ZMOVE_SELECTION_CHANCE)) 
+                        {
+                            currentType = i; // Update current type
+                            currentStab = isStabType;
+
+                            // Switch on current type
+                            switch(currentType) {
+                                // TODO
+                                default: 
+                                    ITEM_NONE; 
+                                break;
+                            }
+                        }
+
+                        // Gem (e.g. Fire Gem) Check
+                        if (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_GEM_SELECTION_CHANCE)) 
+                        {
+                            currentType = i; // Update current type
+                            currentStab = isStabType;
+
+                            // Switch on current type
+                            switch(currentType) {
+                                // TODO
+                                default: 
+                                    ITEM_NONE; 
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // *** Resist Berries *** 
+
+        // Random chance to use resist berry
+        if (BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE || BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE) 
+        {
+            // Placeholders
+            currentType = TYPE_NONE;
+            uq4_12_t currentValue = UQ_4_12(1.0);
+
+            // Loop over the types
+            for(i = 0; i < NUMBER_OF_MON_TYPES; i++) 
+            {
+                // Switch on type modifier
+                switch(typeModifier[i]) 
+                {
+                    case UQ_4_12(2.0): // 2x Weakness
+                        // Skip if we have already found a 4x weakness
+                        if ((currentType != UQ_4_12(4.0)) && (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE))) {
+                            // Update selected type, value
+                            currentValue = typeModifier[i];
+                            currentType = i;
+                        }
+                    break;
+                    case UQ_4_12(4.0): // 4x Weakness
+                        if (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE)) {
+                            // Update selected type, value
+                            currentValue = typeModifier[i];
+                            currentType = i;
+                        }
+                    break;
+                }
+            }
+
+            // Switch on type selected
+            switch(currentType) {
+                default: 
+                    itemId = ITEM_NONE;
+                    break;
+            }
+        }
+
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // Fiwam Berries
+        if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE))
+            // Get the fiwam berry opposite to which would confuse
+            itemId = gFiwamConfuseLookup[natureInfo.negStat];
+
+        // Stat Boosting Berries
+        if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE)) 
+        {
+            // Get the stat boosting berry for the nature-boosted stat
+            switch(natureInfo.posStat) {
+                case STAT_ATK: 
+                    itemId = ITEM_LIECHI_BERRY; 
+                case STAT_DEF: 
+                    itemId = ITEM_GANLON_BERRY;
+                case STAT_SPATK:
+                    itemId = ITEM_PETAYA_BERRY;
+                case STAT_SPDEF: 
+                    itemId = ITEM_APICOT_BERRY;
+                case STAT_SPEED: 
+                    itemId = ITEM_SALAC_BERRY;
+            }
+        }
+
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // *** Obscure items with specific use cases ***
+
+        // Chesto Berry (Has rest)
+        if (itemId == ITEM_NONE && (hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
+            itemId = ITEM_CHESTO_BERRY;
+
+        // Wide Lens (Has inaccurate moves)
+        if (itemId == ITEM_NONE && (hasInaccurate == TRUE) && RANDOM_CHOICE(BFG_ITEM_WIDE_LENS_SELECTION_CHANCE))
+            itemId = ITEM_WIDE_LENS;
+
+        // White Herb (Has stat dropping move)
+        if (itemId == ITEM_NONE && hasStatDrop && (RANDOM_CHANCE(BFG_ITEM_WHITE_HERB_SELECTION_CHANCE)))
+            itemId = ITEM_WHITE_HERB;
+
+        // Eject Pack (Has stat dropping move)
+        if (itemId == ITEM_NONE && hasStatDrop && (RANDOM_CHANCE(BFG_ITEM_EJECT_PACK_SELECTION_CHANCE)))
+            itemId = ITEM_EJECT_PACK;
+
+        // Punching Glove (Punching Moves, increased chance with Iron Fist)
+        if (itemId == ITEM_NONE && hasPunch && (RANDOM_CHANCE(BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE) || ((abilityId == ABILITY_IRON_FIST) && RANDOM_CHANCE(BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE))))
+            itemId = ITEM_PUNCHING_GLOVE;
+
+        // Air Balloon
+        if ((itemId == ITEM_NONE) && (abilityId != ABILITY_LEVITATE) &&
+            // Different odds for both 2x and 4x ground weaknesses, exclude levitating Pokemon
+            ((typeModifier[TYPE_GROUND] == UQ_4_12(2.0) && (RANDOM_CHANCE(BFG_ITEM_AIR_BALLOON_2X_SELECTION_CHANCE))) || 
+            (typeModifier[TYPE_GROUND] == UQ_4_12(4.0) && (RANDOM_CHANCE(BFG_ITEM_AIR_BALLOON_4X_SELECTION_CHANCE)))))
+            itemId = ITEM_AIR_BALLOON;
+
+        // Adrenaline Orb (Defiant / Competitive)
+        if (itemId == ITEM_NONE && ((abilityId == ABILITY_DEFIANT) || (abilityId == ABILITY_COMPETITIVE)) && RANDOM_CHANCE(BFG_ITEM_ADRENALINE_ORB_SELECTION_CHANCE))
+            itemId = ITEM_ADRENALINE_ORB;
+
+        // Black Sludge (For poison types)
+        if (itemId == ITEM_NONE && IS_TYPE(species->types[0], species->types[1], TYPE_POISON) && RANDOM_CHANCE(BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE))
+            itemId = ITEM_BLACK_SLUDGE;
+
+        // Terrain Extender (Terrain Moves / Abilities)
+        if (itemId == ITEM_NONE && (hasTerrain == TRUE || IS_TERRAIN_ABILITY(abilityId)) && RANDOM_CHANCE(BFG_ITEM_TERRAIN_EXTENDER_SELECTION_CHANCE))
+            itemId = ITEM_TERRAIN_EXTENDER;
+
+        // Weather Extending Items (Weather-Specific Moves/Abilities)
+        if (itemId == ITEM_NONE && (hasWeather != MOVE_NONE) && RANDOM_CHANCE(BFG_ITEM_WEATHER_EXTENDER_SELECTION_CHANCE)) 
+        {
+            switch(hasWeather)
+            {
+                case MOVE_RAIN_DANCE: 
+                    itemId = ITEM_DAMP_ROCK; 
+                break; 
+                case MOVE_SUNNY_DAY: 
+                    itemId = ITEM_HEAT_ROCK;
+                break;
+                case MOVE_SANDSTORM:
+                    itemId = ITEM_SMOOTH_ROCK;
+                break;
+                case MOVE_HAIL:
+                    itemId = ITEM_ICY_ROCK;
+                break;
+            }
+        }
+
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
+            return itemId; // Unique item found
+
+        // *** Fallback (Custom Items List) ***
 
         // Sample a random item from the list
         itemId = customItemsList[Random() % customItemsLength];
 
-        if (GetSpeciesItemCheckUnique(itemId, index))
+        // If the itemId is not ITEM_NONE, and the selected item is unique
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
             return itemId; // Unique item found
 
         // Otherwise, continue looping
