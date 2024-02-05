@@ -2,6 +2,7 @@
 #include "random.h"
 #include "pokemon.h"
 #include "event_data.h"
+#include "battle_util.h"
 #include "battle_tower.h"
 #include "frontier_util.h"
 #include "battle_frontier_generator.h"
@@ -1990,16 +1991,20 @@ static bool32 GetSpeciesItemCheckUnique(u16 itemId, u8 index) {
     return TRUE; // Unique itemId
 }
 
-static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum) {
+static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abilityNum) {
 
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
-    const struct Nature natureInfo = gNatureInfo[nature];
+    const struct Nature * nature = &(gNatureInfo[natureId]);
     const struct BattleMove * move; 
 
     s32 i,f;
     u16 itemId, moveId, abilityId;
-    u8 numPhysical, numSpecial, numStatus, numOffensive;
-    u8 currentType;
+    
+    u8 numPhysical = 0;
+    u8 numSpecial = 0; 
+    u8 numStatus = 0; 
+    
+    u8 numOffensive, currentType;
 
     // Move flags
     bool8 hasInaccurate = FALSE;
@@ -2023,10 +2028,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     if (evolutions != NULL)
         hasEvolution = TRUE;
 
-    u8 moveTypeCount[NUMBER_OF_MON_TYPES] = {};
+    u8 moveTypeCount[NUMBER_OF_MON_TYPES];
 
     // Pokemon Weaknesses for use with resist berries
-    uq4_12_t typeModifier[NUMBER_OF_MON_TYPES] = {};
+    uq4_12_t typeModifier[NUMBER_OF_MON_TYPES];
 
     // Loop over all of the (attacking) types
     for(i = 0; i < NUMBER_OF_MON_TYPES; i++) {
@@ -2133,7 +2138,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             else // General Case
             {
                 // Physical move
-                if (move->split == SPLIT_PHYSICAL) 
+                if (move->split == SPLIT_PHYSICAL)
                 {
                     numPhysical++; // Increment physical counter
                 }
@@ -2202,7 +2207,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             itemId = ITEM_CHOICE_SCARF;        
 
         // Life Orb
-        if (itemId == ITEM_NONE && (numOffensive = BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
+        if (itemId == ITEM_NONE && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
             itemId = ITEM_LIFE_ORB;
 
         // Eviolite
@@ -2222,7 +2227,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             itemId = ITEM_LOADED_DICE;
 
         // Flame Orb (Guts, with at least one Physical attack)
-        if (itemId == ITEM_NONE && (abilityId == ABILITY_GUTS && numPhysical >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) || (abilityId == ABILITY_FLARE_BOOST && numSpecial >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_FLAME_ORB_SELECTION_CHANCE))
+        if (itemId == ITEM_NONE && ((abilityId == ABILITY_GUTS && numPhysical >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) || (abilityId == ABILITY_FLARE_BOOST && numSpecial >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED)) && RANDOM_CHANCE(BFG_ITEM_FLAME_ORB_SELECTION_CHANCE))
             itemId = ITEM_FLAME_ORB;
 
         // Toxic Orb (Toxic Heal / Toxic Boost)
@@ -2267,7 +2272,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                     if ((!(BFG_ITEM_TYPE_ITEM_STAB_REQUIRED) || isStabType))
                     {
                         // Type Item (e.g. Mystic Water) Check
-                        if ((moveTypeCount >= BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED) && 
+                        if ((moveTypeCount[i] >= BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED) && 
                         (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_TYPE_SELECTION_CHANCE))) 
                         {
                             currentType = i; // Update current type
@@ -2277,7 +2282,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                             switch(currentType) {
                                 // TODO
                                 default: 
-                                    ITEM_NONE; 
+                                    itemId = ITEM_NONE; 
                                 break;
                             }
                         }
@@ -2292,7 +2297,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                             switch(currentType) {
                                 // TODO
                                 default: 
-                                    ITEM_NONE; 
+                                    itemId = ITEM_NONE; 
                                 break;
                             }
                         }
@@ -2307,7 +2312,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                             switch(currentType) {
                                 // TODO
                                 default: 
-                                    ITEM_NONE; 
+                                    itemId = ITEM_NONE; 
                                 break;
                             }
                         }
@@ -2337,7 +2342,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 {
                     case UQ_4_12(2.0): // 2x Weakness
                         // Skip if we have already found a 4x weakness
-                        if ((currentType != UQ_4_12(4.0)) && (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE))) {
+                        if ((currentValue != UQ_4_12(4.0)) && (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE))) {
                             // Update selected type, value
                             currentValue = typeModifier[i];
                             currentType = i;
@@ -2368,13 +2373,13 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         // Fiwam Berries
         if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE))
             // Get the fiwam berry opposite to which would confuse
-            itemId = gFiwamConfuseLookup[natureInfo.negStat];
+            itemId = gFiwamConfuseLookup[nature->negStat];
 
         // Stat Boosting Berries
         if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE)) 
         {
             // Get the stat boosting berry for the nature-boosted stat
-            switch(natureInfo.posStat) {
+            switch(nature->posStat) {
                 case STAT_ATK: 
                     itemId = ITEM_LIECHI_BERRY; 
                 case STAT_DEF: 
@@ -2399,7 +2404,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             itemId = ITEM_CHESTO_BERRY;
 
         // Wide Lens (Has inaccurate moves)
-        if (itemId == ITEM_NONE && (hasInaccurate == TRUE) && RANDOM_CHOICE(BFG_ITEM_WIDE_LENS_SELECTION_CHANCE))
+        if (itemId == ITEM_NONE && (hasInaccurate == TRUE) && RANDOM_CHANCE(BFG_ITEM_WIDE_LENS_SELECTION_CHANCE))
             itemId = ITEM_WIDE_LENS;
 
         // White Herb (Has stat dropping move)
