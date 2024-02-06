@@ -142,6 +142,9 @@
     (x == SPECIES_LUCARIO) || (x == SPECIES_ABOMASNOW) || (x == SPECIES_GALLADE) || (x == SPECIES_AUDINO) || \
     (x == SPECIES_DIANCIE) || (x == SPECIES_RAYQUAZA))
 
+#define CHECK_ARCEUS_ZMOVE ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ARCEUS))
+#define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
+
 // *** ITEM ***
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 const u16 customItemsList[] = {
@@ -2691,8 +2694,29 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
             // Switch on the species
             switch(speciesId) {
                 case SPECIES_PIKACHU: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_PIKACHU))
-                        speciesId = RANDOM_RANGE(SPECIES_PIKACHU_COSPLAY, SPECIES_PICHU_SPIKY_EARED);
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PIKANIUM_Z)) 
+                    {
+                        hasZMove = TRUE;
+                        
+                        move = MOVE_VOLT_TACKLE;
+                        item = ITEM_PIKANIUM_Z;
+                    }
+                    else // Z-Move not selected
+                    {
+                        if (RANDOM_CHANCE(BFG_FORME_CHANCE_PIKACHU))
+                            speciesId = RANDOM_RANGE(SPECIES_PIKACHU_COSPLAY, SPECIES_PICHU_SPIKY_EARED);
+
+                        // Hat Pikachu-Exclusive Z-Move
+                        if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && IN_INCLUSIVE_RANGE(SPECIES_PIKACHU_ORIGINAL_CAP,SPECIES_PIKACHU_WORLD_CAP,speciesId) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PIKASHUNIUM_Z)) 
+                        {
+                                hasZMove = TRUE;
+                            
+                            move = MOVE_THUNDERBOLT;
+                            item = ITEM_PIKASHUNIUM_Z;
+                        }
+                        else if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_LIGHT_BALL_SELECTION_CHANCE))
+                            item = ITEM_LIGHT_BALL; 
+                    }
                 }; break;
                 case SPECIES_PICHU: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_PICHU))
@@ -2762,24 +2786,25 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ARCEUS)) {
                         speciesId = RANDOM_RANGE(SPECIES_ARCEUS_FIGHTING, SPECIES_BASCULIN_BLUE_STRIPED);
                         switch(speciesId) {
-                            case SPECIES_ARCEUS_FIGHTING: item = ITEM_FIST_PLATE; break;
-                            case SPECIES_ARCEUS_FLYING: item = ITEM_SKY_PLATE; break;
-                            case SPECIES_ARCEUS_POISON: item = ITEM_TOXIC_PLATE; break;
-                            case SPECIES_ARCEUS_GROUND: item = ITEM_EARTH_PLATE; break;
-                            case SPECIES_ARCEUS_ROCK: item = ITEM_STONE_PLATE; break;
-                            case SPECIES_ARCEUS_BUG: item = ITEM_INSECT_PLATE; break;
-                            case SPECIES_ARCEUS_GHOST: item = ITEM_SPOOKY_PLATE; break;
-                            case SPECIES_ARCEUS_STEEL: item = ITEM_IRON_PLATE; break;
-                            case SPECIES_ARCEUS_FIRE: item = ITEM_FLAME_PLATE; break;
-                            case SPECIES_ARCEUS_WATER: item = ITEM_SPLASH_PLATE; break;
-                            case SPECIES_ARCEUS_GRASS: item = ITEM_MEADOW_PLATE; break;
-                            case SPECIES_ARCEUS_ELECTRIC: item = ITEM_ZAP_PLATE; break;
-                            case SPECIES_ARCEUS_PSYCHIC: item = ITEM_MIND_PLATE; break;
-                            case SPECIES_ARCEUS_ICE: item = ITEM_ICICLE_PLATE; break;
-                            case SPECIES_ARCEUS_DRAGON: item = ITEM_DRACO_PLATE; break;
-                            case SPECIES_ARCEUS_DARK: item = ITEM_DREAD_PLATE; break;
-                            case SPECIES_ARCEUS_FAIRY: item = ITEM_PIXIE_PLATE; break;
+                            case SPECIES_ARCEUS_FIGHTING: item = CHECK_ARCEUS_ZMOVE ? ITEM_FIGHTINIUM_Z : ITEM_FIST_PLATE; if (item == ITEM_FIGHTINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_FLYING: item = CHECK_ARCEUS_ZMOVE ? ITEM_FLYINIUM_Z : ITEM_SKY_PLATE; if (item == ITEM_FLYINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_POISON: item = CHECK_ARCEUS_ZMOVE ? ITEM_POISONIUM_Z : ITEM_TOXIC_PLATE; if (item == ITEM_POISONIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_GROUND: item = CHECK_ARCEUS_ZMOVE ? ITEM_GROUNDIUM_Z : ITEM_EARTH_PLATE; if (item == ITEM_GROUNDIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_ROCK: item = CHECK_ARCEUS_ZMOVE ? ITEM_ROCKIUM_Z : ITEM_STONE_PLATE; if (item == ITEM_ROCKIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_BUG: item = CHECK_ARCEUS_ZMOVE ? ITEM_BUGINIUM_Z : ITEM_INSECT_PLATE; if (item == ITEM_BUGINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_GHOST: item = CHECK_ARCEUS_ZMOVE ? ITEM_GHOSTIUM_Z : ITEM_SPOOKY_PLATE; if (item == ITEM_GHOSTIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_STEEL: item = CHECK_ARCEUS_ZMOVE ? ITEM_STEELIUM_Z : ITEM_IRON_PLATE; if (item == ITEM_STEELIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_FIRE: item = CHECK_ARCEUS_ZMOVE ? ITEM_FIRIUM_Z : ITEM_FLAME_PLATE; if (item == ITEM_FIRIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_WATER: item = CHECK_ARCEUS_ZMOVE ? ITEM_WATERIUM_Z : ITEM_SPLASH_PLATE; if (item == ITEM_WATERIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_GRASS: item = CHECK_ARCEUS_ZMOVE ? ITEM_GRASSIUM_Z : ITEM_MEADOW_PLATE; if (item == ITEM_GRASSIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_ELECTRIC: item = CHECK_ARCEUS_ZMOVE ? ITEM_ELECTRIUM_Z : ITEM_ZAP_PLATE; if (item == ITEM_ELECTRIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_PSYCHIC: item = CHECK_ARCEUS_ZMOVE ? ITEM_PSYCHIUM_Z : ITEM_MIND_PLATE; if (item == ITEM_PSYCHIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_ICE: item = CHECK_ARCEUS_ZMOVE ? ITEM_ICIUM_Z : ITEM_ICICLE_PLATE; if (item == ITEM_ICIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_DRAGON: item = CHECK_ARCEUS_ZMOVE ? ITEM_DRAGONIUM_Z : ITEM_DRACO_PLATE; if (item == ITEM_DRAGONIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_DARK: item = CHECK_ARCEUS_ZMOVE ? ITEM_DARKINIUM_Z : ITEM_DREAD_PLATE; if (item == ITEM_DARKINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_ARCEUS_FAIRY: item = CHECK_ARCEUS_ZMOVE ? ITEM_FAIRIUM_Z : ITEM_PIXIE_PLATE; if (item == ITEM_FAIRIUM_Z) hasZMove = TRUE; break;
                         }
+                        move = MOVE_JUDGMENT; // Changes type based on held item
                     }
                 }; break;
                 case SPECIES_BASCULIN: {
@@ -2913,29 +2938,37 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                 case SPECIES_LYCANROC: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ROCKRUFF_LYCANROC))
                         speciesId = RANDOM_RANGE(SPECIES_LYCANROC_MIDNIGHT, SPECIES_WISHIWASHI_SCHOOL);
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_LYCANIUM_Z))
+                    {                            
+                        hasZMove = TRUE;
+
+                        move = MOVE_STONE_EDGE;
+                        item = ITEM_LYCANIUM_Z;
+                    }
                 }; break;
                 case SPECIES_SILVALLY: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_SILVALLY)) {
                         speciesId = RANDOM_RANGE(SPECIES_SILVALLY_FIGHTING, SPECIES_MINIOR_METEOR_ORANGE);
                         switch(speciesId) {
-                            case SPECIES_SILVALLY_FIGHTING: item = ITEM_FIGHTING_MEMORY; break;
-                            case SPECIES_SILVALLY_FLYING: item = ITEM_FLYING_MEMORY; break;
-                            case SPECIES_SILVALLY_POISON: item = ITEM_POISON_MEMORY; break;
-                            case SPECIES_SILVALLY_GROUND: item = ITEM_GROUND_MEMORY; break;
-                            case SPECIES_SILVALLY_ROCK: item = ITEM_ROCK_MEMORY; break;
-                            case SPECIES_SILVALLY_BUG: item = ITEM_BUG_MEMORY; break;
-                            case SPECIES_SILVALLY_GHOST: item = ITEM_GHOST_MEMORY; break;
-                            case SPECIES_SILVALLY_STEEL: item = ITEM_STEEL_MEMORY; break;
-                            case SPECIES_SILVALLY_FIRE: item = ITEM_FIRE_MEMORY; break;
-                            case SPECIES_SILVALLY_WATER: item = ITEM_WATER_MEMORY; break;
-                            case SPECIES_SILVALLY_GRASS: item = ITEM_GRASS_MEMORY; break;
-                            case SPECIES_SILVALLY_ELECTRIC: item = ITEM_ELECTRIC_MEMORY; break;
-                            case SPECIES_SILVALLY_PSYCHIC: item = ITEM_PSYCHIC_MEMORY; break;
-                            case SPECIES_SILVALLY_ICE: item = ITEM_ICE_MEMORY; break;
-                            case SPECIES_SILVALLY_DRAGON: item = ITEM_DRAGON_MEMORY; break;
-                            case SPECIES_SILVALLY_DARK: item = ITEM_DARK_MEMORY; break;
-                            case SPECIES_SILVALLY_FAIRY: item = ITEM_FAIRY_MEMORY; break;
+                            case SPECIES_SILVALLY_FIGHTING: item = CHECK_SILVALLY_ZMOVE ? ITEM_FIGHTINIUM_Z : ITEM_FIGHTING_MEMORY; if (item == ITEM_FIGHTINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_FLYING: item = CHECK_SILVALLY_ZMOVE ? ITEM_FLYINIUM_Z : ITEM_FLYING_MEMORY; if (item == ITEM_FLYINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_POISON: item = CHECK_SILVALLY_ZMOVE ? ITEM_POISONIUM_Z : ITEM_POISON_MEMORY; if (item == ITEM_POISONIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_GROUND: item = CHECK_SILVALLY_ZMOVE ? ITEM_GROUNDIUM_Z : ITEM_GROUND_MEMORY; if (item == ITEM_GROUNDIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_ROCK: item = CHECK_SILVALLY_ZMOVE ? ITEM_ROCKIUM_Z : ITEM_ROCK_MEMORY; if (item == ITEM_ROCKIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_BUG: item = CHECK_SILVALLY_ZMOVE ? ITEM_BUGINIUM_Z : ITEM_BUG_MEMORY; if (item == ITEM_BUGINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_GHOST: item = CHECK_SILVALLY_ZMOVE ? ITEM_GHOSTIUM_Z : ITEM_GHOST_MEMORY; if (item == ITEM_GHOSTIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_STEEL: item = CHECK_SILVALLY_ZMOVE ? ITEM_STEELIUM_Z : ITEM_STEEL_MEMORY; if (item == ITEM_STEELIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_FIRE: item = CHECK_SILVALLY_ZMOVE ? ITEM_FIRIUM_Z : ITEM_FIRE_MEMORY; if (item == ITEM_FIRIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_WATER: item = CHECK_SILVALLY_ZMOVE ? ITEM_WATERIUM_Z : ITEM_WATER_MEMORY; if (item == ITEM_WATERIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_GRASS: item = CHECK_SILVALLY_ZMOVE ? ITEM_GRASSIUM_Z : ITEM_GRASS_MEMORY; if (item == ITEM_GRASSIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_ELECTRIC: item = CHECK_SILVALLY_ZMOVE ? ITEM_ELECTRIUM_Z : ITEM_ELECTRIC_MEMORY; if (item == ITEM_ELECTRIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_PSYCHIC: item = CHECK_SILVALLY_ZMOVE ? ITEM_PSYCHIUM_Z : ITEM_PSYCHIC_MEMORY; if (item == ITEM_PSYCHIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_ICE: item = CHECK_SILVALLY_ZMOVE ? ITEM_ICIUM_Z :  ITEM_ICE_MEMORY; if (item == ITEM_ICIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_DRAGON: item = CHECK_SILVALLY_ZMOVE ? ITEM_DRAGONIUM_Z : ITEM_DRAGON_MEMORY; if (item == ITEM_DRAGONIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_DARK: item = CHECK_SILVALLY_ZMOVE ? ITEM_DARKINIUM_Z : ITEM_DARK_MEMORY; if (item == ITEM_DARKINIUM_Z) hasZMove = TRUE; break;
+                            case SPECIES_SILVALLY_FAIRY: item = CHECK_SILVALLY_ZMOVE ? ITEM_FAIRIUM_Z : ITEM_FAIRY_MEMORY; if (item == ITEM_FAIRIUM_Z) hasZMove = TRUE; break;
                         }
+                        move = MOVE_MULTI_ATTACK; // Changes type based on held item
                     }
                 }; break;
                 case SPECIES_MINIOR: {
@@ -2943,25 +2976,25 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = RANDOM_RANGE(SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_RED);
                 }; break;
                 case SPECIES_NECROZMA: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA) && (hasZMove == FALSE)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) {
                         speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
 
                         // Z-Moves are allowed
                         if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) {
-                            
-                            // Has z-move
-                            hasZMove = TRUE;
 
                             // Random chance to select ultra-burst
-                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRA_BURST)) {
+                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) {
                                 move = MOVE_PHOTON_GEYSER;
                                 item = ITEM_ULTRANECROZIUM_Z;
                                 forme = 3; // SPECIES_NECROZMA_ULTRA
+
+                                hasZMove = TRUE;
                             }
-                            else // Else, use Solganium/Lunalium Z
+                            else if (RANDOM_CHANCE(BFG_ZMOVE_CHANCE_NECROZMA)) // Use Solganium/Lunalium Z
                             {
                                 // Select signature move
-                                switch(speciesId) {
+                                switch(speciesId) 
+                                {
                                     case SPECIES_NECROZMA_DAWN_WINGS:
                                         move = MOVE_SUNSTEEL_STRIKE;
                                         item = ITEM_SOLGANIUM_Z;
@@ -2971,6 +3004,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                                         move = ITEM_LUNALIUM_Z;
                                     break;
                                 }
+                                
+                                hasZMove = TRUE;
                             }
                         }
                     }
@@ -3103,48 +3138,142 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DEEP_SEA_TOOTH_SELECTION_CHANCE))
                         item = ITEM_DEEP_SEA_SCALE; 
                 break;
-                case SPECIES_LATIOS:
                 case SPECIES_LATIAS:
-                if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_SOUL_DEW_SELECTION_CHANCE))
-                        item = ITEM_SOUL_DEW; 
+                case SPECIES_LATIOS:
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_SOUL_DEW_SELECTION_CHANCE))
+                        item = ITEM_SOUL_DEW;
                 break;
-                default: { // General case
-                    for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) {
-                        switch(formChanges[j].method) {
-                            #if B_FLAG_DYNAMAX_BATTLE != 0
-                            case FORM_CHANGE_BATTLE_GIGANTAMAX: {
-                                if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_ALLOW_GMAX)
-                                    forme = j;
-                            }; break;
-                            #endif
-                            case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                                if ((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST)) {
-                                    item = formChanges[j].param1; // ItemId
-                                    forme = j;
-                                }
-                            }; break;
-                            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                                if ((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE)) {
-                                    move = formChanges[j].param1; // MoveId
-                                    hasMega = TRUE;
-                                    forme = j;
-                                }
-                            }; break;
-                            case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                                if ((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE)) {
-                                    item = formChanges[j].param1; // ItemId
-                                    hasMega = TRUE;
-                                    forme = j;
-                                }
-                            }; break;
-                        }
-                        if (forme == j) {
-                            DebugPrintf("Forme found: %d ...", forme);
-                            break; // Break if forme found
-                        }
+                // Signature Z-Moves
+                case SPECIES_EEVEE:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_EEVIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_LAST_RESORT;
+                        item = ITEM_EEVIUM_Z;
                     }
-                }; 
                 break;
+                case SPECIES_SNORLAX:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SNORLIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_GIGA_IMPACT;
+                        item = ITEM_SNORLIUM_Z;
+                    }
+                break;
+                case SPECIES_MEW:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MEWNIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_PSYCHIC;
+                        item = ITEM_MEWNIUM_Z;
+                    }
+                break;
+                case SPECIES_DECIDUEYE:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_DECIDIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_SPIRIT_SHACKLE;
+                        item = ITEM_DECIDIUM_Z;
+                    }
+                break;
+                case SPECIES_INCINEROAR:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_INCINIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_DARKEST_LARIAT;
+                        item = ITEM_INCINIUM_Z;
+                    }
+                break;
+                case SPECIES_PRIMARINA:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PRIMARIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_SPARKLING_ARIA;
+                        item = ITEM_PRIMARIUM_Z;
+                    }
+                break;
+                case SPECIES_MIMIKYU:
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MIMIKIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_PLAY_ROUGH;
+                        item = ITEM_MIMIKIUM_Z;
+                    }
+                break;
+                case SPECIES_KOMMO_O: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_KOMMONIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_CLANGING_SCALES;
+                        item = ITEM_KOMMONIUM_Z;
+                    }
+                break;
+                case SPECIES_TAPU_FINI: 
+                case SPECIES_TAPU_BULU: 
+                case SPECIES_TAPU_LELE: 
+                case SPECIES_TAPU_KOKO: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_TAPUNIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_NATURES_MADNESS;
+                        item = ITEM_TAPUNIUM_Z;
+                    }
+                break;
+                case SPECIES_SOLGALEO: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SOLGANIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_SUNSTEEL_STRIKE;
+                        item = ITEM_SOLGANIUM_Z;
+                    }
+                break;
+                case SPECIES_LUNALA: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_LUNALIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_MOONGEIST_BEAM;
+                        item = ITEM_LUNALIUM_Z;
+                    }
+                break;
+                case SPECIES_MARSHADOW: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MARSHADIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_SPECTRAL_THIEF;
+                        item = ITEM_MARSHADIUM_Z;
+                    }
+                break;
+                case SPECIES_RAICHU_ALOLAN: 
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ALORAICHIUM_Z)) {
+                        hasZMove = TRUE;
+                        move = MOVE_THUNDERBOLT;
+                        item = ITEM_ALORAICHIUM_Z;
+                    }
+                break;
+            }
+
+            // Check for Mega/Primal/Gigantamax
+            for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) {
+                switch(formChanges[j].method) {
+                    #if B_FLAG_DYNAMAX_BATTLE != 0
+                    case FORM_CHANGE_BATTLE_GIGANTAMAX: {
+                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_ALLOW_GMAX)
+                            forme = j;
+                    }; break;
+                    #endif
+                    case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) {
+                            item = formChanges[j].param1; // ItemId
+                            forme = j;
+                        }
+                    }; break;
+                    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
+                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) {
+                            move = formChanges[j].param1; // MoveId
+                            hasMega = TRUE;
+                            forme = j;
+                        }
+                    }; break;
+                    case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) {
+                            item = formChanges[j].param1; // ItemId
+                            hasMega = TRUE;
+                            forme = j;
+                        }
+                    }; break;
+                }
+                if (forme == j) {
+                    DebugPrintf("Forme found: %d ...", forme);
+                    break; // Break if forme found
+                }
             }
         }
 

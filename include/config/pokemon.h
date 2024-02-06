@@ -38,6 +38,9 @@
 #define P_FLAG_FORCE_SHINY      0     // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
 #define P_FLAG_FORCE_NO_SHINY   0     // If this flag is set, all wild and gift Pokémon will forced into NOT being Shiny.
 
+// Allow Silvally to change types using Z-Crystals
+#define P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL FALSE
+
 // Go here if you want to disable specific families of Pokémon.
 #include "config/species_enabled.h"
 
