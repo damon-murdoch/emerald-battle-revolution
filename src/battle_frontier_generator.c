@@ -2280,13 +2280,27 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 
                             // Switch on current type
                             switch(currentType) {
-                                // TODO
-                                default: 
-                                    itemId = ITEM_NONE; 
-                                break;
+                                case TYPE_NORMAL: itemId = ITEM_SILK_SCARF; break;
+                                case TYPE_FIRE: itemId = ITEM_CHARCOAL; break;
+                                case TYPE_WATER: itemId = ITEM_MYSTIC_WATER; break;
+                                case TYPE_ELECTRIC: itemId = ITEM_MAGNET; break;
+                                case TYPE_GRASS: itemId = ITEM_MIRACLE_SEED; break;
+                                case TYPE_ICE: itemId = ITEM_NEVER_MELT_ICE; break;
+                                case TYPE_FIGHTING: itemId = ITEM_BLACK_BELT; break;
+                                case TYPE_POISON: itemId = ITEM_POISON_BARB; break;
+                                case TYPE_GROUND: itemId = ITEM_SOFT_SAND; break;
+                                case TYPE_FLYING: itemId = ITEM_SHARP_BEAK; break;
+                                case TYPE_PSYCHIC: itemId = ITEM_TWISTED_SPOON; break;
+                                case TYPE_BUG: itemId = ITEM_SILVER_POWDER; break;
+                                case TYPE_ROCK: itemId = ITEM_HARD_STONE; break;
+                                case TYPE_GHOST: itemId = ITEM_SPELL_TAG; break;
+                                case TYPE_DRAGON: itemId = ITEM_DRAGON_FANG; break;
+                                case TYPE_DARK: itemId = ITEM_BLACK_GLASSES; break;
+                                case TYPE_STEEL: itemId = ITEM_METAL_COAT; break;
+                                case TYPE_FAIRY: itemId = ITEM_FAIRY_FEATHER; break;
+                                default: itemId = ITEM_NONE; break;
                             }
                         }
-
                         // Z-Move (e.g. Electrium Z) Check
                         if (currentType == TYPE_NONE || RANDOM_CHANCE(BFG_ITEM_ZMOVE_SELECTION_CHANCE)) 
                         {
@@ -2295,10 +2309,25 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 
                             // Switch on current type
                             switch(currentType) {
-                                // TODO
-                                default: 
-                                    itemId = ITEM_NONE; 
-                                break;
+                                case TYPE_NORMAL: itemId = ITEM_NORMALIUM_Z; break;
+                                case TYPE_FIRE: itemId = ITEM_FIRIUM_Z; break;
+                                case TYPE_WATER: itemId = ITEM_WATERIUM_Z; break;
+                                case TYPE_ELECTRIC: itemId = ITEM_ELECTRIUM_Z; break;
+                                case TYPE_GRASS: itemId = ITEM_GRASSIUM_Z; break;
+                                case TYPE_ICE: itemId = ITEM_ICIUM_Z; break;
+                                case TYPE_FIGHTING: itemId = ITEM_FIGHTINIUM_Z; break;
+                                case TYPE_POISON: itemId = ITEM_POISONIUM_Z; break;
+                                case TYPE_GROUND: itemId = ITEM_GROUNDIUM_Z; break;
+                                case TYPE_FLYING: itemId = ITEM_FLYINIUM_Z; break;
+                                case TYPE_PSYCHIC: itemId = ITEM_PSYCHIUM_Z; break;
+                                case TYPE_BUG: itemId = ITEM_BUGINIUM_Z; break;
+                                case TYPE_ROCK: itemId = ITEM_ROCKIUM_Z; break;
+                                case TYPE_GHOST: itemId = ITEM_GHOSTIUM_Z; break;
+                                case TYPE_DRAGON: itemId = ITEM_DRAGONIUM_Z; break;
+                                case TYPE_DARK: itemId = ITEM_DARKINIUM_Z; break;
+                                case TYPE_STEEL: itemId = ITEM_STEELIUM_Z; break;
+                                case TYPE_FAIRY: itemId = ITEM_FAIRIUM_Z; break;
+                                default: itemId = ITEM_NONE; break;
                             }
                         }
 
@@ -2310,10 +2339,25 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 
                             // Switch on current type
                             switch(currentType) {
-                                // TODO
-                                default: 
-                                    itemId = ITEM_NONE; 
-                                break;
+                                case TYPE_NORMAL: itemId = ITEM_NORMAL_GEM; break;
+                                case TYPE_FIRE: itemId = ITEM_FIRE_GEM; break;
+                                case TYPE_WATER: itemId = ITEM_WATER_GEM; break;
+                                case TYPE_ELECTRIC: itemId = ITEM_ELECTRIC_GEM; break;
+                                case TYPE_GRASS: itemId = ITEM_GRASS_GEM; break;
+                                case TYPE_ICE: itemId = ITEM_ICE_GEM; break;
+                                case TYPE_FIGHTING: itemId = ITEM_FIGHTING_GEM; break;
+                                case TYPE_POISON: itemId = ITEM_POISON_GEM; break;
+                                case TYPE_GROUND: itemId = ITEM_GROUND_GEM; break;
+                                case TYPE_FLYING: itemId = ITEM_FLYING_GEM; break;
+                                case TYPE_PSYCHIC: itemId = ITEM_PSYCHIC_GEM; break;
+                                case TYPE_BUG: itemId = ITEM_BUG_GEM; break;
+                                case TYPE_ROCK: itemId = ITEM_ROCK_GEM; break;
+                                case TYPE_GHOST: itemId = ITEM_GHOST_GEM; break;
+                                case TYPE_DRAGON: itemId = ITEM_DRAGON_GEM; break;
+                                case TYPE_DARK: itemId = ITEM_DARK_GEM; break;
+                                case TYPE_STEEL: itemId = ITEM_STEEL_GEM; break;
+                                case TYPE_FAIRY: itemId = ITEM_FAIRY_GEM; break;
+                                default: itemId = ITEM_NONE; break;
                             }
                         }
                     }
@@ -2370,34 +2414,12 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
             return itemId; // Unique item found
 
+        // *** Obscure items with specific use cases ***
+
         // Fiwam Berries
         if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE))
             // Get the fiwam berry opposite to which would confuse
             itemId = gFiwamConfuseLookup[nature->negStat];
-
-        // Stat Boosting Berries
-        if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE)) 
-        {
-            // Get the stat boosting berry for the nature-boosted stat
-            switch(nature->posStat) {
-                case STAT_ATK: 
-                    itemId = ITEM_LIECHI_BERRY; 
-                case STAT_DEF: 
-                    itemId = ITEM_GANLON_BERRY;
-                case STAT_SPATK:
-                    itemId = ITEM_PETAYA_BERRY;
-                case STAT_SPDEF: 
-                    itemId = ITEM_APICOT_BERRY;
-                case STAT_SPEED: 
-                    itemId = ITEM_SALAC_BERRY;
-            }
-        }
-
-        // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, index))
-            return itemId; // Unique item found
-
-        // *** Obscure items with specific use cases ***
 
         // Chesto Berry (Has rest)
         if (itemId == ITEM_NONE && (hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
@@ -2455,6 +2477,24 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 case MOVE_HAIL:
                     itemId = ITEM_ICY_ROCK;
                 break;
+            }
+        }
+
+        // Stat Boosting Berries
+        if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE)) 
+        {
+            // Get the stat boosting berry for the nature-boosted stat
+            switch(nature->posStat) {
+                case STAT_ATK: 
+                    itemId = ITEM_LIECHI_BERRY; 
+                case STAT_DEF: 
+                    itemId = ITEM_GANLON_BERRY;
+                case STAT_SPATK:
+                    itemId = ITEM_PETAYA_BERRY;
+                case STAT_SPDEF: 
+                    itemId = ITEM_APICOT_BERRY;
+                case STAT_SPEED: 
+                    itemId = ITEM_SALAC_BERRY;
             }
         }
 
@@ -3030,6 +3070,44 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_URSALUNA))
                         speciesId = SPECIES_URSALUNA_BLOODMOON;
                 }; break;
+                // Species-specific items
+                case SPECIES_FARFETCHD:
+                case SPECIES_FARFETCHD_GALARIAN:
+                case SPECIES_SIRFETCHD: 
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_LEEK_SELECTION_CHANCE))
+                        item = ITEM_LEEK;
+                break;
+                case SPECIES_MAROWAK:
+                case SPECIES_MAROWAK_ALOLAN:
+                case SPECIES_MAROWAK_ALOLAN_TOTEM:
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_THICK_CLUB_SELECTION_CHANCE))
+                        item = ITEM_THICK_CLUB;
+                break; 
+                case SPECIES_CHANSEY: 
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_LUCKY_PUNCH_SELECTION_CHANCE))
+                        item = ITEM_LUCKY_PUNCH;
+                break; 
+                case SPECIES_DITTO: 
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DITTO_POWDER_SELECTION_CHANCE)) {
+                        switch(RANDOM_RANGE(0,2)) {
+                            case 0: item = ITEM_METAL_POWDER; break;
+                            case 1: item = ITEM_QUICK_POWDER; break;
+                        }
+                    }
+                break;
+                case SPECIES_GOREBYSS: 
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DEEP_SEA_SCALE_SELECTION_CHANCE))
+                        item = ITEM_DEEP_SEA_SCALE; 
+                break;
+                case SPECIES_HUNTAIL: 
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DEEP_SEA_TOOTH_SELECTION_CHANCE))
+                        item = ITEM_DEEP_SEA_SCALE; 
+                break;
+                case SPECIES_LATIOS:
+                case SPECIES_LATIAS:
+                if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_SOUL_DEW_SELECTION_CHANCE))
+                        item = ITEM_SOUL_DEW; 
+                break;
                 default: { // General case
                     for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) {
                         switch(formChanges[j].method) {
