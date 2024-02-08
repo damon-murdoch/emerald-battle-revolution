@@ -485,9 +485,7 @@ static void OpponentHandleDrawTrainerPic(u32 battler)
         xPos = 176;
     }
 
-    BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE,
-                                       xPos, 40 + 4 * (8 - gTrainerSprites[trainerPicId].y_offset),
-                                       -1);
+    BtlController_HandleDrawTrainerPic(battler, trainerPicId, TRUE, xPos, 40, -1);
 }
 
 static void OpponentHandleTrainerSlide(u32 battler)
@@ -597,7 +595,7 @@ static void OpponentHandleChooseMove(u32 battler)
             } while (!CanTargetBattler(battler, target, move));
 
             // Don't bother to loop through table if the move can't attack ally
-            if (B_WILD_NATURAL_ENEMIES == TRUE && !(gBattleMoves[move].target & MOVE_TARGET_BOTH))
+            if (B_WILD_NATURAL_ENEMIES == TRUE && !(gMovesInfo[move].target & MOVE_TARGET_BOTH))
             {
                 u16 i, speciesAttacker, speciesTarget, isPartnerEnemy = FALSE;
                 static const u16 naturalEnemies[][2] =
