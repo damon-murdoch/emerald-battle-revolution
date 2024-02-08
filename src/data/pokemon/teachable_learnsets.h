@@ -81995,7 +81995,7 @@ static const u16 sLechonkTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
 
-static const u16 sOinkologneMaleTeachableLearnset[] = {
+static const u16 sOinkologneTeachableLearnset[] = {
     MOVE_BELCH,
     MOVE_BODY_PRESS,
     MOVE_BODY_SLAM,
@@ -82042,42 +82042,6 @@ static const u16 sOinkologneMaleTeachableLearnset[] = {
     MOVE_UPROAR,
     MOVE_WORK_UP,
     MOVE_YAWN,
-    MOVE_ZEN_HEADBUTT,
-    MOVE_UNAVAILABLE,
-};
-
-static const u16 sOinkologneFemaleTeachableLearnset[] = {
-    MOVE_BODY_PRESS,
-    MOVE_BODY_SLAM,
-    MOVE_BULLDOZE,
-    MOVE_BULLET_SEED,
-    MOVE_CHILLING_WATER,
-    MOVE_DIG,
-    MOVE_DISARMING_VOICE,
-    MOVE_EARTH_POWER,
-    MOVE_ENDURE,
-    MOVE_ENERGY_BALL,
-    MOVE_FACADE,
-    MOVE_GIGA_IMPACT,
-    MOVE_HELPING_HAND,
-    MOVE_HYPER_BEAM,
-    MOVE_HYPER_VOICE,
-    MOVE_IRON_HEAD,
-    MOVE_MUD_SHOT,
-    MOVE_MUD_SLAP,
-    MOVE_PLAY_ROUGH,
-    MOVE_PROTECT,
-    MOVE_RAIN_DANCE,
-    MOVE_REST,
-    MOVE_SEED_BOMB,
-    MOVE_SLEEP_TALK,
-    MOVE_STOMPING_TANTRUM,
-    MOVE_SUBSTITUTE,
-    MOVE_SUNNY_DAY,
-    MOVE_TAKE_DOWN,
-    MOVE_TERA_BLAST,
-    MOVE_THIEF,
-    MOVE_TRAILBLAZE,
     MOVE_ZEN_HEADBUTT,
     MOVE_UNAVAILABLE,
 };
