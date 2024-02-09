@@ -93,14 +93,16 @@ void EnableVCountIntrAtLine150(void);
 
 void AgbMain()
 {
-    // Modern compilers are liberal with the stack on entry to this function,
-    // so RegisterRamReset may crash if it resets IWRAM.
-#if !MODERN
-    RegisterRamReset(RESET_ALL);
-#endif //MODERN
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
-    REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
+    // Setup waitstates for all ROM mirrors
+    if (DECAP_ENABLED && DECAP_MIRRORING)
+        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE
+            | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3
+            | WAITCNT_WS1_S_1 | WAITCNT_WS1_N_3
+            | WAITCNT_WS2_S_1 | WAITCNT_WS2_N_3;
+    else
+        REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
     InitKeys();
     InitIntrHandlers();
     m4aSoundInit();
@@ -240,9 +242,22 @@ void EnableVCountIntrAtLine150(void)
 #ifdef BUGFIX
 static void SeedRngWithRtc(void)
 {
-    u32 seed = RtcGetMinuteCount();
-    seed = (seed >> 16) ^ (seed & 0xFFFF);
-    SeedRng(seed);
+    #if HQ_RANDOM == FALSE
+        u32 seed = RtcGetMinuteCount();
+        seed = (seed >> 16) ^ (seed & 0xFFFF);
+        SeedRng(seed);
+    #else
+        #define BCD8(x) ((((x) >> 4) & 0xF) * 10 + ((x) & 0xF))
+        u32 seconds;
+        struct SiiRtcInfo rtc;
+        RtcGetInfo(&rtc);
+        seconds =
+            ((HOURS_PER_DAY * RtcGetDayCount(&rtc) + BCD8(rtc.hour))
+            * MINUTES_PER_HOUR + BCD8(rtc.minute))
+            * SECONDS_PER_MINUTE + BCD8(rtc.second);
+        SeedRng(seconds);
+        #undef BCD8
+    #endif
 }
 #endif
 
@@ -374,7 +389,7 @@ static void VBlankIntr(void)
     TryReceiveLinkBattleData();
 
     if (!gTestRunnerEnabled && (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED))))
-        Random();
+        AdvanceRandom();
 
     UpdateWirelessStatusIndicatorSprite();
 
