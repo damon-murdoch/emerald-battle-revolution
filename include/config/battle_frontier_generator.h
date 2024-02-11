@@ -118,6 +118,7 @@
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
     SPECIES_DITTO, \
     SPECIES_WYNAUT, \
+    SPECIES_SPINDA, \
     SPECIES_WOBBUFFET, \
     SPECIES_SHEDINJA, \
     SPECIES_SMEARGLE, \
@@ -170,27 +171,32 @@
 // lower accuracy moves compared to fully
 // accurate moves.
 #define BFG_MOVE_ACCURACY_POWER 2
+#define BFG_MOVE_CRIT_STAGE_POWER 1.2
 
 #define BFG_MOVE_MAX_OFFENSIVE 4    // Maximum number of offensive moves
 #define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
 #define BFG_MOVE_MAX_STATUS 3       // Maximum number of status moves
 
 #define BFG_MOVE_OFF_BOOST_REQUIRE_ATTACK 2 // Required attacks to use offensive attack boosting moves
+#define BFG_MOVE_CRIT_BOOST_REQUIRE_CRIT 1 // Min. Crit-Boosted effects required before using crit-boosting moves
+
 
 #define BFG_MOVE_MAX_SPEED_CONTROL_EFFECT 1         // Maximum number of speed control effects
-#define BFG_MOVE_MAX_SPEED_BOOSTING_EFFECT FALSE    // Maximum number of speed boosting effects
-#define BFG_MOVE_MAX_OFF_BOOSTING_EFFECT 1          // Maximum number of offensive boosting effects
-#define BFG_MOVE_MAX_DEF_BOOSTING_EFFECT 1          // Maximum number of defensive boosting effects
 #define BFG_MOVE_MAX_STAT_CHANGING_EFFECT 1         // Maximum number of total stat-changing effects (self and opponent)
 
-#define BFG_MOVE_SPEED_CONTROL_ALLOW_SUPPORT TRUE   // Allow mons with speed control moves to use support/self-target moves
-#define BFG_MOVE_SPEED_BOOST_ALLOW_SUPPORT FALSE    // Allow mons with speed-boosting moves to use support/self-target moves
-#define BFG_MOVE_OFF_BOOST_ALLOW_SUPPORT FALSE      // Allow mons with offensive-boosting moves to use support/self-target moves
-#define BFG_MOVE_DEF_BOOST_ALLOW_SUPPORT TRUE       // Allow mons with defensive-boosting moves to use support/self-target moves
+#define BFG_MOVE_ALLOW_ATK_CHANGING_EFFECT TRUE
+#define BFG_MOVE_ALLOW_DEF_CHANGING_EFFECT TRUE
+#define BFG_MOVE_ALLOW_SP_ATK_CHANGING_EFFECT TRUE
+#define BFG_MOVE_ALLOW_SP_DEF_CHANGING_EFFECT TRUE
+#define BFG_MOVE_ALLOW_SPEED_CHANGING_EFFECT FALSE
 
-#define BFG_MOVE_MAX_CONFUSION_EFFECT 1     // Maximum number of confusion effects
-#define BFG_MOVE_MAX_STATUS_EFFECT 1        // Maximum number of status effects
-#define BFG_MOVE_MAX_FIELD_OR_ALLY_TARGET 2 // Maximum number of field targets
+#define BFG_MOVE_SPEED_CONTROL_ALLOW_SUPPORT TRUE   // Allow mons with speed control moves to use support/self-target moves
+#define BFG_MOVE_STAT_CHANGING_ALLOW_SUPPORT TRUE   // Allow mons with defensive-boosting moves to use support/self-target moves
+
+#define BFG_MOVE_MAX_NON_VOLATILE_STATUS_EFFECT 1   // Maximum number of status effects
+#define BFG_MOVE_MAX_FIELD_OR_ALLY_TARGET 2         // Maximum number of field targets
+#define BFG_MOVE_MAX_CONFUSION_EFFECT 1             // Maximum number of confusion effects
+#define BFG_MOVE_MAX_HAZARD_EFFECT 0                // Maximum number of hazard effects
 
 #define BFG_MOVE_BATON_PASS_MINIMUM 4 // Minimum stat boosting moves for baton pass
 
@@ -199,6 +205,7 @@
 #define BFG_MOVE_MAX_PRIORITY_VALUE 3 // Max. Priority Calculation
 
 #define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f  // Doubles modifier for random targeting moves
+#define BFG_MOVE_CRIT_BOOST_MULTIPLIER 1.1f  // Multipliplier for crit-boosting moves
 #define BFG_MOVE_STAT_BOOST_MULTIPLIER 0.8f  // Multipliplier for stat-boosting moves
 #define BFG_MOVE_ALLY_HIT_MULTIPLIER 0.8f    // Doubles modifier for ally-damaging moves
 #define BFG_MOVE_PRIORITY_MULTIPLIER 1.1f    // Multiplier per-stage for priority moves
@@ -209,16 +216,10 @@
 #define BFG_MOVE_EV_INVEST_MULTIPLIER 1.5f   // EV investment modifier
 #define BFG_MOVE_STAB_MULTIPLIER 1.5f        // STAB move multiplier (Offensive Only)
 
-#define BFG_MOVE_MISC_STAT_MODIFIER FALSE  // Multiplier for misc. stat changing moves
-
-// Use ability effect modifiers
-#define BFG_MOVE_ABILITY_MODIFIERS TRUE
-#if BFG_MOVE_ABILITY_MODIFIERS == TRUE
+#define BFG_MOVE_MISC_STAT_UP_MODIFIER 1.0f  // Multiplier for misc. stat changing moves
+#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 0.0f  // Multiplier for misc. stat changing moves
 
 #define BFG_MOVE_ABILITY_MODIFIER 1.5f      // Modifier to increase chance for moves affected by abilities
-
-#endif // BFG_MOVE_ABILITY_MODIFIERS
-
 #define BFG_MOVE_EFFECT_CHANCE_MULTIPLIER 0.3f  // Secondary effect chance multiplier
 
 // Use move effect modifiers
@@ -231,13 +232,14 @@
 #define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
 #define BFG_MOVE_WEATHER_MULTIPLIER FALSE
 
-#define BFG_MOVE_VOLATILE_MULTIPLIER 1.1f // Worry Seed, Leech Seed, etc.
+#define BFG_MOVE_VOLATILE_MULTIPLIER 1.0f
 #define BFG_MOVE_STATUS_MULTIPLIER 1.2f
 #define BFG_MOVE_SCREEN_MULTIPLIER 0.9f // Reflect, Light Screen, etc.
 
 #define BFG_MOVE_RECOVERY_MODIFIER 1.1f
 #define BFG_MOVE_ABSORB_MODIFIER 1.5f
 #define BFG_MOVE_PIVOT_MODIFIER 1.5f
+#define BFG_MOVE_PHASE_MODIFIER 0.5f
 
 #define BFG_MOVE_DOUBLES_PROTECT_MODIFIER 1.5f   // Wide Guard, Quick Guard, etc.
 #define BFG_MOVE_SPECIAL_PROTECT_MODIFIER FALSE  // Detect, Spiky Shield, etc.
@@ -245,13 +247,18 @@
 #define BFG_MOVE_PROTECT_MODIFIER FALSE          // Normal Protect
 #define BFG_MOVE_ENDURE_MODIFIER 0.5f            // Normal Endure
 
+#define BFG_MOVE_TYPE_CHANGE_MODIFIER 0.6f      // Modifier for moves which change the user/opponent's type
+#define BFG_MOVE_ABILITY_CHANGE_MODIFIER 0.6f   // Modifier for moves which change the user/opponent's ability
+
+#define BFG_MOVE_ITEM_RECYCLE_MODIFIER 1.0f   // Modifier for moves which recycle the user's held item
 #define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f   // Modifier for moves which switch the user and opponent's item
 #define BFG_MOVE_ITEM_REMOVE_MODIFIER 0.8f   // Modifier for moves which remove the opponent's item (and / or item effects)
 
-#define BFG_MOVE_COUNTER_MODIFIER 0.1f       // Multiplier for countering moves (e.g. Counter, Mirror Coat)
+#define BFG_MOVE_COUNTER_MODIFIER 0.1f    // Multiplier for countering moves (e.g. Counter, Mirror Coat)
 #define BFG_MOVE_HAZARD_MODIFIER 0.1f     // Modifier for entry hazards (e.g. Stealth Rock)
-#define BFG_MOVE_FIELD_MODIFIER 1.0f       // Modifier for field effects (e.g. Haze, Perish Song)
-#define BFG_MOVE_LUCK_MODIFIER 1.0f        // Status / OHKO moves with luck-based effects
+#define BFG_MOVE_FIELD_MODIFIER 1.0f      // Modifier for field effects (e.g. Haze, Perish Song)
+#define BFG_MOVE_LUCK_MODIFIER 1.0f       // Status / OHKO moves with luck-based effects
+#define BFG_MOVE_OHKO_MODIFIER FALSE      // Status / OHKO moves with luck-based effects
 
 // Negative Modifiers
 #define BFG_MOVE_DUPLICATE_TYPE_MODIFIER 0.8f // Same-type attack deduction (per same-type move)
@@ -293,6 +300,7 @@
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 
 // Moves required for certain items to be eligible
+#define BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED 2
 #define BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED 3
 #define BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED 4
 #define BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED 2
@@ -301,9 +309,10 @@
 #define BFG_ITEM_FLAME_ORB_MOVES_REQUIRED 1
 
 // Common Items
+#define BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE 3
 #define BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE 2
 #define BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE 2
-#define BFG_ITEM_LIFE_ORB_SELECTION_CHANCE 2
+#define BFG_ITEM_LIFE_ORB_SELECTION_CHANCE 3
 #define BFG_ITEM_EVIOLITE_SELECTION_CHANCE 2
 
 // Choice Items
@@ -319,16 +328,19 @@
 #define BFG_ITEM_FLAME_ORB_SELECTION_CHANCE 2
 
 // Move-Specific Items
-#define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 4  // hasPunch
+#define BFG_ITEM_BLUNDER_POLICY_SELECTION_CHANCE 4  // numInaccurate
+#define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 3  // numPunch
 #define BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE 2    // hasRest
-#define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // hasSound
-#define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 3     // hasMultiHit
-#define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 3      // hasStatDrop
-#define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 3      // hasStatDrop
-#define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 4      // hasScreens
-#define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 2      // hasCritBoost
+#define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // numSound
+#define BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE 3     // numStatus
+#define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 3     // numMultiHit
+#define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 3      // numScreens
+#define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 4      // numStatDrop
+#define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 4      // numStatDrop
+#define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 4      // numCritModifier
+#define BFG_ITEM_RAZOR_CLAW_SELECTION_CHANCE 4      // numCritModifier
 #define BFG_ITEM_POWER_HERB_SELECTION_CHANCE 2      // hasMultiTurn
-#define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 4       // hasInaccurate
+#define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 4       // numInaccurate
 
 // Species-specific items
 #define BFG_ITEM_LIGHT_BALL_SELECTION_CHANCE 1          // Pikachu
@@ -346,9 +358,13 @@
 #define BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE 2
 
 // Type-Specific Items
-#define BFG_ITEM_GEM_SELECTION_CHANCE 3
-#define BFG_ITEM_TYPE_SELECTION_CHANCE 3
-#define BFG_ITEM_ZMOVE_SELECTION_CHANCE 3
+#define BFG_ITEM_GEM_SELECTION_CHANCE 4
+#define BFG_ITEM_TYPE_SELECTION_CHANCE 4
+#define BFG_ITEM_ZMOVE_SELECTION_CHANCE 0 // Excludes signature Z-Moves
+
+// Common Berries
+#define BFG_ITEM_SITRUS_BERRY_SELECTION_CHANCE 4
+#define BFG_ITEM_LUM_BERRY_SELECTION_CHANCE 4
 
 // Resist / Weakness Berries
 #define BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE 2
@@ -357,44 +373,44 @@
 #define BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE 8
 #define BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE 4
 
+// Custom list of items which can be selected, in
+// the event that the pokemon has the move 'recycle'.
+// A random item from this list will be selected, if
+// none of the above berry flags are checked.
+#define BFG_RECYCLE_ITEMS_LIST \
+    ITEM_MARANGA_BERRY, \
+    ITEM_CUSTAP_BERRY, \
+    ITEM_JABOCA_BERRY, \
+    ITEM_LANSAT_BERRY, \
+    ITEM_STARF_BERRY, \
+    ITEM_MICLE_BERRY, \
+    ITEM_ROWAP_BERRY, \
+    ITEM_CHILAN_BERRY, \
+    ITEM_KEE_BERRY
 
 // Custom list of items which can be selected, in 
 // addition to the flags set above. A random item 
 // from this list will be chosen if none of the 
 // above flags are matched.
 #define BFG_CUSTOM_ITEMS_LIST \
-    ITEM_UTILITY_UMBRELLA, \
-    ITEM_HEAVY_DUTY_BOOTS, \
-    ITEM_WEAKNESS_POLICY, \
-    ITEM_PROTECTIVE_PADS, \
-    ITEM_BLUNDER_POLICY, \
-    ITEM_ABILITY_SHIELD, \
-    ITEM_MARANGA_BERRY, \
-    ITEM_SITRUS_BERRY, \
-    ITEM_CUSTAP_BERRY, \
-    ITEM_JABOCA_BERRY, \
-    ITEM_CLEAR_AMULET, \
-    ITEM_COVERT_CLOAK, \
-    ITEM_EJECT_BUTTON, \
+    BFG_RECYCLE_ITEMS_LIST, \
+    ITEM_BRIGHT_POWDER, \
     ITEM_ROCKY_HELMET, \
-    ITEM_LANSAT_BERRY, \
-    ITEM_STARF_BERRY, \
     ITEM_MIRROR_HERB, \
-    ITEM_MICLE_BERRY, \
-    ITEM_ROWAP_BERRY, \
+    ITEM_FOCUS_BAND, \
+    ITEM_QUICK_CLAW, \
+    ITEM_KINGS_ROCK, \
     ITEM_SHELL_BELL, \
-    ITEM_LUM_BERRY, \
-    ITEM_KEE_BERRY, \
     ITEM_LEFTOVERS, \
     ITEM_RED_CARD
 
-// Here are some other *fun* items you can add :)
-// ITEM_BRIGHT_POWDER, \
-// ITEM_QUICK_CLAW, \
-// ITEM_KINGS_ROCK, \
-// ITEM_FOCUS_BAND, \
-// ITEM_RAZOR_CLAW, \
-// ITEM_RAZOR_FANG, \
+// TODO items
+// ITEM_PROTECTIVE_PADS
+// ITEM_ABILITY_SHIELD
+// ITEM_ROCKY_HELMET
+// ITEM_CLEAR_AMULET
+// ITEM_COVERT_CLOAK
+// ITEM_EJECT_BUTTON
 // ITEM_RED_CARD
 
 #endif // BFG_NO_ITEM_SELECTION_CHANCE != 1
