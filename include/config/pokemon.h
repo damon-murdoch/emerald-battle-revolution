@@ -45,6 +45,9 @@
 #define P_SHOW_TERA_TYPE            GEN_LATEST  // Since Gen 9, the Tera Type is shown on the summary screen.
 #define P_TM_LITERACY               GEN_LATEST  // Since Gen 6, TM illiterate Pokémon can learn TMs that teach moves that are in their level-up learnsets.
 
+// Learnset helper toggles
+#define P_LEARNSET_HELPER_TEACHABLE FALSE        // If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/teachable.py using the included JSON files based on available TMs and tutors.
+
 // Flag settings
 // To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
 // Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
@@ -56,6 +59,9 @@
 
 // [LOuroboros] Nickname your Pokémon from the party menu
 #define P_ALLOW_RENAME_TRADED TRUE // Rename traded Pokemon from party menu
+
+// Allow Silvally to change types using Z-Crystals
+#define P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL FALSE
 
 // Go here if you want to disable specific families of Pokémon.
 #include "config/species_enabled.h"

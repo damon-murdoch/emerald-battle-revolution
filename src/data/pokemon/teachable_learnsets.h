@@ -1,3 +1,6 @@
+// DO NOT MODIFY THIS FILE!
+// This file has been custom-generated using old Porymoves code lol
+
 static const u16 sNoneTeachableLearnset[] = {
     MOVE_UNAVAILABLE,
 };
