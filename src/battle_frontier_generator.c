@@ -3500,7 +3500,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                 switch(formChanges[j].method) {
                     #if B_FLAG_DYNAMAX_BATTLE != 0
                     case FORM_CHANGE_BATTLE_GIGANTAMAX: {
-                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_ALLOW_GMAX)
+                        if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_IV_ALLOW_GMAX)
                             forme = j;
                     }; break;
                     #endif

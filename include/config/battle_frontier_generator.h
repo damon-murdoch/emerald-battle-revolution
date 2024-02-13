@@ -2,7 +2,7 @@
 #define GUARD_CONFIG_BATTLE_FRONTIER_GENERATOR_H
 
 // *** GENERAL ***
-#define BFG_FLAG_FRONTIER_GENERATOR FLAG_UNUSED_0x020 // Flag to enable or disable random generator
+#define BFG_FLAG_FRONTIER_GENERATOR FLAG_BATTLE_FRONTIER_GENERATOR // Flag to enable or disable random generator
 
 #define BFG_RANDOM_BOOL_FIXED FALSE // Fixed value for RANDOM_BOOL()
 #define BFG_RANDOM_OFFSET 0        // Max Value for RANDOM_OFFSET()

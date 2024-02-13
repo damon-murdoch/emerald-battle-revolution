@@ -48,7 +48,7 @@
 #define FLAG_RECEIVED_EXP_CHARM        0x23 // Experience Charm Obtained
 #define FLAG_MOVE_TUTOR_LEARNSET       0x24 // Learn egg/tutor moves instead of relearn moves
 #define FLAG_MOVE_TUTOR_IGNORE_LEVEL   0x25 // Reteach any moves regardless of level
-#define FLAG_UNUSED_0x026    0x26 // Unused Flag
+#define FLAG_BATTLE_FRONTIER_GENERATOR 0x26 // Battle Frontier Set Generator enabled/disabled
 #define FLAG_UNUSED_0x027    0x27 // Unused Flag
 #define FLAG_UNUSED_0x028    0x28 // Unused Flag
 #define FLAG_UNUSED_0x029    0x29 // Unused Flag
