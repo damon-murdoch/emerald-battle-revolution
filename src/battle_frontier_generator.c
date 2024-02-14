@@ -2807,7 +2807,7 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     );
 
     // If this species has a hidden ability
-    if ((species->abilities[2] != ABILITY_NONE) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) {
+    if (((species->abilities[1] != ABILITY_NONE) && (species->abilities[2] != ABILITY_NONE)) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) {
         abilityNum = 3; // Hidden ability index
         SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
     }
@@ -2827,8 +2827,11 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     // contains 'FRUSTRATION'. 
     moveCount = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
 
-    // At least one move
-    if (moveCount > 0) {
+    // Meets the minimum number of moves to accept
+    if (moveCount >= BFG_MOVE_SELECT_MINIMUM) {
+
+        DebugPrintf("Moves found: %d ...", moveCount);
+
         #if BFG_NO_ITEM_SELECTION_CHANCE != 1
         // Currently has no held item
         if (item == ITEM_NONE && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
@@ -2843,6 +2846,24 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
 
     // No moves, generation failed
     return FALSE;
+}
+
+
+void DebugTrainerPokemon(u8 index) 
+{
+    s32 i;
+    struct Pokemon * pokemon = (&gEnemyParty[index]);
+    u16 speciesId = GetMonData(pokemon, MON_DATA_SPECIES);
+    u8 abilityNum = GetMonData(pokemon,MON_DATA_ABILITY_NUM);
+
+    DebugPrintf("%d @ %d", speciesId, GetMonData(pokemon,MON_DATA_HELD_ITEM));
+    DebugPrintf("Ability: %d (%d)", abilityNum, gSpeciesInfo[speciesId].abilities[abilityNum]);
+    DebugPrintf("IVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_IV),GetMonData(pokemon,MON_DATA_ATK_IV), GetMonData(pokemon,MON_DATA_DEF_IV), GetMonData(pokemon,MON_DATA_SPATK_IV), GetMonData(pokemon,MON_DATA_SPDEF_IV), GetMonData(pokemon,MON_DATA_SPEED_IV));
+    DebugPrintf("EVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_EV),GetMonData(pokemon,MON_DATA_ATK_EV), GetMonData(pokemon,MON_DATA_DEF_EV), GetMonData(pokemon,MON_DATA_SPATK_EV), GetMonData(pokemon,MON_DATA_SPDEF_EV), GetMonData(pokemon,MON_DATA_SPEED_EV));
+    DebugPrintf("%d nature", GetNature(pokemon));
+    for(i=0; i<MAX_MON_MOVES; i++) {
+        DebugPrintf("- %d", GetMonData(pokemon, MON_DATA_MOVE1 + i));
+    }
 }
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
@@ -3538,6 +3559,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
 
         // If the pokemon was successfully added to the trainer's party, move on to the next party slot.
         if (GenerateTrainerPokemon(speciesId, i + firstMonId, otID, fixedIV, level, forme, move, item) == TRUE)
-            i++;
+            DebugTrainerPokemon(i++);
     }
 }

@@ -156,6 +156,7 @@
 
 // *** MOVES *** 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
+#define BFG_MOVE_SELECT_MINIMUM 4 // Maximum times move selection can fail
 
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
