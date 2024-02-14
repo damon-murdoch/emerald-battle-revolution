@@ -4,8 +4,12 @@
 // *** GENERAL ***
 #define BFG_FLAG_FRONTIER_GENERATOR FLAG_UNUSED_0x020 // Flag to enable or disable random generator
 
-#define BFG_RANDOM_BOOL_FIXED FALSE // Fixed value for RANDOM_BOOL()
-#define BFG_RANDOM_OFFSET 0        // Max Value for RANDOM_OFFSET()
+#define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
+#define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
+#define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
+
+#define BFG_RANDOM_OFFSET_MIN 0        // Min. Value for RANDOM_OFFSET()
+#define BFG_RANDOM_OFFSET_MAX 0        // Max. Value for RANDOM_OFFSET()
 
 // *** BASE STATS ***
 
@@ -155,122 +159,20 @@
 #define BFG_HA_SELECTION_CHANCE 4 // Hidden ability selection chance (5 = 1/5)
 
 // *** MOVES *** 
+
+// Selection method which will be used for selecting moves
+// The selection methods are defined as follows:
+
+// BFG_MOVE_SELECT_DEFAULT: Use default moves at level
+// BFG_MOVE_SELECT_RANDOM: Randomly select from available moves
+
+#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_DEFAULT
+
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
 #define BFG_MOVE_SELECT_MINIMUM 4 // Maximum times move selection can fail
 
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
-
-#define BFG_MOVE_SELECT_RANDOM FALSE    // Randomly select moves with no heuristic
-#if BFG_MOVE_SELECT_RANDOM == FALSE
-
-#define BFG_MOVE_BASE_RATING 1.0f   // Baseline rating for all moves
-#define BFG_MOVE_BASE_MODIFIER 1.0f // Base modifier for move effects
-
-// Accuracy modifier will be multiplied
-// by itself 'n' times, in order to punish
-// lower accuracy moves compared to fully
-// accurate moves.
-#define BFG_MOVE_ACCURACY_POWER 2
-#define BFG_MOVE_CRIT_STAGE_POWER 1.2
-
-#define BFG_MOVE_MAX_OFFENSIVE 4    // Maximum number of offensive moves
-#define BFG_MOVE_MAX_PER_TYPE 2     // Maximum number of offensive moves per-type
-#define BFG_MOVE_MAX_STATUS 3       // Maximum number of status moves
-
-#define BFG_MOVE_OFF_BOOST_REQUIRE_ATTACK 2 // Required attacks to use offensive attack boosting moves
-#define BFG_MOVE_CRIT_BOOST_REQUIRE_CRIT 1 // Min. Crit-Boosted effects required before using crit-boosting moves
-
-
-#define BFG_MOVE_MAX_SPEED_CONTROL_EFFECT 1         // Maximum number of speed control effects
-#define BFG_MOVE_MAX_STAT_CHANGING_EFFECT 1         // Maximum number of total stat-changing effects (self and opponent)
-
-#define BFG_MOVE_ALLOW_ATK_CHANGING_EFFECT TRUE
-#define BFG_MOVE_ALLOW_DEF_CHANGING_EFFECT TRUE
-#define BFG_MOVE_ALLOW_SP_ATK_CHANGING_EFFECT TRUE
-#define BFG_MOVE_ALLOW_SP_DEF_CHANGING_EFFECT TRUE
-#define BFG_MOVE_ALLOW_SPEED_CHANGING_EFFECT FALSE
-
-#define BFG_MOVE_SPEED_CONTROL_ALLOW_SUPPORT TRUE   // Allow mons with speed control moves to use support/self-target moves
-#define BFG_MOVE_STAT_CHANGING_ALLOW_SUPPORT TRUE   // Allow mons with defensive-boosting moves to use support/self-target moves
-
-#define BFG_MOVE_MAX_NON_VOLATILE_STATUS_EFFECT 1   // Maximum number of status effects
-#define BFG_MOVE_MAX_FIELD_OR_ALLY_TARGET 2         // Maximum number of field targets
-#define BFG_MOVE_MAX_CONFUSION_EFFECT 1             // Maximum number of confusion effects
-#define BFG_MOVE_MAX_HAZARD_EFFECT 0                // Maximum number of hazard effects
-
-#define BFG_MOVE_BATON_PASS_MINIMUM 4 // Minimum stat boosting moves for baton pass
-
-// Priority Levels Higher/Lower than this will be set to max/min respectively
-#define BFG_MOVE_MIN_PRIORITY_VALUE 0 // Min. Priority Calculation
-#define BFG_MOVE_MAX_PRIORITY_VALUE 3 // Max. Priority Calculation
-
-#define BFG_MOVE_RANDOM_HIT_MULTIPLIER 0.6f  // Doubles modifier for random targeting moves
-#define BFG_MOVE_CRIT_BOOST_MULTIPLIER 1.1f  // Multipliplier for crit-boosting moves
-#define BFG_MOVE_STAT_BOOST_MULTIPLIER 0.8f  // Multipliplier for stat-boosting moves
-#define BFG_MOVE_ALLY_HIT_MULTIPLIER 0.8f    // Doubles modifier for ally-damaging moves
-#define BFG_MOVE_PRIORITY_MULTIPLIER 1.1f    // Multiplier per-stage for priority moves
-#define BFG_MOVE_DOUBLES_MULTIPLIER 1.2f     // Doubles modifier for spread moves in doubles
-
-#define BFG_MOVE_NEG_NATURE_MULTIPLIER 0.7f  // Negative nature multiplier
-#define BFG_MOVE_POS_NATURE_MULTIPLIER 1.3f  // Positive nature multiplier
-#define BFG_MOVE_EV_INVEST_MULTIPLIER 1.5f   // EV investment modifier
-#define BFG_MOVE_STAB_MULTIPLIER 1.5f        // STAB move multiplier (Offensive Only)
-
-#define BFG_MOVE_MISC_STAT_UP_MODIFIER 1.0f  // Multiplier for misc. stat changing moves
-#define BFG_MOVE_OPP_STAT_DOWN_MODIFIER 0.0f  // Multiplier for misc. stat changing moves
-
-#define BFG_MOVE_ABILITY_MODIFIER 1.5f      // Modifier to increase chance for moves affected by abilities
-#define BFG_MOVE_EFFECT_CHANCE_MULTIPLIER 0.3f  // Secondary effect chance multiplier
-
-// Use move effect modifiers
-#define BFG_MOVE_EFFECT_MODIFIERS TRUE
-#if BFG_MOVE_EFFECT_MODIFIERS == TRUE
-
-// Neutral / Positive Modifiers
-#define BFG_MOVE_SPEED_CONTROL_MODIFIER 1.3f     // Trick Room, Tailwind
-#define BFG_MOVE_DO_NOTHING_MODIFIER FALSE       // Splash, Celebrate
-#define BFG_MOVE_TERRAIN_MULTIPLIER FALSE
-#define BFG_MOVE_WEATHER_MULTIPLIER FALSE
-
-#define BFG_MOVE_VOLATILE_MULTIPLIER 1.0f
-#define BFG_MOVE_STATUS_MULTIPLIER 1.2f
-#define BFG_MOVE_SCREEN_MULTIPLIER 0.9f // Reflect, Light Screen, etc.
-
-#define BFG_MOVE_RECOVERY_MODIFIER 1.1f
-#define BFG_MOVE_ABSORB_MODIFIER 1.5f
-#define BFG_MOVE_PIVOT_MODIFIER 1.5f
-#define BFG_MOVE_PHASE_MODIFIER 0.5f
-
-#define BFG_MOVE_DOUBLES_PROTECT_MODIFIER 1.5f   // Wide Guard, Quick Guard, etc.
-#define BFG_MOVE_SPECIAL_PROTECT_MODIFIER FALSE  // Detect, Spiky Shield, etc.
-#define BFG_MOVE_SUBSTITUTE_MODIFIER 1.0f        // Substitute, Shed Tail
-#define BFG_MOVE_PROTECT_MODIFIER FALSE          // Normal Protect
-#define BFG_MOVE_ENDURE_MODIFIER 0.5f            // Normal Endure
-
-#define BFG_MOVE_TYPE_CHANGE_MODIFIER 0.6f      // Modifier for moves which change the user/opponent's type
-#define BFG_MOVE_ABILITY_CHANGE_MODIFIER 0.6f   // Modifier for moves which change the user/opponent's ability
-
-#define BFG_MOVE_ITEM_RECYCLE_MODIFIER 1.0f   // Modifier for moves which recycle the user's held item
-#define BFG_MOVE_ITEM_SWITCH_MODIFIER 1.0f   // Modifier for moves which switch the user and opponent's item
-#define BFG_MOVE_ITEM_REMOVE_MODIFIER 0.8f   // Modifier for moves which remove the opponent's item (and / or item effects)
-
-#define BFG_MOVE_COUNTER_MODIFIER 0.1f    // Multiplier for countering moves (e.g. Counter, Mirror Coat)
-#define BFG_MOVE_HAZARD_MODIFIER 0.1f     // Modifier for entry hazards (e.g. Stealth Rock)
-#define BFG_MOVE_FIELD_MODIFIER 1.0f      // Modifier for field effects (e.g. Haze, Perish Song)
-#define BFG_MOVE_LUCK_MODIFIER 1.0f       // Status / OHKO moves with luck-based effects
-#define BFG_MOVE_OHKO_MODIFIER FALSE      // Status / OHKO moves with luck-based effects
-
-// Negative Modifiers
-#define BFG_MOVE_DUPLICATE_TYPE_MODIFIER 0.8f // Same-type attack deduction (per same-type move)
-#define BFG_MOVE_MULTI_TURN_MODIFIER 0.5f
-#define BFG_MOVE_INTERRUPT_MODIFIER FALSE   // Focus Punch
-#define BFG_MOVE_RECHARGE_MODIFIER 0.5f
-#define BFG_MOVE_RAMPAGE_MODIFIER 0.5f
-#define BFG_MOVE_SELF_KO_MODIFIER 0.5f     // Self Destruct, Explosion
-#define BFG_MOVE_LIMITED_MODIFIER FALSE    // Dream Eater, Synchronoise
-
-#define BFG_MOVE_GENERIC_MODIFIER 1.0f  // Unhandled / General Case
 
 // Moves which will always be selected
 #define BFG_MOVE_ALWAYS_SELECT \
@@ -281,9 +183,6 @@
 #define BFG_MOVE_NEVER_SELECT \
     MOVE_HIDDEN_POWER, \
     MOVE_NONE,
-
-#endif // BFG_MOVE_EFFECT_MODIFIERS
-#endif // BFG_MOVE_SELECT_RANDOM
 
 // *** ITEMS ***
 
