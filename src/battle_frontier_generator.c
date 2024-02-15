@@ -70,10 +70,6 @@
 // *** MOVE ***
 #define NORMALISE(x) (((float)(x)) / 100.0f)
 
-// These lists need to be maintained manually :(
-#define IS_COUNTER_ATTACK(x) (((x) == MOVE_COUNTER) || ((x) == MOVE_MIRROR_COAT) || ((x) == MOVE_METAL_BURST))
-#define IS_DEFENSIVE_ATTACK(x) (((x) == MOVE_BODY_PRESS) || ((x) == MOVE_FOUL_PLAY) || ((x) == MOVE_SEISMIC_TOSS) || ((x) == MOVE_NIGHT_SHADE) || IS_COUNTER_ATTACK(x))
-
 #define IS_SUN_EFFECT(e) ((e == EFFECT_SUNNY_DAY))
 #define IS_RAIN_EFFECT(e) ((e == EFFECT_RAIN_DANCE))
 #define IS_SAND_EFFECT(e) ((e == EFFECT_SANDSTORM))
@@ -96,8 +92,11 @@
 
 #define IS_TERRAIN_ABILITY(a) (IS_MISTY_ABILITY(a) || IS_GRASSY_ABILITY(a) || IS_PSYCHIC_ABILITY(a) || IS_ELECTRIC_ABILITY(a))
 
-#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
+#define IS_OFF_BOOSTING_EFFECT(e) (((e) == EFFECT_NO_RETREAT) || ((e) == EFFECT_BULK_UP) || ((e) == EFFECT_COIL) || ((e) == EFFECT_CURSE) || ((e) == EFFECT_VICTORY_DANCE) || ((e) == EFFECT_DRAGON_DANCE) || ((e) == EFFECT_SHELL_SMASH) || ((e) == EFFECT_ATTACK_SPATK_UP) || ((e) == EFFECT_GEOMANCY) || ((e) == EFFECT_QUIVER_DANCE) || ((e) == EFFECT_SHIFT_GEAR) || ((e) == EFFECT_TAKE_HEART) || ((e) == EFFECT_CALM_MIND) || ((e) == EFFECT_BELLY_DRUM) || ((e) == EFFECT_ATTACK_UP_2) || ((e) == EFFECT_ATTACK_UP_USER_ALLY) || ((e) == EFFECT_ATTACK_ACCURACY_UP) || ((e) == EFFECT_ATTACK_UP) || ((e) == EFFECT_SPECIAL_ATTACK_UP_3) || ((e) == EFFECT_SPECIAL_ATTACK_UP_2) || ((e) == EFFECT_SPECIAL_ATTACK_UP))
+#define IS_DEF_BOOSTING_EFFECT(e) (((e) == EFFECT_COSMIC_POWER) || ((e) == EFFECT_STOCKPILE) || ((e) == EFFECT_DEFENSE_UP_3) || ((e) == EFFECT_DEFENSE_UP_2) || ((e) == EFFECT_DEFENSE_CURL) || ((e) == EFFECT_DEFENSE_UP) || (e == EFFECT_SPECIAL_DEFENSE_UP_2) || (e == EFFECT_SPECIAL_DEFENSE_UP))
+#define IS_SPEED_BOOSTING_EFFECT(e) (((e) == EFFECT_AUTOTOMIZE) || ((e) == EFFECT_SPEED_UP_2) || ((e) == EFFECT_SPEED_UP))
 #define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
+#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
 
 #define IS_PROTECTING_EFFECT(e) (((e) == EFFECT_PROTECT) || ((e) == EFFECT_MAT_BLOCK) || ((e) == EFFECT_ENDURE) || ((e) == EFFECT_SUBSTITUTE))
 #define IS_DOUBLES_PROTECT(x) (((x) == MOVE_WIDE_GUARD) || ((x) == MOVE_QUICK_GUARD) || ((x) == MOVE_CRAFTY_SHIELD) || ((x) == MOVE_MAT_BLOCK))
@@ -121,8 +120,8 @@
 #define IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) (IS_TYPE((t1),(t2),TYPE_FLYING) || IS_ABILITY((a1),(a2), ABILITY_LEVITATE))
 
 // *** SPECIES ***
-#define IS_BASE_SPECIES(x) (x == GET_BASE_SPECIES_ID(x))
-#define IS_REGIONAL_FORME(s) ((s->isAlolanForm == TRUE) || (s->isGalarianForm == TRUE) || (s->isHisuianForm == TRUE) || (s->isPaldeanForm))
+#define IS_BASE_SPECIES(x) ((x) == GET_BASE_SPECIES_ID(x))
+#define IS_REGIONAL_FORME(s) (((s)->isAlolanForm == TRUE) || ((s)->isGalarianForm == TRUE) || ((s)->isHisuianForm == TRUE) || ((s)->isPaldeanForm))
 #define IS_EEVEE(s) ((s) == SPECIES_EEVEE || (s) == SPECIES_VAPOREON || (s) == SPECIES_JOLTEON || (s) == SPECIES_FLAREON || (s) == SPECIES_ESPEON || (s) == SPECIES_UMBREON || (s) == SPECIES_LEAFEON || (s) == SPECIES_GLACEON || (s) == SPECIES_SYLVEON)
 #define IS_REGI(s) ((s) == SPECIES_REGIROCK || (s) == SPECIES_REGICE || (s) == SPECIES_REGISTEEL || (s) == SPECIES_REGIDRAGO || (s) == SPECIES_REGIELEKI || (s) == SPECIES_REGIGIGAS)
 #define IS_STARTER(s) ( \
@@ -153,12 +152,20 @@
 #define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
 
 // *** MOVES ***
-const u16 moveAlwaysSelectList[] = {
-    BFG_MOVE_ALWAYS_SELECT
+const u16 moveSinglesAlwaysSelectList[] = {
+    BFG_MOVE_ALWAYS_SELECT_SINGLES
 };
 
-const u16 moveNeverSelectList[] = {
-    BFG_MOVE_NEVER_SELECT
+const u16 moveDoublesAlwaysSelectList[] = {
+    BFG_MOVE_ALWAYS_SELECT_DOUBLES
+};
+
+const u16 moveSinglesNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT_SINGLES
+}; 
+
+const u16 moveDoublesNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT_DOUBLES
 }; 
 
 // *** ITEM ***
@@ -200,17 +207,6 @@ const u16 fixedIVMaxBSTLookup [] = {
 
 // *** FUNCTIONS ***
 
-#if BFG_MOVE_EFFECT_MODIFIERS == TRUE
-static float fpow(float x, s32 n) {
-    s32 i; 
-    float product = 1;
-    for(i = 0; i < n; i++){
-        product *= x;
-    }
-    return product;
-}
-#endif
-
 // Allow custom species banlists
 #if BFG_USE_CUSTOM_BANNED_SPECIES == TRUE
 
@@ -228,21 +224,21 @@ const u16 customBannedSpeciesLvlTent[] = {
 
 #endif
 
-static bool8 SpeciesValidForFrontierLevel(u16 speciesId) {
-
+static bool8 SpeciesValidForFrontierLevel(u16 speciesId) 
+{
     s32 i;
 
     // Get the level mode for the frontier
     u8 lvlMode = GET_LVL_MODE();
 
     // Switch on level mode
-    switch(lvlMode) {
+    switch(lvlMode) 
+    {
         case FRONTIER_LVL_50: {
             #if BFG_LVL_50_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
                 if (gFrontierBannedSpecies[i] == speciesId)
                     return FALSE; // Species banned
-            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvl50[i] != SPECIES_NONE; i++)
@@ -252,10 +248,9 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId) {
         }; break;
         case FRONTIER_LVL_OPEN: {
             #if BFG_LVL_OPEN_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
                 if (gFrontierBannedSpecies[i] == speciesId)
                     return FALSE; // Species banned
-            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlOpen[i] != SPECIES_NONE; i++)
@@ -265,10 +260,9 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId) {
         }; break;
         case FRONTIER_LVL_TENT: {
             #if BFG_LVL_TENT_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) {
+            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++)
                 if (gFrontierBannedSpecies[i] == speciesId)
                     return FALSE; // Species banned
-            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlTent[i] != SPECIES_NONE; i++)
@@ -281,8 +275,8 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId) {
     return TRUE;
 }
 
-static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) {
-
+static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) 
+{
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     
     // Dereference types/abilities
@@ -292,7 +286,8 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) {
     u16 a2 = species->abilities[1];
 
     // Switch on trainer class
-    switch(trainerClass) {
+    switch(trainerClass) 
+    {
         case TRAINER_CLASS_RUIN_MANIAC: {
             if ((species->isHisuianForm) || (species->isParadoxForm) || IS_REGI(speciesId))
                 return TRUE;
@@ -451,10 +446,12 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) {
     return FALSE;
 }
 
-static u8 GetNatureFromStats(u8 posStat, u8 negStat) {
+static u8 GetNatureFromStats(u8 posStat, u8 negStat) 
+{
     s32 i;
     // Loop over the natures
-    for(i=0; i<NUM_NATURES; i++) { 
+    for(i=0; i<NUM_NATURES; i++) 
+    { 
         // Return matching nature (if found)
         if ((gNatureInfo[i].posStat == posStat) && 
         (gNatureInfo[i].negStat == negStat))
@@ -464,8 +461,8 @@ static u8 GetNatureFromStats(u8 posStat, u8 negStat) {
     return NATURE_HARDY;
 }
 
-static u8 GetSpeciesNature(u16 speciesId) {
-
+static u8 GetSpeciesNature(u16 speciesId) 
+{
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
     #if BFG_NATURE_SELECT_RANDOM == TRUE
@@ -509,7 +506,8 @@ static u8 GetSpeciesNature(u16 speciesId) {
     }
 
     // If negative speed natures are allowed
-    if (BFG_PRIORITISE_ATK_SPA_OVER_SPE && negStatValue > species->baseSpeed) {
+    if (BFG_PRIORITISE_ATK_SPA_OVER_SPE && negStatValue > species->baseSpeed) 
+    {
         negStat = STAT_SPEED;
         negStatValue = species->baseSpeed;
     }
@@ -521,7 +519,8 @@ static u8 GetSpeciesNature(u16 speciesId) {
 
         temp1 = (posStatValue + RANDOM_OFFSET());
 
-        switch(i) {
+        switch(i) 
+        {
             case STAT_ATK: {
                 temp2 = ((species->baseAttack) + RANDOM_OFFSET());
                 if ((temp2 > temp1) || ((temp2 == temp1) && (
@@ -586,8 +585,8 @@ static u8 GetSpeciesNature(u16 speciesId) {
     #endif
 }
 
-static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) {
-
+static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) 
+{
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
     u8 evs = 0;
@@ -640,19 +639,23 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) {
         valR = (valT + RANDOM_OFFSET());
 
         // If stat 1 is undefined, or new stat is greater
-        if (stat1 == 0xFF || ((val2 > val1) && (valR > (val1 + RANDOM_OFFSET())))) {
+        if (stat1 == 0xFF || ((val2 > val1) && (valR > (val1 + RANDOM_OFFSET())))) 
+        {
             stat1 = i; 
             val1 = valT;
         }
         // If stat 2 is undefined, or new stat is greater
-        else if (stat2 == 0xFF || ((val2 < val1) && (valR > (val2 + RANDOM_OFFSET())))) {
+        else if (stat2 == 0xFF || ((val2 < val1) && (valR > (val2 + RANDOM_OFFSET())))) 
+        {
             stat2 = i; 
             val2 = valT;
         }
         // Both stat 1 and stat 2 match
-        else if ((val2 == val1) && (valR > (val2 + RANDOM_OFFSET()))) {
+        else if ((val2 == val1) && (valR > (val2 + RANDOM_OFFSET()))) 
+        {
             // Replace stat1
-            if (RANDOM_BOOL()) {
+            if (RANDOM_BOOL()) 
+            {
                 stat1 = i; 
                 val1 = valT;
             }
@@ -682,54 +685,162 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) {
     return evs;
 }
 
-static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
+static u8 GetSpreadType(u8 natureId, u8 evs){
+    // Spread investment counters
+    u8 offensive=0,defensive=0;
+
+    // hp/spe can be used for either, 
+    // irrelevant for this calc
+
+    // Check offensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_ATTACK))
+        offensive++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_ATTACK))
+        offensive++;
+
+    // Check defensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE))
+        defensive++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_DEFENSE))
+        defensive++;
+
+    // Compare offensive / defensive evs
+    if (offensive > defensive)
+        return BFG_SPREAD_TYPE_OFFENSIVE;
+    else if (offensive < defensive)
+        return BFG_SPREAD_TYPE_DEFENSIVE;
+
+    // Both values match
+
+    // Compare offensive / defensive nature
+    if ((gNatureInfo[natureId].posStat == STAT_ATK) || (gNatureInfo[natureId].posStat == STAT_SPATK))
+        return BFG_SPREAD_TYPE_OFFENSIVE;
+    else if ((gNatureInfo[natureId].posStat == STAT_DEF) || (gNatureInfo[natureId].posStat == STAT_SPDEF))
+        return BFG_SPREAD_TYPE_DEFENSIVE;
+
+    // Comparison failed
+    return RANDOM_BOOL(); // Coinflip
+}
+
+static u8 GetSpreadCategory(u8 natureId, u8 evs){
+    // Spread category counters
+    u8 physical=0,special=0;
+
+    // Check offensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_ATTACK))
+        physical++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_ATTACK))
+        special++;
+
+    // Compare physical / special evs
+    if (physical > special)
+        return BFG_SPREAD_CATEGORY_PHYSICAL;
+    else if (physical < special)
+        return BFG_SPREAD_CATEGORY_SPECIAL;
+
+    // Physical attack nature-boosted, or special is nature-reduced
+    if ((gNatureInfo[natureId].posStat == STAT_ATK) || (gNatureInfo[natureId].negStat == STAT_SPATK))
+        return BFG_SPREAD_CATEGORY_PHYSICAL;
+
+    // Special attack nature-boosted, or physical is nature-reduced
+    if ((gNatureInfo[natureId].posStat == STAT_SPATK) || (gNatureInfo[natureId].negStat == STAT_ATK))
+        return BFG_SPREAD_CATEGORY_SPECIAL;
+
+    // Comparison failed
+    return BFG_SPREAD_CATEGORY_MIXED; // Mixed nature
+}
+
+static void ResetMoves(u8 index)
 {
     s32 i;
-
-    // Friendship level
-    // This is changed for Frustration
-    u8 friendship = FRIENDSHIP_MAX;
-
-    // Number of moves learnt
-    u8 moveCount = 0;
-
-    // Current move
-    u16 moveId;
-
-    // Default Moves (i.e. Level-Up Moves for specific level)
-    #if BFG_MOVE_SELECTION_METHOD == BFG_MOVE_SELECT_DEFAULT
-    // Keeps track of if move slot '0' will be replaced by
-    // the required move for the species, if set.
-    bool8 needRequiredMove = (requiredMove != MOVE_NONE);
-    
-    // Loop over all of the moves
     for(i=0; i<MAX_MON_MOVES; i++)
+        SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, i);
+}
+
+static bool32 IsNeverSelectMove(u16 moveId) 
+{
+    if (IS_DOUBLES())
     {
-        // Get the currently-selected move for the species
-        moveId = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + i);
+        for(s32 i=0; moveDoublesNeverSelectList[i] != MOVE_NONE; i++)
+            if (moveDoublesNeverSelectList[i] == moveId)
+                return TRUE; // Never select
+    }
+    else // Not doubles
+    {
+        for(s32 i=0; moveSinglesNeverSelectList[i] != MOVE_NONE; i++)
+            if (moveSinglesNeverSelectList[i] == moveId)
+                return TRUE; // Never select
+    }
+    return FALSE;
+}
 
-        // Need required move is true, and current move matches
-        if (needRequiredMove && requiredMove == moveId) 
-            needRequiredMove = FALSE; // Move already present
+static bool32 IsAlwaysSelectMove(u16 moveId) 
+{
+    if (IS_DOUBLES())
+    {
+        for(s32 i=0; moveDoublesAlwaysSelectList[i] != MOVE_NONE; i++)
+            if (moveDoublesAlwaysSelectList[i] == moveId)
+                return TRUE; // Never select
+    }
+    else // Not doubles
+    {
+        for(s32 i=0; moveSinglesAlwaysSelectList[i] != MOVE_NONE; i++)
+            if (moveSinglesAlwaysSelectList[i] == moveId)
+                return TRUE; // Never select
+    }
+    return FALSE;
+}
 
-        // Move not none
-        if (moveId != MOVE_NONE) 
-        {
-            moveCount++; // Increment move count
+static u16 GetMovePower(u16 moveId)
+{
+    const struct MoveInfo* move = &(gMovesInfo[moveId]);
 
-            // Special case for frustration
-            if (moveId == MOVE_FRUSTRATION)
-                friendship = 0;
-        }
+    // Dereference move power
+    u16 power = move->power;
+
+    // Special Cases
+    switch(moveId) 
+    {
+        case MOVE_FRUSTRATION:
+        case MOVE_RETURN:
+            power = 102;
+        break;
+        case MOVE_KNOCK_OFF:
+            power = 97;
+        break;
     }
 
-    // Set first index to required move
-    if (needRequiredMove)
-        SetMonMoveSlot(&gEnemyParty[index], requiredMove, 0);
+    // Apply multi-hit modifier
+    if (move->strikeCount >= 0)
+        power *= move->strikeCount;
 
-    #else // Any other selection method (e.g. Random, Heuristic)
-    s32 j;
-    u16 levelUpMoves, teachableMoves, moveIndex, moveCount;
+    return power;
+}
+
+static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
+{
+    // If move is duplicate, never select move, or none - Reject new move
+    if ((moveNew == moveOld) || (moveNew == MOVE_NONE))
+        return moveOld;
+
+    // Replace old move if none
+    if (moveOld == MOVE_NONE)
+        return moveNew;
+    
+    // TODO: Implement actual logic
+
+    // Randomly return either
+    if (RANDOM_BOOL())
+        return moveNew;
+    return moveOld;
+}
+
+#define CATEGORY(m) (gMovesInfo[m].category)
+
+static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
+{
+    s32 i, j;
+    u16 moveIndex;
 
     u16 moves[MAX_MON_MOVES] = {
         MOVE_NONE,
@@ -738,11 +849,23 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         MOVE_NONE,
     };
 
+    // Number of moves per type
+    u8 types[NUMBER_OF_MON_TYPES] = {
+        0,0,0,0,0,
+        0,0,0,0,0,
+        0,0,0,0,0,
+        0,0,0,0,
+    };
+
     const struct LevelUpMove* levelUpLearnset;
     const u16 * teachableLearnset;
 
-    levelUpMoves = 0;
-    teachableMoves = 0;
+    u16 levelUpMoves = 0;
+    u16 teachableMoves = 0;
+
+    // Get offensive/defensive & physical/special split
+    u8 spreadType = GetSpreadType(nature, evs);
+    u8 spreadCategory = GetSpreadCategory(nature, evs);
 
     #if BFG_MOVE_ALLOW_LEVEL_UP == TRUE
     levelUpLearnset = GetSpeciesLevelUpLearnset(speciesId);
@@ -761,98 +884,224 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     // Duplicate move tracker
     u16 failures = 0;
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
-    {
-        DebugPrintf("Selecting move %d ...", i);
+    // Friendship level
+    // This is changed for Frustration
+    u8 friendship = FRIENDSHIP_MAX;
 
-        moveId = MOVE_NONE;
+    // Number of moves learnt
+    u8 moveCount = 0;
 
-        // First move index, and required move is set
-        if (i == 0 && requiredMove != MOVE_NONE) {
-            moveId = requiredMove;
-        }
-        else  // General case
-        {
-            // While no move found, and failure limit has not been reached
-            while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) {
-                #if BFG_MOVE_SELECT_RANDOM == TRUE
-                moveIndex = Random() % (teachableMoves + levelUpMoves);
-                // Teachable learnset
-                if (moveIndex >= levelUpMoves) 
-                {
-                    moveIndex %= levelUpMoves;
+    // Current move
+    u16 moveId;
 
-                    moveId = teachableLearnset[moveIndex];
-                }
-                else // Level-up learnset
-                {
-                    moveId = levelUpLearnset[moveIndex].move;
-                }
-                // Check previous moves
-                for(j = 0; j < i; j++) {
-                    if (moves[j] == moveId) {
-                        moveId = MOVE_NONE;
-                        failures++;
-                        break;
-                    }
-                }
+    // Get the method for selecting the moves
+    u8 method = BFG_MOVE_SELECTION_METHOD;
 
-                // Move found
-                if moveId != MOVE_NONE:
-                    moveCount++;
-                #else
-                // Default rating
-                bestRating = 0;
-
-                DebugPrintf("Processing level up moves ...");
-
-                for(j=0; j < levelUpMoves; j++) 
-                {
-                    rating = GetMoveRating(levelUpLearnset[j].move, 
-                        speciesId, nature, evs, abilityNum, moves);
-
-                    if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
-                        moveId = levelUpLearnset[j].move;
-                        bestRating = rating;
-                    }
-                }
-
-                DebugPrintf("Processing teachable moves ...");
-
-                for(j=0; j < teachableMoves; j++)
-                {
-                    rating = GetMoveRating(teachableLearnset[j], 
-                        speciesId, nature, evs, abilityNum, moves);
-
-                    if (rating > bestRating || ((rating == bestRating) && RANDOM_BOOL())) {
-                        moveId = teachableLearnset[j];
-                        bestRating = rating;
-                    }
-                }
-
-                // Failed to find move
-                if (bestRating == 0) {
-                    moveId = MOVE_NONE;
-                    failures++;
-                }
-                else // Found move
-                    moveCount++;
-                #endif
-            }
-        }
-
-        // Otherwise, left as MOVE_NONE
-        
-        // Set the move slot data
-        SetMonMoveSlot(&gEnemyParty[index], moveId, i);
-        moves[i] = moveId;
-
-        // Frustration is more powerful the
-        // lower the pokemon's friendship is.
-        if (moveId == MOVE_FRUSTRATION)
-            friendship = 0;
-    }
+    #if BFG_VAR_MOVE_SELECTION_METHOD != 0
+    if (method == BFG_MOVE_SELECT_VARIABLE) 
+        method = VarGet(BFG_VAR_MOVE_SELECTION_METHOD);
     #endif
+
+    // Switch on selection method
+    switch(method) 
+    {
+        // Random (Fast) Selection
+        case BFG_MOVE_SELECT_RANDOM: {
+            for (i = 0; i < MAX_MON_MOVES; i++)
+            {
+                DebugPrintf("Selecting move %d ...", i);
+
+                moveId = MOVE_NONE;
+
+                // First move index, and required move is set
+                if (i == 0 && requiredMove != MOVE_NONE) 
+                    moveId = requiredMove;
+                else  // General case
+                {
+                    // While no move found, and failure limit has not been reached
+                    while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                    {
+                        // Sample random move index
+                        moveIndex = Random() % (teachableMoves + levelUpMoves);
+
+                        // Teachable learnset
+                        if (moveIndex >= levelUpMoves) 
+                        {
+                            moveIndex %= levelUpMoves;
+
+                            moveId = teachableLearnset[moveIndex];
+                        }
+                        else // Level-up learnset
+                            moveId = levelUpLearnset[moveIndex].move;
+
+                        // Check banned moves
+                        if (IsNeverSelectMove(moveId)) 
+                        {
+                            moveId = MOVE_NONE;
+                            failures++;
+                            break;
+                        }
+                        
+                        // Check previous moves
+                        for(j = 0; j < i; j++) 
+                        {
+                            if (GetMonData(&gEnemyParty[index], MON_DATA_MOVE1 + j) == moveId)
+                            {
+                                moveId = MOVE_NONE;
+                                failures++;
+                                break;
+                            }
+                        }
+
+                        // Due to the nature of this algorithm, 
+                        // moveAlwaysSelectList is not checked
+
+                        // Move found
+                        if (moveId != MOVE_NONE)
+                            moveCount++;
+                    }
+                }
+
+                // Otherwise, left as MOVE_NONE
+                
+                // Set the move slot data
+                SetMonMoveSlot(&gEnemyParty[index], moveId, i);
+
+                // Frustration is more powerful the
+                // lower the pokemon's friendship is.
+                if (moveId == MOVE_FRUSTRATION)
+                    friendship = 0;
+            }
+        }; break;
+        // Filtered Selection
+        case BFG_MOVE_SELECT_FILTERED:
+        case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY: {
+            
+            // Current / new move id
+            u8 moveCategory;
+            
+            // Always-selected move
+            bool8 alwaysSelect;
+
+            // Moves that cannot be replaced
+            bool8 fixed[MAX_MON_MOVES] = {
+                FALSE, FALSE, FALSE, FALSE
+            };
+
+            // Number of required attacking moves
+            // This is 3-4 for offensive mons, and 1-2 for defensive mons
+            u8 requiredAttacks = (spreadType == BFG_SPREAD_TYPE_OFFENSIVE) ? RANDOM_RANGE(3,4) : RANDOM_RANGE(1,2);
+
+            // Clear moves list
+            ResetMoves(index);
+
+            // Required move provided
+            if (requiredMove != MOVE_NONE)
+            {
+                // Status move
+                if (CATEGORY(requiredMove) == DAMAGE_CATEGORY_STATUS)
+                {
+                    moves[requiredAttacks + 1] = requiredMove;
+                    fixed[requiredAttacks + 1] = TRUE;
+                }
+                else // Offensive move
+                {
+                    moves[0] = requiredMove;
+                    fixed[0] = TRUE;
+                }
+            }
+
+            // Check level-up moves
+            for(i=0; i < levelUpMoves; i++)
+            {
+                moveId = levelUpLearnset[i].move;
+
+                if (IsNeverSelectMove(moveId))
+                    continue; // Skip never-select move
+                
+                if (IsAlwaysSelectMove(moveId))
+                    alwaysSelect = TRUE; // Always-select move
+
+                moveCategory = CATEGORY(moveId);
+
+                // Move is a status move
+                if (moveCategory == DAMAGE_CATEGORY_STATUS) 
+                {
+                    for(j=(requiredAttacks + 1); j<MAX_MON_MOVES; j++)
+                    {
+                        if (fixed[j] == TRUE)
+                            continue; // Skip fixed moves
+                        else if (alwaysSelect)
+                        {
+                            moves[j] = moveId;
+                            fixed[j] = TRUE;
+                        }
+                        else // Need to compare
+                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
+                    }
+                }
+                else // Physical/Special Move
+                {
+                    if ((!alwaysSelect) && ((moveCategory == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) || 
+                        (moveCategory == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL)))
+                        continue; // Skip mismatched move
+
+                    for(j=0; j<requiredAttacks; j++)
+                    {
+                        if (fixed[j] == TRUE)
+                            continue; // Skip fixed moves
+                        else if (alwaysSelect)
+                        {
+                            moves[j] = moveId;
+                            fixed[j] = TRUE;
+                        }
+                        else // Need to compare
+                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
+                    }
+                }
+            }
+
+            // Check teachable moves
+            for(i=0; i<teachableMoves; i++)
+            {
+                moveId = teachableLearnset[i];
+            }
+
+        }; break;
+        // Default (Level-Up / Required Move Only)
+        default: 
+            DebugPrintf("Unhandled move selection method: %d, falling back to default method ...", method);
+        case BFG_MOVE_SELECT_DEFAULT: {
+            // Keeps track of if move slot '0' will be replaced by
+            // the required move for the species, if set.
+            bool8 needRequiredMove = (requiredMove != MOVE_NONE);
+            
+            // Loop over all of the moves
+            for(i=0; i<MAX_MON_MOVES; i++)
+            {
+                // Get the currently-selected move for the species
+                moveId = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + i);
+
+                // Need required move is true, and current move matches
+                if (needRequiredMove && requiredMove == moveId) 
+                    needRequiredMove = FALSE; // Move already present
+
+                // Move not none
+                if (moveId != MOVE_NONE) 
+                {
+                    moveCount++; // Increment move count
+
+                    // Special case for frustration
+                    if (moveId == MOVE_FRUSTRATION)
+                        friendship = 0;
+                }
+            }
+
+            // Set first index to required move
+            if (needRequiredMove)
+                SetMonMoveSlot(&gEnemyParty[index], requiredMove, 0);
+        }; break;
+    }
 
     // Update friendship
     SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
@@ -860,17 +1109,17 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     return moveCount;
 }
 
-static bool32 GetSpeciesItemCheckUnique(u16 itemId, u8 index) {
+static bool32 GetSpeciesItemCheckUnique(u16 itemId, u8 index) 
+{
     s32 i;
-    for(i=0; i < index; i++) {
+    for(i=0; i < index; i++)
         if (GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM) == itemId)
             return FALSE; // Duplicate itemId
-    }
     return TRUE; // Unique itemId
 }
 
-static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abilityNum) {
-
+static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abilityNum) 
+{
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct Nature * nature = &(gNatureInfo[natureId]);
     const struct MoveInfo * move; 
@@ -916,8 +1165,8 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
     uq4_12_t typeModifier[NUMBER_OF_MON_TYPES];
 
     // Loop over all of the (attacking) types
-    for(i = 0; i < NUMBER_OF_MON_TYPES; i++) {
-
+    for(i = 0; i < NUMBER_OF_MON_TYPES; i++) 
+    {
         // Initialise move counter
         moveTypeCount[i] = 0;
 
@@ -925,16 +1174,13 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         typeModifier[i] = uq4_12_multiply(UQ_4_12(1.0), GetTypeModifier(i, species->types[0]));
 
         // If the species is not a mono-type Pokemon
-        if ((species->types[0]) != (species->types[1])) {
-
-            // Apply secondary type modifier
+        if ((species->types[0]) != (species->types[1]))
             typeModifier[i] = uq4_12_multiply(typeModifier[i], GetTypeModifier(i, species->types[1]));
-        }
     }
 
     // Loop over the species moves
-    for (i = 0; i < MAX_MON_MOVES; i++) {
-
+    for (i = 0; i < MAX_MON_MOVES; i++) 
+    {
         moveId = GetMonData(&gEnemyParty[index], (MON_DATA_MOVE1 + i));
         move = &(gMovesInfo[moveId]);
 
@@ -1066,8 +1312,8 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
     u16 recycleItemsLength = i;
 
     // Loop until failure limit is reached (or item found)
-    for(f=0; f < BFG_ITEM_SELECT_FAILURE_LIMIT; f++) {
-
+    for(f=0; f < BFG_ITEM_SELECT_FAILURE_LIMIT; f++) 
+    {
         // Default item id
         itemId = ITEM_NONE;
 
@@ -1076,6 +1322,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         // Eviolite
         if ((hasRecycle == FALSE) && hasEvolution == TRUE && RANDOM_CHANCE(BFG_ITEM_EVIOLITE_SELECTION_CHANCE))
             itemId = ITEM_EVIOLITE;
+
+        // Booster Energy
+        if ((itemId == ITEM_NONE) && ((abilityId == ABILITY_PROTOSYNTHESIS) && (abilityId == ABILITY_QUARK_DRIVE)) && RANDOM_CHANCE(BFG_ITEM_BOOSTER_ENERGY_SELECTION_CHANCE))
+            itemId = ITEM_BOOSTER_ENERGY;
 
         // Focus Sash (No investment in HP/Def/SpDef)
         if ((CHECK_EVS(evs,F_EV_SPREAD_HP) == FALSE) && (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) == FALSE) && (CHECK_EVS(evs,F_EV_SPREAD_SP_DEFENSE)) && RANDOM_CHANCE(BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE))
@@ -1086,25 +1336,25 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             itemId = ITEM_ASSAULT_VEST;
 
         // Choice Items
-        if ((hasRecycle == FALSE) && itemId == ITEM_NONE && ((numPhysical + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE))
+        if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && ((numPhysical + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE))
             itemId = ITEM_CHOICE_BAND;
 
-        if ((hasRecycle == FALSE) && itemId == ITEM_NONE && ((numSpecial + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE))
+        if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && ((numSpecial + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE))
             itemId = ITEM_CHOICE_SPECS;
 
-        if ((hasRecycle == FALSE) && itemId == ITEM_NONE && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
-            itemId = ITEM_CHOICE_SCARF;        
+        if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
+            itemId = ITEM_CHOICE_SCARF;   
 
         // Life Orb
-        if ((hasRecycle == FALSE) && itemId == ITEM_NONE && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
+        if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
             itemId = ITEM_LIFE_ORB;
 
         // Weakness Policy
-        if (itemId == ITEM_NONE && (numOffensive >= BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE))
             itemId = ITEM_WEAKNESS_POLICY;
 
         // Power Herb (Multi-turn moves)
-        if (itemId == ITEM_NONE && hasTwoTurn && RANDOM_CHANCE(BFG_ITEM_POWER_HERB_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && hasTwoTurn && RANDOM_CHANCE(BFG_ITEM_POWER_HERB_SELECTION_CHANCE))
             itemId = ITEM_POWER_HERB;
 
         // Mental Herb (Has status moves)
@@ -1126,11 +1376,11 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                     itemId = ITEM_LOADED_DICE;
 
             // Flame Orb (Guts, with at least one Physical attack)
-            if (itemId == ITEM_NONE && ((abilityId == ABILITY_GUTS && (numPhysical + numDynamic) >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) || (abilityId == ABILITY_FLARE_BOOST && (numSpecial + numDynamic) >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED)) && RANDOM_CHANCE(BFG_ITEM_FLAME_ORB_SELECTION_CHANCE))
+            if ((itemId == ITEM_NONE) && ((abilityId == ABILITY_GUTS && (numPhysical + numDynamic) >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED) || (abilityId == ABILITY_FLARE_BOOST && (numSpecial + numDynamic) >= BFG_ITEM_FLAME_ORB_MOVES_REQUIRED)) && RANDOM_CHANCE(BFG_ITEM_FLAME_ORB_SELECTION_CHANCE))
                 itemId = ITEM_FLAME_ORB;
 
             // Toxic Orb (Toxic Heal / Toxic Boost)
-            if (itemId == ITEM_NONE && ((abilityId == ABILITY_TOXIC_BOOST && (numPhysical + numDynamic) >= BFG_ITEM_TOXIC_ORB_MOVES_REQUIRED) || abilityId == ABILITY_POISON_HEAL) && RANDOM_CHANCE(BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE))
+            if ((itemId == ITEM_NONE) && ((abilityId == ABILITY_TOXIC_BOOST && (numPhysical + numDynamic) >= BFG_ITEM_TOXIC_ORB_MOVES_REQUIRED) || abilityId == ABILITY_POISON_HEAL) && RANDOM_CHANCE(BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE))
                 itemId = ITEM_TOXIC_ORB;
 
             // Light Clay (Has screens)
@@ -1285,11 +1535,11 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         // *** Common Berries ***
 
         // Sitrus Berry
-        if (itemId == ITEM_NONE && RANDOM_CHANCE(BFG_ITEM_SITRUS_BERRY_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_SITRUS_BERRY_SELECTION_CHANCE))
             itemId = ITEM_SITRUS_BERRY;
 
         // Lum Berry
-        if (itemId == ITEM_NONE && RANDOM_CHANCE(BFG_ITEM_LUM_BERRY_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_LUM_BERRY_SELECTION_CHANCE))
             itemId = ITEM_LUM_BERRY;
 
         // Fiwam Berries
@@ -1320,14 +1570,16 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 {
                     case UQ_4_12(2.0): // 2x Weakness
                         // Skip if we have already found a 4x weakness
-                        if ((currentValue != UQ_4_12(4.0)) && (RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE))) {
+                        if ((currentValue != UQ_4_12(4.0)) && (RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE))) 
+                        {
                             // Update selected type, value
                             currentValue = typeModifier[i];
                             currentType = i;
                         }
                     break;
                     case UQ_4_12(4.0): // 4x Weakness
-                        if (RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE)) {
+                        if (RANDOM_CHANCE(BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE)) 
+                        {
                             // Update selected type, value
                             currentValue = typeModifier[i];
                             currentType = i;
@@ -1337,7 +1589,8 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             }
 
             // Switch on type selected
-            switch(currentType) {
+            switch(currentType) 
+            {
                 case TYPE_NORMAL: itemId = ITEM_CHILAN_BERRY; break;
                 case TYPE_FIRE: itemId = ITEM_OCCA_BERRY; break;
                 case TYPE_WATER: itemId = ITEM_PASSHO_BERRY; break;
@@ -1380,7 +1633,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         }
 
         // Chesto Berry (Has rest)
-        if (itemId == ITEM_NONE && (hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && (hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
             itemId = ITEM_CHESTO_BERRY;
 
         // Wide Lens / Blunder Policy (Inaccurate moves)
@@ -1401,22 +1654,22 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                     itemId = ITEM_PUNCHING_GLOVE;
 
             // Black Sludge (For poison types)
-            if (itemId == ITEM_NONE && IS_TYPE(species->types[0], species->types[1], TYPE_POISON) && RANDOM_CHANCE(BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE))
+            if ((itemId == ITEM_NONE) && IS_TYPE(species->types[0], species->types[1], TYPE_POISON) && RANDOM_CHANCE(BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE))
                 itemId = ITEM_BLACK_SLUDGE;
 
             // Terrain Extender (Terrain Moves / Abilities)
-            if (itemId == ITEM_NONE && (hasTerrain == TRUE || IS_TERRAIN_ABILITY(abilityId)) && RANDOM_CHANCE(BFG_ITEM_TERRAIN_EXTENDER_SELECTION_CHANCE))
+            if ((itemId == ITEM_NONE) && (hasTerrain == TRUE || IS_TERRAIN_ABILITY(abilityId)) && RANDOM_CHANCE(BFG_ITEM_TERRAIN_EXTENDER_SELECTION_CHANCE))
                 itemId = ITEM_TERRAIN_EXTENDER;
 
             // Weather Extending Items (Weather-Specific Moves/Abilities)
-            if (itemId == ITEM_NONE && (hasWeather != MOVE_NONE) && RANDOM_CHANCE(BFG_ITEM_WEATHER_EXTENDER_SELECTION_CHANCE)) 
+            if ((itemId == ITEM_NONE) && (hasWeather != MOVE_NONE) && RANDOM_CHANCE(BFG_ITEM_WEATHER_EXTENDER_SELECTION_CHANCE)) 
             {
                 switch(hasWeather)
                 {
-                    case MOVE_RAIN_DANCE: 
+                    case MOVE_RAIN_DANCE:
                         itemId = ITEM_DAMP_ROCK; 
                     break; 
-                    case MOVE_SUNNY_DAY: 
+                    case MOVE_SUNNY_DAY:
                         itemId = ITEM_HEAT_ROCK;
                     break;
                     case MOVE_SANDSTORM:
@@ -1437,14 +1690,15 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             itemId = ITEM_AIR_BALLOON;
 
         // Adrenaline Orb (Defiant / Competitive)
-        if (itemId == ITEM_NONE && ((abilityId == ABILITY_DEFIANT) || (abilityId == ABILITY_COMPETITIVE)) && RANDOM_CHANCE(BFG_ITEM_ADRENALINE_ORB_SELECTION_CHANCE))
+        if ((itemId == ITEM_NONE) && ((abilityId == ABILITY_DEFIANT) || (abilityId == ABILITY_COMPETITIVE)) && RANDOM_CHANCE(BFG_ITEM_ADRENALINE_ORB_SELECTION_CHANCE))
             itemId = ITEM_ADRENALINE_ORB;
 
         // Stat Boosting Berries
         if ((itemId != ITEM_NONE) && RANDOM_CHANCE(BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE)) 
         {
             // Get the stat boosting berry for the nature-boosted stat
-            switch(nature->posStat) {
+            switch(nature->posStat) 
+            {
                 case STAT_ATK: 
                     itemId = ITEM_LIECHI_BERRY; 
                 case STAT_DEF: 
@@ -1480,8 +1734,8 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
     return ITEM_NONE;
 }
 
-static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex, u16 move, u16 item) {
-
+static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex, u16 move, u16 item) 
+{
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
 
@@ -1491,7 +1745,8 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     u16 formeId = speciesId;
 
     // Forme is not default
-    if (formeIndex != FORME_DEFAULT) {
+    if (formeIndex != FORME_DEFAULT) 
+    {
         // Get the species form change table
         formChanges = GetSpeciesFormChanges(speciesId);
 
@@ -1510,13 +1765,15 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     );
 
     // If this species has a hidden ability
-    if (((species->abilities[1] != ABILITY_NONE) && (species->abilities[2] != ABILITY_NONE)) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) {
+    if (((species->abilities[1] != ABILITY_NONE) && (species->abilities[2] != ABILITY_NONE)) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) 
+    {
         abilityNum = 3; // Hidden ability index
         SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
     }
 
     // No forme change
-    if (formeId == speciesId) {
+    if (formeId == speciesId) 
+    {
         // Get the actual selected ability for the species
         abilityNum = GetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM);
     }
@@ -1531,8 +1788,8 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     moveCount = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
 
     // Meets the minimum number of moves to accept
-    if (moveCount >= BFG_MOVE_SELECT_MINIMUM) {
-
+    if (moveCount >= BFG_MOVE_SELECT_MINIMUM) 
+    {
         DebugPrintf("Moves found: %d ...", moveCount);
 
         // Currently has no held item
@@ -1562,13 +1819,12 @@ void DebugTrainerPokemon(u8 index)
     DebugPrintf("IVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_IV),GetMonData(pokemon,MON_DATA_ATK_IV), GetMonData(pokemon,MON_DATA_DEF_IV), GetMonData(pokemon,MON_DATA_SPATK_IV), GetMonData(pokemon,MON_DATA_SPDEF_IV), GetMonData(pokemon,MON_DATA_SPEED_IV));
     DebugPrintf("EVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_EV),GetMonData(pokemon,MON_DATA_ATK_EV), GetMonData(pokemon,MON_DATA_DEF_EV), GetMonData(pokemon,MON_DATA_SPATK_EV), GetMonData(pokemon,MON_DATA_SPDEF_EV), GetMonData(pokemon,MON_DATA_SPEED_EV));
     DebugPrintf("%d nature", GetNature(pokemon));
-    for(i=0; i<MAX_MON_MOVES; i++) {
+    for(i=0; i<MAX_MON_MOVES; i++)
         DebugPrintf("- %d", GetMonData(pokemon, MON_DATA_MOVE1 + i));
-    }
 }
 
-void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
-
+void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) 
+{
     u8 forme;
     u16 speciesId, bst;
     bool32 hasMega,hasZMove;
@@ -1596,10 +1852,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
     DebugPrintf("Finding sets for trainer class %d ...", trainerClass);
 
     // Loop over all species
-    for(i = 0; i < NUM_SPECIES; i++) {
-
+    for(i = 0; i < NUM_SPECIES; i++) 
+    {
         // Break loop if mon limit reached
-        if (bfMonCount == BFG_TRAINER_CLASS_MON_LIMIT) {
+        if (bfMonCount == BFG_TRAINER_CLASS_MON_LIMIT) 
+        {
             DebugPrintf("Trainer Class Mon %d Count limit reached: %d, modifying limit/constraints ...", trainerClass, bfMonCount);
             break;
         }
@@ -1622,9 +1879,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
         // Get base stat total
         bst = GetTotalBaseStat(i);
 
-        // If species is above bst limit, or below than the minimum, and does not have a mega (or megas are not enabled)
-        if ((bst > maxBST) || ((bst < minBST) && (!((fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && HAS_MEGA_EVOLUTION(i)))))
-            continue; 
+        // Check bst limit (and special cases)
+        if ((bst > maxBST) || ((bst < minBST) && (
+            // Special case for rotom formes
+            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) || 
+            // Special case for mega evolutions
+            (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
+        )))
+            continue;
 
         // Add species to mon set
         monSet[bfMonCount++] = i;
@@ -1637,9 +1899,12 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
     // successfully chosen. The trainer's party may not have duplicate pokemon species
     // or duplicate held items.
 
-    i = 0;
-    while(i != monCount) {
+    hasZMove = FALSE;
+    hasMega = FALSE;
 
+    i = 0;
+    while(i != monCount) 
+    {
         DebugPrintf("Generating mon number %d ...", i);
 
         // Sample random species from the mon count
@@ -1664,12 +1929,13 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
 
         // Get species forme change table
         formChanges = GetSpeciesFormChanges(speciesId);
-        if (formChanges != NULL) {
-           
+        if (formChanges != NULL) 
+        {
             DebugPrintf("Checking for megas/z/other formes ...");
      
             // Switch on the species
-            switch(speciesId) {
+            switch(speciesId) 
+            {
                 case SPECIES_PIKACHU: {
                     if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PIKANIUM_Z)) 
                     {
@@ -1732,9 +1998,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_GASTRODON_EAST_SEA;
                 }; break;
                 case SPECIES_ROTOM: {
-                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)) {
+                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_ROTOM_HEAT, SPECIES_DIALGA_ORIGIN);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_ROTOM_HEAT: move = MOVE_OVERHEAT; break;
                             case SPECIES_ROTOM_WASH: move = MOVE_HYDRO_PUMP; break;
                             case SPECIES_ROTOM_FROST: move = MOVE_BLIZZARD; break;
@@ -1760,9 +2028,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_SHAYMIN_SKY;
                 }; break;
                 case SPECIES_ARCEUS: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_ARCEUS)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_ARCEUS)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_ARCEUS_FIGHTING, SPECIES_BASCULIN_BLUE_STRIPED);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_ARCEUS_FIGHTING: item = CHECK_ARCEUS_ZMOVE ? ITEM_FIGHTINIUM_Z : ITEM_FIST_PLATE; if (item == ITEM_FIGHTINIUM_Z) hasZMove = TRUE; break;
                             case SPECIES_ARCEUS_FLYING: item = CHECK_ARCEUS_ZMOVE ? ITEM_FLYINIUM_Z : ITEM_SKY_PLATE; if (item == ITEM_FLYINIUM_Z) hasZMove = TRUE; break;
                             case SPECIES_ARCEUS_POISON: item = CHECK_ARCEUS_ZMOVE ? ITEM_POISONIUM_Z : ITEM_TOXIC_PLATE; if (item == ITEM_POISONIUM_Z) hasZMove = TRUE; break;
@@ -1813,9 +2083,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_ENAMORUS_THERIAN;
                 }; break;
                 case SPECIES_KYUREM: {
-                    if ((bst + 40 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) {
+                    if ((bst + 40 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_KYUREM_BLACK: {
                                 move = MOVE_FUSION_BOLT;
                             }; break;
@@ -1826,15 +2098,18 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     }
                 }; break;
                 case SPECIES_KELDEO: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_KELDEO)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_KELDEO)) 
+                    {
                         speciesId = SPECIES_KELDEO_RESOLUTE;
                         move = MOVE_SECRET_SWORD;
                     }
                 }; break;
                 case SPECIES_GENESECT: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_GENESECT)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_GENESECT)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_GENESECT_DOUSE_DRIVE, SPECIES_GRENINJA_BATTLE_BOND);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_GENESECT_DOUSE_DRIVE: item = ITEM_DOUSE_DRIVE; break;
                             case SPECIES_GENESECT_SHOCK_DRIVE: item = ITEM_SHOCK_DRIVE; break;
                             case SPECIES_GENESECT_BURN_DRIVE: item = ITEM_BURN_DRIVE; break;
@@ -1843,7 +2118,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     }
                 }; break;
                 case SPECIES_GRENINJA: {
-                    if ((bst + 110 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) {
+                    if ((bst + 110 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
+                    {
                         speciesId = SPECIES_GRENINJA_BATTLE_BOND;
                         move = MOVE_WATER_SHURIKEN;
                     }
@@ -1887,8 +2163,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ZYGARDE))
                         speciesId = SPECIES_ZYGARDE_10;
                     // Change to power construct
-                    if (708 <= maxBST) {
-                        switch(speciesId) {
+                    if (708 <= maxBST) 
+                    {
+                        switch(speciesId) 
+                        {
                             case SPECIES_ZYGARDE_10: 
                                 speciesId = SPECIES_ZYGARDE_10_POWER_CONSTRUCT;
                             break;
@@ -1924,9 +2202,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     }
                 }; break;
                 case SPECIES_SILVALLY: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_SILVALLY)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_SILVALLY)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_SILVALLY_FIGHTING, SPECIES_MINIOR_METEOR_ORANGE);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_SILVALLY_FIGHTING: item = CHECK_SILVALLY_ZMOVE ? ITEM_FIGHTINIUM_Z : ITEM_FIGHTING_MEMORY; if (item == ITEM_FIGHTINIUM_Z) hasZMove = TRUE; break;
                             case SPECIES_SILVALLY_FLYING: item = CHECK_SILVALLY_ZMOVE ? ITEM_FLYINIUM_Z : ITEM_FLYING_MEMORY; if (item == ITEM_FLYINIUM_Z) hasZMove = TRUE; break;
                             case SPECIES_SILVALLY_POISON: item = CHECK_SILVALLY_ZMOVE ? ITEM_POISONIUM_Z : ITEM_POISON_MEMORY; if (item == ITEM_POISONIUM_Z) hasZMove = TRUE; break;
@@ -1953,14 +2233,16 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = RANDOM_RANGE(SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_RED);
                 }; break;
                 case SPECIES_NECROZMA: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
 
                         // Z-Moves are allowed
-                        if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) {
-
+                        if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
+                        {
                             // Random chance to select ultra-burst
-                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) {
+                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
+                            {
                                 move = MOVE_PHOTON_GEYSER;
                                 item = ITEM_ULTRANECROZIUM_Z;
                                 forme = 3; // SPECIES_NECROZMA_ULTRA
@@ -2002,14 +2284,16 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_INDEEDEE_MALE;
                 }; break;
                 case SPECIES_ZACIAN: {
-                    if ((bst + 60 <= maxBST)) {
+                    if ((bst + 60 <= maxBST)) 
+                    {
                         speciesId = SPECIES_ZACIAN_CROWNED_SWORD;
                         item = ITEM_RUSTED_SWORD;
                         move = MOVE_IRON_HEAD;
                     }
                 }; break;
                 case SPECIES_ZAMAZENTA: {
-                    if ((bst + 60 <= maxBST)) {
+                    if ((bst + 60 <= maxBST)) 
+                    {
                         speciesId = SPECIES_ZAMAZENTA_CROWNED_SHIELD;
                         item = ITEM_RUSTED_SHIELD;
                         move = MOVE_IRON_HEAD;
@@ -2020,9 +2304,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_URSHIFU_RAPID_STRIKE_STYLE;
                 }; break;
                 case SPECIES_CALYREX: {
-                    if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) {
+                    if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             // Signature Moves
                             case SPECIES_CALYREX_ICE_RIDER: {
                                 move = MOVE_GLACIAL_LANCE;
@@ -2066,10 +2352,12 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         speciesId = SPECIES_GIMMIGHOUL_ROAMING;
                 }; break;
                 case SPECIES_OGERPON: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_OGERPON)) {
+                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_OGERPON)) 
+                    {
                         speciesId = RANDOM_RANGE(SPECIES_OGERPON_WELLSPRING_MASK, SPECIES_OGERPON_TEAL_MASK_TERA);
                         // Required hold item
-                        switch(speciesId) {
+                        switch(speciesId) 
+                        {
                             case SPECIES_OGERPON_WELLSPRING_MASK: item = ITEM_WELLSPRING_MASK; break;
                             case SPECIES_OGERPON_HEARTHFLAME_MASK: item = ITEM_HEARTHFLAME_MASK; break;
                             case SPECIES_OGERPON_CORNERSTONE_MASK: item = ITEM_CORNERSTONE_MASK; break;
@@ -2100,11 +2388,13 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                         item = ITEM_LUCKY_PUNCH;
                 break; 
                 case SPECIES_DITTO: 
-                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DITTO_POWDER_SELECTION_CHANCE)) {
-                        switch(RANDOM_RANGE(0,2)) {
-                            case 0: item = ITEM_METAL_POWDER; break;
-                            case 1: item = ITEM_QUICK_POWDER; break;
-                        }
+                    if (BFG_NO_ITEM_SELECTION_CHANCE != 1 && RANDOM_CHANCE(BFG_ITEM_DITTO_POWDER_SELECTION_CHANCE)) 
+                    {
+                        // Select ditto item
+                        if (RANDOM_BOOL())
+                            item = ITEM_METAL_POWDER;
+                        else
+                            item = ITEM_QUICK_POWDER;
                     }
                 break;
                 case SPECIES_GOREBYSS: 
@@ -2122,56 +2412,64 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                 break;
                 // Signature Z-Moves
                 case SPECIES_EEVEE:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_EEVIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_EEVIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_LAST_RESORT;
                         item = ITEM_EEVIUM_Z;
                     }
                 break;
                 case SPECIES_SNORLAX:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SNORLIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SNORLIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_GIGA_IMPACT;
                         item = ITEM_SNORLIUM_Z;
                     }
                 break;
                 case SPECIES_MEW:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MEWNIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MEWNIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_PSYCHIC;
                         item = ITEM_MEWNIUM_Z;
                     }
                 break;
                 case SPECIES_DECIDUEYE:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_DECIDIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_DECIDIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_SPIRIT_SHACKLE;
                         item = ITEM_DECIDIUM_Z;
                     }
                 break;
                 case SPECIES_INCINEROAR:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_INCINIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_INCINIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_DARKEST_LARIAT;
                         item = ITEM_INCINIUM_Z;
                     }
                 break;
                 case SPECIES_PRIMARINA:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PRIMARIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_PRIMARIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_SPARKLING_ARIA;
                         item = ITEM_PRIMARIUM_Z;
                     }
                 break;
                 case SPECIES_MIMIKYU:
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MIMIKIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MIMIKIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_PLAY_ROUGH;
                         item = ITEM_MIMIKIUM_Z;
                     }
                 break;
                 case SPECIES_KOMMO_O: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_KOMMONIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_KOMMONIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_CLANGING_SCALES;
                         item = ITEM_KOMMONIUM_Z;
@@ -2181,35 +2479,40 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                 case SPECIES_TAPU_BULU: 
                 case SPECIES_TAPU_LELE: 
                 case SPECIES_TAPU_KOKO: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_TAPUNIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_TAPUNIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_NATURES_MADNESS;
                         item = ITEM_TAPUNIUM_Z;
                     }
                 break;
                 case SPECIES_SOLGALEO: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SOLGANIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SOLGANIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_SUNSTEEL_STRIKE;
                         item = ITEM_SOLGANIUM_Z;
                     }
                 break;
                 case SPECIES_LUNALA: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_LUNALIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_LUNALIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_MOONGEIST_BEAM;
                         item = ITEM_LUNALIUM_Z;
                     }
                 break;
                 case SPECIES_MARSHADOW: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MARSHADIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_MARSHADIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_SPECTRAL_THIEF;
                         item = ITEM_MARSHADIUM_Z;
                     }
                 break;
                 case SPECIES_RAICHU_ALOLAN: 
-                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ALORAICHIUM_Z)) {
+                    if ((fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ALORAICHIUM_Z)) 
+                    {
                         hasZMove = TRUE;
                         move = MOVE_THUNDERBOLT;
                         item = ITEM_ALORAICHIUM_Z;
@@ -2218,8 +2521,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
             }
 
             // Check for Mega/Primal/Gigantamax
-            for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) {
-                switch(formChanges[j].method) {
+            for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) 
+            {
+                switch(formChanges[j].method) 
+                {
                     #if B_FLAG_DYNAMAX_BATTLE != 0
                     case FORM_CHANGE_BATTLE_GIGANTAMAX: {
                         if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_IV_ALLOW_GMAX)
@@ -2227,27 +2532,31 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) {
                     }; break;
                     #endif
                     case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) {
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
+                        {
                             item = formChanges[j].param1; // ItemId
                             forme = j;
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) {
+                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        {
                             move = formChanges[j].param1; // MoveId
                             hasMega = TRUE;
                             forme = j;
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) {
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        {
                             item = formChanges[j].param1; // ItemId
                             hasMega = TRUE;
                             forme = j;
                         }
                     }; break;
                 }
-                if (forme == j) {
+                if (forme == j) 
+                {
                     DebugPrintf("Forme found: %d ...", forme);
                     break; // Break if forme found
                 }
