@@ -685,6 +685,78 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId)
     return evs;
 }
 
+static u8 GetSpreadType(u8 natureId, u8 evs){
+    // Spread investment counters
+    u8 offensive=0,defensive=0;
+
+    // hp/spe can be used for either, 
+    // irrelevant for this calc
+
+    // Check offensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_ATTACK))
+        offensive++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_ATTACK))
+        offensive++;
+
+    // Check defensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE))
+        defensive++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_DEFENSE))
+        defensive++;
+
+    // Compare offensive / defensive evs
+    if (offensive > defensive)
+        return BFG_SPREAD_TYPE_OFFENSIVE;
+    else if (offensive < defensive)
+        return BFG_SPREAD_TYPE_DEFENSIVE;
+
+    // Both values match
+
+    // Compare offensive / defensive nature
+    if ((gNatureInfo[natureId].posStat == STAT_ATK) || (gNatureInfo[natureId].posStat == STAT_SPATK))
+        return BFG_SPREAD_TYPE_OFFENSIVE;
+    else if ((gNatureInfo[natureId].posStat == STAT_DEF) || (gNatureInfo[natureId].posStat == STAT_SPDEF))
+        return BFG_SPREAD_TYPE_DEFENSIVE;
+
+    // Comparison failed
+    return RANDOM_BOOL(); // Coinflip
+}
+
+static u8 GetSpreadCategory(u8 natureId, u8 evs){
+    // Spread category counters
+    u8 physical=0,special=0;
+
+    // Check offensive ev stats
+    if (CHECK_EVS(evs,F_EV_SPREAD_ATTACK))
+        physical++;
+    if (CHECK_EVS(evs,F_EV_SPREAD_SP_ATTACK))
+        special++;
+
+    // Compare physical / special evs
+    if (physical > special)
+        return BFG_SPREAD_CATEGORY_PHYSICAL;
+    else if (physical < special)
+        return BFG_SPREAD_CATEGORY_SPECIAL;
+
+    // Physical attack nature-boosted, or special is nature-reduced
+    if ((gNatureInfo[natureId].posStat == STAT_ATK) || (gNatureInfo[natureId].negStat == STAT_SPATK))
+        return BFG_SPREAD_CATEGORY_PHYSICAL;
+
+    // Special attack nature-boosted, or physical is nature-reduced
+    if ((gNatureInfo[natureId].posStat == STAT_SPATK) || (gNatureInfo[natureId].negStat == STAT_ATK))
+        return BFG_SPREAD_CATEGORY_SPECIAL;
+
+    // Comparison failed
+    return BFG_SPREAD_CATEGORY_MIXED; // Mixed nature
+}
+
+static void ResetMoves(u8 index)
+{
+    s32 i;
+    for(i=0; i<MAX_MON_MOVES; i++)
+        SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, i);
+}
+
 static bool32 IsNeverSelectMove(u16 moveId) 
 {
     if (IS_DOUBLES())
@@ -711,9 +783,7 @@ static bool32 IsAlwaysSelectMove(u16 moveId)
     return FALSE;
 }
 
-static void ResetMoves()
-
-static u16 GetMovePower(u16 moveId, u8 index)
+static u16 GetMovePower(u16 moveId)
 {
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
 
@@ -736,48 +806,17 @@ static u16 GetMovePower(u16 moveId, u8 index)
     if (move->strikeCount >= 0)
         power *= move->strikeCount;
 
-    // Check same-type-attack bonus
-    if (
-        (gEnemyParty[index].types[0] == move->type) || 
-        (gEnemyParty[index].types[1] == move->type)
-    )
-        power *= (power / 2); // Apply ~1.5x boost
-
     return power;
 }
 
-static bool32 TryReplaceMove(moveId, index, method) 
+static u16 GetBestMove(u16 speciesId, u8 index, u16 moveNew, u16 moveOld)
 {
-    s32 i;
-    u16 currentMoveId;
+    // If move is duplicate, never select move, or none - Reject new move
+    if ((moveNew == moveOld) || (moveNew == MOVE_NONE) || IsNeverSelectMove(moveNew))
+        return moveOld;
 
-    if (IsNeverSelectMove(moveId))
-        return FALSE; // Never select
-
-    bool8 isAlwaysSelectMove = IsAlwaysSelectMove(moveId);
-    bool8 isStatusMove = (gMovesInfo[moveId] == DAMAGE_CATEGORY_STATUS);
-
-    if ((!isAlwaysSelectMove) && (isStatusMove && (method == BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY)))
-        return FALSE; // No status moves allowed (Always select moves excluded)
-
-    // Loop over currently selected moves
-    for(i=0; i < MAX_MON_MOVES; i++)
-        if (GetMonData(&gEnemyParty[index], MON_DATA_MOVE1 + i) == moveId)
-            return FALSE; // Duplicate moveId
-
-    // Try replace move
-    for(i=0; i < MAX_MON_MOVES; i++)
-    {
-
-
-        if (
-            ((!(isStatusMove)) && (gMovesInfo[currentMoveId].type) == (gMovesInfo[moveId].type)) && // Same Type
-            ((gMovesInfo[currentMoveId].category) == (gMovesInfo[moveId].category)) && // Same Category
-            ((!IS_DOUBLES()) || (gMovesInfo[currentMoveId].target == gMovesInfo[moveId].target)) // Is not Doubles / Same Target
-        ) {
-
-        }
-    }
+    if (moveOld == MOVE_NONE)
+        return moveNew;
 }
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
@@ -805,6 +844,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
 
     u16 levelUpMoves = 0;
     u16 teachableMoves = 0;
+
+    // Get offensive/defensive & physical/special split
+    u8 spreadType = GetSpreadType(nature, evs);
+    u8 spreadCategory = GetSpreadCategory(nature, evs);
 
     #if BFG_MOVE_ALLOW_LEVEL_UP == TRUE
     levelUpLearnset = GetSpeciesLevelUpLearnset(speciesId);
@@ -916,32 +959,29 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         case BFG_MOVE_SELECT_FILTERED:
         case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY: {
             
-            // Check level-up moves
-            for(j=0; j < levelUpMoves; j++)
-            {
-                moveId = levelUpLearnset[j];
-                TryReplaceMove(moveId, index, method);
+            // Current / new move id
+            u16 currentMove, newMove;
 
-                /*
-                if (AddSpeciesMove(, moveCount) && (moveCount < MAX_MON_MOVES))
-                {
-                    SetMonMoveSlot(&gEnemyParty[index], moveId, moveCount++);
-                    types[gMovesInfo[moveId].type]++;
+            // Clear moves list
+            ResetMoves(index);
+
+            // Check level-up moves
+            for(i=0; i < levelUpMoves; i++)
+            {
+                moveId = levelUpLearnset[i].move;
+                for(j=0; j<MAX_MON_MOVES; j++){
+                    currentMove = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + j);
+                    if (GetBestMove(speciesId, ))
                 }
-                */
             }
 
             // Check teachable moves
-            for(j=0; j<teachableMoves; j++)
+            for(i=0; i<teachableMoves; i++)
             {
-                moveId = teachableLearnset[j];
-                TryReplaceMove(moveId, index, method);
-
-                // if (AddSpeciesMove(moveId, index, method, moveCount) && (moveCount < MAX_MON_MOVES))
-                // {
-                //     SetMonMoveSlot(&gEnemyParty[index], moveId, moveCount++);
-                //     types[gMovesInfo[moveId].type]++;
-                // }
+                moveId = teachableLearnset[i];
+                for(j=0; j<MAX_MON_MOVES; j++){
+                    currentMove = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + j);
+                }
             }
 
         }; break;
