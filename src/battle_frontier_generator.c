@@ -760,26 +760,34 @@ static void ResetMoves(u8 index)
 static bool32 IsNeverSelectMove(u16 moveId) 
 {
     if (IS_DOUBLES())
+    {
         for(s32 i=0; moveDoublesNeverSelectList[i] != MOVE_NONE; i++)
             if (moveDoublesNeverSelectList[i] == moveId)
                 return TRUE; // Never select
-    else
+    }
+    else // Not doubles
+    {
         for(s32 i=0; moveSinglesNeverSelectList[i] != MOVE_NONE; i++)
             if (moveSinglesNeverSelectList[i] == moveId)
                 return TRUE; // Never select
+    }
     return FALSE;
 }
 
 static bool32 IsAlwaysSelectMove(u16 moveId) 
 {
     if (IS_DOUBLES())
+    {
         for(s32 i=0; moveDoublesAlwaysSelectList[i] != MOVE_NONE; i++)
             if (moveDoublesAlwaysSelectList[i] == moveId)
                 return TRUE; // Never select
-    else
+    }
+    else // Not doubles
+    {
         for(s32 i=0; moveSinglesAlwaysSelectList[i] != MOVE_NONE; i++)
             if (moveSinglesAlwaysSelectList[i] == moveId)
                 return TRUE; // Never select
+    }
     return FALSE;
 }
 
@@ -809,20 +817,30 @@ static u16 GetMovePower(u16 moveId)
     return power;
 }
 
-static u16 GetBestMove(u16 speciesId, u8 index, u16 moveNew, u16 moveOld)
+static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
 {
     // If move is duplicate, never select move, or none - Reject new move
-    if ((moveNew == moveOld) || (moveNew == MOVE_NONE) || IsNeverSelectMove(moveNew))
+    if ((moveNew == moveOld) || (moveNew == MOVE_NONE))
         return moveOld;
 
+    // Replace old move if none
     if (moveOld == MOVE_NONE)
         return moveNew;
+    
+    // TODO: Implement actual logic
+
+    // Randomly return either
+    if (RANDOM_BOOL())
+        return moveNew;
+    return moveOld;
 }
+
+#define CATEGORY(m) (gMovesInfo[m].category)
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
     s32 i, j;
-    u16 moveIndex, moveCount;
+    u16 moveIndex;
 
     u16 moves[MAX_MON_MOVES] = {
         MOVE_NONE,
@@ -960,18 +978,86 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY: {
             
             // Current / new move id
-            u16 currentMove, newMove;
+            u8 moveCategory;
+            
+            // Always-selected move
+            bool8 alwaysSelect;
+
+            // Moves that cannot be replaced
+            bool8 fixed[MAX_MON_MOVES] = {
+                FALSE, FALSE, FALSE, FALSE
+            };
+
+            // Number of required attacking moves
+            // This is 3-4 for offensive mons, and 1-2 for defensive mons
+            u8 requiredAttacks = (spreadType == BFG_SPREAD_TYPE_OFFENSIVE) ? RANDOM_RANGE(3,4) : RANDOM_RANGE(1,2);
 
             // Clear moves list
             ResetMoves(index);
+
+            // Required move provided
+            if (requiredMove != MOVE_NONE)
+            {
+                // Status move
+                if (CATEGORY(requiredMove) == DAMAGE_CATEGORY_STATUS)
+                {
+                    moves[requiredAttacks + 1] = requiredMove;
+                    fixed[requiredAttacks + 1] = TRUE;
+                }
+                else // Offensive move
+                {
+                    moves[0] = requiredMove;
+                    fixed[0] = TRUE;
+                }
+            }
 
             // Check level-up moves
             for(i=0; i < levelUpMoves; i++)
             {
                 moveId = levelUpLearnset[i].move;
-                for(j=0; j<MAX_MON_MOVES; j++){
-                    currentMove = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + j);
-                    if (GetBestMove(speciesId, ))
+
+                if (IsNeverSelectMove(moveId))
+                    continue; // Skip never-select move
+                
+                if (IsAlwaysSelectMove(moveId))
+                    alwaysSelect = TRUE; // Always-select move
+
+                moveCategory = CATEGORY(moveId);
+
+                // Move is a status move
+                if (moveCategory == DAMAGE_CATEGORY_STATUS) 
+                {
+                    for(j=(requiredAttacks + 1); j<MAX_MON_MOVES; j++)
+                    {
+                        if (fixed[j] == TRUE)
+                            continue; // Skip fixed moves
+                        else if (alwaysSelect)
+                        {
+                            moves[j] = moveId;
+                            fixed[j] = TRUE;
+                        }
+                        else // Need to compare
+                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
+                    }
+                }
+                else // Physical/Special Move
+                {
+                    if ((!alwaysSelect) && ((moveCategory == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) || 
+                        (moveCategory == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL)))
+                        continue; // Skip mismatched move
+
+                    for(j=0; j<requiredAttacks; j++)
+                    {
+                        if (fixed[j] == TRUE)
+                            continue; // Skip fixed moves
+                        else if (alwaysSelect)
+                        {
+                            moves[j] = moveId;
+                            fixed[j] = TRUE;
+                        }
+                        else // Need to compare
+                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
+                    }
                 }
             }
 
@@ -979,9 +1065,6 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             for(i=0; i<teachableMoves; i++)
             {
                 moveId = teachableLearnset[i];
-                for(j=0; j<MAX_MON_MOVES; j++){
-                    currentMove = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + j);
-                }
             }
 
         }; break;

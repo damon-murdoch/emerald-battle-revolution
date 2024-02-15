@@ -162,7 +162,7 @@
 // BFG_MOVE_SELECT_DEFAULT: Use default moves at level
 // BFG_MOVE_SELECT_RANDOM: Randomly select from available moves
 
-#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_RANDOM
+#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_DEFAULT
 #define BFG_VAR_MOVE_SELECTION_METHOD 0 // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
