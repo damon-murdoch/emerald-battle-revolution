@@ -152,12 +152,20 @@
 #define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
 
 // *** MOVES ***
-const u16 moveAlwaysSelectList[] = {
-    BFG_MOVE_ALWAYS_SELECT
+const u16 moveSinglesAlwaysSelectList[] = {
+    BFG_MOVE_ALWAYS_SELECT_SINGLES
 };
 
-const u16 moveNeverSelectList[] = {
-    BFG_MOVE_NEVER_SELECT
+const u16 moveDoublesAlwaysSelectList[] = {
+    BFG_MOVE_ALWAYS_SELECT_DOUBLES
+};
+
+const u16 moveSinglesNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT_SINGLES
+}; 
+
+const u16 moveDoublesNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT_DOUBLES
 }; 
 
 // *** ITEM ***
@@ -218,7 +226,6 @@ const u16 customBannedSpeciesLvlTent[] = {
 
 static bool8 SpeciesValidForFrontierLevel(u16 speciesId) 
 {
-
     s32 i;
 
     // Get the level mode for the frontier
@@ -680,21 +687,66 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId)
 
 static bool32 IsNeverSelectMove(u16 moveId) 
 {
-    for(s32 i=0; moveNeverSelectList[i] != MOVE_NONE; i++)
-        if (moveNeverSelectList[i] == moveId)
-            return TRUE; // Never select
+    if (IS_DOUBLES())
+        for(s32 i=0; moveDoublesNeverSelectList[i] != MOVE_NONE; i++)
+            if (moveDoublesNeverSelectList[i] == moveId)
+                return TRUE; // Never select
+    else
+        for(s32 i=0; moveSinglesNeverSelectList[i] != MOVE_NONE; i++)
+            if (moveSinglesNeverSelectList[i] == moveId)
+                return TRUE; // Never select
     return FALSE;
 }
 
 static bool32 IsAlwaysSelectMove(u16 moveId) 
 {
-    for(s32 i=0; moveAlwaysSelectList[i] != MOVE_NONE; i++)
-        if (moveAlwaysSelectList[i] == moveId)
-            return TRUE; // Always select
+    if (IS_DOUBLES())
+        for(s32 i=0; moveDoublesAlwaysSelectList[i] != MOVE_NONE; i++)
+            if (moveDoublesAlwaysSelectList[i] == moveId)
+                return TRUE; // Never select
+    else
+        for(s32 i=0; moveSinglesAlwaysSelectList[i] != MOVE_NONE; i++)
+            if (moveSinglesAlwaysSelectList[i] == moveId)
+                return TRUE; // Never select
     return FALSE;
 }
 
-static bool32 GetSpeciesMoveCheckValidity(u16 moveId, u8 index, u8 method, u8 currentMoves) 
+static void ResetMoves()
+
+static u16 GetMovePower(u16 moveId, u8 index)
+{
+    const struct MoveInfo* move = &(gMovesInfo[moveId]);
+
+    // Dereference move power
+    u16 power = move->power;
+
+    // Special Cases
+    switch(moveId) 
+    {
+        case MOVE_FRUSTRATION:
+        case MOVE_RETURN:
+            power = 102;
+        break;
+        case MOVE_KNOCK_OFF:
+            power = 97;
+        break;
+    }
+
+    // Apply multi-hit modifier
+    if (move->strikeCount >= 0)
+        power *= move->strikeCount;
+
+    // Check same-type-attack bonus
+    if (
+        (gEnemyParty[index].types[0] == move->type) || 
+        (gEnemyParty[index].types[1] == move->type)
+    )
+        power *= (power / 2); // Apply ~1.5x boost
+
+    return power;
+}
+
+static bool32 TryReplaceMove(moveId, index, method) 
 {
     s32 i;
     u16 currentMoveId;
@@ -709,35 +761,23 @@ static bool32 GetSpeciesMoveCheckValidity(u16 moveId, u8 index, u8 method, u8 cu
         return FALSE; // No status moves allowed (Always select moves excluded)
 
     // Loop over currently selected moves
-    for(i=0; i < currentMoves; i++)
+    for(i=0; i < MAX_MON_MOVES; i++)
+        if (GetMonData(&gEnemyParty[index], MON_DATA_MOVE1 + i) == moveId)
+            return FALSE; // Duplicate moveId
+
+    // Try replace move
+    for(i=0; i < MAX_MON_MOVES; i++)
     {
-        currentMoveId = GetMonData(&gEnemyParty[index], MON_DATA_MOVE1 + i);
 
-        if (currentMoveId != MOVE_NONE)
-        {
-            if (currentMoveId == moveId)
-                return FALSE; // Duplicate moveId
 
-            if (
-                ((!(isStatusMove)) && (gMovesInfo[currentMoveId].type) == (gMovesInfo[moveId].type)) && // Same Type
-                ((gMovesInfo[currentMoveId].category) == (gMovesInfo[moveId].category)) && // Same Category
-                ((!IS_DOUBLES()) || (gMovesInfo[currentMoveId].target == gMovesInfo[moveId].target)) // Is not Doubles / Same Target
-            ) {
-                if (
-                    isAlwaysSelectMove || // Always select move
-                    (gMovesInfo[moveId].power > gMovesInfo[moveId].power) || // Same type, greater power
-                    ((gMovesInfo[moveId].power == gMovesInfo[moveId].power) && RANDOM_BOOL()) // Same power, ~50% chance
-                ) {
-                    // Replace the existing move slot
-                    SetMonMoveSlot(&gEnemyParty[index], moveId, i);
-                }
-                // Move replaced / skipped
-                return FALSE;
-            }
+        if (
+            ((!(isStatusMove)) && (gMovesInfo[currentMoveId].type) == (gMovesInfo[moveId].type)) && // Same Type
+            ((gMovesInfo[currentMoveId].category) == (gMovesInfo[moveId].category)) && // Same Category
+            ((!IS_DOUBLES()) || (gMovesInfo[currentMoveId].target == gMovesInfo[moveId].target)) // Is not Doubles / Same Target
+        ) {
+
         }
     }
-
-    return TRUE; // Unique moveId
 }
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
@@ -880,22 +920,28 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             for(j=0; j < levelUpMoves; j++)
             {
                 moveId = levelUpLearnset[j];
-                if (GetSpeciesMoveCheckValidity(moveId, index, method, moveCount) && (moveCount < MAX_MON_MOVES))
+                TryReplaceMove(moveId, index, method);
+
+                /*
+                if (AddSpeciesMove(, moveCount) && (moveCount < MAX_MON_MOVES))
                 {
                     SetMonMoveSlot(&gEnemyParty[index], moveId, moveCount++);
                     types[gMovesInfo[moveId].type]++;
                 }
+                */
             }
 
             // Check teachable moves
             for(j=0; j<teachableMoves; j++)
             {
                 moveId = teachableLearnset[j];
-                if (GetSpeciesMoveCheckValidity(moveId, index, method, moveCount) && (moveCount < MAX_MON_MOVES))
-                {
-                    SetMonMoveSlot(&gEnemyParty[index], moveId, moveCount++);
-                    types[gMovesInfo[moveId].type]++;
-                }
+                TryReplaceMove(moveId, index, method);
+
+                // if (AddSpeciesMove(moveId, index, method, moveCount) && (moveCount < MAX_MON_MOVES))
+                // {
+                //     SetMonMoveSlot(&gEnemyParty[index], moveId, moveCount++);
+                //     types[gMovesInfo[moveId].type]++;
+                // }
             }
 
         }; break;
