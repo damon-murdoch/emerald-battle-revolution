@@ -68,41 +68,13 @@
 #define CHECK_EVS(evs,stat) ((evs) & (stat))
 
 // *** MOVE ***
-#define NORMALISE(x) (((float)(x)) / 100.0f)
 
-#define IS_SUN_EFFECT(e) ((e == EFFECT_SUNNY_DAY))
-#define IS_RAIN_EFFECT(e) ((e == EFFECT_RAIN_DANCE))
-#define IS_SAND_EFFECT(e) ((e == EFFECT_SANDSTORM))
-#define IS_HAIL_EFFECT(e) ((e == EFFECT_HAIL) || (e == EFFECT_SNOWSCAPE))
+#define CATEGORY(m) (gMovesInfo[m].category)
+#define TYPE(m) (gMovesInfo[m].type)
 
-#define IS_WEATHER_EFFECT(e) (IS_SUN_EFFECT(e) || IS_RAIN_EFFECT(e) || IS_SAND_EFFECT(e) || IS_HAIL_EFFECT(e))
-#define IS_TERRAIN_EFFECT(e) ((e == EFFECT_MISTY_TERRAIN) || (e == EFFECT_GRASSY_TERRAIN) || (e == EFFECT_PSYCHIC_TERRAIN) || (e == EFFECT_ELECTRIC_TERRAIN))
+#define HAS_SPEED(n,e) ((gNatureInfo[n].posStat == STAT_SPEED) || (CHECK_EVS(e,F_EV_SPREAD_SPEED)))
+#define IS_STAB(s,t) (((gSpeciesInfo[s].types[0]) == (t)) || ((gSpeciesInfo[s].types[1]) == (t)))
 
-#define IS_SUN_ABILITY(a) ((a == ABILITY_DROUGHT) || (a == ABILITY_DESOLATE_LAND) || (a == ABILITY_ORICHALCUM_PULSE))
-#define IS_RAIN_ABILITY(a) ((a == ABILITY_DRIZZLE) || (a == ABILITY_PRIMORDIAL_SEA))
-#define IS_SAND_ABILITY(a) ((a == ABILITY_SAND_STREAM) || (a == ABILITY_SAND_SPIT))
-#define IS_HAIL_ABILITY(a) ((a == ABILITY_SNOW_WARNING) || (a == ABILITY_DESOLATE_LAND) || (a == ABILITY_ORICHALCUM_PULSE))
-
-#define IS_WEATHER_ABILITY(a) (IS_SUN_ABILITY(a) || IS_RAIN_ABILITY(a) || IS_SAND_ABILITY(a) || IS_HAIL_ABILITY(a))
-
-#define IS_MISTY_ABILITY(a) (a == ABILITY_MISTY_SURGE)
-#define IS_GRASSY_ABILITY(a) ((a == ABILITY_GRASSY_SURGE) || (a == ABILITY_SEED_SOWER))
-#define IS_PSYCHIC_ABILITY(a) (a == ABILITY_PSYCHIC_SURGE)
-#define IS_ELECTRIC_ABILITY(a) (a == ABILITY_ELECTRIC_SURGE)
-
-#define IS_TERRAIN_ABILITY(a) (IS_MISTY_ABILITY(a) || IS_GRASSY_ABILITY(a) || IS_PSYCHIC_ABILITY(a) || IS_ELECTRIC_ABILITY(a))
-
-#define IS_OFF_BOOSTING_EFFECT(e) (((e) == EFFECT_NO_RETREAT) || ((e) == EFFECT_BULK_UP) || ((e) == EFFECT_COIL) || ((e) == EFFECT_CURSE) || ((e) == EFFECT_VICTORY_DANCE) || ((e) == EFFECT_DRAGON_DANCE) || ((e) == EFFECT_SHELL_SMASH) || ((e) == EFFECT_ATTACK_SPATK_UP) || ((e) == EFFECT_GEOMANCY) || ((e) == EFFECT_QUIVER_DANCE) || ((e) == EFFECT_SHIFT_GEAR) || ((e) == EFFECT_TAKE_HEART) || ((e) == EFFECT_CALM_MIND) || ((e) == EFFECT_BELLY_DRUM) || ((e) == EFFECT_ATTACK_UP_2) || ((e) == EFFECT_ATTACK_UP_USER_ALLY) || ((e) == EFFECT_ATTACK_ACCURACY_UP) || ((e) == EFFECT_ATTACK_UP) || ((e) == EFFECT_SPECIAL_ATTACK_UP_3) || ((e) == EFFECT_SPECIAL_ATTACK_UP_2) || ((e) == EFFECT_SPECIAL_ATTACK_UP))
-#define IS_DEF_BOOSTING_EFFECT(e) (((e) == EFFECT_COSMIC_POWER) || ((e) == EFFECT_STOCKPILE) || ((e) == EFFECT_DEFENSE_UP_3) || ((e) == EFFECT_DEFENSE_UP_2) || ((e) == EFFECT_DEFENSE_CURL) || ((e) == EFFECT_DEFENSE_UP) || (e == EFFECT_SPECIAL_DEFENSE_UP_2) || (e == EFFECT_SPECIAL_DEFENSE_UP))
-#define IS_SPEED_BOOSTING_EFFECT(e) (((e) == EFFECT_AUTOTOMIZE) || ((e) == EFFECT_SPEED_UP_2) || ((e) == EFFECT_SPEED_UP))
-#define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
-#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
-
-#define IS_PROTECTING_EFFECT(e) (((e) == EFFECT_PROTECT) || ((e) == EFFECT_MAT_BLOCK) || ((e) == EFFECT_ENDURE) || ((e) == EFFECT_SUBSTITUTE))
-#define IS_DOUBLES_PROTECT(x) (((x) == MOVE_WIDE_GUARD) || ((x) == MOVE_QUICK_GUARD) || ((x) == MOVE_CRAFTY_SHIELD) || ((x) == MOVE_MAT_BLOCK))
-#define IS_SPECIAL_PROTECT(e,x) (((e) == EFFECT_PROTECT) && ((x) != MOVE_PROTECT))
-
-#define IS_FIELD_OR_ALLY_TARGET(t) (((t) == MOVE_TARGET_ALL_BATTLERS) || ((t) == MOVE_TARGET_OPPONENTS_FIELD) || ((t) == MOVE_TARGET_ALLY))
 #define IS_DYNAMIC_ATTACK(x) (((x) == MOVE_TERA_BLAST) || ((x) == MOVE_PHOTON_GEYSER))
 
 // *** TYPE ***
@@ -152,20 +124,35 @@
 #define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
 
 // *** MOVES ***
+
+// Required Moves
 const u16 moveSinglesAlwaysSelectList[] = {
-    BFG_MOVE_ALWAYS_SELECT_SINGLES
+    BFG_MOVE_ALWAYS_SELECT_SINGLES, 
+    MOVE_NONE
 };
-
 const u16 moveDoublesAlwaysSelectList[] = {
-    BFG_MOVE_ALWAYS_SELECT_DOUBLES
+    BFG_MOVE_ALWAYS_SELECT_DOUBLES, 
+    MOVE_NONE
 };
 
+// Banned Moves
 const u16 moveSinglesNeverSelectList[] = {
-    BFG_MOVE_NEVER_SELECT_SINGLES
+    BFG_MOVE_NEVER_SELECT_SINGLES, 
+    MOVE_NONE
+}; 
+const u16 moveDoublesNeverSelectList[] = {
+    BFG_MOVE_NEVER_SELECT_DOUBLES, 
+    MOVE_NONE
 }; 
 
-const u16 moveDoublesNeverSelectList[] = {
-    BFG_MOVE_NEVER_SELECT_DOUBLES
+// Allowed Status Moves
+const u16 moveSinglesStatusAllowList[] = {
+    BFG_MOVE_STATUS_ALLOW_SELECT_SINGLES, 
+    MOVE_NONE
+}; 
+const u16 moveDoublesStatusAllowList[] = {
+    BFG_MOVE_STATUS_ALLOW_SELECT_DOUBLES, 
+    MOVE_NONE
 }; 
 
 // *** ITEM ***
@@ -791,14 +778,78 @@ static bool32 IsAlwaysSelectMove(u16 moveId)
     return FALSE;
 }
 
-static u16 GetMovePower(u16 moveId)
+static bool32 IsAllowedStatusMove(u16 moveId)
 {
+    // Status move allow list enabled
+    if (BFG_MOVE_USE_STATUS_ALLOW_LIST)
+    {
+        if (IS_DOUBLES())
+        {
+            for(s32 i=0; moveDoublesAlwaysSelectList[i] != MOVE_NONE; i++)
+                if (moveDoublesAlwaysSelectList[i] == moveId)
+                    return TRUE; // Never select
+        }
+        else // Not doubles
+        {
+            for(s32 i=0; moveSinglesAlwaysSelectList[i] != MOVE_NONE; i++)
+                if (moveSinglesAlwaysSelectList[i] == moveId)
+                    return TRUE; // Never select
+        }
+        return FALSE;
+    }
+    else
+        return TRUE; // Assume allowed
+}
+
+static u8 GetMoveType(u16 moveId, u16 abilityId)
+{
+    // Get the move type
+    u8 type = TYPE(moveId);
+    switch(abilityId)
+    {
+        case ABILITY_NORMALIZE: 
+            type = TYPE_NORMAL;
+            break;
+        case ABILITY_AERILATE: 
+            if (type == TYPE_NORMAL) 
+                type = TYPE_FLYING;
+            break;
+        case ABILITY_PIXILATE: 
+            if (type == TYPE_NORMAL)  
+                type = TYPE_FAIRY;
+            break;
+        case ABILITY_REFRIGERATE: 
+            if (type == TYPE_NORMAL) 
+                type = TYPE_ICE;
+            break;
+        case ABILITY_GALVANIZE: 
+            if (type == TYPE_NORMAL) 
+                type = TYPE_ELECTRIC;
+            break;
+        case ABILITY_LIQUID_VOICE: 
+            if ((gMovesInfo[moveId].soundMove) == TRUE) 
+                type = TYPE_WATER;
+            break;
+    }
+    return type;
+}
+
+static u16 GetMoveRating(u16 speciesId, u16 moveId, u16 abilityId)
+{
+    u16 rating;
+
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
+
+    // Get move type, accounted for ability
+    u8 type = GetMoveType(moveId, abilityId);
+    bool8 isStab = IS_STAB(speciesId, type);
 
     // Dereference move power
     u16 power = move->power;
 
     // Special Cases
+
+    // Moves
     switch(moveId) 
     {
         case MOVE_FRUSTRATION:
@@ -810,11 +861,81 @@ static u16 GetMovePower(u16 moveId)
         break;
     }
 
-    // Apply multi-hit modifier
-    if (move->strikeCount >= 0)
-        power *= move->strikeCount;
+    // Abilities
+    switch(abilityId)
+    {
+        case ABILITY_GUTS:
+        case ABILITY_TOXIC_BOOST:
+            if (moveId == MOVE_FACADE)
+                rating += BFG_MOVE_ABILITY_MODIFIER; // Boosted attack when burned/etc.
+            break;
+        case ABILITY_SNIPER:
+        case ABILITY_SUPER_LUCK:
+            if ((move->criticalHitStage > 0) || (move->effect == EFFECT_FOCUS_ENERGY))
+                rating += BFG_MOVE_ABILITY_MODIFIER; // Natural high crit chance, or focus energy
+            break;
+        case ABILITY_PUNK_ROCK:
+            if (move->soundMove == TRUE)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_STEELWORKER:
+            if (type == TYPE_STEEL)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_STRONG_JAW: 
+            if (move->bitingMove == TRUE)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_MEGA_LAUNCHER: 
+            if (move->ballisticMove == TRUE)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_TOUGH_CLAWS: 
+            if (move->makesContact == TRUE)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_TECHNICIAN: 
+            if (power <= 60)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_IRON_FIST: 
+            if (move->punchingMove == TRUE)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_HUGE_POWER: 
+            if (move->category == DAMAGE_CATEGORY_PHYSICAL)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_WATER_BUBBLE: 
+            if (type == TYPE_WATER)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+        case ABILITY_PROTEAN: 
+        case ABILITY_LIBERO:
+            if (!isStab)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+            break;
+    }
 
-    return power;
+    // Special 
+
+    // Apply multi-hit modifier
+    if (move->strikeCount > 1)
+        power *= move->strikeCount; // Apply strike count
+    else if (move->effect == EFFECT_MULTI_HIT)
+        if (abilityId == ABILITY_SKILL_LINK)
+            power *= 5; // 5 hits
+        else
+            power *= RANDOM_RANGE(2,6); // 2-5 hits
+
+    // Add power to the rating
+    rating += power;
+
+    // Add accuracy to the rating
+    if (move->accuracy == 0)
+        rating += 100; // Perfect accuracy
+    else
+        rating += move->accuracy;
 }
 
 static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
@@ -835,7 +956,28 @@ static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
     return moveOld;
 }
 
-#define CATEGORY(m) (gMovesInfo[m].category)
+// Tests if all moves are 'fixed'
+// If this is set to true, we can stop looping
+static bool8 CanReplaceMove(bool8 fixed[MAX_MON_MOVES])
+{
+    s32 i;
+    for(i=0; i<MAX_MON_MOVES; i++)
+        if (fixed[i] == FALSE)
+            return TRUE; // Can replace move
+    return FALSE; // Cannot replace move
+}
+
+// If true, returns the index of which the new move should be
+// replaced. Otherwise, returns 5 (BFG_MOVE_TRY_REPLACE_FAILED).
+static u8 TryReplaceMove(u8 index, u8 moveId, u8 moves[MAX_MON_MOVES], bool8 fixed[MAX_MON_MOVES], u8 types[NUMBER_OF_MON_TYPES], bool8 required)
+{
+    u8 moveSlot;
+    for(moveSlot=0; moveSlot<MAX_MON_MOVES; moveSlot++)
+    {
+        if (fixed[i] == TRUE)
+            continue; // Skip fixed moveslot
+    }
+}
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
@@ -849,12 +991,12 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         MOVE_NONE,
     };
 
-    // Number of moves per type
-    u8 types[NUMBER_OF_MON_TYPES] = {
-        0,0,0,0,0,
-        0,0,0,0,0,
-        0,0,0,0,0,
-        0,0,0,0,
+    // Has offensive move of type
+    bool8 types[NUMBER_OF_MON_TYPES] = {
+        FALSE,FALSE,FALSE,FALSE,FALSE,
+        FALSE,FALSE,FALSE,FALSE,FALSE,
+        FALSE,FALSE,FALSE,FALSE,FALSE,
+        FALSE,FALSE,FALSE,FALSE,
     };
 
     const struct LevelUpMove* levelUpLearnset;
@@ -892,7 +1034,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     u8 moveCount = 0;
 
     // Current move
-    u16 moveId;
+    u16 moveId, oldMoveId;
 
     // Get the method for selecting the moves
     u8 method = BFG_MOVE_SELECTION_METHOD;
@@ -978,7 +1120,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY: {
             
             // Current / new move id
-            u8 moveCategory;
+            u8 moveSlot, moveCategory;
             
             // Always-selected move
             bool8 alwaysSelect;
@@ -989,76 +1131,44 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             };
 
             // Number of required attacking moves
-            // This is 3-4 for offensive mons, and 1-2 for defensive mons
-            u8 requiredAttacks = (spreadType == BFG_SPREAD_TYPE_OFFENSIVE) ? RANDOM_RANGE(3,4) : RANDOM_RANGE(1,2);
+            // If Select attacks is set to true, set required attacks to 4. Otherwise, this is 3-4 for offensive mons, and 1-2 for defensive mons.
+            u8 requiredAttacks = (BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) ? 4 : ((spreadType == BFG_SPREAD_TYPE_OFFENSIVE) ? RANDOM_RANGE(3,4) : RANDOM_RANGE(1,2));
 
             // Clear moves list
             ResetMoves(index);
 
-            // Required move provided
-            if (requiredMove != MOVE_NONE)
+            if ((requiredMove != MOVE_NONE))
             {
-                // Status move
-                if (CATEGORY(requiredMove) == DAMAGE_CATEGORY_STATUS)
-                {
-                    moves[requiredAttacks + 1] = requiredMove;
-                    fixed[requiredAttacks + 1] = TRUE;
-                }
+                moveSlot = TryReplaceMove(index, requiredMove, moves, fixed, types, TRUE);
+                if (moveSlot == BFG_MOVE_TRY_REPLACE_FAILED)
+                    return 0; // Failed to add required move
+                moves[moveSlot] = requiredMove;
+                fixed[moveSlot] = FALSE; // Fix moveslot
+                if (CATEGORY(requiredMove) == DAMAGE_CATEGORY_SPECIAL && (requiredAttacks > 0))
+                    requiredAttacks--; // Require one less attack
                 else // Offensive move
-                {
-                    moves[0] = requiredMove;
-                    fixed[0] = TRUE;
-                }
+                    types[TYPE(requiredMove)] = TRUE; // Increment type counter
             }
-
+            
             // Check level-up moves
             for(i=0; i < levelUpMoves; i++)
             {
                 moveId = levelUpLearnset[i].move;
+                alwaysSelect = IsAlwaysSelectMove(moveId);
+                if ((!alwaysSelect) && IsNeverSelectMove(moveId))
+                    continue; // Skip move
 
-                if (IsNeverSelectMove(moveId))
-                    continue; // Skip never-select move
-                
-                if (IsAlwaysSelectMove(moveId))
-                    alwaysSelect = TRUE; // Always-select move
-
-                moveCategory = CATEGORY(moveId);
-
-                // Move is a status move
-                if (moveCategory == DAMAGE_CATEGORY_STATUS) 
-                {
-                    for(j=(requiredAttacks + 1); j<MAX_MON_MOVES; j++)
-                    {
-                        if (fixed[j] == TRUE)
-                            continue; // Skip fixed moves
-                        else if (alwaysSelect)
-                        {
-                            moves[j] = moveId;
-                            fixed[j] = TRUE;
-                        }
-                        else // Need to compare
-                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
-                    }
-                }
-                else // Physical/Special Move
-                {
-                    if ((!alwaysSelect) && ((moveCategory == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) || 
-                        (moveCategory == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL)))
-                        continue; // Skip mismatched move
-
-                    for(j=0; j<requiredAttacks; j++)
-                    {
-                        if (fixed[j] == TRUE)
-                            continue; // Skip fixed moves
-                        else if (alwaysSelect)
-                        {
-                            moves[j] = moveId;
-                            fixed[j] = TRUE;
-                        }
-                        else // Need to compare
-                            moves[j] = GetBestMove(speciesId, moveId, moves[j]);
-                    }
-                }
+                moveSlot = TryReplaceMove(index, moveId, moves, fixed, types, alwaysSelect);
+                if (moveSlot == BFG_MOVE_TRY_REPLACE_FAILED)
+                    continue; // Skip move
+                if ((moves[moveSlot] != MOVE_NONE) && (CATEGORY(moves[moveSlot]) != DAMAGE_CATEGORY_STATUS))
+                    types[TYPE(moves[moveSlot])] = FALSE; // Decrease current type counter
+                moves[moveSlot] = moveId;
+                fixed[moveSlot] = alwaysSelect;
+                if (alwaysSelect && (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) && (requiredAttacks > 0))
+                    requiredAttacks--; // Require one less attack
+                else // Offensive move
+                    types[TYPE(moveId)] = TRUE; // Increment type counter
             }
 
             // Check teachable moves
