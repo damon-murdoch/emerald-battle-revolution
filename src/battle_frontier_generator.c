@@ -936,6 +936,8 @@ static u16 GetMoveRating(u16 speciesId, u16 moveId, u16 abilityId)
         rating += 100; // Perfect accuracy
     else
         rating += move->accuracy;
+
+    return rating;
 }
 
 static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
@@ -969,7 +971,7 @@ static bool8 CanReplaceMove(bool8 fixed[MAX_MON_MOVES])
 
 // If true, returns the index of which the new move should be
 // replaced. Otherwise, returns 5 (BFG_MOVE_TRY_REPLACE_FAILED).
-static u8 TryReplaceMove(u8 index, u8 moveId, u8 moves[MAX_MON_MOVES], bool8 fixed[MAX_MON_MOVES], u8 types[NUMBER_OF_MON_TYPES], bool8 required)
+static u8 TryReplaceMove(u8 index, u8 moveId, u8 moves[MAX_MON_MOVES], u16 rating[MAX_MON_MOVES], u8 types[NUMBER_OF_MON_TYPES], u8 numAttacks, bool8 required)
 {
     u8 moveSlot;
     for(moveSlot=0; moveSlot<MAX_MON_MOVES; moveSlot++)
@@ -977,6 +979,21 @@ static u8 TryReplaceMove(u8 index, u8 moveId, u8 moves[MAX_MON_MOVES], bool8 fix
         if (fixed[i] == TRUE)
             continue; // Skip fixed moveslot
     }
+}
+
+static u8 FillMonMoveSlots(u8 index, u8 moves[MAX_MON_MOVES])
+{
+    s32 i;
+    u8 moveCount = 0;
+
+    ResetMoves(index);
+
+    // Loop over moves list
+    for(i=0; i<MAX_MON_MOVES; i++)
+        if (moves[i] != MOVE_NONE) // Populate & increment counter if not none
+            SetMonMoveSlot(&gEnemyParty[index], moves[i], moveCount++);
+
+    return moveCount;
 }
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
@@ -1116,65 +1133,142 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             }
         }; break;
         // Filtered Selection
-        case BFG_MOVE_SELECT_FILTERED:
-        case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY: {
-            
-            // Current / new move id
-            u8 moveSlot, moveCategory;
-            
-            // Always-selected move
-            bool8 alwaysSelect;
+        case BFG_MOVE_SELECT_RATING:
+        case BFG_MOVE_SELECT_RATING_ATTACKS_ONLY: {
 
-            // Moves that cannot be replaced
-            bool8 fixed[MAX_MON_MOVES] = {
-                FALSE, FALSE, FALSE, FALSE
-            };
+            // Get species ability            
+            u16 abilityId = gSpeciesInfo[speciesId].abilities[abilityNum];
 
-            // Number of required attacking moves
-            // If Select attacks is set to true, set required attacks to 4. Otherwise, this is 3-4 for offensive mons, and 1-2 for defensive mons.
-            u8 requiredAttacks = (BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) ? 4 : ((spreadType == BFG_SPREAD_TYPE_OFFENSIVE) ? RANDOM_RANGE(3,4) : RANDOM_RANGE(1,2));
+            // Shortlist for allowed attacking moves
+            u16 allowedAttackMoves[BFG_MOVE_RATING_LIST_SIZE_ATTACK];
+            s32 numAllowedAttackMoves = 0;
 
-            // Clear moves list
-            ResetMoves(index);
+            // Shortlist for allowed status moves
+            u16 allowedStatusMoves[BFG_MOVE_RATING_LIST_SIZE_STATUS];
+            s32 numAllowedStatusMoves = 0;
 
             if ((requiredMove != MOVE_NONE))
             {
-                moveSlot = TryReplaceMove(index, requiredMove, moves, fixed, types, TRUE);
-                if (moveSlot == BFG_MOVE_TRY_REPLACE_FAILED)
-                    return 0; // Failed to add required move
-                moves[moveSlot] = requiredMove;
-                fixed[moveSlot] = FALSE; // Fix moveslot
-                if (CATEGORY(requiredMove) == DAMAGE_CATEGORY_SPECIAL && (requiredAttacks > 0))
-                    requiredAttacks--; // Require one less attack
-                else // Offensive move
-                    types[TYPE(requiredMove)] = TRUE; // Increment type counter
+                moves[moveCount] = requiredMove;
+                rating[moveCount] = BFG_MOVE_RATING_FIXED;
+                if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
+                {
+                    types[TYPE(requiredMove)] = TRUE; // Set type flag
+                }
+                moveCount++; // Increment move counter
             }
             
+            // STAGE 1: Add always-select moves and build lists
+
             // Check level-up moves
             for(i=0; i < levelUpMoves; i++)
             {
                 moveId = levelUpLearnset[i].move;
-                alwaysSelect = IsAlwaysSelectMove(moveId);
-                if ((!alwaysSelect) && IsNeverSelectMove(moveId))
-                    continue; // Skip move
+                if (IsAlwaysSelectMove(moveId))
+                {
+                    moves[moveCount] = moveId;
+                    rating[moveCount] = BFG_MOVE_RATING_FIXED;
+                    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
+                    {
+                        types[TYPE(moveId)] = TRUE; // Set type flag
+                    }
+                    moveCount++; // Increment move counter
 
-                moveSlot = TryReplaceMove(index, moveId, moves, fixed, types, alwaysSelect);
-                if (moveSlot == BFG_MOVE_TRY_REPLACE_FAILED)
-                    continue; // Skip move
-                if ((moves[moveSlot] != MOVE_NONE) && (CATEGORY(moves[moveSlot]) != DAMAGE_CATEGORY_STATUS))
-                    types[TYPE(moves[moveSlot])] = FALSE; // Decrease current type counter
-                moves[moveSlot] = moveId;
-                fixed[moveSlot] = alwaysSelect;
-                if (alwaysSelect && (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) && (requiredAttacks > 0))
-                    requiredAttacks--; // Require one less attack
-                else // Offensive move
-                    types[TYPE(moveId)] = TRUE; // Increment type counter
+                    // Reached max. moves
+                    if (moveCount == MAX_MON_MOVES)
+                        return FillMonMoveSlots(index, moves);
+                }
+                else // Not always-select
+                {
+                    if (IsNeverSelectMove(moveId))
+                        continue; // Skip move
+                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
+                        if ((method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))
+                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
+                    else // Non-Status Move
+                        allowedAttackMoves[numAllowedAttackMoves++] = moveId;
+                }
             }
 
             // Check teachable moves
             for(i=0; i<teachableMoves; i++)
             {
                 moveId = teachableLearnset[i];
+                if (IsAlwaysSelectMove(moveId))
+                {
+                    moves[moveCount] = moveId;
+                    rating[moveCount] = BFG_MOVE_RATING_FIXED;
+                    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
+                    {
+                        types[TYPE(moveId)] = TRUE; // Set type flag
+                    }
+                    moveCount++; // Increment move counter
+
+                    // Reached max. moves
+                    if (moveCount == MAX_MON_MOVES)
+                        return FillMonMoveSlots(index, moves);
+                }
+                else // Not always-select
+                {
+                    if (IsNeverSelectMove(moveId))
+                        continue; // Skip move
+                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
+                        if ((method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))
+                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
+                    else // Non-Status Move
+                        allowedAttackMoves[numAllowedAttackMoves++] = moveId;
+                }
+            }
+
+            // *** STAGE 2: ADD OTHER MOVES ***
+            
+            // Move ratings
+            u16 rating[MAX_MON_MOVES] = {
+                0, 0, 0, 0
+            };
+
+            // Remaining move slots
+            u8 remainder = MAX_MON_MOVES - moveCount;
+            u8 requiredAttacks = remainder;
+
+            // Reduce number of required attacks, if necessary
+            if (method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY)
+            {
+                if (spreadType == BFG_SPREAD_TYPE_OFFENSIVE)
+                    requiredAttacks = MIN(remainder, RANDOM_RANGE(3,5));
+                else
+                    requiredAttacks = MIN(remainder, RANDOM_RANGE(1,3));
+            }
+
+            // Calculate number of required status moves
+            u8 requiredStatus = remainder - requiredAttacks;
+
+            for(i=0; i < requiredStatus; i++)
+            {
+                // Reset moveId
+                moveId = MOVE_NONE; 
+
+                // While no move found, and failure limit has not been reached
+                while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                {
+                    // Sample a random status move from the list
+                    moveIndex = Random() % numAllowedStatusMoves;
+
+                    // Check previous moves
+                    for(j = 0; j < i; j++)
+                    {
+                        if (moves[j] == moveId)
+                        {
+                            moveId = MOVE_NONE;
+                            failures++;
+                            break;
+                        }
+                    }
+
+                    // Move found
+                    if (moveId != MOVE_NONE)
+                        moveCount++;
+                }
             }
 
         }; break;

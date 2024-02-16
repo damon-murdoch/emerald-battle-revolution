@@ -169,6 +169,9 @@
 #define BFG_MOVE_SELECT_MINIMUM 4       // Maximum times move selection can fail
 #define BFG_MOVE_ATTACK_MINIMUM 1       // Minimum number of offensive moves
 
+#define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0xFF
+#define BFG_MOVE_RATING_LIST_SIZE_STATUS 0xFF
+
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
 
@@ -322,8 +325,6 @@
 #define BFG_MOVE_STATUS_ALLOW_SELECT_DOUBLES \
     BFG_MOVE_STATUS_ALLOW_SELECT_SINGLES, \
     BFG_MOVE_DOUBLES_ONLY
-
-// 
 
 #define BFG_MOVE_RATING_DEFAULT 0         // Default Rating
 #define BFG_MOVE_STAB_MODIFIER 50    // +x to rating for same-type-attack-bonus
