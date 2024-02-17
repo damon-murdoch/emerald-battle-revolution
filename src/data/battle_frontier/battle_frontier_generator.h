@@ -28,6 +28,7 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
     [MOVE_GIGA_IMPACT] = TRUE,
     [MOVE_HIDDEN_POWER] = TRUE,
     [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_PROTECT] = TRUE,
     // Doubles-Exclusive Moves
     [MOVE_FOLLOW_ME] = TRUE,
     [MOVE_WIDE_GUARD] = TRUE,
@@ -48,6 +49,7 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
     [MOVE_GIGA_IMPACT] = TRUE,
     [MOVE_HIDDEN_POWER] = TRUE,
     [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_PROTECT] = TRUE,
     // Doubles-Exclusive Moves
     [MOVE_THRASH] = TRUE,
     [MOVE_OUTRAGE] = TRUE,

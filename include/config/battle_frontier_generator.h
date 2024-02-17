@@ -32,7 +32,7 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
-#define BFG_TRAINER_CLASS_MON_LIMIT 0xFF   // Maximum number of mons available per trainer class
+#define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
 
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
@@ -168,8 +168,8 @@
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
 #define BFG_MOVE_SELECT_MINIMUM 1       // Minumum number of moves allowed
 
-#define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0xFF
-#define BFG_MOVE_RATING_LIST_SIZE_STATUS 0xFF
+#define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0x20
+#define BFG_MOVE_RATING_LIST_SIZE_STATUS 0x20
 
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
