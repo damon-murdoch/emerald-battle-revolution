@@ -32,7 +32,7 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
-#define BFG_TRAINER_CLASS_MON_LIMIT 0x1FF   // Maximum number of mons available per trainer class
+#define BFG_TRAINER_CLASS_MON_LIMIT 0xFF   // Maximum number of mons available per trainer class
 
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
@@ -162,12 +162,11 @@
 // BFG_MOVE_SELECT_DEFAULT: Use default moves at level
 // BFG_MOVE_SELECT_RANDOM: Randomly select from available moves
 
-#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_DEFAULT
+#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_RATING
 #define BFG_VAR_MOVE_SELECTION_METHOD 0 // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
-#define BFG_MOVE_SELECT_MINIMUM 4       // Maximum times move selection can fail
-#define BFG_MOVE_ATTACK_MINIMUM 1       // Minimum number of offensive moves
+#define BFG_MOVE_SELECT_MINIMUM 1       // Minumum number of moves allowed
 
 #define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0xFF
 #define BFG_MOVE_RATING_LIST_SIZE_STATUS 0xFF
@@ -175,156 +174,9 @@
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
 
-// Special Cases
-#define BFG_MOVE_NO_SPEED_ALWAYS_SELECT_TRICK_ROOM TRUE
-
-// Moves which will always be selected
-#define BFG_MOVE_ALWAYS_SELECT_SINGLES \
-    MOVE_FAKE_OUT, \
-    MOVE_KINGS_SHIELD
-
-#define BFG_MOVE_ALWAYS_SELECT_DOUBLES \
-    BFG_MOVE_ALWAYS_SELECT_SINGLES, \
-    MOVE_FOLLOW_ME, \
-    MOVE_WIDE_GUARD, \
-    MOVE_RAGE_POWDER, \
-    MOVE_QUICK_GUARD, \
-    MOVE_CRAFTY_SHIELD, \
-    MOVE_INSTRUCT
-
-// Moves which will never be selected
-#define BFG_MOVE_NEVER_SELECT_SINGLES \
-    BFG_MOVE_DOUBLES_ONLY, \
-    MOVE_FLY, \
-    MOVE_DIG, \
-    MOVE_HYPER_BEAM, \
-    MOVE_SELF_DESTRUCT, \
-    MOVE_EXPLOSION, \
-    MOVE_DIVE, \
-    MOVE_GIGA_IMPACT, \
-    MOVE_HIDDEN_POWER, \
-    MOVE_FOCUS_PUNCH
-
-#define BFG_MOVE_NEVER_SELECT_DOUBLES \
-    MOVE_THRASH, \
-    MOVE_OUTRAGE, \
-    MOVE_HIDDEN_POWER, \
-    MOVE_PETAL_BLIZZARD
-
-// If this is set to true, the following list
-// will be used as an 'allow' list for status
-// moves which can be selected
+// If this is set to true, the move lookup table
+// 'gBattleFrontierMoveStatusAllowSelect' will be used
 #define BFG_MOVE_USE_STATUS_ALLOW_LIST TRUE
-#define BFG_MOVE_STATUS_ALLOW_SELECT_SINGLES \
-    MOVE_WHIRLWIND, \
-    MOVE_ROAR, \
-    MOVE_SING, \
-    MOVE_SUPERSONIC, \
-    MOVE_DISABLE, \
-    MOVE_LEECH_SEED, \
-    MOVE_POISON_POWDER, \
-    MOVE_STUN_SPORE, \
-    MOVE_SLEEP_POWDER, \
-    MOVE_TOXIC, \
-    MOVE_HYPNOSIS, \
-    MOVE_TELEPORT, \
-    MOVE_DOUBLE_TEAM, \
-    MOVE_RECOVER, \
-    MOVE_MINIMIZE, \
-    MOVE_CONFUSE_RAY, \
-    MOVE_LIGHT_SCREEN, \
-    MOVE_HAZE, \
-    MOVE_REFLECT, \
-    MOVE_FOCUS_ENERGY, \
-    MOVE_SOFT_BOILED, \
-    MOVE_GLARE, \
-    MOVE_LOVELY_KISS, \
-    MOVE_TRANSFORM, \
-    MOVE_SPORE, \
-    MOVE_REST, \
-    MOVE_SUBSTITUTE, \
-    MOVE_FORESIGHT, \
-    MOVE_DESTINY_BOND, \
-    MOVE_PERISH_SONG, \
-    MOVE_SANDSTORM, \
-    MOVE_SWAGGER, \
-    MOVE_MEAN_LOOK, \
-    MOVE_ATTRACT, \
-    MOVE_HEAL_BELL, \
-    MOVE_SAFEGUARD, \
-    MOVE_PAIN_SPLIT, \
-    MOVE_ENCORE, \
-    MOVE_MORNING_SUN, \
-    MOVE_SYNTHESIS, \
-    MOVE_MOONLIGHT, \
-    MOVE_RAIN_DANCE, \
-    MOVE_SUNNY_DAY, \
-    MOVE_MIRROR_COAT, \
-    MOVE_PSYCH_UP, \
-    MOVE_STOCKPILE, \
-    MOVE_HAIL, \
-    MOVE_TORMENT, \
-    MOVE_FLATTER, \
-    MOVE_WILL_O_WISP, \
-    MOVE_TAUNT, \
-    MOVE_HELPING_HAND, \
-    MOVE_TRICK, \
-    MOVE_ROLE_PLAY, \
-    MOVE_WISH, \
-    MOVE_INGRAIN, \
-    MOVE_RECYCLE, \
-    MOVE_YAWN, \
-    MOVE_SKILL_SWAP, \
-    MOVE_IMPRISON, \
-    MOVE_REFRESH, \
-    MOVE_GRUDGE, \
-    MOVE_SNATCH, \
-    MOVE_BLOCK, \
-    MOVE_ROOST, \
-    MOVE_GRAVITY, \
-    MOVE_MIRACLE_EYE, \
-    MOVE_TAILWIND, \
-    MOVE_SWITCHEROO, \
-    MOVE_DEFOG, \
-    MOVE_TRICK_ROOM, \
-    MOVE_HEAL_ORDER, \
-    MOVE_GUARD_SPLIT, \
-    MOVE_POWER_SPLIT, \
-    MOVE_WONDER_ROOM, \
-    MOVE_MAGIC_ROOM, \
-    MOVE_SOAK, \
-    MOVE_SIMPLE_BEAM, \
-    MOVE_ENTRAINMENT, \
-    MOVE_ROTOTILLER, \
-    MOVE_TRICK_OR_TREAT, \
-    MOVE_ION_DELUGE, \
-    MOVE_FORESTS_CURSE, \
-    MOVE_PARTING_SHOT, \
-    MOVE_TOPSY_TURVY, \
-    MOVE_GRASSY_TERRAIN, \
-    MOVE_MISTY_TERRAIN, \
-    MOVE_ELECTRIFY, \
-    MOVE_FAIRY_LOCK, \
-    MOVE_KINGS_SHIELD, \
-    MOVE_SPIKY_SHIELD, \
-    MOVE_POWDER, \
-    MOVE_ELECTRIC_TERRAIN, \
-    MOVE_SHORE_UP, \
-    MOVE_BANEFUL_BUNKER, \
-    MOVE_FLORAL_HEALING, \
-    MOVE_STRENGTH_SAP, \
-    MOVE_PSYCHIC_TERRAIN, \
-    MOVE_SPEED_SWAP, \
-    MOVE_LIFE_DEW, \
-    MOVE_OBSTRUCT, \
-    MOVE_LUNAR_BLESSING, \
-    MOVE_REVIVAL_BLESSING, \
-    MOVE_DOODLE, \
-    MOVE_SNOWSCAPE
-
-#define BFG_MOVE_STATUS_ALLOW_SELECT_DOUBLES \
-    BFG_MOVE_STATUS_ALLOW_SELECT_SINGLES, \
-    BFG_MOVE_DOUBLES_ONLY
 
 #define BFG_MOVE_RATING_DEFAULT 0         // Default Rating
 #define BFG_MOVE_STAB_MODIFIER 50    // +x to rating for same-type-attack-bonus

@@ -28,15 +28,15 @@ enum {
 enum {
     BFG_SPREAD_CATEGORY_PHYSICAL,
     BFG_SPREAD_CATEGORY_SPECIAL, 
-    BFG_SPREAD_CATEGORY_MIXED
+    BFG_SPREAD_CATEGORY_MIXED,
 };
 
 enum {
-    BFG_MOVE_SELECT_DEFAULT,                 // Default moves (Only replace if required)
-    BFG_MOVE_SELECT_RANDOM,                  // Select moves completely randomly (From Level Up / Teachable Moves)
+    BFG_MOVE_SELECT_DEFAULT,
+    BFG_MOVE_SELECT_RANDOM,
     BFG_MOVE_SELECT_RATING,
     BFG_MOVE_SELECT_RATING_ATTACKS_ONLY,
-    BFG_MOVE_SELECT_VARIABLE                 // Switch based on VAR()
+    BFG_MOVE_SELECT_VARIABLE,
 };
 
 enum {
@@ -44,7 +44,7 @@ enum {
     BFG_MOVE_TRY_REPLACE_SLOT_2,
     BFG_MOVE_TRY_REPLACE_SLOT_3,
     BFG_MOVE_TRY_REPLACE_SLOT_4,
-    BFG_MOVE_TRY_REPLACE_FAILED
-}
+    BFG_MOVE_TRY_REPLACE_FAILED,
+};
 
 #endif // GUARD_CONSTANTS_BATTLE_FRONTIER_GENERATOR_H
