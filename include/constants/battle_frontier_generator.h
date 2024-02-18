@@ -5,23 +5,6 @@
 
 #define BFG_MOVE_RATING_FIXED 0xFFFF
 
-// Moves which should only be selected in doubles
-#define BFG_MOVE_DOUBLES_ONLY \
-    MOVE_FOLLOW_ME, \
-    MOVE_WIDE_GUARD, \
-    MOVE_RAGE_POWDER, \
-    MOVE_AFTER_YOU, \
-    MOVE_QUICK_GUARD, \
-    MOVE_ALLY_SWITCH, \
-    MOVE_HEAL_PULSE, \
-    MOVE_QUASH, \
-    MOVE_MAT_BLOCK, \
-    MOVE_CRAFTY_SHIELD, \
-    MOVE_FLOWER_SHIELD, \
-    MOVE_SPOTLIGHT, \
-    MOVE_INSTRUCT, \
-    MOVE_DECORATE
-
 enum {
     BFG_SPREAD_TYPE_OFFENSIVE,
     BFG_SPREAD_TYPE_DEFENSIVE,

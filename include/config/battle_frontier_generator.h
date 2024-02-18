@@ -165,7 +165,7 @@
 #define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_FILTERED
 #define BFG_VAR_MOVE_SELECTION_METHOD 0 // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
 
-#define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
+#define BFG_MOVE_SELECT_FAILURE_LIMIT 5 // Maximum times move selection can fail
 #define BFG_MOVE_SELECT_MINIMUM 1       // Minumum number of moves allowed
 
 #define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0x20
@@ -173,6 +173,8 @@
 
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
+
+#define BFG_MOVE_IGNORE_TYPE_COUNT FALSE // Ignore 1-per-type limit for moves
 
 // If this is set to true, the move lookup table
 // 'gBattleFrontierMoveStatusAllowSelect' will be used
@@ -199,6 +201,7 @@
 
 // Moves required for certain items to be eligible
 #define BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED 2
+#define BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED 1
 #define BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED 3
 #define BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED 4
 #define BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED 2
@@ -233,6 +236,7 @@
 #define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // numSound
 #define BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE 3     // numStatus
 #define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 3     // numMultiHit
+#define BFG_ITEM_MIRROR_HERB_SELECTION_CHANCE 2     // hasFlatter & hasSwagger
 #define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 3      // numScreens
 #define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 4      // numStatDrop
 #define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 4      // numStatDrop
@@ -295,7 +299,6 @@
     BFG_RECYCLE_ITEMS_LIST, \
     ITEM_BRIGHT_POWDER, \
     ITEM_ROCKY_HELMET, \
-    ITEM_MIRROR_HERB, \
     ITEM_FOCUS_BAND, \
     ITEM_QUICK_CLAW, \
     ITEM_KINGS_ROCK, \

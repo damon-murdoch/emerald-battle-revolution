@@ -765,12 +765,15 @@ static bool32 IsAllowedStatusMove(u16 moveId)
 
 static bool32 IsIgnoreTypeCountMove(u16 moveId)
 {
+    if (BFG_MOVE_IGNORE_TYPE_COUNT)
+        return TRUE; // Ignore all type limits
     if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
         return gBattleFrontierMoveIgnoreTypeCount[moveId];
     else
         return TRUE; // Attacks only
 }
 
+/*
 static u8 GetMoveType(u16 moveId, u16 abilityId)
 {
     // Get the move type
@@ -804,34 +807,23 @@ static u8 GetMoveType(u16 moveId, u16 abilityId)
     return type;
 }
 
-/*
-static u16 GetMoveRating(u16 speciesId, u16 moveId, u16 abilityId)
-{
-    // Baseline move rating
-    u16 rating = BFG_MOVE_RATING_DEFAULT;
-
+static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
+{    
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
+
+    // Baseline move rating
+    u16 rating = gBattleFrontierAttackRatings[moveId];
+
+    // No rating for move
+    if (rating == 0)
+    {
+        DebugPrintf("Warning: No rating for attack %d ...", moveId);
+        rating = BFG_MOVE_DEFAULT_RATING;
+    }
 
     // Get move type, accounted for ability
     u8 type = GetMoveType(moveId, abilityId);
     bool8 isStab = IS_STAB(speciesId, type);
-
-    // Dereference move power
-    u16 power = move->power;
-
-    // Special Cases
-
-    // Moves
-    switch(moveId) 
-    {
-        case MOVE_FRUSTRATION:
-        case MOVE_RETURN:
-            power = 102;
-        break;
-        case MOVE_KNOCK_OFF:
-            power = 97;
-        break;
-    }
 
     // Abilities
     switch(abilityId)
@@ -889,26 +881,8 @@ static u16 GetMoveRating(u16 speciesId, u16 moveId, u16 abilityId)
             break;
     }
 
-    // Apply multi-hit modifier
-    if (move->strikeCount > 1)
-    {
-        power *= move->strikeCount; // Apply strike count
-    }
-    else if (move->effect == EFFECT_MULTI_HIT)
-    {
-        if (abilityId == ABILITY_SKILL_LINK)
-            power *= 5; // 5 hits
-        else
-            power *= RANDOM_RANGE(2,6); // 2-5 hits
-    }
-    // Add power to the rating
-    rating += power;
-
-    // Add accuracy to the rating
-    if (move->accuracy == 0)
-        rating += 100; // Perfect accuracy
-    else
-        rating += move->accuracy;
+    if (isStab)
+        rating += BFG_MOVE_STAB_MODIFIER;
 
     return rating;
 }
@@ -1131,8 +1105,8 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             if ((requiredMove != MOVE_NONE))
             {
                 moves[moveCount] = requiredMove;
-                if (!(IsIgnoreTypeCountMove(moveId)))
-                    types[TYPE(requiredMove)] = moveCount; // Set type flag
+                if ((types[TYPE(requiredMove)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(requiredMove))))
+                    types[TYPE(requiredMove)] = moveCount; // Set type index
                 moveCount++;
             }
             
@@ -1145,8 +1119,8 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 if (IsAlwaysSelectMove(moveId))
                 {
                     moves[moveCount] = moveId;
-                    if (!(IsIgnoreTypeCountMove(moveId)))
-                        types[TYPE(moveId)] = moveCount; // Set type flag
+                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                        types[TYPE(moveId)] = moveCount; // Set type index
                     moveCount++;
 
                     // Reached max. moves
@@ -1178,8 +1152,8 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 if (IsAlwaysSelectMove(moveId))
                 {
                     moves[moveCount] = moveId;
-                    if (!(IsIgnoreTypeCountMove(moveId)))
-                        types[TYPE(moveId)] = moveCount; // Set type flag
+                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                        types[TYPE(moveId)] = moveCount; // Set type index
                     moveCount++;
 
                     // Reached max. moves
@@ -1205,13 +1179,6 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             }
 
             // *** STAGE 2: ADD OTHER MOVES ***
-            
-            /*
-            // Move ratings
-            u16 rating[MAX_MON_MOVES] = {
-                0, 0, 0, 0
-            };
-            */
 
             // Remaining move slots
             u8 remainder = MAX_MON_MOVES - moveCount;
@@ -1239,24 +1206,39 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                     // While no move found, and failure limit has not been reached
                     while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
                     {
-                        // Sample a random status move from the list
+                        // Sample a random attacking move from the list
                         moveIndex = Random() % numAllowedAttackMoves;
                         moveId = allowedAttackMoves[moveIndex];
 
-                        // Check previous moves
-                        for(j = 0; j < moveCount; j++)
+                        // Check for previous moves of the same type (Or if move ignores type count)
+                        if ((types[TYPE(moveId)] != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
                         {
-                            if (moves[j] == moveId)
+                            moveId = MOVE_NONE;
+                            failures++;
+                        }
+                        else // Does not match previous move
+                        {
+                            // Check previous moves
+                            for(j = 0; j < moveCount; j++)
                             {
-                                moveId = MOVE_NONE;
-                                failures++;
-                                break;
+                                // Break if duplicate
+                                if (moves[j] == moveId)
+                                {
+                                    moveId = MOVE_NONE;
+                                    failures++;
+                                    break;
+                                }
                             }
                         }
 
                         // Move found
                         if (moveId != MOVE_NONE)
-                            moves[moveCount++] = moveId;
+                        {
+                            moves[moveCount] = moveId;
+                            if (!(IsIgnoreTypeCountMove(moveId)))
+                                types[TYPE(moveId)] = moveCount; // Set type index
+                            moveCount++;
+                        }
                     }
                 }
                 
@@ -1372,6 +1354,8 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
     bool8 hasTerrain = FALSE;
     bool8 hasTwoTurn = FALSE; 
     bool8 hasRecycle = FALSE;
+    bool8 hasSwagger = FALSE;
+    bool8 hasFlatter = FALSE;
     bool8 hasRest = FALSE;
 
     // Move Counters
@@ -1453,21 +1437,30 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 if (IS_TERRAIN_EFFECT(move->effect))
                     hasTerrain = TRUE; 
 
-                // Screens
-                if (moveId == MOVE_LIGHT_SCREEN || moveId == MOVE_REFLECT || moveId == MOVE_AURORA_VEIL)
-                    numScreens++;
-
-                // Crit rate up
-                if (move->effect == EFFECT_FOCUS_ENERGY)
-                    numCritModifier++;
-
-                // Has recycle (Can reuse berries)
-                if (move->effect == EFFECT_RECYCLE)
-                    hasRecycle = TRUE;
-
-                // Rest
-                if (moveId == MOVE_REST)
-                    hasRest = TRUE;
+                // Other Effects
+                switch(move->effect)
+                {
+                    case EFFECT_LIGHT_SCREEN:
+                    case EFFECT_REFLECT:
+                    case EFFECT_AURORA_VEIL:
+                        numScreens++;
+                    break;
+                    case EFFECT_FOCUS_ENERGY:
+                        numCritModifier++;
+                    break;
+                    case EFFECT_RECYCLE:
+                        hasRecycle = TRUE;
+                    break;
+                    case EFFECT_FLATTER:
+                        hasFlatter = TRUE;
+                    break;
+                    case EFFECT_SWAGGER:
+                        hasSwagger = TRUE;
+                    break;
+                    case EFFECT_REST:
+                        hasRest = TRUE;
+                    break;
+                }
             }
         } 
         else // Non-Status Move
@@ -1863,6 +1856,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             else if (RANDOM_CHANCE(BFG_ITEM_EJECT_PACK_SELECTION_CHANCE))
                 itemId = ITEM_EJECT_PACK;
         }
+
+        // Mirror Herb (Has Swagger / Flatter)
+        if ((itemId == ITEM_NONE) && (((hasFlatter == TRUE) && (numSpecial >= BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED)) || ((hasSwagger == TRUE) && (numPhysical >= BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED))) && RANDOM_CHANCE(BFG_ITEM_MIRROR_HERB_SELECTION_CHANCE))
+            itemId = ITEM_MIRROR_HERB;
 
         // Chesto Berry (Has rest)
         if ((itemId == ITEM_NONE) && (hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
