@@ -763,6 +763,14 @@ static bool32 IsAllowedStatusMove(u16 moveId)
         return TRUE; // Assume allowed
 }
 
+static bool32 IsIgnoreTypeCountMove(u16 moveId)
+{
+    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
+        return gBattleFrontierMoveIgnoreTypeCount[moveId];
+    else
+        return TRUE; // Attacks only
+}
+
 static u8 GetMoveType(u16 moveId, u16 abilityId)
 {
     // Get the move type
@@ -1090,18 +1098,22 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             }
         }; break;
         // Filtered Selection
-        case BFG_MOVE_SELECT_RATING:
-        case BFG_MOVE_SELECT_RATING_ATTACKS_ONLY: {
+        case BFG_MOVE_SELECT_FILTERED:
+        case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY:
+        case BFG_MOVE_SELECT_FILTERED_RANKING:
+        case BFG_MOVE_SELECT_FILTERED_RANKING_ATTACKS_ONLY: {
 
             // Get species ability            
             // u16 abilityId = gSpeciesInfo[speciesId].abilities[abilityNum];
 
-            // Has offensive move of type
-            bool8 types[NUMBER_OF_MON_TYPES] = {
-                FALSE,FALSE,FALSE,FALSE,FALSE,
-                FALSE,FALSE,FALSE,FALSE,FALSE,
-                FALSE,FALSE,FALSE,FALSE,FALSE,
-                FALSE,FALSE,FALSE,FALSE,
+            // Index of offensive move for each type - Limited to 1 move per 
+            // type (excl. moves in 'gBattleFrontierMoveIgnoreTypeCount').
+            // Value '0xFF' (BFG_MOVE_TYPE_NONE) indicates no move of type
+            u8 types[NUMBER_OF_MON_TYPES] = {
+                0xFF,0xFF,0xFF,0xFF,0xFF,
+                0xFF,0xFF,0xFF,0xFF,0xFF,
+                0xFF,0xFF,0xFF,0xFF,0xFF,
+                0xFF,0xFF,0xFF,0xFF,
             };
 
             // Get offensive/defensive & physical/special split
@@ -1118,11 +1130,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
 
             if ((requiredMove != MOVE_NONE))
             {
-                moves[moveCount++] = requiredMove;
-                if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
-                {
-                    types[TYPE(requiredMove)] = TRUE; // Set type flag
-                }
+                moves[moveCount] = requiredMove;
+                if (!(IsIgnoreTypeCountMove(moveId)))
+                    types[TYPE(requiredMove)] = moveCount; // Set type flag
+                moveCount++;
             }
             
             // STAGE 1: Add always-select moves and build lists
@@ -1133,11 +1144,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = levelUpLearnset[i].move;
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount++] = moveId;
-                    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
-                    {
-                        types[TYPE(moveId)] = TRUE; // Set type flag
-                    }
+                    moves[moveCount] = moveId;
+                    if (!(IsIgnoreTypeCountMove(moveId)))
+                        types[TYPE(moveId)] = moveCount; // Set type flag
+                    moveCount++;
 
                     // Reached max. moves
                     if (moveCount == MAX_MON_MOVES)
@@ -1149,7 +1159,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         continue; // Skip move
                     if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
                     {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
+                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
                             allowedStatusMoves[numAllowedStatusMoves++] = moveId;
                     }
                     else // Non-Status Move
@@ -1167,11 +1177,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = teachableLearnset[i];
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount++] = moveId;
-                    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
-                    {
-                        types[TYPE(moveId)] = TRUE; // Set type flag
-                    }
+                    moves[moveCount] = moveId;
+                    if (!(IsIgnoreTypeCountMove(moveId)))
+                        types[TYPE(moveId)] = moveCount; // Set type flag
+                    moveCount++;
 
                     // Reached max. moves
                     if (moveCount == MAX_MON_MOVES)
@@ -1183,7 +1192,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         continue; // Skip move
                     if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
                     {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
+                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
                             allowedStatusMoves[numAllowedStatusMoves++] = moveId;
                     }
                     else // Non-Status Move
@@ -1211,9 +1220,9 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             if (remainder > 0)
             {
                 u8 attackCount = remainder;
-
+                
                 // Reduce number of required attacks, if necessary
-                if (method != BFG_MOVE_SELECT_RATING_ATTACKS_ONLY)
+                if ((method == BFG_MOVE_SELECT_FILTERED) || (method == BFG_MOVE_SELECT_FILTERED_RANKING))
                 {
                     if (spreadType == BFG_SPREAD_TYPE_OFFENSIVE)
                         attackCount = MIN(remainder, RANDOM_RANGE(3,5));

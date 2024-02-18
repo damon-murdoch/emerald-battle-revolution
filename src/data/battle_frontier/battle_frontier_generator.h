@@ -166,3 +166,34 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
     [MOVE_DOODLE] = TRUE,
     [MOVE_SNOWSCAPE] = TRUE,
 };
+
+// Moves which should not be counted towards their type counter
+// This, for example, allows Fake Out and Return to be picked on the same set.
+const bool8 gBattleFrontierMoveIgnoreTypeCount[MOVES_COUNT] = 
+{
+    // Priority Attacks
+    [MOVE_FAKE_OUT] = TRUE, 
+    [MOVE_UPPER_HAND] = TRUE, 
+    [MOVE_EXTREME_SPEED] = TRUE, 
+    [MOVE_FEINT] = TRUE,
+    [MOVE_FIRST_IMPRESSION] = TRUE, 
+    [MOVE_ACCELEROCK] = TRUE, 
+    [MOVE_AQUA_JET] = TRUE, 
+    [MOVE_BULLET_PUNCH] = TRUE, 
+    [MOVE_GRASSY_GLIDE] = TRUE, 
+    [MOVE_ICE_SHARD] = TRUE, 
+    [MOVE_JET_PUNCH] = TRUE, 
+    [MOVE_MACH_PUNCH] = TRUE, 
+    [MOVE_QUICK_ATTACK] = TRUE, 
+    [MOVE_SHADOW_SNEAK] = TRUE, 
+    [MOVE_SUCKER_PUNCH] = TRUE, 
+    [MOVE_THUNDERCLAP] = TRUE, 
+    [MOVE_VACUUM_WAVE] = TRUE, 
+    [MOVE_WATER_SHURIKEN] = TRUE, 
+    // Counter Attacks
+    [MOVE_BIDE] = TRUE, 
+    [MOVE_COMEUPPANCE] = TRUE, 
+    [MOVE_COUNTER] = TRUE, 
+    [MOVE_METAL_BURST] = TRUE, 
+    [MOVE_MIRROR_COAT] = TRUE,
+};
