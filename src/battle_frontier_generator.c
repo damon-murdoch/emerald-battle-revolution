@@ -1056,6 +1056,9 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             u16 allowedStatusMoves[BFG_MOVE_RATING_LIST_SIZE_STATUS];
             s32 numAllowedStatusMoves = 0;
 
+            // Ensure no double-up moves
+            bool8 isDuplicate;
+
             if ((requiredMove != MOVE_NONE))
             {
                 moves[moveCount] = requiredMove;
@@ -1072,14 +1075,31 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = levelUpLearnset[i].move;
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount] = moveId;
-                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                        types[TYPE(moveId)] = moveCount; // Set type index
-                    moveCount++;
+                    // Ensure no double-up moves
+                    isDuplicate = FALSE;
+                    
+                    // Check previous moves
+                    for(j = 0; j < moveCount; j++){
+                        if (moves[j] == moveId)
+                        {
+                            // Mark as duplicate
+                            isDuplicate = TRUE;
+                            break;
+                        }
+                    }
 
-                    // Reached max. moves
-                    if (moveCount == MAX_MON_MOVES)
-                        return FillMonMoveSlots(index, moves);
+                    // Is not duplicate
+                    if (!isDuplicate)
+                    {
+                        moves[moveCount] = moveId;
+                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                            types[TYPE(moveId)] = moveCount; // Set type index
+                        moveCount++;
+
+                        // Reached max. moves
+                        if (moveCount == MAX_MON_MOVES)
+                            return FillMonMoveSlots(index, moves);
+                    }
                 }
                 else // Not always-select
                 {
@@ -1105,14 +1125,31 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = teachableLearnset[i];
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount] = moveId;
-                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                        types[TYPE(moveId)] = moveCount; // Set type index
-                    moveCount++;
+                    // Ensure no double-up moves
+                    isDuplicate = FALSE;
+                    
+                    // Check previous moves
+                    for(j = 0; j < moveCount; j++){
+                        if (moves[j] == moveId)
+                        {
+                            // Mark as duplicate
+                            isDuplicate = TRUE;
+                            break;
+                        }
+                    }
 
-                    // Reached max. moves
-                    if (moveCount == MAX_MON_MOVES)
-                        return FillMonMoveSlots(index, moves);
+                    // Is not duplicate
+                    if (!isDuplicate)
+                    {
+                        moves[moveCount] = moveId;
+                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                            types[TYPE(moveId)] = moveCount; // Set type index
+                        moveCount++;
+
+                        // Reached max. moves
+                        if (moveCount == MAX_MON_MOVES)
+                            return FillMonMoveSlots(index, moves);
+                    }
                 }
                 else // Not always-select
                 {

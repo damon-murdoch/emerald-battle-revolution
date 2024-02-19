@@ -181,7 +181,9 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierEx
 	switch(var(VAR_RESULT)) {
 		case 0: # Change Opponents
 			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeOpponents)
-		case 1: # Change Music
+		case 1: # Change Behavior
+			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior)
+		case 2: # Change Music
 			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic)
 		default: 
 			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertEnd)
@@ -220,6 +222,19 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierEx
 	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk)
 }
 
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior {
+
+	msgbox(format("I can change how modern Battle Frontier teams are built."))
+	msgbox(format("Which option would you like to use?"))
+
+	multichoice2(18,0,BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior)
+	copyvar(VAR_FRONTIER_METHOD, VAR_RESULT)
+
+	msgbox(format("Modern teams have been updated successfully!"))
+
+	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk)
+}
+
 script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic {
 	msgbox(format("What would like to listen to?"))
 	msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
@@ -251,7 +266,18 @@ text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman {
 
 text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpert {
 	"CHANGE OPPONENTS$"
+	"CHANGE BEHAVIOR$"
 	"CHANGE MUSIC$"
 	"NOTHING$"
+	""
+}
+
+text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior {
+	"DEFAULT$"
+	"RANDOM$"
+	"FILTERED$"
+	"FILTERED ATTACKS$"
+	"RANKED$"
+	"RANKED ATTACKS$"
 	""
 }

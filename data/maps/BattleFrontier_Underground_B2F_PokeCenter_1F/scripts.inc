@@ -207,6 +207,7 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOpt
 	switch VAR_RESULT
 	case 0, BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions_2
 	case 1, BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions_3
+	case 2, BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions_4
 	goto BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertEnd
 	return
 
@@ -215,6 +216,10 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOpt
 	return
 
 BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions_3:
+	goto BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior
+	return
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions_4:
 	goto BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic
 	return
 
@@ -249,6 +254,16 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertCha
 	clearflag FLAG_BATTLE_FRONTIER_GENERATOR
 	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeOpponents_Text_5
 	goto BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeOpponents_5
+
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior::
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_0
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_1
+	multichoice2 18, 0, BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior
+	copyvar VAR_FRONTIER_METHOD, VAR_RESULT
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_2
+	goto BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk
+	return
 
 
 BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic::
@@ -391,6 +406,17 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertCha
 	.string "Feel free to ask me again if you change\n"
 	.string "your mind!$"
 
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_0:
+	.string "I can change how modern Battle\n"
+	.string "Frontier teams are built.$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_1:
+	.string "Which option would you like to use?$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior_Text_2:
+	.string "Modern teams have been updated\n"
+	.string "successfully!$"
+
 BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic_Text_0:
 	.string "What would like to listen to?$"
 
@@ -411,6 +437,16 @@ BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman::
 
 BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpert::
 	.string "CHANGE OPPONENTS$"
+	.string "CHANGE BEHAVIOR$"
 	.string "CHANGE MUSIC$"
 	.string "NOTHING$"
+	.string "$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior::
+	.string "DEFAULT$"
+	.string "RANDOM$"
+	.string "FILTERED$"
+	.string "FILTERED ATTACKS$"
+	.string "RANKED$"
+	.string "RANKED ATTACKS$"
 	.string "$"
