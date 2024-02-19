@@ -120,8 +120,10 @@
 
 // Custom list of common banned species
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
+    SPECIES_WOBBUFFET, \
     SPECIES_SHEDINJA, \
     SPECIES_SMEARGLE, \
+    SPECIES_WYNAUT, \
     SPECIES_UNOWN, \
     SPECIES_NONE,
 
@@ -156,13 +158,7 @@
 
 // *** MOVES *** 
 
-// Selection method which will be used for selecting moves
-// The selection methods are defined as follows:
-
-// BFG_MOVE_SELECT_DEFAULT: Use default moves at level
-// BFG_MOVE_SELECT_RANDOM: Randomly select from available moves
-
-#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_FILTERED
+#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_FILTERED_RANKING
 #define BFG_VAR_MOVE_SELECTION_METHOD 0 // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
 
 #define BFG_MOVE_SELECT_FAILURE_LIMIT 5 // Maximum times move selection can fail
@@ -175,6 +171,10 @@
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
 
 #define BFG_MOVE_IGNORE_TYPE_COUNT FALSE // Ignore 1-per-type limit for moves
+#define BFG_MOVE_DEFAULT_RATING 60       // Default rating for moves which do not have one
+
+#define BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE 2   // Chance to accept move with equal rating
+#define BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE 10  // Chance to accept move with same rating
 
 // If this is set to true, the move lookup table
 // 'gBattleFrontierMoveStatusAllowSelect' will be used

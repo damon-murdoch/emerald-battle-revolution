@@ -773,7 +773,7 @@ static bool32 IsIgnoreTypeCountMove(u16 moveId)
         return TRUE; // Attacks only
 }
 
-/*
+
 static u8 GetMoveType(u16 moveId, u16 abilityId)
 {
     // Get the move type
@@ -807,7 +807,7 @@ static u8 GetMoveType(u16 moveId, u16 abilityId)
     return type;
 }
 
-static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
+static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
 {    
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
 
@@ -821,8 +821,6 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
         rating = BFG_MOVE_DEFAULT_RATING;
     }
 
-    // Get move type, accounted for ability
-    u8 type = GetMoveType(moveId, abilityId);
     bool8 isStab = IS_STAB(speciesId, type);
 
     // Abilities
@@ -859,7 +857,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
         case ABILITY_TECHNICIAN: 
-            if (power <= 60)
+            if ((move->power) <= 60)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
         case ABILITY_IRON_FIST: 
@@ -867,7 +865,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
         case ABILITY_HUGE_POWER: 
-            if (move->category == DAMAGE_CATEGORY_PHYSICAL)
+            if ((move->category) == DAMAGE_CATEGORY_PHYSICAL)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
         case ABILITY_WATER_BUBBLE: 
@@ -886,50 +884,6 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId)
 
     return rating;
 }
-
-static u16 GetBestMove(u16 speciesId, u16 moveNew, u16 moveOld)
-{
-    // If move is duplicate, never select move, or none - Reject new move
-    if ((moveNew == moveOld) || (moveNew == MOVE_NONE))
-        return moveOld;
-
-    // Replace old move if none
-    if (moveOld == MOVE_NONE)
-        return moveNew;
-    
-    // TODO: Implement actual logic
-
-    // Randomly return either
-    if (RANDOM_BOOL())
-        return moveNew;
-    return moveOld;
-}
-
-
-// Tests if all moves are 'fixed'
-// If this is set to true, we can stop looping
-static bool8 CanReplaceMove(bool8 fixed[MAX_MON_MOVES])
-{
-    s32 i;
-    for(i=0; i<MAX_MON_MOVES; i++)
-        if (fixed[i] == FALSE)
-            return TRUE; // Can replace move
-    return FALSE; // Cannot replace move
-}
-
-// If true, returns the index of which the new move should be
-// replaced. Otherwise, returns 5 (BFG_MOVE_TRY_REPLACE_FAILED).
-static u8 TryReplaceMove(u8 index, u8 moveId, u16 moves[MAX_MON_MOVES], u16 rating[MAX_MON_MOVES], u8 types[NUMBER_OF_MON_TYPES], u8 numAttacks, bool8 required)
-{
-    u16 moveslot;
-    for(moveSlot=0; moveSlot<MAX_MON_MOVES; moveSlot++)
-    {
-        if (rating[moveSlot] == BFG_MOVE_RATING_FIXED)
-            continue; // Skip fixed moveslot
-        return moveSlot;
-    }
-}
-*/
 
 static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
 {
@@ -1077,9 +1031,6 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         case BFG_MOVE_SELECT_FILTERED_RANKING:
         case BFG_MOVE_SELECT_FILTERED_RANKING_ATTACKS_ONLY: {
 
-            // Get species ability            
-            // u16 abilityId = gSpeciesInfo[speciesId].abilities[abilityNum];
-
             // Index of offensive move for each type - Limited to 1 move per 
             // type (excl. moves in 'gBattleFrontierMoveIgnoreTypeCount').
             // Value '0xFF' (BFG_MOVE_TYPE_NONE) indicates no move of type
@@ -1089,6 +1040,9 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 0xFF,0xFF,0xFF,0xFF,0xFF,
                 0xFF,0xFF,0xFF,0xFF,
             };
+                
+            // Get species ability            
+            u16 abilityId = gSpeciesInfo[speciesId].abilities[abilityNum];
 
             // Get offensive/defensive & physical/special split
             u8 spreadType = GetSpreadType(nature, evs);
@@ -1197,56 +1151,128 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         attackCount = MIN(remainder, RANDOM_RANGE(1,3));
                 }
 
-                // Add attacking moves
-                for(i=0; i < attackCount; i++)
+                // Select moves via ranking
+                if ((method == BFG_MOVE_SELECT_FILTERED_RANKING) || (method == BFG_MOVE_SELECT_FILTERED_RANKING_ATTACKS_ONLY))
                 {
-                    // Reset moveId
-                    moveId = MOVE_NONE; 
+                    // Attack move indexes
+                    u8 start = moveCount;
+                    u8 end = moveCount + attackCount;
 
-                    // While no move found, and failure limit has not been reached
-                    while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                    // Move Rating Table
+                    u16 rating[MAX_MON_MOVES] = {};
+
+                    u8 oldType, newType; // Attack type
+                    u16 attackRating; // Current move
+
+                    // Loop over allowed attacking moves
+                    for(i=0; i<numAllowedAttackMoves; i++)
                     {
-                        // Sample a random attacking move from the list
-                        moveIndex = Random() % numAllowedAttackMoves;
-                        moveId = allowedAttackMoves[moveIndex];
+                        moveId = allowedAttackMoves[i];
+                        
+                        // Get move type, accounted for ability
+                        newType = GetMoveType(moveId, abilityId);
+                        attackRating = GetAttackRating(speciesId, moveId, abilityId, newType);
 
-                        // Check for previous moves of the same type (Or if move ignores type count)
-                        if ((types[TYPE(moveId)] != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                        // Index of same-typed move
+                        moveIndex = types[newType];
+                        if (moves[moveIndex] == moveId)
+                            continue; // Skip duplicate move
+
+                        // If this is not the first move of type, and move is not an ignore type count move
+                        if ((moveIndex != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
                         {
-                            moveId = MOVE_NONE;
-                            failures++;
-                        }
-                        else // Does not match previous move
-                        {
-                            // Check previous moves
-                            for(j = 0; j < moveCount; j++)
+                            // Rating is greater, or equal/worse and selection chance is met
+                            if ((rating[moveIndex] < attackRating) || ((rating[moveIndex] == attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE)) || ((rating[moveIndex] > attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE)))
                             {
-                                // Break if duplicate
-                                if (moves[j] == moveId)
+                                // Update move, rating
+                                moves[moveIndex] = moveId;
+                                rating[moveIndex] = attackRating;
+                                types[newType] = moveIndex; // Move index
+                            }
+                        }
+                        else // No same-typed moves
+                        {
+                            // Loop over move indexes
+                            for(j=start; j<end; j++)
+                            {
+                                // Rating is greater, or equal/worse and selection chance is met
+                                if ((rating[j] < attackRating) || ((rating[j] == attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE)) || ((rating[j] > attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE)))
                                 {
-                                    moveId = MOVE_NONE;
-                                    failures++;
-                                    break;
+                                    // Replacing existing move
+                                    if (moves[j] != MOVE_NONE)
+                                    {
+                                        oldType = GetMoveType(moves[j], abilityId);
+
+                                        // Update old type
+                                        if (newType != oldType)
+                                            types[oldType] = BFG_MOVE_TYPE_NONE;
+                                    }
+                                    else // Adding new move
+                                        moveCount++;
+
+                                    // Update move, rating
+                                    moves[j] = moveId;
+                                    rating[j] = attackRating;
+                                    types[newType] = j; // Move index
+                                    break; // Break the loop
                                 }
                             }
                         }
+                    }
+                }
+                else // Select moves randomly
+                {
+                    // Add attacking moves
+                    for(i=0; i < attackCount; i++)
+                    {
+                        // Reset moveId
+                        moveId = MOVE_NONE; 
 
-                        // Move found
-                        if (moveId != MOVE_NONE)
+                        // While no move found, and failure limit has not been reached
+                        while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
                         {
-                            moves[moveCount] = moveId;
-                            if (!(IsIgnoreTypeCountMove(moveId)))
-                                types[TYPE(moveId)] = moveCount; // Set type index
-                            moveCount++;
+                            // Sample a random attacking move from the list
+                            moveIndex = Random() % numAllowedAttackMoves;
+                            moveId = allowedAttackMoves[moveIndex];
+
+                            // Check for previous moves of the same type (Or if move ignores type count)
+                            if ((types[TYPE(moveId)] != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                            {
+                                moveId = MOVE_NONE;
+                                failures++;
+                            }
+                            else // Does not match previous move
+                            {
+                                // Check previous moves
+                                for(j = 0; j < moveCount; j++)
+                                {
+                                    // Break if duplicate
+                                    if (moves[j] == moveId)
+                                    {
+                                        moveId = MOVE_NONE;
+                                        failures++;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // Move found
+                            if (moveId != MOVE_NONE)
+                            {
+                                moves[moveCount] = moveId;
+                                if (!(IsIgnoreTypeCountMove(moveId)))
+                                    types[TYPE(moveId)] = moveCount; // Set type index
+                                moveCount++;
+                            }
                         }
                     }
                 }
-                
+
                 // Reset failure limit
                 failures = 0;
 
                 // Calculate number of required status moves
-                u8 statusCount = remainder - attackCount;
+                u8 statusCount = moveCount - MAX_MON_MOVES;
 
                 // Add status moves
                 for(i=0; i < statusCount; i++)
