@@ -717,7 +717,7 @@
 #define JOY_EXCL_DPAD   0x030F
 
 // [voloved] Add Sleep Mode
-#ifdef ENABLE_SLEEP_MODE
+#ifdef SYS_ENABLE_SLEEP_MODE
 #define SLEEP_KEYS      ((L_BUTTON | R_BUTTON | SELECT_BUTTON))
 #define WAKE_KEYS       ((SELECT_BUTTON | START_BUTTON))
 #endif // SLEEP_MODE_ENABLED

@@ -1145,7 +1145,7 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .encourageEncore = TRUE,
     },
 
-    [EFFECT_WRING_OUT] =
+    [EFFECT_VARY_POWER_BASED_ON_HP] =
     {
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 0, // TODO: Assign points
@@ -2213,5 +2213,11 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectFocusEnergy,
         .battleTvScore = 1,
         .encourageEncore = TRUE,
+    },
+
+    [EFFECT_LAST_RESPECTS] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 0, // TODO: Assign points
     },
 };

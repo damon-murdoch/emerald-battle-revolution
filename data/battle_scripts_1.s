@@ -381,7 +381,7 @@ BattleScript_EffectAttackUpUserAlly_TryAlly:
 BattleScript_EffectAttackUpUserAlly_End:
 	goto BattleScript_MoveEnd
 BattleScript_EffectAttackUpUserAlly_TryAlly_:
- 	jumpifability BS_ATTACKER_PARTNER, ABILITY_SOUNDPROOF, BattleScript_EffectAttackUpUserAlly_TryAllyBlocked
+	jumpifability BS_ATTACKER_PARTNER, ABILITY_SOUNDPROOF, BattleScript_EffectAttackUpUserAlly_TryAllyBlocked
 	setstatchanger STAT_ATK, 1, FALSE
 	statbuffchange STAT_CHANGE_ALLOW_PTR, BattleScript_EffectAttackUpUserAlly_End
 	jumpifbyte CMP_NOT_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STAT_WONT_INCREASE, BattleScript_EffectAttackUpUserAlly_AllyAnim
@@ -2232,8 +2232,8 @@ BattleScript_EffectHealPulse::
 	attackcanceler
 	attackstring
 	ppreduce
-    jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents @ stops pollen puff
-    jumpifstatus3 BS_TARGET, STATUS3_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents
+	jumpifstatus3 BS_ATTACKER, STATUS3_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents @ stops pollen puff
+	jumpifstatus3 BS_TARGET, STATUS3_HEAL_BLOCK, BattleScript_MoveUsedHealBlockPrevents
 	accuracycheck BattleScript_ButItFailed, NO_ACC_CALC_CHECK_LOCK_ON
 	jumpifsubstituteblocks BattleScript_ButItFailed
 	tryhealpulse BattleScript_AlreadyAtFullHp
@@ -2534,6 +2534,10 @@ BattleScript_EffectTrickRoom::
 	waitanimation
 	printfromtable gRoomsStringIds
 	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_TryRoomServiceLoop
+	goto BattleScript_MoveEnd
+
+BattleScript_TryRoomServiceLoop:
 	savetarget
 	setbyte gBattlerTarget, 0
 BattleScript_RoomServiceLoop:
@@ -2544,7 +2548,7 @@ BattleScript_RoomServiceLoop_NextBattler:
 	addbyte gBattlerTarget, 0x1
 	jumpifbytenotequal gBattlerTarget, gBattlersCount, BattleScript_RoomServiceLoop
 	restoretarget
-	goto BattleScript_MoveEnd
+	return
 
 BattleScript_EffectWonderRoom::
 BattleScript_EffectMagicRoom::
@@ -5165,7 +5169,7 @@ BattleScript_EffectYawn::
 	setyawn BattleScript_ButItFailed
 	attackanimation
 	waitanimation
- BattleScript_EffectYawnSuccess::
+BattleScript_EffectYawnSuccess::
 	printstring STRINGID_PKMNWASMADEDROWSY
 	waitmessage B_WAIT_TIME_LONG
 	goto BattleScript_MoveEnd
@@ -5982,6 +5986,19 @@ BattleScript_SunlightFaded::
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities
 	end2
+
+BattleScript_OverworldStatusStarts::
+	printfromtable gStartingStatusStringIds
+	waitmessage B_WAIT_TIME_LONG
+	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
+	call BattleScript_OverworldStatusStarts_TryActivations
+	end3
+
+BattleScript_OverworldStatusStarts_TryActivations:
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TRICK_ROOM, BattleScript_TryRoomServiceLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TAILWIND_PLAYER, BattleScript_TryTailwindAbilitiesLoop
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SET_TAILWIND_OPPONENT, BattleScript_TryTailwindAbilitiesLoop
+	return
 
 BattleScript_OverworldWeatherStarts::
 	printfromtable gWeatherStartsStringIds
@@ -7781,6 +7798,7 @@ BattleScript_TryAdrenalineOrbRet:
 
 BattleScript_IntimidateActivates::
 	showabilitypopup BS_ATTACKER
+	copybyte sSAVED_BATTLER, gBattlerTarget
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
 	setbyte gBattlerTarget, 0
@@ -7808,6 +7826,7 @@ BattleScript_IntimidateLoopIncrement:
 BattleScript_IntimidateEnd:
 	copybyte sBATTLER, gBattlerAttacker
 	destroyabilitypopup
+	copybyte gBattlerTarget, sSAVED_BATTLER
 	pause B_WAIT_TIME_MED
 	end3
 
@@ -7831,6 +7850,7 @@ BattleScript_IntimidateInReverse:
 
 BattleScript_SupersweetSyrupActivates::
 	showabilitypopup BS_ATTACKER
+ 	copybyte sSAVED_BATTLER, gBattlerTarget
 	pause B_WAIT_TIME_LONG
 	destroyabilitypopup
 	printstring STRINGID_SUPERSWEETAROMAWAFTS
@@ -7859,6 +7879,7 @@ BattleScript_SupersweetSyrupLoopIncrement:
 BattleScript_SupersweetSyrupEnd:
 	copybyte sBATTLER, gBattlerAttacker
 	destroyabilitypopup
+ 	copybyte gBattlerTarget, sSAVED_BATTLER
 	pause B_WAIT_TIME_MED
 	end3
 
