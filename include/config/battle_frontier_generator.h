@@ -32,7 +32,7 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
-#define BFG_TRAINER_CLASS_MON_LIMIT 0x1FF   // Maximum number of mons available per trainer class
+#define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
 
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
@@ -120,8 +120,10 @@
 
 // Custom list of common banned species
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
+    SPECIES_WOBBUFFET, \
     SPECIES_SHEDINJA, \
     SPECIES_SMEARGLE, \
+    SPECIES_WYNAUT, \
     SPECIES_UNOWN, \
     SPECIES_NONE,
 
@@ -156,79 +158,31 @@
 
 // *** MOVES *** 
 
-// Selection method which will be used for selecting moves
-// The selection methods are defined as follows:
-
-// BFG_MOVE_SELECT_DEFAULT: Use default moves at level
-// BFG_MOVE_SELECT_RANDOM: Randomly select from available moves
-
-#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_DEFAULT
+#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_FILTERED_RANKING
 #define BFG_VAR_MOVE_SELECTION_METHOD 0 // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
 
-#define BFG_MOVE_SELECT_FAILURE_LIMIT 3 // Maximum times move selection can fail
-#define BFG_MOVE_SELECT_MINIMUM 4       // Maximum times move selection can fail
+#define BFG_MOVE_SELECT_FAILURE_LIMIT 5 // Maximum times move selection can fail
+#define BFG_MOVE_SELECT_MINIMUM 1       // Minumum number of moves allowed
+
+#define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0x20
+#define BFG_MOVE_RATING_LIST_SIZE_STATUS 0x20
 
 #define BFG_MOVE_ALLOW_LEVEL_UP TRUE    // Allow level-up moves to be used
 #define BFG_MOVE_ALLOW_TEACHABLE TRUE   // Allow teachable moves to be used
 
-// Moves which will always be selected
-#define BFG_MOVE_ALWAYS_SELECT_SINGLES \
-    MOVE_POPULATION_BOMB, \
-    MOVE_SURGING_STRIKES, \
-    MOVE_MATCHA_GOTCHA, \
-    MOVE_STRANGE_STEAM, \
-    MOVE_MIGHTY_CLEAVE, \
-    MOVE_WICKED_BLOW, \
-    MOVE_SOFT_BOILED, \
-    MOVE_CHLOROBLAST, \
-    MOVE_SALT_CURE, \
-    MOVE_TWIN_BEAM, \
-    MOVE_PSYSTRIKE, \
-    MOVE_FAKE_OUT, \
-    MOVE_SPORE
+#define BFG_MOVE_IGNORE_TYPE_COUNT FALSE // Ignore 1-per-type limit for moves
+#define BFG_MOVE_DEFAULT_RATING 60       // Default rating for moves which do not have one
 
-#define BFG_MOVE_ALWAYS_SELECT_DOUBLES \
-    BFG_MOVE_ALWAYS_SELECT_SINGLES, \
-    MOVE_BANEFUL_BUNKER, \
-    MOVE_CRAFTY_SHIELD, \
-    MOVE_SPIKY_SHIELD, \
-    MOVE_KINGS_SHIELD, \
-    MOVE_PARTING_SHOT, \
-    MOVE_QUICK_GUARD, \
-    MOVE_POLLEN_PUFF, \
-    MOVE_WIDE_GUARD, \
-    MOVE_DECORATE, \
-    MOVE_INSTRUCT, \
-    MOVE_MAT_BLOCK
+#define BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE 2   // Chance to accept move with equal rating
+#define BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE 10  // Chance to accept move with same rating
 
-// Moves which will never be selected
-#define BFG_MOVE_NEVER_SELECT_SINGLES \
-    MOVE_HIDDEN_POWER, \
-    MOVE_QUICK_GUARD, \
-    MOVE_WIDE_GUARD, \
-    MOVE_DECORATE, \
-    MOVE_INSTRUCT, \
-    MOVE_PROTECT, \
-    MOVE_ENDURE, \
-    MOVE_DETECT
+// If this is set to true, the move lookup table
+// 'gBattleFrontierMoveStatusAllowSelect' will be used
+#define BFG_MOVE_USE_STATUS_ALLOW_LIST TRUE
 
-#define BFG_MOVE_NEVER_SELECT_DOUBLES \
-    MOVE_HIDDEN_POWER, \
-    MOVE_PROTECT, \
-    MOVE_ENDURE, \
-    MOVE_DETECT
-    
-#define BFG_MOVE_EFFECT_ALWAYS_SELECT_SINGLES
-
-#define BFG_MOVE_EFFECT_ALWAYS_SELECT_DOUBLES \
-    EFFECT_FOLLOW_ME
-
-#define BFG_MOVE_EFFECT_NEVER_SELECT_SINGLES \
-    EFFECT_FOLLOW_ME
-
-#define BFG_MOVE_EFFECT_NEVER_SELECT_DOUBLES \
-    EFFECT_TWO_TURNS_ATTACK
-
+#define BFG_MOVE_RATING_DEFAULT 0         // Default Rating
+#define BFG_MOVE_STAB_MODIFIER 50    // +x to rating for same-type-attack-bonus
+#define BFG_MOVE_ABILITY_MODIFIER 80      // +x to rating for ability synergy moves
 
 // *** ITEMS ***
 
@@ -247,6 +201,7 @@
 
 // Moves required for certain items to be eligible
 #define BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED 2
+#define BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED 1
 #define BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED 3
 #define BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED 4
 #define BFG_ITEM_TYPE_ITEM_TYPE_MOVES_REQUIRED 2
@@ -281,6 +236,7 @@
 #define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // numSound
 #define BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE 3     // numStatus
 #define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 3     // numMultiHit
+#define BFG_ITEM_MIRROR_HERB_SELECTION_CHANCE 2     // hasFlatter & hasSwagger
 #define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 3      // numScreens
 #define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 4      // numStatDrop
 #define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 4      // numStatDrop
@@ -343,7 +299,6 @@
     BFG_RECYCLE_ITEMS_LIST, \
     ITEM_BRIGHT_POWDER, \
     ITEM_ROCKY_HELMET, \
-    ITEM_MIRROR_HERB, \
     ITEM_FOCUS_BAND, \
     ITEM_QUICK_CLAW, \
     ITEM_KINGS_ROCK, \
