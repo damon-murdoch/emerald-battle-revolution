@@ -2,8 +2,13 @@
 #define GUARD_SAVE_H
 
 // Each 4 KiB flash sector contains 3968 bytes of actual data followed by 116 bytes of SaveBlock3 and then 12 bytes of footer.
+#ifdef SYS_EXPANDED_SECTOR_DATA
+#define SECTOR_DATA_SIZE 4084
+#define SAVE_BLOCK_3_CHUNK_SIZE 0
+#else
 #define SECTOR_DATA_SIZE 3968
 #define SAVE_BLOCK_3_CHUNK_SIZE 116
+#endif
 #define SECTOR_FOOTER_SIZE 12
 #define SECTOR_SIZE (SECTOR_DATA_SIZE + SAVE_BLOCK_3_CHUNK_SIZE + SECTOR_FOOTER_SIZE)
 

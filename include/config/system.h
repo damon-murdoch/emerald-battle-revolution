@@ -7,7 +7,7 @@
 // Only 12 bytes of the footer are used.
 
 // Comment out this line to use the original save structure
-#define ENABLE_EXTRA_SPACE
+#define SYS_EXPANDED_SECTOR_DATA
 
 // [voloved] Add Sleep Mode
 // If this is set to true, sleep mode will be enabled
@@ -15,10 +15,10 @@
 // support (Keys are defined in include/gba/io_reg.h)
 
 // Comment out this line to disable sleep mode
-#define ENABLE_SLEEP_MODE
+#define SYS_ENABLE_SLEEP_MODE
 
 // [FieryMewtwo] Enable trade with 
 // FRLG without beating the game
-#define ENABLE_FRLG_EARLY_TRADE
+#define SYS_ENABLE_FRLG_EARLY_TRADE
 
 #endif // GUARD_CONFIG_SYSTEM_H

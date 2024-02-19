@@ -282,7 +282,7 @@ static void ReadKeys(void)
     u16 keyInput = REG_KEYINPUT ^ KEYS_MASK;
 
 // [voloved] Add Sleep Mode
-#ifdef ENABLE_SLEEP_MODE
+#ifdef SYS_ENABLE_SLEEP_MODE
     if (keyInput == SLEEP_KEYS)
     {
         vu16 IeBak, DispCntBak;

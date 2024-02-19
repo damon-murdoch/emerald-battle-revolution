@@ -677,7 +677,7 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->compatibility.hasNews = FALSE;
     data->compatibility.hasCard = FALSE;
     data->compatibility.unknown = FALSE;
-#ifdef ENABLE_FRLG_EARLY_TRADE
+#ifdef SYS_ENABLE_FRLG_EARLY_TRADE
     // [FieryMewtwo] Enable trade with FRLG without beating the game
     data->compatibility.canLinkNationally = TRUE;
 #else

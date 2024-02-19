@@ -334,7 +334,7 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
 
     // [FieryMewtwo] Enable trade with FRLG without beating the game
-#ifndef ENABLE_FRLG_EARLY_TRADE
+#ifndef SYS_ENABLE_FRLG_EARLY_TRADE
     if (FlagGet(FLAG_IS_CHAMPION))
     {
         gLocalLinkPlayer.progressFlags |= 0x10;
