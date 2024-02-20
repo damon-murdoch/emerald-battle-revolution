@@ -205,6 +205,19 @@ const u16 customBannedSpeciesLvlTent[] = {
 
 #endif
 
+static u8 GetTeamGenerationMethod()
+{
+    // Get the method for selecting the moves
+    u8 method = BFG_TEAM_GENERATION_METHOD;
+
+    #if BFG_VAR_TEAM_GENERATION_METHOD != 0
+    if (method == BFG_TEAM_GENERATOR_VARIABLE) 
+        method = VarGet(BFG_VAR_TEAM_GENERATION_METHOD);
+    #endif
+
+    return method;
+}
+
 static bool8 SpeciesValidForFrontierLevel(u16 speciesId) 
 {
     s32 i;
@@ -444,210 +457,239 @@ static u8 GetNatureFromStats(u8 posStat, u8 negStat)
 
 static u8 GetSpeciesNature(u16 speciesId) 
 {
+    // Get the method for selecting the moves
+    u8 method = GetTeamGenerationMethod();
+    
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
-    #if BFG_NATURE_SELECT_RANDOM == TRUE
-    return Random() % NUM_NATURES;
-    #else
-    s32 i; 
-
-    u8 posStat = 0;
-    u8 posStatValue = 0;
-
-    u8 negStat = 0;
-    u8 negStatValue = 0;
-
-    u16 temp1 = ((species->baseAttack) + RANDOM_OFFSET());
-    u16 temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
-
-    // If both attack and special attack stats match
-    if (temp1 == temp2)
+    // Switch on team generation method
+    switch(method)
     {
-        // prioritise special attack
-        if (RANDOM_BOOL())
-        {
-            negStat = STAT_ATK;
-            negStatValue = species->baseAttack;
-        }
-        else // Prioritise attack
-        {
-            negStat = STAT_SPATK;
-            negStatValue = species->baseSpAttack;
-        }
-    }
-    else if (temp1 > temp2) 
-    {
-        negStat = STAT_SPATK;
-        negStatValue = species->baseSpAttack;
-    }
-    else // Special attack is greater than attack
-    {
-        negStat = STAT_ATK;
-        negStatValue = species->baseAttack; 
-    }
+        // Filtered Generation Methods
+        case BFG_TEAM_GENERATOR_FILTERED:
+        case BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY: {
 
-    // If negative speed natures are allowed
-    if (BFG_PRIORITISE_ATK_SPA_OVER_SPE && negStatValue > species->baseSpeed) 
-    {
-        negStat = STAT_SPEED;
-        negStatValue = species->baseSpeed;
+            s32 i; 
+
+            u8 posStat = 0;
+            u8 posStatValue = 0;
+
+            u8 negStat = 0;
+            u8 negStatValue = 0;
+
+            u16 temp1 = ((species->baseAttack) + RANDOM_OFFSET());
+            u16 temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
+
+            // If both attack and special attack stats match
+            if (temp1 == temp2)
+            {
+                // prioritise special attack
+                if (RANDOM_BOOL())
+                {
+                    negStat = STAT_ATK;
+                    negStatValue = species->baseAttack;
+                }
+                else // Prioritise attack
+                {
+                    negStat = STAT_SPATK;
+                    negStatValue = species->baseSpAttack;
+                }
+            }
+            else if (temp1 > temp2) 
+            {
+                negStat = STAT_SPATK;
+                negStatValue = species->baseSpAttack;
+            }
+            else // Special attack is greater than attack
+            {
+                negStat = STAT_ATK;
+                negStatValue = species->baseAttack; 
+            }
+
+            // If negative speed natures are allowed
+            if (BFG_PRIORITISE_ATK_SPA_OVER_SPE && negStatValue > species->baseSpeed) 
+            {
+                negStat = STAT_SPEED;
+                negStatValue = species->baseSpeed;
+            }
+
+            // Loop over the stats (pick best stat)
+            for(i = STAT_ATK; i < NUM_STATS; i++){
+                if (i == negStat)
+                    continue; 
+
+                temp1 = (posStatValue + RANDOM_OFFSET());
+
+                switch(i) 
+                {
+                    case STAT_ATK: {
+                        temp2 = ((species->baseAttack) + RANDOM_OFFSET());
+                        if ((temp2 > temp1) || ((temp2 == temp1) && (
+                            ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
+                            (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
+                        ))) 
+                        {
+                            posStat = STAT_ATK;
+                            posStatValue = species->baseAttack;
+                        }
+                    }; break;
+                    case STAT_DEF: {
+                        temp2 = ((species->baseDefense) + RANDOM_OFFSET());
+                        if ((temp2 > temp1) || ((temp2 == temp1) && (
+                            (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
+                            (posStat == STAT_SPDEF && RANDOM_BOOL()))
+                        ))) 
+                        {
+                            posStat = STAT_DEF;
+                            posStatValue = species->baseDefense;
+                        }
+                    }; break;
+                    case STAT_SPATK: {
+                        temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
+                        if ((temp2 > temp1) || ((temp2 == temp1) && (
+                            ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
+                            (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
+                        ))) 
+                        {
+                            posStat = STAT_SPATK;
+                            posStatValue = species->baseSpAttack;
+                        }
+                    }; break;
+                    case STAT_SPDEF: {
+                        temp2 = ((species->baseSpDefense) + RANDOM_OFFSET());
+                        if ((temp2 > temp1) || ((temp2 == temp1) && (
+                            (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
+                            (posStat == STAT_DEF && RANDOM_BOOL()))
+                        ))) 
+                        {
+                            posStat = STAT_SPDEF;
+                            posStatValue = species->baseSpDefense;
+                        }
+                    }; break;
+                    case STAT_SPEED: {
+                        temp2 = ((species->baseSpeed) + RANDOM_OFFSET());
+                        if ((temp2 > temp1) || ((temp2 == temp1) && (
+                            ((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_SPE == FALSE)) || 
+                            (posStat == STAT_DEF || posStat == STAT_SPDEF)
+                        )))
+                        {
+                            posStat = STAT_SPEED;
+                            posStatValue = species->baseSpeed;
+                        }
+                    }; break;
+                }
+            }
+
+            // Return the nature matching that stats (if any)
+            // If no matching nature is found, will return 'HARDY'
+            return GetNatureFromStats(posStat, negStat);
+        }; break;
+        // Random / Generic Generation Methods
+        default:
+            DebugPrintf("Unhandled team generation method: %d, falling back to default method ...", method);
+        case BFG_TEAM_GENERATOR_DEFAULT:
+        case BFG_TEAM_GENERATOR_RANDOM: {
+            return NATURE_HARDY; // Neutral nature
+        }; break;
     }
-
-    // Loop over the stats (pick best stat)
-    for(i = STAT_ATK; i < NUM_STATS; i++){
-        if (i == negStat)
-            continue; 
-
-        temp1 = (posStatValue + RANDOM_OFFSET());
-
-        switch(i) 
-        {
-            case STAT_ATK: {
-                temp2 = ((species->baseAttack) + RANDOM_OFFSET());
-                if ((temp2 > temp1) || ((temp2 == temp1) && (
-                    ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
-                    (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
-                ))) 
-                {
-                    posStat = STAT_ATK;
-                    posStatValue = species->baseAttack;
-                }
-            }; break;
-            case STAT_DEF: {
-                temp2 = ((species->baseDefense) + RANDOM_OFFSET());
-                if ((temp2 > temp1) || ((temp2 == temp1) && (
-                    (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
-                    (posStat == STAT_SPDEF && RANDOM_BOOL()))
-                ))) 
-                {
-                    posStat = STAT_DEF;
-                    posStatValue = species->baseDefense;
-                }
-            }; break;
-            case STAT_SPATK: {
-                temp2 = ((species->baseSpAttack) + RANDOM_OFFSET());
-                if ((temp2 > temp1) || ((temp2 == temp1) && (
-                    ((posStat == STAT_DEF || posStat == STAT_SPDEF) && BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD) || 
-                    (posStat == STAT_SPEED && BFG_PRIORITISE_ATK_SPA_OVER_SPE)
-                ))) 
-                {
-                    posStat = STAT_SPATK;
-                    posStatValue = species->baseSpAttack;
-                }
-            }; break;
-            case STAT_SPDEF: {
-                temp2 = ((species->baseSpDefense) + RANDOM_OFFSET());
-                if ((temp2 > temp1) || ((temp2 == temp1) && (
-                    (((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_DEF_SPD == FALSE)) || 
-                    (posStat == STAT_DEF && RANDOM_BOOL()))
-                ))) 
-                {
-                    posStat = STAT_SPDEF;
-                    posStatValue = species->baseSpDefense;
-                }
-            }; break;
-            case STAT_SPEED: {
-                temp2 = ((species->baseSpeed) + RANDOM_OFFSET());
-                if ((temp2 > temp1) || ((temp2 == temp1) && (
-                    ((posStat == STAT_ATK || posStat == STAT_SPATK) && (BFG_PRIORITISE_ATK_SPA_OVER_SPE == FALSE)) || 
-                    (posStat == STAT_DEF || posStat == STAT_SPDEF)
-                )))
-                {
-                    posStat = STAT_SPEED;
-                    posStatValue = species->baseSpeed;
-                }
-            }; break;
-        }
-    }
-
-    // Return the nature matching that stats (if any)
-    // If no matching nature is found, will return 'HARDY'
-    return GetNatureFromStats(posStat, negStat);
-    #endif
 }
 
 static u8 GetSpeciesEVs(u16 speciesId, u8 natureId) 
 {
-    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
     u8 evs = 0;
     u8 stat1, stat2;
 
-    #if BFG_EV_SELECT_RANDOM
-    stat1 = Random() % NUM_STATS;
-    stat2 = stat1;
-    while(stat2 == stat1)
-        stat2 = Random() % NUM_STATS;
-    #else
-    s32 i;
-    u16 val1 = 0; 
-    u16 val2 = 0; 
-    u16 valT, valR;
+    // Get the method for selecting the moves
+    u8 method = GetTeamGenerationMethod();
+    
+    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
 
-    const struct Nature * nature = &(gNatureInfo[natureId]);
+    switch(method){
+        case BFG_TEAM_GENERATOR_FILTERED:
+        case BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY: {
 
-    // Default Values
-    stat1 = 0xFF;
-    stat2 = 0xFF;
+            s32 i;
+            u16 val1 = 0; 
+            u16 val2 = 0; 
+            u16 valT, valR;
 
-    for(i = STAT_HP; i < NUM_STATS; i++)
-    {
-        if (i == nature->negStat)
-            continue;
-        switch(i)
-        {
-            case STAT_HP:
-                valT = (species->baseHP) + BFG_EV_HP_OFFSET;
-                break;
-            case STAT_ATK:
-                valT = species->baseAttack;
-                break;
-            case STAT_DEF:
-                valT = species->baseDefense;
-                break;
-            case STAT_SPATK:
-                valT = species->baseSpAttack;
-                break;
-            case STAT_SPDEF:
-                valT = species->baseSpDefense;
-                break;
-            case STAT_SPEED:
-                valT = species->baseSpeed;
-                break;
-        }
+            const struct Nature * nature = &(gNatureInfo[natureId]);
 
-        // For calculating with offset
-        valR = (valT + RANDOM_OFFSET());
+            // Default Values
+            stat1 = 0xFF;
+            stat2 = 0xFF;
 
-        // If stat 1 is undefined, or new stat is greater
-        if (stat1 == 0xFF || ((val2 > val1) && (valR > (val1 + RANDOM_OFFSET())))) 
-        {
-            stat1 = i; 
-            val1 = valT;
-        }
-        // If stat 2 is undefined, or new stat is greater
-        else if (stat2 == 0xFF || ((val2 < val1) && (valR > (val2 + RANDOM_OFFSET())))) 
-        {
-            stat2 = i; 
-            val2 = valT;
-        }
-        // Both stat 1 and stat 2 match
-        else if ((val2 == val1) && (valR > (val2 + RANDOM_OFFSET()))) 
-        {
-            // Replace stat1
-            if (RANDOM_BOOL()) 
+            for(i = STAT_HP; i < NUM_STATS; i++)
             {
-                stat1 = i; 
-                val1 = valT;
+                if (i == nature->negStat)
+                    continue;
+                switch(i)
+                {
+                    case STAT_HP:
+                        valT = (species->baseHP) + BFG_EV_HP_OFFSET;
+                        break;
+                    case STAT_ATK:
+                        valT = species->baseAttack;
+                        break;
+                    case STAT_DEF:
+                        valT = species->baseDefense;
+                        break;
+                    case STAT_SPATK:
+                        valT = species->baseSpAttack;
+                        break;
+                    case STAT_SPDEF:
+                        valT = species->baseSpDefense;
+                        break;
+                    case STAT_SPEED:
+                        valT = species->baseSpeed;
+                        break;
+                }
+
+                // For calculating with offset
+                valR = (valT + RANDOM_OFFSET());
+
+                // If stat 1 is undefined, or new stat is greater
+                if (stat1 == 0xFF || ((val2 > val1) && (valR > (val1 + RANDOM_OFFSET())))) 
+                {
+                    stat1 = i; 
+                    val1 = valT;
+                }
+                // If stat 2 is undefined, or new stat is greater
+                else if (stat2 == 0xFF || ((val2 < val1) && (valR > (val2 + RANDOM_OFFSET())))) 
+                {
+                    stat2 = i; 
+                    val2 = valT;
+                }
+                // Both stat 1 and stat 2 match
+                else if ((val2 == val1) && (valR > (val2 + RANDOM_OFFSET()))) 
+                {
+                    // Replace stat1
+                    if (RANDOM_BOOL()) 
+                    {
+                        stat1 = i; 
+                        val1 = valT;
+                    }
+                    else // Replace stat2
+                    {
+                        stat2 = i; 
+                        val2 = valT;
+                    }
+                }
             }
-            else // Replace stat2
-            {
-                stat2 = i; 
-                val2 = valT;
-            }
-        }
+        }; break;
+        default: 
+            DebugPrintf("Unhandled team generation method: %d, falling back to default method ...", method);
+        case BFG_TEAM_GENERATOR_DEFAULT:
+        case BFG_TEAM_GENERATOR_RANDOM: {
+           stat1 = STAT_HP;
+           stat2 = RANDOM_BOOL() ? STAT_DEF : STAT_SPDEF;
+        }; break;
     }
-    #endif
 
     // Apply stat bitmasks to evs
     if (stat1 == STAT_HP || stat2 == STAT_HP)
@@ -772,7 +814,6 @@ static bool32 IsIgnoreTypeCountMove(u16 moveId)
     else
         return TRUE; // Attacks only
 }
-
 
 static u8 GetMoveType(u16 moveId, u16 abilityId)
 {
@@ -947,18 +988,13 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
     u16 moveId;
 
     // Get the method for selecting the moves
-    u8 method = BFG_MOVE_SELECTION_METHOD;
-
-    #if BFG_VAR_MOVE_SELECTION_METHOD != 0
-    if (method == BFG_MOVE_SELECT_VARIABLE) 
-        method = VarGet(BFG_VAR_MOVE_SELECTION_METHOD);
-    #endif
+    u8 method = GetTeamGenerationMethod(); 
 
     // Switch on selection method
     switch(method) 
     {
         // Random (Fast) Selection
-        case BFG_MOVE_SELECT_RANDOM: {
+        case BFG_TEAM_GENERATOR_RANDOM: {
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
                 DebugPrintf("Selecting move %d ...", i);
@@ -971,7 +1007,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 else  // General case
                 {
                     // While no move found, and failure limit has not been reached
-                    while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
                     {
                         // Sample random move index
                         moveIndex = Random() % (teachableMoves + levelUpMoves);
@@ -1026,10 +1062,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             }
         }; break;
         // Filtered Selection
-        case BFG_MOVE_SELECT_FILTERED:
-        case BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY:
-        case BFG_MOVE_SELECT_FILTERED_RANKING:
-        case BFG_MOVE_SELECT_FILTERED_RANKING_ATTACKS_ONLY: {
+        case BFG_TEAM_GENERATOR_FILTERED:
+        case BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING:
+        case BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY: {
 
             // Index of offensive move for each type - Limited to 1 move per 
             // type (excl. moves in 'gBattleFrontierMoveIgnoreTypeCount').
@@ -1056,6 +1092,9 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             u16 allowedStatusMoves[BFG_MOVE_RATING_LIST_SIZE_STATUS];
             s32 numAllowedStatusMoves = 0;
 
+            // Ensure no double-up moves
+            bool8 isDuplicate;
+
             if ((requiredMove != MOVE_NONE))
             {
                 moves[moveCount] = requiredMove;
@@ -1072,14 +1111,31 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = levelUpLearnset[i].move;
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount] = moveId;
-                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                        types[TYPE(moveId)] = moveCount; // Set type index
-                    moveCount++;
+                    // Ensure no double-up moves
+                    isDuplicate = FALSE;
+                    
+                    // Check previous moves
+                    for(j = 0; j < moveCount; j++){
+                        if (moves[j] == moveId)
+                        {
+                            // Mark as duplicate
+                            isDuplicate = TRUE;
+                            break;
+                        }
+                    }
 
-                    // Reached max. moves
-                    if (moveCount == MAX_MON_MOVES)
-                        return FillMonMoveSlots(index, moves);
+                    // Is not duplicate
+                    if (!isDuplicate)
+                    {
+                        moves[moveCount] = moveId;
+                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                            types[TYPE(moveId)] = moveCount; // Set type index
+                        moveCount++;
+
+                        // Reached max. moves
+                        if (moveCount == MAX_MON_MOVES)
+                            return FillMonMoveSlots(index, moves);
+                    }
                 }
                 else // Not always-select
                 {
@@ -1087,7 +1143,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         continue; // Skip move
                     if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
                     {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
+                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
                             allowedStatusMoves[numAllowedStatusMoves++] = moveId;
                     }
                     else // Non-Status Move
@@ -1105,14 +1161,31 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = teachableLearnset[i];
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    moves[moveCount] = moveId;
-                    if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                        types[TYPE(moveId)] = moveCount; // Set type index
-                    moveCount++;
+                    // Ensure no double-up moves
+                    isDuplicate = FALSE;
+                    
+                    // Check previous moves
+                    for(j = 0; j < moveCount; j++){
+                        if (moves[j] == moveId)
+                        {
+                            // Mark as duplicate
+                            isDuplicate = TRUE;
+                            break;
+                        }
+                    }
 
-                    // Reached max. moves
-                    if (moveCount == MAX_MON_MOVES)
-                        return FillMonMoveSlots(index, moves);
+                    // Is not duplicate
+                    if (!isDuplicate)
+                    {
+                        moves[moveCount] = moveId;
+                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
+                            types[TYPE(moveId)] = moveCount; // Set type index
+                        moveCount++;
+
+                        // Reached max. moves
+                        if (moveCount == MAX_MON_MOVES)
+                            return FillMonMoveSlots(index, moves);
+                    }
                 }
                 else // Not always-select
                 {
@@ -1120,7 +1193,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         continue; // Skip move
                     if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
                     {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_MOVE_SELECT_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
+                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
                             allowedStatusMoves[numAllowedStatusMoves++] = moveId;
                     }
                     else // Non-Status Move
@@ -1143,7 +1216,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 u8 attackCount = remainder;
                 
                 // Reduce number of required attacks, if necessary
-                if ((method == BFG_MOVE_SELECT_FILTERED) || (method == BFG_MOVE_SELECT_FILTERED_RANKING))
+                if ((method == BFG_TEAM_GENERATOR_FILTERED) || (method == BFG_TEAM_GENERATOR_FILTERED_RANKING))
                 {
                     if (spreadType == BFG_SPREAD_TYPE_OFFENSIVE)
                         attackCount = MIN(remainder, RANDOM_RANGE(3,5));
@@ -1152,14 +1225,16 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 }
 
                 // Select moves via ranking
-                if ((method == BFG_MOVE_SELECT_FILTERED_RANKING) || (method == BFG_MOVE_SELECT_FILTERED_RANKING_ATTACKS_ONLY))
+                if ((method == BFG_TEAM_GENERATOR_FILTERED_RANKING) || (method == BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY))
                 {
                     // Attack move indexes
                     u8 start = moveCount;
                     u8 end = moveCount + attackCount;
 
                     // Move Rating Table
-                    u16 rating[MAX_MON_MOVES] = {};
+                    u16 rating[MAX_MON_MOVES] = {
+                        0, 0, 0, 0
+                    };
 
                     u8 oldType, newType; // Attack type
                     u16 attackRating; // Current move
@@ -1229,7 +1304,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         moveId = MOVE_NONE; 
 
                         // While no move found, and failure limit has not been reached
-                        while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                        while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
                         {
                             // Sample a random attacking move from the list
                             moveIndex = Random() % numAllowedAttackMoves;
@@ -1281,7 +1356,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                     moveId = MOVE_NONE; 
 
                     // While no move found, and failure limit has not been reached
-                    while((moveId == MOVE_NONE) && (failures < BFG_MOVE_SELECT_FAILURE_LIMIT)) 
+                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
                     {
                         // Sample a random status move from the list
                         moveIndex = Random() % numAllowedStatusMoves;
@@ -1310,8 +1385,8 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
         }; break;
         // Default (Level-Up / Required Move Only)
         default: 
-            DebugPrintf("Unhandled move selection method: %d, falling back to default method ...", method);
-        case BFG_MOVE_SELECT_DEFAULT: {
+            DebugPrintf("Unhandled team generation method: %d, falling back to default method ...", method);
+        case BFG_TEAM_GENERATOR_DEFAULT: {
             // Keeps track of if move slot '0' will be replaced by
             // the required move for the species, if set.
             bool8 needRequiredMove = (requiredMove != MOVE_NONE);
@@ -2043,7 +2118,7 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     moveCount = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
 
     // Meets the minimum number of moves to accept
-    if (moveCount >= BFG_MOVE_SELECT_MINIMUM) 
+    if (moveCount >= BFG_TEAM_GENERATOR_MINIMUM) 
     {
         DebugPrintf("Moves found: %d ...", moveCount);
 
@@ -2060,7 +2135,6 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     // No moves, generation failed
     return FALSE;
 }
-
 
 void DebugTrainerPokemon(u8 index) 
 {

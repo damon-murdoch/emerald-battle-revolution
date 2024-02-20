@@ -1,45 +1,87 @@
 const bool8 gBattleFrontierMoveAlwaysSelectSingles[MOVES_COUNT] = 
 {
+	// Misc. Moves
 	[MOVE_SPORE] = TRUE,
     [MOVE_FAKE_OUT] = TRUE,
+	// Unique Protecting Moves
+    [MOVE_BANEFUL_BUNKER] = TRUE,
+    [MOVE_BURNING_BULWARK] = TRUE,
     [MOVE_KINGS_SHIELD] = TRUE,
+    [MOVE_OBSTRUCT] = TRUE,
+    [MOVE_SILK_TRAP] = TRUE,
+    [MOVE_SPIKY_SHIELD] = TRUE,
 };
 
 const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] = 
 {
+	// Misc. Moves
 	[MOVE_SPORE] = TRUE,
     [MOVE_FAKE_OUT] = TRUE,
+	// Unique Protecting Moves
+    [MOVE_BANEFUL_BUNKER] = TRUE,
+    [MOVE_BURNING_BULWARK] = TRUE,
     [MOVE_KINGS_SHIELD] = TRUE,
+    [MOVE_OBSTRUCT] = TRUE,
+    [MOVE_SILK_TRAP] = TRUE,
+    [MOVE_SPIKY_SHIELD] = TRUE,
 	// Doubles-Bonus Moves
+	// [MOVE_TAILWIND] = TRUE, 
+	// [MOVE_ICY_WIND] = TRUE, 
+	// [MOVE_TRICK_ROOM] = TRUE,
 	[MOVE_POLLEN_PUFF] = TRUE, 
     // Doubles-Exclusive Moves
+    [MOVE_INSTRUCT] = TRUE,
     [MOVE_FOLLOW_ME] = TRUE,
     [MOVE_WIDE_GUARD] = TRUE,
     [MOVE_RAGE_POWDER] = TRUE,
     [MOVE_QUICK_GUARD] = TRUE,
-    [MOVE_CRAFTY_SHIELD] = TRUE,
-    [MOVE_INSTRUCT] = TRUE,
+
 };
 
 const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] = 
 {
-    [MOVE_FLY] = TRUE,
-    [MOVE_DIG] = TRUE,
-    [MOVE_HYPER_BEAM] = TRUE,
-    [MOVE_SELF_DESTRUCT] = TRUE,
-    [MOVE_EXPLOSION] = TRUE,
-    [MOVE_DIVE] = TRUE,
-    [MOVE_GIGA_IMPACT] = TRUE,
-    [MOVE_HIDDEN_POWER] = TRUE,
-    [MOVE_FOCUS_PUNCH] = TRUE,
-    [MOVE_SNORE] = TRUE,
+	// Misc. Moves
+	[MOVE_SNORE] = TRUE,
     [MOVE_SPIT_UP] = TRUE,
     [MOVE_REVERSAL] = TRUE,
     [MOVE_DREAM_EATER] = TRUE,
     [MOVE_LAST_RESORT] = TRUE,
+    [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_SYNCHRONOISE] = TRUE,
+    [MOVE_STORED_POWER] = TRUE,
+    [MOVE_HIDDEN_POWER] = TRUE,
     [MOVE_DYNAMIC_PUNCH] = TRUE,
     [MOVE_TERRAIN_PULSE] = TRUE,
+	// Pseudoboosting Moves
+	[MOVE_ANCIENT_POWER] = TRUE,
+	[MOVE_OMINOUS_WIND] = TRUE,
+	[MOVE_SILVER_WIND] = TRUE,
+	// Recharge Moves
+    [MOVE_BLAST_BURN] = TRUE,
+    [MOVE_ETERNABEAM] = TRUE,
+    [MOVE_FRENZY_PLANT] = TRUE,
+    [MOVE_GIGA_IMPACT] = TRUE,
+    [MOVE_HYDRO_CANNON] = TRUE,
+    [MOVE_HYPER_BEAM] = TRUE,
+    [MOVE_METEOR_ASSAULT] = TRUE,
+    [MOVE_PRISMATIC_LASER] = TRUE,
+    [MOVE_ROAR_OF_TIME] = TRUE,
+    [MOVE_ROCK_WRECKER] = TRUE,
+	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
+    [MOVE_SELF_DESTRUCT] = TRUE,
+    [MOVE_EXPLOSION] = TRUE,
+	// Charging Moves
+	[MOVE_BOUNCE] = TRUE,
+    [MOVE_DIG] = TRUE,
+    [MOVE_DIVE] = TRUE,
+    [MOVE_FLY] = TRUE,
+	[MOVE_FREEZE_SHOCK] = TRUE,
+	[MOVE_ICE_BURN] = TRUE,
+	[MOVE_RAZOR_WIND] = TRUE,
+	[MOVE_SKULL_BASH] = TRUE,
+    [MOVE_SOLAR_BEAM] = TRUE,
+    [MOVE_SOLAR_BLADE] = TRUE,
     // Countering Moves
     [MOVE_BIDE] = TRUE,
     [MOVE_COMEUPPANCE] = TRUE,
@@ -57,33 +99,58 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
 
 const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] = 
 {
-    [MOVE_FLY] = TRUE,
-    [MOVE_DIG] = TRUE,
-    [MOVE_HYPER_BEAM] = TRUE,
-    [MOVE_SELF_DESTRUCT] = TRUE,
-    [MOVE_EXPLOSION] = TRUE,
-    [MOVE_DIVE] = TRUE,
-    [MOVE_GIGA_IMPACT] = TRUE,
-    [MOVE_HIDDEN_POWER] = TRUE,
-    [MOVE_FOCUS_PUNCH] = TRUE,
-    [MOVE_SNORE] = TRUE,
+	// Misc. Moves
+	[MOVE_SNORE] = TRUE,
     [MOVE_SPIT_UP] = TRUE,
     [MOVE_REVERSAL] = TRUE,
-	[MOVE_DREAM_EATER] = TRUE,
+    [MOVE_DREAM_EATER] = TRUE,
     [MOVE_LAST_RESORT] = TRUE,
+    [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_SYNCHRONOISE] = TRUE,
+    [MOVE_STORED_POWER] = TRUE,
+    [MOVE_HIDDEN_POWER] = TRUE,
     [MOVE_DYNAMIC_PUNCH] = TRUE,
     [MOVE_TERRAIN_PULSE] = TRUE,
+	// Pseudoboosting Moves
+	[MOVE_ANCIENT_POWER] = TRUE,
+	[MOVE_OMINOUS_WIND] = TRUE,
+	[MOVE_SILVER_WIND] = TRUE,
+	// Recharge Moves
+    [MOVE_BLAST_BURN] = TRUE,
+    [MOVE_ETERNABEAM] = TRUE,
+    [MOVE_FRENZY_PLANT] = TRUE,
+    [MOVE_GIGA_IMPACT] = TRUE,
+    [MOVE_HYDRO_CANNON] = TRUE,
+    [MOVE_HYPER_BEAM] = TRUE,
+    [MOVE_METEOR_ASSAULT] = TRUE,
+    [MOVE_PRISMATIC_LASER] = TRUE,
+    [MOVE_ROAR_OF_TIME] = TRUE,
+    [MOVE_ROCK_WRECKER] = TRUE,
+	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
+    [MOVE_SELF_DESTRUCT] = TRUE,
+    [MOVE_EXPLOSION] = TRUE,
+	// Charging Moves
+	[MOVE_BOUNCE] = TRUE,
+    [MOVE_DIG] = TRUE,
+    [MOVE_DIVE] = TRUE,
+    [MOVE_FLY] = TRUE,
+	[MOVE_FREEZE_SHOCK] = TRUE,
+	[MOVE_ICE_BURN] = TRUE,
+	[MOVE_RAZOR_WIND] = TRUE,
+	[MOVE_SKULL_BASH] = TRUE,
+    [MOVE_SOLAR_BEAM] = TRUE,
+    [MOVE_SOLAR_BLADE] = TRUE,
     // Countering Moves
     [MOVE_BIDE] = TRUE,
     [MOVE_COMEUPPANCE] = TRUE,
     [MOVE_COUNTER] = TRUE,
     [MOVE_METAL_BURST] = TRUE,
     [MOVE_MIRROR_COAT] = TRUE,
-    // Doubles-Exclusive Moves
+    // Thrashing Moves
     [MOVE_THRASH] = TRUE,
     [MOVE_OUTRAGE] = TRUE,
-    [MOVE_PETAL_BLIZZARD] = TRUE,
+    [MOVE_PETAL_DANCE] = TRUE,
 };
 
 // Status moves which are allowed to be selected, 
