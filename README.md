@@ -231,10 +231,45 @@ being worked on is stored. This branch has the debug menu enabled, as well as ot
 features. This branch is generally not advised to be used for a genuine playthrough, and may 
 not always be in a compiling state when committed.
 
+## Frontier-Dev (Development)
+
+This branch is used to merge updates from my ([battle frontier generator branch](https://github.com/damon-murdoch/pokeemerald-expansion/tree/frontier-set-generator-upcoming)), which is used for developing the Battle Frontier
+Modernised Set-Generation feature. This is developed on a seperate project, to allow for other romhackers to 
+implement this feature on their own projects.
+
 ## Changelog
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 1.0.0
+
+Major update: Battle Frontier Modernised Set-Generator has been implemented, with over a 
+months worth of development on a seperate repository ([battle frontier generator branch](https://github.com/damon-murdoch/pokeemerald-expansion/tree/frontier-set-generator-upcoming)) so it may be used by other projects. An NPC has been
+added to the Battle Frontier Underground which allows for the customisation of Battle Frontier
+Facilities, with the following options:
+
+* Change between legacy (original) Battle Frontier Sets, or modern (randomised) Battle Frontier Sets with new Pokemon, moves, etc.
+* Change between different team generation modes (modern sets only), with the following options:
+  * Default: Default level-up learnsets at level 50
+  * Random: Completely randomised movesets
+  * Filtered: Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore.
+  * Filtered (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Aside from status moves marked as 'required', or Pokemon who do not have four valid attacks, only attacking moves will be used.
+  * Ranked: Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Attacking moves are 'ranked' based on a viability table, so in general stronger moves are picked over weaker moves (accounting for STAB, abilities, etc.)
+  * Ranked (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Attacking moves are 'ranked' based on a viability table, so in general stronger moves are picked over weaker moves (accounting for STAB, abilities, etc). Aside from status moves marked as 'required', or Pokemon who do not have four valid attacks, only attacking moves will be used.
+* Change the background music during Battle Frontier matches
+
+For the 'Default' and 'Random' settings, EVs are invested in bulk (HP required, then Def/Spdef randomly) and a neutral nature is
+used. Otherwise, evs/ivs/nature are selected based upon the base-stats of the Pokemon, where nature and evs will be invested in
+whichever stats are highest first. Signature Z-Moves and Mega Evolutions may be used in the later matches (~41+), 
+
+There is still a significant amount of work expected to be done on this part of the project, however it is currently in a completely
+playable state. Please note, this has only been tested in Battle Tower Singles and Doubles so far, however further testing and 
+development will be conducted to ensure all features work in the other facilities as well. Team generation takes about ~1 second 
+to complete (can be quicker with default/random methods, as they are simpler). In future, this will be worked on to reduce wait 
+time and attempt to reduce performance impacts. Please keep in mind, however that while these features are still in active 
+development you may encounter crashes or other issues whilst using these features. If you do, please feel free to open an
+issue with the project describing the crash so it can be investigated.
 
 ### Ver. 0.9.8
 
