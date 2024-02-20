@@ -4,9 +4,12 @@
 // *** GENERAL ***
 #define BFG_FLAG_FRONTIER_GENERATOR FLAG_BATTLE_FRONTIER_GENERATOR // Flag to enable or disable random generator
 
-// #define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
-// #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
-// #define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
+#define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_FILTERED_RANKING
+#define BFG_VAR_TEAM_GENERATION_METHOD 0 // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
+
+#define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
+#define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
+#define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
 
 #define BFG_RANDOM_OFFSET_MIN 0        // Min. Value for RANDOM_OFFSET()
 #define BFG_RANDOM_OFFSET_MAX 0        // Max. Value for RANDOM_OFFSET()
@@ -158,11 +161,8 @@
 
 // *** MOVES *** 
 
-#define BFG_MOVE_SELECTION_METHOD BFG_MOVE_SELECT_VARIABLE
-#define BFG_VAR_MOVE_SELECTION_METHOD VAR_FRONTIER_METHOD // Used if BFG_MOVE_SELECTION_METHOD is set to 'BFG_MOVE_SELECT_VARIABLE'
-
-#define BFG_MOVE_SELECT_FAILURE_LIMIT 5 // Maximum times move selection can fail
-#define BFG_MOVE_SELECT_MINIMUM 1       // Minumum number of moves allowed
+#define BFG_TEAM_GENERATOR_FAILURE_LIMIT 5 // Maximum times move selection can fail
+#define BFG_TEAM_GENERATOR_MINIMUM 1       // Minumum number of moves allowed
 
 #define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0x20
 #define BFG_MOVE_RATING_LIST_SIZE_STATUS 0x20
@@ -192,9 +192,9 @@
 
 // Set any of these values to 32 or above to disable them entirely
 
-#define BFG_ITEM_IV_ALLOW_MEGA 31   // Min. IVs required for Mega Evolution
-#define BFG_ITEM_IV_ALLOW_ZMOVE 31  // Min. IVs required for Z-Moves
-#define BFG_ITEM_IV_ALLOW_GMAX 31   // Min. IVs required for Gigantamax
+#define BFG_ITEM_IV_ALLOW_MEGA 21   // Min. IVs required for Mega Evolution
+#define BFG_ITEM_IV_ALLOW_ZMOVE 21  // Min. IVs required for Z-Moves
+#define BFG_ITEM_IV_ALLOW_GMAX 21   // Min. IVs required for Gigantamax
 
 #define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
