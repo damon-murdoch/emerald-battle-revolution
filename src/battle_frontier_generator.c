@@ -22,6 +22,10 @@
 #include "constants/items.h"
 
 #include "data/battle_frontier/battle_frontier_generator.h"
+
+#include "data/battle_frontier/battle_frontier_generator_trainer_class_mons.h"
+#include "data/battle_frontier/battle_frontier_generator_move_ratings.h"
+
 #include "data/pokemon/natures.h"
 
 // *** UTILITY ***
@@ -269,6 +273,7 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     return TRUE;
 }
 
+#if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
 static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) 
 {
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
@@ -439,6 +444,7 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId)
 
     return FALSE;
 }
+#endif
 
 static u8 GetNatureFromStats(u8 posStat, u8 negStat) 
 {
@@ -2159,7 +2165,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     bool32 hasMega,hasZMove;
 
     s32 i, j;
-    u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
     u32 otID = Random32();
         
     // Normal battle frontier trainer.
@@ -2174,11 +2179,13 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
-
-    const struct SpeciesInfo * species;
     const struct FormChange * formChanges;
 
     DebugPrintf("Finding sets for trainer class %d ...", trainerClass);
+
+    #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
+    u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
+    const struct SpeciesInfo * species;
 
     // Loop over all species
     for(i = 0; i < NUM_SPECIES; i++) 
@@ -2211,7 +2218,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         // Check bst limit (and special cases)
         if ((bst > maxBST) || ((bst < minBST) && (
             // Special case for rotom formes
-            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) || 
+            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) && 
             // Special case for mega evolutions
             (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
         )))
@@ -2220,7 +2227,19 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         // Add species to mon set
         monSet[bfMonCount++] = i;
     }
-
+    #else
+    const u16 * speciesList = gBattleFrontierTrainerClassSpeciesLookup[trainerClass];
+    if (speciesList == NULL)
+    {
+        DebugPrintf("Warning: No list found for trainer class %d, defaulting to Pokemaniac ...", trainerClass);
+        
+        // Fallback to Pokemaniac
+        speciesList = gBattleFrontierTrainerClassSpeciesLookup[TRAINER_CLASS_POKEMANIAC];
+        bfMonCount = gBattleFrontierTrainerClassSpeciesCountLookup[TRAINER_CLASS_POKEMANIAC];
+    }
+    else 
+        bfMonCount = (u16)(gBattleFrontierTrainerClassSpeciesCountLookup[trainerClass]);
+    #endif
     DebugPrintf("Possible species found: %d ...", bfMonCount);
 
     // Regular battle frontier trainer.
@@ -2237,10 +2256,26 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         DebugPrintf("Generating mon number %d ...", i);
 
         // Sample random species from the mon count
+        #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
         speciesId = monSet[Random() % bfMonCount];
-
-        // Get base stat total
         bst = GetTotalBaseStat(speciesId);
+        #else
+        speciesId = speciesList[Random() % bfMonCount];
+        bst = GetTotalBaseStat(speciesId);
+
+        // Check bst limit (and special cases)
+        if ((bst > maxBST) || ((bst < minBST) && (
+            // Special case for rotom formes
+            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) && 
+            // Special case for mega evolutions
+            (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
+        )))
+            continue; // Next species
+
+        // Species is not allowed for this format
+        if (!(SpeciesValidForFrontierLevel(speciesId)))
+            continue; // Next species
+        #endif
 
         // Alt. Forme (e.g. mega, ultra burst)
         forme = FORME_DEFAULT; // Default

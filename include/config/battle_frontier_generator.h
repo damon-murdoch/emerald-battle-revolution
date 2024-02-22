@@ -35,6 +35,7 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
+#define BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC FALSE // Use dynamic list for mon selection, instead of hard-coded list
 #define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
 
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
