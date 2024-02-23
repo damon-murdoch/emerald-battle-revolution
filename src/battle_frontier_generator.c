@@ -1205,6 +1205,70 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
     return moveCount;
 }
 
+#define MACRO_ALWAYS_SELECT \
+    isDuplicate = FALSE; \
+    for(j = 0; j < moveCount; j++) { \
+        if (moves[j] == moveId) { isDuplicate = TRUE; break; } \
+    } \
+    if (!isDuplicate) { \
+        moves[moveCount] = moveId; \
+        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId)))) \
+            types[TYPE(moveId)] = moveCount; \
+        moveCount++; \
+        if (moveCount == MAX_MON_MOVES) \
+            return FillMonMoveSlots(index, moves); \
+    }
+
+#define MACRO_MOVE_SWITCH \
+    switch(moveId) { \
+        #if BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE != 0 \
+        case MOVE_TRICK_ROOM: \
+            if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE != 0 \
+        case MOVE_TAILWIND: \
+            if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE != 0 \
+        case MOVE_ICY_WIND: \
+            if ((spreadCategory != BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE != 0 \
+        case MOVE_AURORA_VEIL: \
+            if (IS_HAIL_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE != 0 \
+        case MOVE_FINAL_GAMBIT: \
+            if (CHECK_EVS(evs,F_EV_SPREAD_HP) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE != 0 \
+        case MOVE_BODY_PRESS: \
+            if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) && (gNatureInfo[nature].posStat == STAT_DEF) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        #if BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE != 0 \
+        case MOVE_FOUL_PLAY: \
+            if ((spreadCategory != BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) \
+                MACRO_ALWAYS_SELECT \
+            break; \
+        #endif \
+        default: \
+            if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
+            else { if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL))) allowedAttackMoves[numAllowedAttackMoves++] = moveId; } \
+            break; \
+    }
+
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
     s32 i, j;
@@ -1375,47 +1439,13 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = levelUpLearnset[i].move;
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    // Ensure no double-up moves
-                    isDuplicate = FALSE;
-                    
-                    // Check previous moves
-                    for(j = 0; j < moveCount; j++){
-                        if (moves[j] == moveId)
-                        {
-                            // Mark as duplicate
-                            isDuplicate = TRUE;
-                            break;
-                        }
-                    }
-
-                    // Is not duplicate
-                    if (!isDuplicate)
-                    {
-                        moves[moveCount] = moveId;
-                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                            types[TYPE(moveId)] = moveCount; // Set type index
-                        moveCount++;
-
-                        // Reached max. moves
-                        if (moveCount == MAX_MON_MOVES)
-                            return FillMonMoveSlots(index, moves);
-                    }
+                    MACRO_ALWAYS_SELECT
                 }
                 else // Not always-select
                 {
                     if (IsNeverSelectMove(moveId))
                         continue; // Skip move
-                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
-                    {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
-                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
-                    }
-                    else // Non-Status Move
-                    {
-                        // Add move, if category matches the spread type
-                        if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL)))
-                            allowedAttackMoves[numAllowedAttackMoves++] = moveId;
-                    }
+                    MACRO_MOVE_SWITCH
                 }
             }
 
@@ -1425,47 +1455,13 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = teachableLearnset[i];
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    // Ensure no double-up moves
-                    isDuplicate = FALSE;
-                    
-                    // Check previous moves
-                    for(j = 0; j < moveCount; j++){
-                        if (moves[j] == moveId)
-                        {
-                            // Mark as duplicate
-                            isDuplicate = TRUE;
-                            break;
-                        }
-                    }
-
-                    // Is not duplicate
-                    if (!isDuplicate)
-                    {
-                        moves[moveCount] = moveId;
-                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                            types[TYPE(moveId)] = moveCount; // Set type index
-                        moveCount++;
-
-                        // Reached max. moves
-                        if (moveCount == MAX_MON_MOVES)
-                            return FillMonMoveSlots(index, moves);
-                    }
+                    MACRO_ALWAYS_SELECT
                 }
                 else // Not always-select
                 {
                     if (IsNeverSelectMove(moveId))
                         continue; // Skip move
-                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
-                    {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
-                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
-                    }
-                    else // Non-Status Move
-                    {
-                        // Add move, if category matches the spread type
-                        if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL)))
-                            allowedAttackMoves[numAllowedAttackMoves++] = moveId;
-                    }
+                    MACRO_MOVE_SWITCH
                 }
             }
 
@@ -1520,6 +1516,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         // If this is not the first move of type, and move is not an ignore type count move
                         if ((moveIndex != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
                         {
+                            // Existing move has no rating
+                            if (rating[moveIndex] == 0)
+                                continue; // Cannot be replaced
+
                             // Rating is greater, or equal/worse and selection chance is met
                             if ((rating[moveIndex] < attackRating) || ((rating[moveIndex] == attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE)) || ((rating[moveIndex] > attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE)))
                             {
@@ -1715,12 +1715,14 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 
     // Move flags
 
+    bool8 hasTrickRoom = FALSE;
     bool8 hasEvolution = FALSE;
     bool8 hasTerrain = FALSE;
     bool8 hasTwoTurn = FALSE; 
     bool8 hasRecycle = FALSE;
     bool8 hasSwagger = FALSE;
     bool8 hasFlatter = FALSE;
+    bool8 hasFling = FALSE;
     bool8 hasRest = FALSE;
 
     // Move Counters
@@ -1812,6 +1814,9 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                     break;
                     case EFFECT_FOCUS_ENERGY:
                         numCritModifier++;
+                    break;
+                    case EFFECT_TRICK_ROOM:
+                        hasTrickRoom = TRUE;
                     break;
                     case EFFECT_RECYCLE:
                         hasRecycle = TRUE;
@@ -1933,7 +1938,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             itemId = ITEM_CHOICE_SPECS;
 
         if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
-            itemId = ITEM_CHOICE_SCARF;   
+            itemId = ITEM_CHOICE_SCARF;
 
         // Life Orb
         if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
@@ -1956,6 +1961,16 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         for(i=0; ((itemId == ITEM_NONE) && (i < numSound)); i++)
             if (RANDOM_CHANCE(BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE))
                 itemId = ITEM_THROAT_SPRAY;
+
+        // Razor Fang / King's Rock (Fling)
+        if ((itemId == ITEM_NONE) && hasFling)
+        {
+            if (RANDOM_CHANCE(BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE))
+                itemId = ITEM_RAZOR_FANG;
+            else if (RANDOM_CHANCE(BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE))
+                itemId = ITEM_KINGS_ROCK;
+            // Otherwise, do nothing
+        }
 
         // Other non-recyclable items
         if (hasRecycle == FALSE)
@@ -2247,6 +2262,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 if (RANDOM_CHANCE(BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE))
                     itemId = ITEM_PUNCHING_GLOVE;
 
+            // Iron Ball (For trick room Pokemon)
+            if ((itemId == ITEM_NONE) && hasTrickRoom && RANDOM_CHANCE(BFG_ITEM_IRON_BALL_SELECTION_CHANCE))
+                itemId = ITEM_IRON_BALL;
+
             // Black Sludge (For poison types)
             if ((itemId == ITEM_NONE) && IS_TYPE(species->types[0], species->types[1], TYPE_POISON) && RANDOM_CHANCE(BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE))
                 itemId = ITEM_BLACK_SLUDGE;
@@ -2275,6 +2294,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 }
             }
         }
+
+        // Room Service (For trick room Pokemon)
+        if ((itemId == ITEM_NONE) && hasTrickRoom && RANDOM_CHANCE(BFG_ITEM_ROOM_SERVICE_SELECTION_CHANCE))
+            itemId = ITEM_ROOM_SERVICE;
 
         // Air Balloon
         if ((itemId == ITEM_NONE) && (abilityId != ABILITY_LEVITATE) &&
