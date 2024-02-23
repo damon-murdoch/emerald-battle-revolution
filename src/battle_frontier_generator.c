@@ -2529,11 +2529,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         #else
         if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
         {
+            // Restricted species
             speciesId = GetTrainerClassRestricted(trainerClass); // Pick restricteds when eligible on 2nd, 4th species
             ignoreMaxBST = TRUE; // Ignore Max. BST
         }
-        else if ((i == (monCount - 1)) && (BFG_FORME_CHANCE_MEGA == 1) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (hasMega == FALSE)) // Mega Evolution
-            speciesId = GetTrainerClassMega(trainerClass); // Pick Mega when eligible on 4th species (if not present)
         else // Standard species
             speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
@@ -2871,7 +2870,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = RANDOM_RANGE(SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_RED);
                 }; break;
                 case SPECIES_NECROZMA: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
 
@@ -2879,7 +2878,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
                         {
                             // Random chance to select ultra-burst
-                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
+                            if ((ignoreMaxBST || 754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
                             {
                                 move = MOVE_PHOTON_GEYSER;
                                 item = ITEM_ULTRANECROZIUM_Z;
@@ -2926,7 +2925,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     {
                         speciesId = SPECIES_ZACIAN_CROWNED_SWORD;
                         item = ITEM_RUSTED_SWORD;
-                        move = MOVE_IRON_HEAD;
+                        move = MOVE_BEHEMOTH_BLADE;
                     }
                 }; break;
                 case SPECIES_ZAMAZENTA: {
@@ -2934,7 +2933,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     {
                         speciesId = SPECIES_ZAMAZENTA_CROWNED_SHIELD;
                         item = ITEM_RUSTED_SHIELD;
-                        move = MOVE_IRON_HEAD;
+                        move = MOVE_BEHEMOTH_BASH;
                     }
                 }; break;
                 case SPECIES_URSHIFU: {
