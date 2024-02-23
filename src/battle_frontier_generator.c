@@ -1221,52 +1221,38 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
 
 #define MACRO_MOVE_SWITCH \
     switch(moveId) { \
-        #if BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE != 0 \
-        case MOVE_TRICK_ROOM: \
+        case MOVE_TRICK_ROOM: { \
             if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE != 0 \
-        case MOVE_TAILWIND: \
+        }; break; \
+        case MOVE_TAILWIND: { \
             if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE != 0 \
-        case MOVE_ICY_WIND: \
-            if ((spreadCategory != BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) \
+        }; break; \
+        case MOVE_ICY_WIND: { \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE != 0 \
-        case MOVE_AURORA_VEIL: \
+        }; break; \
+        case MOVE_AURORA_VEIL: { \
             if (IS_HAIL_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE != 0 \
-        case MOVE_FINAL_GAMBIT: \
+        }; break; \
+        case MOVE_FINAL_GAMBIT: { \
             if (CHECK_EVS(evs,F_EV_SPREAD_HP) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE != 0 \
-        case MOVE_BODY_PRESS: \
+        }; break; \
+        case MOVE_BODY_PRESS: { \
             if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) && (gNatureInfo[nature].posStat == STAT_DEF) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        #if BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE != 0 \
-        case MOVE_FOUL_PLAY: \
-            if ((spreadCategory != BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) \
+        }; break; \
+        case MOVE_FOUL_PLAY: { \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) \
                 MACRO_ALWAYS_SELECT \
-            break; \
-        #endif \
-        default: \
+        }; break; \
+        default: { \
             if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
             else { if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL))) allowedAttackMoves[numAllowedAttackMoves++] = moveId; } \
-            break; \
+        }; break; \
     }
 
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
@@ -1421,7 +1407,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             s32 numAllowedStatusMoves = 0;
 
             // Ensure no double-up moves
-            bool8 isDuplicate;
+            bool8 isDuplicate = FALSE;
 
             if ((requiredMove != MOVE_NONE))
             {
