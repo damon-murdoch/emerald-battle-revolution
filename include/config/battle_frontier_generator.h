@@ -35,6 +35,7 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
+#define BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC FALSE // Use dynamic list for mon selection, instead of hard-coded list
 #define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
 
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
@@ -120,7 +121,6 @@
 // Allow custom species banlists
 #define BFG_USE_CUSTOM_BANNED_SPECIES TRUE
 #if BFG_USE_CUSTOM_BANNED_SPECIES == TRUE
-
 // Custom list of common banned species
 #define BFG_COMMON_CUSTOM_BANNED_SPECIES \
     SPECIES_WOBBUFFET, \
@@ -141,7 +141,6 @@
 // Custom list of battle tent banned species
 #define BFG_LVL_TENT_CUSTOM_BANNED_SPECIES \
     BFG_COMMON_CUSTOM_BANNED_SPECIES
-
 #endif
 
 // *** STATS ***
@@ -184,6 +183,36 @@
 #define BFG_MOVE_STAB_MODIFIER 50    // +x to rating for same-type-attack-bonus
 #define BFG_MOVE_ABILITY_MODIFIER 80      // +x to rating for ability synergy moves
 
+// Special Cases for other moves
+// Please note, the following special cases bypass the 'Attacks Only' modes.
+
+// Speed Control
+#define BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE 1 // Trick Room Selection Chance (No Speed Only)
+#define BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE 1 // Tailwind Selection Chance (Speed Only)
+#define BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE 1 // Icy Wind Selection Chance (Non-Physical Set)
+
+// Unique Attacks / Other
+#define BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE 1  // Aurora Veil Selection Chance (Snow Warning)
+#define BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE 1 // Final Gambit Selection Chance (Max HP)
+#define BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE 1   // Body Press Selection Chance (Max Def)
+#define BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE 1    // Foul Play Selection Chance (Non-Physical Set)
+
+// TODO
+
+// Stat-Boosting Moves
+#define BFG_MOVE_SPECIAL_SWORDS_DANCE_SELECTION_CHANCE 0 // Swords Dance Selection Chance (Physical Set)
+#define BFG_MOVE_SPECIAL_DRAGON_DANCE_SELECTION_CHANCE 0 // Dragon Dance Selection Chance (Physical Set)
+#define BFG_MOVE_SPECIAL_QUIVER_DANCE_SELECTION_CHANCE 0 // Quiver Dance Selection Chance (Special Set)
+#define BFG_MOVE_SPECIAL_NASTY_PLOT_SELECTION_CHANCE 0   // Nasty Plot Selection Chance (Special Set)
+
+// Please note, the following special cases DO NOT bypass the 'Attacks Only' modes.
+
+// Weather-Setting Moves
+#define BFG_MOVE_SPECIAL_SUNNY_DAY_SELECTION_CHANCE 0   // Sunny Day Selection Chance (Chlorophyll, Harvest, etc)
+#define BFG_MOVE_SPECIAL_RAIN_DANCE_SELECTION_CHANCE 0  // Rain Dance Selection Chance (Swift Swim, Rain Dish, etc)
+#define BFG_MOVE_SPECIAL_SANDSTORM_SELECTION_CHANCE 0   // Sandstorm Selection Chance (Sand Rush, Sand Force, etc)
+#define BFG_MOVE_SPECIAL_SNOWSCAPE_SELECTION_CHANCE 0   // Sandstorm Selection Chance (Slush Rush, Ice Face, etc)
+
 // *** ITEMS ***
 
 // Number of times item can fail to be found
@@ -192,9 +221,9 @@
 
 // Set any of these values to 32 or above to disable them entirely
 
-#define BFG_ITEM_IV_ALLOW_MEGA 21   // Min. IVs required for Mega Evolution
-#define BFG_ITEM_IV_ALLOW_ZMOVE 21  // Min. IVs required for Z-Moves
-#define BFG_ITEM_IV_ALLOW_GMAX 21   // Min. IVs required for Gigantamax
+#define BFG_ITEM_IV_ALLOW_MEGA 15   // Min. IVs required for Mega Evolution
+#define BFG_ITEM_IV_ALLOW_ZMOVE 15  // Min. IVs required for Z-Moves
+#define BFG_ITEM_IV_ALLOW_GMAX 15   // Min. IVs required for Gigantamax
 
 #define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
@@ -230,8 +259,11 @@
 #define BFG_ITEM_FLAME_ORB_SELECTION_CHANCE 2
 
 // Move-Specific Items
+
+
 #define BFG_ITEM_BLUNDER_POLICY_SELECTION_CHANCE 4  // numInaccurate
 #define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 3  // numPunch
+#define BFG_ITEM_ROOM_SERVICE_SELECTION_CHANCE 3    // hasTrickRoom
 #define BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE 2    // hasRest
 #define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // numSound
 #define BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE 3     // numStatus
@@ -243,7 +275,10 @@
 #define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 4      // numCritModifier
 #define BFG_ITEM_RAZOR_CLAW_SELECTION_CHANCE 4      // numCritModifier
 #define BFG_ITEM_POWER_HERB_SELECTION_CHANCE 2      // hasMultiTurn
+#define BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE 2      // hasFling
+#define BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE 2      // hasFling
 #define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 4       // numInaccurate
+#define BFG_ITEM_IRON_BALL_SELECTION_CHANCE 3       // hasTrickRoom
 
 // Species-specific items
 #define BFG_ITEM_LIGHT_BALL_SELECTION_CHANCE 1          // Pikachu
