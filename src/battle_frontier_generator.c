@@ -22,6 +22,10 @@
 #include "constants/items.h"
 
 #include "data/battle_frontier/battle_frontier_generator.h"
+
+#include "data/battle_frontier/battle_frontier_generator_trainer_class_mons.h"
+#include "data/battle_frontier/battle_frontier_generator_move_ratings.h"
+
 #include "data/pokemon/natures.h"
 
 // *** UTILITY ***
@@ -42,7 +46,7 @@
 
 // Random Chance (1/x)
 #ifdef BFG_RANDOM_CHANCE_FIXED
-#define RANDOM_CHANCE(x) (BFG_RANDOM_CHANCE_FIXED)
+#define RANDOM_CHANCE(x) ((x == 1) ? TRUE : (BFG_RANDOM_CHANCE_FIXED))
 #else
 #define RANDOM_CHANCE(x) (((x) != 0) && ((Random() % (x)) == 0))
 #endif
@@ -269,6 +273,7 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     return TRUE;
 }
 
+#if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
 static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) 
 {
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
@@ -439,6 +444,265 @@ static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId)
 
     return FALSE;
 }
+#else
+u16 GetTrainerClassSpecies(u16 trainerClass)
+{
+    switch(trainerClass)
+    {
+        case TRAINER_CLASS_HIKER:
+            return gSpeciesListTrainerClassHiker[Random() % SPECIES_LIST_TRAINER_CLASS_HIKER_COUNT];
+        case TRAINER_CLASS_PKMN_BREEDER:
+            return gSpeciesListTrainerClassPkmnBreeder[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_BREEDER_COUNT];
+        case TRAINER_CLASS_COOLTRAINER:
+        case TRAINER_CLASS_COOLTRAINER_2:
+            return gSpeciesListTrainerClassCooltrainer[Random() % SPECIES_LIST_TRAINER_CLASS_COOLTRAINER_COUNT];
+        case TRAINER_CLASS_BIRD_KEEPER:
+            return gSpeciesListTrainerClassBirdKeeper[Random() % SPECIES_LIST_TRAINER_CLASS_BIRD_KEEPER_COUNT];
+        case TRAINER_CLASS_SWIMMER_M:
+            return gSpeciesListTrainerClassSwimmerM[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_M_COUNT];
+        case TRAINER_CLASS_SWIMMER_F:
+            return gSpeciesListTrainerClassSwimmerF[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_F_COUNT];
+        case TRAINER_CLASS_EXPERT:
+            return gSpeciesListTrainerClassExpert[Random() % SPECIES_LIST_TRAINER_CLASS_EXPERT_COUNT];
+        case TRAINER_CLASS_BLACK_BELT:
+            return gSpeciesListTrainerClassBlackBelt[Random() % SPECIES_LIST_TRAINER_CLASS_BLACK_BELT_COUNT];
+        case TRAINER_CLASS_HEX_MANIAC:
+            return gSpeciesListTrainerClassHexManiac[Random() % SPECIES_LIST_TRAINER_CLASS_HEX_MANIAC_COUNT];
+        case TRAINER_CLASS_AROMA_LADY:
+            return gSpeciesListTrainerClassAromaLady[Random() % SPECIES_LIST_TRAINER_CLASS_AROMA_LADY_COUNT];
+        case TRAINER_CLASS_RUIN_MANIAC:
+            return gSpeciesListTrainerClassRuinManiac[Random() % SPECIES_LIST_TRAINER_CLASS_RUIN_MANIAC_COUNT];
+        case TRAINER_CLASS_TUBER_M:
+            return gSpeciesListTrainerClassTuberM[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_M_COUNT];
+        case TRAINER_CLASS_TUBER_F:
+            return gSpeciesListTrainerClassTuberF[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_F_COUNT];
+        case TRAINER_CLASS_LADY:
+            return gSpeciesListTrainerClassLady[Random() % SPECIES_LIST_TRAINER_CLASS_LADY_COUNT];
+        case TRAINER_CLASS_BEAUTY:
+            return gSpeciesListTrainerClassBeauty[Random() % SPECIES_LIST_TRAINER_CLASS_BEAUTY_COUNT];
+        case TRAINER_CLASS_RICH_BOY:
+            return gSpeciesListTrainerClassRichBoy[Random() % SPECIES_LIST_TRAINER_CLASS_RICH_BOY_COUNT];
+        case TRAINER_CLASS_POKEMANIAC:
+            return gSpeciesListTrainerClassPokemaniac[Random() % SPECIES_LIST_TRAINER_CLASS_POKEMANIAC_COUNT];
+        case TRAINER_CLASS_GUITARIST:
+            return gSpeciesListTrainerClassGuitarist[Random() % SPECIES_LIST_TRAINER_CLASS_GUITARIST_COUNT];
+        case TRAINER_CLASS_KINDLER:
+            return gSpeciesListTrainerClassKindler[Random() % SPECIES_LIST_TRAINER_CLASS_KINDLER_COUNT];
+        case TRAINER_CLASS_CAMPER:
+            return gSpeciesListTrainerClassCamper[Random() % SPECIES_LIST_TRAINER_CLASS_CAMPER_COUNT];
+        case TRAINER_CLASS_PICNICKER:
+            return gSpeciesListTrainerClassPicnicker[Random() % SPECIES_LIST_TRAINER_CLASS_PICNICKER_COUNT];
+        case TRAINER_CLASS_BUG_MANIAC:
+            return gSpeciesListTrainerClassBugManiac[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_MANIAC_COUNT];
+        case TRAINER_CLASS_PSYCHIC:
+            return gSpeciesListTrainerClassPsychic[Random() % SPECIES_LIST_TRAINER_CLASS_PSYCHIC_COUNT];
+        case TRAINER_CLASS_GENTLEMAN:
+            return gSpeciesListTrainerClassGentleman[Random() % SPECIES_LIST_TRAINER_CLASS_GENTLEMAN_COUNT];
+        case TRAINER_CLASS_SCHOOL_KID:
+            return gSpeciesListTrainerClassSchoolKid[Random() % SPECIES_LIST_TRAINER_CLASS_SCHOOL_KID_COUNT];
+        case TRAINER_CLASS_POKEFAN:
+            return gSpeciesListTrainerClassPokefan[Random() % SPECIES_LIST_TRAINER_CLASS_POKEFAN_COUNT];
+        case TRAINER_CLASS_YOUNGSTER:
+            return gSpeciesListTrainerClassYoungster[Random() % SPECIES_LIST_TRAINER_CLASS_YOUNGSTER_COUNT];
+        case TRAINER_CLASS_FISHERMAN:
+            return gSpeciesListTrainerClassFisherman[Random() % SPECIES_LIST_TRAINER_CLASS_FISHERMAN_COUNT];
+        case TRAINER_CLASS_TRIATHLETE:
+            return gSpeciesListTrainerClassTriathlete[Random() % SPECIES_LIST_TRAINER_CLASS_TRIATHLETE_COUNT];
+        case TRAINER_CLASS_DRAGON_TAMER:
+            return gSpeciesListTrainerClassDragonTamer[Random() % SPECIES_LIST_TRAINER_CLASS_DRAGON_TAMER_COUNT];
+        case TRAINER_CLASS_NINJA_BOY:
+            return gSpeciesListTrainerClassNinjaBoy[Random() % SPECIES_LIST_TRAINER_CLASS_NINJA_BOY_COUNT];
+        case TRAINER_CLASS_BATTLE_GIRL:
+            return gSpeciesListTrainerClassBattleGirl[Random() % SPECIES_LIST_TRAINER_CLASS_BATTLE_GIRL_COUNT];
+        case TRAINER_CLASS_PARASOL_LADY:
+            return gSpeciesListTrainerClassParasolLady[Random() % SPECIES_LIST_TRAINER_CLASS_PARASOL_LADY_COUNT];
+        case TRAINER_CLASS_SAILOR:
+            return gSpeciesListTrainerClassSailor[Random() % SPECIES_LIST_TRAINER_CLASS_SAILOR_COUNT];
+        case TRAINER_CLASS_BUG_CATCHER:
+            return gSpeciesListTrainerClassBugCatcher[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_CATCHER_COUNT];
+        case TRAINER_CLASS_PKMN_RANGER:
+            return gSpeciesListTrainerClassPkmnRanger[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_COUNT];
+        case TRAINER_CLASS_LASS:
+            return gSpeciesListTrainerClassLass[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_COLLECTOR:
+            return gSpeciesListTrainerClassCollector[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_COUNT];
+    }
+}
+
+u16 GetTrainerClassMega(u16 trainerClass)
+{
+    switch(trainerClass)
+    {
+        case TRAINER_CLASS_HIKER:
+            return gSpeciesListTrainerClassHikerMega[Random() % SPECIES_LIST_TRAINER_CLASS_HIKER_MEGA_COUNT];
+        case TRAINER_CLASS_PKMN_BREEDER:
+            return gSpeciesListTrainerClassPkmnBreederMega[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_BREEDER_MEGA_COUNT];
+        case TRAINER_CLASS_COOLTRAINER:
+        case TRAINER_CLASS_COOLTRAINER_2:
+            return gSpeciesListTrainerClassCooltrainerMega[Random() % SPECIES_LIST_TRAINER_CLASS_COOLTRAINER_MEGA_COUNT];
+        case TRAINER_CLASS_BIRD_KEEPER:
+            return gSpeciesListTrainerClassBirdKeeperMega[Random() % SPECIES_LIST_TRAINER_CLASS_BIRD_KEEPER_MEGA_COUNT];
+        case TRAINER_CLASS_SWIMMER_M:
+            return gSpeciesListTrainerClassSwimmerMMega[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_M_MEGA_COUNT];
+        case TRAINER_CLASS_SWIMMER_F:
+            return gSpeciesListTrainerClassSwimmerFMega[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_F_MEGA_COUNT];
+        case TRAINER_CLASS_EXPERT:
+            return gSpeciesListTrainerClassExpertMega[Random() % SPECIES_LIST_TRAINER_CLASS_EXPERT_MEGA_COUNT];
+        case TRAINER_CLASS_BLACK_BELT:
+            return gSpeciesListTrainerClassBlackBeltMega[Random() % SPECIES_LIST_TRAINER_CLASS_BLACK_BELT_MEGA_COUNT];
+        case TRAINER_CLASS_HEX_MANIAC:
+            return gSpeciesListTrainerClassHexManiacMega[Random() % SPECIES_LIST_TRAINER_CLASS_HEX_MANIAC_MEGA_COUNT];
+        case TRAINER_CLASS_AROMA_LADY:
+            return gSpeciesListTrainerClassAromaLadyMega[Random() % SPECIES_LIST_TRAINER_CLASS_AROMA_LADY_MEGA_COUNT];
+        case TRAINER_CLASS_RUIN_MANIAC:
+            return gSpeciesListTrainerClassRuinManiacMega[Random() % SPECIES_LIST_TRAINER_CLASS_RUIN_MANIAC_MEGA_COUNT];
+        case TRAINER_CLASS_TUBER_M:
+            return gSpeciesListTrainerClassTuberMMega[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_M_MEGA_COUNT];
+        case TRAINER_CLASS_TUBER_F:
+            return gSpeciesListTrainerClassTuberFMega[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_F_MEGA_COUNT];
+        case TRAINER_CLASS_LADY:
+            return gSpeciesListTrainerClassLadyMega[Random() % SPECIES_LIST_TRAINER_CLASS_LADY_MEGA_COUNT];
+        case TRAINER_CLASS_BEAUTY:
+            return gSpeciesListTrainerClassBeautyMega[Random() % SPECIES_LIST_TRAINER_CLASS_BEAUTY_MEGA_COUNT];
+        case TRAINER_CLASS_RICH_BOY:
+            return gSpeciesListTrainerClassRichBoyMega[Random() % SPECIES_LIST_TRAINER_CLASS_RICH_BOY_MEGA_COUNT];
+        case TRAINER_CLASS_POKEMANIAC:
+            return gSpeciesListTrainerClassPokemaniacMega[Random() % SPECIES_LIST_TRAINER_CLASS_POKEMANIAC_MEGA_COUNT];
+        case TRAINER_CLASS_GUITARIST:
+            return gSpeciesListTrainerClassGuitaristMega[Random() % SPECIES_LIST_TRAINER_CLASS_GUITARIST_MEGA_COUNT];
+        case TRAINER_CLASS_KINDLER:
+            return gSpeciesListTrainerClassKindlerMega[Random() % SPECIES_LIST_TRAINER_CLASS_KINDLER_MEGA_COUNT];
+        case TRAINER_CLASS_CAMPER:
+            return gSpeciesListTrainerClassCamperMega[Random() % SPECIES_LIST_TRAINER_CLASS_CAMPER_MEGA_COUNT];
+        case TRAINER_CLASS_PICNICKER:
+            return gSpeciesListTrainerClassPicnickerMega[Random() % SPECIES_LIST_TRAINER_CLASS_PICNICKER_MEGA_COUNT];
+        case TRAINER_CLASS_BUG_MANIAC:
+            return gSpeciesListTrainerClassBugManiacMega[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_MANIAC_MEGA_COUNT];
+        case TRAINER_CLASS_PSYCHIC:
+            return gSpeciesListTrainerClassPsychicMega[Random() % SPECIES_LIST_TRAINER_CLASS_PSYCHIC_MEGA_COUNT];
+        case TRAINER_CLASS_GENTLEMAN:
+            return gSpeciesListTrainerClassGentlemanMega[Random() % SPECIES_LIST_TRAINER_CLASS_GENTLEMAN_MEGA_COUNT];
+        case TRAINER_CLASS_SCHOOL_KID:
+            return gSpeciesListTrainerClassSchoolKidMega[Random() % SPECIES_LIST_TRAINER_CLASS_SCHOOL_KID_MEGA_COUNT];
+        case TRAINER_CLASS_POKEFAN:
+            return gSpeciesListTrainerClassPokefanMega[Random() % SPECIES_LIST_TRAINER_CLASS_POKEFAN_MEGA_COUNT];
+        case TRAINER_CLASS_YOUNGSTER:
+            return gSpeciesListTrainerClassYoungsterMega[Random() % SPECIES_LIST_TRAINER_CLASS_YOUNGSTER_MEGA_COUNT];
+        case TRAINER_CLASS_FISHERMAN:
+            return gSpeciesListTrainerClassFishermanMega[Random() % SPECIES_LIST_TRAINER_CLASS_FISHERMAN_MEGA_COUNT];
+        case TRAINER_CLASS_TRIATHLETE:
+            return gSpeciesListTrainerClassTriathleteMega[Random() % SPECIES_LIST_TRAINER_CLASS_TRIATHLETE_MEGA_COUNT];
+        case TRAINER_CLASS_DRAGON_TAMER:
+            return gSpeciesListTrainerClassDragonTamerMega[Random() % SPECIES_LIST_TRAINER_CLASS_DRAGON_TAMER_MEGA_COUNT];
+        case TRAINER_CLASS_NINJA_BOY:
+            return gSpeciesListTrainerClassNinjaBoyMega[Random() % SPECIES_LIST_TRAINER_CLASS_NINJA_BOY_MEGA_COUNT];
+        case TRAINER_CLASS_BATTLE_GIRL:
+            return gSpeciesListTrainerClassBattleGirlMega[Random() % SPECIES_LIST_TRAINER_CLASS_BATTLE_GIRL_MEGA_COUNT];
+        case TRAINER_CLASS_PARASOL_LADY:
+            return gSpeciesListTrainerClassParasolLadyMega[Random() % SPECIES_LIST_TRAINER_CLASS_PARASOL_LADY_MEGA_COUNT];
+        case TRAINER_CLASS_SAILOR:
+            return gSpeciesListTrainerClassSailorMega[Random() % SPECIES_LIST_TRAINER_CLASS_SAILOR_MEGA_COUNT];
+        case TRAINER_CLASS_BUG_CATCHER:
+            return gSpeciesListTrainerClassBugCatcherMega[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_CATCHER_MEGA_COUNT];
+        case TRAINER_CLASS_PKMN_RANGER:
+            return gSpeciesListTrainerClassPkmnRangerMega[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_MEGA_COUNT];
+        case TRAINER_CLASS_LASS:
+            return gSpeciesListTrainerClassLassMega[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_MEGA_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_COLLECTOR:
+            return gSpeciesListTrainerClassCollectorMega[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_MEGA_COUNT];
+    }
+}
+
+u16 GetTrainerClassRestricted(u16 trainerClass)
+{
+    switch(trainerClass)
+    {
+        case TRAINER_CLASS_HIKER:
+            return gSpeciesListTrainerClassHikerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_HIKER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_PKMN_BREEDER:
+            return gSpeciesListTrainerClassPkmnBreederRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_BREEDER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_COOLTRAINER:
+        case TRAINER_CLASS_COOLTRAINER_2:
+            return gSpeciesListTrainerClassCooltrainerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_COOLTRAINER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BIRD_KEEPER:
+            return gSpeciesListTrainerClassBirdKeeperRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BIRD_KEEPER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_SWIMMER_M:
+            return gSpeciesListTrainerClassSwimmerMRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_M_RESTRICTED_COUNT];
+        case TRAINER_CLASS_SWIMMER_F:
+            return gSpeciesListTrainerClassSwimmerFRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_SWIMMER_F_RESTRICTED_COUNT];
+        case TRAINER_CLASS_EXPERT:
+            return gSpeciesListTrainerClassExpertRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_EXPERT_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BLACK_BELT:
+            return gSpeciesListTrainerClassBlackBeltRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BLACK_BELT_RESTRICTED_COUNT];
+        case TRAINER_CLASS_HEX_MANIAC:
+            return gSpeciesListTrainerClassHexManiacRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_HEX_MANIAC_RESTRICTED_COUNT];
+        case TRAINER_CLASS_AROMA_LADY:
+            return gSpeciesListTrainerClassAromaLadyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_AROMA_LADY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_RUIN_MANIAC:
+            return gSpeciesListTrainerClassRuinManiacRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_RUIN_MANIAC_RESTRICTED_COUNT];
+        case TRAINER_CLASS_TUBER_M:
+            return gSpeciesListTrainerClassTuberMRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_M_RESTRICTED_COUNT];
+        case TRAINER_CLASS_TUBER_F:
+            return gSpeciesListTrainerClassTuberFRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_TUBER_F_RESTRICTED_COUNT];
+        case TRAINER_CLASS_LADY:
+            return gSpeciesListTrainerClassLadyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_LADY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BEAUTY:
+            return gSpeciesListTrainerClassBeautyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BEAUTY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_RICH_BOY:
+            return gSpeciesListTrainerClassRichBoyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_RICH_BOY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_POKEMANIAC:
+            return gSpeciesListTrainerClassPokemaniacRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_POKEMANIAC_RESTRICTED_COUNT];
+        case TRAINER_CLASS_GUITARIST:
+            return gSpeciesListTrainerClassGuitaristRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_GUITARIST_RESTRICTED_COUNT];
+        case TRAINER_CLASS_KINDLER:
+            return gSpeciesListTrainerClassKindlerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_KINDLER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_CAMPER:
+            return gSpeciesListTrainerClassCamperRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_CAMPER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_PICNICKER:
+            return gSpeciesListTrainerClassPicnickerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PICNICKER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BUG_MANIAC:
+            return gSpeciesListTrainerClassBugManiacRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_MANIAC_RESTRICTED_COUNT];
+        case TRAINER_CLASS_PSYCHIC:
+            return gSpeciesListTrainerClassPsychicRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PSYCHIC_RESTRICTED_COUNT];
+        case TRAINER_CLASS_GENTLEMAN:
+            return gSpeciesListTrainerClassGentlemanRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_GENTLEMAN_RESTRICTED_COUNT];
+        case TRAINER_CLASS_SCHOOL_KID:
+            return gSpeciesListTrainerClassSchoolKidRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_SCHOOL_KID_RESTRICTED_COUNT];
+        case TRAINER_CLASS_POKEFAN:
+            return gSpeciesListTrainerClassPokefanRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_POKEFAN_RESTRICTED_COUNT];
+        case TRAINER_CLASS_YOUNGSTER:
+            return gSpeciesListTrainerClassYoungsterRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_YOUNGSTER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_FISHERMAN:
+            return gSpeciesListTrainerClassFishermanRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_FISHERMAN_RESTRICTED_COUNT];
+        case TRAINER_CLASS_TRIATHLETE:
+            return gSpeciesListTrainerClassTriathleteRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_TRIATHLETE_RESTRICTED_COUNT];
+        case TRAINER_CLASS_DRAGON_TAMER:
+            return gSpeciesListTrainerClassDragonTamerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_DRAGON_TAMER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_NINJA_BOY:
+            return gSpeciesListTrainerClassNinjaBoyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_NINJA_BOY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BATTLE_GIRL:
+            return gSpeciesListTrainerClassBattleGirlRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BATTLE_GIRL_RESTRICTED_COUNT];
+        case TRAINER_CLASS_PARASOL_LADY:
+            return gSpeciesListTrainerClassParasolLadyRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PARASOL_LADY_RESTRICTED_COUNT];
+        case TRAINER_CLASS_SAILOR:
+            return gSpeciesListTrainerClassSailorRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_SAILOR_RESTRICTED_COUNT];
+        case TRAINER_CLASS_BUG_CATCHER:
+            return gSpeciesListTrainerClassBugCatcherRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_BUG_CATCHER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_PKMN_RANGER:
+            return gSpeciesListTrainerClassPkmnRangerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_RESTRICTED_COUNT];
+        case TRAINER_CLASS_LASS:
+            return gSpeciesListTrainerClassLassRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_RESTRICTED_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_COLLECTOR:
+            return gSpeciesListTrainerClassCollectorRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_RESTRICTED_COUNT];
+    }
+}
+#endif
 
 static u8 GetNatureFromStats(u8 posStat, u8 negStat) 
 {
@@ -941,6 +1205,63 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
     return moveCount;
 }
 
+#define MACRO_ALWAYS_SELECT \
+    isDuplicate = FALSE; \
+    for(j = 0; j < moveCount; j++) { \
+        if (moves[j] == moveId) { isDuplicate = TRUE; break; } \
+    } \
+    if (!isDuplicate) { \
+        moves[moveCount] = moveId; \
+        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId)))) \
+            types[TYPE(moveId)] = moveCount; \
+        moveCount++; \
+        if (moveCount == MAX_MON_MOVES) \
+            return FillMonMoveSlots(index, moves); \
+    }
+
+#define MACRO_MOVE_SWITCH \
+    switch(moveId) { \
+        case MOVE_TRICK_ROOM: { \
+            if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_TAILWIND: { \
+            if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_ICY_WIND: { \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_AURORA_VEIL: { \
+            if (IS_HAIL_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_FINAL_GAMBIT: { \
+            if (CHECK_EVS(evs,F_EV_SPREAD_HP) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_BODY_PRESS: { \
+            if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) && (gNatureInfo[nature].posStat == STAT_DEF) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_FOUL_PLAY: { \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        default: { \
+            if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
+            else { if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL))) allowedAttackMoves[numAllowedAttackMoves++] = moveId; } \
+        }; break; \
+    }
+
 static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
     s32 i, j;
@@ -1093,7 +1414,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             s32 numAllowedStatusMoves = 0;
 
             // Ensure no double-up moves
-            bool8 isDuplicate;
+            bool8 isDuplicate = FALSE;
 
             if ((requiredMove != MOVE_NONE))
             {
@@ -1111,47 +1432,13 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = levelUpLearnset[i].move;
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    // Ensure no double-up moves
-                    isDuplicate = FALSE;
-                    
-                    // Check previous moves
-                    for(j = 0; j < moveCount; j++){
-                        if (moves[j] == moveId)
-                        {
-                            // Mark as duplicate
-                            isDuplicate = TRUE;
-                            break;
-                        }
-                    }
-
-                    // Is not duplicate
-                    if (!isDuplicate)
-                    {
-                        moves[moveCount] = moveId;
-                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                            types[TYPE(moveId)] = moveCount; // Set type index
-                        moveCount++;
-
-                        // Reached max. moves
-                        if (moveCount == MAX_MON_MOVES)
-                            return FillMonMoveSlots(index, moves);
-                    }
+                    MACRO_ALWAYS_SELECT
                 }
                 else // Not always-select
                 {
                     if (IsNeverSelectMove(moveId))
                         continue; // Skip move
-                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
-                    {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
-                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
-                    }
-                    else // Non-Status Move
-                    {
-                        // Add move, if category matches the spread type
-                        if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL)))
-                            allowedAttackMoves[numAllowedAttackMoves++] = moveId;
-                    }
+                    MACRO_MOVE_SWITCH
                 }
             }
 
@@ -1161,47 +1448,13 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 moveId = teachableLearnset[i];
                 if (IsAlwaysSelectMove(moveId))
                 {
-                    // Ensure no double-up moves
-                    isDuplicate = FALSE;
-                    
-                    // Check previous moves
-                    for(j = 0; j < moveCount; j++){
-                        if (moves[j] == moveId)
-                        {
-                            // Mark as duplicate
-                            isDuplicate = TRUE;
-                            break;
-                        }
-                    }
-
-                    // Is not duplicate
-                    if (!isDuplicate)
-                    {
-                        moves[moveCount] = moveId;
-                        if ((types[TYPE(moveId)] == BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
-                            types[TYPE(moveId)] = moveCount; // Set type index
-                        moveCount++;
-
-                        // Reached max. moves
-                        if (moveCount == MAX_MON_MOVES)
-                            return FillMonMoveSlots(index, moves);
-                    }
+                    MACRO_ALWAYS_SELECT
                 }
                 else // Not always-select
                 {
                     if (IsNeverSelectMove(moveId))
                         continue; // Skip move
-                    if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS)
-                    {
-                        if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId)))
-                            allowedStatusMoves[numAllowedStatusMoves++] = moveId;
-                    }
-                    else // Non-Status Move
-                    {
-                        // Add move, if category matches the spread type
-                        if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL)))
-                            allowedAttackMoves[numAllowedAttackMoves++] = moveId;
-                    }
+                    MACRO_MOVE_SWITCH
                 }
             }
 
@@ -1256,6 +1509,10 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         // If this is not the first move of type, and move is not an ignore type count move
                         if ((moveIndex != BFG_MOVE_TYPE_NONE) && (!(IsIgnoreTypeCountMove(moveId))))
                         {
+                            // Existing move has no rating
+                            if (rating[moveIndex] == 0)
+                                continue; // Cannot be replaced
+
                             // Rating is greater, or equal/worse and selection chance is met
                             if ((rating[moveIndex] < attackRating) || ((rating[moveIndex] == attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE)) || ((rating[moveIndex] > attackRating) && RANDOM_CHANCE(BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE)))
                             {
@@ -1451,12 +1708,14 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 
     // Move flags
 
+    bool8 hasTrickRoom = FALSE;
     bool8 hasEvolution = FALSE;
     bool8 hasTerrain = FALSE;
     bool8 hasTwoTurn = FALSE; 
     bool8 hasRecycle = FALSE;
     bool8 hasSwagger = FALSE;
     bool8 hasFlatter = FALSE;
+    bool8 hasFling = FALSE;
     bool8 hasRest = FALSE;
 
     // Move Counters
@@ -1548,6 +1807,9 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                     break;
                     case EFFECT_FOCUS_ENERGY:
                         numCritModifier++;
+                    break;
+                    case EFFECT_TRICK_ROOM:
+                        hasTrickRoom = TRUE;
                     break;
                     case EFFECT_RECYCLE:
                         hasRecycle = TRUE;
@@ -1669,7 +1931,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             itemId = ITEM_CHOICE_SPECS;
 
         if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
-            itemId = ITEM_CHOICE_SCARF;   
+            itemId = ITEM_CHOICE_SCARF;
 
         // Life Orb
         if ((hasRecycle == FALSE) && (itemId == ITEM_NONE) && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
@@ -1692,6 +1954,16 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
         for(i=0; ((itemId == ITEM_NONE) && (i < numSound)); i++)
             if (RANDOM_CHANCE(BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE))
                 itemId = ITEM_THROAT_SPRAY;
+
+        // Razor Fang / King's Rock (Fling)
+        if ((itemId == ITEM_NONE) && hasFling)
+        {
+            if (RANDOM_CHANCE(BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE))
+                itemId = ITEM_RAZOR_FANG;
+            else if (RANDOM_CHANCE(BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE))
+                itemId = ITEM_KINGS_ROCK;
+            // Otherwise, do nothing
+        }
 
         // Other non-recyclable items
         if (hasRecycle == FALSE)
@@ -1983,6 +2255,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 if (RANDOM_CHANCE(BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE))
                     itemId = ITEM_PUNCHING_GLOVE;
 
+            // Iron Ball (For trick room Pokemon)
+            if ((itemId == ITEM_NONE) && hasTrickRoom && RANDOM_CHANCE(BFG_ITEM_IRON_BALL_SELECTION_CHANCE))
+                itemId = ITEM_IRON_BALL;
+
             // Black Sludge (For poison types)
             if ((itemId == ITEM_NONE) && IS_TYPE(species->types[0], species->types[1], TYPE_POISON) && RANDOM_CHANCE(BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE))
                 itemId = ITEM_BLACK_SLUDGE;
@@ -2011,6 +2287,10 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                 }
             }
         }
+
+        // Room Service (For trick room Pokemon)
+        if ((itemId == ITEM_NONE) && hasTrickRoom && RANDOM_CHANCE(BFG_ITEM_ROOM_SERVICE_SELECTION_CHANCE))
+            itemId = ITEM_ROOM_SERVICE;
 
         // Air Balloon
         if ((itemId == ITEM_NONE) && (abilityId != ABILITY_LEVITATE) &&
@@ -2159,7 +2439,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     bool32 hasMega,hasZMove;
 
     s32 i, j;
-    u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
     u32 otID = Random32();
         
     // Normal battle frontier trainer.
@@ -2169,16 +2448,18 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     u16 minBST = fixedIVMinBSTLookup[fixedIV];
     u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
 
-    u16 bfMonCount = 0;
-
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
-
-    const struct SpeciesInfo * species;
     const struct FormChange * formChanges;
 
+    #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
     DebugPrintf("Finding sets for trainer class %d ...", trainerClass);
+
+    u16 bfMonCount = 0;
+
+    u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
+    const struct SpeciesInfo * species;
 
     // Loop over all species
     for(i = 0; i < NUM_SPECIES; i++) 
@@ -2211,7 +2492,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         // Check bst limit (and special cases)
         if ((bst > maxBST) || ((bst < minBST) && (
             // Special case for rotom formes
-            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) || 
+            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) && 
             // Special case for mega evolutions
             (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
         )))
@@ -2222,6 +2503,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     }
 
     DebugPrintf("Possible species found: %d ...", bfMonCount);
+    #endif
 
     // Regular battle frontier trainer.
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
@@ -2231,16 +2513,41 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     hasZMove = FALSE;
     hasMega = FALSE;
 
+    // Ignore Max. BST Value
+    bool8 ignoreMinBST = FALSE;
+    bool8 ignoreMaxBST = FALSE;
+
     i = 0;
     while(i != monCount) 
     {
         DebugPrintf("Generating mon number %d ...", i);
 
         // Sample random species from the mon count
+        #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
         speciesId = monSet[Random() % bfMonCount];
-
-        // Get base stat total
         bst = GetTotalBaseStat(speciesId);
+        #else
+        if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
+        {
+            // Restricted species
+            speciesId = GetTrainerClassRestricted(trainerClass); // Pick restricteds when eligible on 2nd, 4th species
+            ignoreMaxBST = TRUE; // Ignore Max. BST
+        }
+        else // Standard species
+            speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
+        bst = GetTotalBaseStat(speciesId);
+
+        if ((HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
+            ignoreMinBST = TRUE; // Ignore Min. BST
+
+        // Check BST limits
+        if (((!ignoreMinBST) && (bst < minBST)) || ((!ignoreMaxBST) && (bst > maxBST)))
+            continue; // Next species
+
+        // Species is not allowed for this format
+        if (!(SpeciesValidForFrontierLevel(speciesId)))
+            continue; // Next species
+        #endif
 
         // Alt. Forme (e.g. mega, ultra burst)
         forme = FORME_DEFAULT; // Default
@@ -2327,8 +2634,9 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_GASTRODON_EAST_SEA;
                 }; break;
                 case SPECIES_ROTOM: {
-                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)) 
+                    if ((440 <= minBST) || ((520 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)))
                     {
+                        // Forced to select if 440 is less than Min. BST, random chance otherwise
                         speciesId = RANDOM_RANGE(SPECIES_ROTOM_HEAT, SPECIES_DIALGA_ORIGIN);
                         switch(speciesId) 
                         {
@@ -2412,7 +2720,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_ENAMORUS_THERIAN;
                 }; break;
                 case SPECIES_KYUREM: {
-                    if ((bst + 40 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
+                    if ((ignoreMaxBST || 700 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
                         switch(speciesId) 
@@ -2447,7 +2755,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }
                 }; break;
                 case SPECIES_GRENINJA: {
-                    if ((bst + 110 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
+                    if ((ignoreMaxBST || 640 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
                     {
                         speciesId = SPECIES_GRENINJA_BATTLE_BOND;
                         move = MOVE_WATER_SHURIKEN;
@@ -2492,7 +2800,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ZYGARDE))
                         speciesId = SPECIES_ZYGARDE_10;
                     // Change to power construct
-                    if (708 <= maxBST) 
+                    if (ignoreMaxBST || 708 <= maxBST) 
                     {
                         switch(speciesId) 
                         {
@@ -2506,7 +2814,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }
                 }; break;
                 case SPECIES_HOOPA: {
-                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
                         speciesId = SPECIES_HOOPA_UNBOUND;
                 }; break;
                 case SPECIES_ORICORIO: {
@@ -2562,7 +2870,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = RANDOM_RANGE(SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_RED);
                 }; break;
                 case SPECIES_NECROZMA: {
-                    if (RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
 
@@ -2570,7 +2878,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
                         {
                             // Random chance to select ultra-burst
-                            if ((bst + 76 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
+                            if ((ignoreMaxBST || 754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
                             {
                                 move = MOVE_PHOTON_GEYSER;
                                 item = ITEM_ULTRANECROZIUM_Z;
@@ -2613,19 +2921,19 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_INDEEDEE_MALE;
                 }; break;
                 case SPECIES_ZACIAN: {
-                    if ((bst + 60 <= maxBST)) 
+                    if ((ignoreMaxBST || 700 <= maxBST)) 
                     {
                         speciesId = SPECIES_ZACIAN_CROWNED_SWORD;
                         item = ITEM_RUSTED_SWORD;
-                        move = MOVE_IRON_HEAD;
+                        move = MOVE_BEHEMOTH_BLADE;
                     }
                 }; break;
                 case SPECIES_ZAMAZENTA: {
-                    if ((bst + 60 <= maxBST)) 
+                    if ((ignoreMaxBST || 700 <= maxBST)) 
                     {
                         speciesId = SPECIES_ZAMAZENTA_CROWNED_SHIELD;
                         item = ITEM_RUSTED_SHIELD;
-                        move = MOVE_IRON_HEAD;
+                        move = MOVE_BEHEMOTH_BASH;
                     }
                 }; break;
                 case SPECIES_URSHIFU: {
@@ -2633,7 +2941,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_URSHIFU_RAPID_STRIKE_STYLE;
                 }; break;
                 case SPECIES_CALYREX: {
-                    if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
                         switch(speciesId) 
@@ -2861,14 +3169,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }; break;
                     #endif
                     case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
                         {
                             item = formChanges[j].param1; // ItemId
                             forme = j;
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                         {
                             move = formChanges[j].param1; // MoveId
                             hasMega = TRUE;
@@ -2876,7 +3184,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                         {
                             item = formChanges[j].param1; // ItemId
                             hasMega = TRUE;
