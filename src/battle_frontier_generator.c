@@ -1222,32 +1222,39 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
 #define MACRO_MOVE_SWITCH \
     switch(moveId) { \
         case MOVE_TRICK_ROOM: { \
-            if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) \
+            if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_TAILWIND: { \
-            if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) \
+            if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_ICY_WIND: { \
-            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_AURORA_VEIL: { \
-            if (IS_HAIL_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE)) \
+            if (IS_HAIL_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_FINAL_GAMBIT: { \
-            if (CHECK_EVS(evs,F_EV_SPREAD_HP) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE)) \
+            if (CHECK_EVS(evs,F_EV_SPREAD_HP) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_BODY_PRESS: { \
-            if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) && (gNatureInfo[nature].posStat == STAT_DEF) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE)) \
+            if (CHECK_EVS(evs,F_EV_SPREAD_DEFENSE) && (gNatureInfo[nature].posStat == STAT_DEF) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         case MOVE_FOUL_PLAY: { \
-            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) \
+            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
+            } \
         }; break; \
         default: { \
             if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
@@ -2506,6 +2513,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     hasZMove = FALSE;
     hasMega = FALSE;
 
+    // Ignore Max. BST Value
+    bool8 ignoreMinBST = FALSE;
+    bool8 ignoreMaxBST = FALSE;
+
     i = 0;
     while(i != monCount) 
     {
@@ -2517,20 +2528,21 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
         bst = GetTotalBaseStat(speciesId);
         #else
         if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
+        {
             speciesId = GetTrainerClassRestricted(trainerClass); // Pick restricteds when eligible on 2nd, 4th species
+            ignoreMaxBST = TRUE; // Ignore Max. BST
+        }
         else if ((i == (monCount - 1)) && (BFG_FORME_CHANCE_MEGA == 1) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (hasMega == FALSE)) // Mega Evolution
             speciesId = GetTrainerClassMega(trainerClass); // Pick Mega when eligible on 4th species (if not present)
         else // Standard species
             speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
 
-        // Check bst limit (and special cases)
-        if ((bst > maxBST) || ((bst < minBST) && (
-            // Special case for rotom formes
-            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) && 
-            // Special case for mega evolutions
-            (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
-        )))
+        if ((HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
+            ignoreMinBST = TRUE; // Ignore Min. BST
+
+        // Check BST limits
+        if (((!ignoreMinBST) && (bst < minBST)) || ((!ignoreMaxBST) && (bst > maxBST)))
             continue; // Next species
 
         // Species is not allowed for this format
@@ -2623,8 +2635,9 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_GASTRODON_EAST_SEA;
                 }; break;
                 case SPECIES_ROTOM: {
-                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)) 
+                    if ((440 <= minBST) || ((520 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_ROTOM)))
                     {
+                        // Forced to select if 440 is less than Min. BST, random chance otherwise
                         speciesId = RANDOM_RANGE(SPECIES_ROTOM_HEAT, SPECIES_DIALGA_ORIGIN);
                         switch(speciesId) 
                         {
@@ -2708,7 +2721,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_ENAMORUS_THERIAN;
                 }; break;
                 case SPECIES_KYUREM: {
-                    if ((bst + 40 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
+                    if ((ignoreMaxBST || 700 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
                         switch(speciesId) 
@@ -2743,7 +2756,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }
                 }; break;
                 case SPECIES_GRENINJA: {
-                    if ((bst + 110 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
+                    if ((ignoreMaxBST || 640 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
                     {
                         speciesId = SPECIES_GRENINJA_BATTLE_BOND;
                         move = MOVE_WATER_SHURIKEN;
@@ -2788,7 +2801,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ZYGARDE))
                         speciesId = SPECIES_ZYGARDE_10;
                     // Change to power construct
-                    if (708 <= maxBST) 
+                    if (ignoreMaxBST || 708 <= maxBST) 
                     {
                         switch(speciesId) 
                         {
@@ -2802,7 +2815,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }
                 }; break;
                 case SPECIES_HOOPA: {
-                    if ((bst + 80 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
                         speciesId = SPECIES_HOOPA_UNBOUND;
                 }; break;
                 case SPECIES_ORICORIO: {
@@ -2909,7 +2922,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_INDEEDEE_MALE;
                 }; break;
                 case SPECIES_ZACIAN: {
-                    if ((bst + 60 <= maxBST)) 
+                    if ((ignoreMaxBST || 700 <= maxBST)) 
                     {
                         speciesId = SPECIES_ZACIAN_CROWNED_SWORD;
                         item = ITEM_RUSTED_SWORD;
@@ -2917,7 +2930,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }
                 }; break;
                 case SPECIES_ZAMAZENTA: {
-                    if ((bst + 60 <= maxBST)) 
+                    if ((ignoreMaxBST || 700 <= maxBST)) 
                     {
                         speciesId = SPECIES_ZAMAZENTA_CROWNED_SHIELD;
                         item = ITEM_RUSTED_SHIELD;
@@ -2929,7 +2942,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         speciesId = SPECIES_URSHIFU_RAPID_STRIKE_STYLE;
                 }; break;
                 case SPECIES_CALYREX: {
-                    if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
                     {
                         speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
                         switch(speciesId) 
@@ -3157,14 +3170,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     }; break;
                     #endif
                     case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
                         {
                             item = formChanges[j].param1; // ItemId
                             forme = j;
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                         {
                             move = formChanges[j].param1; // MoveId
                             hasMega = TRUE;
@@ -3172,7 +3185,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                         }
                     }; break;
                     case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (bst + 100 <= maxBST) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                        if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                         {
                             item = formChanges[j].param1; // ItemId
                             hasMega = TRUE;
