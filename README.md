@@ -264,6 +264,13 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.1.1
+
+Extensive testing has been performed on each Battle Frontier facility, to ensure that features are working
+as expected. Issues with level scaling have now been resolved in all facilities, and new set generation
+has been confirmed as working in most facilities. For a full list of all features which are currently
+supported in each Battle Facility, including Battle Tents please see the [Battle Frontier Feature Table](#feature-table).
+
 ### Ver. 1.1.0
 
 Merged upstream changes which have implemented a more efficient species selection system, including ensuring that two restricted (i.e. legendary) Pokemon are picked on all teams in the 'Open' rules battle mode when playing doubles (with four Pokemon), and one is selected playing in formats where three Pokemon are selected.
@@ -274,11 +281,6 @@ Special cases have now been added for selecting moves such as Icy Wind, Trick Ro
 
 Other issues with fusion formes (e.g. Kyurem, Calyrex) not appearing has been resolved, and incomplete 
 species such as Pecharunt and Terapagos have been removed from the available species list.
-
-Extensive testing has been performed on each Battle Frontier facility, to ensure that features are working
-as expected. Issues with level scaling have now been resolved in all facilities, and new set generation
-has been confirmed as working in most facilities. For a full list of all features which are currently
-supported in each Battle Facility, including Battle Tents please see the [Battle Frontier Feature Table](#feature-table).
 
 ### Ver. 1.0.1
 
