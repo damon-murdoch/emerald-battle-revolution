@@ -146,6 +146,28 @@ rate of $9800 to 1 BP.
 * Open Level ruleset has also been scaled down to level 50
   * However, restricted Pokemon (i.e. Groudon, Kyogre, etc.) are now allowed
 
+##### Feature Table
+
+Please see below for the list of features which are supported in each Battle Frontier facility.
+
+| Facility Name  | Level Scaling   | New Species   | 4 Pokemon (Doubles) | Total |
+| -------------- | --------------- | ------------- | ------------------- | ----- |
+| Battle Arena   | Yes             | Yes           | N/A                 | 2/3   |
+| Battle Dome    | Yes             | No            | No                  | 1/3   |
+| Battle Factory | N/A             | No            | No                  | 0/3   |
+| Battle Palace  | Yes             | Yes           | No                  | 2/3   |
+| Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
+| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3 |
+| Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
+
+Please see below for the list of features which are supported in each Battle Tent.
+
+| Facility Name   | Level Scaling   | New Species   | 4 Pokemon (Doubles) | Total |
+| --------------- | --------------- | ------------- | ------------------- | ----- |
+| Fallarbor  Tent | Yes             | No            | N/A                 | 1/3   |
+| Slateport  Tent | Yes             | No            | N/A                 | 1/3   |
+| Verdanturf Tent | Yes             | No            | N/A                 | 1/3   |
+
 ## Future Changes
 For a list of future changes which are intended for this project, 
 please check the [issues page](https://github.com/damon-murdoch/emerald-battle-revolution/issues). 
@@ -241,6 +263,26 @@ implement this feature on their own projects.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 1.1.0
+
+Merged upstream changes which have implemented a more efficient species selection system, including ensuring that two restricted (i.e. legendary) Pokemon are picked on all teams in the 'Open' rules battle mode when playing doubles (with four Pokemon), and one is selected playing in formats where three Pokemon are selected.
+
+Mythicals are now legal to be used in all level 50 and open rules formats, and have been added to the normal selection pool for both (Excluding Arceus and Deoxys, which are considered restricted).
+
+Special cases have now been added for selecting moves such as Icy Wind, Trick Room, Tailwind and some others which will make them more likely to be chosen appropriately (even when 'attacks only' mode is chosen).
+
+Other issues with fusion formes (e.g. Kyurem, Calyrex) not appearing has been resolved, and incomplete 
+species such as Pecharunt and Terapagos have been removed from the available species list.
+
+Extensive testing has been performed on each Battle Frontier facility, to ensure that features are working
+as expected. Issues with level scaling have now been resolved in all facilities, and new set generation
+has been confirmed as working in most facilities. For a full list of all features which are currently
+supported in each Battle Facility, including Battle Tents please see the [Battle Frontier Feature Table](#feature-table).
+
+### Ver. 1.0.1
+
+Updated config to revert changes which prevented Battle Frontier set randomisation from working as expected
 
 ### Ver. 1.0.0
 

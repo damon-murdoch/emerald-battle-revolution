@@ -40,6 +40,8 @@
 #include "party_menu.h"
 #include "config/battle_frontier.h"
 
+#include "data/battle_frontier/battle_frontier_banned_species.h"
+
 struct FrontierBrainMon
 {
     u16 species;
@@ -1931,20 +1933,60 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
 
     // Check banned species true/false
     bool8 checkBannedSpecies = TRUE;
+    bool8 useCustomBanlist = FALSE;
 
-    if (lvlMode == FRONTIER_LVL_50 && BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
-        checkBannedSpecies = FALSE;
-    else if (lvlMode == FRONTIER_LVL_OPEN && BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
-        checkBannedSpecies = FALSE;
-    else if (lvlMode == FRONTIER_LVL_TENT && BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
-        checkBannedSpecies = FALSE;
+    // Custom banlist reference
+    static const u16 * customBanlist; 
+
+    switch(lvlMode)
+    {
+        case FRONTIER_LVL_50:
+            if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+                checkBannedSpecies = FALSE;
+            else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+            {
+                customBanlist = sFrontierLvl50CustomBannedSpeciesList;
+                useCustomBanlist = TRUE;
+            }
+        break;
+        case FRONTIER_LVL_OPEN:
+            if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+                checkBannedSpecies = FALSE;
+            else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+            {
+                customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
+                useCustomBanlist = TRUE;
+            }
+        break;
+        case FRONTIER_LVL_TENT:
+            if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+                checkBannedSpecies = FALSE;
+            else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+            {
+                customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
+                useCustomBanlist = TRUE;
+            }
+        break;
+    }
 
     // Banned species check enabled
     if (checkBannedSpecies){
-        for (i = 0; (gFrontierBannedSpecies[i] != 0xFFFF) && (gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)) && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
-            ;
-        if (gFrontierBannedSpecies[i] != 0xFFFF)
-            return;
+        // Use custom banlist
+        if (useCustomBanlist)
+        {
+            for(i=0; (customBanlist[i] != SPECIES_NONE) && customBanlist[i] != GET_BASE_SPECIES_ID(species) && IsSpeciesEnabled(customBanlist[i]); i++)
+                ;
+
+            if (customBanlist[i] != SPECIES_NONE)
+                return; 
+        }
+        else // Use original banlist
+        {
+            for (i = 0; (gFrontierBannedSpecies[i] != 0xFFFF) && (gFrontierBannedSpecies[i] != GET_BASE_SPECIES_ID(species)) && IsSpeciesEnabled(gFrontierBannedSpecies[i]); i++)
+                ;
+            if (gFrontierBannedSpecies[i] != 0xFFFF)
+                return;
+        }
     }
 
     // Level scaling is not enabled

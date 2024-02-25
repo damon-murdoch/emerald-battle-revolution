@@ -190,11 +190,11 @@ BattleFrontier_BattleDomeLobby_EventScript_SaveBeforeChallenge::
 	dome_inittrainers
 BattleFrontier_BattleDomeLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	dome_settrainers
 	msgbox BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_BattleDomeLobby_EventScript_WalkToDoor
 	special HealPlayerParty
 	warp MAP_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR, 23, 6

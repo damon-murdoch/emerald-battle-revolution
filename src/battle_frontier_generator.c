@@ -9,6 +9,7 @@
 #include "battle_ai_util.h"
 #include "battle_frontier_generator.h"
 #include "config/battle_frontier_generator.h"
+#include "config/battle_frontier.h"
 
 #include "constants/battle_frontier_generator.h"
 #include "constants/battle_move_effects.h"
@@ -21,6 +22,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
+#include "data/battle_frontier/battle_frontier_banned_species.h"
 #include "data/battle_frontier/battle_frontier_generator.h"
 
 #include "data/battle_frontier/battle_frontier_generator_trainer_class_mons.h"
@@ -234,9 +236,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     {
         case FRONTIER_LVL_50: {
             #if BFG_LVL_50_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvl50CustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvl50CustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvl50[i] != SPECIES_NONE; i++)
@@ -246,9 +257,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_OPEN: {
             #if BFG_LVL_OPEN_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvlOpenCustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvlOpenCustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlOpen[i] != SPECIES_NONE; i++)
@@ -258,9 +278,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_TENT: {
             #if BFG_LVL_TENT_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++)
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvlTentCustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvlTentCustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlTent[i] != SPECIES_NONE; i++)

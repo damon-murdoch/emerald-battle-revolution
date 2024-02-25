@@ -1558,7 +1558,7 @@ void CalculateMonStats(struct Pokemon *mon)
                     break;
                 case FRONTIER_LVL_TENT: // Battle Tent (Special)
                     scaleUp = BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_UP;
-                    scaleUp = BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_LEVEL;
+                    scaleLevel = BF_BATTLE_FRONTIER_LEVEL_TENT_SCALE_LEVEL;
                     break;
             }
 
