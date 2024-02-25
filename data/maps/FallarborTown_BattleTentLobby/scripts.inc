@@ -157,10 +157,10 @@ FallarborTown_BattleTentLobby_EventScript_SaveBeforeChallenge::
 	goto_if_eq VAR_RESULT, 0, FallarborTown_BattleTentLobby_EventScript_CancelChallengeSaveFailed
 FallarborTown_BattleTentLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox FallarborTown_BattleTentLobby_Text_GuideYouToBattleTent, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call FallarborTown_BattleTentLobby_EventScript_WalkToDoor
 	warp MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR, 2, 7
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0

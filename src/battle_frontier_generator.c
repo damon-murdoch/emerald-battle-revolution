@@ -9,6 +9,7 @@
 #include "battle_ai_util.h"
 #include "battle_frontier_generator.h"
 #include "config/battle_frontier_generator.h"
+#include "config/battle_frontier.h"
 
 #include "constants/battle_frontier_generator.h"
 #include "constants/battle_move_effects.h"
@@ -21,6 +22,7 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
+#include "data/battle_frontier/battle_frontier_banned_species.h"
 #include "data/battle_frontier/battle_frontier_generator.h"
 
 #include "data/battle_frontier/battle_frontier_generator_trainer_class_mons.h"
@@ -234,9 +236,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     {
         case FRONTIER_LVL_50: {
             #if BFG_LVL_50_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvl50CustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvl50CustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvl50[i] != SPECIES_NONE; i++)
@@ -246,9 +257,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_OPEN: {
             #if BFG_LVL_OPEN_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvlOpenCustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvlOpenCustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlOpen[i] != SPECIES_NONE; i++)
@@ -258,9 +278,18 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_TENT: {
             #if BFG_LVL_TENT_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++)
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+            {
+                for(i=0; sFrontierLvlTentCustomBannedSpeciesList[i] != SPECIES_NONE; i++)
+                    if (sFrontierLvlTentCustomBannedSpeciesList[i] == speciesId)
+                        return FALSE; // Species banned
+            }
+            else // Default banned species list
+            {
+                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
+                    if (gFrontierBannedSpecies[i] == speciesId)
+                        return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlTent[i] != SPECIES_NONE; i++)
@@ -2719,21 +2748,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_ENAMORUS_THERIAN))
                         speciesId = SPECIES_ENAMORUS_THERIAN;
                 }; break;
-                case SPECIES_KYUREM: {
-                    if ((ignoreMaxBST || 700 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_KYUREM)) 
-                    {
-                        speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
-                        switch(speciesId) 
-                        {
-                            case SPECIES_KYUREM_BLACK: {
-                                move = MOVE_FUSION_BOLT;
-                            }; break;
-                            case SPECIES_KYUREM_WHITE: {
-                                move = MOVE_FUSION_FLARE;
-                            }; break;
-                        }
-                    }
-                }; break;
                 case SPECIES_KELDEO: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_KELDEO)) 
                     {
@@ -2869,43 +2883,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_MINIOR))
                         speciesId = RANDOM_RANGE(SPECIES_MINIOR_METEOR_ORANGE, SPECIES_MINIOR_CORE_RED);
                 }; break;
-                case SPECIES_NECROZMA: {
-                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_NECROZMA)) 
-                    {
-                        speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
-
-                        // Z-Moves are allowed
-                        if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
-                        {
-                            // Random chance to select ultra-burst
-                            if ((ignoreMaxBST || 754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
-                            {
-                                move = MOVE_PHOTON_GEYSER;
-                                item = ITEM_ULTRANECROZIUM_Z;
-                                forme = 3; // SPECIES_NECROZMA_ULTRA
-
-                                hasZMove = TRUE;
-                            }
-                            else if (RANDOM_CHANCE(BFG_ZMOVE_CHANCE_NECROZMA)) // Use Solganium/Lunalium Z
-                            {
-                                // Select signature move
-                                switch(speciesId) 
-                                {
-                                    case SPECIES_NECROZMA_DAWN_WINGS:
-                                        move = MOVE_SUNSTEEL_STRIKE;
-                                        item = ITEM_SOLGANIUM_Z;
-                                    break;
-                                    case SPECIES_NECROZMA_DUSK_MANE:
-                                        move = MOVE_MOONGEIST_BEAM;
-                                        move = ITEM_LUNALIUM_Z;
-                                    break;
-                                }
-                                
-                                hasZMove = TRUE;
-                            }
-                        }
-                    }
-                }; break;
                 case SPECIES_MAGEARNA: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_MAGEARNA))
                         speciesId = SPECIES_MAGEARNA_ORIGINAL_COLOR;
@@ -2939,22 +2916,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                 case SPECIES_URSHIFU: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_URSHIFU))
                         speciesId = SPECIES_URSHIFU_RAPID_STRIKE_STYLE;
-                }; break;
-                case SPECIES_CALYREX: {
-                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_CALYREX)) 
-                    {
-                        speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
-                        switch(speciesId) 
-                        {
-                            // Signature Moves
-                            case SPECIES_CALYREX_ICE_RIDER: {
-                                move = MOVE_GLACIAL_LANCE;
-                            }; break;
-                            case SPECIES_CALYREX_SHADOW_RIDER: {
-                                move = MOVE_ASTRAL_BARRAGE;
-                            }; break;
-                        }
-                    }
                 }; break;
                 case SPECIES_BASCULEGION: {
                     if (RANDOM_CHANCE(BFG_FORME_CHANCE_BASCULEGION))
@@ -3197,6 +3158,84 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
                     DebugPrintf("Forme found: %d ...", forme);
                     break; // Break if forme found
                 }
+            }
+        }
+        else // No forme change table
+        {
+            // Special case for fusion mons
+            switch(speciesId)
+            {
+                case SPECIES_KYUREM: {
+                    if ((ignoreMaxBST || 700 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_KYUREM))
+                    {
+                        speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
+                        switch(speciesId) 
+                        {
+                            case SPECIES_KYUREM_BLACK: {
+                                move = MOVE_FUSION_BOLT;
+                            }; break;
+                            case SPECIES_KYUREM_WHITE: {
+                                move = MOVE_FUSION_FLARE;
+                            }; break;
+                        }
+                    }
+                }; break;
+                case SPECIES_NECROZMA: {
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_NECROZMA)) 
+                    {
+                        speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
+
+                        // Z-Moves are allowed
+                        if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
+                        {
+                            // Random chance to select ultra-burst
+                            if ((ignoreMaxBST || 754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
+                            {
+                                move = MOVE_PHOTON_GEYSER;
+                                item = ITEM_ULTRANECROZIUM_Z;
+                                forme = 3; // SPECIES_NECROZMA_ULTRA
+
+                                hasZMove = TRUE;
+                            }
+                            else if (RANDOM_CHANCE(BFG_ZMOVE_CHANCE_NECROZMA)) // Use Solganium/Lunalium Z
+                            {
+                                // Select signature move
+                                switch(speciesId) 
+                                {
+                                    case SPECIES_NECROZMA_DAWN_WINGS:
+                                        move = MOVE_SUNSTEEL_STRIKE;
+                                        item = ITEM_SOLGANIUM_Z;
+                                    break;
+                                    case SPECIES_NECROZMA_DUSK_MANE:
+                                        move = MOVE_MOONGEIST_BEAM;
+                                        move = ITEM_LUNALIUM_Z;
+                                    break;
+                                }
+                                
+                                hasZMove = TRUE;
+                            }
+                        }
+                    }
+                }; break;
+                case SPECIES_CALYREX: {
+                    if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_CALYREX)) 
+                    {
+                        speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
+                        switch(speciesId) 
+                        {
+                            // Signature Moves
+                            case SPECIES_CALYREX_ICE_RIDER: {
+                                move = MOVE_GLACIAL_LANCE;
+                            }; break;
+                            case SPECIES_CALYREX_SHADOW_RIDER: {
+                                move = MOVE_ASTRAL_BARRAGE;
+                            }; break;
+                        }
+                    }
+                }; break;
+                default:
+                    DebugPrintf("No form changes/fusions for speciesId %d ...", speciesId);
+                break;
             }
         }
 

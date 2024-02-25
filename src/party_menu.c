@@ -79,6 +79,8 @@
 #include "naming_screen.h"
 #include "config/battle_frontier.h"
 
+#include "data/battle_frontier/battle_frontier_banned_species.h"
+
 #if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
 #define gStringVar4 (MirrorPtr(gStringVar4))
 #define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) (AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str)))
@@ -7008,6 +7010,10 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 
     // Check banned species true/false
     bool8 checkBannedSpecies = TRUE;
+    bool8 useCustomBanlist = FALSE;
+
+    // Custom banlist reference
+    static const u16 * customBanlist; 
 
     // Get the level mode for the format
     u16 lvlMode = gSpecialVar_0x8004;
@@ -7033,20 +7039,51 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
         return TRUE;
     default: // Battle Frontier
     
-        if (lvlMode == FRONTIER_LVL_50 && BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
-            checkBannedSpecies = FALSE;
-        else if (lvlMode == FRONTIER_LVL_OPEN && BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
-            checkBannedSpecies = FALSE;
-        else if (lvlMode == FRONTIER_LVL_TENT && BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
-            checkBannedSpecies = FALSE;
+        switch(lvlMode)
+        {
+            case FRONTIER_LVL_50:
+                if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+                    checkBannedSpecies = FALSE;
+                else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+                {
+                    customBanlist = sFrontierLvl50CustomBannedSpeciesList;
+                    useCustomBanlist = TRUE;
+                }
+            break;
+            case FRONTIER_LVL_OPEN:
+                if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+                    checkBannedSpecies = FALSE;
+                else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+                {
+                    customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
+                    useCustomBanlist = TRUE;
+                }
+            break;
+            case FRONTIER_LVL_TENT:
+                if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+                    checkBannedSpecies = FALSE;
+                else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+                {
+                    customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
+                    useCustomBanlist = TRUE;
+                }
+            break;
+        }
 
         // Allow banned species is not set
         if (checkBannedSpecies){
             species = GetMonData(mon, MON_DATA_SPECIES);
-            for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+            if (useCustomBanlist)
             {
-                if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                    return FALSE;
+                for(; customBanlist[i] != SPECIES_NONE; i++)
+                    if (customBanlist[i] == GET_BASE_SPECIES_ID(species))
+                        return FALSE;
+            }
+            else
+            {
+                for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
+                    if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
+                        return FALSE;
             }
         }
         return TRUE;

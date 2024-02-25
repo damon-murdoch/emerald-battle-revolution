@@ -180,10 +180,10 @@ BattleFrontier_BattlePalaceLobby_EventScript_SaveBeforeChallenge::
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePalaceLobby_EventScript_CancelChallengeSaveFailed
 BattleFrontier_BattlePalaceLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePalaceLobby_Text_FollowMe, MSGBOX_DEFAULT
 	closemessage
-	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	call BattleFrontier_BattlePalaceLobby_EventScript_WalkToDoor
 	warp MAP_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR, 8, 13
 	setvar VAR_TEMP_CHALLENGE_STATUS, 0

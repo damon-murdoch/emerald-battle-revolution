@@ -30,6 +30,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus::
 
 BattleFrontier_BattlePyramidLobby_EventScript_QuitWithoutSaving::
 	lockall
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	message BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag
 	waitmessage
 	playse SE_EXP_MAX
@@ -52,6 +53,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge::
 BattleFrontier_BattlePyramidLobby_EventScript_DefeatedKing::
 	msgbox BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing, MSGBOX_DEFAULT
 BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	special DoBattlePyramidMonsHaveHeldItem
 	call_if_eq VAR_RESULT, TRUE, BattleFrontier_BattlePyramidLobby_EventScript_StoreHeldItemsInPyramidBag
 	clearflag FLAG_STORING_ITEMS_IN_PYRAMID_BAG
@@ -79,6 +81,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_GiveBattlePoints::
 	end
 
 BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge::
+	clearflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_checkairshow
 	special LoadPlayerParty
 	pyramid_clearhelditems
@@ -161,6 +164,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_SaveBeforeChallenge::
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidLobby_EventScript_CancelChallengeSaveFailed
 BattleFrontier_BattlePyramidLobby_EventScript_EnterChallenge::
 	special SavePlayerParty
+	setflag FLAG_FORCE_FRONTIER_LEVEL_SCALING
 	frontier_setpartyorder FRONTIER_PARTY_SIZE
 	msgbox BattleFrontier_BattlePyramidLobby_Text_ShowYouIntoPyramid, MSGBOX_DEFAULT
 	closemessage
