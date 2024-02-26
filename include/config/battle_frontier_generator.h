@@ -16,6 +16,7 @@
 
 // *** BASE STATS ***
 
+#define BFG_IV_MIN_BST_0 150
 #define BFG_IV_MIN_BST_3 180
 #define BFG_IV_MIN_BST_6 225
 #define BFG_IV_MIN_BST_9 270
@@ -25,6 +26,7 @@
 #define BFG_IV_MIN_BST_21 450
 #define BFG_IV_MIN_BST_MAX 495
 
+#define BFG_IV_MAX_BST_0 350
 #define BFG_IV_MAX_BST_3 405
 #define BFG_IV_MAX_BST_6 450
 #define BFG_IV_MAX_BST_9 495

@@ -169,6 +169,7 @@ const u16 recycleItemsList[] = {
 #define FORME_DEFAULT 0xFF
 
 const u16 fixedIVMinBSTLookup[] = {
+    [0] = BFG_IV_MIN_BST_0,
     [3] = BFG_IV_MIN_BST_3,
     [6] = BFG_IV_MIN_BST_6,
     [9] = BFG_IV_MIN_BST_9,
@@ -180,6 +181,7 @@ const u16 fixedIVMinBSTLookup[] = {
 };
 
 const u16 fixedIVMaxBSTLookup [] = {
+    [0] = BFG_IV_MAX_BST_0,
     [3] = BFG_IV_MAX_BST_3,
     [6] = BFG_IV_MAX_BST_6,
     [9] = BFG_IV_MAX_BST_9,
@@ -2417,22 +2419,21 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     return FALSE;
 }
 
-static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, bool8 ignoreMinBST, bool8 ignoreMaxBST, bool8 hasMega, bool8 hasZMove)
+static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u16 minBST, u16 maxBST, bool8 hasMega, bool8 hasZMove)
 {
+    s32 i;
+
     // Alt. Forme (e.g. mega, ultra burst)
     u8 forme = FORME_DEFAULT; // Default
 
     // Move / item placeholder
     u16 move = MOVE_NONE;
     u16 item = ITEM_NONE;
-    
-    // Min/Max BST Value Lookup Table
-    u16 minBST = fixedIVMinBSTLookup[fixedIV];
-    u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
+
+    u16 bst = GetTotalBaseStat(speciesId);
 
     // Get species forme change table
     const struct FormChange * formChanges = GetSpeciesFormChanges(speciesId);
-
     if (formChanges != NULL) 
     {
         DebugPrintf("Checking for megas/z/other formes ...");
@@ -2608,7 +2609,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }
             }; break;
             case SPECIES_GRENINJA: {
-                if ((ignoreMaxBST || 640 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
+                if ((640 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_GRENINJA)) 
                 {
                     speciesId = SPECIES_GRENINJA_BATTLE_BOND;
                     move = MOVE_WATER_SHURIKEN;
@@ -2653,7 +2654,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 if (RANDOM_CHANCE(BFG_FORME_CHANCE_ZYGARDE))
                     speciesId = SPECIES_ZYGARDE_10;
                 // Change to power construct
-                if (ignoreMaxBST || 708 <= maxBST) 
+                if (708 <= maxBST) 
                 {
                     switch(speciesId) 
                     {
@@ -2667,7 +2668,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }
             }; break;
             case SPECIES_HOOPA: {
-                if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
+                if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FORME_CHANCE_HOOPA))
                     speciesId = SPECIES_HOOPA_UNBOUND;
             }; break;
             case SPECIES_ORICORIO: {
@@ -2737,7 +2738,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                     speciesId = SPECIES_INDEEDEE_MALE;
             }; break;
             case SPECIES_ZACIAN: {
-                if ((ignoreMaxBST || 700 <= maxBST)) 
+                if ((700 <= maxBST)) 
                 {
                     speciesId = SPECIES_ZACIAN_CROWNED_SWORD;
                     item = ITEM_RUSTED_SWORD;
@@ -2745,7 +2746,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }
             }; break;
             case SPECIES_ZAMAZENTA: {
-                if ((ignoreMaxBST || 700 <= maxBST)) 
+                if ((700 <= maxBST)) 
                 {
                     speciesId = SPECIES_ZAMAZENTA_CROWNED_SHIELD;
                     item = ITEM_RUSTED_SHIELD;
@@ -2958,9 +2959,9 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
         }
 
         // Check for Mega/Primal/Gigantamax
-        for(j = 0; formChanges[j].method != FORM_CHANGE_TERMINATOR; j++) 
+        for(i = 0; formChanges[i].method != FORM_CHANGE_TERMINATOR; i++) 
         {
-            switch(formChanges[j].method) 
+            switch(formChanges[i].method) 
             {
                 #if B_FLAG_DYNAMAX_BATTLE != 0
                 case FORM_CHANGE_BATTLE_GIGANTAMAX: {
@@ -2969,30 +2970,30 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }; break;
                 #endif
                 case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
+                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
                     {
-                        item = formChanges[j].param1; // ItemId
-                        forme = j;
+                        item = formChanges[i].param1; // ItemId
+                        forme = i;
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                    if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                     {
-                        move = formChanges[j].param1; // MoveId
+                        move = formChanges[i].param1; // MoveId
                         hasMega = TRUE;
-                        forme = j;
+                        forme = i;
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && (ignoreMaxBST || (bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                     {
-                        item = formChanges[j].param1; // ItemId
+                        item = formChanges[i].param1; // ItemId
                         hasMega = TRUE;
-                        forme = j;
+                        forme = i;
                     }
                 }; break;
             }
-            if (forme == j) 
+            if (forme == i) 
             {
                 DebugPrintf("Forme found: %d ...", forme);
                 break; // Break if forme found
@@ -3005,7 +3006,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
         switch(speciesId)
         {
             case SPECIES_KYUREM: {
-                if ((ignoreMaxBST || 700 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_KYUREM))
+                if ((700 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_KYUREM))
                 {
                     speciesId = RANDOM_RANGE(SPECIES_KYUREM_BLACK, SPECIES_KELDEO_RESOLUTE);
                     switch(speciesId) 
@@ -3020,7 +3021,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }
             }; break;
             case SPECIES_NECROZMA: {
-                if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_NECROZMA)) 
+                if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_NECROZMA)) 
                 {
                     speciesId = RANDOM_RANGE(SPECIES_NECROZMA_DUSK_MANE, SPECIES_NECROZMA_ULTRA);
 
@@ -3028,7 +3029,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                     if (fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE) 
                     {
                         // Random chance to select ultra-burst
-                        if ((ignoreMaxBST || 754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
+                        if ((754 <= maxBST) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ULTRANECROZIUM_Z)) 
                         {
                             move = MOVE_PHOTON_GEYSER;
                             item = ITEM_ULTRANECROZIUM_Z;
@@ -3057,7 +3058,7 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
                 }
             }; break;
             case SPECIES_CALYREX: {
-                if ((ignoreMaxBST || 680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_CALYREX)) 
+                if ((680 <= maxBST) && RANDOM_CHANCE(BFG_FUSION_CHANCE_CALYREX)) 
                 {
                     speciesId = RANDOM_RANGE(SPECIES_CALYREX_ICE_RIDER, SPECIES_CALYREX_SHADOW_RIDER);
                     switch(speciesId) 
@@ -3102,12 +3103,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
 {
     u16 speciesId, bst;
     bool32 hasMega,hasZMove;
+    s32 i,j;
 
-    s32 i, j;
+    u16 minBST = BFG_BST_MIN;
+    u16 maxBST = BFG_BST_MAX;
+
     u32 otID = Random32();
 
     u8 fixedIV; 
-
     switch(facilityMode)
     {
         case BFG_FACILITY_MODE_TENT:
@@ -3118,12 +3121,12 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         case BFG_FACILITY_MODE_DEFAULT:
             // Normal battle frontier trainer.
             fixedIV = GetFrontierTrainerFixedIvs(trainerId);
+
+            // Min/Max BST Value Lookup Table
+            minBST = fixedIVMinBSTLookup[fixedIV];
+            maxBST = fixedIVMaxBSTLookup[fixedIV];
         break;
     }
-
-    // Min/Max BST Value Lookup Table
-    u16 minBST = fixedIVMinBSTLookup[fixedIV];
-    u16 maxBST = fixedIVMaxBSTLookup[fixedIV];
 
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
@@ -3189,10 +3192,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     hasZMove = FALSE;
     hasMega = FALSE;
 
-    // Ignore Max. BST Value
-    bool8 ignoreMinBST = FALSE;
-    bool8 ignoreMaxBST = FALSE;
-
     i = 0;
     while(i != monCount) 
     {
@@ -3207,17 +3206,17 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         {
             // Restricted species
             speciesId = GetTrainerClassRestricted(trainerClass); // Pick restricteds when eligible on 2nd, 4th species
-            ignoreMaxBST = TRUE; // Ignore Max. BST
+            maxBST = BFG_BST_MAX; // Ignore Max. BST
         }
         else // Standard species
             speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
 
         if ((HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
-            ignoreMinBST = TRUE; // Ignore Min. BST
+            minBST = BFG_BST_MIN; // Ignore Min. BST
 
         // Check BST limits
-        if (((!ignoreMinBST) && (bst < minBST)) || ((!ignoreMaxBST) && (bst > maxBST)))
+        if ((bst < minBST) || (bst > maxBST))
             continue; // Next species
 
         // Species is not allowed for this format
@@ -3235,7 +3234,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         DebugPrintf("Generating set for species %d ...", speciesId);
 
         // Generate Trainer Pokemon
-        if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, ignoreMinBST, ignoreMaxBST, hasMega, hasZMove));
+        if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, hasMega, hasZMove));
             DebugTrainerPokemon(i++);
     }
 }
