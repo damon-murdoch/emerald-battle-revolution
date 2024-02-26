@@ -7,6 +7,6 @@ struct Nature {
     u8 negStat;
 };
 
-void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level);
+void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode);
 
 #endif // GUARD_BATTLE_FRONTIER_GENERATOR_H

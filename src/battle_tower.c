@@ -40,6 +40,7 @@
 #include "constants/event_objects.h"
 #include "constants/moves.h"
 
+#include "constants/battle_frontier_generator.h"
 #include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
 
@@ -1642,12 +1643,12 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
-        DebugPrintf("Generating frontier trainer team ...");
+        DebugPrintf("Generating battle frontier trainer team ...");
 
         // Use Frontier Generator (If flag set)
         #if BFG_FLAG_FRONTIER_GENERATOR != 0
         if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            GenerateTrainerParty(trainerId, firstMonId, monCount, level);
+            GenerateTrainerParty(trainerId, firstMonId, monCount, level, BFG_FACILITY_MODE_DEFAULT);
             return;
         }
         #endif
@@ -3518,6 +3519,15 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
     const u16 *monSet = NULL;
     u32 otID = 0;
     u16 monId;
+
+    DebugPrintf("Generating battle tent trainer team ...");
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateTrainerParty(trainerId, firstMonId, monCount, level, BFG_FACILITY_MODE_TENT);
+        return;
+    }
+    #endif
 
     monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
 
