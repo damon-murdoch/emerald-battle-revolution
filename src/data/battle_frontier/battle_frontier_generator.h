@@ -72,8 +72,8 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
     [MOVE_ROCK_WRECKER] = TRUE,
 	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
-    [MOVE_SELF_DESTRUCT] = TRUE,
-    [MOVE_EXPLOSION] = TRUE,
+    // [MOVE_SELF_DESTRUCT] = TRUE,
+    // [MOVE_EXPLOSION] = TRUE,
 	// Charging Moves
 	[MOVE_BOUNCE] = TRUE,
     [MOVE_DIG] = TRUE,
@@ -83,6 +83,7 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
 	[MOVE_ICE_BURN] = TRUE,
 	[MOVE_RAZOR_WIND] = TRUE,
 	[MOVE_SKULL_BASH] = TRUE,
+    [MOVE_SKY_ATTACK] = TRUE,
     [MOVE_SOLAR_BEAM] = TRUE,
     [MOVE_SOLAR_BLADE] = TRUE,
     // Countering Moves
@@ -134,8 +135,8 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
     [MOVE_ROCK_WRECKER] = TRUE,
 	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
-    [MOVE_SELF_DESTRUCT] = TRUE,
-    [MOVE_EXPLOSION] = TRUE,
+    // [MOVE_SELF_DESTRUCT] = TRUE,
+    // [MOVE_EXPLOSION] = TRUE,
 	// Charging Moves
 	[MOVE_BOUNCE] = TRUE,
     [MOVE_DIG] = TRUE,
@@ -145,6 +146,7 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
 	[MOVE_ICE_BURN] = TRUE,
 	[MOVE_RAZOR_WIND] = TRUE,
 	[MOVE_SKULL_BASH] = TRUE,
+    [MOVE_SKY_ATTACK] = TRUE,
     [MOVE_SOLAR_BEAM] = TRUE,
     [MOVE_SOLAR_BLADE] = TRUE,
     // Countering Moves
