@@ -157,7 +157,7 @@ Please see below for the list of features which are supported in each Battle Fro
 | Battle Factory | N/A             | No            | No                  | 0/3   |
 | Battle Palace  | Yes             | Yes           | No                  | 2/3   |
 | Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3 |
+| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3   |
 | Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
 
 Please see below for the list of features which are supported in each Battle Tent.

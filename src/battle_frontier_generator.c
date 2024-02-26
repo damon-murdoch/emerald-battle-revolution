@@ -2461,7 +2461,7 @@ void DebugTrainerPokemon(u8 index)
         DebugPrintf("- %d", GetMonData(pokemon, MON_DATA_MOVE1 + i));
 }
 
-void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level) 
+void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
 {
     u8 forme;
     u16 speciesId, bst;
@@ -2469,7 +2469,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
 
     s32 i, j;
     u32 otID = Random32();
-        
+    
     // Normal battle frontier trainer.
     u8 fixedIV = GetFrontierTrainerFixedIvs(trainerId);
 
