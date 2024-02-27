@@ -14,9 +14,34 @@
 #define BFG_RANDOM_OFFSET_MIN 0        // Min. Value for RANDOM_OFFSET()
 #define BFG_RANDOM_OFFSET_MAX 0        // Max. Value for RANDOM_OFFSET()
 
+// *** BATTLE FACTORY ***
+
+#define BFG_BST_TENT_MIN BFG_BST_MIN
+#define BFG_BST_TENT_MAX BFG_BST_MAX
+
+#define BFG_BST_TENT_ALLOW_MEGA FALSE
+#define BFG_BST_TENT_ALLOW_GMAX FALSE
+#define BFG_BST_TENT_ALLOW_ZMOVE FALSE
+
+#define BFG_BST_FACTORY_MIN BFG_BST_MIN
+#define BFG_BST_FACTORY_MAX BFG_BST_MIN
+
+#define BFG_FACTORY_ALLOW_MEGA FALSE
+#define BFG_FACTORY_ALLOW_GMAX FALSE
+#define BFG_FACTORY_ALLOW_ZMOVE FALSE
+
+#define BFG_FACTORY_EXPERT_CHALLENGE_NUM 7
+
+#define BFG_BST_FACTORY_EXPERT_MIN BFG_BST_MIN
+#define BFG_BST_FACTORY_EXPERT_MAX BFG_BST_MIN
+
+#define BFG_FACTORY_EXPERT_ALLOW_MEGA TRUE
+#define BFG_FACTORY_EXPERT_ALLOW_GMAX TRUE
+#define BFG_FACTORY_EXPERT_ALLOW_ZMOVE FALSE // TODO
+
 // *** BASE STATS ***
 
-#define BFG_IV_MIN_BST_0 150
+#define BFG_IV_MIN_BST_0 BFG_BST_MIN
 #define BFG_IV_MIN_BST_3 180
 #define BFG_IV_MIN_BST_6 225
 #define BFG_IV_MIN_BST_9 270
@@ -26,7 +51,7 @@
 #define BFG_IV_MIN_BST_21 450
 #define BFG_IV_MIN_BST_MAX 495
 
-#define BFG_IV_MAX_BST_0 350
+#define BFG_IV_MAX_BST_0 BFG_BST_MAX
 #define BFG_IV_MAX_BST_3 405
 #define BFG_IV_MAX_BST_6 450
 #define BFG_IV_MAX_BST_9 495
@@ -37,9 +62,6 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
-#define BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC FALSE // Use dynamic list for mon selection, instead of hard-coded list
-#define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
-
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
 #define BFG_LVL_TENT_ALLOW_BANNED_SPECIES FALSE // Allow banned species (e.g. Kyogre,Groudon) in Battle Tent

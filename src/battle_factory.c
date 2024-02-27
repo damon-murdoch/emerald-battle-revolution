@@ -19,6 +19,10 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 
+#include "constants/battle_frontier_generator.h"
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
+
 static bool8 sPerformedRentalSwap;
 
 static void InitFactoryChallenge(void);
@@ -550,7 +554,15 @@ static void GenerateInitialRentalMons(void)
     }
     rentalRank = GetNumPastRentalsRank(factoryBattleMode, factoryLvlMode);
 
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilityInitialRentalMons(firstMonId, challengeNum, rentalRank, BFG_FACILITY_MODE_FACTORY);
+        return;
+    }
+    #endif
+
     currSpecies = SPECIES_NONE;
+
     i = 0;
     while (i != PARTY_SIZE)
     {

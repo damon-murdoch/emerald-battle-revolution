@@ -5,6 +5,7 @@
 #include "event_data.h"
 #include "battle_util.h"
 #include "battle_tower.h"
+#include "battle_factory.h"
 #include "frontier_util.h"
 #include "battle_ai_util.h"
 #include "battle_frontier_generator.h"
@@ -275,178 +276,6 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     return TRUE;
 }
 
-#if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
-static bool8 SpeciesValidForTrainerClass(u8 trainerClass, u16 speciesId) 
-{
-    const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
-    
-    // Dereference types/abilities
-    u8 t1 = species->types[0];
-    u8 t2 = species->types[1];
-    u16 a1 = species->abilities[0];
-    u16 a2 = species->abilities[1];
-
-    // Switch on trainer class
-    switch(trainerClass) 
-    {
-        case TRAINER_CLASS_RUIN_MANIAC: {
-            if ((species->isHisuianForm) || (species->isParadoxForm) || IS_REGI(speciesId))
-                return TRUE;
-        } // Flow through to TRAINER_CLASS_HIKER
-        case TRAINER_CLASS_HIKER: {
-            if (IS_FDS(t1,t2) || IS_TYPE(t1,t2,TYPE_ROCK) || IS_TYPE(t1,t2,TYPE_GROUND) || IS_TYPE(t1,t2,TYPE_FIGHTING))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_AQUA_LEADER: 
-            if ((species->isMythical) || (species->isLegendary)) 
-                return TRUE;
-        case TRAINER_CLASS_TEAM_AQUA: {
-            if (IS_TYPE(t1,t2,TYPE_WATER) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_DARK))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_BIRD_KEEPER: {
-            if (IS_FLYING_OR_LEVITATE(t1,t2,a1,a2))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_COLLECTOR: {
-            if (IS_STARTER(speciesId))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_TRIATHLETE: {
-            if (IS_TYPE(t1,t2,TYPE_ICE) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY))
-                return TRUE;
-        }; // Flow through to TRAINER_CLASS_SAILOR
-        case TRAINER_CLASS_SAILOR: {
-            if (IS_TYPE(t1,t2,TYPE_WATER) || IS_TYPE(t1,t2,TYPE_FIGHTING))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_TUBER_M:
-        case TRAINER_CLASS_TUBER_F:
-        case TRAINER_CLASS_SWIMMER_M:
-        case TRAINER_CLASS_SWIMMER_F: {
-            if (IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY) || IS_TYPE(t1,t2,TYPE_ICE))
-                return TRUE;
-        }; // Flow through to TRAINER_CLASS_FISHERMAN
-        case TRAINER_CLASS_FISHERMAN:  {
-            if (IS_TYPE(t1,t2,TYPE_WATER))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_MAGMA_LEADER: 
-            if (species->isLegendary)
-                return TRUE;
-        case TRAINER_CLASS_TEAM_MAGMA: {
-            if (IS_TYPE(t1,t2,TYPE_GROUND) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_DARK))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_EXPERT: {
-            if (IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_ROCK) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) || IS_REGI(speciesId))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_BATTLE_GIRL: 
-        case TRAINER_CLASS_BLACK_BELT: {
-            if (IS_FDS(t1,t2) || IS_TYPE(t1,t2,TYPE_FIRE) || IS_TYPE(t1,t2,TYPE_ROCK) || IS_TYPE(t1,t2,TYPE_FIGHTING))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_HEX_MANIAC: {
-            if (IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_POISON))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_AROMA_LADY: {
-            if (IS_TYPE(t1,t2,TYPE_GRASS) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_BUG))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_RICH_BOY:
-        case TRAINER_CLASS_LADY: {
-            if (IS_FWG(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) || IS_EEVEE(speciesId))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_BEAUTY: {
-            if (IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY) || IS_EEVEE(speciesId))
-                return TRUE;
-        }; // Flow through to TRAINER_CLASS_PARASOL_LADY
-        case TRAINER_CLASS_PARASOL_LADY: {
-            if (IS_FWG(t1,t2) || IS_TYPE(t1,t2,TYPE_ELECTRIC) || IS_TYPE(t1,t2,TYPE_ICE) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_FAIRY))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_POKEMANIAC: {
-            if (IS_FWG(t1,t2) || IS_FDS(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_ROCK) || IS_TYPE(t1,t2,TYPE_GROUND))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_GUITARIST: {
-            if (IS_FDS(t1,t2) || IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_ELECTRIC) || IS_TYPE(t1,t2,TYPE_ROCK) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_KINDLER: {
-            if (IS_FDS(t1,t2) || IS_TYPE(t1,t2,TYPE_FIRE) || IS_TYPE(t1,t2,TYPE_GHOST))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_CAMPER:
-        case TRAINER_CLASS_PICNICKER: {
-            if(IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_ELECTRIC) || IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_TYPE(t1,t2,TYPE_BUG) || IS_TYPE(t1,t2,TYPE_FLYING))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_BUG_CATCHER: 
-        case TRAINER_CLASS_BUG_MANIAC: {
-            if (IS_TYPE(t1,t2,TYPE_BUG))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_PSYCHIC: {
-            if (IS_TYPE(t1,t2,TYPE_PSYCHIC) || IS_REGI(speciesId) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_COOLTRAINER:
-        case TRAINER_CLASS_GENTLEMAN: {
-            if ((species->isLegendary) || IS_FWG(t1,t2) || IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_FIGHTING))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_SCHOOL_KID: {
-            if (IS_FWG(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_ELECTRIC) || IS_TYPE(t1,t2,TYPE_BUG) || IS_TYPE(t1,t2,TYPE_FIGHTING))
-                return TRUE; 
-        }; break;
-        case TRAINER_CLASS_POKEFAN: {
-            if(IS_FWG(t1,t2) || IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_FAIRY) || IS_EEVEE(speciesId))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_LASS:
-        case TRAINER_CLASS_YOUNGSTER: {
-            if(IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_GROUND) || IS_TYPE(t1,t2,TYPE_FLYING) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_FIGHTING) || IS_TYPE(t1,t2,TYPE_ELECTRIC) || IS_TYPE(t1,t2,TYPE_ICE))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_DRAGON_TAMER: {
-            if (IS_FDS(t1,t2) || IS_TYPE(t1,t2,TYPE_GROUND) || IS_TYPE(t1,t2,TYPE_WATER) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_NINJA_BOY: {
-            if (IS_PGD(t1,t2) || IS_TYPE(t1,t2,TYPE_FIGHTING) || IS_TYPE(t1,t2,TYPE_POISON) || IS_TYPE(t1,t2,TYPE_BUG))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_PKMN_BREEDER: {
-            if (IS_FWG(t1,t2) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2) || IS_EEVEE(speciesId))
-                return TRUE;
-        }; break;
-        case TRAINER_CLASS_PKMN_RANGER: {
-            if(IS_TYPE(t1,t2,TYPE_BUG) || IS_TYPE(t1,t2,TYPE_NORMAL) || IS_TYPE(t1,t2,TYPE_GRASS) || IS_FLYING_OR_LEVITATE(t1,t2,a1,a2))
-                return TRUE;
-        }; break;
-        default: 
-            return TRUE; // Accept all
-    }
-
-    // case TRAINER_CLASS_INTERVIEWER: {}; break;
-    // case TRAINER_CLASS_ELITE_FOUR: {}; break;
-    // case TRAINER_CLASS_LEADER: {}; break;
-    // case TRAINER_CLASS_SR_AND_JR: {}; break;
-    // case TRAINER_CLASS_CHAMPION: {}; break;
-    // case TRAINER_CLASS_TWINS: {}; break;
-    // case TRAINER_CLASS_RIVAL: {}; break;
-    // case TRAINER_CLASS_YOUNG_COUPLE: {}; break;
-    // case TRAINER_CLASS_OLD_COUPLE: {}; break;
-    // case TRAINER_CLASS_SIS_AND_BRO: {}; break;
-    // case TRAINER_CLASS_RS_PROTAG: {}; break;
-
-    return FALSE;
-}
-#else
 u16 GetTrainerClassSpecies(u16 trainerClass)
 {
     switch(trainerClass)
@@ -526,10 +355,12 @@ u16 GetTrainerClassSpecies(u16 trainerClass)
             return gSpeciesListTrainerClassPkmnRanger[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_COUNT];
         case TRAINER_CLASS_LASS:
             return gSpeciesListTrainerClassLass[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_COUNT];
-        default:
-            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
         case TRAINER_CLASS_COLLECTOR:
             return gSpeciesListTrainerClassCollector[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_DEFAULT: 
+            return gSpeciesListTrainerClassDefault[Random() % SPECIES_LIST_TRAINER_CLASS_DEFAULT_COUNT];
     }
 }
 
@@ -612,10 +443,12 @@ u16 GetTrainerClassMega(u16 trainerClass)
             return gSpeciesListTrainerClassPkmnRangerMega[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_MEGA_COUNT];
         case TRAINER_CLASS_LASS:
             return gSpeciesListTrainerClassLassMega[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_MEGA_COUNT];
-        default:
-            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
         case TRAINER_CLASS_COLLECTOR:
             return gSpeciesListTrainerClassCollectorMega[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_MEGA_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_DEFAULT: 
+            return gSpeciesListTrainerClassDefaultMega[Random() % SPECIES_LIST_TRAINER_CLASS_DEFAULT_MEGA_COUNT];
     }
 }
 
@@ -698,13 +531,14 @@ u16 GetTrainerClassRestricted(u16 trainerClass)
             return gSpeciesListTrainerClassPkmnRangerRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_PKMN_RANGER_RESTRICTED_COUNT];
         case TRAINER_CLASS_LASS:
             return gSpeciesListTrainerClassLassRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_LASS_RESTRICTED_COUNT];
-        default:
-            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
         case TRAINER_CLASS_COLLECTOR:
             return gSpeciesListTrainerClassCollectorRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_COLLECTOR_RESTRICTED_COUNT];
+        default:
+            DebugPrintf("Warning: Unhandled trainer class '%d' ...", trainerClass);
+        case TRAINER_CLASS_DEFAULT: 
+            return gSpeciesListTrainerClassDefaultRestricted[Random() % SPECIES_LIST_TRAINER_CLASS_DEFAULT_RESTRICTED_COUNT];
     }
 }
-#endif
 
 static u8 GetNatureFromStats(u8 posStat, u8 negStat) 
 {
@@ -3115,6 +2949,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     {
         case BFG_FACILITY_MODE_TENT:
             fixedIV = 0; // Battle tent trainer
+    
+            // Battle Tent Fixed Min/Max BST
+            minBST = BFG_BST_TENT_MIN;
+            maxBST = BFG_BST_TENT_MAX; 
         break;
         default: // BFG_FACILITY_MODE_DEFAULT
             DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
@@ -3132,58 +2970,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
 
-    #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
-    DebugPrintf("Finding sets for trainer class %d ...", trainerClass);
-
-    u16 bfMonCount = 0;
-
-    u16 monSet[BFG_TRAINER_CLASS_MON_LIMIT];
-    const struct SpeciesInfo * species;
-
-    // Loop over all species
-    for(i = 0; i < NUM_SPECIES; i++) 
-    {
-        // Break loop if mon limit reached
-        if (bfMonCount == BFG_TRAINER_CLASS_MON_LIMIT) 
-        {
-            DebugPrintf("Trainer Class Mon %d Count limit reached: %d, modifying limit/constraints ...", trainerClass, bfMonCount);
-            break;
-        }
-
-        // Pointer to species info
-        species = &(gSpeciesInfo[i]);
-
-        // Skip if not base species, or regional variant
-        if (!(IS_BASE_SPECIES(i)) || (IS_REGIONAL_FORME(species)))
-            continue;
-
-        // Skip species if banned in frontier level
-        if (SpeciesValidForFrontierLevel(i) == FALSE)
-            continue;
-
-        // Skip species if not valid for trainer class
-        if (SpeciesValidForTrainerClass(trainerClass, i) == FALSE)
-            continue;
-
-        // Get base stat total
-        bst = GetTotalBaseStat(i);
-
-        // Check bst limit (and special cases)
-        if ((bst > maxBST) || ((bst < minBST) && (
-            // Special case for rotom formes
-            (!((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1))) && 
-            // Special case for mega evolutions
-            (!(HAS_MEGA_EVOLUTION(i) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA)))
-        )))
-            continue;
-
-        // Add species to mon set
-        monSet[bfMonCount++] = i;
-    }
-
-    DebugPrintf("Possible species found: %d ...", bfMonCount);
-    #endif
-
     // Regular battle frontier trainer.
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate pokemon species
@@ -3198,10 +2984,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         DebugPrintf("Generating mon number %d ...", i);
 
         // Sample random species from the mon count
-        #if BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC == TRUE
-        speciesId = monSet[Random() % bfMonCount];
-        bst = GetTotalBaseStat(speciesId);
-        #else
         if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
         {
             // Restricted species
@@ -3222,7 +3004,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         // Species is not allowed for this format
         if (!(SpeciesValidForFrontierLevel(speciesId)))
             continue; // Next species
-        #endif
 
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
@@ -3236,5 +3017,100 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         // Generate Trainer Pokemon
         if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, hasMega, hasZMove));
             DebugTrainerPokemon(i++);
+    }
+}
+
+void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode)
+{
+    s32 i, j;
+
+    u16 species[PARTY_SIZE]; 
+    u16 speciesId, currSpecies;
+
+    u16 minBST = BFG_BST_MIN;
+    u16 maxBST = BFG_BST_MAX;
+    u16 bst; 
+
+    u16 allowMega,allowGmax,allowZMove;
+
+    // Battle Tent
+    if (facilityMode == BFG_FACILITY_MODE_TENT)
+    {
+        // Battle Tent (Slateport)
+        minBST = BFG_BST_TENT_MIN;
+        maxBST = BFG_BST_TENT_MAX; 
+
+        allowMega = BFG_BST_TENT_ALLOW_MEGA;
+        allowGmax = BFG_BST_TENT_ALLOW_GMAX;
+        allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+    }
+
+    u8 lvlMode = GET_LVL_MODE();
+    currSpecies = 0;
+
+    i = 0; 
+    while(i != PARTY_SIZE)
+    {
+        DebugPrintf("Generating initial rental mon number %d ...", i);
+
+        // Battle Factory
+        if ((facilityMode != BFG_FACILITY_MODE_TENT))
+        {
+            // High Challenge Num / Rental Rank
+            if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM) || (i < rentalRank))
+            {
+                // Expert Mode (High BST)
+                minBST = BFG_BST_FACTORY_EXPERT_MIN;
+                maxBST = BFG_BST_FACTORY_EXPERT_MAX;
+
+                allowMega = BFG_FACTORY_EXPERT_ALLOW_MEGA;
+                allowGmax = BFG_FACTORY_EXPERT_ALLOW_GMAX;
+                allowZMove = BFG_FACTORY_EXPERT_ALLOW_ZMOVE;
+            }
+            else // Basic Mode (Low BST)
+            {
+                minBST = BFG_BST_FACTORY_MIN;
+                maxBST = BFG_BST_FACTORY_MAX;
+                
+                allowMega = BFG_FACTORY_ALLOW_MEGA;
+                allowGmax = BFG_FACTORY_ALLOW_GMAX;
+                allowZMove = BFG_FACTORY_ALLOW_ZMOVE;
+            }
+        }
+
+        // Sample random species from the mon count
+        if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
+        {
+            // Restricted species
+            speciesId = GetTrainerClassRestricted(TRAINER_CLASS_DEFAULT); // Pick restricteds when eligible on 2nd, 4th species
+            maxBST = BFG_BST_MAX; // Ignore Max. BST
+        }
+        else // Standard species
+            speciesId = GetTrainerClassSpecies(TRAINER_CLASS_DEFAULT); // Pick normal species
+        bst = GetTotalBaseStat(speciesId);
+
+        if ((HAS_MEGA_EVOLUTION(i) && allowMega) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
+            minBST = BFG_BST_MIN; // Ignore Min. BST
+
+        // Check BST limits
+        if ((bst < minBST) || (bst > maxBST))
+            continue; // Next species
+
+        // Species is not allowed for this format
+        if (!(SpeciesValidForFrontierLevel(speciesId)))
+            continue; // Next species
+
+        // Cannot have two Pokémon of the same species.
+        for (j = firstMonId; j < firstMonId + i; j++)
+        {
+            if (speciesId == (gSaveBlock2Ptr->frontier.rentalMons[j].monId));
+                break; // Same species
+        }
+        if (j != firstMonId + i)
+            continue; // Skip duplicate
+
+        gSaveBlock2Ptr->frontier.rentalMons[i].monId = speciesId;
+        species[i] = speciesId;
+        i++;
     }
 }

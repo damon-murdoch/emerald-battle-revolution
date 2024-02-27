@@ -32,6 +32,10 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+#include "constants/battle_frontier_generator.h"
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
+
 // Select_ refers to the first Pokémon selection screen where you choose your initial 3 rental Pokémon.
 // Swap_   refers to the subsequent selection screens where you can swap a Pokémon with one from the beaten trainer
 
@@ -1754,6 +1758,13 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
     rentalRank = GetNumPastRentalsRank(battleMode, lvlMode);
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
 
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilitySelectableMons(BFG_FACILITY_MODE_FACTORY);
+        return;
+    }
+    #endif
+
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
         u16 monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
@@ -1787,6 +1798,13 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     gFacilityTrainerMons = gSlateportBattleTentMons;
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilitySelectableMons(BFG_FACILITY_MODE_TENT);
+        return;
+    }
+    #endif
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {

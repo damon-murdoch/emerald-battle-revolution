@@ -19,6 +19,10 @@
 #include "constants/region_map_sections.h"
 #include "constants/trainers.h"
 
+#include "constants/battle_frontier_generator.h"
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
+
 // This file's functions.
 static void InitVerdanturfTentChallenge(void);
 static void GetVerdanturfTentPrize(void);
@@ -305,6 +309,14 @@ static void GenerateInitialRentalMons(void)
         heldItems[i] = 0;
     }
     gFacilityTrainerMons = gSlateportBattleTentMons;
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilityInitialRentalMons(firstMonId, 0, 0, BFG_FACILITY_MODE_TENT);
+        return;
+    }
+    #endif
+
     currSpecies = SPECIES_NONE;
     i = 0;
     while (i != PARTY_SIZE)
