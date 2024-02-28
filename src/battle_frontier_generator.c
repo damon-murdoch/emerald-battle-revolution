@@ -874,11 +874,26 @@ static u8 GetSpreadCategory(u8 natureId, u8 evs){
     return BFG_SPREAD_CATEGORY_MIXED; // Mixed nature
 }
 
-static void ResetMoves(u8 index)
+static void ResetMonMoves(struct pokemon * mon)
 {
     s32 i;
     for(i=0; i<MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gEnemyParty[index], MOVE_NONE, i);
+        SetMonMoveSlot(mon, MOVE_NONE, i);
+}
+
+static u8 SetMonMoves(struct Pokemon * mon, u16 moves[MAX_MON_MOVES])
+{
+    s32 i;
+    u8 moveCount = 0;
+
+    ResetMonMoves(mon);
+
+    // Loop over moves list
+    for(i=0; i<MAX_MON_MOVES; i++)
+        if (moves[i] != MOVE_NONE) // Populate & increment counter if not none
+            SetMonMoveSlot(mon, moves[i], moveCount++);
+
+    return moveCount;
 }
 
 static bool32 IsAlwaysSelectMove(u16 moveId) 
@@ -1027,21 +1042,6 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
     return rating;
 }
 
-static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
-{
-    s32 i;
-    u8 moveCount = 0;
-
-    ResetMoves(index);
-
-    // Loop over moves list
-    for(i=0; i<MAX_MON_MOVES; i++)
-        if (moves[i] != MOVE_NONE) // Populate & increment counter if not none
-            SetMonMoveSlot(&gEnemyParty[index], moves[i], moveCount++);
-
-    return moveCount;
-}
-
 #define MACRO_ALWAYS_SELECT \
     isDuplicate = FALSE; \
     for(j = 0; j < moveCount; j++) { \
@@ -1053,7 +1053,7 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
             types[TYPE(moveId)] = moveCount; \
         moveCount++; \
         if (moveCount == MAX_MON_MOVES) \
-            return FillMonMoveSlots(index, moves); \
+            return SetMonMoves(mon, moves); \
     }
 
 #define MACRO_MOVE_SWITCH \
@@ -1099,7 +1099,7 @@ static u8 FillMonMoveSlots(u8 index, u16 moves[MAX_MON_MOVES])
         }; break; \
     }
 
-static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
+static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
     s32 i, j;
     u16 moveIndex;
@@ -1191,7 +1191,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                         // Check previous moves
                         for(j = 0; j < i; j++) 
                         {
-                            if (GetMonData(&gEnemyParty[index], MON_DATA_MOVE1 + j) == moveId)
+                            if (GetMonData(mon, MON_DATA_MOVE1 + j) == moveId)
                             {
                                 moveId = MOVE_NONE;
                                 failures++;
@@ -1211,7 +1211,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
                 // Otherwise, left as MOVE_NONE
                 
                 // Set the move slot data
-                SetMonMoveSlot(&gEnemyParty[index], moveId, i);
+                SetMonMoveSlot(mon, moveId, i);
 
                 // Frustration is more powerful the
                 // lower the pokemon's friendship is.
@@ -1475,7 +1475,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             }
 
             // Fill the moveslots for the species
-            moveCount = FillMonMoveSlots(index, moves);
+            moveCount = SetMonMoves(mon, moves);
         }; break;
         // Default (Level-Up / Required Move Only)
         default: 
@@ -1489,7 +1489,7 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
             for(i=0; i<MAX_MON_MOVES; i++)
             {
                 // Get the currently-selected move for the species
-                moveId = GetMonData((&gEnemyParty[index]), MON_DATA_MOVE1 + i);
+                moveId = GetMonData(mon, MON_DATA_MOVE1 + i);
 
                 // Need required move is true, and current move matches
                 if (needRequiredMove && requiredMove == moveId) 
@@ -1508,12 +1508,12 @@ static u8 GetSpeciesMoves(u16 speciesId, u8 index, u8 nature, u8 evs, u8 ability
 
             // Set first index to required move
             if (needRequiredMove)
-                SetMonMoveSlot(&gEnemyParty[index], requiredMove, 0);
+                SetMonMoveSlot(mon, requiredMove, 0);
         }; break;
     }
 
     // Update friendship
-    SetMonData(&gEnemyParty[index], MON_DATA_FRIENDSHIP, &friendship);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
 
     return moveCount;
 }
@@ -2182,7 +2182,7 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
 }
 
 
-static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u8 formeIndex, u16 move, u16 item) 
+static bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u32 otID, u8 fixedIV, u8 level, u8 formeIndex, u16 move, u16 item) 
 {
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
@@ -2208,7 +2208,7 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
 
     // Place the chosen pokemon into the trainer's party
     CreateMonWithEVSpreadNatureOTID(
-        &gEnemyParty[index], speciesId, level, 
+        mon, speciesId, level, 
         nature, fixedIV, evs, otID
     );
 
@@ -2216,14 +2216,14 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     if (((species->abilities[1] != ABILITY_NONE) && (species->abilities[2] != ABILITY_NONE)) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) 
     {
         abilityNum = 3; // Hidden ability index
-        SetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM, &abilityNum);
+        SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
     }
 
     // No forme change
     if (formeId == speciesId) 
     {
         // Get the actual selected ability for the species
-        abilityNum = GetMonData(&gEnemyParty[index], MON_DATA_ABILITY_NUM);
+        abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
     }
     else // Forme change
     {
@@ -2233,7 +2233,7 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     // Give the chosen pokemon its specified moves.
     // Returns FRIENDSHIP_MAX unless the moveset
     // contains 'FRUSTRATION'. 
-    moveCount = GetSpeciesMoves(formeId, index, nature, evs, abilityNum, move);
+    moveCount = GetSpeciesMoves(mon, formeId, nature, evs, abilityNum, move);
 
     // Meets the minimum number of moves to accept
     if (moveCount >= BFG_TEAM_GENERATOR_MINIMUM) 
@@ -2242,9 +2242,9 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
 
         // Currently has no held item
         if ((item == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
-            item = GetSpeciesItem(formeId, index, nature, evs, abilityNum);
+            item = GetSpeciesItem(mon, formeId, nature, evs, abilityNum);
 
-        SetMonData(&gEnemyParty[index], MON_DATA_HELD_ITEM, &item);
+        SetMonData(mon, MON_DATA_HELD_ITEM, &item);
 
         // Set generated successfully
         return TRUE;
@@ -2254,7 +2254,7 @@ static bool32 GenerateTrainerPokemon(u16 speciesId, u8 index, u32 otID, u8 fixed
     return FALSE;
 }
 
-static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otID, u8 fixedIV, u8 level, u16 minBST, u16 maxBST, bool8 hasMega, bool8 hasZMove)
+static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, u32 otID, u8 fixedIV, u8 level, u16 minBST, u16 maxBST, bool8 hasMega, bool8 hasZMove)
 {
     s32 i;
 
@@ -2915,23 +2915,22 @@ static bool32 GenerateTrainerPokemonHandleForme(u16 speciesId, u8 index, u32 otI
     }
 
     // If the pokemon was successfully added to the trainer's party, move on to the next party slot.
-    return GenerateTrainerPokemon(speciesId, index, otID, fixedIV, level, forme, move, item);
+    return GenerateTrainerPokemon(mon, speciesId, otID, fixedIV, level, forme, move, item);
 }
 
-void DebugTrainerPokemon(u8 index) 
+void DebugTrainerPokemon(struct Pokemon * mon) 
 {
     s32 i;
-    struct Pokemon * pokemon = (&gEnemyParty[index]);
-    u16 speciesId = GetMonData(pokemon, MON_DATA_SPECIES);
-    u8 abilityNum = GetMonData(pokemon,MON_DATA_ABILITY_NUM);
+    u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
+    u8 abilityNum = GetMonData(mon,MON_DATA_ABILITY_NUM);
 
-    DebugPrintf("%d @ %d", speciesId, GetMonData(pokemon,MON_DATA_HELD_ITEM));
+    DebugPrintf("%d @ %d", speciesId, GetMonData(mon,MON_DATA_HELD_ITEM));
     DebugPrintf("Ability: %d (%d)", abilityNum, gSpeciesInfo[speciesId].abilities[abilityNum]);
-    DebugPrintf("IVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_IV),GetMonData(pokemon,MON_DATA_ATK_IV), GetMonData(pokemon,MON_DATA_DEF_IV), GetMonData(pokemon,MON_DATA_SPATK_IV), GetMonData(pokemon,MON_DATA_SPDEF_IV), GetMonData(pokemon,MON_DATA_SPEED_IV));
-    DebugPrintf("EVs: %d / %d / %d / %d / %d / %d", GetMonData(pokemon,MON_DATA_HP_EV),GetMonData(pokemon,MON_DATA_ATK_EV), GetMonData(pokemon,MON_DATA_DEF_EV), GetMonData(pokemon,MON_DATA_SPATK_EV), GetMonData(pokemon,MON_DATA_SPDEF_EV), GetMonData(pokemon,MON_DATA_SPEED_EV));
-    DebugPrintf("%d nature", GetNature(pokemon));
+    DebugPrintf("IVs: %d / %d / %d / %d / %d / %d", GetMonData(mon,MON_DATA_HP_IV),GetMonData(mon,MON_DATA_ATK_IV), GetMonData(mon,MON_DATA_DEF_IV), GetMonData(mon,MON_DATA_SPATK_IV), GetMonData(mon,MON_DATA_SPDEF_IV), GetMonData(mon,MON_DATA_SPEED_IV));
+    DebugPrintf("EVs: %d / %d / %d / %d / %d / %d", GetMonData(mon,MON_DATA_HP_EV),GetMonData(mon,MON_DATA_ATK_EV), GetMonData(mon,MON_DATA_DEF_EV), GetMonData(mon,MON_DATA_SPATK_EV), GetMonData(mon,MON_DATA_SPDEF_EV), GetMonData(mon,MON_DATA_SPEED_EV));
+    DebugPrintf("%d nature", GetNature(mon));
     for(i=0; i<MAX_MON_MOVES; i++)
-        DebugPrintf("- %d", GetMonData(pokemon, MON_DATA_MOVE1 + i));
+        DebugPrintf("- %d", GetMonData(mon, MON_DATA_MOVE1 + i));
 }
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode)
@@ -3016,8 +3015,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         DebugPrintf("Generating set for species %d ...", speciesId);
 
         // Generate Trainer Pokemon
-        if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, hasMega, hasZMove));
-            DebugTrainerPokemon(i++);
+        // if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, hasMega, hasZMove));
+        //    DebugTrainerPokemon(i++);
     }
 }
 
