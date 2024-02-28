@@ -3115,7 +3115,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     }
 }
 
-void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u8 facilityMode)
+void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, struct FactorySelectScreen * screen, u8 facilityMode)
 {
     u8 i,j=0;
     u8 ivs;
@@ -3125,7 +3125,7 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     for(i=0; i<SELECTABLE_MONS_COUNT; i++)
     {
         speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
-        sFactorySelectScreen->mons[i + firstMonId].monId = speciesId;
+        screen->mons[i + firstMonId].monId = speciesId;
         if (i < rentalRank)
             ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else

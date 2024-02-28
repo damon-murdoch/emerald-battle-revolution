@@ -1758,7 +1758,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(BFG_FACILITY_MODE_FACTORY);
+        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, sFactorySelectScreen, BFG_FACILITY_MODE_FACTORY);
         return;
     }
     #endif
@@ -1799,7 +1799,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(BFG_FACILITY_MODE_TENT);
+        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, sFactorySelectScreen, BFG_FACILITY_MODE_TENT);
         return;
     }
     #endif
