@@ -46,8 +46,6 @@
 #define SWAP_PLAYER_SCREEN 0  // The screen where the player selects which of their Pokémon to swap away
 #define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new Pokémon from the defeated party to swap for
 
-#define SELECTABLE_MONS_COUNT 6
-
 #define PALNUM_FADE_TEXT 14
 #define PALNUM_TEXT      15
 

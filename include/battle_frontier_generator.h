@@ -8,5 +8,5 @@ struct Nature {
 };
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode);
-
+void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode);
 #endif // GUARD_BATTLE_FRONTIER_GENERATOR_H
