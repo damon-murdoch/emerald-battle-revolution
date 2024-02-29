@@ -1735,6 +1735,36 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #undef STATE_MENU_REINIT
 #undef STATE_MENU_RESHOW
 
+#if BFG_FLAG_FRONTIER_GENERATOR != 0
+void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId, u8 facilityMode)
+{
+    u8 i,j;
+    u8 ivs;
+    
+    u16 speciesId;
+
+    u16 minBST = BFG_BST_MIN;
+    u16 maxBST = BFG_BST_MAX;
+
+    bool32 hasMega,hasZMove;
+
+    hasZMove = FALSE;
+    hasMega = FALSE;
+
+    for(i=0; i<SELECTABLE_MONS_COUNT; i++)
+    {
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
+        sFactorySelectScreen->mons[i + firstMonId].monId = speciesId;
+        if (i < rentalRank)
+            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+        else
+            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
+        
+        GenerateTrainerPokemonHandleForme((&sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, otId, fixedIV, level, x,x,x,x);
+    }
+}
+#endif
+
 static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 {
     u8 i, j = 0;
@@ -1758,7 +1788,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, sFactorySelectScreen, BFG_FACILITY_MODE_FACTORY);
+        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId, BFG_FACILITY_MODE_FACTORY);
         return;
     }
     #endif
@@ -1799,7 +1829,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, sFactorySelectScreen, BFG_FACILITY_MODE_TENT);
+        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, otId, BFG_FACILITY_MODE_TENT);
         return;
     }
     #endif

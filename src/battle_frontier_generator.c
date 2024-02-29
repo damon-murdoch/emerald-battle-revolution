@@ -2254,7 +2254,7 @@ static bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u32 ot
     return FALSE;
 }
 
-static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, u32 otID, u8 fixedIV, u8 level, u16 minBST, u16 maxBST, bool8 hasMega, bool8 hasZMove)
+static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, u32 otID, u8 fixedIV, u8 level, u16 minBST, u16 maxBST, bool8 * hasMega, bool8 * hasZMove)
 {
     s32 i;
 
@@ -2812,7 +2812,7 @@ static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 specie
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                    if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((move == MOVE_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && ((*hasMega) == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                     {
                         move = formChanges[i].param1; // MoveId
                         hasMega = TRUE;
@@ -2820,7 +2820,7 @@ static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 specie
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && (hasMega == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((item == ITEM_NONE) && (fixedIV >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= maxBST)) && ((*hasMega) == FALSE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
                     {
                         item = formChanges[i].param1; // ItemId
                         hasMega = TRUE;
@@ -3015,8 +3015,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         DebugPrintf("Generating set for species %d ...", speciesId);
 
         // Generate Trainer Pokemon
-        // if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, hasMega, hasZMove));
-        //    DebugTrainerPokemon(i++);
+        if (GenerateTrainerPokemonHandleForme(speciesId, i + firstMonId, otID, fixedIV, level, minBST, maxBST, &hasMega, &hasZMove))
+            DebugTrainerPokemon(i++);
     }
 }
 
@@ -3031,7 +3031,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     u16 maxBST = BFG_BST_MAX;
     u16 bst; 
 
-    u16 allowMega,allowGmax,allowZMove;
+    bool8 allowMega,allowGmax,allowZMove;
 
     // Battle Tent
     if (facilityMode == BFG_FACILITY_MODE_TENT)
@@ -3112,23 +3112,5 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = speciesId;
         species[i] = speciesId;
         i++;
-    }
-}
-
-void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, struct FactorySelectScreen * screen, u8 facilityMode)
-{
-    u8 i,j=0;
-    u8 ivs;
-
-    u16 speciesId;
-
-    for(i=0; i<SELECTABLE_MONS_COUNT; i++)
-    {
-        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
-        screen->mons[i + firstMonId].monId = speciesId;
-        if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
-        else
-            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
     }
 }
