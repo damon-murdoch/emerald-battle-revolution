@@ -1738,29 +1738,52 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #if BFG_FLAG_FRONTIER_GENERATOR != 0
 void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId, u8 facilityMode)
 {
-    u8 i,j;
-    u8 ivs;
-    
+    s32 i,j;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+    properties.otID = otId; // Use provided OTID
+
     u16 speciesId;
 
-    u16 minBST = BFG_BST_MIN;
-    u16 maxBST = BFG_BST_MAX;
+    // Allocate team items
+    u16 items [SELECTABLE_MONS_COUNT] = {
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+    };
 
-    bool32 hasMega,hasZMove;
-
-    hasZMove = FALSE;
-    hasMega = FALSE;
-
-    for(i=0; i<SELECTABLE_MONS_COUNT; i++)
+    i=0;
+    while(i != SELECTABLE_MONS_COUNT)
     {
         speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
         sFactorySelectScreen->mons[i + firstMonId].monId = speciesId;
         if (i < rentalRank)
-            ivs = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+            properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
-            ivs = GetFactoryMonFixedIV(challengeNum, FALSE);
+            properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+        DebugPrintf("Generating set for species %d ...", speciesId);
         
-        GenerateTrainerPokemonHandleForme((&sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, otId, fixedIV, level, x,x,x,x);
+        if (GenerateTrainerPokemonHandleForme(&(sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, &properties))
+        {
+            // Add Pokemon item to items list
+            items[i + firstMonId] = GetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM);
+            DebugTrainerPokemon(i++);
+        }
+    }
+
+    // Allocate remaining items
+    for(i=0; i < SELECTABLE_MONS_COUNT; i++)
+    {
+        if (((items[i + firstMonId]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+        {
+            items[i + firstMonId] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData));
+            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, items[i + firstMonId]);
+        }
     }
 }
 #endif
