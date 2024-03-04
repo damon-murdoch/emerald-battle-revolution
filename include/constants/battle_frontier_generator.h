@@ -6,7 +6,7 @@
 
 #define BFG_MOVE_TYPE_NONE 0xFF
 
-#define TRAINER_CLASS_DEFAULT // Unhandled Trainer Class / Factory Rental Picks
+#define TRAINER_CLASS_DEFAULT TRAINER_CLASS_COUNT // Unhandled Trainer Class / Factory Rental Picks
 
 enum {
     BFG_SPREAD_TYPE_OFFENSIVE,

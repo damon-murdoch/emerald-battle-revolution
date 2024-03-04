@@ -837,7 +837,7 @@ static u8 GetSpreadCategory(u8 natureId, u8 evs){
     return BFG_SPREAD_CATEGORY_MIXED; // Mixed nature
 }
 
-static void ResetMonMoves(struct pokemon * mon)
+static void ResetMonMoves(struct Pokemon * mon)
 {
     s32 i;
     for(i=0; i<MAX_MON_MOVES; i++)
@@ -1482,7 +1482,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
 }
 
 
-static bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 items[PARTY_SIZE]) 
+bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items) 
 {
     s32 i;
     for(i=0; i < PARTY_SIZE; i++)
@@ -1491,7 +1491,7 @@ static bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 items[PARTY_SIZE])
     return TRUE; // Unique itemId
 }
 
-static u16 GetSpeciesItem(struct Pokemon * mon, u16 items[PARTY_SIZE])
+u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
 {
     u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
 
@@ -2150,7 +2150,7 @@ static u16 GetSpeciesItem(struct Pokemon * mon, u16 items[PARTY_SIZE])
     return ITEM_NONE;
 }
 
-static bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties)
+bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties)
 {
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
@@ -2213,7 +2213,7 @@ static bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 for
     return FALSE;
 }
 
-static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties)
+bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties)
 {
     s32 i;
 
@@ -2877,7 +2877,7 @@ static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 specie
     return GenerateTrainerPokemon(mon, speciesId, forme, move, item, properties);
 }
 
-void DebugTrainerPokemon(struct Pokemon * mon) 
+void DebugPrintMonData(struct Pokemon * mon) 
 {
     s32 i;
     u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
@@ -3000,7 +3000,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         {
             // Add Pokemon item to items list
             items[i + firstMonId] = GetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM);
-            DebugTrainerPokemon(i++);
+            DebugPrintMonData(i++);
         }
     }
 

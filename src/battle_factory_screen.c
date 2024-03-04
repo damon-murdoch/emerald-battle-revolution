@@ -1738,7 +1738,7 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #if BFG_FLAG_FRONTIER_GENERATOR != 0
 void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId, u8 facilityMode)
 {
-    s32 i,j;
+    s32 i;
 
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, 0);
@@ -1772,7 +1772,8 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
         {
             // Add Pokemon item to items list
             items[i + firstMonId] = GetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM);
-            DebugTrainerPokemon(i++);
+            DebugPrintMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData));
+            i++;
         }
     }
 
@@ -1781,8 +1782,8 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     {
         if (((items[i + firstMonId]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i + firstMonId] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData));
-            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, items[i + firstMonId]);
+            items[i + firstMonId] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items);
+            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i + firstMonId]));
         }
     }
 }

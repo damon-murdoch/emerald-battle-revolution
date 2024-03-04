@@ -48,7 +48,7 @@ struct GeneratorProperties {
     bool8 allowZMove;
     bool8 allowGmax;
     bool8 allowMega;
-}
+};
 
 // Nature lookup table
 struct Nature {
@@ -56,9 +56,13 @@ struct Nature {
     u8 negStat;
 };
 
-static bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties);
-static bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties);
+bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties);
+bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties);
 
+bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items);
+u16 GetSpeciesItem(struct Pokemon * mon, u16 * items);
+
+void DebugPrintMonData(struct Pokemon * mon);
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV);
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode);
