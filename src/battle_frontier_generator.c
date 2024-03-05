@@ -115,8 +115,8 @@
     (x == SPECIES_LUCARIO) || (x == SPECIES_ABOMASNOW) || (x == SPECIES_GALLADE) || (x == SPECIES_AUDINO) || \
     (x == SPECIES_DIANCIE) || (x == SPECIES_RAYQUAZA))
 
-#define CHECK_ARCEUS_ZMOVE (((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ARCEUS))
-#define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_ZMOVE) && (hasZMove == FALSE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
+#define CHECK_ARCEUS_ZMOVE (((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_ZMOVE) && (properties->allowZMove == TRUE)  && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_ARCEUS))
+#define CHECK_SILVALLY_ZMOVE ((P_SILVALLY_TYPE_CHANGE_Z_CRYSTAL) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_ZMOVE) && (properties->allowZMove == TRUE) && RANDOM_CHANCE(BFG_ZMOVE_CHANCE_SILVALLY))
 
 // *** ITEM ***
 const u16 customItemsList[] = {
@@ -1513,7 +1513,6 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
     u8 numOffensive, currentType;
 
     // Move flags
-
     bool8 hasTrickRoom = FALSE;
     bool8 hasEvolution = FALSE;
     bool8 hasTerrain = FALSE;
@@ -1803,7 +1802,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -1931,7 +1930,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -1952,7 +1951,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
             itemId = gFiwamConfuseLookup[nature->negStat];
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -2020,7 +2019,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -2129,7 +2128,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
             return itemId; // Unique item found
 
         // Otherwise, continue looping
@@ -2143,7 +2142,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         itemId = customItemsList[Random() % customItemsLength];
 
     // If the itemId is not ITEM_NONE, and the selected item is unique
-    if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId))
+    if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
         return itemId; // Unique item found
 
     // No item found
@@ -2975,16 +2974,24 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
             speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
 
+        DebugPrintf("Species selected: '%d' ...", speciesId);
+
         if ((HAS_MEGA_EVOLUTION(i) && ((properties.fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA)) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
             properties.minBST = BFG_BST_MIN; // Ignore Min. BST
+
+        DebugPrintf("Checking min (%d) / max (%d) bst requirements ...", properties.minBST, properties.maxBST);
 
         // Check BST limits
         if ((bst < (properties.minBST)) || (bst > (properties.maxBST)))
             continue; // Next species
 
+        DebugPrintf("Checking species validity for frontier level ...");
+
         // Species is not allowed for this format
         if (!(SpeciesValidForFrontierLevel(speciesId)))
             continue; // Next species
+
+        DebugPrintf("Checking for duplicate species ...");
 
         // Ensure this pokemon species isn't a duplicate.
         for (j = 0; j < i + firstMonId; j++)
@@ -2998,9 +3005,12 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         // Generate Trainer Pokemon
         if (GenerateTrainerPokemonHandleForme(&gEnemyParty[i + firstMonId], speciesId, &properties))
         {
+            DebugPrintf("Done.");
+
             // Add Pokemon item to items list
             items[i + firstMonId] = GetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM);
-            DebugPrintMonData(i++);
+            DebugPrintMonData(&gEnemyParty[i + firstMonId]);
+            i++;
         }
     }
 
@@ -3009,8 +3019,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     {
         if (((items[i + firstMonId]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i + firstMonId] = GetSpeciesItem(&gEnemyParty[i + firstMonId]);
-            SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, items[i + firstMonId]);
+            items[i + firstMonId] = GetSpeciesItem(&gEnemyParty[i + firstMonId], items);
+            SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &(items[i + firstMonId]));
         }
     }
 }
@@ -3019,8 +3029,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
 {
     s32 i, j;
 
-    u16 species[PARTY_SIZE]; 
-    u16 speciesId, currSpecies;
+    u16 speciesId;
     u16 bst; 
 
     struct GeneratorProperties properties;
@@ -3039,7 +3048,6 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     }
 
     u8 lvlMode = GET_LVL_MODE();
-    currSpecies = 0;
 
     i = 0; 
     while(i != PARTY_SIZE)
@@ -3072,7 +3080,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         }
 
         // Sample random species from the mon count
-        if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
+        if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_TENT)) && (i % 2 == 1))
         {
             // Restricted species
             speciesId = GetTrainerClassRestricted(TRAINER_CLASS_DEFAULT); // Pick restricteds when eligible on 2nd, 4th species
@@ -3082,28 +3090,35 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
             speciesId = GetTrainerClassSpecies(TRAINER_CLASS_DEFAULT); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
 
-        if ((HAS_MEGA_EVOLUTION(i) && (properties.allowMega)) || ((i == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
+        DebugPrintf("Species selected: '%d' ...", speciesId);
+
+        if ((HAS_MEGA_EVOLUTION(speciesId) && (properties.allowMega)) || ((speciesId == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
             properties.minBST = BFG_BST_MIN; // Ignore Min. BST
+
+        DebugPrintf("Checking min (%d) / max (%d) bst requirements ...", properties.minBST, properties.maxBST);
 
         // Check BST limits
         if ((bst < (properties.minBST)) || (bst > (properties.maxBST)))
             continue; // Next species
 
+        DebugPrintf("Checking species validity for frontier level ...");
+
         // Species is not allowed for this format
         if (!(SpeciesValidForFrontierLevel(speciesId)))
             continue; // Next species
 
+        DebugPrintf("Checking for duplicate species ...");
+
         // Cannot have two Pokémon of the same species.
-        for (j = firstMonId; j < firstMonId + i; j++)
-        {
-            if (speciesId == (gSaveBlock2Ptr->frontier.rentalMons[j].monId));
+        for (j = 0; j < firstMonId + i; j++)
+            if (speciesId == (gSaveBlock2Ptr->frontier.rentalMons[j].monId))
                 break; // Same species
-        }
         if (j != firstMonId + i)
             continue; // Skip duplicate
 
+        DebugPrintf("Done.");
+
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = speciesId;
-        species[i] = speciesId;
         i++;
     }
 }
