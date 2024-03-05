@@ -1771,7 +1771,7 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
         if (GenerateTrainerPokemonHandleForme(&(sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, &properties))
         {
             // Add Pokemon item to items list
-            items[i + firstMonId] = GetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM);
+            items[i] = GetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM);
             DebugPrintMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData));
             i++;
         }
@@ -1780,10 +1780,10 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     // Allocate remaining items
     for(i=0; i < SELECTABLE_MONS_COUNT; i++)
     {
-        if (((items[i + firstMonId]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+        if (((items[i]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i + firstMonId] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items);
-            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i + firstMonId]));
+            items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items);
+            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i]));
         }
     }
 }

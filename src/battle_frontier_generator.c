@@ -1486,7 +1486,7 @@ bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items)
 {
     s32 i;
     for(i=0; i < PARTY_SIZE; i++)
-        if (items[PARTY_SIZE] == itemId)
+        if (items[i] == itemId)
             return FALSE; // Duplicate itemId
     return TRUE; // Unique itemId
 }
@@ -3008,7 +3008,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
             DebugPrintf("Done.");
 
             // Add Pokemon item to items list
-            items[i + firstMonId] = GetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM);
+            items[i] = GetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM);
             DebugPrintMonData(&gEnemyParty[i + firstMonId]);
             i++;
         }
@@ -3017,10 +3017,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     // Allocate remaining items
     for(i=0; i < monCount; i++)
     {
-        if (((items[i + firstMonId]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+        if (((items[i]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i + firstMonId] = GetSpeciesItem(&gEnemyParty[i + firstMonId], items);
-            SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &(items[i + firstMonId]));
+            items[i] = GetSpeciesItem(&gEnemyParty[i + firstMonId], items);
+            SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &(items[i]));
         }
     }
 }
