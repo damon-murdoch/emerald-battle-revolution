@@ -3028,9 +3028,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
 void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode)
 {
     s32 i, j;
-
-    u16 speciesId;
-    u16 bst; 
+    u16 speciesId, bst; 
 
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, 0, 0);
@@ -3040,7 +3038,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     {
         // Battle Tent (Slateport)
         properties.minBST = BFG_BST_TENT_MIN;
-        properties.maxBST = BFG_BST_TENT_MAX; 
+        properties.maxBST = BFG_BST_TENT_MAX;
 
         properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
         properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
@@ -3059,24 +3057,18 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         {
             // High Challenge Num / Rental Rank
             if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM) || (i < rentalRank))
-            {
-                // Expert Mode (High BST)
-                properties.minBST = BFG_BST_FACTORY_EXPERT_MIN;
-                properties.maxBST = BFG_BST_FACTORY_EXPERT_MAX;
-
-                properties.allowMega = BFG_FACTORY_EXPERT_ALLOW_MEGA;
-                properties.allowGmax = BFG_FACTORY_EXPERT_ALLOW_GMAX;
-                properties.allowZMove = BFG_FACTORY_EXPERT_ALLOW_ZMOVE;
-            }
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
             else // Basic Mode (Low BST)
-            {
-                properties.minBST = BFG_BST_FACTORY_MIN;
-                properties.maxBST = BFG_BST_FACTORY_MAX;
-                
-                properties.allowMega = BFG_FACTORY_ALLOW_MEGA;
-                properties.allowGmax = BFG_FACTORY_ALLOW_GMAX;
-                properties.allowZMove = BFG_FACTORY_ALLOW_ZMOVE;
-            }
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+            // Min/Max BST Value Lookup Table
+            properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
+            properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
+
+            // Check fixed ivs for gmax / zmove / mega evolution
+            properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
+            properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
+            properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
         }
 
         // Sample random species from the mon count
@@ -3119,6 +3111,119 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         DebugPrintf("Done.");
 
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = speciesId;
+        i++;
+    }
+}
+
+void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode)
+{
+    s32 i, j;
+    u16 speciesId, bst;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, 0, 0);
+
+    switch(facilityMode)
+    {
+        case BFG_FACILITY_MODE_TENT:
+            properties.fixedIV = 0; // Battle tent trainer
+
+            properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
+            properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
+            properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+        break;
+        default: // BFG_FACILITY_MODE_DEFAULT
+            DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
+        case BFG_FACILITY_MODE_DEFAULT:
+            // High Challenge Num
+            if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM))
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+            else // Basic Mode (Low BST)
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+            // Min/Max BST Value Lookup Table
+            properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
+            properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
+
+            // Check fixed ivs for gmax / zmove / mega evolution
+            properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
+            properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
+            properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
+        break;
+    }
+
+    // Dereference the battle frontier trainer data
+    const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
+    const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
+
+    // Allocate team items
+    u16 items [PARTY_SIZE] = {
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+    };
+
+    u8 lvlMode = GET_LVL_MODE();
+
+    i = 0;
+    while (i != FRONTIER_PARTY_SIZE)
+    {
+        DebugPrintf("Generating opponent rental mon number %d ...", i);
+
+        // Sample random species from the mon count
+        if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_TENT)) && (i % 2 == 1))
+        {
+            // Restricted species
+            speciesId = GetTrainerClassRestricted(TRAINER_CLASS_DEFAULT); // Pick restricteds when eligible on 2nd, 4th species
+            properties.maxBST = BFG_BST_MAX; // Ignore Max. BST
+        }
+        else // Standard species
+            speciesId = GetTrainerClassSpecies(TRAINER_CLASS_DEFAULT); // Pick normal species
+        bst = GetTotalBaseStat(speciesId);
+
+        DebugPrintf("Species selected: '%d' ...", speciesId);
+
+        if ((HAS_MEGA_EVOLUTION(speciesId) && (properties.allowMega)) || ((speciesId == SPECIES_ROTOM) && (BFG_FORME_CHANCE_ROTOM >= 1)))
+            properties.minBST = BFG_BST_MIN; // Ignore Min. BST
+
+        DebugPrintf("Checking min (%d) / max (%d) bst requirements ...", properties.minBST, properties.maxBST);
+
+        // Check BST limits
+        if ((bst < (properties.minBST)) || (bst > (properties.maxBST)))
+            continue; // Next species
+
+        DebugPrintf("Checking species validity for frontier level ...");
+
+        // Species is not allowed for this format
+        if (!(SpeciesValidForFrontierLevel(speciesId)))
+            continue; // Next species
+
+        DebugPrintf("Checking for duplicate species (player) ...");
+
+        // Check not one of player's selectable mons
+        for (j = 0; j < PARTY_SIZE; j++)
+            if (speciesId == (gSaveBlock2Ptr->frontier.rentalMons[j].monId))
+                break; // Same species
+        if (j != PARTY_SIZE)
+            continue; // Skip duplicate
+
+        DebugPrintf("Checking for duplicate species (opponent) ...");
+
+        // Ensure this species hasn't already been chosen for the opponent
+        for (j = 0; j < firstMonId + i; j++)
+        {
+            if (gFrontierTempParty[j] == speciesId)
+                break; // Same species
+        }
+        if (j != firstMonId + i)
+            continue; // Skip duplicate
+
+        DebugPrintf("Done.");
+
+        gFrontierTempParty[i] = speciesId;
         i++;
     }
 }

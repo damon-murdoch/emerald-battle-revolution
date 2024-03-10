@@ -395,6 +395,13 @@ static void GenerateOpponentMons(void)
 
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < TENT_STAGES_PER_CHALLENGE - 1)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
+    
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilityOpponentMons(trainerId, 0, 0, 0, BFG_FACILITY_MODE_TENT);
+        return;
+    }
+    #endif
 
     monSet = gFacilityTrainers[gTrainerBattleOpponent_A].monSet;
     i = 0;

@@ -332,6 +332,13 @@ static void GenerateOpponentMons(void)
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < FRONTIER_STAGES_PER_CHALLENGE - 1)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
 
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilityOpponentMons(trainerId, firstMonId, challengeNum, winStreak, BFG_FACILITY_MODE_FACTORY);
+        return;
+    }
+    #endif
+
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
     {
