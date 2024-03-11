@@ -3156,16 +3156,6 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
 
-    // Allocate team items
-    u16 items [PARTY_SIZE] = {
-        ITEM_NONE,
-        ITEM_NONE,
-        ITEM_NONE,
-        ITEM_NONE,
-        ITEM_NONE,
-        ITEM_NONE,
-    };
-
     u8 lvlMode = GET_LVL_MODE();
 
     i = 0;
@@ -3177,11 +3167,11 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
         if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && lvlMode == FRONTIER_LVL_TENT)) && (i % 2 == 1))
         {
             // Restricted species
-            speciesId = GetTrainerClassRestricted(TRAINER_CLASS_DEFAULT); // Pick restricteds when eligible on 2nd, 4th species
+            speciesId = GetTrainerClassRestricted(trainerClass); // Pick restricteds when eligible on 2nd, 4th species
             properties.maxBST = BFG_BST_MAX; // Ignore Max. BST
         }
         else // Standard species
-            speciesId = GetTrainerClassSpecies(TRAINER_CLASS_DEFAULT); // Pick normal species
+            speciesId = GetTrainerClassSpecies(trainerClass); // Pick normal species
         bst = GetTotalBaseStat(speciesId);
 
         DebugPrintf("Species selected: '%d' ...", speciesId);
