@@ -3217,3 +3217,49 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
         i++;
     }
 }
+
+void SetFacilityPlayerParty(u8 level)
+{
+    s32 i;
+    u16 speciesId;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+
+    DebugPrintf("Populating facility player party ...");
+
+    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        DebugPrintf("Populating party index %d ...", i);
+
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
+
+        GenerateTrainerPokemonHandleForme(&gPlayerParty[i], speciesId, &properties);
+    } 
+
+    DebugPrintf("Done.");
+}
+
+void SetFacilityOpponentParty(u8 level)
+{
+    s32 i;
+    u16 speciesId;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+
+    DebugPrintf("Populating facility opponent party ...");
+
+    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        DebugPrintf("Populating party index %d ...", i);
+
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
+
+        GenerateTrainerPokemonHandleForme(&gEnemyParty[i], speciesId, &properties);
+    }
+
+    DebugPrintf("Done.");
+}
