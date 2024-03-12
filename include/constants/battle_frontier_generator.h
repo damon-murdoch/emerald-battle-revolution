@@ -38,9 +38,8 @@ enum {
 };
 
 enum {
-    BFG_FACILITY_MODE_DEFAULT, // Arena, Palace, Pike, Pyramid, Tower
+    BFG_FACILITY_MODE_DEFAULT, // Factory, Arena, Palace, Pike, Pyramid, Tower
     BFG_FACILITY_MODE_DOME, 
-    BFG_FACILITY_MODE_FACTORY, 
     BFG_FACILITY_MODE_TENT,
 };
 

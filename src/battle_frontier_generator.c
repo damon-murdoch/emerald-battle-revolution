@@ -3218,6 +3218,38 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
     }
 }
 
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 level, u8 fixedIV, u8 facilityMode)
+{
+    u16 speciesId;
+    s32 i; 
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, fixedIV);
+
+    switch(facilityMode)
+    {
+        case BFG_FACILITY_MODE_TENT:
+            properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
+            properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
+            properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+        break;
+        default: // BFG_FACILITY_MODE_DEFAULT
+            DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
+        case BFG_FACILITY_MODE_DEFAULT:
+            // Check fixed ivs for gmax / zmove / mega evolution
+            properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
+            properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
+            properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
+        break;
+    }
+
+    for(i=0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        speciesId = gFrontierTempParty[i];
+        GenerateTrainerPokemonHandleForme(&gEnemyParty[firstMonId + i], speciesId, &properties);
+    }
+}
+
 void SetFacilityPlayerParty(u8 level)
 {
     s32 i;

@@ -1878,6 +1878,14 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     level = SetFacilityPtrsGetLevel();
     otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, level, fixedIV, BFG_FACILITY_MODE_DEFAULT);
+        return;
+    }
+    #endif
+
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         u16 monId = gFrontierTempParty[i];
@@ -1905,6 +1913,13 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
     u8 level = TENT_MIN_LEVEL;
     u8 fixedIV = 0;
     u32 otID = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, level, fixedIV, BFG_FACILITY_MODE_TENT);
+        return;
+    }
+    #endif
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {

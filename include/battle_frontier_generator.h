@@ -69,6 +69,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
 void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode);
 void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode);
 
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 level, u8 fixedIV, u8 facilityMode);
 void SetFacilityPlayerParty(u8 level);
 void SetFacilityOpponentParty(u8 level);
 

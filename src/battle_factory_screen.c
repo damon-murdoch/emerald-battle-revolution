@@ -1812,7 +1812,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId, BFG_FACILITY_MODE_FACTORY);
+        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId, BFG_FACILITY_MODE_DEFAULT);
         return;
     }
     #endif
