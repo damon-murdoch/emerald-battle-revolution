@@ -750,6 +750,16 @@ bool8 InBattleFactory(void)
 static void RestorePlayerPartyHeldItems(void)
 {
     u8 i;
+    
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+        u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+        u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+        RestoreFacilityPlayerPartyHeldItems(challengeNum);
+        return;
+    }
+    #endif
 
     if (gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT)
         gFacilityTrainerMons = gBattleFrontierMons;

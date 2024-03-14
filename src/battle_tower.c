@@ -1841,17 +1841,20 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     u8 fixedIV;
     u32 otID;
 
+    // Default value
+    u8 challengeNum = 0;
+
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
     #ifdef BUGFIX
         u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+        challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
     #else
         u8 UNUSED lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-        u8 challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / FRONTIER_STAGES_PER_CHALLENGE;
+        challengeNum = gSaveBlock2Ptr->frontier.towerWinStreaks[battleMode][FRONTIER_LVL_50] / FRONTIER_STAGES_PER_CHALLENGE;
     #endif
         if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < FRONTIER_STAGES_PER_CHALLENGE - 1)
             fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
@@ -1881,7 +1884,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        FillFacilityTrainerParty(trainerId, otID, firstMonId, level, fixedIV, BFG_FACILITY_MODE_DEFAULT);
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, challengeNum, level, fixedIV, BFG_FACILITY_MODE_DEFAULT);
         return;
     }
     #endif
@@ -1916,7 +1919,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        FillFacilityTrainerParty(trainerId, otID, firstMonId, level, fixedIV, BFG_FACILITY_MODE_TENT);
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, 0, level, fixedIV, BFG_FACILITY_MODE_TENT);
         return;
     }
     #endif

@@ -191,7 +191,7 @@ static u8 GetTeamGenerationMethod()
 
 static bool8 SpeciesValidForFrontierLevel(u16 speciesId) 
 {
-    s32 i;
+    u16 i;
 
     // Get the level mode for the frontier
     u8 lvlMode = GET_LVL_MODE();
@@ -506,7 +506,7 @@ u16 GetTrainerClassRestricted(u16 trainerClass)
 
 static u8 GetNatureFromStats(u8 posStat, u8 negStat) 
 {
-    s32 i;
+    u8 i;
     // Loop over the natures
     for(i=0; i<NUM_NATURES; i++) 
     { 
@@ -535,7 +535,7 @@ static u8 GetSpeciesNature(u16 speciesId)
         case BFG_TEAM_GENERATOR_FILTERED_RANKING:
         case BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY: {
 
-            s32 i; 
+            u8 i; 
 
             u8 posStat = 0;
             u8 posStatValue = 0;
@@ -677,7 +677,7 @@ static u8 GetSpeciesEVs(u16 speciesId, u8 natureId)
         case BFG_TEAM_GENERATOR_FILTERED_RANKING:
         case BFG_TEAM_GENERATOR_FILTERED_RANKING_ATTACKS_ONLY: {
 
-            s32 i;
+            u8 i;
             u16 val1 = 0; 
             u16 val2 = 0; 
             u16 valT, valR;
@@ -839,14 +839,14 @@ static u8 GetSpreadCategory(u8 natureId, u8 evs){
 
 static void ResetMonMoves(struct Pokemon * mon)
 {
-    s32 i;
+    u8 i;
     for(i=0; i<MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, MOVE_NONE, i);
 }
 
 static u8 SetMonMoves(struct Pokemon * mon, u16 moves[MAX_MON_MOVES])
 {
-    s32 i;
+    u8 i;
     u8 moveCount = 0;
 
     ResetMonMoves(mon);
@@ -1064,8 +1064,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
 
 static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
 {
-    s32 i, j;
-    u16 moveIndex;
+    u16 i, j, moveIndex;
 
     // List of moves
     u16 moves[MAX_MON_MOVES] = {
@@ -1482,16 +1481,16 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
 }
 
 
-bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items) 
+bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items, u8 itemCount) 
 {
-    s32 i;
-    for(i=0; i < PARTY_SIZE; i++)
+    u8 i;
+    for(i=0; i < itemCount; i++)
         if (items[i] == itemId)
             return FALSE; // Duplicate itemId
     return TRUE; // Unique itemId
 }
 
-u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
+u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
 {
     u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
 
@@ -1502,7 +1501,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
     const struct Nature * nature = &(gNatureInfo[natureId]);
     const struct MoveInfo * move; 
 
-    s32 i,f;
+    u16 i, f;
     u16 itemId, moveId, abilityId;
     
     u8 numPhysical = 0;
@@ -1802,7 +1801,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -1930,7 +1929,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -1951,7 +1950,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
             itemId = gFiwamConfuseLookup[nature->negStat];
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -2019,7 +2018,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
             return itemId; // Unique item found
         else
             itemId = ITEM_NONE; // Reset itemId
@@ -2128,7 +2127,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         }
 
         // If the itemId is not ITEM_NONE, and the selected item is unique
-        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+        if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
             return itemId; // Unique item found
 
         // Otherwise, continue looping
@@ -2142,7 +2141,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items)
         itemId = customItemsList[Random() % customItemsLength];
 
     // If the itemId is not ITEM_NONE, and the selected item is unique
-    if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items))
+    if ((itemId != ITEM_NONE) && GetSpeciesItemCheckUnique(itemId, items, itemCount))
         return itemId; // Unique item found
 
     // No item found
@@ -2214,7 +2213,7 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
 
 bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties)
 {
-    s32 i;
+    u8 i;
 
     // Alt. Forme (e.g. mega, ultra burst)
     u8 forme = FORME_DEFAULT; // Default
@@ -2878,7 +2877,7 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
 
 void DebugPrintMonData(struct Pokemon * mon) 
 {
-    s32 i;
+    u8 i;
     u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
     u8 abilityNum = GetMonData(mon,MON_DATA_ABILITY_NUM);
 
@@ -2913,7 +2912,7 @@ void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode)
 {
     u16 speciesId, bst;
-    s32 i,j;
+    u8 i,j;
 
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, 0);
@@ -3019,7 +3018,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     {
         if (((items[i]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i] = GetSpeciesItem(&gEnemyParty[i + firstMonId], items);
+            items[i] = GetSpeciesItem(&gEnemyParty[i + firstMonId], items, PARTY_SIZE);
             SetMonData(&gEnemyParty[i + firstMonId], MON_DATA_HELD_ITEM, &(items[i]));
         }
     }
@@ -3027,7 +3026,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
 
 void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode)
 {
-    s32 i, j;
+    u8 i, j;
     u16 speciesId, bst; 
 
     struct GeneratorProperties properties;
@@ -3117,7 +3116,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
 
 void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode)
 {
-    s32 i, j;
+    u8 i, j;
     u16 speciesId, bst;
 
     struct GeneratorProperties properties;
@@ -3218,10 +3217,56 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
     }
 }
 
-void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 level, u8 fixedIV, u8 facilityMode)
+void SetFacilityPlayerParty(u8 level)
+{
+    u8 i;
+    u16 speciesId;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+
+    DebugPrintf("Populating facility player party ...");
+
+    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        DebugPrintf("Populating party index %d ...", i);
+
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
+
+        GenerateTrainerPokemonHandleForme(&gPlayerParty[i], speciesId, &properties);
+    } 
+
+    DebugPrintf("Done.");
+}
+
+void SetFacilityOpponentParty(u8 level)
+{
+    u8 i;
+    u16 speciesId;
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+
+    DebugPrintf("Populating facility opponent party ...");
+
+    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        DebugPrintf("Populating party index %d ...", i);
+
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
+
+        GenerateTrainerPokemonHandleForme(&gEnemyParty[i], speciesId, &properties);
+    }
+
+    DebugPrintf("Done.");
+}
+
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV, u8 facilityMode)
 {
     u16 speciesId;
-    s32 i; 
+    u8 i; 
 
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, fixedIV);
@@ -3248,50 +3293,72 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 level, 
         speciesId = gFrontierTempParty[i];
         GenerateTrainerPokemonHandleForme(&gEnemyParty[firstMonId + i], speciesId, &properties);
     }
-}
 
-void SetFacilityPlayerParty(u8 level)
-{
-    s32 i;
-    u16 speciesId;
+    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    u16 item, curItem;
+    u16 oldSeed = Random2();
 
-    struct GeneratorProperties properties;
-    InitGeneratorProperties(&properties, level, 0);
-
-    DebugPrintf("Populating facility player party ...");
-
-    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    // List of both players and opponents held items
+    u16 items[FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE];
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
     {
-        DebugPrintf("Populating party index %d ...", i);
-
-        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
-        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-
-        GenerateTrainerPokemonHandleForme(&gPlayerParty[i], speciesId, &properties);
-    } 
-
-    DebugPrintf("Done.");
-}
-
-void SetFacilityOpponentParty(u8 level)
-{
-    s32 i;
-    u16 speciesId;
-
-    struct GeneratorProperties properties;
-    InitGeneratorProperties(&properties, level, 0);
-
-    DebugPrintf("Populating facility opponent party ...");
-
-    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
-    {
-        DebugPrintf("Populating party index %d ...", i);
-
-        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
-        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
-
-        GenerateTrainerPokemonHandleForme(&gEnemyParty[i], speciesId, &properties);
+        items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        items[FRONTIER_PARTY_SIZE + i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
     }
 
-    DebugPrintf("Done.");
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
+    {
+        // Get the currently held item for the Pokemon
+        curItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+
+        // No held item
+        if (curItem == ITEM_NONE)
+        {
+            // Use challenge num as seed
+            SeedRng2((u32)(challengeNum));
+            item = GetSpeciesItem(&gEnemyParty[i], items, (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE));
+            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &item);
+        }
+
+        // Otherwise, leave as-is
+    }
+    SeedRng(oldSeed); // Revert seed
+    #endif
+}
+
+void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum)
+{
+    #if BFG_FACTORY_ALLOW_ITEM == FALSE
+    return; // Do nothing
+    #else
+    u8 i;
+    u16 item, curItem;
+    u16 oldSeed = Random2();
+
+    // List of both players and opponents held items
+    u16 items[FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE];
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
+    {
+        items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        items[FRONTIER_PARTY_SIZE + i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+    }
+
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
+    {
+        // Get the currently held item for the Pokemon
+        curItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+
+        // No held item
+        if (curItem == ITEM_NONE)
+        {
+            // Use challenge num as seed
+            SeedRng2((u32)(challengeNum));
+            item = GetSpeciesItem(&gPlayerParty[i], items, (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE));
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
+        }
+
+        // Otherwise, leave as-is
+    }
+    SeedRng(oldSeed); // Revert seed
+    #endif
 }

@@ -1782,7 +1782,7 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     {
         if (((items[i]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
-            items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items);
+            items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items, PARTY_SIZE);
             SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i]));
         }
     }

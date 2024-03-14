@@ -59,8 +59,8 @@ struct Nature {
 bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties);
 bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties);
 
-bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items);
-u16 GetSpeciesItem(struct Pokemon * mon, u16 * items);
+bool32 GetSpeciesItemCheckUnique(u16 itemId, u16 * items, u8 itemCount);
+u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount);
 
 void DebugPrintMonData(struct Pokemon * mon);
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV);
@@ -69,8 +69,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
 void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode);
 void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode);
 
-void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 level, u8 fixedIV, u8 facilityMode);
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV, u8 facilityMode);
 void SetFacilityPlayerParty(u8 level);
 void SetFacilityOpponentParty(u8 level);
+
+void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum);
 
 #endif // GUARD_BATTLE_FRONTIER_GENERATOR_H
