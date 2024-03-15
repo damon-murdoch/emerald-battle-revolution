@@ -1571,10 +1571,6 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
             numInaccurate++;
 
         // Move 
-        
-        // Multi-turn moves
-        if (move->twoTurnMove == TRUE)
-            hasTwoTurn = TRUE; 
 
         // Sound-based moves
         if (move->soundMove == TRUE)
@@ -1612,6 +1608,9 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
                     case EFFECT_FOCUS_ENERGY:
                         numCritModifier++;
                     break;
+                    case EFFECT_TWO_TURNS_ATTACK: 
+                    case EFFECT_SEMI_INVULNERABLE:
+                        hasTwoTurn = TRUE;
                     case EFFECT_TRICK_ROOM:
                         hasTrickRoom = TRUE;
                     break;
