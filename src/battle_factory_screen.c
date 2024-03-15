@@ -1739,12 +1739,9 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId, u8 facilityMode)
 {
     s32 i;
-
-    struct GeneratorProperties properties;
-    InitGeneratorProperties(&properties, level, 0);
-    properties.otID = otId; // Use provided OTID
-
     u16 speciesId;
+
+    DebugPrintf("Generating facility selectable Pokemon ...");
 
     // Allocate team items
     u16 items [SELECTABLE_MONS_COUNT] = {
@@ -1755,6 +1752,10 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
         ITEM_NONE,
         ITEM_NONE,
     };
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+    properties.otID = otId; // Use provided OTID
 
     i=0;
     while(i != SELECTABLE_MONS_COUNT)
@@ -1777,15 +1778,28 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
         }
     }
 
+    DebugPrintf("Generating facility selectable Pokemon held items ...");
+
+    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    u16 oldSeed = Random2();
+    u16 items[SELECTABLE_MONS_COUNT];
     // Allocate remaining items
     for(i=0; i < SELECTABLE_MONS_COUNT; i++)
     {
-        if (((items[i]) == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+        // Use challenge num as seed
+        SeedRng2((u32)(challengeNum));
+        if ((items[i] == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
             items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items, PARTY_SIZE);
             SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i]));
         }
+
+        // Otherwise, leave as-is
     }
+    SeedRng(oldSeed); // Revert seed
+    #endif
+
+    DebugPrintf("Done.");
 }
 #endif
 
