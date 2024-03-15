@@ -6,6 +6,8 @@
 
 #define BFG_MOVE_TYPE_NONE 0xFF
 
+#define TRAINER_CLASS_DEFAULT TRAINER_CLASS_COUNT // Unhandled Trainer Class / Factory Rental Picks
+
 enum {
     BFG_SPREAD_TYPE_OFFENSIVE,
     BFG_SPREAD_TYPE_DEFENSIVE,
@@ -36,9 +38,8 @@ enum {
 };
 
 enum {
-    BFG_FACILITY_MODE_DEFAULT, // Arena, Palace, Pike, Pyramid, Tower
+    BFG_FACILITY_MODE_DEFAULT, // Factory, Arena, Palace, Pike, Pyramid, Tower
     BFG_FACILITY_MODE_DOME, 
-    BFG_FACILITY_MODE_FACTORY, 
     BFG_FACILITY_MODE_TENT,
 };
 
