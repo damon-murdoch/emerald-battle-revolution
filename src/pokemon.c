@@ -422,23 +422,23 @@ const s8 gNatureStatTable[NUM_NATURES][NUM_NATURE_STATS] =
 #include "data/pokemon/experience_tables.h"
 
 #if P_LVL_UP_LEARNSETS >= GEN_9
-#include "data/pokemon/level_up_learnsets/gen_9.h"
+#include "data/pokemon/level_up_learnsets/gen_9.h" // Scarlet/Violet
 #elif P_LVL_UP_LEARNSETS >= GEN_8
-#include "data/pokemon/level_up_learnsets/gen_8.h"
+#include "data/pokemon/level_up_learnsets/gen_8.h" // Sword/Shield
 #elif P_LVL_UP_LEARNSETS >= GEN_7
-#include "data/pokemon/level_up_learnsets/gen_7.h"
+#include "data/pokemon/level_up_learnsets/gen_7.h" // Ultra Sun/ Ultra Moon
 #elif P_LVL_UP_LEARNSETS >= GEN_6
-#include "data/pokemon/level_up_learnsets/gen_6.h"
+#include "data/pokemon/level_up_learnsets/gen_6.h" // Omega Ruby/Alpha Sapphire
 #elif P_LVL_UP_LEARNSETS >= GEN_5
-#include "data/pokemon/level_up_learnsets/gen_5.h"
+#include "data/pokemon/level_up_learnsets/gen_5.h" // Black 2/White 2
 #elif P_LVL_UP_LEARNSETS >= GEN_4
-#include "data/pokemon/level_up_learnsets/gen_4.h"
+#include "data/pokemon/level_up_learnsets/gen_4.h" // HeartGold/SoulSilver
 #elif P_LVL_UP_LEARNSETS >= GEN_3
-#include "data/pokemon/level_up_learnsets/gen_3.h"
+#include "data/pokemon/level_up_learnsets/gen_3.h" // Ruby/Sapphire/Emerald
 #elif P_LVL_UP_LEARNSETS >= GEN_2
-#include "data/pokemon/level_up_learnsets/gen_2.h"
+#include "data/pokemon/level_up_learnsets/gen_2.h" // Crystal
 #elif P_LVL_UP_LEARNSETS >= GEN_1
-#include "data/pokemon/level_up_learnsets/gen_1.h"
+#include "data/pokemon/level_up_learnsets/gen_1.h" // Yellow
 #endif
 
 #include "data/pokemon/teachable_learnsets.h"
@@ -1643,7 +1643,7 @@ static void SetMonMoveSlot_KeepPP(struct Pokemon *mon, u16 move, u8 slot)
     u8 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES, NULL);
     u8 currPP = GetMonData(mon, MON_DATA_PP1 + slot, NULL);
     u8 newPP = CalculatePPWithBonus(move, ppBonuses, slot);
-    u8 finalPP = min(currPP, newPP);
+    u16 finalPP = min(currPP, newPP);
 
     SetMonData(mon, MON_DATA_MOVE1 + slot, &move);
     SetMonData(mon, MON_DATA_PP1 + slot, &finalPP);
@@ -4094,7 +4094,7 @@ static u32 GetGMaxTargetSpecies(u32 species)
 u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 mode, u16 evolutionItem, struct Pokemon *tradePartner)
 {
     int i, j;
-    u16 targetSpecies = 0;
+    u16 targetSpecies = SPECIES_NONE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES, 0);
     u16 heldItem = GetMonData(mon, MON_DATA_HELD_ITEM, 0);
     u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
@@ -4576,6 +4576,7 @@ u16 NationalToHoennOrder(u16 nationalNum)
 
 u16 SpeciesToNationalPokedexNum(u16 species)
 {
+    species = SanitizeSpeciesId(species);
     if (!species)
         return NATIONAL_DEX_NONE;
 
@@ -5607,7 +5608,7 @@ static inline bool32 CanFirstMonBoostHeldItemRarity(void)
     u32 ability;
     if (GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
         return FALSE;
-    
+
     ability = GetMonAbility(&gPlayerParty[0]);
     if ((OW_COMPOUND_EYES < GEN_9) && ability == ABILITY_COMPOUND_EYES)
         return TRUE;
