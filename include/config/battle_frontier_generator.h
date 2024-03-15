@@ -238,9 +238,10 @@
 #define BFG_ITEM_IV_ALLOW_ZMOVE 15  // Min. IVs required for Z-Moves
 #define BFG_ITEM_IV_ALLOW_GMAX 15   // Min. IVs required for Gigantamax
 
-// Allow items in the Battle Frontier
-// Please note, Megas/Zmoves/Gmax ignore this flag
+// Allow items in different Battle Facilities
+// Please note, Megas/Zmoves/Gmax ignore these flags
 #define BFG_FACTORY_ALLOW_ITEM FALSE
+#define BFG_TENT_ALLOW_ITEM FALSE
 
 #define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1

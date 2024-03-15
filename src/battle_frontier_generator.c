@@ -3263,6 +3263,66 @@ void SetFacilityOpponentParty(u8 level)
     DebugPrintf("Done.");
 }
 
+void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 partySize)
+{
+    u8 i;
+    u16 item, curItem;
+    u16 oldSeed = Random2();
+
+    // List of both players and opponents held items
+    u16 items[FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE];
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
+    {
+        items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+        items[FRONTIER_PARTY_SIZE + i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+    }
+
+    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
+    {
+        // Get the currently held item for the Pokemon
+        curItem = GetMonData(&(party[i]), MON_DATA_HELD_ITEM);
+
+        // No held item
+        if (curItem == ITEM_NONE)
+        {
+            // Use challenge num as seed
+            SeedRng2((u32)(challengeNum));
+            item = GetSpeciesItem(&(party[i]), items, (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE));
+            SetMonData(&(party[i]), MON_DATA_HELD_ITEM, &item);
+        }
+
+        // Otherwise, leave as-is
+    }
+    SeedRng(oldSeed); // Revert seed
+}
+
+void SetRentalsToFacilityOpponentParty()
+{
+    u8 i;
+
+    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+
+    DebugPrintf("Setting rentals to facility opponent party ...");
+
+    for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+    {
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId = gFrontierTempParty[i];
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ATK_IV, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].personality = GetMonData(&gEnemyParty[i], MON_DATA_PERSONALITY, NULL);
+        gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].abilityNum = GetBoxMonData(&gEnemyParty[i].box, MON_DATA_ABILITY_NUM, NULL);
+    }
+
+    DebugPrintf("Updating rental opponent party items ...");
+
+    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
+    #endif
+
+    DebugPrintf("Done.");
+}
+
 void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV, u8 facilityMode)
 {
     u16 speciesId;
@@ -3288,77 +3348,31 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
         break;
     }
 
-    for(i=0; i < FRONTIER_PARTY_SIZE; i++)
+    DebugPrintf("Filling facility trainer party ...");
+
+    while(i != FRONTIER_PARTY_SIZE)
     {
-        speciesId = gFrontierTempParty[i];
-        GenerateTrainerPokemonHandleForme(&gEnemyParty[firstMonId + i], speciesId, &properties);
+        DebugPrintf("Generating set for species %d ...", speciesId);
+
+        // Generate Trainer Pokemon
+        if (GenerateTrainerPokemonHandleForme(&gEnemyParty[i + firstMonId], speciesId, &properties))
+        {
+            DebugPrintf("Done.");
+            DebugPrintMonData(&gEnemyParty[i + firstMonId]);
+            i++;
+        }
     }
 
     #if BFG_FACTORY_ALLOW_ITEM == TRUE
-    u16 item, curItem;
-    u16 oldSeed = Random2();
-
-    // List of both players and opponents held items
-    u16 items[FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE];
-    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
-    {
-        items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-        items[FRONTIER_PARTY_SIZE + i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-    }
-
-    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
-    {
-        // Get the currently held item for the Pokemon
-        curItem = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-
-        // No held item
-        if (curItem == ITEM_NONE)
-        {
-            // Use challenge num as seed
-            SeedRng2((u32)(challengeNum));
-            item = GetSpeciesItem(&gEnemyParty[i], items, (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE));
-            SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &item);
-        }
-
-        // Otherwise, leave as-is
-    }
-    SeedRng(oldSeed); // Revert seed
+    SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
     #endif
 }
 
 void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum)
 {
-    #if BFG_FACTORY_ALLOW_ITEM == FALSE
-    return; // Do nothing
-    #else
-    u8 i;
-    u16 item, curItem;
-    u16 oldSeed = Random2();
+    DebugPrintf("Restoring facility player party held items ...");
 
-    // List of both players and opponents held items
-    u16 items[FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE];
-    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
-    {
-        items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-        items[FRONTIER_PARTY_SIZE + i] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
-    }
-
-    for(i=0; i<FRONTIER_PARTY_SIZE; i++)
-    {
-        // Get the currently held item for the Pokemon
-        curItem = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
-
-        // No held item
-        if (curItem == ITEM_NONE)
-        {
-            // Use challenge num as seed
-            SeedRng2((u32)(challengeNum));
-            item = GetSpeciesItem(&gPlayerParty[i], items, (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE));
-            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &item);
-        }
-
-        // Otherwise, leave as-is
-    }
-    SeedRng(oldSeed); // Revert seed
+    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    SetFacilityPartyHeldItems(challengeNum, gPlayerParty, PARTY_SIZE);
     #endif
 }
