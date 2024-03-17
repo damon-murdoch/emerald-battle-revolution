@@ -37,10 +37,4 @@ enum {
     BFG_MOVE_TRY_REPLACE_FAILED,
 };
 
-enum {
-    BFG_FACILITY_MODE_DEFAULT, // Factory, Arena, Palace, Pike, Pyramid, Tower
-    BFG_FACILITY_MODE_DOME, 
-    BFG_FACILITY_MODE_TENT,
-};
-
 #endif // GUARD_CONSTANTS_BATTLE_FRONTIER_GENERATOR_H

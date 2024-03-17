@@ -38,6 +38,10 @@
 #define RANDOM_OFFSET() RANDOM_RANGE(BFG_RANDOM_OFFSET_MIN, BFG_RANDOM_OFFSET_MAX)
 #endif
 
+// *** FORMAT ***
+#define IS_DOUBLES() (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
+#define GET_LVL_MODE() (gSaveBlock2Ptr->frontier.lvlMode)
+
 // Species Generator Properties
 struct GeneratorProperties {
     u32 otID;
@@ -64,12 +68,13 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount);
 
 void DebugPrintMonData(struct Pokemon * mon);
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV);
+void UpdateGeneratorForLevelMode(struct GeneratorProperties * properties, u8 lvlMode); 
 
-void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode);
-void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode);
-void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode);
+void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level);
+void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank);
+void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak);
 
-void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV, u8 facilityMode);
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV);
 
 void SetFacilityPlayerParty(u8 level);
 void SetFacilityOpponentParty(u8 level);

@@ -1736,7 +1736,7 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #undef STATE_MENU_RESHOW
 
 #if BFG_FLAG_FRONTIER_GENERATOR != 0
-void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId, u8 facilityMode)
+void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId)
 {
     s32 i;
     u16 speciesId;
@@ -1757,6 +1757,8 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     InitGeneratorProperties(&properties, level, 0);
     properties.otID = otId; // Use provided OTID
 
+    u8 lvlMode = GET_LVL_MODE();
+
     i=0;
     while(i != SELECTABLE_MONS_COUNT)
     {
@@ -1766,6 +1768,9 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
             properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
             properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+        // Override fixed frontier values (Specified in config)
+        UpdateGeneratorForLevelMode(&properties, lvlMode);
 
         DebugPrintf("Generating set for species %d ...", speciesId);
         
@@ -1780,9 +1785,12 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
 
     DebugPrintf("Generating facility selectable Pokemon held items ...");
 
-    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
     u16 oldSeed = Random2();
-    u16 items[SELECTABLE_MONS_COUNT];
     // Allocate remaining items
     for(i=0; i < SELECTABLE_MONS_COUNT; i++)
     {
@@ -1797,7 +1805,6 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
         // Otherwise, leave as-is
     }
     SeedRng(oldSeed); // Revert seed
-    #endif
 
     DebugPrintf("Done.");
 }
@@ -1826,7 +1833,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId, BFG_FACILITY_MODE_DEFAULT);
+        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId);
         return;
     }
     #endif
@@ -1867,7 +1874,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, otId, BFG_FACILITY_MODE_TENT);
+        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, otId);
         return;
     }
     #endif

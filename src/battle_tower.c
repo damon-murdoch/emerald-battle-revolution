@@ -1648,7 +1648,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
         // Use Frontier Generator (If flag set)
         #if BFG_FLAG_FRONTIER_GENERATOR != 0
         if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            GenerateTrainerParty(trainerId, firstMonId, monCount, level, BFG_FACILITY_MODE_DEFAULT);
+            GenerateTrainerParty(trainerId, firstMonId, monCount, level);
             return;
         }
         #endif
@@ -1884,7 +1884,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        FillFacilityTrainerParty(trainerId, otID, firstMonId, challengeNum, level, fixedIV, BFG_FACILITY_MODE_DEFAULT);
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, challengeNum, level, fixedIV);
         return;
     }
     #endif
@@ -1919,7 +1919,7 @@ static void FillFactoryTentTrainerParty(u16 trainerId, u8 firstMonId)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        FillFacilityTrainerParty(trainerId, otID, firstMonId, 0, level, fixedIV, BFG_FACILITY_MODE_TENT);
+        FillFacilityTrainerParty(trainerId, otID, firstMonId, 0, level, fixedIV);
         return;
     }
     #endif
@@ -3542,7 +3542,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateTrainerParty(trainerId, firstMonId, monCount, level, BFG_FACILITY_MODE_TENT);
+        GenerateTrainerParty(trainerId, firstMonId, monCount, level);
         return;
     }
     #endif

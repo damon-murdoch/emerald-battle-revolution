@@ -30,10 +30,6 @@
 
 #include "data/pokemon/natures.h"
 
-// *** FORMAT ***
-#define IS_DOUBLES() (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
-#define GET_LVL_MODE() (gSaveBlock2Ptr->frontier.lvlMode)
-
 // *** STATS ***
 #define CHECK_EVS(evs,stat) ((evs) & (stat))
 
@@ -2908,7 +2904,42 @@ void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, 
     properties->allowMega = TRUE;
 }
 
-void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u8 facilityMode)
+void UpdateGeneratorForLevelMode(struct GeneratorProperties * properties, u8 lvlMode)
+{
+    switch(lvlMode)
+    {
+        case FRONTIER_LVL_TENT:
+            // Fixed battle tent values
+            properties->fixedIV = BFG_IV_LVL_TENT;
+            properties->minBST = BFG_BST_LVL_TENT_MIN;
+            properties->maxBST = BFG_BST_LVL_TENT_MAX; 
+        break;
+        case FRONTIER_LVL_50:
+            #ifdef BFG_IV_LVL_50
+            properties->fixedIV = BFG_IV_LVL_50;
+            #endif
+            #ifdef BFG_BST_LVL_50_MIN
+            properties->minBST = BFG_BST_LVL_50_MIN;
+            #endif
+            #ifdef BFG_BST_LVL_50_MAX
+            properties->maxBST = BFG_BST_LVL_50_MAX;
+            #endif
+        break;
+        case FRONTIER_LVL_OPEN:
+            #ifdef BFG_IV_LVL_OPEN
+            properties->fixedIV = BFG_IV_LVL_OPEN;
+            #endif
+            #ifdef BFG_BST_LVL_OPEN_MIN
+            properties->minBST = BFG_BST_LVL_OPEN_MIN;
+            #endif
+            #ifdef BFG_BST_LVL_OPEN_MAX
+            properties->maxBST = BFG_BST_LVL_OPEN_MAX;
+            #endif
+        break;
+    }
+}
+
+void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
 {
     u16 speciesId, bst;
     u8 i,j;
@@ -2916,28 +2947,17 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, 0);
 
+    // Default values
+    properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
+    // Min/Max BST Value Lookup Table
+    properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
+    properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
+
+    // Setup fixed values for level mode
+    u8 lvlMode = GET_LVL_MODE();
+    UpdateGeneratorForLevelMode(&properties, lvlMode);
+
     DebugPrintf("Generating trainer party ...");
-
-    switch(facilityMode)
-    {
-        case BFG_FACILITY_MODE_TENT:
-            properties.fixedIV = 0; // Battle tent trainer
-    
-            // Battle Tent Fixed Min/Max BST
-            properties.minBST = BFG_BST_TENT_MIN;
-            properties.maxBST = BFG_BST_TENT_MAX; 
-        break;
-        default: // BFG_FACILITY_MODE_DEFAULT
-            DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
-        case BFG_FACILITY_MODE_DEFAULT:
-            // Normal battle frontier trainer.
-            properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
-
-            // Min/Max BST Value Lookup Table
-            properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
-            properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
-        break;
-    }
 
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
@@ -3012,6 +3032,11 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
         }
     }
 
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
     // Allocate remaining items
     for(i=0; i < monCount; i++)
     {
@@ -3025,7 +3050,7 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level, u
     DebugPrintf("Done.");
 }
 
-void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 facilityMode)
+void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank)
 {
     u8 i, j;
     u16 speciesId, bst; 
@@ -3035,19 +3060,18 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
 
     DebugPrintf("Generating facility initial rental mons ...");
 
+    u8 lvlMode = GET_LVL_MODE();
+
     // Battle Tent
-    if (facilityMode == BFG_FACILITY_MODE_TENT)
+    if (lvlMode == FRONTIER_LVL_TENT)
     {
-        // Battle Tent (Slateport)
-        properties.minBST = BFG_BST_TENT_MIN;
-        properties.maxBST = BFG_BST_TENT_MAX;
+        // Override fixed tent values (Specified in config)
+        UpdateGeneratorForLevelMode(&properties, lvlMode);
 
         properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
         properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
         properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
     }
-
-    u8 lvlMode = GET_LVL_MODE();
 
     i = 0; 
     while(i != PARTY_SIZE)
@@ -3055,7 +3079,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         DebugPrintf("Generating initial rental mon number %d ...", i);
 
         // Battle Factory
-        if ((facilityMode != BFG_FACILITY_MODE_TENT))
+        if ((lvlMode != FRONTIER_LVL_TENT))
         {
             // High Challenge Num / Rental Rank
             if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM) || (i < rentalRank))
@@ -3071,6 +3095,9 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
             properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
             properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
             properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
+
+            // Override fixed frontier values (Specified in config)
+            UpdateGeneratorForLevelMode(&properties, lvlMode);
         }
 
         // Sample random species from the mon count
@@ -3117,7 +3144,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     }
 }
 
-void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak, u8 facilityMode)
+void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak)
 {
     u8 i, j;
     u16 speciesId, bst;
@@ -3125,20 +3152,21 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, 0, 0);
 
+    u8 lvlMode = GET_LVL_MODE();
+
     DebugPrintf("Generating facility opponent mons ...");
 
-    switch(facilityMode)
+    switch(lvlMode)
     {
-        case BFG_FACILITY_MODE_TENT:
-            properties.fixedIV = 0; // Battle tent trainer
+        case FRONTIER_LVL_TENT:
+            properties.fixedIV = BFG_IV_LVL_TENT; // Battle tent trainer
 
             properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
             properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
             properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
         break;
-        default: // BFG_FACILITY_MODE_DEFAULT
-            DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
-        case BFG_FACILITY_MODE_DEFAULT:
+        case FRONTIER_LVL_50:
+        case FRONTIER_LVL_OPEN:
             // High Challenge Num
             if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM))
                 properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
@@ -3153,14 +3181,15 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
             properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
             properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
             properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
+
+            // Override fixed frontier values (Specified in config)
+            UpdateGeneratorForLevelMode(&properties, lvlMode);
         break;
     }
 
     // Dereference the battle frontier trainer data
     const struct BattleFrontierTrainer * trainer = &(gFacilityTrainers[trainerId]);
     const u8 trainerClass = gFacilityClassToTrainerClass[trainer->facilityClass];
-
-    u8 lvlMode = GET_LVL_MODE();
 
     i = 0;
     while (i != FRONTIER_PARTY_SIZE)
@@ -3329,18 +3358,20 @@ void SetRentalsToFacilityOpponentParty()
 
     DebugPrintf("Updating rental opponent party items ...");
 
-    #if BFG_FACTORY_ALLOW_ITEM == TRUE
-    u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u8 lvlMode = GET_LVL_MODE();
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
 
     SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
-    #endif
-
     DebugPrintf("Done.");
 }
 
-void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV, u8 facilityMode)
+void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV)
 {
     u16 speciesId;
     u8 i; 
@@ -3348,16 +3379,17 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, fixedIV);
 
-    switch(facilityMode)
+    u8 lvlMode = GET_LVL_MODE();
+
+    switch(lvlMode)
     {
-        case BFG_FACILITY_MODE_TENT:
+        case FRONTIER_LVL_TENT:
             properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
             properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
             properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
         break;
-        default: // BFG_FACILITY_MODE_DEFAULT
-            DebugPrintf("Unhandled facility mode: %d, using default settings ...", facilityMode);
-        case BFG_FACILITY_MODE_DEFAULT:
+        case FRONTIER_LVL_50:
+        case FRONTIER_LVL_OPEN:
             // Check fixed ivs for gmax / zmove / mega evolution
             properties.allowGmax = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_GMAX);
             properties.allowZMove = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_ZMOVE);
@@ -3382,16 +3414,23 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
         }
     }
 
-    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
     SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
-    #endif
 }
 
 void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum)
 {
     DebugPrintf("Restoring facility player party held items ...");
 
-    #if BFG_FACTORY_ALLOW_ITEM == TRUE
+    u8 lvlMode = GET_LVL_MODE();
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
     SetFacilityPartyHeldItems(challengeNum, gPlayerParty, PARTY_SIZE);
-    #endif
 }

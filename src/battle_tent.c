@@ -312,7 +312,7 @@ static void GenerateInitialRentalMons(void)
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilityInitialRentalMons(firstMonId, 0, 0, BFG_FACILITY_MODE_TENT);
+        GenerateFacilityInitialRentalMons(firstMonId, 0, 0);
         return;
     }
     #endif
@@ -398,7 +398,7 @@ static void GenerateOpponentMons(void)
     
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
     if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-        GenerateFacilityOpponentMons(trainerId, 0, 0, 0, BFG_FACILITY_MODE_TENT);
+        GenerateFacilityOpponentMons(trainerId, 0, 0, 0);
         return;
     }
     #endif
