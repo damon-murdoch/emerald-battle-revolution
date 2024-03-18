@@ -49,8 +49,8 @@
 #define MAX_STREAK 9999
 
 #define FRONTIER_MAX_LEVEL_50   50
-#define FRONTIER_MIN_LEVEL_OPEN MAX_LEVEL // Default: 60
-#define FRONTIER_MAX_LEVEL_OPEN MAX_LEVEL
+#define FRONTIER_MIN_LEVEL_OPEN 50 // Default: 60
+#define FRONTIER_MAX_LEVEL_OPEN 50
 
 // This is the default number of battles (or floors, in Battle Pyramid) per challenge.
 // There are 2 facilities that differ: Battle Dome (DOME_ROUNDS_COUNT) and Battle Pike (NUM_PIKE_ROOMS).

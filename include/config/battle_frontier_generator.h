@@ -14,8 +14,38 @@
 #define BFG_RANDOM_OFFSET_MIN 0        // Min. Value for RANDOM_OFFSET()
 #define BFG_RANDOM_OFFSET_MAX 10        // Max. Value for RANDOM_OFFSET()
 
+// *** BATTLE FACTORY ***
+
+#define BFG_IV_LVL_TENT 0
+
+// (Optional Fixed BST Ranges for Lvl.50 / Open Level Facilities)
+// If you do not wish to use these values, please comment them out :)
+
+// #define BFG_IV_LVL_50 x
+// #define BFG_IV_LVL_OPEN x
+
+#define BFG_BST_LVL_TENT_MIN 200
+#define BFG_BST_LVL_TENT_MAX 500
+
+// (Optional Fixed BST Ranges for Lvl.50 / Open Level Facilities)
+// Please note, restricted Pokemon do not respect the following values
+// If you do not wish to use these values, please comment them out :)
+
+// #define BFG_BST_LVL_50_MIN BFG_BST_MIN
+// #define BFG_BST_LVL_50_MAX BFG_BST_MAX
+
+#define BFG_BST_LVL_OPEN_MIN 495
+#define BFG_BST_LVL_OPEN_MAX 720
+
+#define BFG_BST_TENT_ALLOW_MEGA FALSE
+#define BFG_BST_TENT_ALLOW_GMAX FALSE
+#define BFG_BST_TENT_ALLOW_ZMOVE FALSE
+
+#define BFG_FACTORY_EXPERT_CHALLENGE_NUM 7
+
 // *** BASE STATS ***
 
+#define BFG_IV_MIN_BST_0 BFG_BST_MIN
 #define BFG_IV_MIN_BST_3 180
 #define BFG_IV_MIN_BST_6 225
 #define BFG_IV_MIN_BST_9 270
@@ -25,6 +55,7 @@
 #define BFG_IV_MIN_BST_21 450
 #define BFG_IV_MIN_BST_MAX 495
 
+#define BFG_IV_MAX_BST_0 BFG_BST_MAX
 #define BFG_IV_MAX_BST_3 405
 #define BFG_IV_MAX_BST_6 450
 #define BFG_IV_MAX_BST_9 495
@@ -35,9 +66,6 @@
 #define BFG_IV_MAX_BST_MAX 720
 
 // *** SPECIES ***
-#define BFG_TRAINER_CLASS_MON_SELECT_DYNAMIC FALSE // Use dynamic list for mon selection, instead of hard-coded list
-#define BFG_TRAINER_CLASS_MON_LIMIT 0x200   // Maximum number of mons available per trainer class
-
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
 #define BFG_LVL_OPEN_ALLOW_BANNED_SPECIES TRUE  // Allow banned species (e.g. Kyogre,Groudon) in Frontier Open Level Mode
 #define BFG_LVL_TENT_ALLOW_BANNED_SPECIES FALSE // Allow banned species (e.g. Kyogre,Groudon) in Battle Tent
@@ -228,6 +256,11 @@
 #define BFG_ITEM_IV_ALLOW_ZMOVE 15  // Min. IVs required for Z-Moves
 #define BFG_ITEM_IV_ALLOW_GMAX 15   // Min. IVs required for Gigantamax
 
+// Allow items in different Battle Facilities
+// Please note, Megas/Zmoves/Gmax ignore these flags
+#define BFG_FACTORY_ALLOW_ITEM TRUE
+#define BFG_TENT_ALLOW_ITEM FALSE
+
 #define BFG_NO_ITEM_SELECTION_CHANCE FALSE
 #if BFG_NO_ITEM_SELECTION_CHANCE != 1
 
@@ -243,45 +276,45 @@
 
 // Common Items
 #define BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE 3
-#define BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE 2
-#define BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE 2
+#define BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE 3
+#define BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE 3
 #define BFG_ITEM_LIFE_ORB_SELECTION_CHANCE 3
-#define BFG_ITEM_EVIOLITE_SELECTION_CHANCE 2
+#define BFG_ITEM_EVIOLITE_SELECTION_CHANCE 3
 
 // Choice Items
-#define BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE 2
-#define BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE 2
-#define BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE 2
+#define BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE 3
+#define BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE 3
+#define BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE 3
 
 // Ability-Specific Items
 #define BFG_ITEM_TERRAIN_EXTENDER_SELECTION_CHANCE 4
 #define BFG_ITEM_WEATHER_EXTENDER_SELECTION_CHANCE 4
 #define BFG_ITEM_ADRENALINE_ORB_SELECTION_CHANCE 2
 #define BFG_ITEM_BOOSTER_ENERGY_SELECTION_CHANCE 2
-#define BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE 2
-#define BFG_ITEM_FLAME_ORB_SELECTION_CHANCE 2
+#define BFG_ITEM_TOXIC_ORB_SELECTION_CHANCE 1
+#define BFG_ITEM_FLAME_ORB_SELECTION_CHANCE 1
 
 // Move-Specific Items
 
 
-#define BFG_ITEM_BLUNDER_POLICY_SELECTION_CHANCE 4  // numInaccurate
-#define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 3  // numPunch
-#define BFG_ITEM_ROOM_SERVICE_SELECTION_CHANCE 3    // hasTrickRoom
-#define BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE 2    // hasRest
-#define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 2    // numSound
+#define BFG_ITEM_BLUNDER_POLICY_SELECTION_CHANCE 3  // numInaccurate
+#define BFG_ITEM_PUNCHING_GLOVE_SELECTION_CHANCE 2  // numPunch
+#define BFG_ITEM_ROOM_SERVICE_SELECTION_CHANCE 2    // hasTrickRoom
+#define BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE 1    // hasRest
+#define BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE 1    // numSound
 #define BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE 3     // numStatus
-#define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 3     // numMultiHit
+#define BFG_ITEM_LOADED_DICE_SELECTION_CHANCE 2     // numMultiHit
 #define BFG_ITEM_MIRROR_HERB_SELECTION_CHANCE 2     // hasFlatter & hasSwagger
-#define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 3      // numScreens
-#define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 4      // numStatDrop
-#define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 4      // numStatDrop
-#define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 4      // numCritModifier
-#define BFG_ITEM_RAZOR_CLAW_SELECTION_CHANCE 4      // numCritModifier
-#define BFG_ITEM_POWER_HERB_SELECTION_CHANCE 2      // hasMultiTurn
-#define BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE 2      // hasFling
-#define BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE 2      // hasFling
-#define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 4       // numInaccurate
-#define BFG_ITEM_IRON_BALL_SELECTION_CHANCE 3       // hasTrickRoom
+#define BFG_ITEM_LIGHT_CLAY_SELECTION_CHANCE 2      // numScreens
+#define BFG_ITEM_WHITE_HERB_SELECTION_CHANCE 3      // numStatDrop
+#define BFG_ITEM_EJECT_PACK_SELECTION_CHANCE 3      // numStatDrop
+#define BFG_ITEM_SCOPE_LENS_SELECTION_CHANCE 2      // numCritModifier
+#define BFG_ITEM_RAZOR_CLAW_SELECTION_CHANCE 2      // numCritModifier
+#define BFG_ITEM_POWER_HERB_SELECTION_CHANCE 1      // hasMultiTurn
+#define BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE 1      // hasFling
+#define BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE 1      // hasFling
+#define BFG_ITEM_WIDE_LENS_SELECTION_CHANCE 3       // numInaccurate
+#define BFG_ITEM_IRON_BALL_SELECTION_CHANCE 2       // hasTrickRoom
 
 // Species-specific items
 #define BFG_ITEM_LIGHT_BALL_SELECTION_CHANCE 1          // Pikachu
@@ -299,19 +332,19 @@
 #define BFG_ITEM_BLACK_SLUDGE_SELECTION_CHANCE 2
 
 // Type-Specific Items
-#define BFG_ITEM_GEM_SELECTION_CHANCE 4
-#define BFG_ITEM_TYPE_SELECTION_CHANCE 4
+#define BFG_ITEM_GEM_SELECTION_CHANCE 3
+#define BFG_ITEM_TYPE_SELECTION_CHANCE 3
 #define BFG_ITEM_ZMOVE_SELECTION_CHANCE 0 // Excludes signature Z-Moves
 
 // Common Berries
-#define BFG_ITEM_SITRUS_BERRY_SELECTION_CHANCE 4
-#define BFG_ITEM_LUM_BERRY_SELECTION_CHANCE 4
+#define BFG_ITEM_SITRUS_BERRY_SELECTION_CHANCE 3
+#define BFG_ITEM_LUM_BERRY_SELECTION_CHANCE 3
 
 // Resist / Weakness Berries
 #define BFG_ITEM_RESIST_BERRY_4X_SELECTION_CHANCE 2
-#define BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE 4
+#define BFG_ITEM_RESIST_BERRY_2X_SELECTION_CHANCE 3
 
-#define BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE 8
+#define BFG_ITEM_STAT_BOOST_BERRY_SELECTION_CHANCE FALSE // These suck lol
 #define BFG_ITEM_FIWAM_BERRY_SELECTION_CHANCE 4
 
 // Custom list of items which can be selected, in
@@ -327,6 +360,8 @@
     ITEM_MICLE_BERRY, \
     ITEM_ROWAP_BERRY, \
     ITEM_CHILAN_BERRY, \
+    ITEM_SITRUS_BERRY, \
+    ITEM_LUM_BERRY, \
     ITEM_KEE_BERRY
 
 // Custom list of items which can be selected, in 
