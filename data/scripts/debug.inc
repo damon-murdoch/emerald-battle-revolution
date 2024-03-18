@@ -281,21 +281,6 @@ DebugText_BerryWeedsDisabled:
 	.string "OW_BERRY_WEEDS is disabled.\n"
 	.string "Unable to force weeds onto berry trees.$"
 
-.endif
-
-Debug_FlagsAndVarNotSetBattleConfigMessage::
-	lockall
-	message Debug_FlagsAndVarNotSetBattleConfigMessage_Text
-	waitmessage
-	waitbuttonpress
-	releaseall
-	end
-
-Debug_FlagsAndVarNotSetBattleConfigMessage_Text:
-	.string "Feature unavailable! Please define a\n"
-	.string "usable flag and a usable var in:\l"
-	.string "'include/config/battle.h'!$"
-
 Debug_EventScript_InflictStatus1::
 	lockall
 	getpartysize
@@ -338,6 +323,42 @@ Debug_EventScript_InflictStatus1_Single:
 	releaseall
 	end
 
+Debug_EventScript_InflictStatus1_Party:
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
+	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
+	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
+	switch VAR_RESULT
+	case 0, Debug_EventScript_InflictStatus1_Party_Poison
+	case 1, Debug_EventScript_InflictStatus1_Party_Paralysis
+	case 2, Debug_EventScript_InflictStatus1_Party_Sleep
+	case 3, Debug_EventScript_InflictStatus1_Party_Burn
+	case 4, Debug_EventScript_InflictStatus1_Party_Freeze
+	case 5, Debug_EventScript_InflictStatus1_Party_Frostbite
+	case 6, Debug_EventScript_InflictStatus1_Close
+	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
+	releaseall
+	end
+
+.endif
+
+Debug_FlagsAndVarNotSetBattleConfigMessage::
+	lockall
+	message Debug_FlagsAndVarNotSetBattleConfigMessage_Text
+	waitmessage
+	waitbuttonpress
+	releaseall
+	end
+
+Debug_FlagsAndVarNotSetBattleConfigMessage_Text:
+	.string "Feature unavailable! Please define a\n"
+	.string "usable flag and a usable var in:\l"
+	.string "'include/config/battle.h'!$"
+
 Debug_EventScript_InflictStatus1_Single_Poison:
 	setstatus1 STATUS1_POISON, VAR_0x8004
 	releaseall
@@ -365,27 +386,6 @@ Debug_EventScript_InflictStatus1_Single_Freeze:
 
 Debug_EventScript_InflictStatus1_Single_Frostbite:
 	setstatus1 STATUS1_FROSTBITE, VAR_0x8004
-	releaseall
-	end
-
-Debug_EventScript_InflictStatus1_Party:
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Poison, 0
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Paralysis, 1
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Sleep, 2
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Burn, 3
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Freeze, 4
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Frostbite, 5
-	dynmultipush Debug_EventScript_InflictStatus1_Text_Close, 6
-	dynmultistack 0, 0, FALSE, 7, FALSE, 0, NULL
-	switch VAR_RESULT
-	case 0, Debug_EventScript_InflictStatus1_Party_Poison
-	case 1, Debug_EventScript_InflictStatus1_Party_Paralysis
-	case 2, Debug_EventScript_InflictStatus1_Party_Sleep
-	case 3, Debug_EventScript_InflictStatus1_Party_Burn
-	case 4, Debug_EventScript_InflictStatus1_Party_Freeze
-	case 5, Debug_EventScript_InflictStatus1_Party_Frostbite
-	case 6, Debug_EventScript_InflictStatus1_Close
-	case MULTI_B_PRESSED, Debug_EventScript_InflictStatus1_Close
 	releaseall
 	end
 
