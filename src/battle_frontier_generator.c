@@ -1796,10 +1796,6 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
             numInaccurate++;
 
         // Move 
-        
-        // Multi-turn moves
-        if (move->twoTurnMove == TRUE)
-            hasTwoTurn = TRUE; 
 
         // Sound-based moves
         if (move->soundMove == TRUE)
@@ -1837,6 +1833,9 @@ static u16 GetSpeciesItem(u16 speciesId, u8 index, u8 natureId, u8 evs, u8 abili
                     case EFFECT_FOCUS_ENERGY:
                         numCritModifier++;
                     break;
+                    case EFFECT_TWO_TURNS_ATTACK: 
+                    case EFFECT_SEMI_INVULNERABLE:
+                        hasTwoTurn = TRUE;
                     case EFFECT_TRICK_ROOM:
                         hasTrickRoom = TRUE;
                     break;
