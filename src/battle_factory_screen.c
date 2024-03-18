@@ -1832,7 +1832,7 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId);
         return;
     }
@@ -1873,7 +1873,7 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilitySelectableMons(firstMonId, 0, 0, level, otId);
         return;
     }
