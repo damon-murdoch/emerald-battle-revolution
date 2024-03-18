@@ -2782,7 +2782,7 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
                 #if B_FLAG_DYNAMAX_BATTLE != 0
                 case FORM_CHANGE_BATTLE_GIGANTAMAX: {
                     if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_IV_ALLOW_GMAX)
-                        forme = j;
+                        forme = i;
                 }; break;
                 #endif
                 case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {

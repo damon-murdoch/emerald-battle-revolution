@@ -40,6 +40,8 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 
 const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] = 
 {
+    // Not Implemented
+    [MOVE_TERA_BLAST] = TRUE, 
 	// Misc. Moves
 	[MOVE_SNORE] = TRUE,
     [MOVE_SPIT_UP] = TRUE,
@@ -102,6 +104,8 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
 
 const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] = 
 {
+    // Not Implemented
+    [MOVE_TERA_BLAST] = TRUE, 
 	// Misc. Moves
 	[MOVE_SNORE] = TRUE,
     [MOVE_SPIT_UP] = TRUE,

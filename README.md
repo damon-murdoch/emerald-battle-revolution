@@ -154,19 +154,19 @@ Please see below for the list of features which are supported in each Battle Fro
 | -------------- | --------------- | ------------- | ------------------- | ----- |
 | Battle Arena   | Yes             | Yes           | N/A                 | 2/3   |
 | Battle Dome    | Yes             | No            | No                  | 1/3   |
-| Battle Factory | N/A             | No            | No                  | 0/3   |
+| Battle Factory | Yes             | Yes           | No                  | 2/3   |
 | Battle Palace  | Yes             | Yes           | No                  | 2/3   |
 | Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3 |
+| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3   |
 | Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
 
 Please see below for the list of features which are supported in each Battle Tent.
 
 | Facility Name   | Level Scaling   | New Species   | 4 Pokemon (Doubles) | Total |
 | --------------- | --------------- | ------------- | ------------------- | ----- |
-| Fallarbor  Tent | Yes             | No            | N/A                 | 1/3   |
-| Slateport  Tent | Yes             | No            | N/A                 | 1/3   |
-| Verdanturf Tent | Yes             | No            | N/A                 | 1/3   |
+| Fallarbor  Tent | Yes             | Yes           | N/A                 | 2/3   |
+| Slateport  Tent | Yes             | Yes           | N/A                 | 2/3   |
+| Verdanturf Tent | Yes             | Yes           | N/A                 | 2/3   |
 
 ## Future Changes
 For a list of future changes which are intended for this project, 
@@ -263,6 +263,18 @@ implement this feature on their own projects.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 1.2.0
+
+Merged upstream changes which have implemented modern battle frontier set generation for Battle Factory, as well as all Battle Tent Facilities. 
+Battle Factory is fully working, including items, swapping, and open lvl. mode has every second Pokemon (and one Pokemon on each opponent team)
+as a restricted legendary. Please see the [Battle Frontier Feature Table](#feature-table) for more details. 
+
+Optional BST range fixing has been implemented (compile-side), and open lvl. mode will now always have the highest BST limit by default rather 
+than starting low and increasing. The latest changes from the upstream branch of the Pokeemerald Expansion Project have now also been merged.
+
+The list of Pokemon which can be selected for each trainer class has been expanded, and Tera Blast has been added to the banned moves list as
+it has not been fully implemented yet.
 
 ### Ver. 1.1.0
 
