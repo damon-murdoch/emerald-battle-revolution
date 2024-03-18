@@ -32,6 +32,10 @@
 #include "constants/songs.h"
 #include "constants/rgb.h"
 
+#include "constants/battle_frontier_generator.h"
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
+
 // Select_ refers to the first Pokémon selection screen where you choose your initial 3 rental Pokémon.
 // Swap_   refers to the subsequent selection screens where you can swap a Pokémon with one from the beaten trainer
 
@@ -41,8 +45,6 @@
 
 #define SWAP_PLAYER_SCREEN 0  // The screen where the player selects which of their Pokémon to swap away
 #define SWAP_ENEMY_SCREEN  1  // The screen where the player selects which new Pokémon from the defeated party to swap for
-
-#define SELECTABLE_MONS_COUNT 6
 
 #define PALNUM_FADE_TEXT 14
 #define PALNUM_TEXT      15
@@ -1733,6 +1735,81 @@ static void Select_Task_HandleChooseMons(u8 taskId)
 #undef STATE_MENU_REINIT
 #undef STATE_MENU_RESHOW
 
+#if BFG_FLAG_FRONTIER_GENERATOR != 0
+void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRank, u8 level, u32 otId)
+{
+    s32 i;
+    u16 speciesId;
+
+    DebugPrintf("Generating facility selectable Pokemon ...");
+
+    // Allocate team items
+    u16 items [SELECTABLE_MONS_COUNT] = {
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+    };
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+    properties.otID = otId; // Use provided OTID
+
+    u8 lvlMode = GET_LVL_MODE();
+
+    i=0;
+    while(i != SELECTABLE_MONS_COUNT)
+    {
+        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
+        sFactorySelectScreen->mons[i + firstMonId].monId = speciesId;
+        if (i < rentalRank)
+            properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+        else
+            properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
+
+        // Override fixed frontier values (Specified in config)
+        UpdateGeneratorForLevelMode(&properties, lvlMode);
+
+        DebugPrintf("Generating set for species %d ...", speciesId);
+        
+        if (GenerateTrainerPokemonHandleForme(&(sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, &properties))
+        {
+            // Add Pokemon item to items list
+            items[i] = GetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM);
+            DebugPrintMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData));
+            i++;
+        }
+    }
+
+    DebugPrintf("Generating facility selectable Pokemon held items ...");
+
+    if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
+        return; // Battle Tent items disabled
+    else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
+        return; // Battle Frontier items disabled
+
+    u16 oldSeed = Random2();
+    // Allocate remaining items
+    for(i=0; i < SELECTABLE_MONS_COUNT; i++)
+    {
+        // Use challenge num as seed
+        SeedRng2((u32)(challengeNum));
+        if ((items[i] == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+        {
+            items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items, PARTY_SIZE);
+            SetMonData(&(sFactorySelectScreen->mons[i + firstMonId].monData), MON_DATA_HELD_ITEM, &(items[i]));
+        }
+
+        // Otherwise, leave as-is
+    }
+    SeedRng(oldSeed); // Revert seed
+
+    DebugPrintf("Done.");
+}
+#endif
+
 static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 {
     u8 i, j = 0;
@@ -1753,6 +1830,13 @@ static void CreateFrontierFactorySelectableMons(u8 firstMonId)
 
     rentalRank = GetNumPastRentalsRank(battleMode, lvlMode);
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilitySelectableMons(firstMonId, challengeNum, rentalRank, level, otId);
+        return;
+    }
+    #endif
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
@@ -1787,6 +1871,13 @@ static void CreateSlateportTentSelectableMons(u8 firstMonId)
 
     gFacilityTrainerMons = gSlateportBattleTentMons;
     otId = T1_READ_32(gSaveBlock2Ptr->playerTrainerId);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        GenerateFacilitySelectableMons(firstMonId, 0, 0, level, otId);
+        return;
+    }
+    #endif
 
     for (i = 0; i < SELECTABLE_MONS_COUNT; i++)
     {
