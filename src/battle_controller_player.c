@@ -1761,7 +1761,7 @@ static void MoveSelectionDisplayMoveType(u32 battler)
         }; break;
     }
 
-    StringCopy(txtPtr, gTypeNames[type]);
+    StringCopy(txtPtr, gTypesInfo[type].name);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_TYPE);
 }
 
