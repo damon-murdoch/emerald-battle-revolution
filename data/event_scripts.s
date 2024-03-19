@@ -1081,3 +1081,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BattleFrontier_Underground_B2F_PokeCenter_1F/scripts.inc"
 
 	.include "data/maps/BattleFrontier_Underground_B2F_PokeCenter_2F/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_BattleSpot_1F/scripts.inc"
