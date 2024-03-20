@@ -296,7 +296,7 @@ script RustboroCity_DevonCorp_3F_EventScript_GiveExpShare {
 		setflag(FLAG_RECEIVED_EXP_SHARE)
 		call(RustboroCity_DevonCorp_3F_Text_ExplainExpShare)
 	}
-	else // Already received
+	else # Already received
 	{
 		giveitem(ITEM_ULTRA_BALL)
 		goto_if_eq(VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull)

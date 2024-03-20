@@ -388,10 +388,3 @@ VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"
 `
-
-script VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant {
-	msgbox(format("Welcome to the BATTLE TENT VERDANTURF SITE!"))
-	msgbox(format("I can help you change the battle music. What would like to listen to?"))
-	msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
-	goto(BattleFrontier_Generic_EventScript_MusicAttendantPage1)
-}

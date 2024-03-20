@@ -83,9 +83,9 @@ mart LilycoveCity_DepartmentStore_3F_Mart_ClerkLeft {
 	ITEM_SPELON_BERRY
 	ITEM_PAMTRE_BERRY
 	ITEM_WATMEL_BERRY
-	// For future use
-	// ITEM_DURIN_BERRY
-	// ITEM_BELUE_BERRY
+	# For future use
+	# ITEM_DURIN_BERRY
+	# ITEM_BELUE_BERRY
 }
 
 script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
@@ -93,7 +93,7 @@ script LilycoveCity_DepartmentStore_3F_EventScript_ClerkRight {
 	faceplayer
 	message(gText_HowMayIServeYou)
 	waitmessage
-	// Stat modifiers, including nature mints
+	# Stat modifiers, including nature mints
 	pokemart(LilycoveCity_DepartmentStore_3F_Mart_ClerkRight)
 	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
 	release

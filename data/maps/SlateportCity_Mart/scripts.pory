@@ -54,7 +54,7 @@ script SlateportCity_Mart_EventScript_Clerk2 {
 			pokemart(SlateportCity_Mart_Pokemart_Clerk2)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

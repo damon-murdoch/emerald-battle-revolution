@@ -1,0 +1,155 @@
+script TeamShopCommon_EventScript_TeamShop {
+    lock
+    faceplayer
+    msgbox(format("Hello and welcome to the Sample Team Shop!"))
+    goto(TeamShopCommon_EventScript_TeamShopCheckMoney)
+}
+
+script TeamShopCommon_EventScript_TeamShopCheckMoney {
+    showmoneybox(18, 0)
+    checkmoney(30000)
+    if (var(VAR_RESULT) == TRUE){
+        goto(TeamShopCommon_EventScript_TeamShopShowControls)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥30000 to buy anything here!"))
+        goto(PokemonShopCommon_EventScript_PokemonShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopShowControls {
+    msgbox(format("What are you looking for today?"))
+    msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+    goto(TeamShopCommon_EventScript_TeamShopFormatsPage1)
+}
+
+script TeamShopCommon_EventScript_TeamShopFormatsPage1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopFormatsPage1)
+    switch(var(VAR_RESULT)){
+        case 0: # Singles (3v3)
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
+        case 1: # Doubles (3v3)
+            goto(TeamShopCommon_EventScript_TeamShopDoubles3v3Page1)
+        case 2: # Doubles (4v4)
+            goto(TeamShopCommon_EventScript_TeamShopDoubles4v4Page1)
+        case 3: # Singles (Open) (3v3)
+            goto(TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1)
+        case 4: # Doubles (Open) (3v3)
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1)
+        case 5: # Doubles (Open) (4v4)
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1)
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopFormatsPage1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopFormatsPage1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopSingles3v3Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopDoubles3v3Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopDoubles3v3Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopDoubles3v3Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopDoubles4v4Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoubles4v4Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopDoubles4v4Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopDoubles4v4Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSinglesOpen3v3Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen3v3Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+script TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1 {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen4v4Page1)
+    {
+        case MULTI_L_PRESSED: 
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1)
+        case MULTI_R_PRESSED:
+            goto(TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1)
+        default: 
+            goto(TeamShopCommon_Text_TeamShopEnd)
+    }
+}
+
+text TeamShopCommon_Text_TeamShopFormatsPage1 {
+    "SINGLES (3v3)$"
+    "DOUBLES (3v3)$"
+    "DOUBLES (4v4)$"
+    "SINGLES (OPEN) (3v3)$"
+    "DOUBLES (OPEN) (3v3)$"
+    "DOUBLES (OPEN) (4v4)$"
+    ""
+}
+
+text TeamShopCommon_Text_TeamShopSingles3v3Page1 {
+
+}
+
+text TeamShopCommon_Text_TeamShopDoubles3v3Page1 {
+    
+}
+
+text TeamShopCommon_Text_TeamShopDoubles4v4Page1 {
+    
+}
+
+text TeamShopCommon_Text_TeamShopSinglesOpen3v3Page1 {
+    
+}
+
+text TeamShopCommon_Text_TeamShopDoublesOpen3v3Page1 {
+    
+}
+
+text TeamShopCommon_Text_TeamShopDoublesOpen4v4Page1 {
+    
+}

@@ -140,12 +140,12 @@ script EverGrandeCity_PokemonLeague_1F_EventScript_Clerk2 {
 		if(flag(FLAG_IS_CHAMPION)){
 			pokemart(EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2_Expanded)
 		}
-		else // Not unlocked
+		else # Not unlocked
 		{
 			pokemart(EverGrandeCity_PokemonLeague_1F_Pokemart_Clerk2)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

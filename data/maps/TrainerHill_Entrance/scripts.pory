@@ -416,17 +416,6 @@ TrainerHill_Elevator_Text_ReturnToReception:
 	.string "the reception counter?$"
 `
 
-script TrainerHill_Entrance_EventScript_MusicAttendant {
-	msgbox(format("Welcome to TRAINER HILL!"))
-	if (flag(FLAG_IS_CHAMPION)){
-		msgbox(format("I can help you change the battle music. What would like to listen to?"))
-		msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
-		goto(BattleFrontier_Generic_EventScript_MusicAttendantPage1)
-	}
-	msgbox(format("We haven't finished getting everything ready yet."))
-	goto(BattleFrontier_Generic_EventScript_MusicAttendantEnd)
-}
-
 script TrainerHill_Entrance_EventScript_Clerk2 {
 	lock
 	faceplayer
@@ -435,7 +424,7 @@ script TrainerHill_Entrance_EventScript_Clerk2 {
 	if (flag(FLAG_IS_CHAMPION)) {
 		pokemart(TrainerHill_Entrance_Pokemart_Clerk2)
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

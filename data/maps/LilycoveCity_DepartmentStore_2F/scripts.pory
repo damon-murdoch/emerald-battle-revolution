@@ -47,12 +47,12 @@ script LilycoveCity_DepartmentStore_2F_EventScript_ClerkRight {
 		if (flag(FLAG_IS_CHAMPION)){
 			pokemart(LilycoveCity_Mart_Pokemart_Clerk2_Expanded)
 		}
-		else // Not unlocked
+		else # Not unlocked
 		{
 			pokemart(LilycoveCity_Mart_Pokemart_Clerk2)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

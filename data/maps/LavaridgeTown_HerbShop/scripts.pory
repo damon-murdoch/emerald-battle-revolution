@@ -132,7 +132,7 @@ mart LavaridgeTown_HerbShop_Mart_Clerk2 {
 	ITEM_KEE_BERRY
 	ITEM_MARANGA_BERRY
 	ITEM_ENIGMA_BERRY
-	// ITEM_ENIGMA_BERRY_E_READER
+	# ITEM_ENIGMA_BERRY_E_READER
 }
 
 script LavaridgeTown_HerbShop_EventScript_Clerk3 {
@@ -215,9 +215,9 @@ mart LavaridgeTown_HerbShop_Pokemart_Clerk3Berries {
 	ITEM_SPELON_BERRY
 	ITEM_PAMTRE_BERRY
 	ITEM_WATMEL_BERRY
-	// For future use
-	// ITEM_DURIN_BERRY
-	// ITEM_BELUE_BERRY
+	# For future use
+	# ITEM_DURIN_BERRY
+	# ITEM_BELUE_BERRY
 }
 
 mart LavaridgeTown_HerbShop_Pokemart_Clerk3Mints {

@@ -70,7 +70,7 @@ script InsideOfTruck_EventScript_Introduction {
 	msgbox("Created by Damon Murdoch\n(Twitter: SirScrubbington)")
 	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
 	msgbox(format("Current Version: 1.2.0"))
-	msgbox(format("For more information, please visit our website: https://www.dragapult.xyz?ebr"))
+	msgbox(format("For more information, please visit our website: https:#www.dragapult.xyz?ebr"))
 	goto(InsideOfTruck_EventScript_AskSandboxMode)
 }
 
