@@ -8,13 +8,13 @@ script TeamShopCommon_EventScript_TeamShop {
 script TeamShopCommon_EventScript_TeamShopCheckMoney {
     showmoneybox(18, 0)
     checkmoney(30000)
-    if (var(VAR_RESULT) == TRUE){
+    if (var(VAR_RESULT) == TRUE) {
         goto(TeamShopCommon_EventScript_TeamShopShowControls)
     }
     else # Player does not have enough money
     {
         msgbox(format("Oh, sorry! You need at least ¥30000 to buy anything here!"))
-        goto(PokemonShopCommon_EventScript_PokemonShopEnd)
+        goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
@@ -26,7 +26,7 @@ script TeamShopCommon_EventScript_TeamShopShowControls {
 
 script TeamShopCommon_EventScript_TeamShopFormatsPage1 {
     multichoice2(0,0,TeamShopCommon_Text_TeamShopFormatsPage1)
-    switch(var(VAR_RESULT)){
+    switch(var(VAR_RESULT)) {
         case 0: # Singles (3v3)
             goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case 1: # Doubles (3v3)
@@ -44,80 +44,132 @@ script TeamShopCommon_EventScript_TeamShopFormatsPage1 {
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopFormatsPage1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopSingles3v3Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1) 
+    switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopDoubles3v3Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSingles3v3Page1) 
+    switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopDoubles3v3Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopDoubles3v3Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopDoubles4v4Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoubles4v4Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoubles4v4Page1) 
+switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopDoubles4v4Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopDoubles4v4Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopSinglesOpen3v3Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopSinglesOpen3v3Page1) 
+    switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopSinglesOpen3v3Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen3v3Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen3v3Page1) 
+    switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopDoublesOpen3v3Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
 }
 
 script TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1 {
-    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen4v4Page1)
-    {
+    multichoice2(0,0,TeamShopCommon_Text_TeamShopDoublesOpen4v4Page1) 
+    switch(var(VAR_RESULT)) {
+        case 0: # NO TEAMS
+            goto(TeamShopCommon_EventScript_TeamShopSingles3v3Page1)
         case MULTI_L_PRESSED: 
             goto(TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1)
         case MULTI_R_PRESSED:
             goto(TeamShopCommon_EventScript_TeamShopDoublesOpen4v4Page1)
         default: 
-            goto(TeamShopCommon_Text_TeamShopEnd)
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
     }
+}
+
+script TeamShopCommon_EventScript_TeamShopCheckPurchase {
+    msgbox(format("Sure! Let's see if I can handle that for you ..."))
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON have been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON have been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like I can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(TeamShopCommon_EventScript_TeamShopEnd)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    removemoney(30000)
+    updatemoneybox
+    playse(SE_SHOP)
+    waitse
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(TeamShopCommon_EventScript_TeamShopCheckMoney)
+    }
+    goto(TeamShopCommon_EventScript_TeamShopEnd)
+}
+
+script TeamShopCommon_EventScript_TeamShopEnd {
+    msgbox(format("Come back again soon!"))
+    hidemoneybox
+    releaseall
+    end
 }
 
 text TeamShopCommon_Text_TeamShopFormatsPage1 {
@@ -131,25 +183,31 @@ text TeamShopCommon_Text_TeamShopFormatsPage1 {
 }
 
 text TeamShopCommon_Text_TeamShopSingles3v3Page1 {
-
+    "None Available$"
+    ""
 }
 
 text TeamShopCommon_Text_TeamShopDoubles3v3Page1 {
-    
+    "None Available$"
+    ""
 }
 
 text TeamShopCommon_Text_TeamShopDoubles4v4Page1 {
-    
+    "None Available$"
+    ""
 }
 
 text TeamShopCommon_Text_TeamShopSinglesOpen3v3Page1 {
-    
+    "None Available$"
+    ""
 }
 
 text TeamShopCommon_Text_TeamShopDoublesOpen3v3Page1 {
-    
+    "None Available$"
+    ""
 }
 
 text TeamShopCommon_Text_TeamShopDoublesOpen4v4Page1 {
-    
+    "None Available$"
+    ""
 }

@@ -386,22 +386,3 @@ VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "SCOTT: I visit here regularly in hopes\n"
 	.string "of seeing tough TRAINERS in action\l"
 	.string "in whatever the situation.$"
-
-VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant::
-	msgbox VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_0
-	msgbox VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_1
-	msgbox VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_2
-	goto BattleFrontier_Generic_EventScript_MusicAttendantPage1
-	return
-
-
-VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_0:
-	.string "Welcome to the BATTLE TENT VERDANTURF\n"
-	.string "SITE!$"
-
-VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_1:
-	.string "I can help you change the battle music.\n"
-	.string "What would like to listen to?$"
-
-VerdanturfTown_BattleTentLobby_EventScript_MusicAttendant_Text_2:
-	.string "L: Previous Page                    R: Next Page\nB: Go Back$"

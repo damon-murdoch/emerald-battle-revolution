@@ -350,22 +350,3 @@ FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "SCOTT: Instead of wasting your\n"
 	.string "time with the likes of me, why not\l"
 	.string "make a challenge?$"
-
-FallarborTown_BattleTentLobby_EventScript_MusicAttendant::
-	msgbox FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_0
-	msgbox FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_1
-	msgbox FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_2
-	goto BattleFrontier_Generic_EventScript_MusicAttendantPage1
-	return
-
-
-FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_0:
-	.string "Welcome to the BATTLE TENT FALLARBOR\n"
-	.string "SITE!$"
-
-FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_1:
-	.string "I can help you change the battle music.\n"
-	.string "What would like to listen to?$"
-
-FallarborTown_BattleTentLobby_EventScript_MusicAttendant_Text_2:
-	.string "L: Previous Page                    R: Next Page\nB: Go Back$"
