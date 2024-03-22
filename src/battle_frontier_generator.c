@@ -2916,19 +2916,18 @@ void InitGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode
 {
     bool8 allowMega, allowGmax, allowZMove;
 
-    switch(lvlMode)
+    // battle tent
+    if (lvlMode == FRONTIER_LVL_TENT)
     {
-        case FRONTIER_LVL_TENT:
-            allowMega = BFG_BST_TENT_ALLOW_MEGA;
-            allowGmax = BFG_BST_TENT_ALLOW_GMAX;
-            allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
-        break;
-        case FRONTIER_LVL_50:
-        case FRONTIER_LVL_OPEN:
-            allowMega = (BFG_ITEM_IV_ALLOW_MEGA < BFG_ITEM_IV_BANNED);
-            allowGmax = (BFG_ITEM_IV_ALLOW_GMAX < BFG_ITEM_IV_BANNED);
-            allowZMove = (BFG_ITEM_IV_ALLOW_ZMOVE < BFG_ITEM_IV_BANNED);
-        break;
+        allowMega = BFG_BST_TENT_ALLOW_MEGA;
+        allowGmax = BFG_BST_TENT_ALLOW_GMAX;
+        allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+    }
+    else // lvl 50 / lvl open
+    {
+        allowMega = (BFG_ITEM_IV_ALLOW_MEGA < BFG_ITEM_IV_BANNED);
+        allowGmax = (BFG_ITEM_IV_ALLOW_GMAX < BFG_ITEM_IV_BANNED);
+        allowZMove = (BFG_ITEM_IV_ALLOW_ZMOVE < BFG_ITEM_IV_BANNED);
     }
 
     // Update based on flags
@@ -3434,7 +3433,7 @@ void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum)
     SetFacilityPartyHeldItems(challengeNum, gPlayerParty, PARTY_SIZE);
 }
 
-void FrontierBattlerCanMegaEvolve()
+bool8 FrontierBattlerCanMegaEvolve()
 {
     #if BFG_FLAG_FRONTIER_ALLOW_MEGA != 0
     return FlagGet(BFG_FLAG_FRONTIER_ALLOW_MEGA);
@@ -3443,7 +3442,7 @@ void FrontierBattlerCanMegaEvolve()
     #endif
 }
 
-void FrontierBattlerCanUseZMove()
+bool8 FrontierBattlerCanUseZMove()
 {    
     #if BFG_FLAG_FRONTIER_ALLOW_ZMOVE != 0
     return FlagGet(BFG_FLAG_FRONTIER_ALLOW_ZMOVE);
@@ -3452,7 +3451,7 @@ void FrontierBattlerCanUseZMove()
     #endif
 }
 
-void FrontierBattlerCanDynamax(struct Pokemon * mon)
+bool8 FrontierBattlerCanDynamax(struct Pokemon * mon)
 {
     #if BFG_FLAG_FRONTIER_ALLOW_GMAX != 0
     return (FlagGet(BFG_FLAG_FRONTIER_ALLOW_GMAX) || (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR) == FALSE));
@@ -3461,7 +3460,7 @@ void FrontierBattlerCanDynamax(struct Pokemon * mon)
     #endif
 }
 
-void FrontierBattlerShouldDynamax(struct Pokemon * mon)
+bool8 FrontierBattlerShouldDynamax(struct Pokemon * mon)
 {
     // If the selected Pokemon has the gigantamax factor
     if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR) == TRUE)
