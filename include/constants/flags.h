@@ -42,16 +42,16 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#define FLAG_RECEIVED_OVAL_CHARM       0x20 // Oval Charm Obtained
-#define FLAG_RECEIVED_SHINY_CHARM      0x21 // Shiny Charm Obtained
-#define FLAG_RECEIVED_CATCHING_CHARM   0x22 // Catching Charm Obtained
-#define FLAG_RECEIVED_EXP_CHARM        0x23 // Experience Charm Obtained
-#define FLAG_MOVE_TUTOR_LEARNSET       0x24 // Learn egg/tutor moves instead of relearn moves
-#define FLAG_MOVE_TUTOR_IGNORE_LEVEL   0x25 // Reteach any moves regardless of level
-#define FLAG_BATTLE_FRONTIER_GENERATOR 0x26 // Battle Frontier Set Generator enabled/disabled
-#define FLAG_UNUSED_0x027    0x27 // Unused Flag
-#define FLAG_UNUSED_0x028    0x28 // Unused Flag
-#define FLAG_UNUSED_0x029    0x29 // Unused Flag
+#define FLAG_RECEIVED_OVAL_CHARM            0x20 // Oval Charm Obtained
+#define FLAG_RECEIVED_SHINY_CHARM           0x21 // Shiny Charm Obtained
+#define FLAG_RECEIVED_CATCHING_CHARM        0x22 // Catching Charm Obtained
+#define FLAG_RECEIVED_EXP_CHARM             0x23 // Experience Charm Obtained
+#define FLAG_MOVE_TUTOR_LEARNSET            0x24 // Learn egg/tutor moves instead of relearn moves
+#define FLAG_MOVE_TUTOR_IGNORE_LEVEL        0x25 // Reteach any moves regardless of level
+#define FLAG_BATTLE_FRONTIER_GENERATOR      0x26 // Battle Frontier Set Generator enabled/disabled
+#define FLAG_BATTLE_FRONTIER_ALLOW_MEGA     0x27 // Battle Frontier allow Mega Evolutions
+#define FLAG_BATTLE_FRONTIER_ALLOW_GMAX     0x28 // Battle Frontier allow Gigantamax Formes
+#define FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE    0x29 // Battle Frontier allow Z-Moves
 #define FLAG_UNUSED_0x02A    0x2A // Unused Flag
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
