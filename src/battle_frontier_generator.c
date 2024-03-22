@@ -2148,6 +2148,9 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
     const struct SpeciesInfo * species = &(gSpeciesInfo[speciesId]);
     const struct FormChange * formChanges;
 
+    // Gigantamax true/false
+    bool8 gmaxFactor = FALSE;
+
     u8 evs, nature, abilityNum, moveCount;
 
     // Forme ID placeholder
@@ -2158,6 +2161,10 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
     {
         // Get the species form change table
         formChanges = GetSpeciesFormChanges(speciesId);
+
+        // If the forme change is Gigantamax, set gigantamax flag to true
+        if (formChanges[formeIndex].method == FORM_CHANGE_BATTLE_GIGANTAMAX)
+            gmaxFactor = TRUE;
 
         // Get the forme change target species
         formeId = formChanges[formeIndex].targetSpecies;
@@ -2182,14 +2189,15 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
 
     // No forme change
     if (formeId == speciesId) 
-    {
-        // Get the actual selected ability for the species
         abilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM);
-    }
     else // Forme change
-    {
         abilityNum = 0;
-    }
+
+    // Set held item to required item
+    SetMonData(mon, MON_DATA_HELD_ITEM, &item);
+
+    // Set the gigantamax flag
+    SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &gmaxFactor);
 
     // Give the chosen pokemon its specified moves.
     // Returns FRIENDSHIP_MAX unless the moveset
@@ -2752,19 +2760,19 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
             {
                 #if B_FLAG_DYNAMAX_BATTLE != 0
                 case FORM_CHANGE_BATTLE_GIGANTAMAX: {
-                    if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && BFG_ITEM_IV_ALLOW_GMAX)
+                    if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_GMAX) && ((properties->allowGmax) == TRUE))
                         forme = j;
                 }; break;
                 #endif
                 case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
-                    if ((item == ITEM_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL)) 
+                    if ((item == ITEM_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && RANDOM_CHANCE(BFG_FORME_CHANCE_PRIMAL))
                     {
                         item = formChanges[i].param1; // ItemId
                         forme = i;
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE: {
-                    if ((move == MOVE_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && ((properties->allowMega) == TRUE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((move == MOVE_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && ((properties->allowMega) == TRUE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA))
                     {
                         move = formChanges[i].param1; // MoveId
                         properties->allowMega = FALSE;
@@ -2772,7 +2780,7 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
                     }
                 }; break;
                 case FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM: {
-                    if ((item == ITEM_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && ((properties->allowMega) == TRUE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA)) 
+                    if ((item == ITEM_NONE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_MEGA) && ((bst + 100 <= (properties->maxBST))) && ((properties->allowMega) == TRUE) && RANDOM_CHANCE(BFG_FORME_CHANCE_MEGA))
                     {
                         item = formChanges[i].param1; // ItemId
                         properties->allowMega = FALSE;
@@ -2904,7 +2912,49 @@ void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, 
     properties->allowMega = TRUE;
 }
 
-void UpdateGeneratorForLevelMode(struct GeneratorProperties * properties, u8 lvlMode)
+void InitGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode)
+{
+    bool8 allowMega, allowGmax, allowZMove;
+
+    switch(lvlMode)
+    {
+        case FRONTIER_LVL_TENT:
+            allowMega = BFG_BST_TENT_ALLOW_MEGA;
+            allowGmax = BFG_BST_TENT_ALLOW_GMAX;
+            allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+        break;
+        case FRONTIER_LVL_50:
+        case FRONTIER_LVL_OPEN:
+            allowMega = (BFG_ITEM_IV_ALLOW_MEGA < BFG_ITEM_IV_BANNED);
+            allowGmax = (BFG_ITEM_IV_ALLOW_GMAX < BFG_ITEM_IV_BANNED);
+            allowZMove = (BFG_ITEM_IV_ALLOW_ZMOVE < BFG_ITEM_IV_BANNED);
+        break;
+    }
+
+    // Update based on flags
+
+    #if BFG_FLAG_FRONTIER_ALLOW_MEGA != 0
+    allowMega = (FlagGet(BFG_FLAG_FRONTIER_ALLOW_MEGA) && allowMega);
+    #endif
+
+    #if BFG_FLAG_FRONTIER_ALLOW_GMAX != 0
+    allowGmax = (FlagGet(BFG_FLAG_FRONTIER_ALLOW_GMAX) && allowGmax);
+    #endif
+
+    #if BFG_FLAG_FRONTIER_ALLOW_ZMOVE != 0
+    allowZMove = (FlagGet(BFG_FLAG_FRONTIER_ALLOW_ZMOVE) && allowZMove);
+    #endif
+
+    // Update properties
+    properties->allowMega = allowMega;
+    properties->allowGmax = allowGmax;
+    properties->allowZMove = allowZMove;
+    
+    // Configure fixedIv, minBST, maxBST
+    UpdateGeneratorForLvlMode(properties, lvlMode);
+}
+
+void UpdateGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode)
 {
     switch(lvlMode)
     {
@@ -2955,7 +3005,8 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
 
     // Setup fixed values for level mode
     u8 lvlMode = GET_LVL_MODE();
-    UpdateGeneratorForLevelMode(&properties, lvlMode);
+
+    InitGeneratorForLvlMode(&properties, lvlMode);
 
     DebugPrintf("Generating trainer party ...");
 
@@ -3061,13 +3112,11 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
     DebugPrintf("Generating facility initial rental mons ...");
 
     u8 lvlMode = GET_LVL_MODE();
+    InitGeneratorForLvlMode(&properties, lvlMode);
 
     // Battle Tent
     if (lvlMode == FRONTIER_LVL_TENT)
     {
-        // Override fixed tent values (Specified in config)
-        UpdateGeneratorForLevelMode(&properties, lvlMode);
-
         properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
         properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
         properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
@@ -3097,7 +3146,7 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
             properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
 
             // Override fixed frontier values (Specified in config)
-            UpdateGeneratorForLevelMode(&properties, lvlMode);
+            UpdateGeneratorForLvlMode(&properties, lvlMode);
         }
 
         // Sample random species from the mon count
@@ -3153,17 +3202,13 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
     InitGeneratorProperties(&properties, 0, 0);
 
     u8 lvlMode = GET_LVL_MODE();
-
+    
     DebugPrintf("Generating facility opponent mons ...");
 
     switch(lvlMode)
     {
         case FRONTIER_LVL_TENT:
-            properties.fixedIV = BFG_IV_LVL_TENT; // Battle tent trainer
-
-            properties.allowMega = BFG_BST_TENT_ALLOW_MEGA;
-            properties.allowGmax = BFG_BST_TENT_ALLOW_GMAX;
-            properties.allowZMove = BFG_BST_TENT_ALLOW_ZMOVE;
+            InitGeneratorForLvlMode(&properties, lvlMode);
         break;
         case FRONTIER_LVL_50:
         case FRONTIER_LVL_OPEN:
@@ -3183,7 +3228,7 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
             properties.allowMega = (properties.fixedIV >= BFG_ITEM_IV_ALLOW_MEGA);
 
             // Override fixed frontier values (Specified in config)
-            UpdateGeneratorForLevelMode(&properties, lvlMode);
+            UpdateGeneratorForLvlMode(&properties, lvlMode);
         break;
     }
 
@@ -3246,52 +3291,6 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
 
         gFrontierTempParty[i] = speciesId;
         i++;
-    }
-
-    DebugPrintf("Done.");
-}
-
-void SetFacilityPlayerParty(u8 level)
-{
-    u8 i;
-    u16 speciesId;
-
-    struct GeneratorProperties properties;
-    InitGeneratorProperties(&properties, level, 0);
-
-    DebugPrintf("Populating facility player party ...");
-
-    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
-    {
-        DebugPrintf("Populating party index %d ...", i);
-
-        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
-        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-
-        GenerateTrainerPokemonHandleForme(&gPlayerParty[i], speciesId, &properties);
-    } 
-
-    DebugPrintf("Done.");
-}
-
-void SetFacilityOpponentParty(u8 level)
-{
-    u8 i;
-    u16 speciesId;
-
-    struct GeneratorProperties properties;
-    InitGeneratorProperties(&properties, level, 0);
-
-    DebugPrintf("Populating facility opponent party ...");
-
-    for(i = 0; i < FRONTIER_PARTY_SIZE; i++)
-    {
-        DebugPrintf("Populating party index %d ...", i);
-
-        speciesId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
-        properties.fixedIV = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
-
-        GenerateTrainerPokemonHandleForme(&gEnemyParty[i], speciesId, &properties);
     }
 
     DebugPrintf("Done.");
@@ -3433,4 +3432,40 @@ void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum)
         return; // Battle Frontier items disabled
 
     SetFacilityPartyHeldItems(challengeNum, gPlayerParty, PARTY_SIZE);
+}
+
+void FrontierBattlerCanMegaEvolve()
+{
+    #if BFG_FLAG_FRONTIER_ALLOW_MEGA != 0
+    return FlagGet(BFG_FLAG_FRONTIER_ALLOW_MEGA);
+    #else // Default
+    return TRUE; 
+    #endif
+}
+
+void FrontierBattlerCanUseZMove()
+{    
+    #if BFG_FLAG_FRONTIER_ALLOW_ZMOVE != 0
+    return FlagGet(BFG_FLAG_FRONTIER_ALLOW_ZMOVE);
+    #else // Default
+    return TRUE; 
+    #endif
+}
+
+void FrontierBattlerCanDynamax(struct Pokemon * mon)
+{
+    #if BFG_FLAG_FRONTIER_ALLOW_GMAX != 0
+    return (FlagGet(BFG_FLAG_FRONTIER_ALLOW_GMAX) || (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR) == FALSE));
+    #else // Default
+    return TRUE; 
+    #endif
+}
+
+void FrontierBattlerShouldDynamax(struct Pokemon * mon)
+{
+    // If the selected Pokemon has the gigantamax factor
+    if (GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR) == TRUE)
+        return RANDOM_CHANCE(BFG_RANDOM_GIGANTAMAX_CHANCE);
+    else // No gigantamax factor
+        return RANDOM_CHANCE(BFG_RANDOM_DYNAMAX_CHANCE);
 }

@@ -311,7 +311,7 @@ static void GenerateInitialRentalMons(void)
     gFacilityTrainerMons = gSlateportBattleTentMons;
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilityInitialRentalMons(firstMonId, 0, 0);
         return;
     }
@@ -397,7 +397,7 @@ static void GenerateOpponentMons(void)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = gTrainerBattleOpponent_A;
     
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilityOpponentMons(trainerId, 0, 0, 0);
         return;
     }

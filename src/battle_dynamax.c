@@ -22,6 +22,8 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
+#include "battle_frontier_generator.h"
+
 static u8 GetMaxPowerTier(u16 move);
 
 struct GMaxMove
@@ -93,6 +95,10 @@ bool32 CanDynamax(u16 battlerId)
     #endif
         return FALSE;
 
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]])) == FALSE))
+        return FALSE;
+    #endif
 
     // Check if Player has a Dynamax Band.
     if ((GetBattlerPosition(battlerId) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battlerId) == B_POSITION_PLAYER_RIGHT))

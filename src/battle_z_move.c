@@ -42,6 +42,8 @@
 #include "constants/abilities.h"
 #include "constants/moves.h"
 
+#include "battle_frontier_generator.h"
+
 #define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
 
 // Function Declarations
@@ -174,6 +176,11 @@ bool32 IsViableZMove(u8 battler, u16 move)
     // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
         return FALSE;
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanUseZMove() == FALSE))
+        return FALSE; // Battler cannot use Z-Move
+    #endif
 
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;

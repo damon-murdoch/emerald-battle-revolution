@@ -40,6 +40,8 @@
 #include "trainer_hill.h"
 #include "test_runner.h"
 
+#include "battle_frontier_generator.h"
+
 static void OpponentHandleLoadMonSprite(u32 battler);
 static void OpponentHandleSwitchInAnim(u32 battler);
 static void OpponentHandleDrawTrainerPic(u32 battler);
@@ -549,7 +551,15 @@ static void OpponentHandleChooseMove(u32 battler)
                     const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
                     bool32 shouldDynamax = FALSE;
                     if (party != NULL)
+                    {
+                        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+                        if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR))
+                            shouldDynamax = FrontierBattlerShouldDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]]));
+                        else // Normal opponent
+                        #endif
                         shouldDynamax = party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax;
+                    }
+                        
 
                     if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                         gBattlerTarget = battler;

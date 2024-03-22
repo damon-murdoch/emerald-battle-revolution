@@ -48,6 +48,8 @@
 #include "constants/weather.h"
 #include "constants/pokemon.h"
 
+#include "battle_frontier_generator.h"
+
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
 are actually part of battle_main.c. They needed to be moved to this file in order to
@@ -10152,6 +10154,11 @@ bool32 CanMegaEvolve(u32 battler)
     u32 battlerPosition = GetBattlerPosition(battler);
     u8 partnerPosition = GetBattlerPosition(BATTLE_PARTNER(battler));
     struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]))->mega);
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanMegaEvolve() == FALSE))
+        return FALSE; // Battler cannot mega evolve
+    #endif
 
     // Check if Player has a Mega Ring
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))

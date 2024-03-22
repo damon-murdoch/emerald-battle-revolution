@@ -333,7 +333,7 @@ static void GenerateOpponentMons(void)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilityOpponentMons(trainerId, firstMonId, challengeNum, winStreak);
         return;
     }
@@ -395,7 +395,7 @@ static void SetOpponentGfxVar(void)
 static void SetRentalsToOpponentParty(void)
 {
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         SetRentalsToFacilityOpponentParty();
         return;
     }
@@ -446,65 +446,48 @@ static void SetPlayerAndOpponentParties(void)
 
     if (gSpecialVar_0x8005 < 2)
     {
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
-        if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            SetFacilityPlayerParty(monLevel);
-        }
-        else // Standard Generation Method
+        ZeroPlayerPartyMons();
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-        #endif
-            ZeroPlayerPartyMons();
-            for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
+            CreateMon(&gPlayerParty[i],
+                    gFacilityTrainerMons[monId].species,
+                    monLevel,
+                    ivs,
+                    TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
+                    OT_ID_PLAYER_ID, 0);
+
+            count = 0;
+            bits = gFacilityTrainerMons[monId].evSpread;
+            for (j = 0; j < NUM_STATS; bits >>= 1, j++)
             {
-                monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
-                ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-                CreateMon(&gPlayerParty[i],
-                        gFacilityTrainerMons[monId].species,
-                        monLevel,
-                        ivs,
-                        TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
-                        OT_ID_PLAYER_ID, 0);
-
-                count = 0;
-                bits = gFacilityTrainerMons[monId].evSpread;
-                for (j = 0; j < NUM_STATS; bits >>= 1, j++)
-                {
-                    if (bits & 1)
-                        count++;
-                }
-
-                evs = MAX_TOTAL_EVS / count;
-                bits = 1;
-                for (j = 0; j < NUM_STATS; bits <<= 1, j++)
-                {
-                    if (gFacilityTrainerMons[monId].evSpread & bits)
-                        SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
-                }
-
-                CalculateMonStats(&gPlayerParty[i]);
-                friendship = 0;
-                for (k = 0; k < MAX_MON_MOVES; k++)
-                    SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monId].moves[k], k);
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-                SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
+                if (bits & 1)
+                    count++;
             }
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+
+            evs = MAX_TOTAL_EVS / count;
+            bits = 1;
+            for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+            {
+                if (gFacilityTrainerMons[monId].evSpread & bits)
+                    SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
+            }
+
+            CalculateMonStats(&gPlayerParty[i]);
+            friendship = 0;
+            for (k = 0; k < MAX_MON_MOVES; k++)
+                SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monId].moves[k], k);
+            SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+            SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
         }
-        #endif
     }
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
     case 2:
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
-        if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            SetFacilityOpponentParty(monLevel);
-            return;
-        }
-        #endif
-
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
             monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
@@ -587,7 +570,7 @@ static void GenerateInitialRentalMons(void)
     rentalRank = GetNumPastRentalsRank(factoryBattleMode, factoryLvlMode);
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         GenerateFacilityInitialRentalMons(firstMonId, challengeNum, rentalRank);
         return;
     }
@@ -655,7 +638,7 @@ static void GetOpponentMostCommonMonType(void)
     u8 mostCommonTypes[2];
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         // TODO: Generate actual type-checking system
         gSpecialVar_Result = NUMBER_OF_MON_TYPES;
         return;
@@ -712,7 +695,7 @@ static void GetOpponentBattleStyle(void)
     u8 stylePoints[FACTORY_NUM_STYLES];
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         // TODO: Generate actual style-checking system
         gSpecialVar_Result = FACTORY_NUM_STYLES;
         return;
@@ -776,7 +759,7 @@ static void RestorePlayerPartyHeldItems(void)
     u8 i;
     
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if (!FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
         u8 lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
         u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
         u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
