@@ -37,6 +37,8 @@ script BattleFrontierController_EventScript_ControllerOptions {
 			goto(BattleFrontierController_EventScript_ControllerChangeBehavior)
 		case 2: # Change Music
 			goto(BattleFrontierController_EventScript_ControllerChangeMusic)
+		case 3: # Change Rules
+			goto(BattleFrontierController_EventScript_ControllerChangeRules)
 		default: 
 			goto(BattleFrontierController_EventScript_ControllerEnd)
 	}
@@ -207,6 +209,10 @@ script BattleFrontierController_EventScript_ControllerMusicSelectPage4 {
 	goto(BattleFrontierController_EventScript_ControllerMusicSelectSuccess)
 }
 
+script BattleFrontierController_EventScript_ControllerChangeRules {
+	
+}
+
 script BattleFrontierController_EventScript_ControllerMusicSelectSuccess {
 	playse(SE_SUCCESS)
 	msgbox(format("All done! Your music selection has been changed."))
@@ -224,6 +230,7 @@ text BattleFrontierController_Text_ControllerOptionSelect {
 	"CHANGE OPPONENTS$"
 	"CHANGE BEHAVIOR$"
 	"CHANGE MUSIC$"
+	"CHANGE RULES$"
 	"NOTHING$"
 	""
 }
