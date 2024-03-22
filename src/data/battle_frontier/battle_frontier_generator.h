@@ -279,7 +279,7 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 // This, for example, allows Fake Out and Return to be picked on the same set.
 const bool8 gBattleFrontierMoveIgnoreTypeCount[MOVES_COUNT] = 
 {
-    // Priority Attacks
+    // Priority
     [MOVE_FAKE_OUT] = TRUE, 
     [MOVE_UPPER_HAND] = TRUE, 
     [MOVE_EXTREME_SPEED] = TRUE, 
@@ -298,10 +298,12 @@ const bool8 gBattleFrontierMoveIgnoreTypeCount[MOVES_COUNT] =
     [MOVE_THUNDERCLAP] = TRUE, 
     [MOVE_VACUUM_WAVE] = TRUE, 
     [MOVE_WATER_SHURIKEN] = TRUE, 
-    // Counter Attacks
+    // Counters
     [MOVE_BIDE] = TRUE, 
     [MOVE_COMEUPPANCE] = TRUE, 
     [MOVE_COUNTER] = TRUE, 
     [MOVE_METAL_BURST] = TRUE, 
     [MOVE_MIRROR_COAT] = TRUE,
+    // Speed Control
+    [MOVE_ICY_WIND] = TRUE,
 };
