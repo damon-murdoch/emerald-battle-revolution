@@ -465,6 +465,17 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(DATA_ASM_BUILDDIR)/event_scripts.o
 	python3 tools/learnset_helpers/teachable.py
 
+# Generate Modern Battle Frontier Move Ratings List
+$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_move_ratings.h
+	pip install -r tools/bfg_helpers/requirements.txt
+	python3 tools/bfg_helpers/move_ratings.py
+
+# Generate Modern Battle Frontier Trainer Class Mons Lists
+$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_trainer_class_mons.h
+	pip install -r tools/bfg_helpers/requirements.txt
+	python3 tools/bfg_helpers/trainer_mons.py
+
+
 # NOTE: Based on C_DEP above, but without NODEP and KEEP_TEMPS handling.
 define TEST_DEP
 $1: $2 $$(shell $(SCANINC) -I include -I tools/agbcc/include -I gflib $2)
