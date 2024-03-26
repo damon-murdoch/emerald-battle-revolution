@@ -466,12 +466,12 @@ $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(DATA_ASM_BUILDDIR)/event_scr
 	python3 tools/learnset_helpers/teachable.py
 
 # Generate Modern Battle Frontier Move Ratings List
-$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_move_ratings.h
+$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_move_ratings.h: $(DATA_ASM_BUILDDIR)/event_scripts.o
 	pip install -r tools/bfg_helpers/requirements.txt
 	python3 tools/bfg_helpers/move_ratings.py
 
 # Generate Modern Battle Frontier Trainer Class Mons Lists
-$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_trainer_class_mons.h
+$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_trainer_class_mons.h: $(DATA_ASM_BUILDDIR)/event_scripts.o 
 	pip install -r tools/bfg_helpers/requirements.txt
 	python3 tools/bfg_helpers/trainer_mons.py
 

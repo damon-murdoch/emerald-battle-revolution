@@ -309,7 +309,7 @@ if __name__ == "__main__":
         "// Repository Link: https://github.com/damon-murdoch/bfg-helper-scripts",
         "// Warning: Some moves may need to be renamed or removed depending on your project!",
         "",
-        "const u8 gBattleFrontierAttackRatings[MOVES_COUNT] = {",
+        "const u8 gBattleFrontierMoveRatings[MOVES_COUNT] = {",
     ]
 
     # Loop over sorted moves
