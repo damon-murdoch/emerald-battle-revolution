@@ -452,6 +452,16 @@ endif
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 
+# NOTE: The below Python scripts require the 'requests' module ONLY if ./tools/bfg_helpers/data has been deleted!
+
+# Generate Modern Battle Frontier Move Ratings List
+bfg_move_rating_mon_data: tools/bfg_helpers/data/*.json tools/bfg_helpers/custom/*.json tools/bfg_helpers/move_ratings.py
+	python3 tools/bfg_helpers/move_ratings.py
+
+# Generate Modern Battle Frontier Trainer Class Mons Lists
+bfg_trainer_mon_data: tools/bfg_helpers/data/*.json tools/bfg_helpers/custom/*.json tools/bfg_helpers/trainer_mons.py
+	python3 tools/bfg_helpers/trainer_mons.py
+
 $(OBJ_DIR)/sym_bss.ld: sym_bss.txt
 	$(RAMSCRGEN) .bss $< ENGLISH > $@
 
@@ -464,17 +474,6 @@ $(OBJ_DIR)/sym_ewram.ld: sym_ewram.txt
 # NOTE: Depending on event_scripts.o is hacky, but we want to depend on everything event_scripts.s depends on without having to alter scaninc
 $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(DATA_ASM_BUILDDIR)/event_scripts.o
 	python3 tools/learnset_helpers/teachable.py
-
-# Generate Modern Battle Frontier Move Ratings List
-$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_move_ratings.h: $(DATA_ASM_BUILDDIR)/event_scripts.o
-	pip install -r tools/bfg_helpers/requirements.txt
-	python3 tools/bfg_helpers/move_ratings.py
-
-# Generate Modern Battle Frontier Trainer Class Mons Lists
-$(DATA_SRC_SUBDIR)/battle_frontier/battle_frontier_generator_trainer_class_mons.h: $(DATA_ASM_BUILDDIR)/event_scripts.o 
-	pip install -r tools/bfg_helpers/requirements.txt
-	python3 tools/bfg_helpers/trainer_mons.py
-
 
 # NOTE: Based on C_DEP above, but without NODEP and KEEP_TEMPS handling.
 define TEST_DEP

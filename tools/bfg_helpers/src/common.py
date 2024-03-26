@@ -1,4 +1,9 @@
+from datetime import datetime
+
 CONFIG_FILE = "./include/config/battle_frontier_generator.h"
+
+def get_timestamp(time = datetime.now()):
+    return time.strftime("%d-%m-%y %H:%M:%S")
 
 def convert_const_to_camel(const):
     parts = const.split("_")
