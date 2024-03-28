@@ -12,10 +12,10 @@
 #define BFG_VAR_TEAM_GENERATION_METHOD VAR_FRONTIER_METHOD // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
 
 // Run 'move_ratings.py' as part of build pipeline
-#define BFG_GENERATE_MOVE_RATINGS TRUE    // Generate battle_frontier_generator_move_ratings.h
+#define BFG_GENERATE_MOVE_RATINGS FALSE    // Generate battle_frontier_generator_move_ratings.h
 
 // Run 'trainer_mons.py' as part of build pipeline
-#define BFG_GENERATE_TRAINER_MONS TRUE    // Generate battle_frontier_generator_trainer_class_mons.h
+#define BFG_GENERATE_TRAINER_MONS FALSE    // Generate battle_frontier_generator_trainer_class_mons.h
 
 // #define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
 // #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
