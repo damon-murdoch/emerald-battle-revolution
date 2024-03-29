@@ -1072,6 +1072,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/legendary_shop.inc"
 	.include "data/scripts/sample_sets.inc"
 	.include "data/scripts/sample_teams.inc"
+	.include "data/scripts/introduction.inc"
 	.include "data/scripts/currency_converter.inc"
 	.include "data/scripts/frontier_controller.inc"
 	.include "data/text/frontier_brain.inc"
