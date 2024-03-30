@@ -264,6 +264,12 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.2.1
+
+Added new, unfinished location 'Battle Spot' to the Battle Frontier Underground, with a pathway leading in from the center of the top row of shops. 
+Several vendors have been broken down into their own files to improve code reusability. Updated battle frontier controller to allow for the banning
+and unbanning of megas, zmoves, gigantamax. Improved startup scripts
+
 ### Ver. 1.2.0
 
 Merged upstream changes which have implemented modern battle frontier set generation for Battle Factory, as well as all Battle Tent Facilities. 
