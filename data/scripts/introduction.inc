@@ -461,7 +461,7 @@ Introduction_EventScript_SetupSandboxMode_1:
 	setvar VAR_SCOTT_BF_CALL_STEP_COUNTER, 10
 	setvar VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER, 250
 	special EnableNationalPokedex
-	setvar VAR_FRONTIER_METHOD, BFG_TEAM_GENERATOR_FILTERED_RANKING
+	setvar VAR_FRONTIER_METHOD, 4
 	giveitem ITEM_SS_TICKET
 	addmoney 500000
 	givemon SPECIES_TALONFLAME, 50

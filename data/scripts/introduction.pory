@@ -513,7 +513,7 @@ script Introduction_EventScript_SetupSandboxMode {
 	special(EnableNationalPokedex)
 
 	# (New!) Set Frontier Set Generation Method
-	setvar(VAR_FRONTIER_METHOD, BFG_TEAM_GENERATOR_FILTERED_RANKING)
+	setvar(VAR_FRONTIER_METHOD, 4) # BFG_TEAM_GENERATOR_FILTERED_RANKING
 
 	# Story Key Items
 	giveitem(ITEM_SS_TICKET)
