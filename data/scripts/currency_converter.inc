@@ -1,0 +1,532 @@
+CurrencyConverterCommon_EventScript_BattlePointConverter::
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverter_Text_0
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverter_Text_1
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom
+	return
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom::
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_Text_0
+	multichoice2 18, 0, CurrencyConverterCommon_Text_BattlePointConverterBPToOrFrom
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_2
+	case 1, CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_3
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterEnd
+	return
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_2:
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions
+	return
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_3:
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions
+	return
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions::
+	showmoneybox 0, 0
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_0
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	multichoice2 18, 0, CurrencyConverterCommon_Text_BattlePointConverterBPToOptions
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_3
+	case 1, CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_4
+	case 2, CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_5
+	case 3, CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_6
+	case 4, CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_7
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1:
+	playse SE_SHOP
+	special GiveFrontierBattlePoints
+	updatemoneybox
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_1
+	waitse
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions
+	return
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_3:
+	checkmoney 9800
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_9
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_4:
+	checkmoney 49000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_12
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_5:
+	checkmoney 98000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_15
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_6:
+	checkmoney 196000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_18
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_7:
+	checkmoney 490000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_21
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_9:
+	setvar VAR_0x8004, 1
+	removemoney 9800
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_12:
+	setvar VAR_0x8004, 5
+	removemoney 49000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_15:
+	setvar VAR_0x8004, 10
+	removemoney 98000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_18:
+	setvar VAR_0x8004, 20
+	removemoney 196000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_21:
+	setvar VAR_0x8004, 50
+	removemoney 490000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_1
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford::
+	playse SE_FAILURE
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford_Text_0
+	waitse
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom
+	return
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions::
+	special ShowBattlePointsWindow
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_0
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	multichoice2 18, 0, CurrencyConverterCommon_Text_BattlePointConverterBPFromOptions
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_3
+	case 1, CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_4
+	case 2, CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_5
+	case 3, CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_6
+	case 4, CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_7
+	special CloseBattlePointsWindow
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1:
+	playse SE_SHOP
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_Text_0
+	waitse
+	special CloseBattlePointsWindow
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions
+	return
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_3:
+	compare VAR_TEMP_1, 1
+	goto_if_ge CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_9
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_4:
+	compare VAR_TEMP_1, 5
+	goto_if_ge CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_12
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_5:
+	compare VAR_TEMP_1, 10
+	goto_if_ge CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_15
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_6:
+	compare VAR_TEMP_1, 20
+	goto_if_ge CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_18
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_7:
+	compare VAR_TEMP_1, 50
+	goto_if_ge CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_21
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_9:
+	setvar VAR_0x8004, 1
+	addmoney 9800
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_12:
+	setvar VAR_0x8004, 5
+	addmoney 49000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_15:
+	setvar VAR_0x8004, 10
+	addmoney 98000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_18:
+	setvar VAR_0x8004, 20
+	addmoney 196000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_21:
+	setvar VAR_0x8004, 50
+	addmoney 490000
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_1
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford::
+	playse SE_FAILURE
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford_Text_0
+	waitse
+	special CloseBattlePointsWindow
+	goto CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom
+	return
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverterEnd::
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterEnd_Text_0
+	release
+	end
+
+
+CurrencyConverterCommon_EventScript_CoinConverter::
+	msgbox CurrencyConverterCommon_EventScript_CoinConverter_Text_0
+	msgbox CurrencyConverterCommon_EventScript_CoinConverter_Text_1
+	checkitem ITEM_COIN_CASE
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverter_2
+CurrencyConverterCommon_EventScript_CoinConverter_1:
+	msgbox CurrencyConverterCommon_EventScript_CoinConverter_Text_2
+	release
+	end
+
+CurrencyConverterCommon_EventScript_CoinConverter_2:
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOrFrom
+	goto CurrencyConverterCommon_EventScript_CoinConverter_1
+
+
+CurrencyConverterCommon_EventScript_CoinConverterToOrFrom::
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_Text_0
+	multichoice2 18, 0, CurrencyConverterCommon_Text_CoinConverterToOrFrom
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_CoinConverterToOrFrom_2
+	case 1, CurrencyConverterCommon_EventScript_CoinConverterToOrFrom_3
+	goto CurrencyConverterCommon_EventScript_CoinConverterEnd
+	return
+
+CurrencyConverterCommon_EventScript_CoinConverterToOrFrom_2:
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions
+	return
+
+CurrencyConverterCommon_EventScript_CoinConverterToOrFrom_3:
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions
+	return
+
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions::
+	showmoneybox 0, 0
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_0
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	multichoice2 18, 0, CurrencyConverterCommon_Text_CoinConverterToOptions
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_CoinConverterToOptions_3
+	case 1, CurrencyConverterCommon_EventScript_CoinConverterToOptions_4
+	case 2, CurrencyConverterCommon_EventScript_CoinConverterToOptions_5
+	case 3, CurrencyConverterCommon_EventScript_CoinConverterToOptions_6
+	case 4, CurrencyConverterCommon_EventScript_CoinConverterToOptions_7
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOrFrom
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_1:
+	playse SE_SHOP
+	updatemoneybox
+	msgbox CurrencyConverterCommon_EventScript_CoinConverterToOptions_Text_0
+	waitse
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions
+	return
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_3:
+	checkmoney 200
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverterToOptions_9
+	goto CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_4:
+	checkmoney 1000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverterToOptions_12
+	goto CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_5:
+	checkmoney 2000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverterToOptions_15
+	goto CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_6:
+	checkmoney 4000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverterToOptions_18
+	goto CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_7:
+	checkmoney 10000
+	compare VAR_RESULT, TRUE
+	goto_if_eq CurrencyConverterCommon_EventScript_CoinConverterToOptions_21
+	goto CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_9:
+	addcoins 10
+	removemoney 200
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_12:
+	addcoins 50
+	removemoney 1000
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_15:
+	addcoins 100
+	removemoney 2000
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_18:
+	addcoins 200
+	removemoney 4000
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_21:
+	addcoins 500
+	removemoney 10000
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOptions_1
+
+
+CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford::
+	playse SE_FAILURE
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford_Text_0
+	waitse
+	hidemoneybox
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOrFrom
+	return
+
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions::
+	showcoinsbox 1, 1
+	msgbox CurrencyConverterCommon_EventScript_CoinConverterFromOptions_Text_0
+	checkcoins VAR_TEMP_1
+	multichoice2 18, 0, CurrencyConverterCommon_Text_CoinConverterFromOptions
+	switch VAR_RESULT
+	case 0, CurrencyConverterCommon_EventScript_CoinConverterFromOptions_3
+	case 1, CurrencyConverterCommon_EventScript_CoinConverterFromOptions_4
+	case 2, CurrencyConverterCommon_EventScript_CoinConverterFromOptions_5
+	case 3, CurrencyConverterCommon_EventScript_CoinConverterFromOptions_6
+	case 4, CurrencyConverterCommon_EventScript_CoinConverterFromOptions_7
+	hidecoinsbox 1, 1
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOrFrom
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1:
+	playse SE_SHOP
+	updatecoinsbox 1, 1
+	msgbox CurrencyConverterCommon_EventScript_CoinConverterFromOptions_Text_1
+	waitse
+	hidecoinsbox 1, 1
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions
+	return
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_3:
+	compare VAR_TEMP_1, 10
+	goto_if_ge CurrencyConverterCommon_EventScript_CoinConverterFromOptions_9
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_4:
+	compare VAR_TEMP_1, 50
+	goto_if_ge CurrencyConverterCommon_EventScript_CoinConverterFromOptions_12
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_5:
+	compare VAR_TEMP_1, 100
+	goto_if_ge CurrencyConverterCommon_EventScript_CoinConverterFromOptions_15
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_6:
+	compare VAR_TEMP_1, 200
+	goto_if_ge CurrencyConverterCommon_EventScript_CoinConverterFromOptions_18
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_7:
+	compare VAR_TEMP_1, 500
+	goto_if_ge CurrencyConverterCommon_EventScript_CoinConverterFromOptions_21
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_9:
+	removecoins 10
+	addmoney 200
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_12:
+	removecoins 50
+	addmoney 1000
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_15:
+	removecoins 100
+	addmoney 2000
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_18:
+	removecoins 200
+	addmoney 4000
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_21:
+	removecoins 500
+	addmoney 10000
+	goto CurrencyConverterCommon_EventScript_CoinConverterFromOptions_1
+
+
+CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford::
+	playse SE_FAILURE
+	msgbox CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford_Text_0
+	waitse
+	hidecoinsbox 1, 1
+	goto CurrencyConverterCommon_EventScript_CoinConverterToOrFrom
+	return
+
+
+CurrencyConverterCommon_EventScript_CoinConverterEnd::
+	msgbox CurrencyConverterCommon_EventScript_BattlePointConverterEnd_Text_0
+	release
+	end
+
+
+CurrencyConverterCommon_EventScript_BattlePointConverter_Text_0:
+	.string "This is a machine for converting\n"
+	.string "currency between BP and ¥!$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverter_Text_1:
+	.string "The exchange rate is ¥9800 for every 1\n"
+	.string "BP.$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom_Text_0:
+	.string "What would you like to do?$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_0:
+	.string "How much would you like?$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToOptions_Text_1:
+	.string "BP redeemed successfully!$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford_Text_0:
+	.string "Not enough ¥!$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions_Text_0:
+	.string "BP exchanged successfully!$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford_Text_0:
+	.string "Not enough BP!$"
+
+CurrencyConverterCommon_EventScript_BattlePointConverterEnd_Text_0:
+	.string "You decided to stop using the\n"
+	.string "converter.$"
+
+CurrencyConverterCommon_EventScript_CoinConverter_Text_0:
+	.string "This is a machine for converting\n"
+	.string "currency between coins and ¥!$"
+
+CurrencyConverterCommon_EventScript_CoinConverter_Text_1:
+	.string "The exchange rate is ¥20 for every 1\n"
+	.string "coin.$"
+
+CurrencyConverterCommon_EventScript_CoinConverter_Text_2:
+	.string "Before you can use this machine, you\n"
+	.string "will need a COIN CASE.$"
+
+CurrencyConverterCommon_EventScript_CoinConverterToOptions_Text_0:
+	.string "Coins redeemed successfully!$"
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_Text_0:
+	.string "How many would you like?$"
+
+CurrencyConverterCommon_EventScript_CoinConverterFromOptions_Text_1:
+	.string "Coins exchanged successfully!$"
+
+CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford_Text_0:
+	.string "Not enough coins!$"
+
+CurrencyConverterCommon_Text_BattlePointConverterBPToOrFrom::
+	.string "Convert BP to ¥$"
+	.string "Convert ¥ to BP$"
+	.string "CANCEL$"
+	.string "$"
+
+CurrencyConverterCommon_Text_BattlePointConverterBPToOptions::
+	.string "¥9800 (1BP)$"
+	.string "¥49000 (5BP)$"
+	.string "¥98000 (10BP)$"
+	.string "¥196000 (20BP)$"
+	.string "¥490000 (50BP)$"
+	.string "GO BACK$"
+	.string "$"
+
+CurrencyConverterCommon_Text_BattlePointConverterBPFromOptions::
+	.string "1BP (¥9800)$"
+	.string "5BP (¥49000)$"
+	.string "10BP (¥98000)$"
+	.string "20BP (¥196000)$"
+	.string "50BP (¥490000)$"
+	.string "GO BACK$"
+	.string "$"
+
+CurrencyConverterCommon_Text_CoinConverterToOrFrom::
+	.string "Convert coins to ¥$"
+	.string "Convert ¥ to coins$"
+	.string "CANCEL$"
+	.string "$"
+
+CurrencyConverterCommon_Text_CoinConverterToOptions::
+	.string "¥200 (10 coins)$"
+	.string "¥1000 (50 coins)$"
+	.string "¥2000 (100 coins)$"
+	.string "¥4000 (200 coins)$"
+	.string "¥10000 (500 coins)$"
+	.string "GO BACK$"
+	.string "$"
+
+CurrencyConverterCommon_Text_CoinConverterFromOptions::
+	.string "10 coins (¥200)$"
+	.string "50 coins (¥1000)$"
+	.string "100 coins (¥2000)$"
+	.string "200 coins (¥4000)$"
+	.string "500 coins (¥10000)$"
+	.string "GO BACK$"
+	.string "$"

@@ -4460,6 +4460,16 @@
       "secondary_tileset": "gTileset_PokemonCenter",
       "border_filepath": "data/layouts/BattleFrontier_Underground_B2F_PokeCenter_2F/border.bin",
       "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B2F_PokeCenter_2F/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_UNDERGROUND_B2F_BATTLE_SPOT_1F",
+      "name": "BattleFrontier_Underground_B2F_BattleSpot_1F_Layout",
+      "width": 18,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleFrontier",
+      "border_filepath": "data/layouts/BattleFrontier_Underground_B2F_BattleSpot_1F/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_Underground_B2F_BattleSpot_1F/map.bin"
     }
   ]
 }

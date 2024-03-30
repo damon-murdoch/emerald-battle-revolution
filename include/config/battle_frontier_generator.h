@@ -4,12 +4,25 @@
 // *** GENERAL ***
 #define BFG_FLAG_FRONTIER_GENERATOR FLAG_BATTLE_FRONTIER_GENERATOR // Flag to enable or disable random generator
 
+#define BFG_FLAG_FRONTIER_ALLOW_MEGA FLAG_BATTLE_FRONTIER_ALLOW_MEGA // Flag to enable or disable Mega Evolution
+#define BFG_FLAG_FRONTIER_ALLOW_GMAX FLAG_BATTLE_FRONTIER_ALLOW_GMAX // Flag to enable or disable Gigantamax
+#define BFG_FLAG_FRONTIER_ALLOW_ZMOVE FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE // Flag to enable or disable Z Moves
+
 #define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_VARIABLE
 #define BFG_VAR_TEAM_GENERATION_METHOD VAR_FRONTIER_METHOD // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
+
+// Run 'move_ratings.py' as part of build pipeline
+#define BFG_GENERATE_MOVE_RATINGS FALSE    // Generate battle_frontier_generator_move_ratings.h
+
+// Run 'trainer_mons.py' as part of build pipeline
+#define BFG_GENERATE_TRAINER_MONS FALSE    // Generate battle_frontier_generator_trainer_class_mons.h
 
 // #define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
 // #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
 // #define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
+
+#define BFG_RANDOM_GIGANTAMAX_CHANCE 1  // 1/x Chance for a Pokemon to Gigantamax
+#define BFG_RANDOM_DYNAMAX_CHANCE 4     // 1/x Chance for a Pokemon to Dynamax
 
 #define BFG_RANDOM_OFFSET_MIN 0        // Min. Value for RANDOM_OFFSET()
 #define BFG_RANDOM_OFFSET_MAX 10        // Max. Value for RANDOM_OFFSET()
@@ -252,9 +265,9 @@
 
 // Set any of these values to 32 or above to disable them entirely
 
-#define BFG_ITEM_IV_ALLOW_MEGA 15   // Min. IVs required for Mega Evolution
-#define BFG_ITEM_IV_ALLOW_ZMOVE 15  // Min. IVs required for Z-Moves
-#define BFG_ITEM_IV_ALLOW_GMAX 15   // Min. IVs required for Gigantamax
+#define BFG_ITEM_IV_ALLOW_MEGA 21   // Min. IVs required for Mega Evolution
+#define BFG_ITEM_IV_ALLOW_ZMOVE 21  // Min. IVs required for Z-Moves
+#define BFG_ITEM_IV_ALLOW_GMAX 21   // Min. IVs required for Gigantamax
 
 // Allow items in different Battle Facilities
 // Please note, Megas/Zmoves/Gmax ignore these flags

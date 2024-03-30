@@ -49,6 +49,8 @@
 #include "constants/pokemon.h"
 #include "config/dynamax.h"
 
+#include "battle_frontier_generator.h"
+
 /*
 NOTE: The data and functions in this file up until (but not including) sSoundMovesTable
 are actually part of battle_main.c. They needed to be moved to this file in order to
@@ -10155,8 +10157,13 @@ bool32 CanMegaEvolve(u32 battler)
     struct MegaEvolutionData *mega = &(((struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]))->mega);
 
     // Check if Mega Evolution is blocked by dynamax battle
-    if (!DB_ALLOW_MEGA_EVOLUTION && FlagGet(FLAG_DYNAMAX_BATTLE))
+    if ((!DB_ALLOW_MEGA_EVOLUTION) && FlagGet(FLAG_DYNAMAX_BATTLE))
         return FALSE;
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanMegaEvolve() == FALSE))
+        return FALSE; // Battler cannot mega evolve
+    #endif
 
     // Check if Player has a Mega Ring
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT))

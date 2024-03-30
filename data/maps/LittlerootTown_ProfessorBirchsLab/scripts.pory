@@ -1003,16 +1003,16 @@ LittlerootTown_ProfessorBirchsLab_Text_ScottAboardSSTidalCall:
 `
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex {
-	// Has not recieved national pokedex
+	# Has not recieved national pokedex
 	if (flag(FLAG_SYS_NATIONAL_DEX) == false){
 		call(LittlerootTown_ProfessorBirchsLab_EventScript_UpgradeToNationalDex)
 	}
-	else // Already has national pokedex
+	else # Already has national pokedex
 	{
-		// Show Birch message box
+		# Show Birch message box
 		msgbox(LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex)
 
-		// Ensure flags are correct
+		# Ensure flags are correct
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_BIRCH)
 		setflag(FLAG_HIDE_LITTLEROOT_TOWN_RIVAL)
 		setvar(VAR_DEX_UPGRADE_JOHTO_STARTER_STATE, 2)
@@ -1020,7 +1020,7 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex {
 		setflag(FLAG_SCOTT_CALL_BATTLE_FRONTIER)
 	}
 
-	// Give catching charm, if not already owned
+	# Give catching charm, if not already owned
 	if (flag(FLAG_RECEIVED_CATCHING_CHARM) == false){
 		msgbox(format("Also, I'd like you to have this."))
 		giveitem(ITEM_CATCHING_CHARM)
@@ -1030,7 +1030,7 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_CheckNationalPokedex {
 
 	msgbox(format("Now, get out there and enjoy the HOENN region!"))
 
-	// Clean up
+	# Clean up
 	releaseall
 	end
 }
@@ -1051,22 +1051,22 @@ text LittleRootTown_ProfessorBirchsLab_Text_CheckNationalPokedex {
 }
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_CheckPokedex {
-	// Has not recieved pokedex, go to pokedex
+	# Has not recieved pokedex, go to pokedex
 	if (flag(FLAG_RECEIVED_POKEDEX_FROM_BIRCH) == false){
 		call(LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex)
 	}
-	else // Already has POKéDEX
+	else # Already has POKéDEX
 	{
 		msgbox(format("... Oh! it appears you already have the POKéDEX!"))
 	}
 
-	// Clean up
+	# Clean up
 	releaseall
 	end
 }
 
 script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex {
-	// Enable national dex flag (if unset)
+	# Enable national dex flag (if unset)
 	if (flag(FLAG_SYS_NATIONAL_DEX) == false){
 		special(EnableNationalPokedex)
 		setflag(FLAG_SYS_NATIONAL_DEX)
@@ -1075,7 +1075,7 @@ script LittleRootTown_ProfessorBirchsLab_EventScript_ReceiveNationalPokedex {
 }
 
 script LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm {
-	// Player has received Pokedex
+	# Player has received Pokedex
 	if(var(VAR_BIRCH_LAB_STATE) == 5){
 		msgbox(format("I have something to help you with your journey, if you'd like - the Exp. Charm."))
 		msgbox(format("This item will make your Pokemon earn more experience in each battle. Would you like to accept the Exp. Charm?"))
@@ -1085,7 +1085,7 @@ script LittlerootTown_ProfessorBirchsLab_EventScript_AideGiveExpCharm {
 			case 1: call(LittlerootTown_ProfessorBirchsLab_EventScript_AideRejectExpCharm)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		goto(LittlerootTown_ProfessorBirchsLab_EventScript_AideAlreadyMet)
 	}

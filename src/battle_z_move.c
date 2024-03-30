@@ -45,6 +45,8 @@
 #include "config/battle_frontier.h"
 #include "config/dynamax.h"
 
+#include "battle_frontier_generator.h"
+
 #define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
 
 // Function Declarations
@@ -184,8 +186,13 @@ bool32 IsViableZMove(u8 battler, u16 move)
     if (gBattleTypeFlags & (BATTLE_TYPE_SAFARI | BATTLE_TYPE_WALLY_TUTORIAL))
         return FALSE;
 
-    if (BF_ALLOW_Z_MOVES == FALSE && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER))
+    if ((BF_ALLOW_Z_MOVES == FALSE) && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER))
         return FALSE;
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanUseZMove() == FALSE))
+        return FALSE; // Battler cannot use Z-Move
+    #endif
 
     if ((GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;

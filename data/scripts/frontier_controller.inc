@@ -1,0 +1,595 @@
+BattleFrontierController_EventScript_ControllerHill::
+	msgbox BattleFrontierController_EventScript_ControllerHill_Text_0
+	goto_if_set FLAG_IS_CHAMPION, BattleFrontierController_EventScript_ControllerHill_2
+BattleFrontierController_EventScript_ControllerHill_1:
+	msgbox BattleFrontierController_EventScript_ControllerHill_Text_1
+	goto BattleFrontierController_EventScript_ControllerEnd
+	return
+
+BattleFrontierController_EventScript_ControllerHill_2:
+	goto BattleFrontierController_EventScript_ControllerInfo
+	goto BattleFrontierController_EventScript_ControllerHill_1
+
+
+BattleFrontierController_EventScript_ControllerTent::
+	msgbox BattleFrontierController_EventScript_ControllerTent_Text_0
+	goto BattleFrontierController_EventScript_ControllerInfo
+	return
+
+
+BattleFrontierController_EventScript_ControllerFrontier::
+	msgbox BattleFrontierController_EventScript_ControllerFrontier_Text_0
+	goto BattleFrontierController_EventScript_ControllerInfo
+	return
+
+
+BattleFrontierController_EventScript_ControllerManiac::
+	msgbox BattleFrontierController_EventScript_ControllerManiac_Text_0
+	goto BattleFrontierController_EventScript_ControllerInfo
+	return
+
+
+BattleFrontierController_EventScript_ControllerInfo::
+	msgbox BattleFrontierController_EventScript_ControllerInfo_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerInfo_Text_1
+	goto BattleFrontierController_EventScript_ControllerOptions
+	return
+
+
+BattleFrontierController_EventScript_ControllerOptions::
+	multichoice2 18, 0, BattleFrontierController_Text_ControllerOptionSelect
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerOptions_2
+	case 1, BattleFrontierController_EventScript_ControllerOptions_3
+	case 2, BattleFrontierController_EventScript_ControllerOptions_4
+	case 3, BattleFrontierController_EventScript_ControllerOptions_5
+	goto BattleFrontierController_EventScript_ControllerEnd
+	return
+
+BattleFrontierController_EventScript_ControllerOptions_2:
+	goto BattleFrontierController_EventScript_ControllerChangeOpponents
+	return
+
+BattleFrontierController_EventScript_ControllerOptions_3:
+	goto BattleFrontierController_EventScript_ControllerChangeBehavior
+	return
+
+BattleFrontierController_EventScript_ControllerOptions_4:
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
+	return
+
+BattleFrontierController_EventScript_ControllerOptions_5:
+	goto BattleFrontierController_EventScript_ControllerChangeMusic
+	return
+
+
+BattleFrontierController_EventScript_ControllerChangeOpponents::
+	goto_if_set FLAG_BATTLE_FRONTIER_GENERATOR, BattleFrontierController_EventScript_ControllerChangeOpponents_2
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_4
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1
+BattleFrontierController_EventScript_ControllerChangeOpponents_1:
+	yesnobox 0, 8
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontierController_EventScript_ControllerChangeOpponents_6
+BattleFrontierController_EventScript_ControllerChangeOpponents_5:
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_2:
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_2
+	goto BattleFrontierController_EventScript_ControllerChangeOpponents_1
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_6:
+	goto_if_set FLAG_BATTLE_FRONTIER_GENERATOR, BattleFrontierController_EventScript_ControllerChangeOpponents_8
+	setflag FLAG_BATTLE_FRONTIER_GENERATOR
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6
+	goto BattleFrontierController_EventScript_ControllerChangeOpponents_5
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_8:
+	clearflag FLAG_BATTLE_FRONTIER_GENERATOR
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5
+	goto BattleFrontierController_EventScript_ControllerChangeOpponents_5
+
+
+BattleFrontierController_EventScript_ControllerChangeBehavior::
+	msgbox BattleFrontierController_EventScript_ControllerChangeBehavior_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeBehavior_Text_1
+	multichoice2 18, 0, BattleFrontierController_Text_ControllerOptionSelectBehavior
+	copyvar VAR_FRONTIER_METHOD, VAR_RESULT
+	msgbox BattleFrontierController_EventScript_ControllerChangeBehavior_Text_2
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+
+BattleFrontierController_EventScript_ControllerChangeMusic::
+	msgbox BattleFrontierController_EventScript_ControllerChangeMusic_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeMusic_Text_1
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1
+	return
+
+
+BattleFrontierController_EventScript_ControllerChangeBanlist::
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlist_Text_0
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerChangeRules
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeBanlist_2
+	case 1, BattleFrontierController_EventScript_ControllerChangeBanlist_3
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+BattleFrontierController_EventScript_ControllerChangeBanlist_2:
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard
+	return
+
+BattleFrontierController_EventScript_ControllerChangeBanlist_3:
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistDynamax
+	return
+
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard::
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_1
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_2
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerChangeRulesStandard
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_4
+	case 2, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_5
+	case 3, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_6
+	case 4, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_7
+	case 5, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_8
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1:
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_3:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_3
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_MEGA
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_4:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_4
+	clearflag FLAG_BATTLE_FRONTIER_ALLOW_MEGA
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_5:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_5
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_6:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_6
+	clearflag FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_7:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_8:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
+
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax::
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_1
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_2
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerChangeRulesDynamax
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_4
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_1:
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_3:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_1
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_GMAX
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_1
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_4:
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_2
+	clearflag FLAG_BATTLE_FRONTIER_ALLOW_GMAX
+	goto BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_1
+
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1::
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerMusicSelectPage1
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeMusicPage1_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeMusicPage1_4
+	case 2, BattleFrontierController_EventScript_ControllerChangeMusicPage1_5
+	case 3, BattleFrontierController_EventScript_ControllerChangeMusicPage1_6
+	case 4, BattleFrontierController_EventScript_ControllerChangeMusicPage1_7
+	case 5, BattleFrontierController_EventScript_ControllerChangeMusicPage1_8
+	case MULTI_L_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage1_9
+	case MULTI_R_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage1_10
+	goto BattleFrontierController_EventScript_ControllerAsk
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_1:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicSuccess
+	return
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_3:
+	setvar VAR_FRONTIER_BGM, 0
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_4:
+	setvar VAR_FRONTIER_BGM, 1
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_5:
+	setvar VAR_FRONTIER_BGM, 2
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_6:
+	setvar VAR_FRONTIER_BGM, 3
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_7:
+	setvar VAR_FRONTIER_BGM, 4
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_8:
+	setvar VAR_FRONTIER_BGM, 5
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_9:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage1_10:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1_1
+
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2::
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerMusicSelectPage2
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeMusicPage2_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeMusicPage2_4
+	case 2, BattleFrontierController_EventScript_ControllerChangeMusicPage2_5
+	case 3, BattleFrontierController_EventScript_ControllerChangeMusicPage2_6
+	case 4, BattleFrontierController_EventScript_ControllerChangeMusicPage2_7
+	case 5, BattleFrontierController_EventScript_ControllerChangeMusicPage2_8
+	case MULTI_L_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage2_9
+	case MULTI_R_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage2_10
+	goto BattleFrontierController_EventScript_ControllerAsk
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_1:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicSuccess
+	return
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_3:
+	setvar VAR_FRONTIER_BGM, 6
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_4:
+	setvar VAR_FRONTIER_BGM, 7
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_5:
+	setvar VAR_FRONTIER_BGM, 8
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_6:
+	setvar VAR_FRONTIER_BGM, 9
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_7:
+	setvar VAR_FRONTIER_BGM, 10
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_8:
+	setvar VAR_FRONTIER_BGM, 11
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_9:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage2_10:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2_1
+
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3::
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerMusicSelectPage3
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeMusicPage3_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeMusicPage3_4
+	case 2, BattleFrontierController_EventScript_ControllerChangeMusicPage3_5
+	case 3, BattleFrontierController_EventScript_ControllerChangeMusicPage3_6
+	case 4, BattleFrontierController_EventScript_ControllerChangeMusicPage3_7
+	case 5, BattleFrontierController_EventScript_ControllerChangeMusicPage3_8
+	case MULTI_L_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage3_9
+	case MULTI_R_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage3_10
+	goto BattleFrontierController_EventScript_ControllerAsk
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_1:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicSuccess
+	return
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_3:
+	setvar VAR_FRONTIER_BGM, 12
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_4:
+	setvar VAR_FRONTIER_BGM, 13
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_5:
+	setvar VAR_FRONTIER_BGM, 14
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_6:
+	setvar VAR_FRONTIER_BGM, 15
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_7:
+	setvar VAR_FRONTIER_BGM, 16
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_8:
+	setvar VAR_FRONTIER_BGM, 17
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_9:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage2
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage3_10:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3_1
+
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage4::
+	multichoice2 0, 0, BattleFrontierController_Text_ControllerMusicSelectPage4
+	switch VAR_RESULT
+	case 0, BattleFrontierController_EventScript_ControllerChangeMusicPage4_3
+	case 1, BattleFrontierController_EventScript_ControllerChangeMusicPage4_4
+	case MULTI_L_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage4_5
+	case MULTI_R_PRESSED, BattleFrontierController_EventScript_ControllerChangeMusicPage4_6
+	goto BattleFrontierController_EventScript_ControllerAsk
+BattleFrontierController_EventScript_ControllerChangeMusicPage4_1:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicSuccess
+	return
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage4_3:
+	setvar VAR_FRONTIER_BGM, 18
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage4_4:
+	setvar VAR_FRONTIER_BGM, 19
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage4_5:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage3
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4_1
+
+BattleFrontierController_EventScript_ControllerChangeMusicPage4_6:
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage1
+	goto BattleFrontierController_EventScript_ControllerChangeMusicPage4_1
+
+
+BattleFrontierController_EventScript_ControllerChangeMusicSuccess::
+	playse SE_SUCCESS
+	msgbox BattleFrontierController_EventScript_ControllerChangeMusicSuccess_Text_0
+	waitse
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+
+BattleFrontierController_EventScript_ControllerAsk::
+	msgbox BattleFrontierController_EventScript_ControllerAsk_Text_0
+	yesnobox 0, 8
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontierController_EventScript_ControllerAsk_1
+	goto BattleFrontierController_EventScript_ControllerEnd
+	return
+
+BattleFrontierController_EventScript_ControllerAsk_1:
+	goto BattleFrontierController_EventScript_ControllerOptions
+	return
+
+
+BattleFrontierController_EventScript_ControllerEnd::
+	msgbox BattleFrontierController_EventScript_ControllerEnd_Text_0
+	release
+	end
+
+
+BattleFrontierController_EventScript_ControllerHill_Text_0:
+	.string "Hello and welcome to the TRAINER HILL!$"
+
+BattleFrontierController_EventScript_ControllerHill_Text_1:
+	.string "We haven't finished getting everything\n"
+	.string "ready yet.$"
+
+BattleFrontierController_EventScript_ControllerTent_Text_0:
+	.string "Hello and welcome to the BATTLE TENT!$"
+
+BattleFrontierController_EventScript_ControllerFrontier_Text_0:
+	.string "Hello and welcome to the BATTLE\n"
+	.string "FRONTIER!$"
+
+BattleFrontierController_EventScript_ControllerManiac_Text_0:
+	.string "Hello, I'm the BATTLE FRONTIER MANIAC!$"
+
+BattleFrontierController_EventScript_ControllerInfo_Text_0:
+	.string "I can help you customise your Battle\n"
+	.string "Frontier experience.$"
+
+BattleFrontierController_EventScript_ControllerInfo_Text_1:
+	.string "What would you like to do?$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_0:
+	.string "You are currently playing against\n"
+	.string "modern Battle Frontier opponents.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1:
+	.string "Keep in mind, you may experience bugs or\n"
+	.string "crashes using this mode during\l"
+	.string "development.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_2:
+	.string "Would you like to switch to legacy\n"
+	.string "Battle Frontier opponents?$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3:
+	.string "You are currently playing against\n"
+	.string "legacy Battle Frontier opponents.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_4:
+	.string "Would you like to switch to modern\n"
+	.string "Battle Frontier opponents?$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5:
+	.string "Done! You'll now play against legacy\n"
+	.string "Battle Frontier opponents.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6:
+	.string "Done! You'll now play against modern\n"
+	.string "Battle Frontier opponents.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7:
+	.string "Feel free to ask me again if you change\n"
+	.string "your mind!$"
+
+BattleFrontierController_EventScript_ControllerChangeBehavior_Text_0:
+	.string "I can change how modern Battle\n"
+	.string "Frontier teams are built.$"
+
+BattleFrontierController_EventScript_ControllerChangeBehavior_Text_1:
+	.string "Which option would you like to use?$"
+
+BattleFrontierController_EventScript_ControllerChangeBehavior_Text_2:
+	.string "Modern teams have been updated\n"
+	.string "successfully!$"
+
+BattleFrontierController_EventScript_ControllerChangeMusic_Text_0:
+	.string "What would like to listen to?$"
+
+BattleFrontierController_EventScript_ControllerChangeMusic_Text_1:
+	.string "L: Previous Page                    R: Next Page\nB: Go Back$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlist_Text_0:
+	.string "Which ruleset would you like to change?$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_0:
+	.string "These are the options for standard\n"
+	.string "battles.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_1:
+	.string "Please remember, these rules apply to\n"
+	.string "both you and your opponents!$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_2:
+	.string "What would you like to change?$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_3:
+	.string "Okay! Mega Evolutions will be allowed.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_4:
+	.string "Okay! Mega Evolutions will be banned.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_5:
+	.string "Okay! Z-Moves will be allowed.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_6:
+	.string "Okay! Z-Moves will be banned.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7:
+	.string "Tera is not available yet, sorry!$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_0:
+	.string "These are the options for dynamax\n"
+	.string "battles.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_1:
+	.string "Okay! Gigantamax Formes will be allowed.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_2:
+	.string "Okay! Gigantamax Formes will be banned.$"
+
+BattleFrontierController_EventScript_ControllerChangeMusicSuccess_Text_0:
+	.string "All done! Your music selection has been\n"
+	.string "changed.$"
+
+BattleFrontierController_EventScript_ControllerAsk_Text_0:
+	.string "Do you need me for anything else?$"
+
+BattleFrontierController_EventScript_ControllerEnd_Text_0:
+	.string "I hope you have some good battles!$"
+
+BattleFrontierController_Text_ControllerOptionSelect::
+	.string "CHANGE OPPONENTS$"
+	.string "CHANGE BEHAVIOR$"
+	.string "CHANGE BANLIST$"
+	.string "CHANGE MUSIC$"
+	.string "NOTHING$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerOptionSelectBehavior::
+	.string "DEFAULT$"
+	.string "RANDOM$"
+	.string "FILTERED$"
+	.string "FILTERED ATTACKS$"
+	.string "RANKED$"
+	.string "RANKED ATTACKS$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerChangeRules::
+	.string "STANDARD BATTLE$"
+	.string "DYNAMAX BATTLE$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerChangeRulesStandard::
+	.string "ALLOW MEGAS$"
+	.string "BAN MEGAS$"
+	.string "ALLOW ZMOVES$"
+	.string "BAN ZMOVES$"
+	.string "ALLOW TERA$"
+	.string "BAN TERA$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerChangeRulesDynamax::
+	.string "ALLOW GMAX$"
+	.string "BAN GMAX$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerMusicSelectPage1::
+	.string "DEFAULT$"
+	.string "VS.Frontier Brain$"
+	.string "VS.Mew$"
+	.string "VS.Wild Pokemon$"
+	.string "VS.Team Aqua & Magma$"
+	.string "VS.Trainer$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerMusicSelectPage2::
+	.string "VS.Gym Leader$"
+	.string "VS.Champion$"
+	.string "VS.Regi$"
+	.string "VS.Kyogre & Groudon$"
+	.string "VS.Rival$"
+	.string "VS.Elite Four$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerMusicSelectPage3::
+	.string "VS.Aqua & Magma Leader$"
+	.string "VS.Gym Leader (FRLG)$"
+	.string "VS.Trainer (FRLG)$"
+	.string "VS.Wild Pokemon (FRLG)$"
+	.string "VS.Champion (FRLG)$"
+	.string "VS.Deoxys (FRLG)$"
+	.string "$"
+
+BattleFrontierController_Text_ControllerMusicSelectPage4::
+	.string "VS.Mewtwo (FRLG)$"
+	.string "VS.Legend (FRLG)$"
+	.string "$"

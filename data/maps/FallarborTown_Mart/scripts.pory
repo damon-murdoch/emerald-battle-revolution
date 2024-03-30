@@ -52,7 +52,7 @@ FallarborTown_Mart_Text_SellNuggetIFound:
 script FallarborTown_Mart_EventScript_Clerk2 {
 	lock
 	faceplayer
-	// First gym badge obtained
+	# First gym badge obtained
 	if (flag(FLAG_BADGE03_GET)) {
 		message(gText_HowMayIServeYou)
 		waitmessage
@@ -61,17 +61,17 @@ script FallarborTown_Mart_EventScript_Clerk2 {
 			{
 				pokemart(FallarborTown_Mart_Pokemart_Clerk2_Expanded2)
 			}
-			else // Not unlocked
+			else # Not unlocked
 			{
 				pokemart(FallarborTown_Mart_Pokemart_Clerk2_Expanded)
 			}
 		}
-		else // Not unlocked
+		else # Not unlocked
 		{
 			pokemart(FallarborTown_Mart_Pokemart_Clerk2)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

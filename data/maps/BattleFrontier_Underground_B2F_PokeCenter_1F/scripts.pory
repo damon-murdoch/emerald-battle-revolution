@@ -108,7 +108,7 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpert
 		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpertCantTeachEgg)
 	}
 
-	// Check if the pokemon is gigantamax
+	# Check if the pokemon is gigantamax
 	hasgigantamaxfactor(VAR_0x8004)
 
 	if (var(VAR_RESULT) == TRUE) {
@@ -169,115 +169,9 @@ script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_GigantamaxExpert
 	end
 }
 
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpert {
-	msgbox(format("Hello! I'm the Battle Frontier Expert!"))
-	msgbox(format("I can help you customise your Battle Frontier experience."))
-	msgbox(format("What would you like to do?"))
-	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions)
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions {
-	multichoice2(18,0,BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpert)
-	switch(var(VAR_RESULT)) {
-		case 0: # Change Opponents
-			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeOpponents)
-		case 1: # Change Behavior
-			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior)
-		case 2: # Change Music
-			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic)
-		default: 
-			goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertEnd)
-	}
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeOpponents {
-
-	if (flag(FLAG_BATTLE_FRONTIER_GENERATOR) == TRUE) {
-		msgbox(format("You are currently playing against modern Battle Frontier opponents."))
-		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
-		msgbox(format("Would you like to switch to legacy Battle Frontier opponents?"))
-	}
-	else # Frontier Generator not enabled
-	{
-		msgbox(format("You are currently playing against legacy Battle Frontier opponents."))
-		msgbox(format("Would you like to switch to modern Battle Frontier opponents?"))
-		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
-	}
-
-	yesnobox(0, 8)
-
-	if (var(VAR_RESULT) == YES){
-		if (flag(FLAG_BATTLE_FRONTIER_GENERATOR) == TRUE) {
-			clearflag(FLAG_BATTLE_FRONTIER_GENERATOR) # Clear the flag
-			msgbox(format("Done! You'll now play against legacy Battle Frontier opponents."))
-		}
-		else # Frontier Generator not enabled
-		{
-			setflag(FLAG_BATTLE_FRONTIER_GENERATOR) # Set the flag
-			msgbox(format("Done! You'll now play against modern Battle Frontier opponents."))
-		}
-	}
-
-	msgbox(format("Feel free to ask me again if you change your mind!"))
-	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk)
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeBehavior {
-
-	msgbox(format("I can change how modern Battle Frontier teams are built."))
-	msgbox(format("Which option would you like to use?"))
-
-	multichoice2(18,0,BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior)
-	copyvar(VAR_FRONTIER_METHOD, VAR_RESULT)
-
-	msgbox(format("Modern teams have been updated successfully!"))
-
-	goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk)
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertChangeMusic {
-	msgbox(format("What would like to listen to?"))
-	msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
-	goto(BattleFrontier_Generic_EventScript_MusicAttendantPage1)
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertAsk {
-	msgbox(format("Do you need me for anything else?"))
-	yesnobox(0, 8)
-    if (var(VAR_RESULT) == YES){
-        goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertOptions)
-    } else {
-		goto(BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertEnd)
-	}
-}
-
-script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_BattleFrontierExpertEnd {
-	msgbox(format("I hope you have some good battles!"))
-	release
-	end
-}
-
 text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_Gentleman {
 	"CHERISH BALL$"
 	"GOLD BOTTLE CAP$"
 	"NOTHING$"
-	""
-}
-
-text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpert {
-	"CHANGE OPPONENTS$"
-	"CHANGE BEHAVIOR$"
-	"CHANGE MUSIC$"
-	"NOTHING$"
-	""
-}
-
-text BattleFrontier_Underground_B2F_PokeCenter_1F_Text_BattleFrontierExpertBehavior {
-	"DEFAULT$"
-	"RANDOM$"
-	"FILTERED$"
-	"FILTERED ATTACKS$"
-	"RANKED$"
-	"RANKED ATTACKS$"
 	""
 }

@@ -1770,7 +1770,7 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
             properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
 
         // Override fixed frontier values (Specified in config)
-        UpdateGeneratorForLevelMode(&properties, lvlMode);
+        UpdateGeneratorForLvlMode(&properties, lvlMode);
 
         DebugPrintf("Generating set for species %d ...", speciesId);
         

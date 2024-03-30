@@ -1,0 +1,369 @@
+# Battle Point Currency Converter
+
+script CurrencyConverterCommon_EventScript_BattlePointConverter {
+    msgbox(format("This is a machine for converting currency between BP and ¥!"))
+    msgbox(format("The exchange rate is ¥9800 for every 1 BP."))
+    goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom)
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom {
+    msgbox(format("What would you like to do?"))
+    multichoice2(18,0,CurrencyConverterCommon_Text_BattlePointConverterBPToOrFrom)
+    switch(var(VAR_RESULT)){
+        case 0: # BP to ¥
+            goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions)
+        case 1: # ¥ to BP
+            goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOptions)
+        default: # Cancel
+            goto(CurrencyConverterCommon_EventScript_BattlePointConverterEnd)
+    }
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterToOptions {
+    showmoneybox(0,0)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,CurrencyConverterCommon_Text_BattlePointConverterBPToOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            checkmoney(9800)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 1)
+                removemoney(9800)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford)
+            }
+        case 1:
+            checkmoney(49000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 5)
+                removemoney(49000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford)
+            }
+        case 2:
+            checkmoney(98000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 10)
+                removemoney(98000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford)
+            }
+        case 3:
+            checkmoney(196000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 20)
+                removemoney(196000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford)
+            }
+        case 4:
+            checkmoney(490000)
+            if (var(VAR_RESULT) == TRUE) {
+                setvar(VAR_0x8004, 50)
+                removemoney(490000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford)
+            }
+        default:
+            hidemoneybox
+            goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(GiveFrontierBattlePoints)
+    updatemoneybox
+    msgbox(format("BP redeemed successfully!"))
+    waitse
+    hidemoneybox
+    goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOptions)
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterToCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough ¥!"))
+    waitse
+    hidemoneybox
+    goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom)
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions {
+    special(ShowBattlePointsWindow)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,CurrencyConverterCommon_Text_BattlePointConverterBPFromOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            if (var(VAR_TEMP_1) >= 1) {
+                setvar(VAR_0x8004, 1)
+                addmoney(9800)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford)
+            }
+        case 1:
+            if (var(VAR_TEMP_1) >= 5) {
+                setvar(VAR_0x8004, 5)
+                addmoney(49000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford)
+            }
+        case 2:
+            if (var(VAR_TEMP_1) >= 10) {
+                setvar(VAR_0x8004, 10)
+                addmoney(98000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford)
+            }
+        case 3:
+            if (var(VAR_TEMP_1) >= 20) {
+                setvar(VAR_0x8004, 20)
+                addmoney(196000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford)
+            }
+        case 4:
+            if (var(VAR_TEMP_1) >= 50) {
+                setvar(VAR_0x8004, 50)
+                addmoney(490000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford)
+            }
+        default:
+            special(CloseBattlePointsWindow)
+            goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    special(TakeFrontierBattlePoints)
+    special(UpdateBattlePointsWindow)
+    msgbox(format("BP exchanged successfully!"))
+    waitse
+    special(CloseBattlePointsWindow)
+    goto(CurrencyConverterCommon_EventScript_BattlePointConverterFromOptions)
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterFromCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough BP!"))
+    waitse
+    special(CloseBattlePointsWindow)
+    goto(CurrencyConverterCommon_EventScript_BattlePointConverterToOrFrom)
+}
+
+script CurrencyConverterCommon_EventScript_BattlePointConverterEnd {
+    msgbox(format("You decided to stop using the converter."))
+    release
+    end
+}
+
+text CurrencyConverterCommon_Text_BattlePointConverterBPToOrFrom {
+    "Convert BP to ¥$"
+    "Convert ¥ to BP$"
+    "CANCEL$"
+    ""
+}
+
+text CurrencyConverterCommon_Text_BattlePointConverterBPToOptions {
+    "¥9800 (1BP)$"
+    "¥49000 (5BP)$" 
+    "¥98000 (10BP)$"
+    "¥196000 (20BP)$"
+    "¥490000 (50BP)$"
+    "GO BACK$"
+    ""
+}
+
+text CurrencyConverterCommon_Text_BattlePointConverterBPFromOptions {
+    "1BP (¥9800)$"
+    "5BP (¥49000)$"
+    "10BP (¥98000)$"
+    "20BP (¥196000)$"
+    "50BP (¥490000)$"
+    "GO BACK$"
+    ""
+}
+
+# Game Corner Currency Converter
+
+script CurrencyConverterCommon_EventScript_CoinConverter {
+    msgbox(format("This is a machine for converting currency between coins and ¥!"))
+    msgbox(format("The exchange rate is ¥20 for every 1 coin."))
+	checkitem(ITEM_COIN_CASE)
+	if (var(VAR_RESULT) == TRUE) {
+		goto(CurrencyConverterCommon_EventScript_CoinConverterToOrFrom)
+	}
+	msgbox(format("Before you can use this machine, you will need a COIN CASE."))
+	release
+	end
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterToOrFrom {
+    msgbox(format("What would you like to do?"))
+    multichoice2(18,0,CurrencyConverterCommon_Text_CoinConverterToOrFrom)
+    switch(var(VAR_RESULT)){
+        case 0: # coins to ¥
+            goto(CurrencyConverterCommon_EventScript_CoinConverterFromOptions)
+        case 1: # ¥ to coins
+            goto(CurrencyConverterCommon_EventScript_CoinConverterToOptions)
+        default: # Cancel
+            goto(CurrencyConverterCommon_EventScript_CoinConverterEnd)
+    }
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterToOptions {
+    showmoneybox(0,0)
+    msgbox(format("How much would you like?"))
+    specialvar(VAR_TEMP_1, GetFrontierBattlePoints)
+    multichoice2(18,0,CurrencyConverterCommon_Text_CoinConverterToOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            checkmoney(200)
+            if (var(VAR_RESULT) == TRUE) {
+				addcoins(10)
+                removemoney(200)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford)
+            }
+        case 1:
+            checkmoney(1000)
+            if (var(VAR_RESULT) == TRUE) {
+                addcoins(50)
+                removemoney(1000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford)
+            }
+        case 2:
+            checkmoney(2000)
+            if (var(VAR_RESULT) == TRUE) {
+                addcoins(100)
+                removemoney(2000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford)
+            }
+        case 3:
+            checkmoney(4000)
+            if (var(VAR_RESULT) == TRUE) {
+                addcoins(200)
+                removemoney(4000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford)
+            }
+        case 4:
+            checkmoney(10000)
+            if (var(VAR_RESULT) == TRUE) {
+                addcoins(500)
+                removemoney(10000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford)
+            }
+        default:
+            hidemoneybox
+            goto(CurrencyConverterCommon_EventScript_CoinConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+    updatemoneybox
+    msgbox(format("Coins redeemed successfully!"))
+    waitse
+    hidemoneybox
+    goto(CurrencyConverterCommon_EventScript_CoinConverterToOptions)
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterToCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough ¥!"))
+    waitse
+    hidemoneybox
+    goto(CurrencyConverterCommon_EventScript_CoinConverterToOrFrom)
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterFromOptions {
+    showcoinsbox(1,1)
+    msgbox(format("How many would you like?"))
+	checkcoins(VAR_TEMP_1)
+    multichoice2(18,0,CurrencyConverterCommon_Text_CoinConverterFromOptions)
+    switch(var(VAR_RESULT)){
+        case 0:
+            if (var(VAR_TEMP_1) >= 10) {
+                removecoins(10)
+                addmoney(200)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford)
+            }
+        case 1:
+            if (var(VAR_TEMP_1) >= 50) {
+                removecoins(50)
+                addmoney(1000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford)
+            }
+        case 2:
+            if (var(VAR_TEMP_1) >= 100) {
+                removecoins(100)
+                addmoney(2000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford)
+            }
+        case 3:
+            if (var(VAR_TEMP_1) >= 200) {
+                removecoins(200)
+                addmoney(4000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford)
+            }
+        case 4:
+            if (var(VAR_TEMP_1) >= 500) {
+				removecoins(500)
+                addmoney(10000)
+            } else {
+                goto(CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford)
+            }
+        default:
+            hidecoinsbox(1,1)
+            goto(CurrencyConverterCommon_EventScript_CoinConverterToOrFrom)
+    }
+    playse(SE_SHOP)
+	updatecoinsbox(1,1)
+    msgbox(format("Coins exchanged successfully!"))
+    waitse
+    hidecoinsbox(1,1)
+    goto(CurrencyConverterCommon_EventScript_CoinConverterFromOptions)
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterFromCannotAfford {
+    playse(SE_FAILURE)
+    msgbox(format("Not enough coins!"))
+    waitse
+    hidecoinsbox(1,1)
+    goto(CurrencyConverterCommon_EventScript_CoinConverterToOrFrom)
+}
+
+script CurrencyConverterCommon_EventScript_CoinConverterEnd {
+    msgbox(format("You decided to stop using the converter."))
+    release
+    end
+}
+
+text CurrencyConverterCommon_Text_CoinConverterToOrFrom {
+    "Convert coins to ¥$"
+    "Convert ¥ to coins$"
+    "CANCEL$"
+    ""
+}
+
+text CurrencyConverterCommon_Text_CoinConverterToOptions {
+    "¥200 (10 coins)$"
+    "¥1000 (50 coins)$" 
+    "¥2000 (100 coins)$"
+    "¥4000 (200 coins)$"
+    "¥10000 (500 coins)$"
+    "GO BACK$"
+    ""
+}
+
+text CurrencyConverterCommon_Text_CoinConverterFromOptions {
+    "10 coins (¥200)$"
+    "50 coins (¥1000)$"
+    "100 coins (¥2000)$"
+    "200 coins (¥4000)$"
+    "500 coins (¥10000)$"
+    "GO BACK$"
+    ""
+}

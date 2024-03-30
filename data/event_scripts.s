@@ -1068,6 +1068,13 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/move_tutors.inc"
 	.include "data/scripts/trainer_hill.inc"
 	.include "data/scripts/test_signpost.inc"
+	.include "data/scripts/pokemon_shop.inc"
+	.include "data/scripts/legendary_shop.inc"
+	.include "data/scripts/sample_sets.inc"
+	.include "data/scripts/sample_teams.inc"
+	.include "data/scripts/introduction.inc"
+	.include "data/scripts/currency_converter.inc"
+	.include "data/scripts/frontier_controller.inc"
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"
@@ -1081,3 +1088,5 @@ EventScript_VsSeekerChargingDone::
 	.include "data/maps/BattleFrontier_Underground_B2F_PokeCenter_1F/scripts.inc"
 
 	.include "data/maps/BattleFrontier_Underground_B2F_PokeCenter_2F/scripts.inc"
+
+	.include "data/maps/BattleFrontier_Underground_B2F_BattleSpot_1F/scripts.inc"

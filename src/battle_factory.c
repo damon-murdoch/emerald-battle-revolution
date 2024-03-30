@@ -446,65 +446,48 @@ static void SetPlayerAndOpponentParties(void)
 
     if (gSpecialVar_0x8005 < 2)
     {
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
-        if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            SetFacilityPlayerParty(monLevel);
-        }
-        else // Standard Generation Method
+        ZeroPlayerPartyMons();
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
-        #endif
-            ZeroPlayerPartyMons();
-            for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+            monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
+            CreateMon(&gPlayerParty[i],
+                    gFacilityTrainerMons[monId].species,
+                    monLevel,
+                    ivs,
+                    TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
+                    OT_ID_PLAYER_ID, 0);
+
+            count = 0;
+            bits = gFacilityTrainerMons[monId].evSpread;
+            for (j = 0; j < NUM_STATS; bits >>= 1, j++)
             {
-                monId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
-                ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
-                CreateMon(&gPlayerParty[i],
-                        gFacilityTrainerMons[monId].species,
-                        monLevel,
-                        ivs,
-                        TRUE, gSaveBlock2Ptr->frontier.rentalMons[i].personality,
-                        OT_ID_PLAYER_ID, 0);
-
-                count = 0;
-                bits = gFacilityTrainerMons[monId].evSpread;
-                for (j = 0; j < NUM_STATS; bits >>= 1, j++)
-                {
-                    if (bits & 1)
-                        count++;
-                }
-
-                evs = MAX_TOTAL_EVS / count;
-                bits = 1;
-                for (j = 0; j < NUM_STATS; bits <<= 1, j++)
-                {
-                    if (gFacilityTrainerMons[monId].evSpread & bits)
-                        SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
-                }
-
-                CalculateMonStats(&gPlayerParty[i]);
-                friendship = 0;
-                for (k = 0; k < MAX_MON_MOVES; k++)
-                    SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monId].moves[k], k);
-                SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
-                SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
-                SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
+                if (bits & 1)
+                    count++;
             }
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+
+            evs = MAX_TOTAL_EVS / count;
+            bits = 1;
+            for (j = 0; j < NUM_STATS; bits <<= 1, j++)
+            {
+                if (gFacilityTrainerMons[monId].evSpread & bits)
+                    SetMonData(&gPlayerParty[i], MON_DATA_HP_EV + j, &evs);
+            }
+
+            CalculateMonStats(&gPlayerParty[i]);
+            friendship = 0;
+            for (k = 0; k < MAX_MON_MOVES; k++)
+                SetMonMoveAvoidReturn(&gPlayerParty[i], gFacilityTrainerMons[monId].moves[k], k);
+            SetMonData(&gPlayerParty[i], MON_DATA_FRIENDSHIP, &friendship);
+            SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &gBattleFrontierHeldItems[gFacilityTrainerMons[monId].itemTableId]);
+            SetMonData(&gPlayerParty[i], MON_DATA_ABILITY_NUM, &gSaveBlock2Ptr->frontier.rentalMons[i].abilityNum);
         }
-        #endif
     }
 
     switch (gSpecialVar_0x8005)
     {
     case 0:
     case 2:
-        #if BFG_FLAG_FRONTIER_GENERATOR != 0
-        if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
-            SetFacilityOpponentParty(monLevel);
-            return;
-        }
-        #endif
-
         for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
         {
             monId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;

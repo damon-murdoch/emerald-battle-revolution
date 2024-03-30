@@ -306,22 +306,3 @@ SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
 	.string "Wouldn't it be nice if they had more of\n"
 	.string "a selection?$"
-
-SlateportCity_BattleTentLobby_EventScript_MusicAttendant::
-	msgbox SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_0
-	msgbox SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_1
-	msgbox SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_2
-	goto BattleFrontier_Generic_EventScript_MusicAttendantPage1
-	return
-
-
-SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_0:
-	.string "Welcome to the BATTLE TENT SLATEPORT\n"
-	.string "SITE!$"
-
-SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_1:
-	.string "I can help you change the battle music.\n"
-	.string "What would like to listen to?$"
-
-SlateportCity_BattleTentLobby_EventScript_MusicAttendant_Text_2:
-	.string "L: Previous Page                    R: Next Page\nB: Go Back$"

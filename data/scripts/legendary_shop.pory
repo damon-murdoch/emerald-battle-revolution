@@ -1,0 +1,992 @@
+script LegendaryShopCommon_EventScript_LegendaryShop {
+    lock
+    faceplayer
+    msgbox(format("Welcome to the one-and-only legendary POKéMON shop!"))
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckMoney)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopCheckMoney {
+    showmoneybox(18,0)
+    checkmoney(12000)
+    if (var(VAR_RESULT) == TRUE){
+        goto(LegendaryShopCommon_EventScript_LegendaryShopCheckGoldBottleCap)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥12000 to buy anything here!"))
+        goto(LegendaryShopCommon_EventScript_LegendaryShopEnd)
+    }
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopCheckGoldBottleCap {
+    checkitem(ITEM_GOLD_BOTTLE_CAP)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("Oh, you have a gold bottle cap! Would you redeem it for a shiny Pokemon?"))
+        yesnobox(0, 8)
+        if (var(VAR_RESULT) == TRUE) {
+            clearflag(P_FLAG_FORCE_NO_SHINY)
+            setflag(P_FLAG_FORCE_SHINY)
+        }
+        else {
+            setflag(P_FLAG_FORCE_NO_SHINY)
+            clearflag(P_FLAG_FORCE_SHINY)
+        }
+    }
+    else {
+        setflag(P_FLAG_FORCE_NO_SHINY)
+        clearflag(P_FLAG_FORCE_SHINY)
+    }
+
+    msgbox(format("What are you looking for today?"))
+    msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+    goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopRegions1 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopRegions1)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKanto)
+        case 1:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopJohto)
+        case 2:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopHoenn)
+        case 3:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh)
+        case 4:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova)
+        case 5:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKalos)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+        default: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopEnd)
+    }
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopKanto {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopKanto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_MEWTWO, 70)
+        case 1:
+            givemon(SPECIES_ARTICUNO, 50)
+        case 2:
+            givemon(SPECIES_ZAPDOS, 50)
+        case 3:
+            givemon(SPECIES_MOLTRES, 50)
+        case 4:
+            givemon(SPECIES_MEW, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKanto)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKanto)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopJohto {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopJohto)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LUGIA, 70)
+        case 1:
+            givemon(SPECIES_HO_OH, 70)
+        case 2:
+            givemon(SPECIES_RAIKOU, 50)
+        case 3:
+            givemon(SPECIES_ENTEI, 50)
+        case 4: 
+            givemon(SPECIES_SUICUNE, 50)
+        case 5:
+            givemon(SPECIES_CELEBI, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopJohto)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopJohto)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopHoenn {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopHoenn)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_GROUDON, 70)
+        case 1:
+            givemon(SPECIES_KYOGRE, 70)
+        case 2:
+            givemon(SPECIES_RAYQUAZA, 70)
+        case 3:
+            givemon(SPECIES_REGIROCK, 50)
+        case 4:
+            givemon(SPECIES_REGICE, 50)
+        case 5:
+            givemon(SPECIES_REGISTEEL, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopHoenn2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopHoenn2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopHoenn2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopHoenn2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_LATIOS, 50)
+        case 1:
+            givemon(SPECIES_LATIAS, 50)
+        case 2:
+            givemon(SPECIES_JIRACHI, 50)
+        case 3:
+            givemon(SPECIES_DEOXYS, 70)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopHoenn)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopHoenn)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopSinnoh {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopSinnoh)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIALGA, 70)
+        case 1:
+            givemon(SPECIES_PALKIA, 70)
+        case 2:
+            givemon(SPECIES_GIRATINA, 70)
+        case 3: 
+            givemon(SPECIES_HEATRAN, 50)
+        case 4:
+            givemon(SPECIES_REGIGIGAS, 50)
+        case 5:
+            givemon(SPECIES_CRESSELIA, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh3)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopSinnoh2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopSinnoh2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_UXIE, 50)
+        case 1:
+            givemon(SPECIES_MESPRIT, 50)
+        case 2:
+            givemon(SPECIES_AZELF, 50)
+        case 3:
+            givemon(SPECIES_PHIONE, 50)
+        case 4:
+            givemon(SPECIES_MANAPHY, 50)
+        case 5:
+            givemon(SPECIES_DARKRAI, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh3)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopSinnoh3 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopSinnoh3)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            givemon(SPECIES_SHAYMIN_LAND, 50)
+        case 1:
+            givemon(SPECIES_SHAYMIN_SKY, 50)
+        case 2:
+            givemon(SPECIES_ARCEUS, 50)
+        case 3:
+            givemon(SPECIES_ROTOM, 30)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopSinnoh)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopUnova {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopUnova)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_RESHIRAM, 70)
+        case 1:
+            givemon(SPECIES_ZEKROM, 70)
+        case 2:
+            givemon(SPECIES_KYUREM, 70)
+        case 3:
+            givemon(SPECIES_COBALION, 50)
+        case 4:
+            givemon(SPECIES_TERRAKION, 50)
+        case 5:
+            givemon(SPECIES_VIRIZION, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova3)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopUnova2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopUnova2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_TORNADUS, 50)
+        case 1:
+            givemon(SPECIES_THUNDURUS, 50)
+        case 2:
+            givemon(SPECIES_LANDORUS, 50)
+        case 3: 
+            givemon(SPECIES_TORNADUS_THERIAN, 50)
+        case 4:
+            givemon(SPECIES_THUNDURUS_THERIAN, 50)
+        case 5:
+            givemon(SPECIES_LANDORUS_THERIAN, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova3)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopUnova3 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopUnova3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ENAMORUS, 50)
+        case 1:
+            givemon(SPECIES_ENAMORUS_THERIAN, 50)
+        case 2:
+            givemon(SPECIES_VICTINI, 50)
+        case 3:
+            givemon(SPECIES_KELDEO, 50)
+        case 4:
+            givemon(SPECIES_MELOETTA, 50)
+        case 5: 
+            givemon(SPECIES_GENESECT, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopUnova)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopKalos {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopKalos)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_XERNEAS, 70)
+        case 1:
+            givemon(SPECIES_YVELTAL, 70)
+        case 2:
+            givemon(SPECIES_ZYGARDE_10_AURA_BREAK, 50)
+        case 3:
+            givemon(SPECIES_ZYGARDE_50_AURA_BREAK, 50)
+        case 4:
+            givemon(SPECIES_ZYGARDE_10_POWER_CONSTRUCT, 70)
+        case 5:
+            givemon(SPECIES_ZYGARDE_50_POWER_CONSTRUCT, 70)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKalos2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKalos2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopKalos2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopKalos2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_DIANCIE, 50)
+        case 1:
+            givemon(SPECIES_HOOPA, 50)
+        case 2:
+            givemon(SPECIES_HOOPA_UNBOUND, 50)
+        case 3:
+            givemon(SPECIES_VOLCANION, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKalos)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopKalos)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopRegions2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopRegions2)
+    switch(var(VAR_RESULT)){
+        case 0: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola)
+        case 1: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar)
+        case 2: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopRegions1)
+        default: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopEnd)
+    }
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopAlola {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopAlola)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_COSMOG, 30)
+        case 1:
+            givemon(SPECIES_SOLGALEO, 70)
+        case 2:
+            givemon(SPECIES_LUNALA, 70)
+        case 3:
+            givemon(SPECIES_NECROZMA, 70)
+        case 4:
+            givemon(SPECIES_TYPE_NULL, 50)
+        case 5:
+            givemon(SPECIES_SILVALLY, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola5)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopAlola2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopAlola2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_TAPU_KOKO, 50)
+        case 1:
+            givemon(SPECIES_TAPU_LELE, 50)
+        case 2:
+            givemon(SPECIES_TAPU_BULU, 50)
+        case 3:
+            givemon(SPECIES_TAPU_FINI, 50)
+        case 4:
+            givemon(SPECIES_NIHILEGO, 50)
+        case 5:
+            givemon(SPECIES_BUZZWOLE, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola3)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopAlola3 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopAlola3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_PHEROMOSA, 50)
+        case 1:
+            givemon(SPECIES_XURKITREE, 50)
+        case 2:
+            givemon(SPECIES_CELESTEELA, 50)
+        case 3:
+            givemon(SPECIES_KARTANA, 50)
+        case 4:
+            givemon(SPECIES_GUZZLORD, 50)
+        case 5:
+            givemon(SPECIES_STAKATAKA, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola4)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopAlola4 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopAlola4)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_BLACEPHALON, 50)
+        case 1:
+            givemon(SPECIES_POIPOLE, 50)
+        case 2:
+            givemon(SPECIES_NAGANADEL, 50)
+        case 3:
+            givemon(SPECIES_MAGEARNA, 50)
+        case 4:
+            givemon(SPECIES_MAGEARNA_ORIGINAL_COLOR, 50)
+        case 5:
+            givemon(SPECIES_MARSHADOW, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola3)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola5)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopAlola5 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopAlola5)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ZERAORA, 50)
+        case 1:
+            givemon(SPECIES_GRENINJA_BATTLE_BOND, 50)
+        case 2:
+            givemon(SPECIES_ROCKRUFF_OWN_TEMPO, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola4)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopAlola)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopGalar {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopGalar)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_ZACIAN, 70)
+        case 1:
+            givemon(SPECIES_ZAMAZENTA, 70)
+        case 2:
+            givemon(SPECIES_ETERNATUS, 70)
+        case 3:
+            givemon(SPECIES_KUBFU, 30)
+        case 4:
+            givemon(SPECIES_URSHIFU_SINGLE_STRIKE_STYLE, 50)
+        case 5:
+            givemon(SPECIES_URSHIFU_RAPID_STRIKE_STYLE, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar3)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopGalar2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopGalar2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_CALYREX, 70)
+        case 1:
+            givemon(SPECIES_GLASTRIER, 50)
+        case 2:
+            givemon(SPECIES_SPECTRIER, 50)
+        case 3:
+            givemon(SPECIES_ARTICUNO_GALARIAN, 50)
+        case 4:
+            givemon(SPECIES_ZAPDOS_GALARIAN, 50)
+        case 5:
+            givemon(SPECIES_MOLTRES_GALARIAN, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar3)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopGalar3 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopGalar3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_REGIELEKI, 50)
+        case 1:
+            givemon(SPECIES_REGIDRAGO, 50)
+        case 2:
+            givemon(SPECIES_MELTAN, 30)
+        case 3:
+            givemon(SPECIES_MELMETAL, 50)
+        case 4:
+            givemon(SPECIES_ZARUDE, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopGalar)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopPaldea {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopPaldea)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_KORAIDON, 70)
+        case 1:
+            givemon(SPECIES_MIRAIDON, 70)
+        case 2:
+            givemon(SPECIES_WO_CHIEN, 50)
+        case 3:
+            givemon(SPECIES_CHIEN_PAO, 50)
+        case 4:
+            givemon(SPECIES_TING_LU, 50)
+        case 5:
+            givemon(SPECIES_CHI_YU, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea5)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea2)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopPaldea2 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopPaldea2)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_IRON_TREADS, 50)
+        case 1:
+            givemon(SPECIES_IRON_BUNDLE, 50)
+        case 2:
+            givemon(SPECIES_IRON_HANDS, 50)
+        case 3:
+            givemon(SPECIES_IRON_JUGULIS, 50)
+        case 4:
+            givemon(SPECIES_IRON_MOTH, 50)
+        case 5:
+            givemon(SPECIES_IRON_THORNS, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea3)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopPaldea3 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopPaldea3)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_IRON_VALIANT, 70)
+        case 1:
+            givemon(SPECIES_IRON_LEAVES, 50)
+        case 2:
+            givemon(SPECIES_GREAT_TUSK, 50)
+        case 3:
+            givemon(SPECIES_SCREAM_TAIL, 50)
+        case 4:
+            givemon(SPECIES_BRUTE_BONNET, 50)
+        case 5:
+            givemon(SPECIES_FLUTTER_MANE, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea2)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea4)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopPaldea4 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopPaldea4)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_SLITHER_WING, 50)
+        case 1:
+            givemon(SPECIES_SANDY_SHOCKS, 50)
+        case 2:
+            givemon(SPECIES_ROARING_MOON, 70)
+        case 3:
+            givemon(SPECIES_WALKING_WAKE, 50)
+        case 4:
+            givemon(SPECIES_OKIDOGI, 50)
+        case 5:
+            givemon(SPECIES_MUNKIDORI, 50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea3)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea5)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopPaldea5 {
+    multichoice2(0,0,LegendaryShopCommon_Text_LegendaryShopPaldea5)
+    switch(var(VAR_RESULT)){
+        case 0:
+            givemon(SPECIES_FEZANDIPITI, 50)
+        case 1:
+            givemon(SPECIES_OGERPON, 50)
+        case 2:
+            givemon(SPECIES_URSALUNA_BLOODMOON,50)
+        case MULTI_L_PRESSED: 
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea4)
+        case MULTI_R_PRESSED:
+            goto(LegendaryShopCommon_EventScript_LegendaryShopPaldea)
+        default: 
+           goto(LegendaryShopCommon_EventScript_LegendaryShopRegions2)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopCheckPurchase {
+    msgbox(format("Let's see if we can find one of those for you ..."))
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON has been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON has been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like we can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(LegendaryShopCommon_EventScript_LegendaryShopEnd)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    removemoney(12000)
+    updatemoneybox
+    playse(SE_SHOP)
+    waitse
+    if (flag(P_FLAG_FORCE_SHINY) == TRUE){
+        msgbox(format("You also gave a Gold Bottle Cap in exchange."))
+        removeitem(ITEM_GOLD_BOTTLE_CAP, 1)
+    }
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(LegendaryShopCommon_EventScript_LegendaryShopCheckMoney)
+    }
+    goto(LegendaryShopCommon_EventScript_LegendaryShopEnd)
+}
+
+script LegendaryShopCommon_EventScript_LegendaryShopEnd {
+    msgbox(format("Come back again soon!"))
+    clearflag(P_FLAG_FORCE_NO_SHINY)
+    clearflag(P_FLAG_FORCE_SHINY)
+    hidemoneybox
+    releaseall
+    end
+}
+
+script BattleFrontier_Underground_B1F_EventScript_PokemonShopItemClerk {
+    lock
+	faceplayer
+	message(gText_HowMayIServeYou)
+	waitmessage
+	pokemart(BattleFrontier_Underground_B1F_Mart_PokemonShopItemClerk)
+	msgbox(gText_PleaseComeAgain, MSGBOX_DEFAULT)
+	release
+	end
+}
+
+text LegendaryShopCommon_Text_LegendaryShopRegions1 {
+    "KANTO$"
+    "JOHTO$"
+    "HOENN$"
+    "SINNOH$"
+    "UNOVA$"
+    "KALOS$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopKanto {
+    "MEWTWO{CLEAR_TO 0x48}¥12000$"
+    "ARTICUNO{CLEAR_TO 0x48}¥12000$"
+    "ZAPDOS{CLEAR_TO 0x48}¥12000$"
+    "MOLTRES{CLEAR_TO 0x48}¥12000$"
+    "MEW{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopJohto {
+    "LUGIA{CLEAR_TO 0x48}¥12000$"
+    "HO-OH{CLEAR_TO 0x48}¥12000$"
+    "RAIKOU{CLEAR_TO 0x48}¥12000$"
+    "ENTEI{CLEAR_TO 0x48}¥12000$"
+    "SUICUNE{CLEAR_TO 0x48}¥12000$"
+    "CELEBI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopHoenn {
+    "GROUDON{CLEAR_TO 0x48}¥12000$"
+    "KYOGRE{CLEAR_TO 0x48}¥12000$"
+    "RAYQUAZA{CLEAR_TO 0x48}¥12000$"
+    "REGIROCK{CLEAR_TO 0x48}¥12000$"
+    "REGICE{CLEAR_TO 0x48}¥12000$"
+    "REGISTEEL{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopHoenn2 {
+    "LATIOS{CLEAR_TO 0x48}¥12000$"
+    "LATIAS{CLEAR_TO 0x48}¥12000$"
+    "JIRACHI{CLEAR_TO 0x48}¥12000$"
+    "DEOXYS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopSinnoh {
+    "DIALGA{CLEAR_TO 0x48}¥12000$"
+    "PALKIA{CLEAR_TO 0x48}¥12000$"
+    "GIRATINA{CLEAR_TO 0x48}¥12000$"
+    "HEATRAN{CLEAR_TO 0x48}¥12000$"
+    "REGIGIGAS{CLEAR_TO 0x48}¥12000$"
+    "CRESSELIA{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopSinnoh2 {
+    "UXIE{CLEAR_TO 0x48}¥12000$"
+    "MESPRIT{CLEAR_TO 0x48}¥12000$"
+    "AZELF{CLEAR_TO 0x48}¥12000$"
+    "PHIONE{CLEAR_TO 0x48}¥12000$"
+    "MANAPHY{CLEAR_TO 0x48}¥12000$"
+    "DARKRAI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopSinnoh3 {
+    "SHAYMIN{CLEAR_TO 0x48}¥12000$"
+    "SHAYMIN SKY{CLEAR_TO 0x48}¥12000$"
+    "ARCEUS{CLEAR_TO 0x48}¥12000$"
+    "ROTOM{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopUnova {
+    "RESHIRAM{CLEAR_TO 0x48}¥12000$"
+    "ZEKROM{CLEAR_TO 0x48}¥12000$"
+    "KYUREM{CLEAR_TO 0x48}¥12000$"
+    "COBALION{CLEAR_TO 0x48}¥12000$"
+    "TERRAKION{CLEAR_TO 0x48}¥12000$"
+    "VIRIZION{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopUnova2 {
+    "TORNADUS{CLEAR_TO 0x48}¥12000$"
+    "THUNDURUS{CLEAR_TO 0x48}¥12000$"
+    "LANDORUS{CLEAR_TO 0x48}¥12000$"
+    "TORNADUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "THUNDURUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "LANDORUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopUnova3 {
+    "ENAMORUS{CLEAR_TO 0x48}¥12000$"
+    "ENAMORUS THERIAN{CLEAR_TO 0x48}¥12000$"
+    "VICTINI{CLEAR_TO 0x48}¥12000$"
+    "KELDEO{CLEAR_TO 0x48}¥12000$"
+    "MELOETTA{CLEAR_TO 0x48}¥12000$"
+    "GENESECT{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopKalos {
+    "XERNEAS{CLEAR_TO 0x48}¥12000$"
+    "YVELTAL{CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-10 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-50 (AURA BK.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-10 (POWER C.){CLEAR_TO 0x48}¥12000$"
+    "ZYGARDE-50 (POWER C.){CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopKalos2 {
+    "DIANCIE{CLEAR_TO 0x48}¥12000$"
+    "HOOPA{CLEAR_TO 0x48}¥12000$"
+    "HOOPA UNBOUND{CLEAR_TO 0x48}¥12000$"
+    "VOLCANION{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopRegions2 {
+    "ALOLA$"
+    "GALAR$"
+    "PALDEA$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopAlola {
+    "COSMOG{CLEAR_TO 0x48}¥12000$"
+    "SOLGALEO{CLEAR_TO 0x48}¥12000$"
+    "LUNALA{CLEAR_TO 0x48}¥12000$"
+    "NECROZMA{CLEAR_TO 0x48}¥12000$"
+    "TYPE NULL{CLEAR_TO 0x48}¥12000$"
+    "SILVALLY{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopAlola2 {
+    "TAPU KOKO{CLEAR_TO 0x48}¥12000$"
+    "TAPU LELE{CLEAR_TO 0x48}¥12000$"
+    "TAPU BULU{CLEAR_TO 0x48}¥12000$"
+    "TAPU FINI{CLEAR_TO 0x48}¥12000$"
+    "NIHILEGO{CLEAR_TO 0x48}¥12000$"
+    "BUZZWOLE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopAlola3 {
+    "PHEROMOSA{CLEAR_TO 0x48}¥12000$"
+    "XURKITREE{CLEAR_TO 0x48}¥12000$"
+    "CELESTEELA{CLEAR_TO 0x48}¥12000$"
+    "KARTANA{CLEAR_TO 0x48}¥12000$"
+    "GUZZLORD{CLEAR_TO 0x48}¥12000$"
+    "STAKATAKA{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopAlola4 {
+    "BLACEPHALON{CLEAR_TO 0x48}¥12000$"
+    "POIPOLE{CLEAR_TO 0x48}¥12000$"
+    "NAGANADEL{CLEAR_TO 0x48}¥12000$"
+    "MAGEARNA{CLEAR_TO 0x48}¥12000$"
+    "MAGEARNA OC{CLEAR_TO 0x48}¥12000$"
+    "MARSHADOW{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopAlola5 {
+    "ZERAORA{CLEAR_TO 0x48}¥12000$"
+    "ASH GRENINJA{CLEAR_TO 0x48}¥12000$"
+    "ROCKRUFF{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopGalar {
+    "ZACIAN{CLEAR_TO 0x48}¥12000$"
+    "ZAMAZENTA{CLEAR_TO 0x48}¥12000$"
+    "ETERNATUS{CLEAR_TO 0x48}¥12000$"
+    "KUBFU{CLEAR_TO 0x48}¥12000$"
+    "URSHIFU SS{CLEAR_TO 0x48}¥12000$"
+    "URSHIFU RS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopGalar2 {
+    "CALYREX{CLEAR_TO 0x48}¥12000$"
+    "GLASTRIER{CLEAR_TO 0x48}¥12000$"
+    "SPECTRIER{CLEAR_TO 0x48}¥12000$"
+    "ARTICUNO GALAR{CLEAR_TO 0x48}¥12000$"
+    "ZAPDOS GALAR{CLEAR_TO 0x48}¥12000$"
+    "MOLTRES GALAR{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopGalar3 {
+    "REGIELEKI{CLEAR_TO 0x48}¥12000$"
+    "REGIDRAGO{CLEAR_TO 0x48}¥12000$"
+    "MELTAN{CLEAR_TO 0x48}¥12000$"
+    "MELMETAL{CLEAR_TO 0x48}¥12000$"
+    "ZARUDE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopPaldea {
+    "KORAIDON{CLEAR_TO 0x48}¥12000$"
+    "MIRAIDON{CLEAR_TO 0x48}¥12000$"
+    "WO-CHIEN{CLEAR_TO 0x48}¥12000$"
+    "CHIEN-PAO{CLEAR_TO 0x48}¥12000$"
+    "TING-LU{CLEAR_TO 0x48}¥12000$"
+    "CHI-YU{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopPaldea2 {
+    "IRON TREADS{CLEAR_TO 0x48}¥12000$"
+    "IRON BUNDLE{CLEAR_TO 0x48}¥12000$"
+    "IRON HANDS{CLEAR_TO 0x48}¥12000$"
+    "IRON JUGULIS{CLEAR_TO 0x48}¥12000$"
+    "IRON MOTH{CLEAR_TO 0x48}¥12000$"
+    "IRON THORNS{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopPaldea3 {
+    "IRON VALIANT{CLEAR_TO 0x48}¥12000$"
+    "IRON LEAVES{CLEAR_TO 0x48}¥12000$"
+    "GREAT TUSK{CLEAR_TO 0x48}¥12000$"
+    "SCREAM TAIL{CLEAR_TO 0x48}¥12000$"
+    "BRUTE BONNET{CLEAR_TO 0x48}¥12000$"
+    "FLUTTER MANE{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopPaldea4 {
+    "SLITHER WING{CLEAR_TO 0x48}¥12000$"
+    "SANDY SHOCKS{CLEAR_TO 0x48}¥12000$"
+    "ROARING MOON{CLEAR_TO 0x48}¥12000$"
+    "WALKING WAKE{CLEAR_TO 0x48}¥12000$"
+    "OKIDOGI{CLEAR_TO 0x48}¥12000$"
+    "MUNKIDORI{CLEAR_TO 0x48}¥12000$"
+    ""
+}
+
+text LegendaryShopCommon_Text_LegendaryShopPaldea5 {
+    "FEZANDIPITI{CLEAR_TO 0x48}¥12000$"
+    "OGERPON{CLEAR_TO 0x48}¥12000$"
+    "URSALUNA BLOODMOON{CLEAR_TO 0x48}¥12000$"
+    ""
+}

@@ -60,6 +60,9 @@ struct Nature {
     u8 negStat;
 };
 
+// Forme / Gimmick not allowed
+#define BFG_ITEM_IV_BANNED 32
+
 bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, struct GeneratorProperties * properties);
 bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex, u16 move, u16 item, struct GeneratorProperties * properties);
 
@@ -68,7 +71,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount);
 
 void DebugPrintMonData(struct Pokemon * mon);
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV);
-void UpdateGeneratorForLevelMode(struct GeneratorProperties * properties, u8 lvlMode); 
+void UpdateGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode); 
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level);
 void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rentalRank);
@@ -76,10 +79,15 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
 
 void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV);
 
-void SetFacilityPlayerParty(u8 level);
-void SetFacilityOpponentParty(u8 level);
 void SetRentalsToFacilityOpponentParty();
 
 void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum);
+
+
+bool8 FrontierBattlerCanMegaEvolve();
+bool8 FrontierBattlerCanUseZMove();
+
+bool8 FrontierBattlerCanDynamax(struct Pokemon * mon);
+bool8 FrontierBattlerShouldDynamax(struct Pokemon * mon);
 
 #endif // GUARD_BATTLE_FRONTIER_GENERATOR_H

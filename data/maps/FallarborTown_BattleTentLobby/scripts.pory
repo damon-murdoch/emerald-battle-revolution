@@ -353,10 +353,3 @@ FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "make a challenge?$"
 
 `
-
-script FallarborTown_BattleTentLobby_EventScript_MusicAttendant {
-	msgbox(format("Welcome to the BATTLE TENT FALLARBOR SITE!"))
-	msgbox(format("I can help you change the battle music. What would like to listen to?"))
-	msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
-	goto(BattleFrontier_Generic_EventScript_MusicAttendantPage1)
-}

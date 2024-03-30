@@ -1,0 +1,349 @@
+script BattleFrontierController_EventScript_ControllerHill {
+	msgbox(format("Hello and welcome to the TRAINER HILL!"))
+	if (flag(FLAG_IS_CHAMPION)){
+		goto(BattleFrontierController_EventScript_ControllerInfo)
+	}
+	msgbox(format("We haven't finished getting everything ready yet."))
+	goto(BattleFrontierController_EventScript_ControllerEnd)
+}
+
+script BattleFrontierController_EventScript_ControllerTent {
+	msgbox(format("Hello and welcome to the BATTLE TENT!"))
+	goto(BattleFrontierController_EventScript_ControllerInfo)
+}
+
+script BattleFrontierController_EventScript_ControllerFrontier {
+	msgbox(format("Hello and welcome to the BATTLE FRONTIER!"))
+	goto(BattleFrontierController_EventScript_ControllerInfo)
+}
+
+script BattleFrontierController_EventScript_ControllerManiac {
+	msgbox(format("Hello, I'm the BATTLE FRONTIER MANIAC!"))
+	goto(BattleFrontierController_EventScript_ControllerInfo)
+} 
+
+script BattleFrontierController_EventScript_ControllerInfo {
+	msgbox(format("I can help you customise your Battle Frontier experience."))
+	msgbox(format("What would you like to do?"))
+	goto(BattleFrontierController_EventScript_ControllerOptions)
+}
+
+script BattleFrontierController_EventScript_ControllerOptions {
+	multichoice2(18,0,BattleFrontierController_Text_ControllerOptionSelect)
+	switch(var(VAR_RESULT)) {
+		case 0: # Change Opponents
+			goto(BattleFrontierController_EventScript_ControllerChangeOpponents)
+		case 1: # Change Behavior
+			goto(BattleFrontierController_EventScript_ControllerChangeBehavior)
+		case 2: # Change Rules
+			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
+		case 3: # Change Music
+			goto(BattleFrontierController_EventScript_ControllerChangeMusic)
+		default: 
+			goto(BattleFrontierController_EventScript_ControllerEnd)
+	}
+}
+
+script BattleFrontierController_EventScript_ControllerChangeOpponents {
+
+	if (flag(FLAG_BATTLE_FRONTIER_GENERATOR) == TRUE) {
+		msgbox(format("You are currently playing against modern Battle Frontier opponents."))
+		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
+		msgbox(format("Would you like to switch to legacy Battle Frontier opponents?"))
+	}
+	else # Frontier Generator not enabled
+	{
+		msgbox(format("You are currently playing against legacy Battle Frontier opponents."))
+		msgbox(format("Would you like to switch to modern Battle Frontier opponents?"))
+		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
+	}
+
+	yesnobox(0, 8)
+	if (var(VAR_RESULT) == YES){
+		if (flag(FLAG_BATTLE_FRONTIER_GENERATOR) == TRUE) {
+			clearflag(FLAG_BATTLE_FRONTIER_GENERATOR) # Clear the flag
+			msgbox(format("Done! You'll now play against legacy Battle Frontier opponents."))
+		}
+		else # Frontier Generator not enabled
+		{
+			setflag(FLAG_BATTLE_FRONTIER_GENERATOR) # Set the flag
+			msgbox(format("Done! You'll now play against modern Battle Frontier opponents."))
+		}
+	}
+
+	msgbox(format("Feel free to ask me again if you change your mind!"))
+	goto(BattleFrontierController_EventScript_ControllerAsk)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeBehavior {
+
+	msgbox(format("I can change how modern Battle Frontier teams are built."))
+	msgbox(format("Which option would you like to use?"))
+
+	multichoice2(18,0,BattleFrontierController_Text_ControllerOptionSelectBehavior)
+	copyvar(VAR_FRONTIER_METHOD, VAR_RESULT)
+
+	msgbox(format("Modern teams have been updated successfully!"))
+
+	goto(BattleFrontierController_EventScript_ControllerAsk)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusic {
+	msgbox(format("What would like to listen to?"))
+	msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+	goto(BattleFrontierController_EventScript_ControllerChangeMusicPage1)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeBanlist {
+	msgbox(format("Which ruleset would you like to change?"))
+	multichoice2(0,0,BattleFrontierController_Text_ControllerChangeRules)
+	switch(var(VAR_RESULT))
+	{
+		case 0: # Standard Battle
+			goto(BattleFrontierController_EventScript_ControllerChangeBanlistStandard)
+		case 1: # Dynamax Battle
+			goto(BattleFrontierController_EventScript_ControllerChangeBanlistDynamax)
+		default: # Fallback
+			goto(BattleFrontierController_EventScript_ControllerAsk)
+	}
+}
+
+script BattleFrontierController_EventScript_ControllerChangeBanlistStandard {
+	msgbox(format("These are the options for standard battles."))
+	msgbox(format("Please remember, these rules apply to both you and your opponents!"))
+	msgbox(format("What would you like to change?"))
+	multichoice2(0,0,BattleFrontierController_Text_ControllerChangeRulesStandard)
+	switch(var(VAR_RESULT))
+	{
+		case 0: # ALLOW MEGAS
+			msgbox(format("Okay! Mega Evolutions will be allowed."))
+			setflag(FLAG_BATTLE_FRONTIER_ALLOW_MEGA)
+		case 1: # BAN MEGAS
+			msgbox(format("Okay! Mega Evolutions will be banned."))
+			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_MEGA)
+		case 2: # ALLOW ZMOVES
+			msgbox(format("Okay! Z-Moves will be allowed."))
+			setflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
+		case 3: # BAN ZMOVES
+			msgbox(format("Okay! Z-Moves will be banned."))
+			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
+		case 4: # ALLOW TERA
+			msgbox(format("Tera is not available yet, sorry!"))
+		case 5: # BAN TERA
+			msgbox(format("Tera is not available yet, sorry!"))
+		default:
+			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
+	}
+	goto(BattleFrontierController_EventScript_ControllerAsk)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeBanlistDynamax {
+	msgbox(format("These are the options for dynamax battles."))
+	msgbox(format("Please remember, these rules apply to both you and your opponents!"))
+	msgbox(format("What would you like to change?"))
+	multichoice2(0,0,BattleFrontierController_Text_ControllerChangeRulesDynamax)
+	switch(var(VAR_RESULT))
+	{
+		case 0: # ALLOW GMAX
+			msgbox(format("Okay! Gigantamax Formes will be allowed."))
+			setflag(FLAG_BATTLE_FRONTIER_ALLOW_GMAX)
+		case 1: # BAN GMAX
+			msgbox(format("Okay! Gigantamax Formes will be banned."))
+			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_GMAX)
+		default:
+			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
+	}
+	goto(BattleFrontierController_EventScript_ControllerAsk)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusicPage1 {
+	multichoice2(0,0,BattleFrontierController_Text_ControllerMusicSelectPage1)
+	switch(var(VAR_RESULT)){
+		case 0:
+			setvar(VAR_FRONTIER_BGM, 0)
+		case 1:
+			setvar(VAR_FRONTIER_BGM, 1)
+		case 2:
+			setvar(VAR_FRONTIER_BGM, 2)
+		case 3:
+			setvar(VAR_FRONTIER_BGM, 3)
+		case 4:
+			setvar(VAR_FRONTIER_BGM, 4)
+		case 5:
+			setvar(VAR_FRONTIER_BGM, 5)
+		case MULTI_L_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage4)
+		case MULTI_R_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage2)
+		default: 
+			goto(BattleFrontierController_EventScript_ControllerAsk)
+	}
+	goto(BattleFrontierController_EventScript_ControllerChangeMusicSuccess)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusicPage2 {
+	multichoice2(0,0,BattleFrontierController_Text_ControllerMusicSelectPage2)
+	switch(var(VAR_RESULT)){
+		case 0:
+			setvar(VAR_FRONTIER_BGM, 6)
+		case 1:
+			setvar(VAR_FRONTIER_BGM, 7)
+		case 2:
+			setvar(VAR_FRONTIER_BGM, 8)
+		case 3:
+			setvar(VAR_FRONTIER_BGM, 9)
+		case 4:
+			setvar(VAR_FRONTIER_BGM, 10)
+		case 5:
+			setvar(VAR_FRONTIER_BGM, 11)
+		case MULTI_L_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage1)
+		case MULTI_R_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage3)
+		default: 
+			goto(BattleFrontierController_EventScript_ControllerAsk)
+	}
+	goto(BattleFrontierController_EventScript_ControllerChangeMusicSuccess)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusicPage3 {
+	multichoice2(0,0,BattleFrontierController_Text_ControllerMusicSelectPage3)
+	switch(var(VAR_RESULT)){
+		case 0:
+			setvar(VAR_FRONTIER_BGM, 12)
+		case 1:
+			setvar(VAR_FRONTIER_BGM, 13)
+		case 2:
+			setvar(VAR_FRONTIER_BGM, 14)
+		case 3:
+			setvar(VAR_FRONTIER_BGM, 15)
+		case 4:
+			setvar(VAR_FRONTIER_BGM, 16)
+		case 5:
+			setvar(VAR_FRONTIER_BGM, 17)
+		case MULTI_L_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage2)
+		case MULTI_R_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage4)
+		default: 
+			goto(BattleFrontierController_EventScript_ControllerAsk)
+	}
+	goto(BattleFrontierController_EventScript_ControllerChangeMusicSuccess)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusicPage4 {
+	multichoice2(0,0,BattleFrontierController_Text_ControllerMusicSelectPage4)
+	switch(var(VAR_RESULT)){
+		case 0:
+			setvar(VAR_FRONTIER_BGM, 18)
+		case 1:
+			setvar(VAR_FRONTIER_BGM, 19)
+		case MULTI_L_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage3)
+		case MULTI_R_PRESSED:
+			goto(BattleFrontierController_EventScript_ControllerChangeMusicPage1)
+		default: 
+			goto(BattleFrontierController_EventScript_ControllerAsk)
+	}
+	goto(BattleFrontierController_EventScript_ControllerChangeMusicSuccess)
+}
+
+script BattleFrontierController_EventScript_ControllerChangeMusicSuccess {
+	playse(SE_SUCCESS)
+	msgbox(format("All done! Your music selection has been changed."))
+	waitse
+	goto(BattleFrontierController_EventScript_ControllerAsk)
+}
+
+script BattleFrontierController_EventScript_ControllerAsk {
+	msgbox(format("Do you need me for anything else?"))
+	yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(BattleFrontierController_EventScript_ControllerOptions)
+    } else {
+		goto(BattleFrontierController_EventScript_ControllerEnd)
+	}
+}
+
+script BattleFrontierController_EventScript_ControllerEnd {
+	msgbox(format("I hope you have some good battles!"))
+	release
+	end
+}
+
+text BattleFrontierController_Text_ControllerOptionSelect {
+	"CHANGE OPPONENTS$"
+	"CHANGE BEHAVIOR$"
+	"CHANGE BANLIST$"
+	"CHANGE MUSIC$"
+	"NOTHING$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerOptionSelectBehavior {
+	"DEFAULT$"
+	"RANDOM$"
+	"FILTERED$"
+	"FILTERED ATTACKS$"
+	"RANKED$"
+	"RANKED ATTACKS$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerChangeRules {
+	"STANDARD BATTLE$"
+	"DYNAMAX BATTLE$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerChangeRulesStandard {
+	"ALLOW MEGAS$"
+	"BAN MEGAS$"
+	"ALLOW ZMOVES$"
+	"BAN ZMOVES$"
+	"ALLOW TERA$"
+	"BAN TERA$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerChangeRulesDynamax {
+	"ALLOW GMAX$"
+	"BAN GMAX$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerMusicSelectPage1 {
+	"DEFAULT$"
+	"VS.Frontier Brain$"
+	"VS.Mew$"
+	"VS.Wild Pokemon$"
+	"VS.Team Aqua & Magma$"
+	"VS.Trainer$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerMusicSelectPage2 {
+	"VS.Gym Leader$"
+	"VS.Champion$"
+	"VS.Regi$"
+	"VS.Kyogre & Groudon$"
+	"VS.Rival$"
+	"VS.Elite Four$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerMusicSelectPage3 {
+	"VS.Aqua & Magma Leader$"
+	"VS.Gym Leader (FRLG)$"
+	"VS.Trainer (FRLG)$"
+	"VS.Wild Pokemon (FRLG)$"
+	"VS.Champion (FRLG)$"
+	"VS.Deoxys (FRLG)$"
+	""
+}
+
+text BattleFrontierController_Text_ControllerMusicSelectPage4 {
+	"VS.Mewtwo (FRLG)$"
+	"VS.Legend (FRLG)$"
+	""
+}

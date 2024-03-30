@@ -69,13 +69,13 @@ script OldaleTown_Mart_EventScript_Clerk {
 	message(gText_HowMayIServeYou)
 	waitmessage
 
-	// If pokedex has been received
+	# If pokedex has been received
 	if (flag(FLAG_ADVENTURE_STARTED)) {
 		pokemart(0)
 	}
-	else // Pokedex not received
+	else # Pokedex not received
 	{
-		// No PokeBalls
+		# No PokeBalls
 		pokemart(OldaleTown_Mart_Pokemart_Basic)
 	}
 
@@ -107,22 +107,22 @@ script OldaleTown_Mart_EventScript_Clerk2 {
 				if(flag(FLAG_BADGE06_GET)){
 					pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded3)
 				}
-				else // Not unlocked
+				else # Not unlocked
 				{
 					pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded2)
 				}
 			}
-			else // Not unlocked
+			else # Not unlocked
 			{
 				pokemart(OldaleTown_Mart_Pokemart_Clerk2_Expanded)
 			}
 		}
-		else // Not unlocked
+		else # Not unlocked
 		{
 			pokemart(OldaleTown_Mart_Pokemart_Clerk2)
 		}
 	}
-	else // Not unlocked
+	else # Not unlocked
 	{
 		msgbox(format("I'm afraid we are all out of stock at the moment, sorry!"))
 	}

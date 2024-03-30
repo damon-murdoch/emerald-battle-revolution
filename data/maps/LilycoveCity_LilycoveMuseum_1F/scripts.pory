@@ -302,11 +302,11 @@ script LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop {
 	msgbox(format("You can find rare items from all around the world here."))
 	waitmessage
 	
-	// Player has defeated champion
+	# Player has defeated champion
 	if (flag(FLAG_IS_CHAMPION)){
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop_Expanded)
 	}
-	else // Player is not champion
+	else # Player is not champion
 	{
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop)
 	}
@@ -362,11 +362,11 @@ script LilycoveCity_LilycoveMuseum_1F_EventScript_SouvenirShop2 {
 	msgbox(format("You can find rare items from all around the world here."))
 	waitmessage
 	
-	// Player has defeated champion
+	# Player has defeated champion
 	if (flag(FLAG_IS_CHAMPION)){
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2_Expanded)
 	}
-	else // Player is not champion
+	else # Player is not champion
 	{
 		pokemart(LilycoveCity_LilycoveMuseum_1F_Mart_SouvenirShop2)
 	}
