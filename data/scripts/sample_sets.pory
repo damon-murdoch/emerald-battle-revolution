@@ -1,0 +1,441 @@
+script Common_Eventscript_Sample_Sets_Shop {
+    lock
+    faceplayer
+    msgbox(format("Hello and welcome to the Sample Sets Shop!"))
+    goto(Common_Eventscript_Sample_Sets_ShopCheckMoney)
+}
+
+script Common_Eventscript_Sample_Sets_ShopCheckMoney {
+    showmoneybox(18, 0)
+    checkmoney(15000)
+    if (var(VAR_RESULT) == TRUE) {
+        goto(Common_EventScript_Sample_Sets_Shop_Controls)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥15000 to buy anything here!"))
+        goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Controls
+{
+  msgbox("L: Previous Page                    R: Next Page\nB: Go Back")
+  goto(Common_EventScript_Sample_Sets_Shop_Page1)
+}
+
+script Common_Eventscript_Sample_Sets_ShopCheckPurchase {
+    msgbox(format("Sure! Let's see if I can handle that for you ..."))
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON have been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON have been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like I can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    removemoney(15000)
+    updatemoneybox
+    playse(SE_SHOP)
+    waitse
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(Common_Eventscript_Sample_Sets_ShopCheckMoney)
+    }
+    goto(Common_EventScript_Sample_Sets_Shop_End)
+}
+
+script Common_EventScript_Sample_Sets_Shop_End {
+    msgbox(format("Come back again soon!"))
+    hidemoneybox
+    releaseall
+    end
+}
+
+script Common_EventScript_Sample_Sets_Shop_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Singles
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+        case 1: # Doubles
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Singles_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Singles_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Mega
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Mega_Page1)
+        case 1: # Standard
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Standard_Page1)
+        case 2: # Restricted
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Restricted_Page1)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Singles_Mega_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Singles_Mega_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Mega_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Mega_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Singles_Standard_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Singles_Standard_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Standard_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Standard_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Singles_Restricted_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Singles_Restricted_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Restricted_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Restricted_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Singles_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Mega
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page1)
+        case 1: # Standard
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page1)
+        case 2: # Restricted
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Restricted_Page1)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Mega_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # M Kangaskhan
+            givemon(SPECIES_KANGASKHAN,85,ITEM_KANGASKHANITE,ITEM_SPORT_BALL,NATURE_ADAMANT,0,1,36,196,20,0,236,20,31,31,31,31,31,31,MOVE_RETURN,MOVE_LOW_KICK,MOVE_SUCKER_PUNCH,MOVE_FAKE_OUT,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 1: # M Metagross
+            givemon(SPECIES_METAGROSS,85,ITEM_METAGROSSITE,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,124,196,12,0,36,140,31,31,31,31,31,31,MOVE_PROTECT,MOVE_IRON_HEAD,MOVE_ICE_PUNCH,MOVE_STOMPING_TANTRUM,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 2: # M Gardevoir
+            givemon(SPECIES_GARDEVOIR,85,ITEM_GARDEVOIRITE,ITEM_SPORT_BALL,NATURE_MODEST,0,0,244,0,196,36,4,28,31,0,31,31,31,31,MOVE_PROTECT,MOVE_HYPER_VOICE,MOVE_TRICK_ROOM,MOVE_PSYCHIC,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 3: # M Charizard-Y
+            givemon(SPECIES_CHARIZARD,85,ITEM_CHARIZARDITE_Y,ITEM_SPORT_BALL,NATURE_MODEST,0,1,204,0,108,4,4,188,31,0,31,31,31,31,MOVE_PROTECT,MOVE_SCORCHING_SANDS,MOVE_FLAMETHROWER,MOVE_SOLAR_BEAM,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 4: # M Salamence (S)
+            givemon(SPECIES_SALAMENCE,85,ITEM_SALAMENCITE,ITEM_SPORT_BALL,NATURE_MODEST,0,1,4,0,4,244,4,252,31,0,31,31,31,31,MOVE_PROTECT,MOVE_TAILWIND,MOVE_DRACO_METEOR,MOVE_HYPER_VOICE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page2)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page2)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page2
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Mega_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # M Manectric
+            givemon(SPECIES_MANECTRIC,85,ITEM_MANECTITE,ITEM_SPORT_BALL,NATURE_TIMID,0,1,244,0,0,44,0,220,31,0,30,31,31,31,MOVE_PROTECT,MOVE_OVERHEAT,MOVE_VOLT_SWITCH,MOVE_HIDDEN_POWER,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 1: # M Gengar
+            givemon(SPECIES_GENGAR,85,ITEM_GENGARITE,ITEM_SPORT_BALL,NATURE_TIMID,0,0,252,0,68,4,4,180,31,0,31,31,31,31,MOVE_PROTECT,MOVE_SHADOW_BALL,MOVE_PERISH_SONG,MOVE_DISABLE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Mega_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Standard_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Incineroar
+            givemon(SPECIES_INCINEROAR,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_ADAMANT,1,1,236,36,4,0,204,28,31,31,31,31,31,31,MOVE_PARTING_SHOT,MOVE_FLARE_BLITZ,MOVE_KNOCK_OFF,MOVE_FAKE_OUT,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 1: # Rillaboom
+            givemon(SPECIES_RILLABOOM,85,ITEM_ASSAULT_VEST,ITEM_SPORT_BALL,NATURE_ADAMANT,1,0,132,36,60,0,212,68,31,31,31,31,31,31,MOVE_U_TURN,MOVE_WOOD_HAMMER,MOVE_GRASSY_GLIDE,MOVE_FAKE_OUT,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 2: # Amoonguss
+            givemon(SPECIES_AMOONGUSS,85,ITEM_ROCKY_HELMET,ITEM_SPORT_BALL,NATURE_CALM,1,1,252,0,172,4,76,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_RAGE_POWDER,MOVE_POLLEN_PUFF,MOVE_SPORE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 3: # Iron Hands
+            givemon(SPECIES_IRON_HANDS,85,ITEM_ASSAULT_VEST,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,60,156,36,0,252,4,31,31,31,31,31,31,MOVE_DRAIN_PUNCH,MOVE_WILD_CHARGE,MOVE_HEAVY_SLAM,MOVE_FAKE_OUT,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 4: # Politoed
+            givemon(SPECIES_POLITOED,85,ITEM_LEFTOVERS,ITEM_SPORT_BALL,NATURE_CALM,2,0,212,0,132,4,76,84,31,0,31,31,31,31,MOVE_PROTECT,MOVE_PERISH_SONG,MOVE_ENCORE,MOVE_SCALD,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page4)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page2)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page2
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Standard_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Tornadus
+            givemon(SPECIES_TORNADUS,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_TIMID,0,0,4,0,4,244,4,252,31,0,31,31,31,31,MOVE_BLEAKWIND_STORM,MOVE_RAIN_DANCE,MOVE_TAILWIND,MOVE_TAUNT,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 1: # Urshifu-RS
+            givemon(SPECIES_URSHIFU_RAPID_STRIKE_STYLE,85,ITEM_MYSTIC_WATER,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,44,236,4,0,84,140,31,31,31,31,31,31,MOVE_PROTECT,MOVE_SURGING_STRIKES,MOVE_CLOSE_COMBAT,MOVE_AQUA_JET,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 2: # Heatran
+            givemon(SPECIES_HEATRAN,85,ITEM_SHUCA_BERRY,ITEM_SPORT_BALL,NATURE_MODEST,0,0,228,0,4,236,4,36,31,0,31,31,31,31,MOVE_PROTECT,MOVE_SUBSTITUTE,MOVE_HEAT_WAVE,MOVE_EARTH_POWER,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 3: # Landorus-T
+            givemon(SPECIES_LANDORUS_THERIAN,85,ITEM_CHOICE_SCARF,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,4,196,4,0,52,252,31,31,31,31,31,31,MOVE_U_TURN,MOVE_STOMPING_TANTRUM,MOVE_EARTHQUAKE,MOVE_ROCK_SLIDE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 4: # Landorus-T (B)
+            givemon(SPECIES_LANDORUS_THERIAN,85,ITEM_GROUNDIUM_Z,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,156,116,36,0,108,92,31,31,31,31,31,31,MOVE_PROTECT,MOVE_STOMPING_TANTRUM,MOVE_EARTHQUAKE,MOVE_ROCK_SLIDE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page3)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page3
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Standard_Page3)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Flutter Mane
+            givemon(SPECIES_FLUTTER_MANE,85,ITEM_FAIRIUM_Z,ITEM_SPORT_BALL,NATURE_MODEST,0,0,140,0,188,36,4,140,31,0,31,31,31,31,MOVE_PROTECT,MOVE_DAZZLING_GLEAM,MOVE_SHADOW_BALL,MOVE_MOONBLAST,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 1: # Tapu Fini
+            givemon(SPECIES_TAPU_FINI,85,ITEM_CHOICE_SPECS,ITEM_SPORT_BALL,NATURE_MODEST,0,0,244,0,4,196,4,60,31,0,31,31,31,31,MOVE_DAZZLING_GLEAM,MOVE_MUDDY_WATER,MOVE_MOONBLAST,MOVE_HAZE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 2: # Aegislash
+            givemon(SPECIES_AEGISLASH,85,ITEM_LEFTOVERS,ITEM_SPORT_BALL,NATURE_MODEST,0,1,204,0,20,236,20,28,31,0,31,31,31,31,MOVE_KINGS_SHIELD,MOVE_FLASH_CANNON,MOVE_SHADOW_BALL,MOVE_WIDE_GUARD,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 3: # Ogerpon-HF
+            givemon(SPECIES_OGERPON_HEARTHFLAME_MASK,85,ITEM_HEARTHFLAME_MASK,ITEM_SPORT_BALL,NATURE_ADAMANT,0,1,228,156,84,0,4,36,31,31,31,31,31,31,MOVE_SPIKY_SHIELD,MOVE_FOLLOW_ME,MOVE_IVY_CUDGEL,MOVE_HORN_LEECH,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case 4: # Cresselia
+            givemon(SPECIES_CRESSELIA,85,ITEM_SAFETY_GOGGLES,ITEM_SPORT_BALL,NATURE_BOLD,0,1,244,0,180,4,60,20,31,0,31,31,31,31,MOVE_PSYCHIC,MOVE_LUNAR_BLESSING,MOVE_HELPING_HAND,MOVE_TRICK_ROOM,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page2)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page4)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page4
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Standard_Page4)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # Ting-Lu
+            givemon(SPECIES_TING_LU,85,ITEM_ASSAULT_VEST,ITEM_SPORT_BALL,NATURE_ADAMANT,0,0,68,156,4,0,252,28,31,31,31,31,31,31,MOVE_STOMPING_TANTRUM,MOVE_HEAVY_SLAM,MOVE_RUINATION,MOVE_STONE_EDGE,FALSE,FALSE,FALSE)
+            goto(Common_Eventscript_Sample_Team_ShopCheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page3)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Standard_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_Shop_Doubles_Restricted_Page1
+{
+    multichoice2(0,0,Common_Text_Sample_Sets_Shop_Doubles_Restricted_Page1)
+    switch(var(VAR_RESULT))
+    {
+        case MULTI_L_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Restricted_Page1)
+        case MULTI_R_PRESSED:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Restricted_Page1)
+        default:
+            goto(Common_EventScript_Sample_Sets_Shop_Doubles_Page1)
+    }
+}
+
+text Common_Text_Sample_Sets_Shop_Page1
+{
+    "Singles$"
+    "Doubles$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Singles_Page1
+{
+    "Mega$"
+    "Standard$"
+    "Restricted$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Singles_Mega_Page1
+{
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Singles_Standard_Page1
+{
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Singles_Restricted_Page1
+{
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Page1
+{
+    "Mega$"
+    "Standard$"
+    "Restricted$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Mega_Page1
+{
+    "M Kangaskhan$"
+    "M Metagross$"
+    "M Gardevoir$"
+    "M Charizard-Y$"
+    "M Salamence (S)$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Mega_Page2
+{
+    "M Manectric$"
+    "M Gengar$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Standard_Page1
+{
+    "Incineroar$"
+    "Rillaboom$"
+    "Amoonguss$"
+    "Iron Hands$"
+    "Politoed$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Standard_Page2
+{
+    "Tornadus$"
+    "Urshifu-RS$"
+    "Heatran$"
+    "Landorus-T$"
+    "Landorus-T (B)$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Standard_Page3
+{
+    "Flutter Mane$"
+    "Tapu Fini$"
+    "Aegislash$"
+    "Ogerpon-HF$"
+    "Cresselia$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Standard_Page4
+{
+    "Ting-Lu$"
+    "Go Back$"
+    ""
+}
+
+text Common_Text_Sample_Sets_Shop_Doubles_Restricted_Page1
+{
+    "Go Back$"
+    ""
+}
