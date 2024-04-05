@@ -2,12 +2,37 @@ from datetime import datetime
 
 CONFIG_FILE = "./include/config/battle_frontier_generator.h"
 
-def get_timestamp(time = datetime.now()):
+
+def get_timestamp(time=datetime.now()):
     return time.strftime("%d-%m-%y %H:%M:%S")
+
+
+def pory_format(string, delim="_"):
+
+    # Update formatting
+    pory_str = string.replace("_", " ").replace("-", " ")
+    pory_str = pory_str.replace("'", " ").replace(":", " ")
+
+    # Remove Brackets
+    pory_str = pory_str.replace("(", "").replace(")", "")
+    pory_str = pory_str.replace("[", "").replace("]", "")
+    pory_str = pory_str.replace("}", "").replace("}", "")
+
+    # Split the string on the spaces
+    split = pory_str.split(" ")
+
+    # Convert strings to upper case
+    for i in range(len(split)):
+        split[i] = split[i].capitalize()
+
+    # Return rejoined string
+    return delim.join(split)
+
 
 def convert_const_to_camel(const):
     parts = const.split("_")
     return parts[0].lower() + "".join(word.capitalize() for word in parts[1:])
+
 
 def get_constant(string):
 
@@ -25,8 +50,9 @@ def get_constant(string):
 
     return constant
 
+
 def get_species_constant(species_name):
-    
+
     # Convert to generic constant
     constant = get_constant(species_name)
 
@@ -37,9 +63,12 @@ def get_species_constant(species_name):
         .replace("_GALAR", "_GALARIAN")
         .replace("_HISUI", "_HISUIAN")
         .replace("_PALDEA", "_PALDEAN")
+        .replace("_SINGLE_STRIKE", "_SINGLE_STRIKE_FORME")
+        .replace("_RAPID_STRIKE", "_RAPID_STRIKE_FORME")
     )
 
     return f"SPECIES_{constant}"
+
 
 def get_species_id(species_name):
 
@@ -47,14 +76,22 @@ def get_species_id(species_name):
     constant = species_name.lower()
 
     # Update formatting
-    return constant.replace(" ", "").replace("-", "").replace("'", "").replace(":", "").replace("_","")
+    return (
+        constant.replace(" ", "")
+        .replace("-", "")
+        .replace("'", "")
+        .replace(":", "")
+        .replace("_", "")
+    )
+
 
 def parse_gender(gender_string):
     gender = gender_string.lower()
-    if gender == "m" or gender == "n": # Male
+    if gender == "m" or gender == "n":  # Male
         return 0
-    elif gender == "f": # Female
+    elif gender == "f":  # Female
         return 1
+
 
 def is_tagged(species, tag):
     return "tags" in species and tag in species["tags"]
