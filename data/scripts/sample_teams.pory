@@ -2,10 +2,10 @@ script Common_Eventscript_Sample_Team_Shop {
     lock
     faceplayer
     msgbox(format("Hello and welcome to the Sample Team Shop!"))
-    goto(Common_Eventscript_Sample_Team_ShopCheckMoney)
+    goto(Common_Eventscript_Sample_Team_CheckMoney)
 }
 
-script Common_Eventscript_Sample_Team_ShopCheckMoney {
+script Common_Eventscript_Sample_Team_CheckMoney {
     showmoneybox(18, 0)
     checkmoney(45000)
     if (var(VAR_RESULT) == TRUE) {
@@ -18,7 +18,7 @@ script Common_Eventscript_Sample_Team_ShopCheckMoney {
     }
 }
 
-script Common_Eventscript_Sample_Team_ShopCheckPurchase {
+script Common_Eventscript_Sample_Team_CheckPurchase {
     msgbox(format("Sure! Let's see if I can handle that for you ..."))
     switch(var(VAR_RESULT)){
         case MON_GIVEN_TO_PARTY:
@@ -46,7 +46,7 @@ script Common_Eventscript_Sample_Team_ShopCheckPurchase {
     msgbox(format("Can we help you with anything else?"))
     yesnobox(0, 8)
     if (var(VAR_RESULT) == YES){
-        goto(Common_Eventscript_Sample_Team_ShopCheckMoney)
+        goto(Common_Eventscript_Sample_Team_CheckMoney)
     }
     goto(Auto_EventScript_Sample_Teams_End)
 }
