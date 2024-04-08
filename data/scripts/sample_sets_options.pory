@@ -11,7 +11,7 @@ script Auto_EventScript_Sample_Sets_Page1
     multichoice2(0,0,Auto_Text_Sample_Sets_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # standard
+        case 0: # STANDARD
             goto(Auto_EventScript_Sample_Sets_Standard_Page1)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Sample_Sets_Page1)
@@ -27,7 +27,7 @@ script Auto_EventScript_Sample_Sets_Standard_Page1
     multichoice2(0,0,Auto_Text_Sample_Sets_Standard_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # mega
+        case 0: # MEGA
             goto(Auto_EventScript_Sample_Sets_Standard_Mega_Page1)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Sample_Sets_Standard_Page1)
@@ -43,18 +43,18 @@ script Auto_EventScript_Sample_Sets_Standard_Mega_Page1
     multichoice2(0,0,Auto_Text_Sample_Sets_Standard_Mega_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # gardevoir-mega
+        case 0: # GARDEVOIR-MEGA
             givemon(SPECIES_GARDEVOIR,50,ITEM_GARDEVOIRITE,ITEM_PARK_BALL,NATURE_MODEST,0,1,244,0,196,36,4,28,31,0,31,31,31,31,MOVE_PROTECT,MOVE_TRICK_ROOM,MOVE_HYPER_VOICE,MOVE_PSYCHIC,FALSE,FALSE,FALSE)
-            goto(Common_Eventscript_Sample_Sets_CheckPurchase)
-        case 1: # landorus-therian
+            goto(Common_EventScript_Sample_Sets_CheckPurchase)
+        case 1: # LANDORUS-THERIAN
             givemon(SPECIES_LANDORUS_THERIAN,50,ITEM_GROUNDIUM_Z,ITEM_PARK_BALL,NATURE_ADAMANT,0,0,44,196,4,0,68,196,31,31,31,31,31,31,MOVE_PROTECT,MOVE_ROCK_SLIDE,MOVE_SUPERPOWER,MOVE_STOMPING_TANTRUM,FALSE,FALSE,FALSE)
-            goto(Common_Eventscript_Sample_Sets_CheckPurchase)
-        case 2: # amoonguss
-            givemon(SPECIES_AMOONGUSS,50,ITEM_ROCKY_HELMET,ITEM_PARK_BALL,NATURE_CALM,1,0,172,0,252,4,76,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_POLLEN_PUFF,MOVE_RAGE_POWDER,MOVE_SPORE,FALSE,FALSE,FALSE)
-            goto(Common_Eventscript_Sample_Sets_CheckPurchase)
-        case 3: # incineroar
+            goto(Common_EventScript_Sample_Sets_CheckPurchase)
+        case 2: # AMOONGUSS
+            givemon(SPECIES_AMOONGUSS,50,ITEM_ROCKY_HELMET,ITEM_PARK_BALL,NATURE_CALM,1,1,172,0,252,4,76,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_POLLEN_PUFF,MOVE_RAGE_POWDER,MOVE_SPORE,FALSE,FALSE,FALSE)
+            goto(Common_EventScript_Sample_Sets_CheckPurchase)
+        case 3: # INCINEROAR
             givemon(SPECIES_INCINEROAR,50,ITEM_SITRUS_BERRY,ITEM_PARK_BALL,NATURE_ADAMANT,1,0,236,36,4,0,204,28,31,31,31,31,31,31,MOVE_PARTING_SHOT,MOVE_FLARE_BLITZ,MOVE_KNOCK_OFF,MOVE_FAKE_OUT,FALSE,FALSE,FALSE)
-            goto(Common_Eventscript_Sample_Sets_CheckPurchase)
+            goto(Common_EventScript_Sample_Sets_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Sample_Sets_Standard_Mega_Page1)
         case MULTI_R_PRESSED:
@@ -66,24 +66,24 @@ script Auto_EventScript_Sample_Sets_Standard_Mega_Page1
 
 text Auto_Text_Sample_Sets_Page1
 {
-    "standard$"
+    "STANDARD$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Sample_Sets_Standard_Page1
 {
-    "mega$"
+    "MEGA$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Sample_Sets_Standard_Mega_Page1
 {
-    "gardevoir-mega$"
-    "landorus-therian$"
-    "amoonguss$"
-    "incineroar$"
+    "GARDEVOIR-MEGA$"
+    "LANDORUS-THERIAN$"
+    "AMOONGUSS$"
+    "INCINEROAR$"
     "Go Back$"
     ""
 }

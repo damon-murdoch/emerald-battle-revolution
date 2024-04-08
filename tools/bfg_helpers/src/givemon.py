@@ -60,22 +60,11 @@ def get_givemon_str(pokemon):
 
     # If species is 'Mega'
     if species_constant.endswith("_MEGA") or species_constant in MULTI_FORM_MEGAS:
-
-        new_constant = species_constant.split("_MEGA")[0]
-        print(
-            f"Warning: Converting forme {species_constant} to base forme {new_constant} ..."
-        )
-        species_constant = new_constant  # Remove _MEGA_x from string
+        species_constant = species_constant.split("_MEGA")[0]  # Remove _MEGA_x from string
 
     # If species is 'Gmax'
     if species_constant.endswith("_GMAX"):
-
-        new_constant = species_constant.replace("_GMAX", "")
-        print(
-            f"Warning: Converting forme {species_constant} to base forme {new_constant} ..."
-        )
-        species_constant = new_constant  # Remove _GMAX from string
-
+        species_constant = species_constant.replace("_GMAX", "")  # Remove _GMAX from string
         force_gmax = True  # Override gmax value
 
     # Species
@@ -124,9 +113,6 @@ def get_givemon_str(pokemon):
 
         # No matching ability found
         if found == False:
-            print(
-                f"Warning: Invalid ability for species: '{ability}', using default ability ..."
-            )
             args.append(str(0))  # First ability
     else:
         # Generate random number within the range of possible abilities
@@ -221,9 +207,5 @@ if __name__ == "__main__":
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
     outpath = os.path.join(OUTPUT_DIRECTORY, OUTPUT_FILENAME)
 
-    print(f"Writing results to file '{outpath}' ...")
-
     with open(outpath, "w+", encoding="utf8") as f:
         f.write("\n".join(output))
-
-    print("Results saved successfully!")

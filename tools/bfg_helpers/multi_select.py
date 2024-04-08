@@ -4,6 +4,10 @@ import src.common as common
 # Built-in Libraries
 import os, math, json
 
+# Modify text before printing
+# Allowed options: 'upper', 'lower', None
+TEXT_MODIFIER = 'upper'
+
 # Input File Folder
 INPUT_FOLDER = "tools/bfg_helpers/select"
 
@@ -83,6 +87,12 @@ def get_multi_select(name:str, items:list, subtitle: str = "", parent: str = "",
     for item in current_page:
         item_name = item['name']
         item_action = item['action']
+
+        # Apply text modifier
+        if TEXT_MODIFIER == 'upper':
+            item_name = item_name.upper()
+        elif TEXT_MODIFIER == 'lower':
+            item_name = item_name.lower()
 
         item_str = f"{script_name}_{common.pory_format(item_name)}_Page1"
         
@@ -236,11 +246,7 @@ if __name__ == "__main__":
                 f"{no_extension}_{OUTPUT_FILENAME}"
             )
 
-            print(f"Writing results to file '{outpath}' ...")
-
             with open(outpath, "w+", encoding="utf8") as f:
                 f.write("\n".join(output))
-
-            print("Results saved successfully!")
 
         # Ignore non-json files
