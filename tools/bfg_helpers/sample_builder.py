@@ -137,7 +137,17 @@ if __name__ == "__main__":
 
                     # Add species to names
                     full_names = list(names)
-                    full_names.append(set["species"])
+
+                    # Get the species name
+                    name = set["species"]
+
+                    # Check species for note property
+                    if "note" in set["other"]:
+                        # Add the 'note' to the set name
+                        name = f"{name} ({set['other']['note']})"
+
+                    # Add name to names list
+                    full_names.append(name)
 
                     # Generate the givemon string (Including sets goto jump)
                     givemon_str = f"{givemon.get_givemon_str(set)};{SETS_GOTO}"

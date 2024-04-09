@@ -2,6 +2,7 @@ Gardevoir-Mega @ Gardevoirite
 Ability: Pixilate  
 Level: 50  
 Tera Type: Psychic  
+Note: Mega
 EVs: 244 HP / 196 Def / 36 SpA / 4 SpD / 28 Spe  
 Modest Nature  
 IVs: 0 Atk  
@@ -14,6 +15,7 @@ Landorus-Therian @ Groundium Z
 Ability: Intimidate  
 Level: 50  
 Tera Type: Ground  
+Note: Ground-Z
 EVs: 44 HP / 196 Atk / 4 Def / 68 SpD / 196 Spe  
 Adamant Nature  
 - Protect  
@@ -25,6 +27,7 @@ Amoonguss @ Rocky Helmet
 Ability: Regenerator  
 Level: 50  
 Tera Type: Grass  
+Note: Helmet
 EVs: 172 HP / 252 Def / 4 SpA / 76 SpD / 4 Spe  
 Calm Nature  
 IVs: 0 Atk  
@@ -37,6 +40,7 @@ Incineroar @ Sitrus Berry
 Ability: Intimidate  
 Level: 50  
 Tera Type: Fire  
+Note: Sitrus
 EVs: 236 HP / 36 Atk / 4 Def / 204 SpD / 28 Spe  
 Adamant Nature  
 - Parting Shot  

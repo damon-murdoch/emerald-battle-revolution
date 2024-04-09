@@ -1,5 +1,7 @@
 from datetime import datetime
 
+import src.data as data
+
 CONFIG_FILE = "./include/config/battle_frontier_generator.h"
 
 
@@ -25,6 +27,10 @@ def pory_format(string, delim="_"):
     for i in range(len(split)):
         split[i] = split[i].capitalize()
 
+        # Special Case: 'EventScript'
+        if split[i] == "Eventscript":
+            split[i] = "EventScript"
+
     # Return rejoined string
     return delim.join(split)
 
@@ -48,6 +54,11 @@ def get_constant(string):
         constant.replace("’", "").replace(":", "").replace("%", "").replace(".", "")
     )
 
+    # If the constant has a replacement
+    if constant in data.REPLACE_CONSTANT:
+        return data.REPLACE_CONSTANT[constant]
+
+    # Return as-is
     return constant
 
 
@@ -63,11 +74,17 @@ def get_species_constant(species_name):
         .replace("_GALAR", "_GALARIAN")
         .replace("_HISUI", "_HISUIAN")
         .replace("_PALDEA", "_PALDEAN")
-        .replace("_SINGLE_STRIKE", "_SINGLE_STRIKE_FORME")
-        .replace("_RAPID_STRIKE", "_RAPID_STRIKE_FORME")
     )
 
-    return f"SPECIES_{constant}"
+    # Generate the constant string
+    constant = f"SPECIES_{constant}"
+
+    # If the constant has a replacement
+    if constant in data.REPLACE_CONSTANT:
+        return data.REPLACE_CONSTANT[constant]
+
+    # Return as-is
+    return constant
 
 
 def get_species_id(species_name):

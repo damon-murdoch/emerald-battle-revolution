@@ -4,6 +4,9 @@ import src.showdown as showdown
 # Common Library
 import src.common as common
 
+# Data Source
+import src.data as data
+
 # Built-in Libraries
 import os, json, random
 
@@ -17,14 +20,6 @@ OUTPUT_FILENAME = "givemon_from_json.pory"
 DEFAULT_POKEBALL = "ITEM_PARK_BALL"
 
 STATS = ["hp", "atk", "def", "spa", "spd", "spe"]
-
-# Multi-Form Mega Evolutions
-MULTI_FORM_MEGAS = [
-    "SPECIES_CHARIZARD_MEGA_X",
-    "SPECIES_CHARIZARD_MEGA_Y",
-    "SPECIES_MEWTWO_MEGA_X",
-    "SPECIES_MEWTWO_MEGA_Y",
-]
 
 # Other args (last 3, follow same format)
 OTHER_ARGS = ["shiny", "gigantamax", "tera type"]
@@ -59,12 +54,16 @@ def get_givemon_str(pokemon):
     species_constant = common.get_species_constant(species)
 
     # If species is 'Mega'
-    if species_constant.endswith("_MEGA") or species_constant in MULTI_FORM_MEGAS:
-        species_constant = species_constant.split("_MEGA")[0]  # Remove _MEGA_x from string
+    if species_constant.endswith("_MEGA") or species_constant in data.MULTI_FORM_MEGAS:
+        species_constant = species_constant.split("_MEGA")[
+            0
+        ]  # Remove _MEGA_x from string
 
     # If species is 'Gmax'
     if species_constant.endswith("_GMAX"):
-        species_constant = species_constant.replace("_GMAX", "")  # Remove _GMAX from string
+        species_constant = species_constant.replace(
+            "_GMAX", ""
+        )  # Remove _GMAX from string
         force_gmax = True  # Override gmax value
 
     # Species
@@ -83,7 +82,10 @@ def get_givemon_str(pokemon):
         args.append(f"ITEM_NONE")
 
     # Pokeball
-    args.append(DEFAULT_POKEBALL)
+    if "ball" in other:
+        args.append(common.get_constant(other["ball"]))
+    else: # No ball selected
+        args.append(DEFAULT_POKEBALL)
 
     # Nature
     if "nature" in pokemon and pokemon["nature"] != "":
