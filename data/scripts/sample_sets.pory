@@ -1,0 +1,61 @@
+script Common_EventScript_Sample_Sets_Shop {
+    lock
+    faceplayer
+    msgbox(format("Hello and welcome to the Battle Pokemon Shop!"))
+    msgbox(format("You can buy pre-trained Pokemon for your own teams!"))
+    goto(Common_EventScript_Sample_Sets_CheckMoney)
+}
+
+script Common_EventScript_Sample_Sets_CheckMoney {
+    showmoneybox(18, 0)
+    checkmoney(20000)
+    if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("All Pokemon cost a mere ¥20000. What would you like?"))
+        goto(Auto_EventScript_Sample_Sets_Controls)
+    }
+    else # Player does not have enough money
+    {
+        msgbox(format("Oh, sorry! You need at least ¥20000 to buy anything here!"))
+        goto(Auto_EventScript_Sample_Sets_End)
+    }
+}
+
+script Common_EventScript_Sample_Sets_CheckPurchase {
+    msgbox(format("Sure! Let's see if I can handle that for you ..."))
+    switch(var(VAR_RESULT)){
+        case MON_GIVEN_TO_PARTY:
+            playse(SE_SUCCESS)
+            msgbox(format("Here you go!"))
+            msgbox(format("The POKéMON have been added to your party."))
+            waitse
+        case MON_GIVEN_TO_PC:
+            playse(SE_SUCCESS)
+            msgbox(format("All done!"))
+            msgbox(format("The POKéMON have been sent to your PC boxes."))
+            waitse
+        case MON_CANT_GIVE:
+            playse(SE_FAILURE)
+            msgbox(format("It looks like I can't give you any more POKéMON right now - Sorry!"))
+            waitse
+            goto(Auto_EventScript_Sample_Sets_End)
+    }
+    msgbox(format("I'll take your payment now, please."))
+    removemoney(20000)
+    updatemoneybox
+    playse(SE_SHOP)
+    waitse
+    msgbox(format("Thanks for your business!"))
+    msgbox(format("Can we help you with anything else?"))
+    yesnobox(0, 8)
+    if (var(VAR_RESULT) == YES){
+        goto(Common_EventScript_Sample_Sets_CheckMoney)
+    }
+    goto(Auto_EventScript_Sample_Sets_End)
+}
+
+script Auto_EventScript_Sample_Sets_End {
+    msgbox(format("Come back again soon!"))
+    hidemoneybox
+    releaseall
+    end
+}

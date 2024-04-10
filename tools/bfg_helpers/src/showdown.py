@@ -1,6 +1,5 @@
 # Global Imports
 import json as JSON
-import requests
 import os
 
 # Showdown API Data Directory
