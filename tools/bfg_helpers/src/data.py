@@ -2,12 +2,20 @@
 # This list will need to be updated whenever an incompatibility
 # is found between the list of names in both the Showdown! Data
 # set and the native PokeEmerald-Expansion Constants.
+# Note: do not include the MOVE_, SPECIES_,. etc. prefix!
 REPLACE_CONSTANT = {
     # Moves
-    "MOVE_UTURN": "MOVE_U_TURN",
+    "UTURN": "U_TURN",
+    "POWERUP_PUNCH": "POWER_UP_PUNCH",
+    "DOUBLEEDGE": "DOUBLE_EDGE",
+    "TRIATTACK": "TRI_ATTACK",
+    "WILLOWISP": "WILL_O_WISP",
     # Species
-    "SPECIES_URSHIFU_SINGLE_STRIKE": "SPECIES_URSHIFU_SINGLE_STRIKE_STYLE",
-    "SPECIES_URSHIFU_RAPID_STRIKE": "SPECIES_URSHIFU_RAPID_STRIKE_STYLE",
+    "URSHIFU_SINGLE_STRIKE": "URSHIFU_SINGLE_STRIKE_STYLE",
+    "URSHIFU_RAPID_STRIKE": "URSHIFU_RAPID_STRIKE_STYLE",
+    "OGERPON_HEARTHFLAME": "OGERPON_HEARTHFLAME_MASK",
+    "OGERPON_WELLSPRING": "OGERPON_WELLSPRING_MASK",
+    "INDEEDEE_F": "INDEEDEE_FEMALE"
 }
 
 

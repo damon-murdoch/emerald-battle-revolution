@@ -16,10 +16,12 @@ INPUT_FOLDER = "in/givemon"
 OUTPUT_DIRECTORY = "out"
 OUTPUT_FILENAME = "givemon_from_json.pory"
 
-# Ball given to all pokemon
-DEFAULT_POKEBALL = "ITEM_PARK_BALL"
+# Default values
+DEFAULT_LEVEL = "85"
+DEFAULT_NATURE = "HARDY"
+DEFAULT_POKEBALL = "ITEM_SPORT_BALL"
 
-STATS = ["hp", "atk", "def", "spa", "spd", "spe"]
+STATS = ["hp", "atk", "def", "spe", "spa", "spd"]
 
 # Other args (last 3, follow same format)
 OTHER_ARGS = ["shiny", "gigantamax", "tera type"]
@@ -73,7 +75,7 @@ def get_givemon_str(pokemon):
     if "level" in other:
         args.append(other["level"])
     else:
-        args.append("100")
+        args.append(DEFAULT_LEVEL)
 
     # Held Item
     if "item" in pokemon:
@@ -91,7 +93,7 @@ def get_givemon_str(pokemon):
     if "nature" in pokemon and pokemon["nature"] != "":
         args.append(f"NATURE_{common.get_constant(pokemon['nature'])}")
     else:
-        args.append(f"NATURE_HARDY")
+        args.append(DEFAULT_NATURE)
 
     # Ability Number
     if "ability" in pokemon:

@@ -2,20 +2,22 @@ Common_EventScript_Sample_Team_Shop::
 	lock
 	faceplayer
 	msgbox Common_EventScript_Sample_Team_Shop_Text_0
+	msgbox Common_EventScript_Sample_Team_Shop_Text_1
 	goto Common_EventScript_Sample_Team_CheckMoney
 	return
 
 
 Common_EventScript_Sample_Team_CheckMoney::
 	showmoneybox 18, 0
-	checkmoney 45000
+	checkmoney 60000
 	compare VAR_RESULT, TRUE
 	goto_if_eq Common_EventScript_Sample_Team_CheckMoney_1
-	msgbox Common_EventScript_Sample_Team_CheckMoney_Text_0
+	msgbox Common_EventScript_Sample_Team_CheckMoney_Text_1
 	goto Auto_EventScript_Sample_Teams_End
 	return
 
 Common_EventScript_Sample_Team_CheckMoney_1:
+	msgbox Common_EventScript_Sample_Team_CheckMoney_Text_0
 	goto Auto_EventScript_Sample_Teams_Controls
 	return
 
@@ -28,7 +30,7 @@ Common_EventScript_Sample_Team_CheckPurchase::
 	case MON_CANT_GIVE, Common_EventScript_Sample_Team_CheckPurchase_5
 Common_EventScript_Sample_Team_CheckPurchase_1:
 	msgbox Common_EventScript_Sample_Team_CheckPurchase_Text_6
-	removemoney 45000
+	removemoney 60000
 	updatemoneybox
 	playse SE_SHOP
 	waitse
@@ -75,11 +77,19 @@ Auto_EventScript_Sample_Teams_End::
 
 
 Common_EventScript_Sample_Team_Shop_Text_0:
-	.string "Hello and welcome to the Sample Team\n"
+	.string "Hello and welcome to the Battle Team\n"
 	.string "Shop!$"
 
+Common_EventScript_Sample_Team_Shop_Text_1:
+	.string "You can buy pre-made teams here for\n"
+	.string "many different formats and playstyles!$"
+
 Common_EventScript_Sample_Team_CheckMoney_Text_0:
-	.string "Oh, sorry! You need at least ¥45000 to\n"
+	.string "All teams cost a mere ¥60000. What\n"
+	.string "would you like?$"
+
+Common_EventScript_Sample_Team_CheckMoney_Text_1:
+	.string "Oh, sorry! You need at least ¥60000 to\n"
 	.string "buy anything here!$"
 
 Common_EventScript_Sample_Team_CheckPurchase_Text_0:

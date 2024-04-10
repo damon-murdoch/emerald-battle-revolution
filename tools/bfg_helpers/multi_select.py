@@ -161,7 +161,7 @@ def get_multi_select(name:str, items:list, subtitle: str = "", parent: str = "",
     # Leftover options
     if len(leftovers):
         
-        next_eventscript, next_text = get_multi_select(name, leftovers, subtitle, '', (page + 1), page_count)
+        next_eventscript, next_text = get_multi_select(name, leftovers, subtitle, parent, (page + 1), page_count)
 
         multi_eventscript.append("") # Add blank line
         multi_eventscript += next_eventscript # Add next page

@@ -50,9 +50,8 @@ def get_constant(string):
     constant = constant.replace("'", "").replace(":", "")
 
     # Replace Special Characters
-    constant = (
-        constant.replace("’", "").replace(":", "").replace("%", "").replace(".", "")
-    )
+    constant = constant.replace("’", "").replace(":", "")
+    constant = constant.replace("%", "").replace(".", "")
 
     # If the constant has a replacement
     if constant in data.REPLACE_CONSTANT:
@@ -76,15 +75,8 @@ def get_species_constant(species_name):
         .replace("_PALDEA", "_PALDEAN")
     )
 
-    # Generate the constant string
-    constant = f"SPECIES_{constant}"
-
-    # If the constant has a replacement
-    if constant in data.REPLACE_CONSTANT:
-        return data.REPLACE_CONSTANT[constant]
-
-    # Return as-is
-    return constant
+    # Return the constant string
+    return f"SPECIES_{constant}"
 
 
 def get_species_id(species_name):

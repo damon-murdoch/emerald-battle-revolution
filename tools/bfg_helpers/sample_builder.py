@@ -53,27 +53,66 @@ def insert_data(data, path, value):
 
                 # No further nesting, and data is string
                 elif action_type == str and len(path) == 0:
-                    data[i]["action"] = value # Update the value
+                    data[i]["action"] = value  # Update the value
 
-                else: # Data type mismatch
-                    raise TypeError(f"Data type mismatch: {str(action_type)} at key '{key}'")
+                else:  # Data type mismatch
+                    raise TypeError(
+                        f"Data type mismatch: {str(action_type)} at key '{key}'"
+                    )
 
                 has_key = True
-                break # Break the loop
+                break  # Break the loop
 
         # Key is not found
         if has_key == False:
 
-            # Max. Depth not reached
+            # Key type
+            action_type = str
             if len(path) > 0:
-                # Insert key and continue
-                data.append({"name": key, "action": []})
-                insert_data(data[-1]["action"], path, value)
-            else: # Max. Depth reached
-                data.append({"name": key, "action": str(value)}) # Insert value
+                action_type = list
+
+            # Insertion index
+            index = -1  # Back of list
+
+            # Loop over all of the keys
+            for i in range(len(data)):
+
+                # Get the action type for the index
+                index_type = type(data[i]["action"])
+
+                # Current action is a list (and the other is not), or earlier in alphabet
+                if (action_type == list and action_type != index_type) or (
+                    action_type == index_type and key < data[i]["name"]
+                ):
+
+                    # Update index
+                    index = i
+                    break
+
+            # Max. Depth not reached
+            if action_type == list:
+
+                template = {"name": key, "action": []}
+
+                # Index found
+                if index >= 0:
+                    data.insert(index, template)
+                else:  # Insert key and continue
+                    data.append(template)
+
+                insert_data(data[index]["action"], path, value)
+
+            else:  # Max. Depth reached
+
+                template = {"name": key, "action": str(value)}
+
+                # Index found
+                if index >= 0:
+                    data.insert(index, template)
+                else:  # Insert key and continue
+                    data.append(template)
 
 
-    
 if __name__ == "__main__":
 
     # Sets dict
@@ -109,7 +148,7 @@ if __name__ == "__main__":
             sets = parser.parse_sets(raw)
 
             # Split the names on the under score
-            names = no_extension.split('_')
+            names = no_extension.split("_")
 
             # Treat as entire team
             if extension == "team":
@@ -127,10 +166,10 @@ if __name__ == "__main__":
                 givemon_str = f"{';'.join(givemon_list)};{TEAMS_GOTO}"
 
                 # Add the sample team to the table
-                insert_data(sample_teams, names, givemon_str)   
+                insert_data(sample_teams, names, givemon_str)
 
             # Treat as sample sets
-            elif extension == "set":
+            elif extension == "sets":
 
                 # Loop over the sets
                 for set in sets:
@@ -141,9 +180,14 @@ if __name__ == "__main__":
                     # Get the species name
                     name = set["species"]
 
+                    # Check species for name property
+                    if "name" in set["other"]:
+                        # Override default name
+                        name = set["other"]["name"]
+
                     # Check species for note property
                     if "note" in set["other"]:
-                        # Add the 'note' to the set name
+                        # Add note to the name
                         name = f"{name} ({set['other']['note']})"
 
                     # Add name to names list
@@ -156,17 +200,14 @@ if __name__ == "__main__":
 
             else:  # Unhandled extension
                 raise Exception(
-                    f"Unhandled file extension {extension}! Accepted: .set, .team ..."
+                    f"Unhandled file extension {extension}! Accepted: .sets, .team ..."
                 )
-            
+
     # Create output directory (if not exists)
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
 
     # Create Teams Outfile
-    teams_out = os.path.join(
-        OUTPUT_DIRECTORY, 
-        TEAMS_OUTFILE
-    )
+    teams_out = os.path.join(OUTPUT_DIRECTORY, TEAMS_OUTFILE)
 
     # Dump sample teams to file
     with open(teams_out, "w+", encoding="utf8") as f:
@@ -174,10 +215,7 @@ if __name__ == "__main__":
         json.dump(sample_teams, f, indent=2)
 
     # Create Sets Outfile
-    sets_out = os.path.join(
-        OUTPUT_DIRECTORY, 
-        SETS_OUTFILE
-    )
+    sets_out = os.path.join(OUTPUT_DIRECTORY, SETS_OUTFILE)
 
     # Dump sample sets to file
     with open(sets_out, "w+", encoding="utf8") as f:

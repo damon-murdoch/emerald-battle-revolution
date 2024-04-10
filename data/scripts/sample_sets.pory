@@ -1,19 +1,21 @@
 script Common_EventScript_Sample_Sets_Shop {
     lock
     faceplayer
-    msgbox(format("Hello and welcome to the Sample Sets Shop!"))
+    msgbox(format("Hello and welcome to the Battle Pokemon Shop!"))
+    msgbox(format("You can buy pre-trained Pokemon for your own teams!"))
     goto(Common_EventScript_Sample_Sets_CheckMoney)
 }
 
 script Common_EventScript_Sample_Sets_CheckMoney {
     showmoneybox(18, 0)
-    checkmoney(15000)
+    checkmoney(20000)
     if (var(VAR_RESULT) == TRUE) {
+        msgbox(format("All Pokemon cost a mere ¥20000. What would you like?"))
         goto(Auto_EventScript_Sample_Sets_Controls)
     }
     else # Player does not have enough money
     {
-        msgbox(format("Oh, sorry! You need at least ¥15000 to buy anything here!"))
+        msgbox(format("Oh, sorry! You need at least ¥20000 to buy anything here!"))
         goto(Auto_EventScript_Sample_Sets_End)
     }
 }
@@ -38,7 +40,7 @@ script Common_EventScript_Sample_Sets_CheckPurchase {
             goto(Auto_EventScript_Sample_Sets_End)
     }
     msgbox(format("I'll take your payment now, please."))
-    removemoney(15000)
+    removemoney(20000)
     updatemoneybox
     playse(SE_SHOP)
     waitse

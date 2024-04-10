@@ -2,20 +2,22 @@ Common_EventScript_Sample_Sets_Shop::
 	lock
 	faceplayer
 	msgbox Common_EventScript_Sample_Sets_Shop_Text_0
+	msgbox Common_EventScript_Sample_Sets_Shop_Text_1
 	goto Common_EventScript_Sample_Sets_CheckMoney
 	return
 
 
 Common_EventScript_Sample_Sets_CheckMoney::
 	showmoneybox 18, 0
-	checkmoney 15000
+	checkmoney 20000
 	compare VAR_RESULT, TRUE
 	goto_if_eq Common_EventScript_Sample_Sets_CheckMoney_1
-	msgbox Common_EventScript_Sample_Sets_CheckMoney_Text_0
+	msgbox Common_EventScript_Sample_Sets_CheckMoney_Text_1
 	goto Auto_EventScript_Sample_Sets_End
 	return
 
 Common_EventScript_Sample_Sets_CheckMoney_1:
+	msgbox Common_EventScript_Sample_Sets_CheckMoney_Text_0
 	goto Auto_EventScript_Sample_Sets_Controls
 	return
 
@@ -28,7 +30,7 @@ Common_EventScript_Sample_Sets_CheckPurchase::
 	case MON_CANT_GIVE, Common_EventScript_Sample_Sets_CheckPurchase_5
 Common_EventScript_Sample_Sets_CheckPurchase_1:
 	msgbox Common_EventScript_Sample_Sets_CheckPurchase_Text_6
-	removemoney 15000
+	removemoney 20000
 	updatemoneybox
 	playse SE_SHOP
 	waitse
@@ -75,11 +77,19 @@ Auto_EventScript_Sample_Sets_End::
 
 
 Common_EventScript_Sample_Sets_Shop_Text_0:
-	.string "Hello and welcome to the Sample Sets\n"
+	.string "Hello and welcome to the Battle Pokemon\n"
 	.string "Shop!$"
 
+Common_EventScript_Sample_Sets_Shop_Text_1:
+	.string "You can buy pre-trained Pokemon for\n"
+	.string "your own teams!$"
+
 Common_EventScript_Sample_Sets_CheckMoney_Text_0:
-	.string "Oh, sorry! You need at least ¥15000 to\n"
+	.string "All Pokemon cost a mere ¥20000. What\n"
+	.string "would you like?$"
+
+Common_EventScript_Sample_Sets_CheckMoney_Text_1:
+	.string "Oh, sorry! You need at least ¥20000 to\n"
 	.string "buy anything here!$"
 
 Common_EventScript_Sample_Sets_CheckPurchase_Text_0:
