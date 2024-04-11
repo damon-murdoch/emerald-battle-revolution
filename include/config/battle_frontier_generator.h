@@ -4,6 +4,13 @@
 // *** GENERAL ***
 #define BFG_FLAG_FRONTIER_GENERATOR FLAG_UNUSED_0x020 // Flag to enable or disable random generator
 
+#define BFG_TEST_SET_GENERATION TRUE // Test set generation
+#define BFG_TEST_PRINT_RESULTS FALSE // Print test results
+#define BFG_TEST_FIXED_RNG FALSE // Force fixed RNG for testing
+
+#define BFG_TEST_SET_SPECIES SPECIES_VENUSAUR
+#define BFG_TEST_SET_SPECIES_MEGA SPECIES_VENUSAUR
+
 #define BFG_FLAG_FRONTIER_ALLOW_MEGA 0 // Flag to enable or disable Mega Evolution
 #define BFG_FLAG_FRONTIER_ALLOW_GMAX 0 // Flag to enable or disable Gigantamax
 #define BFG_FLAG_FRONTIER_ALLOW_ZMOVE 0 // Flag to enable or disable Z Moves

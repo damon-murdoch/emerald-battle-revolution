@@ -22,6 +22,7 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 
+#include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
 
 static u8 GetMaxPowerTier(u16 move);
@@ -96,7 +97,7 @@ bool32 CanDynamax(u16 battlerId)
         return FALSE;
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]])) == FALSE))
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanDynamax(&(GetSideParty(GetBattlerSide(battlerId))[gBattlerPartyIndexes[battlerId]])) == FALSE))
         return FALSE;
     #endif
 

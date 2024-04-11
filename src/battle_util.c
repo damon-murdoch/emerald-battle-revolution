@@ -48,6 +48,7 @@
 #include "constants/weather.h"
 #include "constants/pokemon.h"
 
+#include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
 
 /*
