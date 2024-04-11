@@ -41,7 +41,9 @@
 #include "test_runner.h"
 #include "config/dynamax.h"
 
+#include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
+#include "event_data.h"
 
 static void OpponentHandleLoadMonSprite(u32 battler);
 static void OpponentHandleSwitchInAnim(u32 battler);

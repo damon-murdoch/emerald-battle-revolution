@@ -591,6 +591,17 @@ struct Fusion
 
 extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
 
+struct Nature {
+    u8 posStat;
+    u8 negStat;
+};
+
+extern const u8 *const gNatureNamePointers[NUM_NATURES];
+extern const struct Nature gNatureInfo[NUM_NATURES];
+extern const u16 gFiwamConfuseLookup[NUM_STATS];
+
+
+
 #define NUM_UNOWN_FORMS 28
 
 #define GET_UNOWN_LETTER(personality) ((   \

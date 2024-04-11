@@ -30,7 +30,8 @@
 #include "data/battle_frontier/battle_frontier_generator_trainer_class_mons.h"
 #include "data/battle_frontier/battle_frontier_generator_move_ratings.h"
 
-#include "data/pokemon/natures.h"
+#include "test/test.h"
+#include "item.h"
 
 // *** STATS ***
 #define CHECK_EVS(evs,stat) ((evs) & (stat))
@@ -2910,13 +2911,17 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
 void DebugPrintMonData(struct Pokemon * mon) 
 {
     u8 i;
+
+    // Species Data
     u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
     u8 abilityNum = GetMonData(mon,MON_DATA_ABILITY_NUM);
+    u16 abilityId = gSpeciesInfo[speciesId].abilities[abilityNum];
+    u16 itemId = GetMonData(mon,MON_DATA_HELD_ITEM);
 
-    DebugPrintf("%d @ %d", speciesId, GetMonData(mon,MON_DATA_HELD_ITEM));
-    DebugPrintf("Ability: %d (%d)", abilityNum, gSpeciesInfo[speciesId].abilities[abilityNum]);
-    DebugPrintf("IVs: %d / %d / %d / %d / %d / %d", GetMonData(mon,MON_DATA_HP_IV),GetMonData(mon,MON_DATA_ATK_IV), GetMonData(mon,MON_DATA_DEF_IV), GetMonData(mon,MON_DATA_SPATK_IV), GetMonData(mon,MON_DATA_SPDEF_IV), GetMonData(mon,MON_DATA_SPEED_IV));
-    DebugPrintf("EVs: %d / %d / %d / %d / %d / %d", GetMonData(mon,MON_DATA_HP_EV),GetMonData(mon,MON_DATA_ATK_EV), GetMonData(mon,MON_DATA_DEF_EV), GetMonData(mon,MON_DATA_SPATK_EV), GetMonData(mon,MON_DATA_SPDEF_EV), GetMonData(mon,MON_DATA_SPEED_EV));
+    DebugPrintf("%d @ %d", speciesId, itemId);
+    DebugPrintf("Ability: %d (%d)", abilityNum, abilityId);
+    DebugPrintf("IVs: %d HP / %d Atk / %d Def / %d SpA / %d SpD / %d Spe", GetMonData(mon,MON_DATA_HP_IV),GetMonData(mon,MON_DATA_ATK_IV), GetMonData(mon,MON_DATA_DEF_IV), GetMonData(mon,MON_DATA_SPATK_IV), GetMonData(mon,MON_DATA_SPDEF_IV), GetMonData(mon,MON_DATA_SPEED_IV));
+    DebugPrintf("EVs: %d HP / %d Atk / %d Def / %d SpA / %d SpD / %d Spe", GetMonData(mon,MON_DATA_HP_EV),GetMonData(mon,MON_DATA_ATK_EV), GetMonData(mon,MON_DATA_DEF_EV), GetMonData(mon,MON_DATA_SPATK_EV), GetMonData(mon,MON_DATA_SPDEF_EV), GetMonData(mon,MON_DATA_SPEED_EV));
     DebugPrintf("%d nature", GetNature(mon));
     for(i=0; i<MAX_MON_MOVES; i++)
         DebugPrintf("- %d", GetMonData(mon, MON_DATA_MOVE1 + i));
