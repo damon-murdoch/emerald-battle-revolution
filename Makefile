@@ -358,7 +358,7 @@ $(CRY_SUBDIR)/%.bin: $(CRY_SUBDIR)/%.aif ; $(AIF) $< $@ --compress
 sound/%.bin: sound/%.aif ; $(AIF) $< $@
 data/%.inc: data/%.pory; $(SCRIPT) -i $< -o $@ -fc tools/poryscript/font_config.json
 
-COMPETITIVE_PARTY_SYNTAX := $(shell echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/global.h | tail -n1)
+COMPETITIVE_PARTY_SYNTAX := $(shell PATH=$(PATH); echo 'COMPETITIVE_PARTY_SYNTAX' | $(CPP) $(CPPFLAGS) -imacros include/global.h | tail -n1)
 ifeq ($(COMPETITIVE_PARTY_SYNTAX),1)
 %.h: %.party tools ; $(CPP) $(CPPFLAGS) - < $< | sed '/#[^p]/d' | $(TRAINERPROC) -o $@ -i $< -
 endif

@@ -54,12 +54,6 @@ struct GeneratorProperties {
     bool8 allowMega;
 };
 
-// Nature lookup table
-struct Nature {
-    u8 posStat;
-    u8 negStat;
-};
-
 // Forme / Gimmick not allowed
 #define BFG_ITEM_IV_BANNED 32
 
@@ -71,6 +65,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount);
 
 void DebugPrintMonData(struct Pokemon * mon);
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV);
+void InitGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode); 
 void UpdateGeneratorForLvlMode(struct GeneratorProperties * properties, u8 lvlMode); 
 
 void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level);

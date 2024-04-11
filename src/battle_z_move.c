@@ -45,7 +45,9 @@
 #include "config/battle_frontier.h"
 #include "config/dynamax.h"
 
+#include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
+#include "event_data.h"
 
 #define STAT_STAGE(battler, stat) (gBattleMons[battler].statStages[stat - 1])
 
