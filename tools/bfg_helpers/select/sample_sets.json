@@ -10,11 +10,11 @@
             "action": [
               {
                 "name": "Charizard",
-                "action": "givemon(SPECIES_CHARIZARD,85,ITEM_CHARIZARDITE_Y,ITEM_SPORT_BALL,NATURE_MODEST,0,1,204,0,108,188,4,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_SCORCHING_SANDS,MOVE_FLAMETHROWER,MOVE_SOLAR_BEAM,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_CHARIZARD,85,ITEM_CHARIZARDITE_Y,ITEM_SPORT_BALL,NATURE_MODEST,0,0,204,0,108,188,4,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_SCORCHING_SANDS,MOVE_FLAMETHROWER,MOVE_SOLAR_BEAM,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Gardevoir",
-                "action": "givemon(SPECIES_GARDEVOIR,85,ITEM_GARDEVOIRITE,ITEM_SPORT_BALL,NATURE_MODEST,0,0,244,0,196,28,36,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_HYPER_VOICE,MOVE_TRICK_ROOM,MOVE_PSYCHIC,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_GARDEVOIR,85,ITEM_GARDEVOIRITE,ITEM_SPORT_BALL,NATURE_MODEST,0,1,244,0,196,28,36,4,31,0,31,31,31,31,MOVE_PROTECT,MOVE_HYPER_VOICE,MOVE_TRICK_ROOM,MOVE_PSYCHIC,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Gengar",
@@ -34,7 +34,7 @@
               },
               {
                 "name": "Salamence (Mixed)",
-                "action": "givemon(SPECIES_SALAMENCE,85,ITEM_SALAMENCITE,ITEM_SPORT_BALL,NATURE_NAIVE,0,1,0,44,0,212,252,0,31,31,31,31,31,31,MOVE_PROTECT,MOVE_TAILWIND,MOVE_HYPER_VOICE,MOVE_DOUBLE_EDGE,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_SALAMENCE,85,ITEM_SALAMENCITE,ITEM_SPORT_BALL,NATURE_NAIVE,0,0,0,44,0,212,252,0,31,31,31,31,31,31,MOVE_PROTECT,MOVE_TAILWIND,MOVE_HYPER_VOICE,MOVE_DOUBLE_EDGE,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Salamence (Physical)",
@@ -76,11 +76,11 @@
               },
               {
                 "name": "Talonflame (Banded)",
-                "action": "givemon(SPECIES_TALONFLAME,85,ITEM_CHOICE_BAND,ITEM_SPORT_BALL,NATURE_ADAMANT,1,1,4,244,4,252,0,4,31,31,31,31,31,31,MOVE_U_TURN,MOVE_BRAVE_BIRD,MOVE_FLARE_BLITZ,MOVE_SLEEP_TALK,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_TALONFLAME,85,ITEM_CHOICE_BAND,ITEM_SPORT_BALL,NATURE_ADAMANT,1,0,4,244,4,252,0,4,31,31,31,31,31,31,MOVE_U_TURN,MOVE_BRAVE_BIRD,MOVE_FLARE_BLITZ,MOVE_SLEEP_TALK,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Talonflame (Mixed)",
-                "action": "givemon(SPECIES_TALONFLAME,85,ITEM_LIFE_ORB,ITEM_SPORT_BALL,NATURE_NAUGHTY,1,1,0,252,0,252,4,0,31,31,31,31,31,31,MOVE_PROTECT,MOVE_TAILWIND,MOVE_BRAVE_BIRD,MOVE_OVERHEAT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_TALONFLAME,85,ITEM_LIFE_ORB,ITEM_SPORT_BALL,NATURE_NAUGHTY,1,0,0,252,0,252,4,0,31,31,31,31,31,31,MOVE_PROTECT,MOVE_TAILWIND,MOVE_BRAVE_BIRD,MOVE_OVERHEAT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Tapu Fini (Specs)",
@@ -118,11 +118,11 @@
               },
               {
                 "name": "Arcanine (Special)",
-                "action": "givemon(SPECIES_ARCANINE,85,ITEM_SAFETY_GOGGLES,ITEM_SPORT_BALL,NATURE_CALM,0,1,244,0,4,68,4,188,31,31,31,31,31,31,MOVE_SNARL,MOVE_OVERHEAT,MOVE_WILL_O_WISP,MOVE_PROTECT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_ARCANINE,85,ITEM_SAFETY_GOGGLES,ITEM_SPORT_BALL,NATURE_CALM,0,0,244,0,4,68,4,188,31,31,31,31,31,31,MOVE_SNARL,MOVE_OVERHEAT,MOVE_WILL_O_WISP,MOVE_PROTECT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Incineroar",
-                "action": "givemon(SPECIES_INCINEROAR,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_ADAMANT,1,0,236,36,4,28,0,204,31,31,31,31,31,31,MOVE_PARTING_SHOT,MOVE_FLARE_BLITZ,MOVE_KNOCK_OFF,MOVE_FAKE_OUT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                "action": "givemon(SPECIES_INCINEROAR,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_ADAMANT,1,1,236,36,4,28,0,204,31,31,31,31,31,31,MOVE_PARTING_SHOT,MOVE_FLARE_BLITZ,MOVE_KNOCK_OFF,MOVE_FAKE_OUT,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
               },
               {
                 "name": "Iron Hands",
@@ -183,7 +183,7 @@
                   },
                   {
                     "name": "Torkoal (Bulky)",
-                    "action": "givemon(SPECIES_TORKOAL,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_BOLD,1,0,252,0,76,4,4,172,31,0,31,31,31,31,MOVE_PROTECT,MOVE_BURNING_JEALOUSY,MOVE_BODY_PRESS,MOVE_YAWN,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
+                    "action": "givemon(SPECIES_TORKOAL,85,ITEM_SITRUS_BERRY,ITEM_SPORT_BALL,NATURE_BOLD,1,1,252,0,76,4,4,172,31,0,31,31,31,31,MOVE_PROTECT,MOVE_BURNING_JEALOUSY,MOVE_BODY_PRESS,MOVE_YAWN,FALSE,FALSE,FALSE);goto(Common_EventScript_Sample_Sets_CheckPurchase)"
                   }
                 ]
               }

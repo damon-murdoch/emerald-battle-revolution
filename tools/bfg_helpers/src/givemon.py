@@ -32,6 +32,9 @@ MOVES, POKEMON = showdown.get_showdown_data()
 
 def get_givemon_str(pokemon):
 
+    # Custom rng using mon data as seed
+    rng = random.Random(str(pokemon))
+
     # Gmax value override
     force_gmax = False
 
@@ -120,7 +123,7 @@ def get_givemon_str(pokemon):
             args.append(str(0))  # First ability
     else:
         # Generate random number within the range of possible abilities
-        args.append(random.randint(0, len(species_data["abilities"]) - 1))
+        args.append(rng.randint(0, len(species_data["abilities"]) - 1))
 
     # Gender is provided, and gender is not empty
     if "gender" in pokemon and pokemon["gender"] != "":
@@ -128,7 +131,7 @@ def get_givemon_str(pokemon):
     elif "gender" in species_data:  # Fixed Gender
         args.append(str(common.parse_gender(species_data["gender"])))
     else:  # No fixed gender
-        args.append(str(random.randint(0, 1)))
+        args.append(str(rng.randint(0, 1)))
 
     # EVs
     evs = pokemon["evs"]
