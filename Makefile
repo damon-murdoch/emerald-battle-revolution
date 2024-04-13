@@ -189,7 +189,7 @@ MAKEFLAGS += --no-print-directory
 # Secondary expansion is required for dependency variables in object rules.
 .SECONDEXPANSION:
 
-.PHONY: all rom clean compare tidy tools check-tools mostlyclean clean-tools clean-check-tools $(TOOLDIRS) $(CHECKTOOLDIRS) libagbsyscall agbcc modern tidymodern tidynonmodern check ebr-helpers
+.PHONY: all rom clean compare tidy tools check-tools mostlyclean clean-tools clean-check-tools $(TOOLDIRS) $(CHECKTOOLDIRS) libagbsyscall agbcc modern tidymodern tidynonmodern check history ebr-helpers
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
 
@@ -263,7 +263,10 @@ endif
 
 AUTO_GEN_TARGETS :=
 
-all: ebr-helpers rom
+all: history ebr-helpers rom
+
+history:
+	@bash ./check_history.sh
 
 tools: $(TOOLDIRS)
 
