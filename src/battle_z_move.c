@@ -54,7 +54,6 @@
 // Function Declarations
 static void SpriteCB_ZMoveTrigger(struct Sprite *sprite);
 static u16 GetSignatureZMove(u16 move, u16 species, u16 item);
-static u16 GetTypeBasedZMove(u16 move, u8 battler);
 static void ZMoveSelectionDisplayPpNumber(u32 battler);
 static void ZMoveSelectionDisplayPower(u16 move, u16 zMove);
 static void ShowZMoveTriggerSprite(u8 battleId);
@@ -395,7 +394,7 @@ static u16 GetSignatureZMove(u16 move, u16 species, u16 item)
     return MOVE_NONE;
 }
 
-static u16 GetTypeBasedZMove(u16 move, u8 battler)
+u16 GetTypeBasedZMove(u16 move, u8 battler)
 {
     u8 moveType = gMovesInfo[move].type;
 

@@ -51,6 +51,7 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
     [MOVE_DREAM_EATER] = TRUE,
     [MOVE_LAST_RESORT] = TRUE,
     [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_STEEL_ROLLER] = TRUE, 
     [MOVE_FINAL_GAMBIT] = TRUE,
     [MOVE_SYNCHRONOISE] = TRUE,
     [MOVE_STORED_POWER] = TRUE,
@@ -74,8 +75,10 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
     [MOVE_ROCK_WRECKER] = TRUE,
 	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
-    // [MOVE_SELF_DESTRUCT] = TRUE,
-    // [MOVE_EXPLOSION] = TRUE,
+    [MOVE_SELF_DESTRUCT] = TRUE,
+    [MOVE_MIND_BLOWN] = TRUE,
+    [MOVE_STEEL_BEAM] = TRUE,
+    [MOVE_EXPLOSION] = TRUE,
 	// Charging Moves
 	[MOVE_BOUNCE] = TRUE,
     [MOVE_DIG] = TRUE,
@@ -116,6 +119,7 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
     [MOVE_DREAM_EATER] = TRUE,
     [MOVE_LAST_RESORT] = TRUE,
     [MOVE_FOCUS_PUNCH] = TRUE,
+    [MOVE_STEEL_ROLLER] = TRUE, 
     [MOVE_FINAL_GAMBIT] = TRUE,
     [MOVE_SYNCHRONOISE] = TRUE,
     [MOVE_STORED_POWER] = TRUE,
@@ -139,8 +143,10 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
     [MOVE_ROCK_WRECKER] = TRUE,
 	// Self-Destructing Moves
     [MOVE_MISTY_EXPLOSION] = TRUE,
-    // [MOVE_SELF_DESTRUCT] = TRUE,
-    // [MOVE_EXPLOSION] = TRUE,
+    [MOVE_SELF_DESTRUCT] = TRUE,
+    [MOVE_MIND_BLOWN] = TRUE,
+    [MOVE_STEEL_BEAM] = TRUE,
+    [MOVE_EXPLOSION] = TRUE,
 	// Charging Moves
 	[MOVE_BOUNCE] = TRUE,
     [MOVE_DIG] = TRUE,
