@@ -66,6 +66,9 @@
 
 #define IS_TERRAIN_ABILITY(a) (IS_MISTY_ABILITY(a) || IS_GRASSY_ABILITY(a) || IS_PSYCHIC_ABILITY(a) || IS_ELECTRIC_ABILITY(a))
 
+// Abilities which trigger at the end of each turn
+#define IS_END_OF_TURN_ABILITY(a) ((a == ABILITY_MOODY) || (a == ABILITY_POISON_HEAL) || (a == ABILITY_SPEED_BOOST))
+
 #define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
 #define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
 
@@ -1019,17 +1022,17 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
 #define MACRO_MOVE_SWITCH \
     switch(moveId) { \
         case MOVE_TRICK_ROOM: { \
-            if ((!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE)) { \
+            if (IS_DOUBLES() && (!(HAS_SPEED(nature,evs))) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TRICK_ROOM_DOUBLES_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
             } \
         }; break; \
         case MOVE_TAILWIND: { \
-            if (HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE)) { \
+            if (IS_DOUBLES() && HAS_SPEED(nature,evs) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_TAILWIND_DOUBLES_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
             } \
         }; break; \
         case MOVE_ICY_WIND: { \
-            if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE)) { \
+            if (IS_DOUBLES() && (spreadCategory != BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_ICY_WIND_DOUBLES_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
             } \
         }; break; \
@@ -1050,6 +1053,11 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
         }; break; \
         case MOVE_FOUL_PLAY: { \
             if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE)) { \
+                MACRO_ALWAYS_SELECT \
+            } \
+        }; break; \
+        case MOVE_PROTECT: { \
+            if (IS_END_OF_TURN_ABILITY(abilityId) && RANDOM_CHANCE(BFG_MOVE_SPECIAL_PROTECT_SELECTION_CHANCE)) { \
                 MACRO_ALWAYS_SELECT \
             } \
         }; break; \
@@ -1617,6 +1625,7 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
                     case EFFECT_TWO_TURNS_ATTACK: 
                     case EFFECT_SEMI_INVULNERABLE:
                         hasTwoTurn = TRUE;
+                    break;
                     case EFFECT_TRICK_ROOM:
                         hasTrickRoom = TRUE;
                     break;
@@ -1713,7 +1722,11 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
     {
         // *** Competitive items with specific use cases ***
 
-        // Eviolite
+        // Power Herb (Multi-turn moves)
+        if (hasTwoTurn && RANDOM_CHANCE(BFG_ITEM_POWER_HERB_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_POWER_HERB);
+
+        // Eviolite (Non-Fully-Evolved)
         if ((hasRecycle == FALSE) && hasEvolution == TRUE && RANDOM_CHANCE(BFG_ITEM_EVIOLITE_SELECTION_CHANCE))
             RETURN_IF_UNIQUE(ITEM_EVIOLITE);
 
@@ -1721,57 +1734,19 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
         if (((abilityId == ABILITY_PROTOSYNTHESIS) && (abilityId == ABILITY_QUARK_DRIVE)) && RANDOM_CHANCE(BFG_ITEM_BOOSTER_ENERGY_SELECTION_CHANCE))
             RETURN_IF_UNIQUE(ITEM_BOOSTER_ENERGY);
 
-        // Focus Sash (No investment in HP/Def/SpDef)
-        if ((GetMonData(mon, MON_DATA_HP_EV) == 0) && (GetMonData(mon, MON_DATA_DEF_EV) == 0) && (GetMonData(mon, MON_DATA_SPDEF_EV) == 0) && RANDOM_CHANCE(BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_FOCUS_SASH);
-
-        // Assault Vest (4 offensive moves)
-        if ((hasRecycle == FALSE) && (numOffensive == 4) && RANDOM_CHANCE(BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_ASSAULT_VEST);
-
-        // Choice Items
-        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && ((numPhysical + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_CHOICE_BAND);
-
-        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && ((numSpecial + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_CHOICE_SPECS);
-
-        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_CHOICE_SCARF);
-
-        // Life Orb
-        if ((hasRecycle == FALSE) && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_LIFE_ORB);
-
-        // Weakness Policy
-        if ((numOffensive >= BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_WEAKNESS_POLICY);
-
-        // Power Herb (Multi-turn moves)
-        if (hasTwoTurn && RANDOM_CHANCE(BFG_ITEM_POWER_HERB_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_POWER_HERB);
-
-        // Mental Herb (Has status moves)
-        for(i=0; (i < numStatus); i++)
-            if (RANDOM_CHANCE(BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE))
-                RETURN_IF_UNIQUE(ITEM_MENTAL_HERB);
+        // Chesto Berry (Has rest)
+        if ((hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_CHESTO_BERRY);
 
         // Throat Spray (Sound-based moves)
         for(i=0; (i < numSound); i++)
             if (RANDOM_CHANCE(BFG_ITEM_THROAT_SPRAY_SELECTION_CHANCE))
                 RETURN_IF_UNIQUE(ITEM_THROAT_SPRAY);
 
-        // Razor Fang / King's Rock (Fling)
-        if (hasFling)
-        {
-            if (RANDOM_CHANCE(BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE)) {
-                RETURN_IF_UNIQUE(ITEM_RAZOR_FANG);
-            } else if (RANDOM_CHANCE(BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE)) {
-                RETURN_IF_UNIQUE(ITEM_KINGS_ROCK);
-            }
-
-            // Otherwise, do nothing
-        }
+        // Mental Herb (Has status moves)
+        for(i=0; (i < numStatus); i++)
+            if (RANDOM_CHANCE(BFG_ITEM_MENTAL_HERB_SELECTION_CHANCE))
+                RETURN_IF_UNIQUE(ITEM_MENTAL_HERB);
 
         // Other non-recyclable items
         if (hasRecycle == FALSE)
@@ -1804,6 +1779,34 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
                 }
             }
         }
+
+        // *** Competitive items with generic use cases ***
+
+        // Focus Sash (No investment in HP/Def/SpDef)
+        if ((GetMonData(mon, MON_DATA_HP_EV) == 0) && (GetMonData(mon, MON_DATA_DEF_EV) == 0) && (GetMonData(mon, MON_DATA_SPDEF_EV) == 0) && RANDOM_CHANCE(BFG_ITEM_FOCUS_SASH_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_FOCUS_SASH);
+
+        // Assault Vest (4 offensive moves)
+        if ((hasRecycle == FALSE) && (numOffensive == 4) && RANDOM_CHANCE(BFG_ITEM_ASSAULT_VEST_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_ASSAULT_VEST);
+
+        // Choice Items
+        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && ((numPhysical + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_BAND_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_CHOICE_BAND);
+
+        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && ((numSpecial + numDynamic) >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SPECS_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_CHOICE_SPECS);
+
+        if ((hasSingleUseMove == FALSE) && (hasRecycle == FALSE) && (numOffensive >= BFG_ITEM_CHOICE_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_CHOICE_SCARF_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_CHOICE_SCARF);
+
+        // Life Orb
+        if ((hasRecycle == FALSE) && (numOffensive >= BFG_ITEM_LIFE_ORB_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_LIFE_ORB_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_LIFE_ORB);
+
+        // Weakness Policy
+        if ((numOffensive >= BFG_ITEM_WEAKNESS_POLICY_OFFENSIVE_MOVES_REQUIRED) && RANDOM_CHANCE(BFG_ITEM_WEAKNESS_POLICY_SELECTION_CHANCE))
+            RETURN_IF_UNIQUE(ITEM_WEAKNESS_POLICY);
 
         // *** Type-Specific Items ***
 
@@ -2027,9 +2030,15 @@ u16 GetSpeciesItem(struct Pokemon * mon, u16 * items, u8 itemCount)
         if ((((hasFlatter == TRUE) && (numSpecial >= BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED)) || ((hasSwagger == TRUE) && (numPhysical >= BFG_ITEM_MIRROR_HERB_OFFENSIVE_MOVES_REQUIRED))) && RANDOM_CHANCE(BFG_ITEM_MIRROR_HERB_SELECTION_CHANCE))
             RETURN_IF_UNIQUE(ITEM_MIRROR_HERB);
 
-        // Chesto Berry (Has rest)
-        if ((hasRest == TRUE) && RANDOM_CHANCE(BFG_ITEM_CHESTO_BERRY_SELECTION_CHANCE))
-            RETURN_IF_UNIQUE(ITEM_CHESTO_BERRY);
+        // Razor Fang / King's Rock (Fling)
+        if (hasFling)
+        {
+            if (RANDOM_CHANCE(BFG_ITEM_RAZOR_FANG_SELECTION_CHANCE)) {
+                RETURN_IF_UNIQUE(ITEM_RAZOR_FANG);
+            } else if (RANDOM_CHANCE(BFG_ITEM_KINGS_ROCK_SELECTION_CHANCE)) {
+                RETURN_IF_UNIQUE(ITEM_KINGS_ROCK);
+            }
+        }
 
         // Wide Lens / Blunder Policy (Inaccurate moves)
         for(i=0; ((i < numInaccurate)); i++)
