@@ -235,7 +235,6 @@
 #define BFG_MOVE_ABILITY_MODIFIER 50 // +x to rating for ability synergy moves
 #define BFG_MOVE_DOUBLES_MODIFIER 50 // +x to rating for spread moves in doubles
 
-
 // Special Cases for other moves
 // Please note, the following special cases bypass the 'Attacks Only' modes.
 
