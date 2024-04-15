@@ -238,16 +238,17 @@
 // Special Cases for other moves
 // Please note, the following special cases bypass the 'Attacks Only' modes.
 
-// Speed Control
-#define BFG_MOVE_SPECIAL_TRICK_ROOM_SELECTION_CHANCE 1 // Trick Room Selection Chance (No Speed Only)
-#define BFG_MOVE_SPECIAL_TAILWIND_SELECTION_CHANCE 1 // Tailwind Selection Chance (Speed Only)
-#define BFG_MOVE_SPECIAL_ICY_WIND_SELECTION_CHANCE 1 // Icy Wind Selection Chance (Non-Physical Set)
+// Speed Control (Doubles Only)
+#define BFG_MOVE_SPECIAL_TRICK_ROOM_DOUBLES_SELECTION_CHANCE 1 // Trick Room Selection Chance (No Speed Only)
+#define BFG_MOVE_SPECIAL_TAILWIND_DOUBLES_SELECTION_CHANCE 1 // Tailwind Selection Chance (Speed Only)
+#define BFG_MOVE_SPECIAL_ICY_WIND_DOUBLES_SELECTION_CHANCE 1 // Icy Wind Selection Chance (Non-Physical Set)
 
 // Unique Attacks / Other
 #define BFG_MOVE_SPECIAL_AURORA_VEIL_SELECTION_CHANCE 1  // Aurora Veil Selection Chance (Snow Warning)
 #define BFG_MOVE_SPECIAL_FINAL_GAMBIT_SELECTION_CHANCE 1 // Final Gambit Selection Chance (Max HP)
 #define BFG_MOVE_SPECIAL_BODY_PRESS_SELECTION_CHANCE 1   // Body Press Selection Chance (Max Def)
 #define BFG_MOVE_SPECIAL_FOUL_PLAY_SELECTION_CHANCE 1    // Foul Play Selection Chance (Non-Physical Set)
+#define BFG_MOVE_SPECIAL_PROTECT_SELECTION_CHANCE 1      // Protect Selection Chance (Speed Boost / Moody)
 
 // TODO
 
