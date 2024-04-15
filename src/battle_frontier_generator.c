@@ -1024,7 +1024,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
             if (!isStab)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
-                case ABILITY_AERILATE:
+        case ABILITY_AERILATE:
         case ABILITY_PIXILATE:
         case ABILITY_REFRIGERATE:
         case ABILITY_GALVANIZE:
