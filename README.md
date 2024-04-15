@@ -157,7 +157,7 @@ Please see below for the list of features which are supported in each Battle Fro
 | Battle Factory | Yes             | Yes           | No                  | 2/3   |
 | Battle Palace  | Yes             | Yes           | No                  | 2/3   |
 | Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Pyramid | Yes             | Trainers Only | N/A                 | 2/3   |
+| Battle Pyramid | Yes             | Yes           | N/A                 | 2/3   |
 | Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
 
 Please see below for the list of features which are supported in each Battle Tent.
@@ -263,6 +263,11 @@ implement this feature on their own projects.
 
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
+
+### Ver. 1.3.1
+
+Restructured nature code, fixed mega/gmax/zmove allow flags, implemented basic testing for set generation. Implemented rng seeding 
+for consistent sample set ability/gender selection. Fixed set generation bugs, updated banned moves, improved item selection.
 
 ### Ver. 1.3.0
 
