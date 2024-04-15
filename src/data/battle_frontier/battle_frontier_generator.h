@@ -4,12 +4,7 @@ const bool8 gBattleFrontierMoveAlwaysSelectSingles[MOVES_COUNT] =
 	[MOVE_SPORE] = TRUE,
     [MOVE_FAKE_OUT] = TRUE,
 	// Unique Protecting Moves
-    [MOVE_BANEFUL_BUNKER] = TRUE,
-    [MOVE_BURNING_BULWARK] = TRUE,
     [MOVE_KINGS_SHIELD] = TRUE,
-    [MOVE_OBSTRUCT] = TRUE,
-    [MOVE_SILK_TRAP] = TRUE,
-    [MOVE_SPIKY_SHIELD] = TRUE,
 };
 
 const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] = 
@@ -24,10 +19,6 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
     [MOVE_OBSTRUCT] = TRUE,
     [MOVE_SILK_TRAP] = TRUE,
     [MOVE_SPIKY_SHIELD] = TRUE,
-	// Doubles-Bonus Moves
-	// [MOVE_TAILWIND] = TRUE, 
-	// [MOVE_ICY_WIND] = TRUE, 
-	// [MOVE_TRICK_ROOM] = TRUE,
 	[MOVE_POLLEN_PUFF] = TRUE, 
     // Doubles-Exclusive Moves
     [MOVE_INSTRUCT] = TRUE,
@@ -44,6 +35,8 @@ const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
     [MOVE_TERA_BLAST] = TRUE, 
 	// Misc. Moves
 	[MOVE_SNORE] = TRUE,
+    [MOVE_ROUND] = TRUE, 
+    [MOVE_UPROAR] = TRUE,
     [MOVE_SPIT_UP] = TRUE,
     [MOVE_REVERSAL] = TRUE,
     [MOVE_FOUL_PLAY] = TRUE,
@@ -112,9 +105,10 @@ const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
     [MOVE_TERA_BLAST] = TRUE, 
 	// Misc. Moves
 	[MOVE_SNORE] = TRUE,
+    [MOVE_ROUND] = TRUE, 
+    [MOVE_UPROAR] = TRUE,
     [MOVE_SPIT_UP] = TRUE,
     [MOVE_REVERSAL] = TRUE,
-    [MOVE_FOUL_PLAY] = TRUE,
     [MOVE_BODY_PRESS] = TRUE,
     [MOVE_DREAM_EATER] = TRUE,
     [MOVE_LAST_RESORT] = TRUE,

@@ -983,6 +983,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
                 rating += BFG_MOVE_ABILITY_MODIFIER; // Natural high crit chance, or focus energy
             break;
         case ABILITY_PUNK_ROCK:
+        case ABILITY_LIQUID_VOICE:
             if (move->soundMove == TRUE)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
@@ -1023,9 +1024,36 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
             if (!isStab)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
+        case ABILITY_AERILATE:
+        case ABILITY_PIXILATE:
+        case ABILITY_REFRIGERATE:
+        case ABILITY_GALVANIZE:
+            if (move->type == TYPE_NORMAL)
+                rating += BFG_MOVE_ABILITY_MODIFIER;
+        break;
+    }
+
+    // Move Target
+    switch(move->target)
+    {
+        // Doubles Positive Bonuses
+        case MOVE_TARGET_ALL_BATTLERS:
+        case MOVE_TARGET_ALLY:
+        case MOVE_TARGET_BOTH:
+        case MOVE_TARGET_FOES_AND_ALLY:
+        case MOVE_TARGET_OPPONENTS_FIELD:
+            // Add doubles rating modifier
+            rating += BFG_MOVE_DOUBLES_MODIFIER;
+        break;
+        // Doubles Negative Bonuses
+        case MOVE_TARGET_RANDOM: 
+            // Subtract doubles rating modifier
+            rating -= BFG_MOVE_DOUBLES_MODIFIER;
+        break;
     }
 
     if (isStab)
+        // Apply stab boost modifier
         rating += BFG_MOVE_STAB_MODIFIER;
 
     return rating;
