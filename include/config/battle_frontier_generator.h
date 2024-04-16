@@ -231,9 +231,9 @@
 #define BFG_MOVE_USE_STATUS_ALLOW_LIST TRUE
 
 #define BFG_MOVE_RATING_DEFAULT 0    // Default Rating
-#define BFG_MOVE_STAB_MODIFIER 50    // +x to rating for same-type-attack-bonus
-#define BFG_MOVE_ABILITY_MODIFIER 50 // +x to rating for ability synergy moves
-#define BFG_MOVE_DOUBLES_MODIFIER 50 // +x to rating for spread moves in doubles
+#define BFG_MOVE_STAB_MODIFIER 60    // +x to rating for same-type-attack-bonus
+#define BFG_MOVE_ABILITY_MODIFIER 60 // +x to rating for ability synergy moves
+#define BFG_MOVE_DOUBLES_MODIFIER 30 // +x to rating for spread moves in doubles
 
 // Special Cases for other moves
 // Please note, the following special cases bypass the 'Attacks Only' modes.

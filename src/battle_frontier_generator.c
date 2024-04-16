@@ -1119,6 +1119,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
             } \
         }; break; \
         default: { \
+            if (IsNeverSelectMove(moveId)) continue; \
             if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
             else { if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL))) allowedAttackMoves[numAllowedAttackMoves++] = moveId; } \
         }; break; \
@@ -1297,8 +1298,6 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                 }
                 else // Not always-select
                 {
-                    if (IsNeverSelectMove(moveId))
-                        continue; // Skip move
                     MACRO_MOVE_SWITCH
                 }
             }
@@ -1313,8 +1312,6 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                 }
                 else // Not always-select
                 {
-                    if (IsNeverSelectMove(moveId))
-                        continue; // Skip move
                     MACRO_MOVE_SWITCH
                 }
             }
@@ -3074,9 +3071,6 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
 
     // Default values
     properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
-    // Min/Max BST Value Lookup Table
-    properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
-    properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
 
     // Setup fixed values for level mode
     u8 lvlMode = GET_LVL_MODE();
@@ -3108,6 +3102,10 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     while(i != monCount) 
     {
         DebugPrintf("Generating mon number %d ...", i);
+
+        // Get min/max bst value from lookup table
+        properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
+        properties.maxBST = fixedIVMaxBSTLookup[properties.fixedIV];
 
         // Sample random species from the mon count
         if (((BFG_LVL_50_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_50) || (BFG_LVL_OPEN_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_OPEN) || (BFG_LVL_TENT_ALLOW_BANNED_SPECIES && GET_LVL_MODE() == FRONTIER_LVL_TENT)) && (i % 2 == 1))
