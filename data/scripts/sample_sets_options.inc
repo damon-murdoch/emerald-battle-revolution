@@ -264,8 +264,10 @@ Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1::
 	multichoice2 0, 0, Auto_Text_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_2
-	case MULTI_L_PRESSED, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_3
-	case MULTI_R_PRESSED, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_4
+	case 1, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_3
+	case 2, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_4
+	case MULTI_L_PRESSED, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_5
+	case MULTI_R_PRESSED, Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_6
 	goto Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Page1
 	return
 
@@ -275,10 +277,20 @@ Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_2:
 	return
 
 Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_3:
-	goto Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1
+	givemon SPECIES_URSALUNA, 85, ITEM_FLAME_ORB, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 1, 236, 180, 0, 0, 0, 92, 31, 31, 31, 31, 31, 31, MOVE_FACADE, MOVE_EARTHQUAKE, MOVE_ICE_PUNCH, MOVE_PROTECT, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Sets_CheckPurchase
 	return
 
 Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_4:
+	givemon SPECIES_URSALUNA_BLOODMOON, 85, ITEM_WHITE_HERB, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 52, 0, 4, 4, 196, 252, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_EARTH_POWER, MOVE_BLOOD_MOON, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Sets_CheckPurchase
+	return
+
+Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_5:
+	goto Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1
+	return
+
+Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1_6:
 	goto Auto_EventScript_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1
 	return
 
@@ -565,6 +577,8 @@ Auto_Text_Sample_Sets_Doubles_Standard_Offense_Page2::
 
 Auto_Text_Sample_Sets_Doubles_Standard_Offense_Trick_Room_Page1::
 	.string "TORKOAL (SPECS)$"
+	.string "URSALUNA$"
+	.string "URSALUNA-BLOODMOON$"
 	.string "Go Back$"
 	.string "$"
 

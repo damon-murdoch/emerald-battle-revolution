@@ -109,12 +109,21 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1::
 	case 1, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_3
 	case 2, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_4
 	case 3, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_5
-	case MULTI_L_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_6
-	case MULTI_R_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_7
+	case 4, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_6
+	case MULTI_L_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_7
+	case MULTI_R_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_8
 	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Page1
 	return
 
 Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_2:
+	givemon SPECIES_LANDORUS_THERIAN, 85, ITEM_CHOICE_SCARF, ITEM_SPORT_BALL, NATURE_NAIVE, 0, 0, 0, 4, 0, 252, 252, 0, 31, 0, 30, 31, 31, 31, MOVE_ROCK_SLIDE, MOVE_HIDDEN_POWER, MOVE_SLUDGE_BOMB, MOVE_EARTH_POWER, FALSE, FALSE, FALSE
+	givemon SPECIES_CHARIZARD, 85, ITEM_CHARIZARDITE_X, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 1, 252, 76, 4, 28, 0, 148, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_ROOST, MOVE_WILL_O_WISP, MOVE_FLARE_BLITZ, FALSE, FALSE, FALSE
+	givemon SPECIES_MILOTIC, 85, ITEM_MARANGA_BERRY, ITEM_SPORT_BALL, NATURE_CALM, 1, 0, 252, 0, 196, 4, 20, 36, 31, 0, 31, 31, 31, 31, MOVE_MUDDY_WATER, MOVE_HYPNOSIS, MOVE_RECOVER, MOVE_COIL, FALSE, FALSE, FALSE
+	givemon SPECIES_RILLABOOM, 50, ITEM_ASSAULT_VEST, ITEM_SPORT_BALL, NATURE_ADAMANT, 1, 0, 132, 36, 60, 68, 0, 212, 31, 31, 31, 31, 31, 31, MOVE_U_TURN, MOVE_WOOD_HAMMER, MOVE_GRASSY_GLIDE, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Team_CheckPurchase
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_3:
 	givemon SPECIES_CHARIZARD, 85, ITEM_CHARIZARDITE_Y, ITEM_SPORT_BALL, NATURE_MODEST, 0, 1, 204, 0, 108, 188, 4, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SCORCHING_SANDS, MOVE_FLAMETHROWER, MOVE_SOLAR_BEAM, FALSE, FALSE, FALSE
 	givemon SPECIES_LANDORUS_THERIAN, 85, ITEM_CHOICE_SCARF, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 0, 4, 196, 4, 252, 0, 52, 31, 31, 31, 31, 31, 31, MOVE_U_TURN, MOVE_STOMPING_TANTRUM, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, FALSE, FALSE, FALSE
 	givemon SPECIES_FLUTTER_MANE, 85, ITEM_FAIRIUM_Z, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 140, 0, 188, 140, 36, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_DAZZLING_GLEAM, MOVE_SHADOW_BALL, MOVE_MOONBLAST, FALSE, FALSE, FALSE
@@ -122,7 +131,7 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_2:
 	goto Common_EventScript_Sample_Team_CheckPurchase
 	return
 
-Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_3:
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_4:
 	givemon SPECIES_GARDEVOIR, 85, ITEM_GARDEVOIRITE, ITEM_SPORT_BALL, NATURE_MODEST, 1, 1, 244, 0, 196, 28, 36, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_HYPER_VOICE, MOVE_TRICK_ROOM, MOVE_PSYCHIC, FALSE, FALSE, FALSE
 	givemon SPECIES_LANDORUS_THERIAN, 85, ITEM_GROUNDIUM_Z, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 0, 156, 116, 36, 92, 0, 108, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_STOMPING_TANTRUM, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, FALSE, FALSE, FALSE
 	givemon SPECIES_HEATRAN, 85, ITEM_SHUCA_BERRY, ITEM_SPORT_BALL, NATURE_MODEST, 0, 1, 228, 0, 4, 36, 236, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_HEAT_WAVE, MOVE_EARTH_POWER, FALSE, FALSE, FALSE
@@ -130,7 +139,7 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_3:
 	goto Common_EventScript_Sample_Team_CheckPurchase
 	return
 
-Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_4:
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_5:
 	givemon SPECIES_METAGROSS, 85, ITEM_METAGROSSITE, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 0, 124, 196, 12, 140, 0, 36, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_IRON_HEAD, MOVE_ICE_PUNCH, MOVE_STOMPING_TANTRUM, FALSE, FALSE, FALSE
 	givemon SPECIES_TAPU_FINI, 85, ITEM_LEFTOVERS, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 244, 0, 4, 52, 196, 12, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_CALM_MIND, MOVE_MUDDY_WATER, MOVE_MOONBLAST, FALSE, FALSE, FALSE
 	givemon SPECIES_INCINEROAR, 85, ITEM_SITRUS_BERRY, ITEM_SPORT_BALL, NATURE_ADAMANT, 1, 1, 188, 36, 4, 28, 0, 252, 31, 31, 31, 31, 31, 31, MOVE_PARTING_SHOT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
@@ -138,7 +147,7 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_4:
 	goto Common_EventScript_Sample_Team_CheckPurchase
 	return
 
-Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_5:
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_6:
 	givemon SPECIES_URSHIFU_RAPID_STRIKE_STYLE, 85, ITEM_FOCUS_SASH, ITEM_SPORT_BALL, NATURE_JOLLY, 0, 1, 4, 244, 4, 252, 0, 4, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SURGING_STRIKES, MOVE_CLOSE_COMBAT, MOVE_AQUA_JET, FALSE, FALSE, FALSE
 	givemon SPECIES_SALAMENCE, 85, ITEM_SALAMENCITE, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 4, 0, 4, 252, 244, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_TAILWIND, MOVE_DRACO_METEOR, MOVE_HYPER_VOICE, FALSE, FALSE, FALSE
 	givemon SPECIES_INCINEROAR, 85, ITEM_SITRUS_BERRY, ITEM_SPORT_BALL, NATURE_ADAMANT, 1, 1, 236, 36, 4, 28, 0, 204, 31, 31, 31, 31, 31, 31, MOVE_PARTING_SHOT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
@@ -146,11 +155,11 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_5:
 	goto Common_EventScript_Sample_Team_CheckPurchase
 	return
 
-Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_6:
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_7:
 	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1
 	return
 
-Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_7:
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1_8:
 	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Modern_Page1
 	return
 
@@ -165,11 +174,7 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1::
 	return
 
 Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1_2:
-	givemon SPECIES_LUDICOLO, 85, ITEM_ASSAULT_VEST, ITEM_SPORT_BALL, NATURE_MODEST, 0, 1, 52, 0, 124, 92, 236, 4, 31, 31, 31, 31, 31, 31, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
-	givemon SPECIES_PELIPPER, 85, ITEM_FOCUS_SASH, ITEM_SPORT_BALL, NATURE_MODEST, 1, 0, 4, 0, 4, 252, 244, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_TAILWIND, MOVE_HURRICANE, MOVE_SCALD, FALSE, FALSE, FALSE
-	givemon SPECIES_KINGDRA, 85, ITEM_WATERIUM_Z, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 252, 0, 4, 52, 196, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, FALSE, FALSE, FALSE
-	givemon SPECIES_SCIZOR, 85, ITEM_SCIZORITE, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 1, 252, 76, 4, 44, 0, 132, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_BULLET_PUNCH, MOVE_BUG_BITE, FALSE, FALSE, FALSE
-	goto Common_EventScript_Sample_Team_CheckPurchase
+	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1
 	return
 
 Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1_3:
@@ -178,6 +183,50 @@ Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1_3:
 
 Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1_4:
 	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1
+	return
+
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1::
+	multichoice2 0, 0, Auto_Text_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_2
+	case 1, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_3
+	case 2, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_4
+	case MULTI_L_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_5
+	case MULTI_R_PRESSED, Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_6
+	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Page1
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_2:
+	givemon SPECIES_LUDICOLO, 85, ITEM_ASSAULT_VEST, ITEM_SPORT_BALL, NATURE_MODEST, 0, 1, 52, 0, 124, 92, 236, 4, 31, 31, 31, 31, 31, 31, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
+	givemon SPECIES_POLITOED, 85, ITEM_LEFTOVERS, ITEM_SPORT_BALL, NATURE_CALM, 2, 1, 212, 0, 132, 84, 4, 76, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_PERISH_SONG, MOVE_ENCORE, MOVE_SCALD, FALSE, FALSE, FALSE
+	givemon SPECIES_MAWILE, 85, ITEM_MAWILITE, ITEM_SPORT_BALL, NATURE_ADAMANT, 1, 1, 252, 36, 4, 4, 0, 212, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_IRON_HEAD, MOVE_PLAY_ROUGH, FALSE, FALSE, FALSE
+	givemon SPECIES_GOTHITELLE, 85, ITEM_SITRUS_BERRY, ITEM_SPORT_BALL, NATURE_CALM, 2, 0, 252, 0, 100, 0, 0, 156, 31, 31, 31, 29, 31, 31, MOVE_PSYCHIC, MOVE_HELPING_HAND, MOVE_TAUNT, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Team_CheckPurchase
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_3:
+	givemon SPECIES_LUDICOLO, 85, ITEM_ASSAULT_VEST, ITEM_SPORT_BALL, NATURE_MODEST, 0, 1, 52, 0, 124, 92, 236, 4, 31, 31, 31, 31, 31, 31, MOVE_SCALD, MOVE_ICE_BEAM, MOVE_GIGA_DRAIN, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
+	givemon SPECIES_PELIPPER, 85, ITEM_FOCUS_SASH, ITEM_SPORT_BALL, NATURE_MODEST, 1, 0, 4, 0, 4, 252, 244, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_TAILWIND, MOVE_HURRICANE, MOVE_SCALD, FALSE, FALSE, FALSE
+	givemon SPECIES_KINGDRA, 85, ITEM_WATERIUM_Z, ITEM_SPORT_BALL, NATURE_MODEST, 0, 0, 252, 0, 4, 52, 196, 4, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_DRACO_METEOR, MOVE_MUDDY_WATER, MOVE_ICE_BEAM, FALSE, FALSE, FALSE
+	givemon SPECIES_SCIZOR, 85, ITEM_SCIZORITE, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 1, 252, 76, 4, 44, 0, 132, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_SWORDS_DANCE, MOVE_BULLET_PUNCH, MOVE_BUG_BITE, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Team_CheckPurchase
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_4:
+	givemon SPECIES_SWAMPERT, 85, ITEM_SWAMPERTITE, ITEM_SPORT_BALL, NATURE_ADAMANT, 0, 1, 252, 156, 4, 84, 0, 12, 31, 31, 31, 31, 31, 31, MOVE_PROTECT, MOVE_EARTHQUAKE, MOVE_ICE_PUNCH, MOVE_WATERFALL, FALSE, FALSE, FALSE
+	givemon SPECIES_THUNDURUS, 85, ITEM_FOCUS_SASH, ITEM_SPORT_BALL, NATURE_TIMID, 0, 0, 4, 0, 4, 252, 244, 4, 31, 0, 31, 31, 31, 31, MOVE_WILDBOLT_STORM, MOVE_THUNDER_WAVE, MOVE_RAIN_DANCE, MOVE_TAUNT, FALSE, FALSE, FALSE
+	givemon SPECIES_INCINEROAR, 85, ITEM_SITRUS_BERRY, ITEM_SPORT_BALL, NATURE_ADAMANT, 1, 0, 236, 36, 4, 28, 0, 204, 31, 31, 31, 31, 31, 31, MOVE_PARTING_SHOT, MOVE_FLARE_BLITZ, MOVE_KNOCK_OFF, MOVE_FAKE_OUT, FALSE, FALSE, FALSE
+	givemon SPECIES_AMOONGUSS, 85, ITEM_ROCKY_HELMET, ITEM_SPORT_BALL, NATURE_CALM, 1, 0, 252, 0, 172, 4, 4, 76, 31, 0, 31, 31, 31, 31, MOVE_PROTECT, MOVE_RAGE_POWDER, MOVE_POLLEN_PUFF, MOVE_SPORE, FALSE, FALSE, FALSE
+	goto Common_EventScript_Sample_Team_CheckPurchase
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_5:
+	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1
+	return
+
+Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1_6:
+	goto Auto_EventScript_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1
 	return
 
 
@@ -417,6 +466,7 @@ Auto_Text_Sample_Teams_Doubles_4v4_Standard_Page1::
 	.string "$"
 
 Auto_Text_Sample_Teams_Doubles_4v4_Standard_Modern_Page1::
+	.string "M-CHARIZARD X$"
 	.string "M-CHARIZARD Y$"
 	.string "M-GARDEVOIR$"
 	.string "M-METAGROSS$"
@@ -425,7 +475,14 @@ Auto_Text_Sample_Teams_Doubles_4v4_Standard_Modern_Page1::
 	.string "$"
 
 Auto_Text_Sample_Teams_Doubles_4v4_Standard_Weather_Page1::
-	.string "M-SCIZOR RAIN$"
+	.string "RAIN$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Sample_Teams_Doubles_4v4_Standard_Weather_Rain_Page1::
+	.string "M-MAWILE$"
+	.string "M-SCIZOR$"
+	.string "M-SWAMPERT$"
 	.string "Go Back$"
 	.string "$"
 
