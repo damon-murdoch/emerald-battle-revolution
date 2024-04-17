@@ -4,6 +4,9 @@ import src.showdown as showdown
 # Common Library
 import src.common as common
 
+# Data Files
+import src.data as data
+
 # Built-in libs
 import os, re
 
@@ -13,9 +16,6 @@ OUTPUT_FILENAME = "battle_frontier_generator_trainer_class_mons.h"
 # Ignore Pokedex Num. Below 1
 IGNORE_SPECIAL = True
 
-# Ignored species
-ignore_species = ["terapagos", "pecharunt", "cosmog", "cosmoem", "meltan"]
-
 # Seperate tables for restricted mons
 # e.g. Mythicals, Box Legends, etc.
 SPLIT_RESTRICTED = True
@@ -24,142 +24,8 @@ SPLIT_RESTRICTED = True
 INCLUDE_BOX_LEGEND = True
 INCLUDE_MYTHICAL = True
 
-# Custom Restricteds
-restricteds = ["deoxys", "arceus"]
-
 # Seperate tables for mega pokemon
 SPLIT_MEGA = True
-
-megas = [
-    "venusaur",
-    "charizard",
-    "blastoise",
-    "beedrill",
-    "pidgeot",
-    "alakazam",
-    "slowbro",
-    "gengar",
-    "kangaskhan",
-    "pinsir",
-    "gyarados",
-    "aerodactyl",
-    "mewtwo",
-    "ampharos",
-    "steelix",
-    "scizor",
-    "heracross",
-    "houndoom",
-    "tyranitar",
-    "sceptile",
-    "blaziken",
-    "swampert",
-    "gardevoir",
-    "sableye",
-    "mawile",
-    "aggron",
-    "medicham",
-    "manectric",
-    "sharpedo",
-    "camerupt",
-    "altaria",
-    "banette",
-    "absol",
-    "glalie",
-    "salamence",
-    "metagross",
-    "latias",
-    "latios",
-    "rayquaza",
-    "lopunny",
-    "garchomp",
-    "lucario",
-    "abomasnow",
-    "gallade",
-    "audino",
-    "diancie",
-]
-
-eevees = [
-    "jolteon",
-    "flareon",
-    "umbreon",
-    "leafeon",
-    "sylveon",
-    "glaceon",
-    "espeon",
-    "vaporean",
-    "eevee",
-]
-
-regis = ["regirock", "regice", "registeel", "regigigas", "regidrago", "regieleki"]
-
-trainer_classes = [
-    "TRAINER_CLASS_HIKER",
-    # 'TRAINER_CLASS_TEAM_AQUA',
-    "TRAINER_CLASS_PKMN_BREEDER",
-    "TRAINER_CLASS_COOLTRAINER",
-    "TRAINER_CLASS_BIRD_KEEPER",
-    "TRAINER_CLASS_COLLECTOR",
-    "TRAINER_CLASS_SWIMMER_M",
-    # 'TRAINER_CLASS_TEAM_MAGMA',
-    "TRAINER_CLASS_EXPERT",
-    # 'TRAINER_CLASS_AQUA_ADMIN',
-    "TRAINER_CLASS_BLACK_BELT",
-    # 'TRAINER_CLASS_AQUA_LEADER',
-    "TRAINER_CLASS_HEX_MANIAC",
-    "TRAINER_CLASS_AROMA_LADY",
-    "TRAINER_CLASS_RUIN_MANIAC",
-    # 'TRAINER_CLASS_INTERVIEWER',
-    "TRAINER_CLASS_TUBER_F",
-    "TRAINER_CLASS_TUBER_M",
-    "TRAINER_CLASS_LADY",
-    "TRAINER_CLASS_BEAUTY",
-    "TRAINER_CLASS_RICH_BOY",
-    "TRAINER_CLASS_POKEMANIAC",
-    "TRAINER_CLASS_GUITARIST",
-    "TRAINER_CLASS_KINDLER",
-    "TRAINER_CLASS_CAMPER",
-    "TRAINER_CLASS_PICNICKER",
-    "TRAINER_CLASS_BUG_MANIAC",
-    "TRAINER_CLASS_PSYCHIC",
-    "TRAINER_CLASS_GENTLEMAN",
-    # 'TRAINER_CLASS_ELITE_FOUR',
-    # 'TRAINER_CLASS_LEADER',
-    "TRAINER_CLASS_SCHOOL_KID",
-    # 'TRAINER_CLASS_SR_AND_JR',
-    # 'TRAINER_CLASS_WINSTRATE',
-    "TRAINER_CLASS_POKEFAN",
-    "TRAINER_CLASS_YOUNGSTER",
-    # 'TRAINER_CLASS_CHAMPION',
-    "TRAINER_CLASS_FISHERMAN",
-    "TRAINER_CLASS_TRIATHLETE",
-    "TRAINER_CLASS_DRAGON_TAMER",
-    "TRAINER_CLASS_NINJA_BOY",
-    "TRAINER_CLASS_BATTLE_GIRL",
-    "TRAINER_CLASS_PARASOL_LADY",
-    "TRAINER_CLASS_SWIMMER_F",
-    # 'TRAINER_CLASS_TWINS',
-    "TRAINER_CLASS_SAILOR",
-    # "TRAINER_CLASS_COOLTRAINER_2",
-    # 'TRAINER_CLASS_MAGMA_ADMIN',
-    # 'TRAINER_CLASS_RIVAL',
-    "TRAINER_CLASS_BUG_CATCHER",
-    "TRAINER_CLASS_PKMN_RANGER",
-    # 'TRAINER_CLASS_MAGMA_LEADER',
-    "TRAINER_CLASS_LASS",
-    # 'TRAINER_CLASS_YOUNG_COUPLE',
-    # 'TRAINER_CLASS_OLD_COUPLE',
-    # 'TRAINER_CLASS_SIS_AND_BRO',
-    # 'TRAINER_CLASS_SALON_MAIDEN',
-    # 'TRAINER_CLASS_DOME_ACE',
-    # 'TRAINER_CLASS_PALACE_MAVEN',
-    # 'TRAINER_CLASS_ARENA_TYCOON',
-    # 'TRAINER_CLASS_FACTORY_HEAD',
-    # 'TRAINER_CLASS_PIKE_QUEEN',
-    # 'TRAINER_CLASS_PYRAMID_KING',
-    # 'TRAINER_CLASS_RS_PROTAG',
-    "TRAINER_CLASS_DEFAULT",
-]
 
 # Main Process
 if __name__ == "__main__":
@@ -183,7 +49,7 @@ if __name__ == "__main__":
     for speciesId in POKEMON:
         species = POKEMON[speciesId]
 
-        if speciesId in ignore_species:
+        if speciesId in data.IGNORE_SPECIES:
             continue  # Skip ignored species
 
         if IGNORE_SPECIAL and species["num"] < 1:
@@ -212,7 +78,7 @@ if __name__ == "__main__":
     classes_lookup = {}
 
     # Initialise lists
-    for trainer_class in trainer_classes:
+    for trainer_class in data.TRAINER_CLASSES:
         classes[trainer_class] = []
         classes_mega[trainer_class] = []
         classes_restricted[trainer_class] = []
@@ -231,11 +97,11 @@ if __name__ == "__main__":
         coverage[speciesId] = 0
 
         # Default Trainer Class (Contains All Species)
-        if SPLIT_MEGA == True and speciesId in megas:
+        if SPLIT_MEGA == True and speciesId in data.MEGA:
             classes_mega["TRAINER_CLASS_DEFAULT"].append(speciesId)
         if (
             SPLIT_RESTRICTED == True
-            and speciesId in restricteds
+            and speciesId in data.RESTRICTED
             or (
                 (
                     INCLUDE_BOX_LEGEND
@@ -253,12 +119,12 @@ if __name__ == "__main__":
         for type in species["types"]:
             # Most Common Types
             if type == "Normal":
-                for trainer_class in trainer_classes:  # All Trainer Classes
-                    if SPLIT_MEGA == True and speciesId in megas:
+                for trainer_class in data.TRAINER_CLASSES:  # All Trainer Classes
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -293,11 +159,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_PKMN_BREEDER",
                     "TRAINER_CLASS_DRAGON_TAMER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -331,11 +197,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_CAMPER",
                     "TRAINER_CLASS_PICNICKER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -369,11 +235,11 @@ if __name__ == "__main__":
                     # "TRAINER_CLASS_LASS",
                     # "TRAINER_CLASS_YOUNGSTER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -407,11 +273,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_LASS",
                     "TRAINER_CLASS_YOUNGSTER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -445,11 +311,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_LASS",
                     "TRAINER_CLASS_YOUNGSTER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -479,11 +345,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_PKMN_RANGER",
                     "TRAINER_CLASS_TRIATHLETE",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -511,11 +377,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_DRAGON_TAMER",
                     "TRAINER_CLASS_NINJA_BOY",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -544,11 +410,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_KINDLER",
                     # "TRAINER_CLASS_NINJA_BOY",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -576,11 +442,11 @@ if __name__ == "__main__":
                     # "TRAINER_CLASS_KINDLER",
                     "TRAINER_CLASS_NINJA_BOY",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -608,11 +474,11 @@ if __name__ == "__main__":
                     # "TRAINER_CLASS_LASS",
                     "TRAINER_CLASS_YOUNGSTER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -641,11 +507,11 @@ if __name__ == "__main__":
                     # "TRAINER_CLASS_YOUNGSTER",
                     "TRAINER_CLASS_GENTLEMAN",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -674,11 +540,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_GUITARIST",
                     "TRAINER_CLASS_DRAGON_TAMER",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -714,11 +580,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_SWIMMER_M",
                     "TRAINER_CLASS_FISHERMAN",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -746,11 +612,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_FISHERMAN",
                     "TRAINER_CLASS_TRIATHLETE",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -779,11 +645,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_PSYCHIC",
                     "TRAINER_CLASS_NINJA_BOY",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -814,11 +680,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_TUBER_F",
                     "TRAINER_CLASS_SWIMMER_F",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -854,11 +720,11 @@ if __name__ == "__main__":
                     "TRAINER_CLASS_SWIMMER_M",
                     "TRAINER_CLASS_SWIMMER_F",
                 ]:
-                    if SPLIT_MEGA == True and speciesId in megas:
+                    if SPLIT_MEGA == True and speciesId in data.MEGA:
                         classes_mega[trainer_class].append(speciesId)
                     if (
                         SPLIT_RESTRICTED == True
-                        and speciesId in restricteds
+                        and speciesId in data.RESTRICTED
                         or (
                             (
                                 INCLUDE_BOX_LEGEND
@@ -885,11 +751,11 @@ if __name__ == "__main__":
                 # "TRAINER_CLASS_COOLTRAINER_2",
                 "TRAINER_CLASS_GENTLEMAN",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -904,17 +770,17 @@ if __name__ == "__main__":
                 coverage[speciesId] += 1
 
         # Regirock / Regice / Registeel
-        if speciesId in regis:
+        if speciesId in data.REGI:
             for trainer_class in [
                 "TRAINER_CLASS_RUIN_MANIAC",
                 "TRAINER_CLASS_EXPERT",
                 "TRAINER_CLASS_PSYCHIC",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -929,17 +795,17 @@ if __name__ == "__main__":
                 coverage[speciesId] += 1
 
         # Eeveelutions
-        if speciesId in eevees:
+        if speciesId in data.EEVEE:
             for trainer_class in [
                 "TRAINER_CLASS_LADY",
                 "TRAINER_CLASS_RICH_BOY",
                 "TRAINER_CLASS_BEAUTY",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -964,11 +830,11 @@ if __name__ == "__main__":
                 "TRAINER_CLASS_PSYCHIC",
                 "TRAINER_CLASS_BIRD_KEEPER",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -987,11 +853,11 @@ if __name__ == "__main__":
             for trainer_class in [
                 "TRAINER_CLASS_RUIN_MANIAC",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -1014,11 +880,11 @@ if __name__ == "__main__":
                 "TRAINER_CLASS_RUIN_MANIAC",
                 "TRAINER_CLASS_GENTLEMAN",
             ]:
-                if SPLIT_MEGA == True and speciesId in megas:
+                if SPLIT_MEGA == True and speciesId in data.MEGA:
                     classes_mega[trainer_class].append(speciesId)
                 if (
                     SPLIT_RESTRICTED == True
-                    and speciesId in restricteds
+                    and speciesId in data.RESTRICTED
                     or (
                         (
                             INCLUDE_BOX_LEGEND
@@ -1035,14 +901,13 @@ if __name__ == "__main__":
     # Create output content
     output = [
         "// File Auto-Generated By tools/bfg_helpers/get_trainer_class_mons.py",
-        f"// Last updated: {common.get_timestamp()}",
         "",
     ]
 
     # Add Trainer Class Lists
 
     # Loop over the trainer classes
-    for trainer_class in trainer_classes:
+    for trainer_class in data.TRAINER_CLASSES:
 
         # Sort species list, remove duplicates
         class_list = sorted(list(set(classes[trainer_class])))
@@ -1063,10 +928,10 @@ if __name__ == "__main__":
 
         # Seperate mega table
         if SPLIT_MEGA == True:
-            # Sort megas list, remove duplicates
+            # Sort data.MEGA list, remove duplicates
             mega_list = sorted(list(set(classes_mega[trainer_class])))
 
-            # Trainer Class Megas Constant
+            # Trainer Class data.MEGA Constant
             mega_constant = f"SPECIES_LIST_{trainer_class}_MEGA_COUNT"
 
             # Create mega table (#define, contents)

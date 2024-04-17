@@ -282,9 +282,11 @@ $(CHECKTOOLDIRS):
 
 # EBR Prereqs
 
+shop: ; python3 $(BFG_TOOLS)/shop_builder.py
+
 sample: ; python3 $(BFG_TOOLS)/sample_builder.py
 
-select: sample ; python3 $(BFG_TOOLS)/multi_select.py
+select: shop sample ; python3 $(BFG_TOOLS)/multi_select.py
 
 ebr-helpers: select
 

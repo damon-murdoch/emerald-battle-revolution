@@ -1,0 +1,456 @@
+[
+  {
+    "name": "Bug",
+    "action": [
+      {
+        "name": "Buzzwole",
+        "action": "givemon(SPECIES_BUZZWOLE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Genesect",
+        "action": "givemon(SPECIES_GENESECT,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pheromosa",
+        "action": "givemon(SPECIES_PHEROMOSA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Dark",
+    "action": [
+      {
+        "name": "Chi-Yu",
+        "action": "givemon(SPECIES_CHI_YU,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chien-Pao",
+        "action": "givemon(SPECIES_CHIEN_PAO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Darkrai",
+        "action": "givemon(SPECIES_DARKRAI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Guzzlord",
+        "action": "givemon(SPECIES_GUZZLORD,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ting-Lu",
+        "action": "givemon(SPECIES_TING_LU,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wo-Chien",
+        "action": "givemon(SPECIES_WO_CHIEN,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yveltal",
+        "action": "givemon(SPECIES_YVELTAL,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zarude",
+        "action": "givemon(SPECIES_ZARUDE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Dragon",
+    "action": [
+      {
+        "name": "Kyurem",
+        "action": "givemon(SPECIES_KYUREM,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Latias",
+        "action": "givemon(SPECIES_LATIAS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Latios",
+        "action": "givemon(SPECIES_LATIOS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rayquaza",
+        "action": "givemon(SPECIES_RAYQUAZA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Regidrago",
+        "action": "givemon(SPECIES_REGIDRAGO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Reshiram",
+        "action": "givemon(SPECIES_RESHIRAM,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zekrom",
+        "action": "givemon(SPECIES_ZEKROM,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zygarde",
+        "action": "givemon(SPECIES_ZYGARDE,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Electric",
+    "action": [
+      {
+        "name": "Miraidon",
+        "action": "givemon(SPECIES_MIRAIDON,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Raikou",
+        "action": "givemon(SPECIES_RAIKOU,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Regieleki",
+        "action": "givemon(SPECIES_REGIELEKI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tapu Koko",
+        "action": "givemon(SPECIES_TAPU_KOKO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Thundurus",
+        "action": "givemon(SPECIES_THUNDURUS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Xurkitree",
+        "action": "givemon(SPECIES_XURKITREE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zapdos",
+        "action": "givemon(SPECIES_ZAPDOS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zeraora",
+        "action": "givemon(SPECIES_ZERAORA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fairy",
+    "action": [
+      {
+        "name": "Enamorus",
+        "action": "givemon(SPECIES_ENAMORUS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Xerneas",
+        "action": "givemon(SPECIES_XERNEAS,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zacian",
+        "action": "givemon(SPECIES_ZACIAN,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fighting",
+    "action": [
+      {
+        "name": "Koraidon",
+        "action": "givemon(SPECIES_KORAIDON,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kubfu",
+        "action": "givemon(SPECIES_KUBFU,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Marshadow",
+        "action": "givemon(SPECIES_MARSHADOW,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zamazenta",
+        "action": "givemon(SPECIES_ZAMAZENTA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fire",
+    "action": [
+      {
+        "name": "Blacephalon",
+        "action": "givemon(SPECIES_BLACEPHALON,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Entei",
+        "action": "givemon(SPECIES_ENTEI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Heatran",
+        "action": "givemon(SPECIES_HEATRAN,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ho-Oh",
+        "action": "givemon(SPECIES_HO_OH,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Moltres",
+        "action": "givemon(SPECIES_MOLTRES,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Volcanion",
+        "action": "givemon(SPECIES_VOLCANION,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Flying",
+    "action": [
+      {
+        "name": "Tornadus",
+        "action": "givemon(SPECIES_TORNADUS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ghost",
+    "action": [
+      {
+        "name": "Giratina",
+        "action": "givemon(SPECIES_GIRATINA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spectrier",
+        "action": "givemon(SPECIES_SPECTRIER,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Grass",
+    "action": [
+      {
+        "name": "Kartana",
+        "action": "givemon(SPECIES_KARTANA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shaymin",
+        "action": "givemon(SPECIES_SHAYMIN,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tapu Bulu",
+        "action": "givemon(SPECIES_TAPU_BULU,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Virizion",
+        "action": "givemon(SPECIES_VIRIZION,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ground",
+    "action": [
+      {
+        "name": "Groudon",
+        "action": "givemon(SPECIES_GROUDON,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Landorus",
+        "action": "givemon(SPECIES_LANDORUS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ice",
+    "action": [
+      {
+        "name": "Articuno",
+        "action": "givemon(SPECIES_ARTICUNO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Glastrier",
+        "action": "givemon(SPECIES_GLASTRIER,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Regice",
+        "action": "givemon(SPECIES_REGICE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Normal",
+    "action": [
+      {
+        "name": "Arceus",
+        "action": "givemon(SPECIES_ARCEUS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Meloetta",
+        "action": "givemon(SPECIES_MELOETTA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Regigigas",
+        "action": "givemon(SPECIES_REGIGIGAS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Type: Null",
+        "action": "givemon(SPECIES_TYPE_NULL,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Poison",
+    "action": [
+      {
+        "name": "Eternatus",
+        "action": "givemon(SPECIES_ETERNATUS,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Poipole",
+        "action": "givemon(SPECIES_POIPOLE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Psychic",
+    "action": [
+      {
+        "name": "Azelf",
+        "action": "givemon(SPECIES_AZELF,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Calyrex",
+        "action": "givemon(SPECIES_CALYREX,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Celebi",
+        "action": "givemon(SPECIES_CELEBI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cresselia",
+        "action": "givemon(SPECIES_CRESSELIA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Deoxys",
+        "action": "givemon(SPECIES_DEOXYS,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hoopa",
+        "action": "givemon(SPECIES_HOOPA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lugia",
+        "action": "givemon(SPECIES_LUGIA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mesprit",
+        "action": "givemon(SPECIES_MESPRIT,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mew",
+        "action": "givemon(SPECIES_MEW,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mewtwo",
+        "action": "givemon(SPECIES_MEWTWO,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Necrozma",
+        "action": "givemon(SPECIES_NECROZMA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tapu Lele",
+        "action": "givemon(SPECIES_TAPU_LELE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Uxie",
+        "action": "givemon(SPECIES_UXIE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Victini",
+        "action": "givemon(SPECIES_VICTINI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Rock",
+    "action": [
+      {
+        "name": "Diancie",
+        "action": "givemon(SPECIES_DIANCIE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nihilego",
+        "action": "givemon(SPECIES_NIHILEGO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Regirock",
+        "action": "givemon(SPECIES_REGIROCK,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stakataka",
+        "action": "givemon(SPECIES_STAKATAKA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Terrakion",
+        "action": "givemon(SPECIES_TERRAKION,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Steel",
+    "action": [
+      {
+        "name": "Celesteela",
+        "action": "givemon(SPECIES_CELESTEELA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cobalion",
+        "action": "givemon(SPECIES_COBALION,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dialga",
+        "action": "givemon(SPECIES_DIALGA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Jirachi",
+        "action": "givemon(SPECIES_JIRACHI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Magearna",
+        "action": "givemon(SPECIES_MAGEARNA,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Melmetal",
+        "action": "givemon(SPECIES_MELMETAL,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Registeel",
+        "action": "givemon(SPECIES_REGISTEEL,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Water",
+    "action": [
+      {
+        "name": "Keldeo",
+        "action": "givemon(SPECIES_KELDEO,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kyogre",
+        "action": "givemon(SPECIES_KYOGRE,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Manaphy",
+        "action": "givemon(SPECIES_MANAPHY,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Palkia",
+        "action": "givemon(SPECIES_PALKIA,70);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Phione",
+        "action": "givemon(SPECIES_PHIONE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Suicune",
+        "action": "givemon(SPECIES_SUICUNE,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tapu Fini",
+        "action": "givemon(SPECIES_TAPU_FINI,50);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      }
+    ]
+  }
+]
