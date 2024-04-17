@@ -111,12 +111,10 @@ Auto_EventScript_Pokemon_Shop_End::
 
 
 Common_EventScript_Pokemon_Shop_Text_0:
-	.string "Hello there! I'm the POKéMON breeder!\n"
-	.string "What are you looking for today?$"
+	.string "Hello there! I'm the POKéMON breeder!$"
 
 Common_EventScript_Pokemon_Shop_CheckMoney_Text_0:
-	.string "All Pokemon cost a mere ¥4000. What\n"
-	.string "would you like?$"
+	.string "All Pokemon cost a mere ¥4000.$"
 
 Common_EventScript_Pokemon_Shop_CheckMoney_Text_1:
 	.string "Oh, sorry! You need at least ¥4000 to\n"
