@@ -1,0 +1,1980 @@
+[
+  {
+    "name": "Bug",
+    "action": [
+      {
+        "name": "Blipbug",
+        "action": "givemon(SPECIES_BLIPBUG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Burmy",
+        "action": "givemon(SPECIES_BURMY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Caterpie",
+        "action": "givemon(SPECIES_CATERPIE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Combee",
+        "action": "givemon(SPECIES_COMBEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cutiefly",
+        "action": "givemon(SPECIES_CUTIEFLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Durant",
+        "action": "givemon(SPECIES_DURANT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dwebble",
+        "action": "givemon(SPECIES_DWEBBLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Grubbin",
+        "action": "givemon(SPECIES_GRUBBIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Heracross",
+        "action": "givemon(SPECIES_HERACROSS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Illumise",
+        "action": "givemon(SPECIES_ILLUMISE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Joltik",
+        "action": "givemon(SPECIES_JOLTIK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Karrablast",
+        "action": "givemon(SPECIES_KARRABLAST,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kricketot",
+        "action": "givemon(SPECIES_KRICKETOT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Larvesta",
+        "action": "givemon(SPECIES_LARVESTA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ledyba",
+        "action": "givemon(SPECIES_LEDYBA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nincada",
+        "action": "givemon(SPECIES_NINCADA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nymble",
+        "action": "givemon(SPECIES_NYMBLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Paras",
+        "action": "givemon(SPECIES_PARAS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pineco",
+        "action": "givemon(SPECIES_PINECO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pinsir",
+        "action": "givemon(SPECIES_PINSIR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rellor",
+        "action": "givemon(SPECIES_RELLOR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Scatterbug",
+        "action": "givemon(SPECIES_SCATTERBUG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Scyther",
+        "action": "givemon(SPECIES_SCYTHER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sewaddle",
+        "action": "givemon(SPECIES_SEWADDLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shelmet",
+        "action": "givemon(SPECIES_SHELMET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shuckle",
+        "action": "givemon(SPECIES_SHUCKLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Slither Wing",
+        "action": "givemon(SPECIES_SLITHER_WING,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spinarak",
+        "action": "givemon(SPECIES_SPINARAK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Surskit",
+        "action": "givemon(SPECIES_SURSKIT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tarountula",
+        "action": "givemon(SPECIES_TAROUNTULA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Venipede",
+        "action": "givemon(SPECIES_VENIPEDE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Venonat",
+        "action": "givemon(SPECIES_VENONAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Volbeat",
+        "action": "givemon(SPECIES_VOLBEAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Weedle",
+        "action": "givemon(SPECIES_WEEDLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wimpod",
+        "action": "givemon(SPECIES_WIMPOD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wurmple",
+        "action": "givemon(SPECIES_WURMPLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yanma",
+        "action": "givemon(SPECIES_YANMA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Dark",
+    "action": [
+      {
+        "name": "Absol",
+        "action": "givemon(SPECIES_ABSOL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Deino",
+        "action": "givemon(SPECIES_DEINO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Houndour",
+        "action": "givemon(SPECIES_HOUNDOUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Impidimp",
+        "action": "givemon(SPECIES_IMPIDIMP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Inkay",
+        "action": "givemon(SPECIES_INKAY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Jugulis",
+        "action": "givemon(SPECIES_IRON_JUGULIS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Maschiff",
+        "action": "givemon(SPECIES_MASCHIFF,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Meowth-Alola",
+        "action": "givemon(SPECIES_MEOWTH_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Moltres-Galar",
+        "action": "givemon(SPECIES_MOLTRES_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Murkrow",
+        "action": "givemon(SPECIES_MURKROW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nickit",
+        "action": "givemon(SPECIES_NICKIT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pawniard",
+        "action": "givemon(SPECIES_PAWNIARD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Poochyena",
+        "action": "givemon(SPECIES_POOCHYENA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Purrloin",
+        "action": "givemon(SPECIES_PURRLOIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Qwilfish-Hisui",
+        "action": "givemon(SPECIES_QWILFISH_HISUIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rattata-Alola",
+        "action": "givemon(SPECIES_RATTATA_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sableye",
+        "action": "givemon(SPECIES_SABLEYE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Scraggy",
+        "action": "givemon(SPECIES_SCRAGGY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sneasel",
+        "action": "givemon(SPECIES_SNEASEL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Vullaby",
+        "action": "givemon(SPECIES_VULLABY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zigzagoon-Galar",
+        "action": "givemon(SPECIES_ZIGZAGOON_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zorua",
+        "action": "givemon(SPECIES_ZORUA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Dragon",
+    "action": [
+      {
+        "name": "Axew",
+        "action": "givemon(SPECIES_AXEW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bagon",
+        "action": "givemon(SPECIES_BAGON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cyclizar",
+        "action": "givemon(SPECIES_CYCLIZAR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dratini",
+        "action": "givemon(SPECIES_DRATINI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dreepy",
+        "action": "givemon(SPECIES_DREEPY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Druddigon",
+        "action": "givemon(SPECIES_DRUDDIGON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Frigibax",
+        "action": "givemon(SPECIES_FRIGIBAX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gible",
+        "action": "givemon(SPECIES_GIBLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Goomy",
+        "action": "givemon(SPECIES_GOOMY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Jangmo-o",
+        "action": "givemon(SPECIES_JANGMO_O,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Roaring Moon",
+        "action": "givemon(SPECIES_ROARING_MOON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tatsugiri",
+        "action": "givemon(SPECIES_TATSUGIRI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Electric",
+    "action": [
+      {
+        "name": "Arctozolt",
+        "action": "givemon(SPECIES_ARCTOZOLT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Blitzle",
+        "action": "givemon(SPECIES_BLITZLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dedenne",
+        "action": "givemon(SPECIES_DEDENNE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dracozolt",
+        "action": "givemon(SPECIES_DRACOZOLT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Electrike",
+        "action": "givemon(SPECIES_ELECTRIKE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Elekid",
+        "action": "givemon(SPECIES_ELEKID,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Emolga",
+        "action": "givemon(SPECIES_EMOLGA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Helioptile",
+        "action": "givemon(SPECIES_HELIOPTILE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Magnemite",
+        "action": "givemon(SPECIES_MAGNEMITE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mareep",
+        "action": "givemon(SPECIES_MAREEP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Minun",
+        "action": "givemon(SPECIES_MINUN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Morpeko",
+        "action": "givemon(SPECIES_MORPEKO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pachirisu",
+        "action": "givemon(SPECIES_PACHIRISU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pawmi",
+        "action": "givemon(SPECIES_PAWMI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pichu",
+        "action": "givemon(SPECIES_PICHU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pincurchin",
+        "action": "givemon(SPECIES_PINCURCHIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Plusle",
+        "action": "givemon(SPECIES_PLUSLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Raging Bolt",
+        "action": "givemon(SPECIES_RAGING_BOLT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rotom",
+        "action": "givemon(SPECIES_ROTOM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sandy Shocks",
+        "action": "givemon(SPECIES_SANDY_SHOCKS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shinx",
+        "action": "givemon(SPECIES_SHINX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tadbulb",
+        "action": "givemon(SPECIES_TADBULB,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Togedemaru",
+        "action": "givemon(SPECIES_TOGEDEMARU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Toxel",
+        "action": "givemon(SPECIES_TOXEL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tynamo",
+        "action": "givemon(SPECIES_TYNAMO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Voltorb",
+        "action": "givemon(SPECIES_VOLTORB,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Voltorb-Hisui",
+        "action": "givemon(SPECIES_VOLTORB_HISUIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wattrel",
+        "action": "givemon(SPECIES_WATTREL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yamper",
+        "action": "givemon(SPECIES_YAMPER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fairy",
+    "action": [
+      {
+        "name": "Cleffa",
+        "action": "givemon(SPECIES_CLEFFA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Comfey",
+        "action": "givemon(SPECIES_COMFEY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fidough",
+        "action": "givemon(SPECIES_FIDOUGH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Flabebe",
+        "action": "givemon(SPECIES_FLABEBE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Valiant",
+        "action": "givemon(SPECIES_IRON_VALIANT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Milcery",
+        "action": "givemon(SPECIES_MILCERY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Scream Tail",
+        "action": "givemon(SPECIES_SCREAM_TAIL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Snubbull",
+        "action": "givemon(SPECIES_SNUBBULL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spritzee",
+        "action": "givemon(SPECIES_SPRITZEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Swirlix",
+        "action": "givemon(SPECIES_SWIRLIX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tinkatink",
+        "action": "givemon(SPECIES_TINKATINK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Togepi",
+        "action": "givemon(SPECIES_TOGEPI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fighting",
+    "action": [
+      {
+        "name": "Clobbopus",
+        "action": "givemon(SPECIES_CLOBBOPUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Crabrawler",
+        "action": "givemon(SPECIES_CRABRAWLER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Falinks",
+        "action": "givemon(SPECIES_FALINKS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Farfetchd-Galar",
+        "action": "givemon(SPECIES_FARFETCHD_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hawlucha",
+        "action": "givemon(SPECIES_HAWLUCHA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Hands",
+        "action": "givemon(SPECIES_IRON_HANDS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Machop",
+        "action": "givemon(SPECIES_MACHOP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Makuhita",
+        "action": "givemon(SPECIES_MAKUHITA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mankey",
+        "action": "givemon(SPECIES_MANKEY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Meditite",
+        "action": "givemon(SPECIES_MEDITITE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mienfoo",
+        "action": "givemon(SPECIES_MIENFOO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pancham",
+        "action": "givemon(SPECIES_PANCHAM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Passimian",
+        "action": "givemon(SPECIES_PASSIMIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Riolu",
+        "action": "givemon(SPECIES_RIOLU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sawk",
+        "action": "givemon(SPECIES_SAWK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sneasel-Hisui",
+        "action": "givemon(SPECIES_SNEASEL_HISUIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Throh",
+        "action": "givemon(SPECIES_THROH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Timburr",
+        "action": "givemon(SPECIES_TIMBURR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tyrogue",
+        "action": "givemon(SPECIES_TYROGUE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zapdos-Galar",
+        "action": "givemon(SPECIES_ZAPDOS_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Fire",
+    "action": [
+      {
+        "name": "Charcadet",
+        "action": "givemon(SPECIES_CHARCADET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Charmander",
+        "action": "givemon(SPECIES_CHARMANDER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chimchar",
+        "action": "givemon(SPECIES_CHIMCHAR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cyndaquil",
+        "action": "givemon(SPECIES_CYNDAQUIL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Darumaka",
+        "action": "givemon(SPECIES_DARUMAKA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fennekin",
+        "action": "givemon(SPECIES_FENNEKIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fuecoco",
+        "action": "givemon(SPECIES_FUECOCO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gouging Fire",
+        "action": "givemon(SPECIES_GOUGING_FIRE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Growlithe",
+        "action": "givemon(SPECIES_GROWLITHE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Growlithe-Hisui",
+        "action": "givemon(SPECIES_GROWLITHE_HISUIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Heatmor",
+        "action": "givemon(SPECIES_HEATMOR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Moth",
+        "action": "givemon(SPECIES_IRON_MOTH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Litleo",
+        "action": "givemon(SPECIES_LITLEO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Litten",
+        "action": "givemon(SPECIES_LITTEN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Magby",
+        "action": "givemon(SPECIES_MAGBY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Numel",
+        "action": "givemon(SPECIES_NUMEL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Oricorio",
+        "action": "givemon(SPECIES_ORICORIO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pansear",
+        "action": "givemon(SPECIES_PANSEAR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ponyta",
+        "action": "givemon(SPECIES_PONYTA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Scorbunny",
+        "action": "givemon(SPECIES_SCORBUNNY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sizzlipede",
+        "action": "givemon(SPECIES_SIZZLIPEDE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Slugma",
+        "action": "givemon(SPECIES_SLUGMA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tepig",
+        "action": "givemon(SPECIES_TEPIG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Torchic",
+        "action": "givemon(SPECIES_TORCHIC,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Torkoal",
+        "action": "givemon(SPECIES_TORKOAL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Turtonator",
+        "action": "givemon(SPECIES_TURTONATOR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Vulpix",
+        "action": "givemon(SPECIES_VULPIX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Flying",
+    "action": [
+      {
+        "name": "Bombirdier",
+        "action": "givemon(SPECIES_BOMBIRDIER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cramorant",
+        "action": "givemon(SPECIES_CRAMORANT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Flamigo",
+        "action": "givemon(SPECIES_FLAMIGO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Noibat",
+        "action": "givemon(SPECIES_NOIBAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rookidee",
+        "action": "givemon(SPECIES_ROOKIDEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ghost",
+    "action": [
+      {
+        "name": "Corsola-Galar",
+        "action": "givemon(SPECIES_CORSOLA_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dhelmise",
+        "action": "givemon(SPECIES_DHELMISE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Drifloon",
+        "action": "givemon(SPECIES_DRIFLOON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Duskull",
+        "action": "givemon(SPECIES_DUSKULL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Flutter Mane",
+        "action": "givemon(SPECIES_FLUTTER_MANE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gastly",
+        "action": "givemon(SPECIES_GASTLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gimmighoul",
+        "action": "givemon(SPECIES_GIMMIGHOUL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Greavard",
+        "action": "givemon(SPECIES_GREAVARD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Litwick",
+        "action": "givemon(SPECIES_LITWICK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mimikyu",
+        "action": "givemon(SPECIES_MIMIKYU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Misdreavus",
+        "action": "givemon(SPECIES_MISDREAVUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Phantump",
+        "action": "givemon(SPECIES_PHANTUMP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pumpkaboo",
+        "action": "givemon(SPECIES_PUMPKABOO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sandygast",
+        "action": "givemon(SPECIES_SANDYGAST,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shuppet",
+        "action": "givemon(SPECIES_SHUPPET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sinistea",
+        "action": "givemon(SPECIES_SINISTEA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spiritomb",
+        "action": "givemon(SPECIES_SPIRITOMB,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yamask",
+        "action": "givemon(SPECIES_YAMASK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Grass",
+    "action": [
+      {
+        "name": "Applin",
+        "action": "givemon(SPECIES_APPLIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bellsprout",
+        "action": "givemon(SPECIES_BELLSPROUT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bounsweet",
+        "action": "givemon(SPECIES_BOUNSWEET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bramblin",
+        "action": "givemon(SPECIES_BRAMBLIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Brute Bonnet",
+        "action": "givemon(SPECIES_BRUTE_BONNET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Budew",
+        "action": "givemon(SPECIES_BUDEW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bulbasaur",
+        "action": "givemon(SPECIES_BULBASAUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cacnea",
+        "action": "givemon(SPECIES_CACNEA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Capsakid",
+        "action": "givemon(SPECIES_CAPSAKID,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Carnivine",
+        "action": "givemon(SPECIES_CARNIVINE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cherubi",
+        "action": "givemon(SPECIES_CHERUBI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chespin",
+        "action": "givemon(SPECIES_CHESPIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chikorita",
+        "action": "givemon(SPECIES_CHIKORITA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cottonee",
+        "action": "givemon(SPECIES_COTTONEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Exeggcute",
+        "action": "givemon(SPECIES_EXEGGCUTE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ferroseed",
+        "action": "givemon(SPECIES_FERROSEED,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fomantis",
+        "action": "givemon(SPECIES_FOMANTIS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Foongus",
+        "action": "givemon(SPECIES_FOONGUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gossifleur",
+        "action": "givemon(SPECIES_GOSSIFLEUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Grookey",
+        "action": "givemon(SPECIES_GROOKEY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hoppip",
+        "action": "givemon(SPECIES_HOPPIP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Leaves",
+        "action": "givemon(SPECIES_IRON_LEAVES,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Maractus",
+        "action": "givemon(SPECIES_MARACTUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Morelull",
+        "action": "givemon(SPECIES_MORELULL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Oddish",
+        "action": "givemon(SPECIES_ODDISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ogerpon",
+        "action": "givemon(SPECIES_OGERPON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pansage",
+        "action": "givemon(SPECIES_PANSAGE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Petilil",
+        "action": "givemon(SPECIES_PETILIL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Poltchageist",
+        "action": "givemon(SPECIES_POLTCHAGEIST,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rowlet",
+        "action": "givemon(SPECIES_ROWLET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Seedot",
+        "action": "givemon(SPECIES_SEEDOT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shroomish",
+        "action": "givemon(SPECIES_SHROOMISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skiddo",
+        "action": "givemon(SPECIES_SKIDDO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Smoliv",
+        "action": "givemon(SPECIES_SMOLIV,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Snivy",
+        "action": "givemon(SPECIES_SNIVY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Snover",
+        "action": "givemon(SPECIES_SNOVER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sprigatito",
+        "action": "givemon(SPECIES_SPRIGATITO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sunkern",
+        "action": "givemon(SPECIES_SUNKERN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tangela",
+        "action": "givemon(SPECIES_TANGELA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Treecko",
+        "action": "givemon(SPECIES_TREECKO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tropius",
+        "action": "givemon(SPECIES_TROPIUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Turtwig",
+        "action": "givemon(SPECIES_TURTWIG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ground",
+    "action": [
+      {
+        "name": "Baltoy",
+        "action": "givemon(SPECIES_BALTOY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cubone",
+        "action": "givemon(SPECIES_CUBONE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Diglett",
+        "action": "givemon(SPECIES_DIGLETT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Diglett-Alola",
+        "action": "givemon(SPECIES_DIGLETT_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Drilbur",
+        "action": "givemon(SPECIES_DRILBUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gligar",
+        "action": "givemon(SPECIES_GLIGAR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Golett",
+        "action": "givemon(SPECIES_GOLETT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Great Tusk",
+        "action": "givemon(SPECIES_GREAT_TUSK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hippopotas",
+        "action": "givemon(SPECIES_HIPPOPOTAS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Treads",
+        "action": "givemon(SPECIES_IRON_TREADS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mudbray",
+        "action": "givemon(SPECIES_MUDBRAY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Phanpy",
+        "action": "givemon(SPECIES_PHANPY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rhyhorn",
+        "action": "givemon(SPECIES_RHYHORN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sandile",
+        "action": "givemon(SPECIES_SANDILE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sandshrew",
+        "action": "givemon(SPECIES_SANDSHREW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Silicobra",
+        "action": "givemon(SPECIES_SILICOBRA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stunfisk",
+        "action": "givemon(SPECIES_STUNFISK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stunfisk-Galar",
+        "action": "givemon(SPECIES_STUNFISK_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Toedscool",
+        "action": "givemon(SPECIES_TOEDSCOOL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Trapinch",
+        "action": "givemon(SPECIES_TRAPINCH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yamask-Galar",
+        "action": "givemon(SPECIES_YAMASK_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Ice",
+    "action": [
+      {
+        "name": "Bergmite",
+        "action": "givemon(SPECIES_BERGMITE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cetoddle",
+        "action": "givemon(SPECIES_CETODDLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cryogonal",
+        "action": "givemon(SPECIES_CRYOGONAL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cubchoo",
+        "action": "givemon(SPECIES_CUBCHOO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Darumaka-Galar",
+        "action": "givemon(SPECIES_DARUMAKA_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Delibird",
+        "action": "givemon(SPECIES_DELIBIRD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Eiscue",
+        "action": "givemon(SPECIES_EISCUE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Bundle",
+        "action": "givemon(SPECIES_IRON_BUNDLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sandshrew-Alola",
+        "action": "givemon(SPECIES_SANDSHREW_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Smoochum",
+        "action": "givemon(SPECIES_SMOOCHUM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Snom",
+        "action": "givemon(SPECIES_SNOM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Snorunt",
+        "action": "givemon(SPECIES_SNORUNT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spheal",
+        "action": "givemon(SPECIES_SPHEAL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Swinub",
+        "action": "givemon(SPECIES_SWINUB,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Vanillite",
+        "action": "givemon(SPECIES_VANILLITE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Vulpix-Alola",
+        "action": "givemon(SPECIES_VULPIX_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Normal",
+    "action": [
+      {
+        "name": "Aipom",
+        "action": "givemon(SPECIES_AIPOM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Audino",
+        "action": "givemon(SPECIES_AUDINO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Azurill",
+        "action": "givemon(SPECIES_AZURILL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bidoof",
+        "action": "givemon(SPECIES_BIDOOF,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bouffalant",
+        "action": "givemon(SPECIES_BOUFFALANT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Buneary",
+        "action": "givemon(SPECIES_BUNEARY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bunnelby",
+        "action": "givemon(SPECIES_BUNNELBY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Castform",
+        "action": "givemon(SPECIES_CASTFORM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chatot",
+        "action": "givemon(SPECIES_CHATOT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Deerling",
+        "action": "givemon(SPECIES_DEERLING,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ditto",
+        "action": "givemon(SPECIES_DITTO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Doduo",
+        "action": "givemon(SPECIES_DODUO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Drampa",
+        "action": "givemon(SPECIES_DRAMPA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dunsparce",
+        "action": "givemon(SPECIES_DUNSPARCE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Eevee",
+        "action": "givemon(SPECIES_EEVEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Farfetchd",
+        "action": "givemon(SPECIES_FARFETCHD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fletchling",
+        "action": "givemon(SPECIES_FLETCHLING,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Furfrou",
+        "action": "givemon(SPECIES_FURFROU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Girafarig",
+        "action": "givemon(SPECIES_GIRAFARIG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Glameow",
+        "action": "givemon(SPECIES_GLAMEOW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Happiny",
+        "action": "givemon(SPECIES_HAPPINY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hoothoot",
+        "action": "givemon(SPECIES_HOOTHOOT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Igglybuff",
+        "action": "givemon(SPECIES_IGGLYBUFF,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kangaskhan",
+        "action": "givemon(SPECIES_KANGASKHAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kecleon",
+        "action": "givemon(SPECIES_KECLEON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Komala",
+        "action": "givemon(SPECIES_KOMALA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lechonk",
+        "action": "givemon(SPECIES_LECHONK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lickitung",
+        "action": "givemon(SPECIES_LICKITUNG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lillipup",
+        "action": "givemon(SPECIES_LILLIPUP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Meowth",
+        "action": "givemon(SPECIES_MEOWTH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Miltank",
+        "action": "givemon(SPECIES_MILTANK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Minccino",
+        "action": "givemon(SPECIES_MINCCINO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Munchlax",
+        "action": "givemon(SPECIES_MUNCHLAX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Oranguru",
+        "action": "givemon(SPECIES_ORANGURU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Patrat",
+        "action": "givemon(SPECIES_PATRAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pidgey",
+        "action": "givemon(SPECIES_PIDGEY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pidove",
+        "action": "givemon(SPECIES_PIDOVE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pikipek",
+        "action": "givemon(SPECIES_PIKIPEK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Porygon",
+        "action": "givemon(SPECIES_PORYGON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rattata",
+        "action": "givemon(SPECIES_RATTATA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rufflet",
+        "action": "givemon(SPECIES_RUFFLET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sentret",
+        "action": "givemon(SPECIES_SENTRET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skitty",
+        "action": "givemon(SPECIES_SKITTY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skwovet",
+        "action": "givemon(SPECIES_SKWOVET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Slakoth",
+        "action": "givemon(SPECIES_SLAKOTH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Smeargle",
+        "action": "givemon(SPECIES_SMEARGLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spearow",
+        "action": "givemon(SPECIES_SPEAROW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spinda",
+        "action": "givemon(SPECIES_SPINDA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Squawkabilly",
+        "action": "givemon(SPECIES_SQUAWKABILLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stantler",
+        "action": "givemon(SPECIES_STANTLER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Starly",
+        "action": "givemon(SPECIES_STARLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stufful",
+        "action": "givemon(SPECIES_STUFFUL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Swablu",
+        "action": "givemon(SPECIES_SWABLU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Taillow",
+        "action": "givemon(SPECIES_TAILLOW,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tandemaus",
+        "action": "givemon(SPECIES_TANDEMAUS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tauros",
+        "action": "givemon(SPECIES_TAUROS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Teddiursa",
+        "action": "givemon(SPECIES_TEDDIURSA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Whismur",
+        "action": "givemon(SPECIES_WHISMUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wooloo",
+        "action": "givemon(SPECIES_WOOLOO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Yungoos",
+        "action": "givemon(SPECIES_YUNGOOS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zangoose",
+        "action": "givemon(SPECIES_ZANGOOSE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zigzagoon",
+        "action": "givemon(SPECIES_ZIGZAGOON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zorua-Hisui",
+        "action": "givemon(SPECIES_ZORUA_HISUIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Poison",
+    "action": [
+      {
+        "name": "Croagunk",
+        "action": "givemon(SPECIES_CROAGUNK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ekans",
+        "action": "givemon(SPECIES_EKANS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Fezandipiti",
+        "action": "givemon(SPECIES_FEZANDIPITI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Grimer",
+        "action": "givemon(SPECIES_GRIMER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Grimer-Alola",
+        "action": "givemon(SPECIES_GRIMER_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gulpin",
+        "action": "givemon(SPECIES_GULPIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Koffing",
+        "action": "givemon(SPECIES_KOFFING,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mareanie",
+        "action": "givemon(SPECIES_MAREANIE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Munkidori",
+        "action": "givemon(SPECIES_MUNKIDORI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nidoran-F",
+        "action": "givemon(SPECIES_NIDORAN_F,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nidoran-M",
+        "action": "givemon(SPECIES_NIDORAN_M,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Okidogi",
+        "action": "givemon(SPECIES_OKIDOGI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Salandit",
+        "action": "givemon(SPECIES_SALANDIT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Seviper",
+        "action": "givemon(SPECIES_SEVIPER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shroodle",
+        "action": "givemon(SPECIES_SHROODLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skorupi",
+        "action": "givemon(SPECIES_SKORUPI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skrelp",
+        "action": "givemon(SPECIES_SKRELP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stunky",
+        "action": "givemon(SPECIES_STUNKY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Trubbish",
+        "action": "givemon(SPECIES_TRUBBISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wooper-Paldea",
+        "action": "givemon(SPECIES_WOOPER_PALDEAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Zubat",
+        "action": "givemon(SPECIES_ZUBAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Psychic",
+    "action": [
+      {
+        "name": "Abra",
+        "action": "givemon(SPECIES_ABRA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Articuno-Galar",
+        "action": "givemon(SPECIES_ARTICUNO_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chingling",
+        "action": "givemon(SPECIES_CHINGLING,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Drowzee",
+        "action": "givemon(SPECIES_DROWZEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Elgyem",
+        "action": "givemon(SPECIES_ELGYEM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Espurr",
+        "action": "givemon(SPECIES_ESPURR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Flittle",
+        "action": "givemon(SPECIES_FLITTLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Gothita",
+        "action": "givemon(SPECIES_GOTHITA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Hatenna",
+        "action": "givemon(SPECIES_HATENNA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Indeedee",
+        "action": "givemon(SPECIES_INDEEDEE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mime Jr.",
+        "action": "givemon(SPECIES_MIME_JR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Munna",
+        "action": "givemon(SPECIES_MUNNA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Natu",
+        "action": "givemon(SPECIES_NATU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ponyta-Galar",
+        "action": "givemon(SPECIES_PONYTA_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ralts",
+        "action": "givemon(SPECIES_RALTS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sigilyph",
+        "action": "givemon(SPECIES_SIGILYPH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Slowpoke-Galar",
+        "action": "givemon(SPECIES_SLOWPOKE_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Solosis",
+        "action": "givemon(SPECIES_SOLOSIS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Spoink",
+        "action": "givemon(SPECIES_SPOINK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Unown",
+        "action": "givemon(SPECIES_UNOWN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Woobat",
+        "action": "givemon(SPECIES_WOOBAT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wynaut",
+        "action": "givemon(SPECIES_WYNAUT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Rock",
+    "action": [
+      {
+        "name": "Aerodactyl",
+        "action": "givemon(SPECIES_AERODACTYL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Amaura",
+        "action": "givemon(SPECIES_AMAURA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Anorith",
+        "action": "givemon(SPECIES_ANORITH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Archen",
+        "action": "givemon(SPECIES_ARCHEN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Binacle",
+        "action": "givemon(SPECIES_BINACLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bonsly",
+        "action": "givemon(SPECIES_BONSLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Carbink",
+        "action": "givemon(SPECIES_CARBINK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cranidos",
+        "action": "givemon(SPECIES_CRANIDOS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Geodude",
+        "action": "givemon(SPECIES_GEODUDE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Geodude-Alola",
+        "action": "givemon(SPECIES_GEODUDE_ALOLAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Glimmet",
+        "action": "givemon(SPECIES_GLIMMET,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Boulder",
+        "action": "givemon(SPECIES_IRON_BOULDER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Thorns",
+        "action": "givemon(SPECIES_IRON_THORNS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Kabuto",
+        "action": "givemon(SPECIES_KABUTO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Klawf",
+        "action": "givemon(SPECIES_KLAWF,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Larvitar",
+        "action": "givemon(SPECIES_LARVITAR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lileep",
+        "action": "givemon(SPECIES_LILEEP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lunatone",
+        "action": "givemon(SPECIES_LUNATONE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Minior",
+        "action": "givemon(SPECIES_MINIOR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nacli",
+        "action": "givemon(SPECIES_NACLI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Nosepass",
+        "action": "givemon(SPECIES_NOSEPASS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Omanyte",
+        "action": "givemon(SPECIES_OMANYTE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Onix",
+        "action": "givemon(SPECIES_ONIX,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rockruff",
+        "action": "givemon(SPECIES_ROCKRUFF,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Roggenrola",
+        "action": "givemon(SPECIES_ROGGENROLA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Rolycoly",
+        "action": "givemon(SPECIES_ROLYCOLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shieldon",
+        "action": "givemon(SPECIES_SHIELDON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Solrock",
+        "action": "givemon(SPECIES_SOLROCK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Stonjourner",
+        "action": "givemon(SPECIES_STONJOURNER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tyrunt",
+        "action": "givemon(SPECIES_TYRUNT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Steel",
+    "action": [
+      {
+        "name": "Aron",
+        "action": "givemon(SPECIES_ARON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Beldum",
+        "action": "givemon(SPECIES_BELDUM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bronzor",
+        "action": "givemon(SPECIES_BRONZOR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Cufant",
+        "action": "givemon(SPECIES_CUFANT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Duraludon",
+        "action": "givemon(SPECIES_DURALUDON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Honedge",
+        "action": "givemon(SPECIES_HONEDGE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Iron Crown",
+        "action": "givemon(SPECIES_IRON_CROWN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Klefki",
+        "action": "givemon(SPECIES_KLEFKI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Klink",
+        "action": "givemon(SPECIES_KLINK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mawile",
+        "action": "givemon(SPECIES_MAWILE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Meowth-Galar",
+        "action": "givemon(SPECIES_MEOWTH_GALARIAN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Orthworm",
+        "action": "givemon(SPECIES_ORTHWORM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Skarmory",
+        "action": "givemon(SPECIES_SKARMORY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Varoom",
+        "action": "givemon(SPECIES_VAROOM,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  },
+  {
+    "name": "Water",
+    "action": [
+      {
+        "name": "Alomomola",
+        "action": "givemon(SPECIES_ALOMOMOLA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Arctovish",
+        "action": "givemon(SPECIES_ARCTOVISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Arrokuda",
+        "action": "givemon(SPECIES_ARROKUDA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Barboach",
+        "action": "givemon(SPECIES_BARBOACH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Basculin",
+        "action": "givemon(SPECIES_BASCULIN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Bruxish",
+        "action": "givemon(SPECIES_BRUXISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Buizel",
+        "action": "givemon(SPECIES_BUIZEL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Carvanha",
+        "action": "givemon(SPECIES_CARVANHA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chewtle",
+        "action": "givemon(SPECIES_CHEWTLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Chinchou",
+        "action": "givemon(SPECIES_CHINCHOU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Clamperl",
+        "action": "givemon(SPECIES_CLAMPERL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Clauncher",
+        "action": "givemon(SPECIES_CLAUNCHER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Corphish",
+        "action": "givemon(SPECIES_CORPHISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Corsola",
+        "action": "givemon(SPECIES_CORSOLA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dewpider",
+        "action": "givemon(SPECIES_DEWPIDER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dondozo",
+        "action": "givemon(SPECIES_DONDOZO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Dracovish",
+        "action": "givemon(SPECIES_DRACOVISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Ducklett",
+        "action": "givemon(SPECIES_DUCKLETT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Feebas",
+        "action": "givemon(SPECIES_FEEBAS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Finizen",
+        "action": "givemon(SPECIES_FINIZEN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Finneon",
+        "action": "givemon(SPECIES_FINNEON,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Frillish",
+        "action": "givemon(SPECIES_FRILLISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Froakie",
+        "action": "givemon(SPECIES_FROAKIE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Goldeen",
+        "action": "givemon(SPECIES_GOLDEEN,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Horsea",
+        "action": "givemon(SPECIES_HORSEA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Krabby",
+        "action": "givemon(SPECIES_KRABBY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lapras",
+        "action": "givemon(SPECIES_LAPRAS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Lotad",
+        "action": "givemon(SPECIES_LOTAD,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Luvdisc",
+        "action": "givemon(SPECIES_LUVDISC,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Magikarp",
+        "action": "givemon(SPECIES_MAGIKARP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mantyke",
+        "action": "givemon(SPECIES_MANTYKE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Mudkip",
+        "action": "givemon(SPECIES_MUDKIP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Oshawott",
+        "action": "givemon(SPECIES_OSHAWOTT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Panpour",
+        "action": "givemon(SPECIES_PANPOUR,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Piplup",
+        "action": "givemon(SPECIES_PIPLUP,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Poliwag",
+        "action": "givemon(SPECIES_POLIWAG,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Popplio",
+        "action": "givemon(SPECIES_POPPLIO,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Psyduck",
+        "action": "givemon(SPECIES_PSYDUCK,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pyukumuku",
+        "action": "givemon(SPECIES_PYUKUMUKU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Quaxly",
+        "action": "givemon(SPECIES_QUAXLY,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Qwilfish",
+        "action": "givemon(SPECIES_QWILFISH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Relicanth",
+        "action": "givemon(SPECIES_RELICANTH,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Remoraid",
+        "action": "givemon(SPECIES_REMORAID,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Seel",
+        "action": "givemon(SPECIES_SEEL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shellder",
+        "action": "givemon(SPECIES_SHELLDER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Shellos",
+        "action": "givemon(SPECIES_SHELLOS,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Slowpoke",
+        "action": "givemon(SPECIES_SLOWPOKE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Sobble",
+        "action": "givemon(SPECIES_SOBBLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Squirtle",
+        "action": "givemon(SPECIES_SQUIRTLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Staryu",
+        "action": "givemon(SPECIES_STARYU,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tentacool",
+        "action": "givemon(SPECIES_TENTACOOL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tirtouga",
+        "action": "givemon(SPECIES_TIRTOUGA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Totodile",
+        "action": "givemon(SPECIES_TOTODILE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Tympole",
+        "action": "givemon(SPECIES_TYMPOLE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Veluza",
+        "action": "givemon(SPECIES_VELUZA,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wailmer",
+        "action": "givemon(SPECIES_WAILMER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Walking Wake",
+        "action": "givemon(SPECIES_WALKING_WAKE,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wiglett",
+        "action": "givemon(SPECIES_WIGLETT,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wingull",
+        "action": "givemon(SPECIES_WINGULL,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wishiwashi",
+        "action": "givemon(SPECIES_WISHIWASHI,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Wooper",
+        "action": "givemon(SPECIES_WOOPER,1);goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
+      }
+    ]
+  }
+]

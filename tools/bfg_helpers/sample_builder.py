@@ -26,93 +26,6 @@ TEAMS_OUTFILE = "sample_teams.json"
 SETS_GOTO = "goto(Common_EventScript_Sample_Sets_CheckPurchase)"
 TEAMS_GOTO = "goto(Common_EventScript_Sample_Team_CheckPurchase)"
 
-
-def insert_data(data, path, value):
-
-    # Depth not reached
-    if len(path) > 0:
-
-        # Get the first item from the path
-        key = path.pop(0)
-
-        # Key is found
-        has_key = False
-
-        # Loop over the data items
-        for i in range(len(data)):
-
-            # Matching key found
-            if data[i]["name"] == key:
-
-                # Get the type of the action
-                action_type = type(data[i]["action"])
-
-                # Further nesting, and action is list
-                if action_type == list and len(path) > 0:
-                    insert_data(data[i]["action"], path, value)
-
-                # No further nesting, and data is string
-                elif action_type == str and len(path) == 0:
-                    data[i]["action"] = value  # Update the value
-
-                else:  # Data type mismatch
-                    raise TypeError(
-                        f"Data type mismatch: {str(action_type)} at key '{key}'"
-                    )
-
-                has_key = True
-                break  # Break the loop
-
-        # Key is not found
-        if has_key == False:
-
-            # Key type
-            action_type = str
-            if len(path) > 0:
-                action_type = list
-
-            # Insertion index
-            index = -1  # Back of list
-
-            # Loop over all of the keys
-            for i in range(len(data)):
-
-                # Get the action type for the index
-                index_type = type(data[i]["action"])
-
-                # Current action is a list (and the other is not), or earlier in alphabet
-                if (action_type == list and action_type != index_type) or (
-                    action_type == index_type and key < data[i]["name"]
-                ):
-
-                    # Update index
-                    index = i
-                    break
-
-            # Max. Depth not reached
-            if action_type == list:
-
-                template = {"name": key, "action": []}
-
-                # Index found
-                if index >= 0:
-                    data.insert(index, template)
-                else:  # Insert key and continue
-                    data.append(template)
-
-                insert_data(data[index]["action"], path, value)
-
-            else:  # Max. Depth reached
-
-                template = {"name": key, "action": str(value)}
-
-                # Index found
-                if index >= 0:
-                    data.insert(index, template)
-                else:  # Insert key and continue
-                    data.append(template)
-
-
 if __name__ == "__main__":
 
     # Sets dict
@@ -166,7 +79,7 @@ if __name__ == "__main__":
                 givemon_str = f"{';'.join(givemon_list)};{TEAMS_GOTO}"
 
                 # Add the sample team to the table
-                insert_data(sample_teams, names, givemon_str)
+                common.insert_data(sample_teams, names, givemon_str)
 
             # Treat as sample sets
             elif extension == "sets":
@@ -196,7 +109,7 @@ if __name__ == "__main__":
                     # Generate the givemon string (Including sets goto jump)
                     givemon_str = f"{givemon.get_givemon_str(set)};{SETS_GOTO}"
 
-                    insert_data(sample_sets, full_names, givemon_str)
+                    common.insert_data(sample_sets, full_names, givemon_str)
 
             else:  # Unhandled extension
                 raise Exception(
