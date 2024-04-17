@@ -1,7 +1,7 @@
 script Common_EventScript_Pokemon_Shop {
     lock
     faceplayer
-    msgbox(format("Hello there! I'm the POKéMON breeder! What are you looking for today?"))
+    msgbox(format("Hello there! I'm the POKéMON breeder!"))
     goto(Common_EventScript_Pokemon_Shop_CheckMoney)
 }
 
@@ -9,7 +9,7 @@ script Common_EventScript_Pokemon_Shop_CheckMoney {
     showmoneybox(18,0)
     checkmoney(4000)
     if (var(VAR_RESULT) == TRUE){
-        msgbox(format("All Pokemon cost a mere ¥4000. What would you like?"))
+        msgbox(format("All Pokemon cost a mere ¥4000."))
         goto(Common_EventScript_Pokemon_Shop_CheckGoldBottleCap)
     }
     else # Player does not have enough money

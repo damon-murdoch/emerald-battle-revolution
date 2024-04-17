@@ -9,7 +9,7 @@ script Common_EventScript_Legendary_Shop_CheckMoney {
     showmoneybox(18,0)
     checkmoney(12000)
     if (var(VAR_RESULT) == TRUE){        
-        msgbox(format("All Pokemon cost a mere ¥12000. What would you like?"))
+        msgbox(format("All Pokemon cost a mere ¥12000."))
         goto(Common_EventScript_Legendary_Shop_CheckGoldBottleCap)
     }
     else # Player does not have enough money

@@ -126,8 +126,7 @@ Common_EventScript_Legendary_Shop_Text_0:
 	.string "POKéMON shop!$"
 
 Common_EventScript_Legendary_Shop_CheckMoney_Text_0:
-	.string "All Pokemon cost a mere ¥12000. What\n"
-	.string "would you like?$"
+	.string "All Pokemon cost a mere ¥12000.$"
 
 Common_EventScript_Legendary_Shop_CheckMoney_Text_1:
 	.string "Oh, sorry! You need at least ¥12000 to\n"
