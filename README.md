@@ -264,6 +264,16 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.3.3
+
+Implemented auto-generator for Pokemon and Legendary shop multi-select menus, 
+updated Pokemon Shop / Legendary Shop text
+
+### Ver. 1.3.2
+
+Updated move lists, ability selection bonuses, fixed several minor bugs, 
+added new sample teams
+
 ### Ver. 1.3.1
 
 Restructured nature code, fixed mega/gmax/zmove allow flags, implemented basic testing for set generation. Implemented rng seeding 

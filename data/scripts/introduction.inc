@@ -505,7 +505,7 @@ Introduction_EventScript_Startup_Text_2:
 	.string "PokeEmerald-Expanded Project$"
 
 Introduction_EventScript_Startup_Text_3:
-	.string "Current Version: 1.3.1$"
+	.string "Current Version: 1.3.3$"
 
 Introduction_EventScript_Startup_Text_4:
 	.string "For more information, please visit our\n"
