@@ -17,9 +17,9 @@ LEGENDARY_TAGS = [
 ]
 
 LEGENDARY_LEVELS = {
-    "Restricted Legendary": 70,
-    "Sub-Legendary": 50,
-    "Mythical": 50,
+    "Restricted Legendary": 1,
+    "Sub-Legendary": 1,
+    "Mythical": 1,
 }
 
 # Output Directory

@@ -176,27 +176,27 @@ Auto_EventScript_Legendary_Shop_Rock_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Rock_Page1_2:
-	givemon SPECIES_DIANCIE, 50
+	givemon SPECIES_DIANCIE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Rock_Page1_3:
-	givemon SPECIES_NIHILEGO, 50
+	givemon SPECIES_NIHILEGO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Rock_Page1_4:
-	givemon SPECIES_REGIROCK, 50
+	givemon SPECIES_REGIROCK, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Rock_Page1_5:
-	givemon SPECIES_STAKATAKA, 50
+	givemon SPECIES_STAKATAKA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Rock_Page1_6:
-	givemon SPECIES_TERRAKION, 50
+	givemon SPECIES_TERRAKION, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -223,27 +223,27 @@ Auto_EventScript_Legendary_Shop_Steel_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page1_2:
-	givemon SPECIES_CELESTEELA, 50
+	givemon SPECIES_CELESTEELA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page1_3:
-	givemon SPECIES_COBALION, 50
+	givemon SPECIES_COBALION, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page1_4:
-	givemon SPECIES_DIALGA, 70
+	givemon SPECIES_DIALGA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page1_5:
-	givemon SPECIES_JIRACHI, 50
+	givemon SPECIES_JIRACHI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page1_6:
-	givemon SPECIES_MAGEARNA, 50
+	givemon SPECIES_MAGEARNA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -267,12 +267,12 @@ Auto_EventScript_Legendary_Shop_Steel_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page2_2:
-	givemon SPECIES_MELMETAL, 50
+	givemon SPECIES_MELMETAL, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Steel_Page2_3:
-	givemon SPECIES_REGISTEEL, 50
+	givemon SPECIES_REGISTEEL, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -299,27 +299,27 @@ Auto_EventScript_Legendary_Shop_Water_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page1_2:
-	givemon SPECIES_KELDEO, 50
+	givemon SPECIES_KELDEO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page1_3:
-	givemon SPECIES_KYOGRE, 70
+	givemon SPECIES_KYOGRE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page1_4:
-	givemon SPECIES_MANAPHY, 50
+	givemon SPECIES_MANAPHY, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page1_5:
-	givemon SPECIES_PALKIA, 70
+	givemon SPECIES_PALKIA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page1_6:
-	givemon SPECIES_PHIONE, 50
+	givemon SPECIES_PHIONE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -343,12 +343,12 @@ Auto_EventScript_Legendary_Shop_Water_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page2_2:
-	givemon SPECIES_SUICUNE, 50
+	givemon SPECIES_SUICUNE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Water_Page2_3:
-	givemon SPECIES_TAPU_FINI, 50
+	givemon SPECIES_TAPU_FINI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -372,12 +372,12 @@ Auto_EventScript_Legendary_Shop_Ground_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Ground_Page1_2:
-	givemon SPECIES_GROUDON, 70
+	givemon SPECIES_GROUDON, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Ground_Page1_3:
-	givemon SPECIES_LANDORUS, 50
+	givemon SPECIES_LANDORUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -402,17 +402,17 @@ Auto_EventScript_Legendary_Shop_Ice_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Ice_Page1_2:
-	givemon SPECIES_ARTICUNO, 50
+	givemon SPECIES_ARTICUNO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Ice_Page1_3:
-	givemon SPECIES_GLASTRIER, 50
+	givemon SPECIES_GLASTRIER, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Ice_Page1_4:
-	givemon SPECIES_REGICE, 50
+	givemon SPECIES_REGICE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -438,22 +438,22 @@ Auto_EventScript_Legendary_Shop_Normal_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_2:
-	givemon SPECIES_ARCEUS, 50
+	givemon SPECIES_ARCEUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_3:
-	givemon SPECIES_MELOETTA, 50
+	givemon SPECIES_MELOETTA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_4:
-	givemon SPECIES_REGIGIGAS, 50
+	givemon SPECIES_REGIGIGAS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_5:
-	givemon SPECIES_TYPE_NULL, 50
+	givemon SPECIES_TYPE_NULL, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -477,12 +477,12 @@ Auto_EventScript_Legendary_Shop_Poison_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Poison_Page1_2:
-	givemon SPECIES_ETERNATUS, 70
+	givemon SPECIES_ETERNATUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Poison_Page1_3:
-	givemon SPECIES_POIPOLE, 50
+	givemon SPECIES_POIPOLE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -509,27 +509,27 @@ Auto_EventScript_Legendary_Shop_Psychic_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page1_2:
-	givemon SPECIES_AZELF, 50
+	givemon SPECIES_AZELF, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page1_3:
-	givemon SPECIES_CALYREX, 70
+	givemon SPECIES_CALYREX, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page1_4:
-	givemon SPECIES_CELEBI, 50
+	givemon SPECIES_CELEBI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page1_5:
-	givemon SPECIES_CRESSELIA, 50
+	givemon SPECIES_CRESSELIA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page1_6:
-	givemon SPECIES_DEOXYS, 50
+	givemon SPECIES_DEOXYS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -556,27 +556,27 @@ Auto_EventScript_Legendary_Shop_Psychic_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page2_2:
-	givemon SPECIES_HOOPA, 50
+	givemon SPECIES_HOOPA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page2_3:
-	givemon SPECIES_LUGIA, 70
+	givemon SPECIES_LUGIA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page2_4:
-	givemon SPECIES_MESPRIT, 50
+	givemon SPECIES_MESPRIT, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page2_5:
-	givemon SPECIES_MEW, 50
+	givemon SPECIES_MEW, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page2_6:
-	givemon SPECIES_MEWTWO, 70
+	givemon SPECIES_MEWTWO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -602,22 +602,22 @@ Auto_EventScript_Legendary_Shop_Psychic_Page3::
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page3_2:
-	givemon SPECIES_NECROZMA, 70
+	givemon SPECIES_NECROZMA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page3_3:
-	givemon SPECIES_TAPU_LELE, 50
+	givemon SPECIES_TAPU_LELE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page3_4:
-	givemon SPECIES_UXIE, 50
+	givemon SPECIES_UXIE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Psychic_Page3_5:
-	givemon SPECIES_VICTINI, 50
+	givemon SPECIES_VICTINI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -643,22 +643,22 @@ Auto_EventScript_Legendary_Shop_Fighting_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Fighting_Page1_2:
-	givemon SPECIES_KORAIDON, 70
+	givemon SPECIES_KORAIDON, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fighting_Page1_3:
-	givemon SPECIES_KUBFU, 50
+	givemon SPECIES_KUBFU, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fighting_Page1_4:
-	givemon SPECIES_MARSHADOW, 50
+	givemon SPECIES_MARSHADOW, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fighting_Page1_5:
-	givemon SPECIES_ZAMAZENTA, 70
+	givemon SPECIES_ZAMAZENTA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -685,27 +685,27 @@ Auto_EventScript_Legendary_Shop_Fire_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page1_2:
-	givemon SPECIES_BLACEPHALON, 50
+	givemon SPECIES_BLACEPHALON, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page1_3:
-	givemon SPECIES_ENTEI, 50
+	givemon SPECIES_ENTEI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page1_4:
-	givemon SPECIES_HEATRAN, 50
+	givemon SPECIES_HEATRAN, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page1_5:
-	givemon SPECIES_HO_OH, 70
+	givemon SPECIES_HO_OH, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page1_6:
-	givemon SPECIES_MOLTRES, 50
+	givemon SPECIES_MOLTRES, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -728,7 +728,7 @@ Auto_EventScript_Legendary_Shop_Fire_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Fire_Page2_2:
-	givemon SPECIES_VOLCANION, 50
+	givemon SPECIES_VOLCANION, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -751,7 +751,7 @@ Auto_EventScript_Legendary_Shop_Flying_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Flying_Page1_2:
-	givemon SPECIES_TORNADUS, 50
+	givemon SPECIES_TORNADUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -775,12 +775,12 @@ Auto_EventScript_Legendary_Shop_Ghost_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Ghost_Page1_2:
-	givemon SPECIES_GIRATINA, 70
+	givemon SPECIES_GIRATINA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Ghost_Page1_3:
-	givemon SPECIES_SPECTRIER, 50
+	givemon SPECIES_SPECTRIER, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -806,22 +806,22 @@ Auto_EventScript_Legendary_Shop_Grass_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Grass_Page1_2:
-	givemon SPECIES_KARTANA, 50
+	givemon SPECIES_KARTANA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Grass_Page1_3:
-	givemon SPECIES_SHAYMIN, 50
+	givemon SPECIES_SHAYMIN, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Grass_Page1_4:
-	givemon SPECIES_TAPU_BULU, 50
+	givemon SPECIES_TAPU_BULU, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Grass_Page1_5:
-	givemon SPECIES_VIRIZION, 50
+	givemon SPECIES_VIRIZION, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -846,17 +846,17 @@ Auto_EventScript_Legendary_Shop_Bug_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Bug_Page1_2:
-	givemon SPECIES_BUZZWOLE, 50
+	givemon SPECIES_BUZZWOLE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Bug_Page1_3:
-	givemon SPECIES_GENESECT, 50
+	givemon SPECIES_GENESECT, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Bug_Page1_4:
-	givemon SPECIES_PHEROMOSA, 50
+	givemon SPECIES_PHEROMOSA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -883,27 +883,27 @@ Auto_EventScript_Legendary_Shop_Dark_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page1_2:
-	givemon SPECIES_CHI_YU, 50
+	givemon SPECIES_CHI_YU, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page1_3:
-	givemon SPECIES_CHIEN_PAO, 50
+	givemon SPECIES_CHIEN_PAO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page1_4:
-	givemon SPECIES_DARKRAI, 50
+	givemon SPECIES_DARKRAI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page1_5:
-	givemon SPECIES_GUZZLORD, 50
+	givemon SPECIES_GUZZLORD, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page1_6:
-	givemon SPECIES_TING_LU, 50
+	givemon SPECIES_TING_LU, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -928,17 +928,17 @@ Auto_EventScript_Legendary_Shop_Dark_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page2_2:
-	givemon SPECIES_WO_CHIEN, 50
+	givemon SPECIES_WO_CHIEN, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page2_3:
-	givemon SPECIES_YVELTAL, 70
+	givemon SPECIES_YVELTAL, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dark_Page2_4:
-	givemon SPECIES_ZARUDE, 50
+	givemon SPECIES_ZARUDE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -965,27 +965,27 @@ Auto_EventScript_Legendary_Shop_Dragon_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page1_2:
-	givemon SPECIES_KYUREM, 70
+	givemon SPECIES_KYUREM, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page1_3:
-	givemon SPECIES_LATIAS, 50
+	givemon SPECIES_LATIAS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page1_4:
-	givemon SPECIES_LATIOS, 50
+	givemon SPECIES_LATIOS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page1_5:
-	givemon SPECIES_RAYQUAZA, 70
+	givemon SPECIES_RAYQUAZA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page1_6:
-	givemon SPECIES_REGIDRAGO, 50
+	givemon SPECIES_REGIDRAGO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -1010,17 +1010,17 @@ Auto_EventScript_Legendary_Shop_Dragon_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page2_2:
-	givemon SPECIES_RESHIRAM, 70
+	givemon SPECIES_RESHIRAM, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page2_3:
-	givemon SPECIES_ZEKROM, 70
+	givemon SPECIES_ZEKROM, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Dragon_Page2_4:
-	givemon SPECIES_ZYGARDE, 70
+	givemon SPECIES_ZYGARDE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -1047,27 +1047,27 @@ Auto_EventScript_Legendary_Shop_Electric_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page1_2:
-	givemon SPECIES_MIRAIDON, 70
+	givemon SPECIES_MIRAIDON, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page1_3:
-	givemon SPECIES_RAIKOU, 50
+	givemon SPECIES_RAIKOU, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page1_4:
-	givemon SPECIES_REGIELEKI, 50
+	givemon SPECIES_REGIELEKI, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page1_5:
-	givemon SPECIES_TAPU_KOKO, 50
+	givemon SPECIES_TAPU_KOKO, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page1_6:
-	givemon SPECIES_THUNDURUS, 50
+	givemon SPECIES_THUNDURUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -1092,17 +1092,17 @@ Auto_EventScript_Legendary_Shop_Electric_Page2::
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page2_2:
-	givemon SPECIES_XURKITREE, 50
+	givemon SPECIES_XURKITREE, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page2_3:
-	givemon SPECIES_ZAPDOS, 50
+	givemon SPECIES_ZAPDOS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Electric_Page2_4:
-	givemon SPECIES_ZERAORA, 50
+	givemon SPECIES_ZERAORA, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
@@ -1127,17 +1127,17 @@ Auto_EventScript_Legendary_Shop_Fairy_Page1::
 	return
 
 Auto_EventScript_Legendary_Shop_Fairy_Page1_2:
-	givemon SPECIES_ENAMORUS, 50
+	givemon SPECIES_ENAMORUS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fairy_Page1_3:
-	givemon SPECIES_XERNEAS, 70
+	givemon SPECIES_XERNEAS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Fairy_Page1_4:
-	givemon SPECIES_ZACIAN, 70
+	givemon SPECIES_ZACIAN, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
