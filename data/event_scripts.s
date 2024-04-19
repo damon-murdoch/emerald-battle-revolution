@@ -1080,6 +1080,7 @@ EventScript_VsSeekerChargingDone::
 	.include "data/scripts/introduction.inc"
 	.include "data/scripts/currency_converter.inc"
 	.include "data/scripts/frontier_controller.inc"
+	.include "data/scripts/simple_npcs.inc"
 	.include "data/text/frontier_brain.inc"
 	.include "data/text/save.inc"
 	.include "data/text/birch_speech.inc"

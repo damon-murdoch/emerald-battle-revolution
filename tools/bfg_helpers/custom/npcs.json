@@ -1,0 +1,122 @@
+{
+  "Common": {
+    "Placeholder": ["Hello! I'm a placeholder NPC!"]
+  },
+  "BattleFrontier_Underground_B1F": {
+    "BattleDomeGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the closest entrance for the Battle Dome facility.",
+      "Feel free to use your bike!"
+    ],
+    "BattlePikeGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the closest entrance for the Battle Factory and Battle Pike facilities.",
+      "Feel free to use your bike!"
+    ],
+    "BattleTowerGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the closest entrance for the Battle Tower, Ranking Hall and BP Exchange Service facilities.",
+      "Feel free to use your bike!"
+    ],
+    "BattlePalaceGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the closest entrance for the Battle Palace, POKéMON Center and POKéMART facilities.",
+      "Feel free to use your bike!"
+    ],
+    "BattlePyramidGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the best entrance for the Battle Pyramid and Battle Arena facilities.",
+      "Feel free to use your bike!"
+    ],
+    "PokemonCenterGreeter": [
+      "Welcome to the Battle Frontier Underground!",
+      "You can find anything you need for battling here.",
+      "This is the entrance to the Battle Frontier Underground Pokémon Center.",
+      "I hope you enjoy your stay!"
+    ],
+    "LegendaryShop_Visitor1": [
+      "Have you been into the POKéMON Day Care yet?",
+      "You can buy new training-ready POKéMON, or even breed your own!",
+      "It's worth checking out if you are looking to add some new POKéMON to your team!"
+    ],
+    "LegendaryShop_Visitor2": [
+      "Have you played the Open Level Rules at the Battle Frontier?",
+      "You can use legendary POKéMON, even the most powerful ones!",
+      "I've heard Xerneas and Groudon are a really powerful combo!"
+    ],
+    "LegendaryShop_Visitor3": [
+      "I've been losing a lot of battles lately.",
+      "Maybe some stronger POKéMON would help?"
+    ],
+    "ChemistShop_Visitor1": [
+      "The medicine at this shop is perfect for training Pokemon.",
+      "You can use a BOTTLE CAP to max out all of your POKéMON's base stats, and other items such as HP UP, Zinc and Carbos to help your POKéMON reach their full potential!"
+    ],
+    "ChemistShop_Visitor2": [
+      "My WEAVILE had a calm nature, but I used a mint to change it to a jolly nature.",
+      "It's much faster and stronger now!"
+    ],
+    "ChemistShop_Visitor3": [
+      "If you want to make a simple ev spreads, all you need is 7 of two different types of ev training medicine, and one feather for the leftover stat.",
+      "If you want to make more complicated spreads, you might want to use a calculator!",
+      "You might find the following website useful!",
+      "www.dragapult.xyz/ebr-ev-spread-utility"
+    ],
+    "TrainingShop_Visitor1": [
+      "Psst! I'll let you in a little secret!",
+      "If you train your POKéMON with 252 EVs in two stats and then 4 points in another, you are missing out on two stat points!",
+      "If you use a spread with 4 EVs in 3 stats, 244 in one, and then 252 in the other - You'll get an extra two stat points!",
+      "Don't share this with anyone else!"
+    ],
+    "TrainingShop_Visitor2": [
+      "Sometimes, it can be really hard to come up with a good EV spread.",
+      "However, there are programs out there that can help you!",
+      "You might find the following website useful!",
+      "www.dragapult.xyz/coverage-calculator"
+    ],
+    "TrainingShop_Visitor3": [
+      "Did you know? Sometimes, it's beneficial to have lower stats on your Pokemon!",
+      "On special attackers, having a low attack stat can result in opposing Foul Plays doing less damage!",
+      "Or on trick room POKéMON, having a low speed stat will make them faster under trick room!",
+      "Keep these in mind when you are training your POKéMON!"
+    ], 
+    "BerryShop_Visitor1": [
+      "If your POKéMON has a major type weakness holding it back, type resist berries may be the solution!",
+      "These berries will halve the incoming damage of a single super-effective move of a given type.",
+      "This includes double weaknesses!"
+    ],
+    "BerryShop_Visitor2": [
+      "Status berries are great for saving your POKéMON in difficult situations.",
+      "If you get randomly frozen, paralyzed or burnt, a Lum berry will restore the status of your POKéMON once!",
+      "The berries for restoring a specific status are more niche, but are useful in certain situations."
+    ],
+    "BerryShop_Visitor3": [
+      "I love giving one of my POKéMON a Sitrus Berry, so they can recover a quarter of their health each battle!",
+      "Other recovery berries such as Figy, Mago, etc. restore more health, but are trigged at lower health.",
+      "Also, make sure you use the right berry for your POKéMON's nature, or they will be confused by it!"
+    ],
+    "PokemonCenter_Visitor1": [
+      "Have you been into the POKéMON CENTRE yet? There are some interesting people in there!",
+      "You can have your POKéMON's GIGANTAMAX factor changed, or even trade BATTLE POINTS for rare items!"
+    ],
+    "GameCorner_Visitor1": [
+      "Have you been into the GAME CORNER yet?",
+      "It's a fun change of pace from battling.",
+      "Just don't bet more than you can afford to lose!"
+    ],
+    "GameCorner_Visitor2": [
+      "Have you seen these vending machines around?",
+      "You can use them to exchange BATTLE POINTS for money, and vice versa.",
+      "Similarly, you can use the machines in the back left of the GAME CORNER to exchange coins for money!"
+    ],
+    "BattleDomeEntrance_Visitor1": [
+      "If you're running low on cash, use the machine here to convert BATTLE POINTS into money!",
+      "If you need to earn some BP and don't have a team yet, try your luck at the BATTLE FACTORY!"
+    ]
+  }
+}

@@ -282,13 +282,15 @@ $(CHECKTOOLDIRS):
 
 # EBR Prereqs
 
+npc: ; python3 $(BFG_TOOLS)/npc_builder.py
+
 shop: ; python3 $(BFG_TOOLS)/shop_builder.py
 
 sample: ; python3 $(BFG_TOOLS)/sample_builder.py
 
 select: shop sample ; python3 $(BFG_TOOLS)/multi_select.py
 
-ebr-helpers: select
+ebr-helpers: npc select
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)
