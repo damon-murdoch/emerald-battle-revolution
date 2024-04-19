@@ -184,3 +184,78 @@ script BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor3 {
     release
     end
 }
+
+# BerryShop_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("If your POKéMON has a major type weakness holding it back, type resist berries may be the solution!"))
+    msgbox(format("These berries will halve the incoming damage of a single super-effective move of a given type."))
+    msgbox(format("This includes double weaknesses!"))
+    release
+    end
+}
+
+# BerryShop_Visitor2
+script BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("Status berries are great for saving your POKéMON in difficult situations."))
+    msgbox(format("If you get randomly frozen, paralyzed or burnt, a Lum berry will restore the status of your POKéMON once!"))
+    msgbox(format("The berries for restoring a specific status are more niche, but are useful in certain situations."))
+    release
+    end
+}
+
+# BerryShop_Visitor3
+script BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor3 {
+    lock
+    faceplayer
+    msgbox(format("I love giving one of my POKéMON a Sitrus Berry, so they can recover a quarter of their health each battle!"))
+    msgbox(format("Other recovery berries such as Figy, Mago, etc. restore more health, but are trigged at lower health."))
+    msgbox(format("Also, make sure you use the right berry for your POKéMON's nature, or they will be confused by it!"))
+    release
+    end
+}
+
+# PokemonCenter_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_PokemonCenter_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you been into the POKéMON CENTRE yet? There are some interesting people in there!"))
+    msgbox(format("You can have your POKéMON's GIGANTAMAX factor changed, or even trade BATTLE POINTS for rare items!"))
+    release
+    end
+}
+
+# GameCorner_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_GameCorner_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you been into the GAME CORNER yet?"))
+    msgbox(format("It's a fun change of pace from battling."))
+    msgbox(format("Just don't bet more than you can afford to lose!"))
+    release
+    end
+}
+
+# GameCorner_Visitor2
+script BattleFrontier_Underground_B1F_EventScript_GameCorner_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("Have you seen these vending machines around?"))
+    msgbox(format("You can use them to exchange BATTLE POINTS for money, and vice versa."))
+    msgbox(format("Similarly, you can use the machines in the back left of the GAME CORNER to exchange coins for money!"))
+    release
+    end
+}
+
+# BattleDomeEntrance_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("If you're running low on cash, use the machine here to convert BATTLE POINTS into money!"))
+    msgbox(format("If you need to earn some BP and don't have a team yet, try your luck at the BATTLE FACTORY!"))
+    release
+    end
+}
