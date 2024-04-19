@@ -53,4 +53,9 @@
 // it is replaced with the new ball
 #define I_RETURN_OLD_BALL TRUE
 
+// Fishing
+#define I_FISHING_CHAIN             TRUE  // Introduced in XY, hooking the same Pokémon repeatedly will increase the odds of that mon being shiny. NOTE: This implementation is an approximation of the actual feature, as XY have not been throughoutly documented or datamined.
+#define I_FISHING_MINIGAME          GEN_3 // Each generation uses a variation of reeling in Pokémon once they have been hooked.
+#define I_FISHING_PROXIMITY         FALSE // Introduced in XY, fishing away from other people in enclosed areas will increase the chances of a Pokémon being hooked. NOTE: This implementation is an approximation of the actual feature, as XY have not been throughoutly documented or datamined.
+
 #endif // GUARD_CONFIG_ITEM_H
