@@ -424,3 +424,50 @@ script BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1 {
     release
     end
 }
+
+# BattleFrontier_Underground_B2F_PokeCenter_1F Scripts
+
+# Visitor1
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("If you want to try a new style of battling, maybe look at changing the battle ban lists, or even trying a new ruleset!"))
+    msgbox(format("You can even play against the old battle frontier sets if you'd like, too."))
+    msgbox(format("The possibilities are endless!"))
+    release
+    end
+}
+
+# Visitor2
+script BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("How do you feel about dynamax battles?"))
+    msgbox(format("Some people prefer them over normal battles."))
+    msgbox(format("Me? I just like the cool Gigantamax formes!"))
+    release
+    end
+}
+
+# BattleFrontier_Underground_B2F_PokeCenter_2F Scripts
+
+# Visitor1
+script BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you ever played in a tournament before?"))
+    msgbox(format("I've heard they hold them in a place far away from here."))
+    msgbox(format("You can even qualify for the world championships!"))
+    release
+    end
+}
+
+# Visitor2
+script BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("I've won lots of games at the Battle Frontier, but I'm not sure I'm ready for union room battles just yet ..."))
+    msgbox(format("I guess the only way to find out is to try!"))
+    release
+    end
+}

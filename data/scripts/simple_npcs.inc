@@ -381,6 +381,45 @@ BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1::
 	end
 
 
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_0
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_1
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_0
+	msgbox BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_1
+	release
+	end
+
+
 Common_EventScript_Placeholder_Text_0:
 	.string "Hello! I'm a placeholder NPC!$"
 
@@ -830,3 +869,48 @@ BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_0:
 
 BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_1:
 	.string "Which one will you be picking up first?$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_0:
+	.string "If you want to try a new style of\n"
+	.string "battling, maybe look at changing the\l"
+	.string "battle ban lists, or even trying a new\l"
+	.string "ruleset!$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_1:
+	.string "You can even play against the old\n"
+	.string "battle frontier sets if you'd like, too.$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor1_Text_2:
+	.string "The possibilities are endless!$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_0:
+	.string "How do you feel about dynamax battles?$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_1:
+	.string "Some people prefer them over normal\n"
+	.string "battles.$"
+
+BattleFrontier_Underground_B2F_PokeCenter_1F_EventScript_Visitor2_Text_2:
+	.string "Me? I just like the cool Gigantamax\n"
+	.string "formes!$"
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_0:
+	.string "Have you ever played in a tournament\n"
+	.string "before?$"
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_1:
+	.string "I've heard they hold them in a place far\n"
+	.string "away from here.$"
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor1_Text_2:
+	.string "You can even qualify for the world\n"
+	.string "championships!$"
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_0:
+	.string "I've won lots of games at the Battle\n"
+	.string "Frontier, but I'm not sure I'm ready for\l"
+	.string "union room battles just yet ...$"
+
+BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_1:
+	.string "I guess the only way to find out is to\n"
+	.string "try!$"
