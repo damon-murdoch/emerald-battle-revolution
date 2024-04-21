@@ -2,63 +2,8 @@ raw `
 BattleFrontier_Underground_B1F_MapScripts::
 	.byte 0
 `
-## Greeters ##
 
-script BattleFrontier_Underground_B1F_EventScript_BattleDomeGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("You can find anything you need for battling here."))
-    msgbox(format("This is the closest entrance for the Battle Dome facility."))
-    msgbox(format("Feel free to use your bike!"))
-    release
-    end
-}
-
-script BattleFrontier_Underground_B1F_EventScript_BattlePikeGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("You can find anything you need for battling here."))
-    msgbox(format("This is the closest entrance for the Battle Factory and Battle Pike facilities."))
-    msgbox(format("Feel free to use your bike!"))
-    release
-    end
-}
-
-script BattleFrontier_Underground_B1F_EventScript_BattleTowerGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("You can find anything you need for battling here."))
-    msgbox(format("This is the closest entrance for the Battle Tower, Ranking Hall and BP Exchange Service facilities."))
-    msgbox(format("Feel free to use your bike!"))
-    release
-    end
-}
-
-script BattleFrontier_Underground_B1F_EventScript_BattlePalaceGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("You can find anything you need for battling here."))
-    msgbox(format("This is the closest entrance for the Battle Palace, POKéMON Center and POKéMART facilities."))
-    msgbox(format("Feel free to use your bike!"))
-    release
-    end
-}
-
-script BattleFrontier_Underground_B1F_EventScript_BattlePyramidGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("You can find anything you need for battling here."))
-    msgbox(format("This is the best entrance for the Battle Pyramid and Battle Arena facilities."))
-    msgbox(format("Feel free to use your bike!"))
-    release
-    end
-}
-
+# Game Corner Greeter
 script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
     lock
 	faceplayer
@@ -74,17 +19,7 @@ script BattleFrontier_Underground_B1F_EventScript_GameCornerGreeter {
     end
 }
 
-script BattleFrontier_Underground_B1F_EventScript_PokemonCenterGreeter {
-    lock
-	faceplayer
-    msgbox(format("Welcome to the Battle Frontier Underground!"))
-    msgbox(format("This is the entrance to the Battle Frontier Underground Pokémon Center."))
-    msgbox(format("I hope you enjoy your stay!"))
-    release
-    end
-}
-
-## Training Street ##
+# Training Street ##
 script BattleFrontier_Underground_B1F_EventScript_BerryShopIVTrainingClerk {
     lock
 	faceplayer
@@ -127,6 +62,7 @@ script BattleFrontier_Underground_B1F_EventScript_TrainingShopMintClerk {
 	release
 	end
 }
+
 # Training Dojo
 script BattleFrontier_Underground_B1F_EventScript_TrainingShopOtherClerk {
     lock
