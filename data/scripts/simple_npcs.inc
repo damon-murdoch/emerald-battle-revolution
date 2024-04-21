@@ -130,6 +130,30 @@ BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3::
 	end
 
 
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_3
+	msgbox BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_4
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_3
+	msgbox BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_4
+	release
+	end
+
+
 BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor1::
 	lock
 	faceplayer
@@ -146,8 +170,8 @@ BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2::
 	faceplayer
 	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_1
-	msgbox BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3_Text_2
 	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_3
 	release
 	end
 
@@ -227,6 +251,132 @@ BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1::
 	faceplayer
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_0
 	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_3
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_2
+	msgbox BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_3
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_1
 	release
 	end
 
@@ -302,7 +452,8 @@ BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor2_Text_2:
 	.string "really powerful combo!$"
 
 BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor3_Text_0:
-	.string "I've been losing a lot of battles lately.$"
+	.string "I've sure been losing a lot of battles\n"
+	.string "lately ...$"
 
 BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor3_Text_1:
 	.string "Maybe some stronger POKéMON would\n"
@@ -310,7 +461,7 @@ BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor3_Text_1:
 
 BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor1_Text_0:
 	.string "The medicine at this shop is perfect\n"
-	.string "for training Pokemon.$"
+	.string "for training POKéMON.$"
 
 BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor1_Text_1:
 	.string "You can use a BOTTLE CAP to max out all\n"
@@ -339,11 +490,56 @@ BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3_Text_1:
 	.string "calculator!$"
 
 BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3_Text_2:
-	.string "You might find the following website\n"
-	.string "useful!$"
+	.string "You might find this website useful!$"
 
 BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3_Text_3:
 	.string "www.dragapult.xyz/ebr-ev-spread-utility$"
+
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_0:
+	.string "Have you entered a DYNAMAX BATTLE\n"
+	.string "yet?$"
+
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_1:
+	.string "Simply turn on your DYNAMAX BAND from\n"
+	.string "the KEY ITEMS menu, and you can use it\l"
+	.string "in the Frontier!$"
+
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_2:
+	.string "If you don't have a DYNAMAX BAND\n"
+	.string "already, you can buy one from the KEY\l"
+	.string "ITEM shop at the bottom-right side of\l"
+	.string "the mall.$"
+
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_3:
+	.string "Keep in mind, though - You won't be able\n"
+	.string "to use Tera, Mega Evolution or Z-Moves\l"
+	.string "while it is active.$"
+
+BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_4:
+	.string "Make sure to max out your POKéMON's\n"
+	.string "dynamax level using MAX MUSHROOMS\l"
+	.string "first!$"
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_0:
+	.string "Have you heard of Terastralisation?$"
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_1:
+	.string "It allows one of your POKéMON to change\n"
+	.string "into a different type once per game!$"
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_2:
+	.string "If you don't have a Tera Orb already,\n"
+	.string "you can buy one from the KEY ITEM shop\l"
+	.string "at the bottom-right side of the mall.$"
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_3:
+	.string "The type changes depending on the\n"
+	.string "POKéMON's Tera Type - Which can be\l"
+	.string "changed using Tera Shards.$"
+
+BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_4:
+	.string "You can check the Tera Type of your\n"
+	.string "POKéMON from the summary menu!$"
 
 BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor1_Text_0:
 	.string "Psst! I'll let you in a little secret!$"
@@ -372,11 +568,14 @@ BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_1:
 	.string "that can help you!$"
 
 BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_2:
+	.string "You might find the this website useful!$"
+
+BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2_Text_3:
 	.string "www.dragapult.xyz/coverage-calculator$"
 
 BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor3_Text_0:
 	.string "Did you know? Sometimes, it's beneficial\n"
-	.string "to have lower stats on your Pokemon!$"
+	.string "to have lower stats on your POKéMON!$"
 
 BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor3_Text_1:
 	.string "On special attackers, having a low\n"
@@ -420,9 +619,9 @@ BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor2_Text_2:
 	.string "certain situations.$"
 
 BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor3_Text_0:
-	.string "I love giving one of my POKéMON a Sitrus\n"
-	.string "Berry, so they can recover a quarter of\l"
-	.string "their health each battle!$"
+	.string "I like to give one of my POKéMON a\n"
+	.string "Sitrus Berry, so they can recover a\l"
+	.string "quarter of their health each battle!$"
 
 BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor3_Text_1:
 	.string "Other recovery berries such as Figy,\n"
@@ -469,11 +668,165 @@ BattleFrontier_Underground_B1F_EventScript_GameCorner_Visitor2_Text_2:
 	.string "exchange coins for money!$"
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_0:
-	.string "If you're running low on cash, use the\n"
-	.string "machine here to convert BATTLE POINTS\l"
-	.string "into money!$"
+	.string "You see that vending machine over\n"
+	.string "there? You can use that to convert\l"
+	.string "BATTLE POINTS to money!$"
 
 BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_1:
-	.string "If you need to earn some BP and don't\n"
-	.string "have a team yet, try your luck at the\l"
-	.string "BATTLE FACTORY!$"
+	.string "You can't buy anything down here with\n"
+	.string "BP, so you'll need to convert it first.$"
+
+BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1_Text_2:
+	.string "If you don't have a team yet, maybe try\n"
+	.string "your luck at the BATTLE FACTORY?$"
+
+BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1_Text_0:
+	.string "Just downstairs from here is the Battle\n"
+	.string "Spot - The new battle facility\l"
+	.string "currently under construction.$"
+
+BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1_Text_1:
+	.string "You can't battle yet, but you can\n"
+	.string "already buy pre-trained POKéMON and\l"
+	.string "teams - be sure to check it out!$"
+
+BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_0:
+	.string "Gems are great! They boost the power of\n"
+	.string "a POKéMON's move of the same type once\l"
+	.string "by 30%, but are only used if the move\l"
+	.string "connects!$"
+
+BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_1:
+	.string "Think of it like a Z-Move, but you can\n"
+	.string "use multiple per match, and doesn't go\l"
+	.string "through protect.$"
+
+BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1_Text_2:
+	.string "Definitely think about using them!$"
+
+BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_0:
+	.string "Type-Boosting items are great! They\n"
+	.string "boost the power of a POKéMON's move\l"
+	.string "move of the same type every turn by\l"
+	.string "20%!$"
+
+BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_1:
+	.string "They work great for POKéMON who mainly\n"
+	.string "focus on a single attacking type!$"
+
+BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1_Text_2:
+	.string "You should consider using them!$"
+
+BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1_Text_0:
+	.string "There are lots of POKéMON that can use\n"
+	.string "common items, but sometimes a less\l"
+	.string "common item allows a POKéMON to really\l"
+	.string "shine.$"
+
+BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1_Text_1:
+	.string "If you are struggling to pick an item,\n"
+	.string "definitely take a look!$"
+
+BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1_Text_0:
+	.string "Some items are so powerful, they stand\n"
+	.string "in a class of their own - Almost any\l"
+	.string "POKéMON can benefit from them!$"
+
+BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1_Text_1:
+	.string "Whenever I'm looking for an item for a\n"
+	.string "new POKéMON, this is the first place I\l"
+	.string "look.$"
+
+BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_0:
+	.string "Z-Crystals are incredible - There is one\n"
+	.string "for every type, and some POKéMON even\l"
+	.string "have unique Z-Moves!$"
+
+BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_1:
+	.string "Be careful, though - If you use one into\n"
+	.string "an immunity, it'll be wasted - and it only\l"
+	.string "deals 1/4 through protect!$"
+
+BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_2:
+	.string "If you don't have a Z-Ring already, you\n"
+	.string "can buy one from the KEY ITEM shop at\l"
+	.string "the bottom-right side of the mall.$"
+
+BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1_Text_3:
+	.string "Isn't the risk-reward balance\n"
+	.string "thrilling?$"
+
+BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_0:
+	.string "Mega evolution POKéMON are incredibly\n"
+	.string "strong - But you can only use one per\l"
+	.string "battle!$"
+
+BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_1:
+	.string "Some megas best used with a team built\n"
+	.string "around them, and others work well to\l"
+	.string "support a team.$"
+
+BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_2:
+	.string "If you don't have a Mega Stone already,\n"
+	.string "you can buy one from the KEY ITEM shop\l"
+	.string "at the bottom-right side of the mall.$"
+
+BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_3:
+	.string "Hmmm ... Which one do I pick this time?$"
+
+BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_0:
+	.string "I always sit down here to rest after a\n"
+	.string "long streak of battles - It really helps\l"
+	.string "me relax.$"
+
+BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_1:
+	.string "Make sure you don't push yourself too\n"
+	.string "hard!$"
+
+BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_0:
+	.string "Wow, they have the complete set of TMs\n"
+	.string "and HMs here!$"
+
+BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_1:
+	.string "I found a few while exploring, but I'll\n"
+	.string "have to buy the rest when I need them.$"
+
+BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_2:
+	.string "Just remember, you won't be able to pick\n"
+	.string "them up if you find them later!$"
+
+BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1_Text_0:
+	.string "I just finished training up my\n"
+	.string "WHIMSICOTT - And it's only Level 1!$"
+
+BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1_Text_1:
+	.string "Any level-up moves it needed, I could\n"
+	.string "teach them to it right here!$"
+
+BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1_Text_0:
+	.string "I just taught my INCINEROAR FAKE OUT -\n"
+	.string "a move it can normally only learn\l"
+	.string "through breeding!$"
+
+BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1_Text_1:
+	.string "I'll definitely have to come back here\n"
+	.string "with my RILLABOOM later!$"
+
+BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_0:
+	.string "Did you know? You can swap a POKéMON's\n"
+	.string "POKéBALL by simply using the ball you\l"
+	.string "want on them from your bag!$"
+
+BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_1:
+	.string "You'll even get back the ball it was\n"
+	.string "originally captured in, too.$"
+
+BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1_Text_2:
+	.string "Try it out for yourself!$"
+
+BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_0:
+	.string "Wow, this place has so many unique items\n"
+	.string "- and you only need to buy them once!$"
+
+BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1_Text_1:
+	.string "Which one will you be picking up first?$"

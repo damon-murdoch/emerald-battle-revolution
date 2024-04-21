@@ -111,7 +111,7 @@ script BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor2 {
 script BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor3 {
     lock
     faceplayer
-    msgbox(format("I've been losing a lot of battles lately."))
+    msgbox(format("I've sure been losing a lot of battles lately ..."))
     msgbox(format("Maybe some stronger POKéMON would help?"))
     release
     end
@@ -121,7 +121,7 @@ script BattleFrontier_Underground_B1F_EventScript_LegendaryShop_Visitor3 {
 script BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor1 {
     lock
     faceplayer
-    msgbox(format("The medicine at this shop is perfect for training Pokemon."))
+    msgbox(format("The medicine at this shop is perfect for training POKéMON."))
     msgbox(format("You can use a BOTTLE CAP to max out all of your POKéMON's base stats, and other items such as HP UP, Zinc and Carbos to help your POKéMON reach their full potential!"))
     release
     end
@@ -143,8 +143,34 @@ script BattleFrontier_Underground_B1F_EventScript_ChemistShop_Visitor3 {
     faceplayer
     msgbox(format("If you want to make a simple ev spreads, all you need is 7 of two different types of ev training medicine, and one feather for the leftover stat."))
     msgbox(format("If you want to make more complicated spreads, you might want to use a calculator!"))
-    msgbox(format("You might find the following website useful!"))
+    msgbox(format("You might find this website useful!"))
     msgbox(format("www.dragapult.xyz/ebr-ev-spread-utility"))
+    release
+    end
+}
+
+# OtherShop_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you entered a DYNAMAX BATTLE yet?"))
+    msgbox(format("Simply turn on your DYNAMAX BAND from the KEY ITEMS menu, and you can use it in the Frontier!"))
+    msgbox(format("If you don't have a DYNAMAX BAND already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
+    msgbox(format("Keep in mind, though - You won't be able to use Tera, Mega Evolution or Z-Moves while it is active."))
+    msgbox(format("Make sure to max out your POKéMON's dynamax level using MAX MUSHROOMS first!"))
+    release
+    end
+}
+
+# TeraShop_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you heard of Terastralisation?"))
+    msgbox(format("It allows one of your POKéMON to change into a different type once per game!"))
+    msgbox(format("If you don't have a Tera Orb already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
+    msgbox(format("The type changes depending on the POKéMON's Tera Type - Which can be changed using Tera Shards."))
+    msgbox(format("You can check the Tera Type of your POKéMON from the summary menu!"))
     release
     end
 }
@@ -167,7 +193,7 @@ script BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2 {
     faceplayer
     msgbox(format("Sometimes, it can be really hard to come up with a good EV spread."))
     msgbox(format("However, there are programs out there that can help you!"))
-    msgbox(format("You might find the following website useful!"))
+    msgbox(format("You might find the this website useful!"))
     msgbox(format("www.dragapult.xyz/coverage-calculator"))
     release
     end
@@ -177,7 +203,7 @@ script BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor2 {
 script BattleFrontier_Underground_B1F_EventScript_TrainingShop_Visitor3 {
     lock
     faceplayer
-    msgbox(format("Did you know? Sometimes, it's beneficial to have lower stats on your Pokemon!"))
+    msgbox(format("Did you know? Sometimes, it's beneficial to have lower stats on your POKéMON!"))
     msgbox(format("On special attackers, having a low attack stat can result in opposing Foul Plays doing less damage!"))
     msgbox(format("Or on trick room POKéMON, having a low speed stat will make them faster under trick room!"))
     msgbox(format("Keep these in mind when you are training your POKéMON!"))
@@ -211,7 +237,7 @@ script BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor2 {
 script BattleFrontier_Underground_B1F_EventScript_BerryShop_Visitor3 {
     lock
     faceplayer
-    msgbox(format("I love giving one of my POKéMON a Sitrus Berry, so they can recover a quarter of their health each battle!"))
+    msgbox(format("I like to give one of my POKéMON a Sitrus Berry, so they can recover a quarter of their health each battle!"))
     msgbox(format("Other recovery berries such as Figy, Mago, etc. restore more health, but are trigged at lower health."))
     msgbox(format("Also, make sure you use the right berry for your POKéMON's nature, or they will be confused by it!"))
     release
@@ -254,8 +280,147 @@ script BattleFrontier_Underground_B1F_EventScript_GameCorner_Visitor2 {
 script BattleFrontier_Underground_B1F_EventScript_BattleDomeEntrance_Visitor1 {
     lock
     faceplayer
-    msgbox(format("If you're running low on cash, use the machine here to convert BATTLE POINTS into money!"))
-    msgbox(format("If you need to earn some BP and don't have a team yet, try your luck at the BATTLE FACTORY!"))
+    msgbox(format("You see that vending machine over there? You can use that to convert BATTLE POINTS to money!"))
+    msgbox(format("You can't buy anything down here with BP, so you'll need to convert it first."))
+    msgbox(format("If you don't have a team yet, maybe try your luck at the BATTLE FACTORY?"))
+    release
+    end
+}
+
+# BattleSpotEntrance_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_BattleSpotEntrance_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Just downstairs from here is the Battle Spot - The new battle facility currently under construction."))
+    msgbox(format("You can't battle yet, but you can already buy pre-trained POKéMON and teams - be sure to check it out!"))
+    release
+    end
+}
+
+# GemShop_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_GemShop_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Gems are great! They boost the power of a POKéMON's move of the same type once by 30%, but are only used if the move connects!"))
+    msgbox(format("Think of it like a Z-Move, but you can use multiple per match, and doesn't go through protect."))
+    msgbox(format("Definitely think about using them!"))
+    release
+    end
+}
+
+# TypeItem_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_TypeItem_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Type-Boosting items are  great! They boost the power of a POKéMON's move move of the same type every turn by 20%!"))
+    msgbox(format("They work great for POKéMON who mainly focus on a single attacking type!"))
+    msgbox(format("You should consider using them!"))
+    release
+    end
+}
+
+# UncommonItem_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_UncommonItem_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("There are lots of POKéMON that can use common items, but sometimes a less common item allows a POKéMON to really shine."))
+    msgbox(format("If you are struggling to pick an item, definitely take a look!"))
+    release
+    end
+}
+
+# CommonItem_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_CommonItem_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Some items are so powerful, they stand in a class of their own - Almost any POKéMON can benefit from them!"))
+    msgbox(format("Whenever I'm looking for an item for a new POKéMON, this is the first place I look."))
+    release
+    end
+}
+
+# ZCrystal_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_ZCrystal_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Z-Crystals are incredible - There is one for every type, and some POKéMON even have unique Z-Moves!"))
+    msgbox(format("Be careful, though - If you use one into an immunity, it'll be wasted - and it only deals 1/4 through protect!"))
+    msgbox(format("If you don't have a Z-Ring already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
+    msgbox(format("Isn't the risk-reward balance thrilling?"))
+    release
+    end
+}
+
+# MegaStone_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Mega evolution POKéMON are incredibly strong - But you can only use one per battle!"))
+    msgbox(format("Some megas best used with a team built around them, and others work well to support a team."))
+    msgbox(format("If you don't have a Mega Stone already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
+    msgbox(format("Hmmm ... Which one do I pick this time?"))
+    release
+    end
+}
+
+# RestArea_Visitor2
+script BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("I always sit down here to rest after a long streak of battles - It really helps me relax."))
+    msgbox(format("Make sure you don't push yourself too hard!"))
+    release
+    end
+}
+
+# TMHMShop_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Wow, they have the complete set of TMs and HMs here!"))
+    msgbox(format("I found a few while exploring, but I'll have to buy the rest when I need them."))
+    msgbox(format("Just remember, you won't be able to pick them up if you find them later!"))
+    release
+    end
+}
+
+# MoveRelearner_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_MoveRelearner_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("I just finished training up my WHIMSICOTT - And it's only Level 1!"))
+    msgbox(format("Any level-up moves it needed, I could teach them to it right here!"))
+    release
+    end
+}
+
+# MoveTutor_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_MoveTutor_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("I just taught my INCINEROAR FAKE OUT - a move it can normally only learn through breeding!"))
+    msgbox(format("I'll definitely have to come back here with my RILLABOOM later!"))
+    release
+    end
+}
+
+# PokeBall_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_PokeBall_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Did you know? You can swap a POKéMON's POKéBALL by simply using the ball you want on them from your bag!"))
+    msgbox(format("You'll even get back the ball it was originally captured in, too."))
+    msgbox(format("Try it out for yourself!"))
+    release
+    end
+}
+
+# NewKeyItem_Visitor1
+script BattleFrontier_Underground_B1F_EventScript_NewKeyItem_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Wow, this place has so many unique items - and you only need to buy them once!"))
+    msgbox(format("Which one will you be picking up first?"))
     release
     end
 }
