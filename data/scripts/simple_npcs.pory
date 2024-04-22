@@ -471,3 +471,63 @@ script BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2 {
     release
     end
 }
+
+# BattleFrontier_Underground_B2F_BattleSpot_1F Scripts
+
+# Placeholder1
+script BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1 {
+    lock
+    faceplayer
+    msgbox(format("Welcome to the Battle Spot!"))
+    msgbox(format("This is the door for the rating battles facility."))
+    msgbox(format("Start from the 1500s, and rise to the top of the 2000s!"))
+    msgbox(format("At the moment, this facility is closed for development."))
+    msgbox(format("Please come back soon!"))
+    release
+    end
+}
+
+# Placeholder2
+script BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2 {
+    lock
+    faceplayer
+    msgbox(format("Welcome to the Battle Spot!"))
+    msgbox(format("This is the door for the ranked battles facility."))
+    msgbox(format("Rise through the ranks to the top of the Master Ball Tier!"))
+    msgbox(format("At the moment, this facility is closed for development."))
+    msgbox(format("Please come back soon!"))
+    release
+    end
+}
+
+# Visitor1
+script BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1 {
+    lock
+    faceplayer
+    msgbox(format("Have you had a look at the sample teams shop yet?"))
+    msgbox(format("It's a great way to get started if you aren't sure what to use!"))
+    msgbox(format("I hope they add some single battle teams soon, though."))
+    release
+    end
+}
+
+# Visitor2
+script BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2 {
+    lock
+    faceplayer
+    msgbox(format("The sample sets shop is really useful if you want to try some new Pokemon, but aren't sure how to train them."))
+    msgbox(format("It's a great way to save time when experimenting or building a new team!"))
+    release
+    end
+}
+
+# Visitor3
+script BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3 {
+    lock
+    faceplayer
+    msgbox(format("From what I've heard, battles in this facility will be filled with challenging opponents!"))
+    msgbox(format("Progress will be based on your win-loss rating rather than relying on win streaks only."))
+    msgbox(format("I'm so excited for it to open!"))
+    release
+    end
+}

@@ -420,6 +420,59 @@ BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2::
 	end
 
 
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_1
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_2
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_3
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_4
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2_Text_1
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_3
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_4
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_1
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_2
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2_Text_1
+	release
+	end
+
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3::
+	lock
+	faceplayer
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_0
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_1
+	msgbox BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_2
+	release
+	end
+
+
 Common_EventScript_Placeholder_Text_0:
 	.string "Hello! I'm a placeholder NPC!$"
 
@@ -914,3 +967,63 @@ BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_0:
 BattleFrontier_Underground_B2F_PokeCenter_2F_EventScript_Visitor2_Text_1:
 	.string "I guess the only way to find out is to\n"
 	.string "try!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_0:
+	.string "Welcome to the Battle Spot!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_1:
+	.string "This is the door for the rating battles\n"
+	.string "facility.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_2:
+	.string "Start from the 1500s, and rise to the\n"
+	.string "top of the 2000s!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_3:
+	.string "At the moment, this facility is closed\n"
+	.string "for development.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder1_Text_4:
+	.string "Please come back soon!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2_Text_0:
+	.string "This is the door for the ranked battles\n"
+	.string "facility.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Placeholder2_Text_1:
+	.string "Rise through the ranks to the top of\n"
+	.string "the Master Ball Tier!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_0:
+	.string "Have you had a look at the sample teams\n"
+	.string "shop yet?$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_1:
+	.string "It's a great way to get started if you\n"
+	.string "aren't sure what to use!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor1_Text_2:
+	.string "I hope they add some single battle\n"
+	.string "teams soon, though.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2_Text_0:
+	.string "The sample sets shop is really useful if\n"
+	.string "you want to try some new Pokemon, but\l"
+	.string "aren't sure how to train them.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor2_Text_1:
+	.string "It's a great way to save time when\n"
+	.string "experimenting or building a new team!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_0:
+	.string "From what I've heard, battles in this\n"
+	.string "facility will be filled with challenging\l"
+	.string "opponents!$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_1:
+	.string "Progress will be based on your win-loss\n"
+	.string "rating rather than relying on win\l"
+	.string "streaks only.$"
+
+BattleFrontier_Underground_B2F_BattleSpot_1F_EventScript_Visitor3_Text_2:
+	.string "I'm so excited for it to open!$"
