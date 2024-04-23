@@ -1,7 +1,11 @@
-.trainerClass = TRAINER_CLASS_PKMN_TRAINER_1
-.encounterMusic_gender = TRAINER_ENCOUNTER_MUSIC_MALE
-.trainerPic = TRAINER_PIC_BRENDAN
-.trainerName = Damon
+# Frontier Trainer Data
+.facilityClass = FACILITY_CLASS_BRENDAN
+.trainerName = _("DAMON")
+.speechBefore = {EC_WORD_I_AM, EC_WORD_NEVER, EC_WORD_GOING, EC_WORD_TO, EC_WORD_LOSE, EC_WORD_EXCL}
+.speechWin = {EC_WORD_I_AM, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_I, EC_WORD_QUES, EC_EMPTY_WORD}
+.speechLose = {EC_WORD_WHAT, EC_WORD_QUES, EC_EMPTY_WORD, EC_WORD_BUT, EC_WORD_HOW, EC_WORD_QUES}
+
+# Battle Spot Trainer Data
 .tier = TIER_MASTER_BALL
 .rating = 1843
 
