@@ -288,9 +288,11 @@ shop: ; python3 $(BFG_TOOLS)/shop_builder.py
 
 sample: ; python3 $(BFG_TOOLS)/sample_builder.py
 
+battle_spot: ; python3 $(BFG_TOOLS)/battle_spot.py
+
 select: shop sample ; python3 $(BFG_TOOLS)/multi_select.py
 
-ebr-helpers: npc select
+ebr-helpers: npc select battle_spot
 
 rom: $(ROM)
 ifeq ($(COMPARE),1)

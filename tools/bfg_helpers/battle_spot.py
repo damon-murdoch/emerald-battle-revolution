@@ -1,6 +1,3 @@
-# Showdown Data
-import src.showdown as showdown
-
 # Showdown Format Parser
 import src.parser as parser
 
@@ -9,9 +6,7 @@ import src.common as common
 
 # Built-in libs
 import json
-import math
 import os
-import re
 
 # Headers to be added to the
 # battle spot trainer object,
