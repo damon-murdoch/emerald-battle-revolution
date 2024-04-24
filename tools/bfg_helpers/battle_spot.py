@@ -8,6 +8,7 @@ import src.parser as parser
 import src.common as common
 
 # Built-in libs
+import json
 import math
 import os
 import re
@@ -39,6 +40,155 @@ OUTPUT_TRAINER_MONS = os.path.join(OUTPUT_DIR,"battle_spot_trainer_mons.h")
 
 ORDERED_FIELDS = ["hp", "atk", "def", "spe", "spa", "spd"]
 
+def get_set_hash(set: object):
+    return hash(json.dumps(set))
+
+def get_mon_data(mon_const: str, set: object): 
+
+    # General / other fields
+    other = set["other"]
+
+    # Mon data array
+    mon_data = [
+        f"[{mon_const}] = " + "{"
+    ]
+
+    # Species
+    mon_data.append(
+        f"    .species = {common.get_species_constant(set['species'])},"
+    )
+
+    # Moves (Open)
+    mon_data.append(
+        "    .moves = {"
+    )
+
+    for move in set['moves']:
+        mon_data.append(
+            f"        MOVE_{common.get_constant(move)},"
+        )
+
+    # Moves (Close)
+    mon_data.append(
+        "    },"
+    )
+
+    # Held Item
+    if "item" in set:
+        mon_data.append(
+            f"    .heldItem = ITEM_{common.get_constant(set['item'])},"
+        )
+
+    # IVs
+    if "ivs" in set:
+        ivs = []
+
+        for field in ORDERED_FIELDS:
+            stat = 31
+            if field in set["ivs"]:
+                stat = str(set["ivs"][field])
+
+            ivs.append(stat)
+
+        mon_data.append(
+            "    .iv = TRAINER_PARTY_IVS(" + 
+            ", ".join(ivs) + 
+            "),"
+        )
+
+    # EVs (Open)
+    if "evs" in set:
+        evs = []
+
+        for field in ORDERED_FIELDS:
+            stat = 0
+            if field in set["evs"]:
+                stat = str(set["evs"][field])
+
+            evs.append(stat)
+
+        mon_data.append(
+            "    .ev = TRAINER_PARTY_EVS(" + 
+            ", ".join(evs) + 
+            "),"
+        )
+
+    # Ball
+    if "ball" in other:
+        mon_data.append(
+            f"    .ball = ITEM_{common.get_constant(other['ball'])},"
+        )
+
+    # Friendship
+    friendship = 255
+    if "friendship" in other:
+        friendship = other["friendship"]
+    elif "Frustration" in set["moves"]:
+        friendship = 0 # Max. Frustration Power
+    
+    mon_data.append(
+        f"    .friendship = {friendship},"
+    )
+
+    # Nature
+    if "nature" in set:
+        mon_data.append(
+            f"    .nature = NATURE_{common.get_constant(set['nature'])},"
+        )
+
+    # Gender
+    gender = None
+    if "gender" in set:
+        if set["gender"].lower() == "f": 
+            gender = "GENDER_FEMALE"
+        elif set["gender"].lower() == "m":
+            gender = "GENDER_MALE"
+    
+    if gender:
+        mon_data.append(
+            f"    .gender = {gender},"
+        )
+
+    # Shininess
+    if "shiny" in other:
+        mon_data.append(
+            f"    .isShiny = {other['shiny']},"
+        )
+        
+    # Dynamax Level
+    dynamaxLevel = 10
+    if "dynamax level" in other:
+        dynamaxLevel = other['dynamax level']
+    mon_data.append(
+        f"    .dynamaxLevel = {dynamaxLevel},"
+    )
+
+    # Gigantamax Factor
+    if "gigantamax" in other:
+        mon_data.append(
+            f"    .gigantamaxFactor = {other['gigantamax']},"
+        )
+
+    # Should Dynamax (AI)
+    if "should dynamax" in other:
+        mon_data.append(
+            f"    .shouldDynamax = {other['should dynamax']},"
+        )
+
+    # Should Tera (AI)
+    if "should terastal" in other:
+        mon_data.append(
+            f"    .shouldTerastal = {other['should terastal']},"
+        )
+
+    # Close data structure
+    mon_data.append(
+        "},"
+    )
+
+    # Return mon data
+    return mon_data
+
 if __name__ == '__main__':
 
     output_mons = [
@@ -54,11 +204,18 @@ if __name__ == '__main__':
         "",
     ]
 
+    # Prevent duplicate sets
+    set_hashes = {
+
+    }
+
     mon_data = {}
     mon_const_data = {}
 
     trainer_data = {}
     trainer_const_data = {}
+
+    common_data = {}
 
     # Constant Values
     trainer_ids = {}
@@ -153,7 +310,6 @@ if __name__ == '__main__':
                 if battle_format not in mon_const_data[battle_type]:
                     mon_const_data[battle_type][battle_format] = []
 
-                # Mon IDs (Per Battle Type/Format)
                 if battle_type not in mon_ids:
                     mon_ids[battle_type] = {}
                 if battle_format not in mon_ids[battle_type]:
@@ -162,185 +318,69 @@ if __name__ == '__main__':
                 # Loop over sets (Limit: 4)
                 for set in sets[:4]:
 
-                    # General / other fields
-                    other = set["other"]
+                    # Get the hash for the set
+                    set_hash = get_set_hash(set)
 
-                    # Generate Constants
-                    mon_const = f"BATTLE_SPOT_MON_{battle_type}_{battle_format}_{common.get_constant(set['species'])}".upper()
-                    if mon_const in duplicate_species:
-                        duplicate_species[mon_const] += 1
-                        mon_const = f"{mon_const}_{duplicate_species[mon_const]}"
-                    else: # Not duplicate
-                        duplicate_species[mon_const] = 1
+                    # Set already hashed
+                    if set_hash in set_hashes:
 
-                    # Add the mon constant to the list
-                    mon_const_data[battle_type][battle_format].append(
-                        f"#define {mon_const} {mon_ids[battle_type][battle_format]}"
-                    )
+                        # Get the const from the hash set
+                        mon_const = set_hashes[set_hash]
 
-                    # Add mon constant to the trainer mon list
-                    output_trainer_mons.append(
-                        f"    {mon_const},"
-                    )
-
-                    mon_data[battle_type][battle_format].append(
-                        f"[{mon_const}] = " + "{", 
-                    )
-
-                    # Species
-                    mon_data[battle_type][battle_format].append(
-                        f"    .species = {common.get_species_constant(set['species'])},"
-                    )
-
-                    # Moves (Open)
-                    mon_data[battle_type][battle_format].append(
-                        "    .moves = {"
-                    )
-
-                    for move in set['moves']:
-                        mon_data[battle_type][battle_format].append(
-                            f"        MOVE_{common.get_constant(move)},"
+                        # Add mon constant to the trainer mon list
+                        output_trainer_mons.append(
+                            f"    {mon_const},"
                         )
 
-                    # Moves (Close)
-                    mon_data[battle_type][battle_format].append(
-                        "    },"
-                    )
+                    else: # Not already hashed
 
-                    # Held Item
-                    if "item" in set:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .heldItem = ITEM_{common.get_constant(set['item'])},"
+                        # Generate Constants
+                        mon_const = f"BATTLE_SPOT_MON_{battle_type}_{battle_format}_{common.get_constant(set['species'])}".upper()
+                        if mon_const in duplicate_species:
+                            duplicate_species[mon_const] += 1
+                            mon_const = f"{mon_const}_{duplicate_species[mon_const]}"
+                        else: # Not duplicate
+                            duplicate_species[mon_const] = 1
+
+                        # Add the mon constant to the list
+                        mon_const_data[battle_type][battle_format].append(
+                            f"#define {mon_const} {mon_ids[battle_type][battle_format]}"
                         )
 
-                    # IVs
-                    if "ivs" in set:
-                        ivs = []
-
-                        for field in ORDERED_FIELDS:
-                            stat = 31
-                            if field in set["ivs"]:
-                                stat = str(set["ivs"][field])
-
-                            ivs.append(stat)
-
-                        mon_data[battle_type][battle_format].append(
-                            "    .iv = TRAINER_PARTY_IVS(" + 
-                            ", ".join(ivs) + 
-                            "),"
+                        # Add mon constant to the trainer mon list
+                        output_trainer_mons.append(
+                            f"    {mon_const},"
                         )
 
-                    # EVs (Open)
-                    if "evs" in set:
-                        evs = []
+                        # Add the mon data to the constant
+                        mon_data[battle_type][battle_format] += get_mon_data(mon_const, set)
 
-                        for field in ORDERED_FIELDS:
-                            stat = 0
-                            if field in set["evs"]:
-                                stat = str(set["evs"][field])
+                        # Add the hash, const to the list
+                        set_hashes[set_hash] = mon_const
 
-                            evs.append(stat)
-
-                        mon_data[battle_type][battle_format].append(
-                            "    .ev = TRAINER_PARTY_EVS(" + 
-                            ", ".join(evs) + 
-                            "),"
-                        )
-
-                    # Ball
-                    if "ball" in other:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .ball = ITEM_{common.get_constant(other['ball'])},"
-                        )
-
-                    # Friendship
-                    friendship = 255
-                    if "friendship" in other:
-                        friendship = other["friendship"]
-                    elif "Frustration" in set["moves"]:
-                        friendship = 0 # Max. Frustration Power
-                    
-                    mon_data[battle_type][battle_format].append(
-                        f"    .friendship = {friendship},"
-                    )
-
-                    # Nature
-                    if "nature" in set:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .nature = NATURE_{common.get_constant(set['nature'])},"
-                        )
-
-                    # Gender
-                    gender = None
-                    if "gender" in set:
-                        if set["gender"].lower() == "f": 
-                            gender = "GENDER_FEMALE"
-                        elif set["gender"].lower() == "m":
-                            gender = "GENDER_MALE"
-                    
-                    if gender:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .gender = {gender},"
-                        )
-
-                    # Shininess
-                    if "shiny" in other:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .isShiny = {other['shiny']},"
-                        )
-                        
-                    # Dynamax Level
-                    dynamaxLevel = 10
-                    if "dynamax level" in other:
-                        dynamaxLevel = other['dynamax level']
-                    mon_data[battle_type][battle_format].append(
-                        f"    .dynamaxLevel = {dynamaxLevel},"
-                    )
-
-                    # Gigantamax Factor
-                    if "gigantamax" in other:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .gigantamaxFactor = {other['gigantamax']},"
-                        )
-
-                    # Should Dynamax (AI)
-                    if "should dynamax" in other:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .shouldDynamax = {other['should dynamax']},"
-                        )
-
-                    # Should Tera (AI)
-                    if "should terastal" in other:
-                        mon_data[battle_type][battle_format].append(
-                            f"    .shouldTerastal = {other['should terastal']},"
-                        )
-
-                    # Close data structure
-                    mon_data[battle_type][battle_format].append(
-                        "},"
-                    )
-
-                    # Increment the mon id for the type, format
-                    mon_ids[battle_type][battle_format] += 1
+                        # Increment the mon id for the type, format
+                        mon_ids[battle_type][battle_format] += 1
 
                 # Add closing bracket, newline to mons list
+                output_trainer_mons.append(f"    -1,")
                 output_trainer_mons.append("};")
                 output_trainer_mons.append("")
 
                 # Generate Trainer Data
 
-                # Trainer data battle type / format
+                # Create trainer data pathways
                 if battle_type not in trainer_data:
                     trainer_data[battle_type] = {}
-                if battle_type not in trainer_const_data:
-                    trainer_const_data[battle_type] = {}
-
                 if battle_format not in trainer_data[battle_type]:
                     trainer_data[battle_type][battle_format] = []
+
+                # Create trainer const data pathways
+                if battle_type not in trainer_const_data:
+                    trainer_const_data[battle_type] = {}
                 if battle_format not in trainer_const_data[battle_type]:
                     trainer_const_data[battle_type][battle_format] = []
 
-                # Trainer IDs (Per Battle Type/Format)
+                # Create trainer id defaults
                 if battle_type not in trainer_ids:
                     trainer_ids[battle_type] = {}
                 if battle_format not in trainer_ids[battle_type]:
@@ -381,16 +421,84 @@ if __name__ == '__main__':
 
             # Treat as sample sets
             elif extension == "sets":
-                pass
+                    
+                # Split the names on the under score
+                battle_type, battle_format = no_extension.split("_")[:2]
+
+                # Common Data
+                if battle_type not in common_data:
+                    common_data[battle_type] = {}
+                if battle_format not in common_data[battle_type]:
+                    common_data[battle_type][battle_format] = []
+
+                # Generate Mon Data
+                if battle_type not in mon_data:
+                    mon_data[battle_type] = {}
+                if battle_type not in mon_const_data:
+                    mon_const_data[battle_type] = {}
+
+                if battle_format not in mon_data[battle_type]:
+                    mon_data[battle_type][battle_format] = []
+                if battle_format not in mon_const_data[battle_type]:
+                    mon_const_data[battle_type][battle_format] = []
+
+                if battle_type not in mon_ids:
+                    mon_ids[battle_type] = {}
+                if battle_format not in mon_ids[battle_type]:
+                    mon_ids[battle_type][battle_format] = 0
+
+                # Loop over the sets
+                for set in sets:
+
+                    # Get the hash for the set
+                    set_hash = get_set_hash(set)
+
+                    # Set already hashed
+                    if set_hash in set_hashes:
+
+                        # Get the const from the hash set
+                        mon_const = set_hashes[set_hash]
+
+                        # Add the mon const to the common Pokemon (if not present)
+                        if mon_const not in common_data[battle_type][battle_format]:
+                            common_data[battle_type][battle_format].append(mon_const)
+
+                    else: # Not already hashed
+
+                        # Generate Constants
+                        mon_const = f"BATTLE_SPOT_MON_{battle_type}_{battle_format}_{common.get_constant(set['species'])}".upper()
+                        if mon_const in duplicate_species:
+                            duplicate_species[mon_const] += 1
+                            mon_const = f"{mon_const}_{duplicate_species[mon_const]}"
+                        else: # Not duplicate
+                            duplicate_species[mon_const] = 1
+
+                        # Add the mon constant to the list
+                        mon_const_data[battle_type][battle_format].append(
+                            f"#define {mon_const} {mon_ids[battle_type][battle_format]}"
+                        )
+
+                        # Add the mon const to the common Pokemon list
+                        common_data[battle_type][battle_format].append(mon_const)
+
+                        # Add the mon data to the constant
+                        mon_data[battle_type][battle_format] += get_mon_data(mon_const, set)
+
+                        # Add the hash, const to the list
+                        set_hashes[set_hash] = mon_const
+
+                        # Increment the mon id for the type, format
+                        mon_ids[battle_type][battle_format] += 1
 
             else:  # Unhandled extension
                 raise Exception(
                     f"Unhandled file extension {extension}! Accepted: .sets, .team ..."
                 )
 
-    for battle_type in trainer_const_data:
-        for battle_format in trainer_const_data[battle_type]:
-
+    # Build Mons Data Set Output
+    for battle_type in mon_const_data:
+        for battle_format in mon_const_data[battle_type]:
+            
             # Pokemon
             output_mons.append(f"// {battle_type} - {battle_format}")
             mon_count_const = f"BATTLE_SPOT_MON_{battle_type.upper()}_{battle_format.upper()}_COUNT"
@@ -419,6 +527,27 @@ if __name__ == '__main__':
                 output_mons.append(f"    {line}")
 
             output_mons.append("};")
+            
+    # Build Common Mons Data Set Output
+    for battle_type in common_data:
+        for battle_format in common_data[battle_type]:
+
+            common_const = f"gBattleSpotTrainerMons{battle_type.capitalize()}{battle_format.capitalize()}Common"
+
+            output_trainer_mons.append(f"// {battle_type}/{battle_format} - common")
+            output_trainer_mons.append(f"const u16 {common_const}[] = " + "{")
+
+            for mon in common_data[battle_type][battle_format]:
+                output_trainer_mons.append(f"    {mon},")
+
+            output_trainer_mons.append(f"    -1,")
+
+            output_trainer_mons.append("};")
+            output_trainer_mons.append("")
+
+    # Build Trainers Data Set Output
+    for battle_type in trainer_const_data:
+        for battle_format in trainer_const_data[battle_type]:
 
             # Trainers
             output_trainers.append(f"// {battle_type} - {battle_format}")
