@@ -35,7 +35,9 @@ OUTPUT_MONS = os.path.join(OUTPUT_DIR,"battle_spot_mons.h")
 OUTPUT_TRAINERS = os.path.join(OUTPUT_DIR,"battle_spot_trainers.h")
 
 # Pre-Constructed trainer mons (per user)
-OUTPUT_TRAINER_MONS = os.path.join(OUTPUT_DIR,"attle_spot_trainer_mons.h")
+OUTPUT_TRAINER_MONS = os.path.join(OUTPUT_DIR,"battle_spot_trainer_mons.h")
+
+ORDERED_FIELDS = ["hp", "atk", "def", "spe", "spa", "spd"]
 
 if __name__ == '__main__':
 
@@ -56,7 +58,6 @@ if __name__ == '__main__':
     mon_const_data = {}
 
     trainer_data = {}
-    trainer_mon_data = {}
     trainer_const_data = {}
 
     # Constant Values
@@ -114,11 +115,32 @@ if __name__ == '__main__':
             # Parse the showdown data
             sets = parser.parse_sets(raw)
 
+            mon_count = len(sets)
+
             # Treat as entire team
             if extension == "team":
                     
                 # Split the names on the under score
                 battle_type, battle_format, player_name = no_extension.split("_")[:3]
+
+                # Generate Trainer Constant
+                trainer_const = f"BATTLE_SPOT_TRAINER_{battle_type}_{battle_format}_{player_name}".upper()
+                
+                # Trainer Mon Global Array Name
+                trainer_mon_array = f"gBattleSpotTrainerMons{battle_type.capitalize()}{battle_format.capitalize()}{player_name.capitalize()}"
+
+                if trainer_const in duplicate_trainers:
+                    duplicate_trainers[trainer_const] += 1
+                    trainer_mon_array = f"{trainer_mon_array}_{duplicate_trainers[trainer_const]}"
+                    trainer_const = f"{trainer_const}_{duplicate_trainers[trainer_const]}"
+                else: # Not duplicate
+                    duplicate_trainers[trainer_const] = 1
+
+                # Add array open to trainer mons file
+                output_trainer_mons += [
+                    f"// {battle_type}/{battle_format} - {player_name}",
+                    f"const u16 {trainer_mon_array}[] = " + "{"
+                ]
 
                 # Generate Mon Data
                 if battle_type not in mon_data:
@@ -131,7 +153,7 @@ if __name__ == '__main__':
                 if battle_format not in mon_const_data[battle_type]:
                     mon_const_data[battle_type][battle_format] = []
 
-                # Trainer IDs (Per Battle Type/Format)
+                # Mon IDs (Per Battle Type/Format)
                 if battle_type not in mon_ids:
                     mon_ids[battle_type] = {}
                 if battle_format not in mon_ids[battle_type]:
@@ -139,21 +161,26 @@ if __name__ == '__main__':
 
                 # Loop over sets (Limit: 4)
                 for set in sets[:4]:
-                    mon_const = f"BATTLE_SPOT_MON_{battle_type.upper()}_{battle_format.upper()}_{common.get_constant(set['species'])}"
 
-                    # Duplicate constant
+                    # General / other fields
+                    other = set["other"]
+
+                    # Generate Constants
+                    mon_const = f"BATTLE_SPOT_MON_{battle_type}_{battle_format}_{common.get_constant(set['species'])}".upper()
                     if mon_const in duplicate_species:
-                        # Add number to the constant
                         duplicate_species[mon_const] += 1
                         mon_const = f"{mon_const}_{duplicate_species[mon_const]}"
                     else: # Not duplicate
-                        # Add to the duplicate table
                         duplicate_species[mon_const] = 1
 
-                    
-                    # Add the trainer constant to the list
+                    # Add the mon constant to the list
                     mon_const_data[battle_type][battle_format].append(
                         f"#define {mon_const} {mon_ids[battle_type][battle_format]}"
+                    )
+
+                    # Add mon constant to the trainer mon list
+                    output_trainer_mons.append(
+                        f"    {mon_const},"
                     )
 
                     mon_data[battle_type][battle_format].append(
@@ -181,60 +208,124 @@ if __name__ == '__main__':
                     )
 
                     # Held Item
-                    mon_data[battle_type][battle_format].append(
-                        f"    .heldItem = ITEM_{common.get_constant(set['item'])},"
-                    )
+                    if "item" in set:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .heldItem = ITEM_{common.get_constant(set['item'])},"
+                        )
 
                     # IVs
-                    ivs = []
+                    if "ivs" in set:
+                        ivs = []
 
-                    for field in ['hp','atk','def','spa','spd','spe']:
-                        stat = 31
-                        if field in set["ivs"]:
-                            stat = str(set["ivs"][field])
+                        for field in ORDERED_FIELDS:
+                            stat = 31
+                            if field in set["ivs"]:
+                                stat = str(set["ivs"][field])
 
-                        ivs.append(stat)
+                            ivs.append(stat)
 
-                    mon_data[battle_type][battle_format].append(
-                        "    .iv = TRAINER_PARTY_IVS(" + 
-                        ", ".join(ivs) + 
-                        "),"
-                    )
+                        mon_data[battle_type][battle_format].append(
+                            "    .iv = TRAINER_PARTY_IVS(" + 
+                            ", ".join(ivs) + 
+                            "),"
+                        )
 
                     # EVs (Open)
-                    evs = []
+                    if "evs" in set:
+                        evs = []
 
-                    for field in ['hp','atk','def','spa','spd','spe']:
-                        stat = 0
-                        if field in set["evs"]:
-                            stat = str(set["evs"][field])
+                        for field in ORDERED_FIELDS:
+                            stat = 0
+                            if field in set["evs"]:
+                                stat = str(set["evs"][field])
 
-                        evs.append(stat)
+                            evs.append(stat)
 
+                        mon_data[battle_type][battle_format].append(
+                            "    .ev = TRAINER_PARTY_EVS(" + 
+                            ", ".join(evs) + 
+                            "),"
+                        )
+
+                    # Ball
+                    if "ball" in other:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .ball = ITEM_{common.get_constant(other['ball'])},"
+                        )
+
+                    # Friendship
+                    friendship = 255
+                    if "friendship" in other:
+                        friendship = other["friendship"]
+                    elif "Frustration" in set["moves"]:
+                        friendship = 0 # Max. Frustration Power
+                    
                     mon_data[battle_type][battle_format].append(
-                        "    .ev = TRAINER_PARTY_EVS(" + 
-                        ", ".join(evs) + 
-                        "),"
+                        f"    .friendship = {friendship},"
                     )
 
                     # Nature
+                    if "nature" in set:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .nature = NATURE_{common.get_constant(set['nature'])},"
+                        )
+
+                    # Gender
+                    gender = None
+                    if "gender" in set:
+                        if set["gender"].lower() == "f": 
+                            gender = "GENDER_FEMALE"
+                        elif set["gender"].lower() == "m":
+                            gender = "GENDER_MALE"
+                    
+                    if gender:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .gender = {gender},"
+                        )
+
+                    # Shininess
+                    if "shiny" in other:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .isShiny = {other['shiny']},"
+                        )
+                        
+                    # Dynamax Level
+                    dynamaxLevel = 10
+                    if "dynamax level" in other:
+                        dynamaxLevel = other['dynamax level']
                     mon_data[battle_type][battle_format].append(
-                        f"    .nature = NATURE_{common.get_constant(set['nature'])}"
+                        f"    .dynamaxLevel = {dynamaxLevel},"
                     )
 
+                    # Gigantamax Factor
+                    if "gigantamax" in other:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .gigantamaxFactor = {other['gigantamax']},"
+                        )
+
+                    # Should Dynamax (AI)
+                    if "should dynamax" in other:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .shouldDynamax = {other['should dynamax']},"
+                        )
+
+                    # Should Tera (AI)
+                    if "should terastal" in other:
+                        mon_data[battle_type][battle_format].append(
+                            f"    .shouldTerastal = {other['should terastal']},"
+                        )
+
+                    # Close data structure
                     mon_data[battle_type][battle_format].append(
                         "},"
                     )
 
-                    # Increment the trainer id for the type, format
+                    # Increment the mon id for the type, format
                     mon_ids[battle_type][battle_format] += 1
 
-
-                # Generate Trainer Mon Data
-                if battle_type not in trainer_mon_data:
-                    trainer_mon_data[battle_type] = {}
-                if battle_format not in trainer_mon_data[battle_type]:
-                    trainer_mon_data[battle_type][battle_format] = 0
+                # Add closing bracket, newline to mons list
+                output_trainer_mons.append("};")
+                output_trainer_mons.append("")
 
                 # Generate Trainer Data
 
@@ -255,17 +346,6 @@ if __name__ == '__main__':
                 if battle_format not in trainer_ids[battle_type]:
                     trainer_ids[battle_type][battle_format] = 0
 
-                trainer_const = f"BATTLE_SPOT_TRAINER_{battle_type}_{battle_format}_{player_name}".upper()
-
-                # Duplicate constant
-                if trainer_const in duplicate_trainers:
-                    # Add number to the constant
-                    duplicate_trainers[trainer_const] += 1
-                    trainer_const = f"{trainer_const}_{duplicate_trainers[trainer_const]}"
-                else: # Not duplicate
-                    # Add to the duplicate table
-                    duplicate_trainers[trainer_const] = 1
-
                 # Add the trainer constant to the list
                 trainer_const_data[battle_type][battle_format].append(
                     f"#define {trainer_const} {trainer_ids[battle_type][battle_format]}"
@@ -281,6 +361,11 @@ if __name__ == '__main__':
                 for header in trainer_headers:
                     if header not in battle_spot_headers:
                         trainer_data[battle_type][battle_format].append(f"        .{header} = {trainer_headers[header]},")
+
+                # Add mon set reference
+                trainer_data[battle_type][battle_format].append(
+                    f"        .monSet = {trainer_mon_array},"
+                )
 
                 trainer_data[battle_type][battle_format].append("    },")
 
@@ -371,3 +456,7 @@ if __name__ == '__main__':
     # Dump the trainer data to the file
     with open(OUTPUT_TRAINERS, "w+") as file:
         file.write("\n".join(output_trainers))
+
+    # Dump the trainer mon data to the file
+    with open(OUTPUT_TRAINER_MONS, "w+") as file:
+        file.write("\n".join(output_trainer_mons))
