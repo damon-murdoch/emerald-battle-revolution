@@ -193,5 +193,58 @@
       "Wow, this place has so many unique items - and you only need to buy them once!",
       "Which one will you be picking up first?"
     ]
+  },
+  "BattleFrontier_Underground_B2F_PokeCenter_1F": {
+    "Visitor1": [
+      "If you want to try a new style of battling, maybe look at changing the battle ban lists, or even trying a new ruleset!",
+      "You can even play against the old battle frontier sets if you'd like, too.",
+      "The possibilities are endless!"
+    ],
+    "Visitor2": [
+      "How do you feel about dynamax battles?",
+      "Some people prefer them over normal battles.",
+      "Me? I just like the cool Gigantamax formes!"
+    ]
+  },
+  "BattleFrontier_Underground_B2F_PokeCenter_2F": {
+    "Visitor1": [
+      "Have you ever played in a tournament before?",
+      "I've heard they hold them in a place far away from here.",
+      "You can even qualify for the world championships!"
+    ],
+    "Visitor2": [
+      "I've won lots of games at the Battle Frontier, but I'm not sure I'm ready for union room battles just yet ...",
+      "I guess the only way to find out is to try!"
+    ]
+  },
+  "BattleFrontier_Underground_B2F_BattleSpot_1F": {
+    "Placeholder1": [
+      "Welcome to the Battle Spot!",
+      "This is the door for the rating battles facility.",
+      "Start from the 1500s, and rise to the top of the 2000s!",
+      "At the moment, this facility is closed for development.",
+      "Please come back soon!"
+    ],
+    "Placeholder2": [
+      "Welcome to the Battle Spot!",
+      "This is the door for the ranked battles facility.",
+      "Rise through the ranks to the top of the Master Ball Tier!",
+      "At the moment, this facility is closed for development.",
+      "Please come back soon!"
+    ],
+    "Visitor1": [
+      "Have you had a look at the sample teams shop yet?",
+      "It's a great way to get started if you aren't sure what to use!",
+      "I hope they add some single battle teams soon, though."
+    ],
+    "Visitor2": [
+      "The sample sets shop is really useful if you want to try some new Pokemon, but aren't sure how to train them.",
+      "It's a great way to save time when experimenting or building a new team!"
+    ],
+    "Visitor3": [
+      "From what I've heard, battles in this facility will be filled with challenging opponents!",
+      "Progress will be based on your win-loss rating rather than relying on win streaks only.",
+      "I'm so excited for it to open!"
+    ]
   }
 }

@@ -1,0 +1,54 @@
+# Frontier Trainer Data
+.facilityClass = FACILITY_CLASS_BRENDAN
+.trainerName = _("DAMON")
+.speechBefore = {EC_WORD_I_AM, EC_WORD_NEVER, EC_WORD_GOING, EC_WORD_TO, EC_WORD_LOSE, EC_WORD_EXCL}
+.speechWin = {EC_WORD_I_AM, EC_WORD_STRONG, EC_WORD_AREN_T, EC_WORD_I, EC_WORD_QUES, EC_EMPTY_WORD}
+.speechLose = {EC_WORD_WHAT, EC_WORD_QUES, EC_EMPTY_WORD, EC_WORD_BUT, EC_WORD_HOW, EC_WORD_QUES}
+
+# Battle Spot Trainer Data
+.tier = TIER_ULTRA_BALL
+.rating = 1756
+
+Charizard @ Charizardite Y  
+Ability: Blaze  
+Level: 50  
+Tera Type: Fire  
+EVs: 204 HP / 108 Def / 4 SpA / 4 SpD / 188 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Protect  
+- Scorching Sands  
+- Flamethrower  
+- Solar Beam  
+
+Landorus-Therian (M) @ Choice Scarf  
+Ability: Intimidate  
+Tera Type: Ground  
+EVs: 4 HP / 196 Atk / 4 Def / 52 SpD / 252 Spe  
+Adamant Nature  
+- U-turn  
+- Stomping Tantrum  
+- Earthquake  
+- Rock Slide  
+
+Flutter Mane @ Fairium Z  
+Ability: Protosynthesis  
+Level: 50  
+Tera Type: Ghost  
+EVs: 140 HP / 188 Def / 36 SpA / 4 SpD / 140 Spe  
+Modest Nature  
+IVs: 0 Atk  
+- Protect  
+- Dazzling Gleam  
+- Shadow Ball  
+- Moonblast  
+
+Iron Hands @ Assault Vest  
+Ability: Quark Drive  
+Tera Type: Fighting  
+EVs: 60 HP / 156 Atk / 36 Def / 252 SpD / 4 Spe  
+Adamant Nature  
+- Drain Punch  
+- Wild Charge  
+- Heavy Slam  
+- Fake Out  
