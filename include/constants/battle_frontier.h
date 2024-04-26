@@ -19,6 +19,10 @@
 #define FACILITY_UNION_ROOM        8
 #define FACILITY_MULTI_OR_EREADER  9  // Direct Corner multi battles, multi battle with Steven, and e-Reader battles
 
+// Custom Battle Facilities
+#define FRONTIER_FACILITY_SPOT_RATING     10
+#define FRONTIER_FACILITY_SPOT_RANKING     11
+
 // Battle Frontier battle modes.
 #define FRONTIER_MODE_SINGLES      0
 #define FRONTIER_MODE_DOUBLES      1
