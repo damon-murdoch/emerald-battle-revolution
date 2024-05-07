@@ -79,9 +79,9 @@ void SetBagItemsPointers(void)
     gBagPockets[BERRIES_POCKET].capacity = BAG_BERRIES_COUNT;
 }
 
-void CopyItemName(u16 itemId, u8 *dst)
+u8 *CopyItemName(u16 itemId, u8 *dst)
 {
-    StringCopy(dst, ItemId_GetName(itemId));
+    return StringCopy(dst, ItemId_GetName(itemId));
 }
 
 void CopyItemNameHandlePlural(u16 itemId, u8 *dst, u32 quantity)

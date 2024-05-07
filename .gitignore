@@ -47,3 +47,4 @@ src/data/map_group_count.h
 src/data/encounter-report.csv
 src/data/ENCOUNTERS.md
 src/data/encounters.csv
+tools/trainerproc/trainerproc
