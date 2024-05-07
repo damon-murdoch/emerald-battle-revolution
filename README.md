@@ -264,6 +264,11 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.4.0
+
+Created new branch for developing the 'Battle Spot' feature, added new sample teams from 
+old VGC formats (2016, 2018 pre/post bank and 2019 sun, moon and ultra series).
+
 ### Ver. 1.3.3
 
 Implemented auto-generator for Pokemon and Legendary shop multi-select menus, 
