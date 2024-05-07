@@ -52,7 +52,7 @@
 #define FLAG_BATTLE_FRONTIER_ALLOW_MEGA     0x27 // Battle Frontier allow Mega Evolutions
 #define FLAG_BATTLE_FRONTIER_ALLOW_GMAX     0x28 // Battle Frontier allow Gigantamax Formes
 #define FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE    0x29 // Battle Frontier allow Z-Moves
-#define FLAG_UNUSED_0x02A    0x2A // Unused Flag
+#define FLAG_BATTLE_FRONTIER_ALLOW_TERA     0x2A // Battle Frontier allow Terastalisation
 #define FLAG_UNUSED_0x02B    0x2B // Unused Flag
 #define FLAG_UNUSED_0x02C    0x2C // Unused Flag
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
@@ -1544,8 +1544,8 @@
 #define FLAG_UNUSED_0x90C                           (SYSTEM_FLAGS + 0xAC) // Unused Flag
 #define FLAG_UNUSED_0x90D                           (SYSTEM_FLAGS + 0xAD) // Unused Flag
 #define FLAG_UNUSED_0x90E                           (SYSTEM_FLAGS + 0xAE) // Unused Flag
-#define FLAG_UNUSED_0x90F                           (SYSTEM_FLAGS + 0xAF) // Unused Flag
-#define FLAG_UNUSED_0x910                           (SYSTEM_FLAGS + 0xB0) // Unused Flag
+#define FLAG_TERA_ORB_NO_COST                       (SYSTEM_FLAGS + 0xAF)
+#define FLAG_TERA_ORB_CHARGED                       (SYSTEM_FLAGS + 0xB0)
 #define FLAG_FORCE_FRONTIER_LEVEL_SCALING           (SYSTEM_FLAGS + 0xB1)
 #define FLAG_FORCE_NO_SHINY                         (SYSTEM_FLAGS + 0xB2)
 #define FLAG_FORCE_SHINY                            (SYSTEM_FLAGS + 0xB3)

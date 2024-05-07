@@ -266,6 +266,9 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 
 ### Ver. 1.4.0
 
+Merged upstream changes, including support for terastalisation which can now be banned or
+unbanned using the Battle Frontier controllers, and used inside and out of Battle Facilities.
+
 Created new branch for developing the 'Battle Spot' feature, added new sample teams from 
 old VGC formats (2016, 2018 pre/post bank and 2019 sun, moon and ultra series).
 

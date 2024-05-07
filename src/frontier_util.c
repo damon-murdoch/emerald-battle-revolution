@@ -1948,10 +1948,22 @@ static void AppendIfValid(u16 species, u16 heldItem, u16 hp, u8 lvlMode, u8 monL
             }
         break;
     }
+    
+    // Banned species check enabled
+    if (checkBannedSpecies)
+    {
+        // Use custom banlist
+        if (useCustomBanlist)
+        {
+            for(i=0; (customBanlist[i] != SPECIES_NONE) && customBanlist[i] != GET_BASE_SPECIES_ID(species) && IsSpeciesEnabled(customBanlist[i]); i++)
+                ;
 
-    // Banned species check enabled, and species is banned
-    if (checkBannedSpecies && gSpeciesInfo[species].isFrontierBanned)
-        return;
+            if (customBanlist[i] != SPECIES_NONE)
+                return; 
+        } 
+        else if (gSpeciesInfo[species].isFrontierBanned)
+            return;
+    }
 
     // Level scaling is not enabled
     if (BF_ENABLE_LEVEL_SCALING == FALSE){

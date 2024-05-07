@@ -1765,6 +1765,8 @@ static void MoveSelectionDisplayMoveType(u32 battler)
         case MOVE_TERA_STARSTORM: {
             if (gBattleMons[battler].species == SPECIES_TERAPAGOS_STELLAR || (gBattleStruct->tera.playerSelect && gBattleMons[battler].species == SPECIES_TERAPAGOS_TERASTAL))
                 type = TYPE_STELLAR;
+            else 
+                type = gMovesInfo[MOVE_TERA_STARSTORM].type;
         }; break; 
         default: {
             type = gMovesInfo[moveInfo->moves[gMoveSelectionCursor[battler]]].type;

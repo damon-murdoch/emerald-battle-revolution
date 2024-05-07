@@ -13,6 +13,10 @@
 #include "constants/abilities.h"
 #include "constants/hold_effects.h"
 #include "constants/rgb.h"
+#include "config/dynamax.h"
+
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
 
 // Sets flags and variables upon a battler's Terastallization.
 void PrepareBattlerForTera(u32 battler)
@@ -53,6 +57,15 @@ void ApplyBattlerVisualsForTeraAnim(u32 battler)
 bool32 CanTerastallize(u32 battler)
 {
     u32 holdEffect = GetBattlerHoldEffect(battler, FALSE);
+
+    // Check if Terastalisation is blocked by dynamax battle
+    if ((!DB_ALLOW_TERASTRALISATION) && FlagGet(FLAG_DYNAMAX_BATTLE))
+        return FALSE;
+
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanTerastalise() == FALSE))
+        return FALSE; // Battler cannot terastalise
+    #endif
 
     // Check if Player has Tera Orb and has charge.
     if (!CheckBagHasItem(ITEM_TERA_ORB, 1)

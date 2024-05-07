@@ -78,9 +78,11 @@ void SetRentalsToFacilityOpponentParty();
 
 void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum);
 
-
 bool8 FrontierBattlerCanMegaEvolve();
 bool8 FrontierBattlerCanUseZMove();
+
+bool8 FrontierBattlerCanTerastalise();
+bool8 FrontierBattlerShouldTerastal(struct Pokemon * mon);
 
 bool8 FrontierBattlerCanDynamax(struct Pokemon * mon);
 bool8 FrontierBattlerShouldDynamax(struct Pokemon * mon);

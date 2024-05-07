@@ -339,8 +339,8 @@ FortreeCity_Gym_EventScript_GiveTeraOrb_Text_0:
 
 FortreeCity_Gym_EventScript_GiveTeraOrb_Text_1:
 	.string "This item will allow your POKéMON to\n"
-	.string "change its type into its Terastral\l"
-	.string "type, once per battle.$"
+	.string "change its type into its Terastal type,\l"
+	.string "once per battle.$"
 
 FortreeCity_Gym_EventScript_GiveTeraOrb_Text_2:
 	.string "This can be used to change to a new\n"

@@ -128,9 +128,11 @@ script BattleFrontierController_EventScript_ControllerChangeBanlistStandard {
 			msgbox(format("Okay! Z-Moves will be banned."))
 			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
 		case 4: # ALLOW TERA
-			msgbox(format("Tera is not available yet, sorry!"))
+			msgbox(format("Okay! Terastalisation will be allowed."))
+			setflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 		case 5: # BAN TERA
-			msgbox(format("Tera is not available yet, sorry!"))
+			msgbox(format("Okay! Terastalisation will be banned."))
+			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 		default:
 			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
 	}

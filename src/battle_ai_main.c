@@ -26,6 +26,9 @@
 #include "constants/items.h"
 #include "constants/trainers.h"
 
+#include "config/battle_frontier_generator.h"
+#include "battle_frontier_generator.h"
+
 #define AI_ACTION_DONE          (1 << 0)
 #define AI_ACTION_FLEE          (1 << 1)
 #define AI_ACTION_WATCH         (1 << 2)
@@ -406,8 +409,20 @@ static void SetBattlerAiGimmickData(u32 battler, struct AiLogicData *aiData)
     const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
     if (party != NULL)
     {
+        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+        if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR))
+        {
+            aiData->shouldDynamax[battler] = CanDynamax(battler) && FrontierBattlerShouldDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]]));
+            aiData->shouldTerastal[battler] = CanTerastallize(battler) && FrontierBattlerShouldTerastal(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]]));
+        }
+        else // Normal opponent
+        {
+        #endif
         aiData->shouldDynamax[battler] = CanDynamax(battler) && (party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax);
         aiData->shouldTerastal[battler] = CanTerastallize(battler) && (party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldTerastal);
+        #if BFG_FLAG_FRONTIER_GENERATOR != 0
+        }
+        #endif
     }
     else
     {

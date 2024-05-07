@@ -324,7 +324,7 @@ script FortreeCity_Gym_EventScript_GiveTeraOrb {
 	if (flag(FLAG_ITEM_TERA_ORB_OBTAINED) == false) {
 		msgbox(format("Also, as a trainer with six gym badges, you've earned this."))
 		giveitem(ITEM_TERA_ORB)
-		msgbox(format("This item will allow your POKéMON to change its type into its Terastral type, once per battle."))
+		msgbox(format("This item will allow your POKéMON to change its type into its Terastal type, once per battle."))
 		msgbox(format("This can be used to change to a new type, or provide even stronger damage for same-type transformations!"))
 		msgbox(format("Most POKéMON have a Tera Type matching either their primary or secondary type."))
 		msgbox(format("Tera Shards can be used to change the type of a POKéMON, and will be available at most POKéMARTs - Even those you've already visited."))

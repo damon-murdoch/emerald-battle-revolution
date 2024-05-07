@@ -169,10 +169,12 @@ BattleFrontierController_EventScript_ControllerChangeBanlistStandard_6:
 
 BattleFrontierController_EventScript_ControllerChangeBanlistStandard_7:
 	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_TERA
 	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
 
 BattleFrontierController_EventScript_ControllerChangeBanlistStandard_8:
-	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7
+	msgbox BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_8
+	clearflag FLAG_BATTLE_FRONTIER_ALLOW_TERA
 	goto BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1
 
 
@@ -504,7 +506,10 @@ BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_6:
 	.string "Okay! Z-Moves will be banned.$"
 
 BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_7:
-	.string "Tera is not available yet, sorry!$"
+	.string "Okay! Terastalisation will be allowed.$"
+
+BattleFrontierController_EventScript_ControllerChangeBanlistStandard_Text_8:
+	.string "Okay! Terastalisation will be banned.$"
 
 BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_Text_0:
 	.string "These are the options for dynamax\n"
