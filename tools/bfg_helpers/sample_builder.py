@@ -54,67 +54,72 @@ if __name__ == "__main__":
         # Open the file contents
         with open(file_path, "r") as file:
 
-            # Read the raw file
-            raw = file.read()
+            try:
 
-            # Parse the showdown data
-            sets = parser.parse_sets(raw)
+                # Read the raw file
+                raw = file.read()
 
-            # Split the names on the under score
-            names = no_extension.split("_")
+                # Parse the showdown data
+                sets = parser.parse_sets(raw)
 
-            # Treat as entire team
-            if extension == "team":
+                # Split the names on the under score
+                names = no_extension.split("_")
 
-                # Givemon string array
-                givemon_list = []
+                # Treat as entire team
+                if extension == "team":
 
-                # Loop over the sets
-                for set in sets:
+                    # Givemon string array
+                    givemon_list = []
 
-                    # Generate the givemon string and add it to the list
-                    givemon_list.append(givemon.get_givemon_str(set))
+                    # Loop over the sets
+                    for set in sets:
 
-                # Combine the givemon string (Including team goto jump)
-                givemon_str = f"{';'.join(givemon_list)};{TEAMS_GOTO}"
+                        # Generate the givemon string and add it to the list
+                        givemon_list.append(givemon.get_givemon_str(set))
 
-                # Add the sample team to the table
-                common.insert_data(sample_teams, names, givemon_str)
+                    # Combine the givemon string (Including team goto jump)
+                    givemon_str = f"{';'.join(givemon_list)};{TEAMS_GOTO}"
 
-            # Treat as sample sets
-            elif extension == "sets":
+                    # Add the sample team to the table
+                    common.insert_data(sample_teams, names, givemon_str)
 
-                # Loop over the sets
-                for set in sets:
+                # Treat as sample sets
+                elif extension == "sets":
 
-                    # Add species to names
-                    full_names = list(names)
+                    # Loop over the sets
+                    for set in sets:
 
-                    # Get the species name
-                    name = set["species"]
+                        # Add species to names
+                        full_names = list(names)
 
-                    # Check species for name property
-                    if "name" in set["other"]:
-                        # Override default name
-                        name = set["other"]["name"]
+                        # Get the species name
+                        name = set["species"]
 
-                    # Check species for note property
-                    if "note" in set["other"]:
-                        # Add note to the name
-                        name = f"{name} ({set['other']['note']})"
+                        # Check species for name property
+                        if "name" in set["other"]:
+                            # Override default name
+                            name = set["other"]["name"]
 
-                    # Add name to names list
-                    full_names.append(name)
+                        # Check species for note property
+                        if "note" in set["other"]:
+                            # Add note to the name
+                            name = f"{name} ({set['other']['note']})"
 
-                    # Generate the givemon string (Including sets goto jump)
-                    givemon_str = f"{givemon.get_givemon_str(set)};{SETS_GOTO}"
+                        # Add name to names list
+                        full_names.append(name)
 
-                    common.insert_data(sample_sets, full_names, givemon_str)
+                        # Generate the givemon string (Including sets goto jump)
+                        givemon_str = f"{givemon.get_givemon_str(set)};{SETS_GOTO}"
 
-            else:  # Unhandled extension
-                raise Exception(
-                    f"Unhandled file extension {extension}! Accepted: .sets, .team ..."
-                )
+                        common.insert_data(sample_sets, full_names, givemon_str)
+
+                else:  # Unhandled extension
+                    raise Exception(
+                        f"Unhandled file extension {extension}! Accepted: .sets, .team ..."
+                    )
+                
+            except Exception as e:
+                print(f"Failed for file {file_name}! Error: {str(e)}")
 
     # Create output directory (if not exists)
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)
