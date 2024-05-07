@@ -613,7 +613,7 @@ BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_4:
 	.string "first!$"
 
 BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_0:
-	.string "Have you heard of Terastralisation?$"
+	.string "Have you heard of Terastalisation?$"
 
 BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_1:
 	.string "It allows one of your POKéMON to change\n"

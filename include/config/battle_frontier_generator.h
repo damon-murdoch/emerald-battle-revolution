@@ -13,6 +13,7 @@
 
 #define BFG_FLAG_FRONTIER_ALLOW_MEGA FLAG_BATTLE_FRONTIER_ALLOW_MEGA // Flag to enable or disable Mega Evolution
 #define BFG_FLAG_FRONTIER_ALLOW_GMAX FLAG_BATTLE_FRONTIER_ALLOW_GMAX // Flag to enable or disable Gigantamax
+#define BFG_FLAG_FRONTIER_ALLOW_TERA FLAG_BATTLE_FRONTIER_ALLOW_TERA // Flag to enable or disable Gigantamax
 #define BFG_FLAG_FRONTIER_ALLOW_ZMOVE FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE // Flag to enable or disable Z Moves
 
 #define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_VARIABLE
@@ -27,6 +28,9 @@
 // #define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
 // #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
 // #define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
+
+#define BFG_RANDOM_STAB_TERA_CHANCE 2   // 1/2 chance for stab tera
+#define BFG_RANDOM_TERA_CHANCE 4        // 1/4 chance for non-stab tera
 
 #define BFG_RANDOM_GIGANTAMAX_CHANCE 1  // 1/x Chance for a Pokemon to Gigantamax
 #define BFG_RANDOM_DYNAMAX_CHANCE 4     // 1/x Chance for a Pokemon to Dynamax

@@ -203,17 +203,17 @@ def parse_sets(str):
       # current object to the 'value'
       current['other'][li[0].strip().lower()] = li[1].strip()
 
-    # If the line contains the 'nature' text
-    elif ('nature' in line.lower()):
-
-      # Retrieve the nature from the string and add it to the object
-      current['nature'] = line.split(' ')[0].strip()
-
     # If the line starts with a '-', is a move
     elif (line.strip().startswith('-')):
 
       # Add the move text to the moves list  for the set
       current['moves'].append(line.replace('-','').strip())
+
+    # If the line contains the 'nature' text
+    elif ('nature' in line.lower()):
+
+      # Retrieve the nature from the string and add it to the object
+      current['nature'] = line.split(' ')[0].strip()
 
   # Made it to the end, add the last set to the stack
   sets.append(current)

@@ -209,11 +209,9 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
                     if (sFrontierLvl50CustomBannedSpeciesList[i] == speciesId)
                         return FALSE; // Species banned
             }
-            else // Default banned species list
+            else if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
             {
-                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                    if (gFrontierBannedSpecies[i] == speciesId)
-                        return FALSE; // Species banned
+                return FALSE; // Species banned
             }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
@@ -230,11 +228,9 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
                     if (sFrontierLvlOpenCustomBannedSpeciesList[i] == speciesId)
                         return FALSE; // Species banned
             }
-            else // Default banned species list
+            else if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
             {
-                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                    if (gFrontierBannedSpecies[i] == speciesId)
-                        return FALSE; // Species banned
+                return FALSE; // Species banned
             }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
@@ -251,11 +247,9 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
                     if (sFrontierLvlTentCustomBannedSpeciesList[i] == speciesId)
                         return FALSE; // Species banned
             }
-            else // Default banned species list
+            else if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
             {
-                for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                    if (gFrontierBannedSpecies[i] == speciesId)
-                        return FALSE; // Species banned
+                return FALSE; // Species banned
             }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
@@ -3523,6 +3517,28 @@ bool8 FrontierBattlerCanUseZMove()
     #else // Default
     return TRUE; 
     #endif
+}
+
+bool8 FrontierBattlerCanTerastalise()
+{
+    #if FLAG_BATTLE_FRONTIER_ALLOW_TERA != 0
+    return FlagGet(FLAG_BATTLE_FRONTIER_ALLOW_TERA);
+    #else // Default
+    return TRUE; 
+    #endif
+}
+
+bool8 FrontierBattlerShouldTerastal(struct Pokemon * mon)
+{
+    // Get the species for the Pokemon
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u8 type = GetMonData(mon, MON_DATA_TERA_TYPE);
+
+    // Same-type terastal
+    if (IS_STAB(species, type))
+        return RANDOM_CHANCE(BFG_RANDOM_STAB_TERA_CHANCE);
+    else // Non-stab tera
+        return RANDOM_CHANCE(BFG_RANDOM_TERA_CHANCE);
 }
 
 bool8 FrontierBattlerCanDynamax(struct Pokemon * mon)

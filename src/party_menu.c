@@ -2480,6 +2480,11 @@ static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, c
     AddTextPrinterParameterized3(windowId, FONT_SMALL, align[0], align[1], sFontColorTable[color], 0, str);
 }
 
+static void DisplayPartyPokemonBarDetailToFit(u8 windowId, const u8 *str, u8 color, const u8 *align, u32 width)
+{
+    AddTextPrinterParameterized3(windowId, GetFontIdToFit(str, FONT_SMALL, 0, width), align[0], align[1], sFontColorTable[color], 0, str);
+}
+
 static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -2489,7 +2494,7 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox
         if (c == 1)
             menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[0] >> 3, menuBox->infoRects->dimensions[1] >> 3, menuBox->infoRects->dimensions[2] >> 3, menuBox->infoRects->dimensions[3] >> 3, FALSE);
         GetMonNickname(mon, nickname);
-        DisplayPartyPokemonBarDetail(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions);
+        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions, 50);
     }
 }
 
@@ -4686,7 +4691,8 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (!IsItemFlute(gSpecialVar_ItemId))
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
@@ -7021,8 +7027,7 @@ static u8 GetPartySlotEntryStatus(s8 slot)
 
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
-    u16 i = 0;
-    u16 species;
+    u32 species;
 
     // Check banned species true/false
     bool8 checkBannedSpecies = TRUE;
@@ -7047,63 +7052,66 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
-    case FACILITY_MULTI_OR_EREADER:
-        if (GetMonData(mon, MON_DATA_HP) != 0)
+        case FACILITY_MULTI_OR_EREADER:
+            if (GetMonData(mon, MON_DATA_HP) != 0)
+                return TRUE;
+            return FALSE;
+        case FACILITY_UNION_ROOM:
             return TRUE;
-        return FALSE;
-    case FACILITY_UNION_ROOM:
-        return TRUE;
-    default: // Battle Frontier
-    
-        switch(lvlMode)
-        {
-            case FRONTIER_LVL_50:
-                if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvl50CustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-            case FRONTIER_LVL_OPEN:
-                if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-            case FRONTIER_LVL_TENT:
-                if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-        }
+        default: // Battle Frontier
+            switch(lvlMode)
+            {
+                case FRONTIER_LVL_50:
+                    if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvl50CustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+                case FRONTIER_LVL_OPEN:
+                    if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+                case FRONTIER_LVL_TENT:
+                    if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+            }
 
-        // Allow banned species is not set
-        if (checkBannedSpecies){
-            species = GetMonData(mon, MON_DATA_SPECIES);
-            if (useCustomBanlist)
+            // Allow banned species is not set
+            if (checkBannedSpecies)
             {
-                for(; customBanlist[i] != SPECIES_NONE; i++)
-                    if (customBanlist[i] == GET_BASE_SPECIES_ID(species))
-                        return FALSE;
+                species = GetMonData(mon, MON_DATA_SPECIES);
+
+                // Use custom banlist
+                if (useCustomBanlist)
+                {
+                    s32 i;
+                    for(i=0; (customBanlist[i] != SPECIES_NONE) && customBanlist[i] != GET_BASE_SPECIES_ID(species) && IsSpeciesEnabled(customBanlist[i]); i++)
+                        ;
+                        
+                    if (customBanlist[i] != SPECIES_NONE)
+                        return FALSE; 
+                }
+                // Use default banlist
+                else if (gSpeciesInfo[species].isFrontierBanned)
+                    return FALSE;
             }
-            else
-            {
-                for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-                    if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                        return FALSE;
-            }
-        }
-        return TRUE;
     }
+        
+    return TRUE;
 }
 
 static u8 CheckBattleEntriesAndGetMessage(void)
