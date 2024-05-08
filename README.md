@@ -264,6 +264,12 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.4.1
+
+Expanded shops to allow for the purchasing of individual sets from a team, as well as expanded
+the individual Pokemon shops to show Pokemon in the categories for both their primary and
+secondary type
+
 ### Ver. 1.4.0
 
 Merged upstream changes, including support for terastalisation which can now be banned or
