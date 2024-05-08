@@ -22,6 +22,13 @@ OUTPUT_DIRECTORY = "tools/bfg_helpers/select"
 SETS_OUTFILE = "sample_sets.json"
 TEAMS_OUTFILE = "sample_teams.json"
 
+# Create a folder in the 'sets' shop, 
+# which allows you to purchase the 
+# individual Pokemon from the teams
+# shop with the provided name
+# To ignore this, set to None
+SETS_FROM_TEAMS_FOLDER = "FROM TEAMS"
+
 # Goto Purchase Jump Scripts
 SETS_GOTO = "goto(Common_EventScript_Sample_Sets_CheckPurchase)"
 TEAMS_GOTO = "goto(Common_EventScript_Sample_Team_CheckPurchase)"
@@ -65,6 +72,9 @@ if __name__ == "__main__":
                 # Split the names on the under score
                 names = no_extension.split("_")
 
+                # Add species to names
+                full_names = list(names)
+
                 # Treat as entire team
                 if extension == "team":
 
@@ -77,6 +87,34 @@ if __name__ == "__main__":
                         # Generate the givemon string and add it to the list
                         givemon_list.append(givemon.get_givemon_str(set))
 
+                        # Sets from teams folder defined
+                        if SETS_FROM_TEAMS_FOLDER:
+                            
+                            # Get the species name
+                            name = set["species"]
+
+                            # Check species for name property
+                            if "name" in set["other"]:
+                                # Override default name
+                                name = set["other"]["name"]
+
+                            # Check species for note property
+                            if "note" in set["other"]:
+                                # Add note to the name
+                                name = f"{name} ({set['other']['note']})"
+
+                            # Create an extended folder for the from-teams samples
+                            extended_names = [SETS_FROM_TEAMS_FOLDER] + full_names
+
+                            # Add name to names list
+                            extended_names.append(name)
+
+                            # Generate the givemon string (Including sets goto jump)
+                            givemon_str = f"{givemon.get_givemon_str(set)};{SETS_GOTO}"
+
+                            # Add the sample sets to the table
+                            common.insert_data(sample_sets, extended_names, givemon_str)
+
                     # Combine the givemon string (Including team goto jump)
                     givemon_str = f"{';'.join(givemon_list)};{TEAMS_GOTO}"
 
@@ -88,9 +126,6 @@ if __name__ == "__main__":
 
                     # Loop over the sets
                     for set in sets:
-
-                        # Add species to names
-                        full_names = list(names)
 
                         # Get the species name
                         name = set["species"]
