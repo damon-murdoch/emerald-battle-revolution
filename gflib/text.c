@@ -59,29 +59,30 @@ struct TextGlyph gCurGlyph;
 TextFlags gTextFlags;
 
 static const u8 sFontHalfRowOffsets[] =
-    {
-        0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-        0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
-        0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-        0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-        0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
-        0x24, 0x25, 0x26, 0x24, 0x27, 0x28, 0x29, 0x27, 0x2A, 0x2B, 0x2C, 0x2A, 0x24, 0x25, 0x26, 0x24,
-        0x2D, 0x2E, 0x2F, 0x2D, 0x30, 0x31, 0x32, 0x30, 0x33, 0x34, 0x35, 0x33, 0x2D, 0x2E, 0x2F, 0x2D,
-        0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
-        0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-        0x3F, 0x40, 0x41, 0x3F, 0x42, 0x43, 0x44, 0x42, 0x45, 0x46, 0x47, 0x45, 0x3F, 0x40, 0x41, 0x3F,
-        0x48, 0x49, 0x4A, 0x48, 0x4B, 0x4C, 0x4D, 0x4B, 0x4E, 0x4F, 0x50, 0x4E, 0x48, 0x49, 0x4A, 0x48,
-        0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
-        0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
-        0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
-        0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
-        0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00};
+{
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
+    0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
+    0x24, 0x25, 0x26, 0x24, 0x27, 0x28, 0x29, 0x27, 0x2A, 0x2B, 0x2C, 0x2A, 0x24, 0x25, 0x26, 0x24,
+    0x2D, 0x2E, 0x2F, 0x2D, 0x30, 0x31, 0x32, 0x30, 0x33, 0x34, 0x35, 0x33, 0x2D, 0x2E, 0x2F, 0x2D,
+    0x1B, 0x1C, 0x1D, 0x1B, 0x1E, 0x1F, 0x20, 0x1E, 0x21, 0x22, 0x23, 0x21, 0x1B, 0x1C, 0x1D, 0x1B,
+    0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
+    0x3F, 0x40, 0x41, 0x3F, 0x42, 0x43, 0x44, 0x42, 0x45, 0x46, 0x47, 0x45, 0x3F, 0x40, 0x41, 0x3F,
+    0x48, 0x49, 0x4A, 0x48, 0x4B, 0x4C, 0x4D, 0x4B, 0x4E, 0x4F, 0x50, 0x4E, 0x48, 0x49, 0x4A, 0x48,
+    0x36, 0x37, 0x38, 0x36, 0x39, 0x3A, 0x3B, 0x39, 0x3C, 0x3D, 0x3E, 0x3C, 0x36, 0x37, 0x38, 0x36,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00,
+    0x09, 0x0A, 0x0B, 0x09, 0x0C, 0x0D, 0x0E, 0x0C, 0x0F, 0x10, 0x11, 0x0F, 0x09, 0x0A, 0x0B, 0x09,
+    0x12, 0x13, 0x14, 0x12, 0x15, 0x16, 0x17, 0x15, 0x18, 0x19, 0x1A, 0x18, 0x12, 0x13, 0x14, 0x12,
+    0x00, 0x01, 0x02, 0x00, 0x03, 0x04, 0x05, 0x03, 0x06, 0x07, 0x08, 0x06, 0x00, 0x01, 0x02, 0x00
+};
 
 static const u8 sDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow.4bpp");
 static const u8 sDarkDownArrowTiles[] = INCBIN_U8("graphics/fonts/down_arrow_alt.4bpp");
 static const u8 sUnusedFRLGBlankedDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_blanked_down_arrow.4bpp");
 static const u8 sUnusedFRLGDownArrow[] = INCBIN_U8("graphics/fonts/unused_frlg_down_arrow.4bpp");
-static const u8 sDownArrowYCoords[] = {0, 1, 2, 1};
+static const u8 sDownArrowYCoords[] = { 0, 1, 2, 1 };
 static const u8 sWindowVerticalScrollSpeeds[] = {
     [OPTIONS_TEXT_SPEED_SLOW] = TEXT_VERTICAL_SCROLL_SLOW,
     [OPTIONS_TEXT_SPEED_MID] = TEXT_VERTICAL_SCROLL_MID,
@@ -89,19 +90,19 @@ static const u8 sWindowVerticalScrollSpeeds[] = {
 };
 
 static const struct GlyphWidthFunc sGlyphWidthFuncs[] =
-    {
-        {FONT_SMALL, GetGlyphWidth_Small},
-        {FONT_NORMAL, GetGlyphWidth_Normal},
-        {FONT_SHORT, GetGlyphWidth_Short},
-        {FONT_SHORT_COPY_1, GetGlyphWidth_Short},
-        {FONT_SHORT_COPY_2, GetGlyphWidth_Short},
-        {FONT_SHORT_COPY_3, GetGlyphWidth_Short},
-        {FONT_BRAILLE, GetGlyphWidth_Braille},
-        {FONT_NARROW, GetGlyphWidth_Narrow},
-        {FONT_SMALL_NARROW, GetGlyphWidth_SmallNarrow},
-        {FONT_NARROWER, GetGlyphWidth_Narrower},
-        {FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower},
-        {FONT_SHORT_NARROW, GetGlyphWidth_ShortNarrow},
+{
+    { FONT_SMALL,          GetGlyphWidth_Small },
+    { FONT_NORMAL,         GetGlyphWidth_Normal },
+    { FONT_SHORT,          GetGlyphWidth_Short },
+    { FONT_SHORT_COPY_1,   GetGlyphWidth_Short },
+    { FONT_SHORT_COPY_2,   GetGlyphWidth_Short },
+    { FONT_SHORT_COPY_3,   GetGlyphWidth_Short },
+    { FONT_BRAILLE,        GetGlyphWidth_Braille },
+    { FONT_NARROW,         GetGlyphWidth_Narrow },
+    { FONT_SMALL_NARROW,   GetGlyphWidth_SmallNarrow },
+    { FONT_NARROWER,       GetGlyphWidth_Narrower },
+    { FONT_SMALL_NARROWER, GetGlyphWidth_SmallNarrower },
+    { FONT_SHORT_NARROW,   GetGlyphWidth_ShortNarrow },
 };
 
 struct
@@ -110,172 +111,173 @@ struct
     u8 width;
     u8 height;
 } static const sKeypadIcons[] =
-    {
-        [CHAR_A_BUTTON] = {0x00, 8, 12},
-        [CHAR_B_BUTTON] = {0x01, 8, 12},
-        [CHAR_L_BUTTON] = {0x02, 16, 12},
-        [CHAR_R_BUTTON] = {0x04, 16, 12},
-        [CHAR_START_BUTTON] = {0x06, 24, 12},
-        [CHAR_SELECT_BUTTON] = {0x09, 24, 12},
-        [CHAR_DPAD_UP] = {0x0C, 8, 12},
-        [CHAR_DPAD_DOWN] = {0x0D, 8, 12},
-        [CHAR_DPAD_LEFT] = {0x0E, 8, 12},
-        [CHAR_DPAD_RIGHT] = {0x0F, 8, 12},
-        [CHAR_DPAD_UPDOWN] = {0x20, 8, 12},
-        [CHAR_DPAD_LEFTRIGHT] = {0x21, 8, 12},
-        [CHAR_DPAD_NONE] = {0x22, 8, 12}};
+{
+    [CHAR_A_BUTTON]       = { 0x00,  8, 12 },
+    [CHAR_B_BUTTON]       = { 0x01,  8, 12 },
+    [CHAR_L_BUTTON]       = { 0x02, 16, 12 },
+    [CHAR_R_BUTTON]       = { 0x04, 16, 12 },
+    [CHAR_START_BUTTON]   = { 0x06, 24, 12 },
+    [CHAR_SELECT_BUTTON]  = { 0x09, 24, 12 },
+    [CHAR_DPAD_UP]        = { 0x0C,  8, 12 },
+    [CHAR_DPAD_DOWN]      = { 0x0D,  8, 12 },
+    [CHAR_DPAD_LEFT]      = { 0x0E,  8, 12 },
+    [CHAR_DPAD_RIGHT]     = { 0x0F,  8, 12 },
+    [CHAR_DPAD_UPDOWN]    = { 0x20,  8, 12 },
+    [CHAR_DPAD_LEFTRIGHT] = { 0x21,  8, 12 },
+    [CHAR_DPAD_NONE]      = { 0x22,  8, 12 }
+};
 
 static const u8 sKeypadIconTiles[] = INCBIN_U8("graphics/fonts/keypad_icons.4bpp");
 
 static const struct FontInfo sFontInfos[] =
-    {
-        [FONT_SMALL] = {
-            .fontFunction = FontFunc_Small,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 12,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_NORMAL] = {
-            .fontFunction = FontFunc_Normal,
-            .maxLetterWidth = 6,
-            .maxLetterHeight = 16,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SHORT] = {
-            .fontFunction = FontFunc_Short,
-            .maxLetterWidth = 6,
-            .maxLetterHeight = 14,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SHORT_COPY_1] = {
-            .fontFunction = FontFunc_ShortCopy1,
-            .maxLetterWidth = 6,
-            .maxLetterHeight = 14,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SHORT_COPY_2] = {
-            .fontFunction = FontFunc_ShortCopy2,
-            .maxLetterWidth = 6,
-            .maxLetterHeight = 14,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SHORT_COPY_3] = {
-            .fontFunction = FontFunc_ShortCopy3,
-            .maxLetterWidth = 6,
-            .maxLetterHeight = 14,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_BRAILLE] = {
-            .fontFunction = FontFunc_Braille,
-            .maxLetterWidth = 8,
-            .maxLetterHeight = 16,
-            .letterSpacing = 0,
-            .lineSpacing = 8,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_NARROW] = {
-            .fontFunction = FontFunc_Narrow,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 16,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SMALL_NARROW] = {
-            .fontFunction = FontFunc_SmallNarrow,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 8,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_BOLD] = {
-            .fontFunction = NULL,
-            .maxLetterWidth = 8,
-            .maxLetterHeight = 8,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 1,
-            .bgColor = 2,
-            .shadowColor = 15,
-        },
-        [FONT_NARROWER] = {
-            .fontFunction = FontFunc_Narrower,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 16,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SMALL_NARROWER] = {
-            .fontFunction = FontFunc_SmallNarrower,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 8,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
-        [FONT_SHORT_NARROW] = {
-            .fontFunction = FontFunc_ShortNarrow,
-            .maxLetterWidth = 5,
-            .maxLetterHeight = 14,
-            .letterSpacing = 0,
-            .lineSpacing = 0,
-            .fgColor = 2,
-            .bgColor = 1,
-            .shadowColor = 3,
-        },
+{
+    [FONT_SMALL] = {
+        .fontFunction = FontFunc_Small,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 12,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NORMAL] = {
+        .fontFunction = FontFunc_Normal,
+        .maxLetterWidth = 6,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT] = {
+        .fontFunction = FontFunc_Short,
+        .maxLetterWidth = 6,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_COPY_1] = {
+        .fontFunction = FontFunc_ShortCopy1,
+        .maxLetterWidth = 6,
+        .maxLetterHeight =  14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_COPY_2] = {
+        .fontFunction = FontFunc_ShortCopy2,
+        .maxLetterWidth = 6,
+        .maxLetterHeight =  14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_COPY_3] = {
+        .fontFunction = FontFunc_ShortCopy3,
+        .maxLetterWidth = 6,
+        .maxLetterHeight =  14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_BRAILLE] = {
+        .fontFunction = FontFunc_Braille,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 8,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_NARROW] = {
+        .fontFunction = FontFunc_Narrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROW] = {
+        .fontFunction = FontFunc_SmallNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_BOLD] = {
+        .fontFunction = NULL,
+        .maxLetterWidth = 8,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 1,
+        .bgColor = 2,
+        .shadowColor = 15,
+    },
+    [FONT_NARROWER] = {
+        .fontFunction = FontFunc_Narrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 16,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SMALL_NARROWER] = {
+        .fontFunction = FontFunc_SmallNarrower,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 8,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
+    [FONT_SHORT_NARROW] = {
+        .fontFunction = FontFunc_ShortNarrow,
+        .maxLetterWidth = 5,
+        .maxLetterHeight = 14,
+        .letterSpacing = 0,
+        .lineSpacing = 0,
+        .fgColor = 2,
+        .bgColor = 1,
+        .shadowColor = 3,
+    },
 };
 
 static const u8 sMenuCursorDimensions[][2] =
-    {
-        [FONT_SMALL] = {8, 12},
-        [FONT_NORMAL] = {8, 15},
-        [FONT_SHORT] = {8, 14},
-        [FONT_SHORT_COPY_1] = {8, 14},
-        [FONT_SHORT_COPY_2] = {8, 14},
-        [FONT_SHORT_COPY_3] = {8, 14},
-        [FONT_BRAILLE] = {8, 16},
-        [FONT_NARROW] = {8, 15},
-        [FONT_SMALL_NARROW] = {8, 8},
-        [FONT_BOLD] = {},
-        [FONT_NARROWER] = {8, 15},
-        [FONT_SMALL_NARROWER] = {8, 8},
-        [FONT_SHORT_NARROW] = {8, 14},
+{
+    [FONT_SMALL]          = { 8,  12 },
+    [FONT_NORMAL]         = { 8,  15 },
+    [FONT_SHORT]          = { 8,  14 },
+    [FONT_SHORT_COPY_1]   = { 8,  14 },
+    [FONT_SHORT_COPY_2]   = { 8,  14 },
+    [FONT_SHORT_COPY_3]   = { 8,  14 },
+    [FONT_BRAILLE]        = { 8,  16 },
+    [FONT_NARROW]         = { 8,  15 },
+    [FONT_SMALL_NARROW]   = { 8,   8 },
+    [FONT_BOLD]           = {},
+    [FONT_NARROWER]       = { 8,  15 },
+    [FONT_SMALL_NARROWER] = { 8,   8 },
+    [FONT_SHORT_NARROW]   = { 8,  14 },
 };
 
 static const u16 sFontBoldJapaneseGlyphs[] = INCBIN_U16("graphics/fonts/bold.hwjpnfont");
@@ -1024,327 +1026,320 @@ static u16 RenderText(struct TextPrinter *textPrinter)
 
     switch (textPrinter->state)
     {
-    case RENDER_STATE_HANDLE_CHAR:
-        if (JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
-            textPrinter->delayCounter = 0;
-
-        if (textPrinter->delayCounter && textPrinter->textSpeed)
-        {
-            textPrinter->delayCounter--;
-            if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
-            {
-                subStruct->hasPrintBeenSpedUp = TRUE;
+        case RENDER_STATE_HANDLE_CHAR:
+            if (JOY_HELD(A_BUTTON | B_BUTTON) && subStruct->hasPrintBeenSpedUp)
                 textPrinter->delayCounter = 0;
+
+            if (textPrinter->delayCounter && textPrinter->textSpeed)
+            {
+                textPrinter->delayCounter--;
+                if (gTextFlags.canABSpeedUpPrint && (JOY_NEW(A_BUTTON | B_BUTTON)))
+                {
+                    subStruct->hasPrintBeenSpedUp = TRUE;
+                    textPrinter->delayCounter = 0;
+                }
+                return RENDER_UPDATE;
             }
-            return RENDER_UPDATE;
-        }
 
-        if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.autoScroll)
-            textPrinter->delayCounter = 3;
-        else
-            textPrinter->delayCounter = textPrinter->textSpeed;
+            if (!(gBattleTypeFlags & BATTLE_TYPE_RECORDED) && gTextFlags.autoScroll)
+                textPrinter->delayCounter = 3;
+            else
+                textPrinter->delayCounter = textPrinter->textSpeed;
 
-        // [ellabrella] Increase Text Speed Beyond Fast
-        currChar = *textPrinter->printerTemplate.currentChar;
-        textPrinter->printerTemplate.currentChar++;
-
-        // Switch on player text speed
-        switch (GetPlayerTextSpeed())
-        {
-        // Slow Text Speed
-        case OPTIONS_TEXT_SPEED_SLOW:
-            repeats = TEXT_SPEED_SLOW;
-            break;
-        // Medium Text Speed
-        case OPTIONS_TEXT_SPEED_MID:
-            repeats = TEXT_SPEED_MID;
-            break;
-        // Fast Text Speed
-        case OPTIONS_TEXT_SPEED_FAST:
-            repeats = TEXT_SPEED_FAST;
-            break;
-        }
-
-        // Loop 'repeats' times
-        for (i = 0; i < repeats; i++)
-        {
+            // [ellabrella] Increase Text Speed Beyond Fast
             currChar = *textPrinter->printerTemplate.currentChar;
             textPrinter->printerTemplate.currentChar++;
 
-            if (DECAP_ENABLED)
+            // Switch on player text speed
+            switch (GetPlayerTextSpeed())
             {
-                lastChar = textPrinter->lastChar;
-                if (lastChar != CHAR_FIXED_CASE)
-                    textPrinter->lastChar = currChar;
+                // Slow Text Speed
+                case OPTIONS_TEXT_SPEED_SLOW:
+                    repeats = TEXT_SPEED_SLOW;
+                    break;
+                // Medium Text Speed
+                case OPTIONS_TEXT_SPEED_MID:
+                    repeats = TEXT_SPEED_MID;
+                    break;
+                // Fast Text Speed
+                case OPTIONS_TEXT_SPEED_FAST:
+                    repeats = TEXT_SPEED_FAST;
+                    break;
             }
 
-            switch (currChar)
+            // Loop 'repeats' times
+            for(i = 0; i < repeats; i++)
             {
-            case CHAR_NEWLINE:
-                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-                textPrinter->printerTemplate.currentY += (gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing);
-                return RENDER_REPEAT;
-            case PLACEHOLDER_BEGIN:
-                textPrinter->printerTemplate.currentChar++;
-                return RENDER_REPEAT;
-            case EXT_CTRL_CODE_BEGIN:
                 currChar = *textPrinter->printerTemplate.currentChar;
                 textPrinter->printerTemplate.currentChar++;
+
                 switch (currChar)
                 {
-                case EXT_CTRL_CODE_COLOR:
-                    textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_HIGHLIGHT:
-                    textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_SHADOW:
-                    textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-                    textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_PALETTE:
-                    textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_FONT:
-                    subStruct->fontId = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_RESET_FONT:
-                    subStruct->fontId = textPrinter->printerTemplate.fontId;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_PAUSE:
-                    textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    textPrinter->state = RENDER_STATE_PAUSE;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-                    textPrinter->state = RENDER_STATE_WAIT;
-                    if (gTextFlags.autoScroll)
-                        subStruct->autoScrollDelay = 0;
-                    return RENDER_UPDATE;
-                case EXT_CTRL_CODE_WAIT_SE:
-                    textPrinter->state = RENDER_STATE_WAIT_SE;
-                    return RENDER_UPDATE;
-                case EXT_CTRL_CODE_PLAY_BGM:
-                    currChar = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    currChar |= *textPrinter->printerTemplate.currentChar << 8;
-                    textPrinter->printerTemplate.currentChar++;
-                    PlayBGM(currChar);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_ESCAPE:
-                    currChar = *textPrinter->printerTemplate.currentChar | 0x100;
-                    textPrinter->printerTemplate.currentChar++;
-                    break;
-                case EXT_CTRL_CODE_PLAY_SE:
-                    currChar = *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    currChar |= (*textPrinter->printerTemplate.currentChar << 8);
-                    textPrinter->printerTemplate.currentChar++;
-                    PlaySE(currChar);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_SHIFT_RIGHT:
-                    textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_SHIFT_DOWN:
-                    textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar;
-                    textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_FILL_WINDOW:
-                    FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                case CHAR_NEWLINE:
                     textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-                    textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
+                    textPrinter->printerTemplate.currentY += (gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing);
                     return RENDER_REPEAT;
-                case EXT_CTRL_CODE_PAUSE_MUSIC:
-                    m4aMPlayStop(&gMPlayInfo_BGM);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_RESUME_MUSIC:
-                    m4aMPlayContinue(&gMPlayInfo_BGM);
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_CLEAR:
-                    width = *textPrinter->printerTemplate.currentChar;
+                case PLACEHOLDER_BEGIN:
                     textPrinter->printerTemplate.currentChar++;
-                    if (width > 0)
+                    return RENDER_REPEAT;
+                case EXT_CTRL_CODE_BEGIN:
+                    currChar = *textPrinter->printerTemplate.currentChar;
+                    textPrinter->printerTemplate.currentChar++;
+                    switch (currChar)
                     {
-                        ClearTextSpan(textPrinter, width);
-                        textPrinter->printerTemplate.currentX += width;
-                        return RENDER_PRINT;
+                    case EXT_CTRL_CODE_COLOR:
+                        textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_HIGHLIGHT:
+                        textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_SHADOW:
+                        textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
+                        textPrinter->printerTemplate.fgColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        textPrinter->printerTemplate.bgColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        textPrinter->printerTemplate.shadowColor = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        GenerateFontHalfRowLookupTable(textPrinter->printerTemplate.fgColor, textPrinter->printerTemplate.bgColor, textPrinter->printerTemplate.shadowColor);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_PALETTE:
+                        textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_FONT:
+                        subStruct->fontId = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_RESET_FONT:
+                        subStruct->fontId = textPrinter->printerTemplate.fontId;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_PAUSE:
+                        textPrinter->delayCounter = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        textPrinter->state = RENDER_STATE_PAUSE;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
+                        textPrinter->state = RENDER_STATE_WAIT;
+                        if (gTextFlags.autoScroll)
+                            subStruct->autoScrollDelay = 0;
+                        return RENDER_UPDATE;
+                    case EXT_CTRL_CODE_WAIT_SE:
+                        textPrinter->state = RENDER_STATE_WAIT_SE;
+                        return RENDER_UPDATE;
+                    case EXT_CTRL_CODE_PLAY_BGM:
+                        currChar = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        currChar |= *textPrinter->printerTemplate.currentChar << 8;
+                        textPrinter->printerTemplate.currentChar++;
+                        PlayBGM(currChar);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_ESCAPE:
+                        currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+                        textPrinter->printerTemplate.currentChar++;
+                        break;
+                    case EXT_CTRL_CODE_PLAY_SE:
+                        currChar = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        currChar |= (*textPrinter->printerTemplate.currentChar << 8);
+                        textPrinter->printerTemplate.currentChar++;
+                        PlaySE(currChar);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_SHIFT_RIGHT:
+                        textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x + *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_SHIFT_DOWN:
+                        textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y + *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_FILL_WINDOW:
+                        FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                        textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                        textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_PAUSE_MUSIC:
+                        m4aMPlayStop(&gMPlayInfo_BGM);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_RESUME_MUSIC:
+                        m4aMPlayContinue(&gMPlayInfo_BGM);
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_CLEAR:
+                        width = *textPrinter->printerTemplate.currentChar;
+                        textPrinter->printerTemplate.currentChar++;
+                        if (width > 0)
+                        {
+                            ClearTextSpan(textPrinter, width);
+                            textPrinter->printerTemplate.currentX += width;
+                            return RENDER_PRINT;
+                        }
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_SKIP:
+                        textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
+                        textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_CLEAR_TO:
+                        {
+                            widthHelper = *textPrinter->printerTemplate.currentChar;
+                            widthHelper += textPrinter->printerTemplate.x;
+                            textPrinter->printerTemplate.currentChar++;
+                            width = widthHelper - textPrinter->printerTemplate.currentX;
+                            if (width > 0)
+                            {
+                                ClearTextSpan(textPrinter, width);
+                                textPrinter->printerTemplate.currentX += width;
+                                return RENDER_PRINT;
+                            }
+                        }
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+                        textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_JPN:
+                        textPrinter->japanese = TRUE;
+                        return RENDER_REPEAT;
+                    case EXT_CTRL_CODE_ENG:
+                        textPrinter->japanese = FALSE;
+                        return RENDER_REPEAT;
                     }
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_SKIP:
-                    textPrinter->printerTemplate.currentX = *textPrinter->printerTemplate.currentChar + textPrinter->printerTemplate.x;
-                    textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_CLEAR_TO:
-                {
-                    widthHelper = *textPrinter->printerTemplate.currentChar;
-                    widthHelper += textPrinter->printerTemplate.x;
-                    textPrinter->printerTemplate.currentChar++;
-                    width = widthHelper - textPrinter->printerTemplate.currentX;
-                    if (width > 0)
-                    {
-                        ClearTextSpan(textPrinter, width);
-                        textPrinter->printerTemplate.currentX += width;
+                    break;
+                    case CHAR_PROMPT_CLEAR:
+                        textPrinter->state = RENDER_STATE_CLEAR;
+                        TextPrinterInitDownArrowCounters(textPrinter);
+                        return RENDER_UPDATE;
+                    case CHAR_PROMPT_SCROLL:
+                        textPrinter->state = RENDER_STATE_SCROLL_START;
+                        TextPrinterInitDownArrowCounters(textPrinter);
+                        return RENDER_UPDATE;
+                    case CHAR_EXTRA_SYMBOL:
+                        currChar = *textPrinter->printerTemplate.currentChar | 0x100;
+                        textPrinter->printerTemplate.currentChar++;
+                        break;
+                    case CHAR_KEYPAD_ICON:
+                        currChar = *textPrinter->printerTemplate.currentChar++;
+                        gCurGlyph.width = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
+                        textPrinter->printerTemplate.currentX += gCurGlyph.width + textPrinter->printerTemplate.letterSpacing;
                         return RENDER_PRINT;
+                    case EOS:
+                        return RENDER_FINISH;
                     }
-                }
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-                    textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_JPN:
-                    textPrinter->japanese = TRUE;
-                    return RENDER_REPEAT;
-                case EXT_CTRL_CODE_ENG:
-                    textPrinter->japanese = FALSE;
-                    return RENDER_REPEAT;
-                }
-                break;
-            case CHAR_PROMPT_CLEAR:
-                textPrinter->state = RENDER_STATE_CLEAR;
-                TextPrinterInitDownArrowCounters(textPrinter);
-                return RENDER_UPDATE;
-            case CHAR_PROMPT_SCROLL:
-                textPrinter->state = RENDER_STATE_SCROLL_START;
-                TextPrinterInitDownArrowCounters(textPrinter);
-                return RENDER_UPDATE;
-            case CHAR_EXTRA_SYMBOL:
-                currChar = *textPrinter->printerTemplate.currentChar | 0x100;
-                textPrinter->printerTemplate.currentChar++;
-                break;
-            case CHAR_KEYPAD_ICON:
-                currChar = *textPrinter->printerTemplate.currentChar++;
-                gCurGlyph.width = DrawKeypadIcon(textPrinter->printerTemplate.windowId, currChar, textPrinter->printerTemplate.currentX, textPrinter->printerTemplate.currentY);
-                textPrinter->printerTemplate.currentX += gCurGlyph.width + textPrinter->printerTemplate.letterSpacing;
-                return RENDER_PRINT;
-            case EOS:
-                return RENDER_FINISH;
-            }
 
-            switch (subStruct->fontId)
-            {
-            case FONT_SMALL:
-                DecompressGlyph_Small(currChar, textPrinter->japanese);
-                break;
-            case FONT_NORMAL:
-                DecompressGlyph_Normal(currChar, textPrinter->japanese);
-                break;
-            case FONT_SHORT:
-            case FONT_SHORT_COPY_1:
-            case FONT_SHORT_COPY_2:
-            case FONT_SHORT_COPY_3:
-                DecompressGlyph_Short(currChar, textPrinter->japanese);
-                break;
-            case FONT_NARROW:
-                DecompressGlyph_Narrow(currChar, textPrinter->japanese);
-                break;
-            case FONT_SMALL_NARROW:
-                DecompressGlyph_SmallNarrow(currChar, textPrinter->japanese);
-                break;
-            case FONT_NARROWER:
-                DecompressGlyph_Narrower(currChar, textPrinter->japanese);
-                break;
-            case FONT_SMALL_NARROWER:
-                DecompressGlyph_SmallNarrower(currChar, textPrinter->japanese);
-                break;
-            case FONT_SHORT_NARROW:
-                DecompressGlyph_ShortNarrow(currChar, textPrinter->japanese);
-                break;
-            case FONT_BRAILLE:
-                break;
-            }
-
-            CopyGlyphToWindow(textPrinter);
-
-            if (textPrinter->minLetterSpacing)
-            {
-                textPrinter->printerTemplate.currentX += gCurGlyph.width;
-                width = textPrinter->minLetterSpacing - gCurGlyph.width;
-                if (width > 0)
+                switch (subStruct->fontId)
                 {
-                    ClearTextSpan(textPrinter, width);
-                    textPrinter->printerTemplate.currentX += width;
+                case FONT_SMALL:
+                    DecompressGlyph_Small(currChar, textPrinter->japanese);
+                    break;
+                case FONT_NORMAL:
+                    DecompressGlyph_Normal(currChar, textPrinter->japanese);
+                    break;
+                case FONT_SHORT:
+                case FONT_SHORT_COPY_1:
+                case FONT_SHORT_COPY_2:
+                case FONT_SHORT_COPY_3:
+                    DecompressGlyph_Short(currChar, textPrinter->japanese);
+                    break;
+                case FONT_NARROW:
+                    DecompressGlyph_Narrow(currChar, textPrinter->japanese);
+                    break;
+                case FONT_SMALL_NARROW:
+                    DecompressGlyph_SmallNarrow(currChar, textPrinter->japanese);
+                    break;
+                case FONT_NARROWER:
+                    DecompressGlyph_Narrower(currChar, textPrinter->japanese);
+                    break;
+                case FONT_SMALL_NARROWER:
+                    DecompressGlyph_SmallNarrower(currChar, textPrinter->japanese);
+                    break;
+                case FONT_SHORT_NARROW:
+                    DecompressGlyph_ShortNarrow(currChar, textPrinter->japanese);
+                    break;
+                case FONT_BRAILLE:
+                    break;
                 }
-            }
-            else
-            {
-                if (textPrinter->japanese)
-                    textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
-                else
+
+                CopyGlyphToWindow(textPrinter);
+
+                if (textPrinter->minLetterSpacing)
+                {
                     textPrinter->printerTemplate.currentX += gCurGlyph.width;
+                    width = textPrinter->minLetterSpacing - gCurGlyph.width;
+                    if (width > 0)
+                    {
+                        ClearTextSpan(textPrinter, width);
+                        textPrinter->printerTemplate.currentX += width;
+                    }
+                }
+                else
+                {
+                    if (textPrinter->japanese)
+                        textPrinter->printerTemplate.currentX += (gCurGlyph.width + textPrinter->printerTemplate.letterSpacing);
+                    else
+                        textPrinter->printerTemplate.currentX += gCurGlyph.width;
+                }
             }
-        }
 
-        return RENDER_PRINT;
-    case RENDER_STATE_WAIT:
-        if (TextPrinterWait(textPrinter))
-            textPrinter->state = RENDER_STATE_HANDLE_CHAR;
-        return RENDER_UPDATE;
-    case RENDER_STATE_CLEAR:
-        if (TextPrinterWaitWithDownArrow(textPrinter))
-        {
-            FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-            textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-            textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
-            textPrinter->state = RENDER_STATE_HANDLE_CHAR;
-        }
-        return RENDER_UPDATE;
-    case RENDER_STATE_SCROLL_START:
-        if (TextPrinterWaitWithDownArrow(textPrinter))
-        {
-            TextPrinterClearDownArrow(textPrinter);
-            textPrinter->scrollDistance = gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing;
-            textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
-            textPrinter->state = RENDER_STATE_SCROLL;
-        }
-        return RENDER_UPDATE;
-    case RENDER_STATE_SCROLL:
-        if (textPrinter->scrollDistance)
-        {
-            int scrollSpeed = GetPlayerTextSpeed();
-            int speed = sWindowVerticalScrollSpeeds[scrollSpeed];
-            if (textPrinter->scrollDistance < speed)
+            return RENDER_PRINT;
+        case RENDER_STATE_WAIT:
+            if (TextPrinterWait(textPrinter))
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
+            return RENDER_UPDATE;
+        case RENDER_STATE_CLEAR:
+            if (TextPrinterWaitWithDownArrow(textPrinter))
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance = 0;
+                FillWindowPixelBuffer(textPrinter->printerTemplate.windowId, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                textPrinter->printerTemplate.currentY = textPrinter->printerTemplate.y;
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
+            }
+            return RENDER_UPDATE;
+        case RENDER_STATE_SCROLL_START:
+            if (TextPrinterWaitWithDownArrow(textPrinter))
+            {
+                TextPrinterClearDownArrow(textPrinter);
+                textPrinter->scrollDistance = gFonts[textPrinter->printerTemplate.fontId].maxLetterHeight + textPrinter->printerTemplate.lineSpacing;
+                textPrinter->printerTemplate.currentX = textPrinter->printerTemplate.x;
+                textPrinter->state = RENDER_STATE_SCROLL;
+            }
+            return RENDER_UPDATE;
+        case RENDER_STATE_SCROLL:
+            if (textPrinter->scrollDistance)
+            {
+                int scrollSpeed = GetPlayerTextSpeed();
+                int speed = sWindowVerticalScrollSpeeds[scrollSpeed];
+                if (textPrinter->scrollDistance < speed)
+                {
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, textPrinter->scrollDistance, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance = 0;
+                }
+                else
+                {
+                    ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
+                    textPrinter->scrollDistance -= speed;
+                }
+                CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
             }
             else
             {
-                ScrollWindow(textPrinter->printerTemplate.windowId, 0, speed, PIXEL_FILL(textPrinter->printerTemplate.bgColor));
-                textPrinter->scrollDistance -= speed;
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
             }
-            CopyWindowToVram(textPrinter->printerTemplate.windowId, COPYWIN_GFX);
-        }
-        else
-        {
-            textPrinter->state = RENDER_STATE_HANDLE_CHAR;
-        }
-        return RENDER_UPDATE;
-    case RENDER_STATE_WAIT_SE:
-        if (!IsSEPlaying())
-            textPrinter->state = RENDER_STATE_HANDLE_CHAR;
-        return RENDER_UPDATE;
-    case RENDER_STATE_PAUSE:
-        if (textPrinter->delayCounter != 0)
-            textPrinter->delayCounter--;
-        else
-            textPrinter->state = RENDER_STATE_HANDLE_CHAR;
-        return RENDER_UPDATE;
+            return RENDER_UPDATE;
+        case RENDER_STATE_WAIT_SE:
+            if (!IsSEPlaying())
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
+            return RENDER_UPDATE;
+        case RENDER_STATE_PAUSE:
+            if (textPrinter->delayCounter != 0)
+                textPrinter->delayCounter--;
+            else
+                textPrinter->state = RENDER_STATE_HANDLE_CHAR;
+            return RENDER_UPDATE;
     }
 
     return RENDER_FINISH;
@@ -1570,13 +1565,10 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 isJapanese = 0;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
-                if (letterSpacing == -1)
-                {
-                    localLetterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
-                }
-                else
-                {
-                    localLetterSpacing = letterSpacing;
+                if (letterSpacing == -1){
+                   localLetterSpacing = GetFontAttribute(fontId, FONTATTR_LETTER_SPACING);
+                } else {
+                   localLetterSpacing = letterSpacing;
                 }
                 break;
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
@@ -1735,7 +1727,8 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             pixels += 0x40;
             break;
         }
-    } while (temp != EOS);
+    }
+    while (temp != EOS);
 
     RestoreTextColors(&colorBackup[0], &colorBackup[1], &colorBackup[2]);
     return 1;
@@ -1782,30 +1775,30 @@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
     int result = 0;
     switch (attributeId)
     {
-    case FONTATTR_MAX_LETTER_WIDTH:
-        result = sFontInfos[fontId].maxLetterWidth;
-        break;
-    case FONTATTR_MAX_LETTER_HEIGHT:
-        result = sFontInfos[fontId].maxLetterHeight;
-        break;
-    case FONTATTR_LETTER_SPACING:
-        result = sFontInfos[fontId].letterSpacing;
-        break;
-    case FONTATTR_LINE_SPACING:
-        result = sFontInfos[fontId].lineSpacing;
-        break;
-    case FONTATTR_UNKNOWN:
-        result = sFontInfos[fontId].unk;
-        break;
-    case FONTATTR_COLOR_FOREGROUND:
-        result = sFontInfos[fontId].fgColor;
-        break;
-    case FONTATTR_COLOR_BACKGROUND:
-        result = sFontInfos[fontId].bgColor;
-        break;
-    case FONTATTR_COLOR_SHADOW:
-        result = sFontInfos[fontId].shadowColor;
-        break;
+        case FONTATTR_MAX_LETTER_WIDTH:
+            result = sFontInfos[fontId].maxLetterWidth;
+            break;
+        case FONTATTR_MAX_LETTER_HEIGHT:
+            result = sFontInfos[fontId].maxLetterHeight;
+            break;
+        case FONTATTR_LETTER_SPACING:
+            result = sFontInfos[fontId].letterSpacing;
+            break;
+        case FONTATTR_LINE_SPACING:
+            result = sFontInfos[fontId].lineSpacing;
+            break;
+        case FONTATTR_UNKNOWN:
+            result = sFontInfos[fontId].unk;
+            break;
+        case FONTATTR_COLOR_FOREGROUND:
+            result = sFontInfos[fontId].fgColor;
+            break;
+        case FONTATTR_COLOR_BACKGROUND:
+            result = sFontInfos[fontId].bgColor;
+            break;
+        case FONTATTR_COLOR_SHADOW:
+            result = sFontInfos[fontId].shadowColor;
+            break;
     }
     return result;
 }
@@ -1950,8 +1943,8 @@ static void DecompressGlyph_Short(u16 glyphId, bool32 isJapanese)
         glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);     // gCurGlyph + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8); // gCurGlyph + 0x60
+        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);    // gCurGlyph + 0x20
+        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);    // gCurGlyph + 0x60
         gCurGlyph.width = gFontShortJapaneseGlyphWidths[glyphId];
         gCurGlyph.height = 14;
     }
@@ -2131,8 +2124,8 @@ static void DecompressGlyph_ShortNarrow(u16 glyphId, bool32 isJapanese)
         glyphs = gFontShortJapaneseGlyphs + (0x100 * (glyphId >> 0x3)) + (0x10 * (glyphId & 0x7));
         DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
         DecompressGlyphTile(glyphs + 0x8, gCurGlyph.gfxBufferTop + 8);
-        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);     // gCurGlyph + 0x20
-        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8); // gCurGlyph + 0x60
+        DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);    // gCurGlyph + 0x20
+        DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);    // gCurGlyph + 0x60
         gCurGlyph.width = gFontShortJapaneseGlyphWidths[glyphId];
         gCurGlyph.height = 14;
     }
@@ -2167,20 +2160,20 @@ static u32 GetGlyphWidth_ShortNarrow(u16 glyphId, bool32 isJapanese)
 }
 
 static const s8 sNarrowerFontIds[] =
-    {
-        [FONT_SMALL] = FONT_SMALL_NARROW,
-        [FONT_NORMAL] = FONT_NARROW,
-        [FONT_SHORT] = FONT_SHORT_NARROW,
-        [FONT_SHORT_COPY_1] = FONT_SHORT_NARROW,
-        [FONT_SHORT_COPY_2] = FONT_SHORT_NARROW,
-        [FONT_SHORT_COPY_3] = FONT_SHORT_NARROW,
-        [FONT_BRAILLE] = -1,
-        [FONT_NARROW] = FONT_NARROWER,
-        [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
-        [FONT_BOLD] = -1,
-        [FONT_NARROWER] = -1,
-        [FONT_SMALL_NARROWER] = -1,
-        [FONT_SHORT_NARROW] = -1,
+{
+    [FONT_SMALL] = FONT_SMALL_NARROW,
+    [FONT_NORMAL] = FONT_NARROW,
+    [FONT_SHORT] = FONT_SHORT_NARROW,
+    [FONT_SHORT_COPY_1] = FONT_SHORT_NARROW,
+    [FONT_SHORT_COPY_2] = FONT_SHORT_NARROW,
+    [FONT_SHORT_COPY_3] = FONT_SHORT_NARROW,
+    [FONT_BRAILLE] = -1,
+    [FONT_NARROW] = FONT_NARROWER,
+    [FONT_SMALL_NARROW] = FONT_SMALL_NARROWER,
+    [FONT_BOLD] = -1,
+    [FONT_NARROWER] = -1,
+    [FONT_SMALL_NARROWER] = -1,
+    [FONT_SHORT_NARROW] = -1,
 };
 
 // If the narrowest font ID doesn't fit the text, we still return that
