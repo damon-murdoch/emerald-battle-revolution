@@ -320,7 +320,7 @@ static void DestroyMoveSelectorSprites(u8);
 static void SetMainMoveSelectorColor(u8);
 static void KeepMoveSelectorVisible(u8);
 static void SummaryScreen_DestroyAnimDelayTask(void);
-static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n);
+static void BufferStat(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n);
 static void BufferIvOrEvStats(u8 mode);
 
 static const struct BgTemplate sBgTemplates[] =
@@ -2827,10 +2827,7 @@ static void ResetWindows(void)
 
 static void PrintTextOnWindowWithFont(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId, u32 fontId)
 {
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_SUMMARY)
-        AddTextPrinterParameterized4(windowId, fontId, x, y, 0, lineSpacing, sTextColors[colorId], 0, MirrorPtr(string));
-    else
-        AddTextPrinterParameterized4(windowId, fontId, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
 }
 
 static void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
@@ -3289,7 +3286,7 @@ static void PrintMonTrainerMemo(void)
 static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.nature]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNaturesInfo[sumStruct->summary.nature].name);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString5);
 }
 
@@ -3506,19 +3503,21 @@ static void PrintRibbonCount(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, x, 1, 0, 0);
 }
 
-static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
+static void BufferStat(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n)
 {
     static const u8 sTextNatureDown[] = _("{COLOR}{08}");
     static const u8 sTextNatureUp[] = _("{COLOR}{05}");
     static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
     u8 *txtPtr;
 
-    if (natureMod == 0 || !SUMMARY_SCREEN_NATURE_COLORS)
+    if (statIndex == 0 || !SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureNeutral);
-    else if (natureMod > 0)
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp)
         txtPtr = StringCopy(dst, sTextNatureUp);
-    else
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureDown);
+    else
+        txtPtr = StringCopy(dst, sTextNatureNeutral);
 
     ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
@@ -3528,7 +3527,6 @@ static void BufferIvOrEvStats(u8 mode)
 {
     u16 hp, hp2, atk, def, spA, spD, spe;
     u8 *currHPString = Alloc(20);
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
 
     switch (mode)
     {
@@ -3586,14 +3584,14 @@ static void BufferIvOrEvStats(u8 mode)
     default:
         BufferStat(currHPString, 0, hp, 0, 3);
         BufferStat(gStringVar1, 0, hp2, 1, 3);
-        BufferStat(gStringVar2, natureMod[STAT_ATK - 1], atk, 2, 7);
-        BufferStat(gStringVar3, natureMod[STAT_DEF - 1], def, 3, 7);
+        BufferStat(gStringVar2, STAT_ATK, atk, 2, 7);
+        BufferStat(gStringVar3, STAT_DEF, def, 3, 7);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
         PrintLeftColumnStats();
 
-        BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], spA, 0, 3);
-        BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], spD, 1, 3);
-        BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], spe, 2, 3);
+        BufferStat(gStringVar1, STAT_SPATK, spA, 0, 3);
+        BufferStat(gStringVar2, STAT_SPDEF, spD, 1, 3);
+        BufferStat(gStringVar3, STAT_SPEED, spe, 2, 3);
         DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
         PrintRightColumnStats();
         break;
@@ -3608,7 +3606,6 @@ static void BufferLeftColumnStats(void)
     u8 *maxHPString = Alloc(20);
     u8 *attackString = Alloc(20);
     u8 *defenseString = Alloc(20);
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
 
 	u8 hpIV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_HP_IV);
 	u8 atkIV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_ATK_IV);
@@ -3633,11 +3630,11 @@ static void BufferLeftColumnStats(void)
 		DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayoutIVEV);
 	}
 	else {
-		BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
-		BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
-		BufferStat(attackString, natureMod[STAT_ATK - 1], sMonSummaryScreen->summary.atk, 2, 7);
-		BufferStat(defenseString, natureMod[STAT_DEF - 1], sMonSummaryScreen->summary.def, 3, 7);
-		DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
+        BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
+        BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
+        BufferStat(attackString, STAT_ATK, sMonSummaryScreen->summary.atk, 2, 7);
+        BufferStat(defenseString, STAT_DEF, sMonSummaryScreen->summary.def, 3, 7);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
 	}
 
     Free(currentHPString);
@@ -3661,8 +3658,6 @@ static void BufferRightColumnStats(void)
 	u8 spDEV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPDEF_EV);
 	u8 speEV = GetMonData(&sMonSummaryScreen->currentMon, MON_DATA_SPEED_EV);
 
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
-
     DynamicPlaceholderTextUtil_Reset();    
 	
 	if (gMain.heldKeys & R_BUTTON) {
@@ -3676,9 +3671,9 @@ static void BufferRightColumnStats(void)
 		BufferStat(gStringVar3, 0, speEV, 2, 3);
 	}
 	else {
-		BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
-		BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
-		BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
+        BufferStat(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
+        BufferStat(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
+        BufferStat(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
 	}
 	
 	DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
