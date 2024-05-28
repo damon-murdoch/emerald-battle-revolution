@@ -264,6 +264,12 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.4.2
+
+Merged upstream changes, fixed issue with text rendering, implemented game versioning system
+which will be used for preventing battling and trading with unofficial versions in the future, 
+fixed bugs related to the battle frontier underground link / cable club rooms
+
 ### Ver. 1.4.1
 
 Expanded shops to allow for the purchasing of individual sets from a team, as well as expanded
