@@ -118,7 +118,7 @@ static u8 GetRubyTrainerStars(struct TrainerCard *);
 static u16 GetCaughtMonsCount(void);
 static void SetPlayerCardData(struct TrainerCard *, u8);
 static void TrainerCard_GenerateCardForPlayer(struct TrainerCard *);
-static u8 VersionToCardType(u8);
+static u8 VersionToCardType(u8 version, u8 versionModifier);
 static void SetDataFromTrainerCard(void);
 static void InitGpuRegs(void);
 static void ResetGpuRegs(void);
@@ -777,7 +777,8 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
 {
     memset(trainerCard, 0, 0x60);
     trainerCard->version = GAME_VERSION;
-    SetPlayerCardData(trainerCard, CARD_TYPE_EMERALD);
+    trainerCard->versionModifier = VERSION_MODIFIER;
+    SetPlayerCardData(trainerCard, VersionToCardType(GAME_VERSION, VERSION_MODIFIER));
     trainerCard->linkHasAllFrontierSymbols = HasAllFrontierSymbols();
     *((u16 *)&trainerCard->linkPoints.frontier) = gSaveBlock2Ptr->frontier.cardBattlePoints;
     if (trainerCard->linkHasAllFrontierSymbols)
@@ -789,12 +790,12 @@ void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *trainerCard)
         trainerCard->unionRoomClass = gUnionRoomFacilityClasses[trainerCard->trainerId % NUM_UNION_ROOM_CLASSES];
 }
 
-void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion)
+void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion, u8 versionModifier)
 {
     memset(dst, 0, sizeof(struct TrainerCard));
     dst->version = gameVersion;
 
-    switch (VersionToCardType(gameVersion))
+    switch (VersionToCardType(gameVersion, versionModifier))
     {
     case CARD_TYPE_FRLG:
         memcpy(dst, src, 0x60);
@@ -1869,7 +1870,7 @@ static u8 GetSetCardType(void)
     }
 }
 
-static u8 VersionToCardType(u8 version)
+static u8 VersionToCardType(u8 version, u8 versionModifier)
 {
     if (version == VERSION_FIRE_RED || version == VERSION_LEAF_GREEN)
         return CARD_TYPE_FRLG;

@@ -56,6 +56,7 @@ struct TrainerCard
     /*0x4E*/ u8 monIconTint; // FRLG only
     /*0x4F*/ u8 unionRoomClass;
     /*0x50*/ u8 stickers[TRAINER_CARD_STICKER_TYPES]; // FRLG only
+    /*0x53*/ u8 versionModifier;
     /*0x54*/ u16 monSpecies[PARTY_SIZE]; // FRLG only
              // Note: Link players use linkHasAllFrontierSymbols, not the field below,
              // which they use for a Wonder Card flag id instead (see CreateTrainerCardInBuffer)
@@ -67,7 +68,7 @@ extern struct TrainerCard gTrainerCards[4];
 
 u32 CountPlayerTrainerStars(void);
 u8 GetTrainerCardStars(u8 cardId);
-void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion);
+void CopyTrainerCardData(struct TrainerCard *dst, struct TrainerCard *src, u8 gameVersion, u8 versionModifier);
 void ShowPlayerTrainerCard(void (*callback)(void));
 void ShowTrainerCardInLink(u8 cardId, void (*callback)(void));
 void TrainerCard_GenerateCardForLinkPlayer(struct TrainerCard *);
