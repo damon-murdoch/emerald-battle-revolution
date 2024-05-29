@@ -70,7 +70,7 @@
 #define IS_END_OF_TURN_ABILITY(a) ((a == ABILITY_MOODY) || (a == ABILITY_POISON_HEAL) || (a == ABILITY_SPEED_BOOST))
 
 #define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
-#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
+#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_MINUS_2) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
 
 // *** TYPE ***
 #define IS_TYPE(x,y,type) ((x) == (type) || (y) == (type))
@@ -201,9 +201,10 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
     {
         case FRONTIER_LVL_50: {
             #if BFG_LVL_50_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
+            {
+                return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvl50[i] != SPECIES_NONE; i++)
@@ -213,9 +214,10 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_OPEN: {
             #if BFG_LVL_OPEN_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++) 
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
+            {
+                return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlOpen[i] != SPECIES_NONE; i++)
@@ -225,9 +227,10 @@ static bool8 SpeciesValidForFrontierLevel(u16 speciesId)
         }; break;
         case FRONTIER_LVL_TENT: {
             #if BFG_LVL_TENT_ALLOW_BANNED_SPECIES == FALSE
-            for(i=0; gFrontierBannedSpecies[i] != SPECIES_END; i++)
-                if (gFrontierBannedSpecies[i] == speciesId)
-                    return FALSE; // Species banned
+            if (gSpeciesInfo[speciesId].isFrontierBanned == TRUE)
+            {
+                return FALSE; // Species banned
+            }
             #endif
             #if BFG_USE_CUSTOM_BANNED_SPECIES
             for(i=0; customBannedSpeciesLvlTent[i] != SPECIES_NONE; i++)
@@ -998,7 +1001,7 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
             if (!isStab)
                 rating += BFG_MOVE_ABILITY_MODIFIER;
             break;
-            case ABILITY_AERILATE:
+        case ABILITY_AERILATE:
         case ABILITY_PIXILATE:
         case ABILITY_REFRIGERATE:
         case ABILITY_GALVANIZE:
@@ -2801,7 +2804,7 @@ bool32 GenerateTrainerPokemonHandleForme(struct Pokemon * mon, u16 speciesId, st
                 #if B_FLAG_DYNAMAX_BATTLE != 0
                 case FORM_CHANGE_BATTLE_GIGANTAMAX: {
                     if (FlagGet(B_FLAG_DYNAMAX_BATTLE) && ((properties->fixedIV) >= BFG_ITEM_IV_ALLOW_GMAX) && ((properties->allowGmax) == TRUE))
-                        forme = j;
+                        forme = i;
                 }; break;
                 #endif
                 case FORM_CHANGE_BATTLE_PRIMAL_REVERSION: {
@@ -3494,6 +3497,28 @@ bool8 FrontierBattlerCanUseZMove()
     #else // Default
     return TRUE; 
     #endif
+}
+
+bool8 FrontierBattlerCanTerastalise()
+{
+    #if FLAG_BATTLE_FRONTIER_ALLOW_TERA != 0
+    return FlagGet(FLAG_BATTLE_FRONTIER_ALLOW_TERA);
+    #else // Default
+    return TRUE; 
+    #endif
+}
+
+bool8 FrontierBattlerShouldTerastal(struct Pokemon * mon)
+{
+    // Get the species for the Pokemon
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
+    u8 type = GetMonData(mon, MON_DATA_TERA_TYPE);
+
+    // Same-type terastal
+    if (IS_STAB(species, type))
+        return RANDOM_CHANCE(BFG_RANDOM_STAB_TERA_CHANCE);
+    else // Non-stab tera
+        return RANDOM_CHANCE(BFG_RANDOM_TERA_CHANCE);
 }
 
 bool8 FrontierBattlerCanDynamax(struct Pokemon * mon)

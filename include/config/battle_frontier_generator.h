@@ -28,6 +28,9 @@
 #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
 #define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
 
+#define BFG_RANDOM_STAB_TERA_CHANCE 2   // 1/2 chance for stab tera
+#define BFG_RANDOM_TERA_CHANCE 4        // 1/4 chance for non-stab tera
+
 #define BFG_RANDOM_GIGANTAMAX_CHANCE 1  // 1/x Chance for a Pokemon to Gigantamax
 #define BFG_RANDOM_DYNAMAX_CHANCE 4     // 1/x Chance for a Pokemon to Dynamax
 

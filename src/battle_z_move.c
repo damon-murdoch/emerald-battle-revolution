@@ -33,6 +33,7 @@
 #include "battle_debug.h"
 #include "data.h"
 #include "pokemon_summary_screen.h"
+#include "event_data.h"
 #include "constants/songs.h"
 #include "constants/items.h"
 #include "constants/species.h"
@@ -721,4 +722,3 @@ u16 GetZMovePower(u16 move)
             return 100;
     }
 }
-

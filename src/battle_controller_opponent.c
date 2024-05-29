@@ -39,7 +39,6 @@
 #include "constants/trainers.h"
 #include "trainer_hill.h"
 #include "test_runner.h"
-#include "config/dynamax.h"
 
 #include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
@@ -566,7 +565,7 @@ static void OpponentHandleChooseMove(u32 battler)
                     else if (CanUltraBurst(battler))
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                     // If opponent can Dynamax and is allowed in the partydata, do it.
-                    else if (DB_ALLOW_OPPONENT_DYNAMAX && CanDynamax(battler) && AI_DATA->shouldDynamax[battler])
+                    else if (CanDynamax(battler) && AI_DATA->shouldDynamax[battler])
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
                     // If opponent can Terastal and is allowed in the partydata, do it.
                     else if (CanTerastallize(battler) && AI_DATA->shouldTerastal[battler])
