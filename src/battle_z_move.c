@@ -731,4 +731,3 @@ u16 GetZMovePower(u16 move)
             return 100;
     }
 }
-
