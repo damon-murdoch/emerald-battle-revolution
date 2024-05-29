@@ -132,6 +132,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .metronomeBanned = TRUE,
         .mirrorMoveBanned = TRUE,
         .sketchBanned = TRUE,
+        .assistBanned = TRUE,
     },
 
     [MOVE_POUND] =
@@ -4529,7 +4530,9 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_FEINT_ATTACK] =
     {
         .name = COMPOUND_STRING("Feint Attack"),
-        .description = sFeintDescription,
+        .description = COMPOUND_STRING(
+            "Draws the foe close, then\n"
+            "strikes without fail."),
         .effect = EFFECT_HIT,
         .power = 60,
         .type = TYPE_DARK,
@@ -6358,7 +6361,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_WILL_O_WISP] =
     {
-        .name = COMPOUND_STRING("Will-o-Wisp"),
+        .name = COMPOUND_STRING("Will-O-Wisp"),
         .description = COMPOUND_STRING(
             "Inflicts a burn on the foe\n"
             "with intense fire."),
@@ -7670,7 +7673,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .makesContact = B_UPDATED_MOVE_DATA < GEN_4,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -8588,7 +8591,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -8807,9 +8810,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
     [MOVE_FEINT] =
     {
         .name = COMPOUND_STRING("Feint"),
-        .description = COMPOUND_STRING(
-            "An attack that hits foes\n"
-            "using moves like Protect."),
+        .description = sFeintDescription,
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 30 : 50,
         .type = TYPE_NORMAL,
@@ -10083,7 +10084,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .type = TYPE_ICE,
         .accuracy = 100,
         .pp = 10,
-        .target = MOVE_TARGET_BOTH,
+        .target = MOVE_TARGET_SELECTED,
         .priority = -4,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
@@ -10455,7 +10456,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -10525,7 +10526,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -12503,7 +12504,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Stomps down on the ground.\n"
             "Lowers Speed."),
-        .effect = EFFECT_BULLDOZE,
+        .effect = EFFECT_EARTHQUAKE,
         .power = 60,
         .type = TYPE_GROUND,
         .accuracy = 100,
@@ -14114,6 +14115,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Whips up a storm of\n"
             "diamonds. May up Defense."),
+        .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_ROCK,
         .accuracy = 95,
@@ -14160,7 +14162,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
 
     [MOVE_HYPERSPACE_HOLE] =
     {
-        .name = HANDLE_EXPANDED_MOVE_NAME("HyprspceHole", "Hyprspace Hole"),
+        .name = HANDLE_EXPANDED_MOVE_NAME("HyprspceHole", "Hyperspace Hole"),
         .description = sHyperspaceHoleDescription,
         .effect = EFFECT_HIT,
         .power = 80,
@@ -15739,7 +15741,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .category = DAMAGE_CATEGORY_SPECIAL,
         .metronomeBanned = TRUE,
         .additionalEffects = ADDITIONAL_EFFECTS({
-            .moveEffect = MOVE_EFFECT_SP_ATK_TWO_DOWN,
+            .moveEffect = MOVE_EFFECT_SP_ATK_MINUS_2,
             .self = TRUE,
         }),
         .contestEffect = CONTEST_EFFECT_USER_MORE_EASILY_STARTLED,
@@ -16584,7 +16586,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "The user attacks twice. Two\n"
             "targets are hit once each."),
-        .effect = EFFECT_HIT, // TODO: EFFECT_DRAGON_DARTS
+        .effect = EFFECT_DRAGON_DARTS,
         .power = 50,
         .type = TYPE_DRAGON,
         .accuracy = 100,
@@ -18440,7 +18442,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "If the user's Terastallized,\n"
             "it hits with its Tera-type."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_TERA_BLAST,
+        .effect = EFFECT_TERA_BLAST,
         .power = 80,
         .type = TYPE_NORMAL,
         .accuracy = 100,
@@ -18449,6 +18451,10 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .forcePressure = TRUE,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_TERA_BLAST,
+            .self = TRUE,
+        }),
     },
 
     [MOVE_SILK_TRAP] =
@@ -18571,7 +18577,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Sharply ups target's Attack,\n"
             "harshly lowers its Defense."),
-        .effect = EFFECT_PLACEHOLDER, // EFFECT_SPICY_EXTRACT
+        .effect = EFFECT_SPICY_EXTRACT,
         .power = 0,
         .type = TYPE_GRASS,
         .accuracy = 0,
@@ -18722,7 +18728,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .name = COMPOUND_STRING("Mortal Spin"),
         .description = COMPOUND_STRING(
             "Erases trap moves and Leech\n"
-            "Seed. Poisons adjecent foes."),
+            "Seed. Poisons adjacent foes."),
         .effect = EFFECT_HIT,
         .power = 30,
         .type = TYPE_POISON,
@@ -19559,12 +19565,12 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_DYNAMAX] =
         .description = COMPOUND_STRING(
             "Damages all opponents if user is\n"
             "Stellar form Terapagos."),
-        .effect = EFFECT_PLACEHOLDER, //EFFECT_TERA_STARSTORM
+        .effect = EFFECT_TERA_STARSTORM,
         .power = 120,
-        .type = TYPE_NORMAL, // Stellar type if used by Terapagos-Stellar
+        .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
-        .target = MOVE_TARGET_SELECTED, // MOVE_TARGET_BOTH if used by Terapagos-Stellar
+        .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
         .assistBanned = TRUE,

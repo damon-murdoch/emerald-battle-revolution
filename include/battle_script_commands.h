@@ -52,13 +52,13 @@ void StealTargetItem(u8 battlerStealer, u8 battlerItem);
 u8 GetCatchingBattler(void);
 u32 GetHighestStatId(u32 battlerId);
 bool32 ProteanTryChangeType(u32 battler, u32 ability, u32 move, u32 moveType);
+bool32 ShouldTeraShellDistortTypeMatchups(u32 move, u32 battlerDef);
 bool32 IsMoveNotAllowedInSkyBattles(u32 move);
 bool32 DoSwitchInAbilities(u32 battlerId);
 u8 GetFirstFaintedPartyIndex(u8 battlerId);
 bool32 IsMoveAffectedByParentalBond(u32 move, u32 battler);
 
 extern void (* const gBattleScriptingCommandsTable[])(void);
-extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
 extern const struct StatFractions gAccuracyStageRatios[];
 
 #endif // GUARD_BATTLE_SCRIPT_COMMANDS_H

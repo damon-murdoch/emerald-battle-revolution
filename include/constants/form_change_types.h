@@ -61,7 +61,7 @@
 #define FORM_CHANGE_END_BATTLE_TERRAIN          8
 
 // Form change that activates when the Pokémon is switched out in battle.
-// - No parameters.
+// param1: ability to check, optional
 #define FORM_CHANGE_BATTLE_SWITCH               9
 
 // Form change that activates when the Pokémon's HP % passes a certain threshold.
@@ -119,5 +119,8 @@
 // Form change that activates when inflicted with a specific status
 // param1: status
 #define FORM_CHANGE_STATUS                      20
+
+// Form change that activates after move is used. Currently only used for activating Gulp Missile.
+#define FORM_CHANGE_HIT_BY_MOVE                     21
 
 #endif // GUARD_CONSTANTS_FORM_CHANGE_TYPES_H

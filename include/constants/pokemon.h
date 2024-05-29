@@ -22,7 +22,8 @@
 #define TYPE_DRAGON           16
 #define TYPE_DARK             17
 #define TYPE_FAIRY            18
-#define NUMBER_OF_MON_TYPES   19
+#define TYPE_STELLAR          19
+#define NUMBER_OF_MON_TYPES   20
 
 // Pokémon egg groups
 #define EGG_GROUP_NONE                0
@@ -291,10 +292,10 @@
 #define EVO_MOVE_THREE_SEGMENT            44     // Pokémon levels up, knows specified move, has a personality value with a modulus of 1-99
 #define EVO_LEVEL_FAMILY_OF_THREE         45     // Pokémon reaches the specified level with a personality value with a modulus of 0
 #define EVO_LEVEL_FAMILY_OF_FOUR          46     // Pokémon reaches the specified level with a personality value with a modulus of 1-99
-#define EVO_LEVEL_MOVE_TWENTY_TIMES       47     // Pokémon levels up after having used a move for at least 20 times
-#define EVO_LEVEL_RECOIL_DAMAGE_MALE      48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
-#define EVO_LEVEL_RECOIL_DAMAGE_FEMALE    49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
-#define EVO_LEVEL_ITEM_COUNT_999          50     // Pokémon levels up after trainer has collected 999 of a specific item
+#define EVO_USE_MOVE_TWENTY_TIMES         47     // Pokémon levels up after having used a move for at least 20 times
+#define EVO_RECOIL_DAMAGE_MALE            48     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a male
+#define EVO_RECOIL_DAMAGE_FEMALE          49     // Pokémon levels up after having suffered specified amount of non-fainting recoil damage as a female
+#define EVO_ITEM_COUNT_999                50     // Pokémon levels up after trainer has collected 999 of a specific item
 
 // Evolution 'modes,' for GetEvolutionTargetSpecies
 #define EVO_MODE_NORMAL            0

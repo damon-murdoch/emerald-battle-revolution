@@ -39,6 +39,7 @@
 #include "constants/trainers.h"
 #include "trainer_hill.h"
 #include "test_runner.h"
+#include "config/dynamax.h"
 
 #include "config/battle_frontier_generator.h"
 #include "battle_frontier_generator.h"
@@ -548,21 +549,6 @@ static void OpponentHandleChooseMove(u32 battler)
             default:
                 {
                     u16 chosenMove = moveInfo->moves[chosenMoveId];
-                    bool32 isSecondTrainer = (GetBattlerPosition(battler) == B_POSITION_OPPONENT_RIGHT) && (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && !BATTLE_TWO_VS_ONE_OPPONENT;
-                    u16 trainerId = isSecondTrainer ? gTrainerBattleOpponent_B : gTrainerBattleOpponent_A;
-                    const struct TrainerMon *party = GetTrainerPartyFromId(trainerId);
-                    bool32 shouldDynamax = FALSE;
-                    if (party != NULL)
-                    {
-                        #if BFG_FLAG_FRONTIER_GENERATOR != 0
-                        if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR))
-                            shouldDynamax = FrontierBattlerShouldDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]]));
-                        else // Normal opponent
-                        #endif
-                        shouldDynamax = party[isSecondTrainer ? gBattlerPartyIndexes[battler] - MULTI_PARTY_SIZE : gBattlerPartyIndexes[battler]].shouldDynamax;
-                    }
-                        
-
                     if (GetBattlerMoveTargetType(battler, chosenMove) & (MOVE_TARGET_USER_OR_SELECTED | MOVE_TARGET_USER))
                         gBattlerTarget = battler;
                     if (GetBattlerMoveTargetType(battler, chosenMove) & MOVE_TARGET_BOTH)
@@ -580,8 +566,11 @@ static void OpponentHandleChooseMove(u32 battler)
                     else if (CanUltraBurst(battler))
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_ULTRA_BURST) | (gBattlerTarget << 8));
                     // If opponent can Dynamax and is allowed in the partydata, do it.
-                    else if (CanDynamax(battler) && shouldDynamax)
+                    else if (DB_ALLOW_OPPONENT_DYNAMAX && CanDynamax(battler) && AI_DATA->shouldDynamax[battler])
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_DYNAMAX) | (gBattlerTarget << 8));
+                    // If opponent can Terastal and is allowed in the partydata, do it.
+                    else if (CanTerastallize(battler) && AI_DATA->shouldTerastal[battler])
+                        BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (RET_TERASTAL) | (gBattlerTarget << 8));
                     else
                         BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, (chosenMoveId) | (gBattlerTarget << 8));
                 }

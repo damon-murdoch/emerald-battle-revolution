@@ -32,9 +32,6 @@
 // We define these when using certain IDEs to fool preproc
 #define _(x)        {x}
 #define __(x)       {x}
-// Like the above, but prepends a fixed-case character
-#define _C(x)       {x}
-#define __C(x)      {x}
 #define INCBIN(...) {0}
 #define INCBIN_U8   INCBIN
 #define INCBIN_U16  INCBIN
@@ -285,7 +282,7 @@ struct BattleTowerPokemon
     u32 gap:1;
     u32 abilityNum:1;
     u32 personality;
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 nickname[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 friendship;
 };
 
@@ -310,7 +307,7 @@ struct BattleTowerInterview
     u16 playerSpecies;
     u16 opponentSpecies;
     u8 opponentName[PLAYER_NAME_LENGTH + 1];
-    u8 opponentMonNickname[POKEMON_NAME_LENGTH + 1];
+    u8 opponentMonNickname[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 opponentLanguage;
 };
 
@@ -744,7 +741,7 @@ struct ContestWinner
     u32 trainerId;
     u16 species;
     u8 contestCategory;
-    u8 monName[POKEMON_NAME_LENGTH + 1];
+    u8 monName[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 trainerName[PLAYER_NAME_LENGTH + 1];
     u8 contestRank:7;
     bool8 isShiny:1;
@@ -764,7 +761,7 @@ struct DaycareMail
 {
     struct Mail message;
     u8 otName[PLAYER_NAME_LENGTH + 1];
-    u8 monName[POKEMON_NAME_LENGTH + 1];
+    u8 monName[VANILLA_POKEMON_NAME_LENGTH + 1];
     u8 gameLanguage:4;
     u8 monLanguage:4;
 };
@@ -1093,7 +1090,5 @@ struct MapPosition
     s16 y;
     s8 elevation;
 };
-
-extern u8 gStackBase[]; // Start of stack-allocated IWRAM
 
 #endif // GUARD_GLOBAL_H

@@ -891,6 +891,10 @@ static const union AnimCmd sSpriteAnim_TypeFairy[] = {
     ANIMCMD_FRAME(TYPE_FAIRY * 8, 0, FALSE, FALSE),
     ANIMCMD_END
 };
+static const union AnimCmd sSpriteAnim_TypeStellar[] = {
+    ANIMCMD_FRAME(TYPE_STELLAR * 8, 0, FALSE, FALSE),
+    ANIMCMD_END
+};
 static const union AnimCmd sSpriteAnim_CategoryCool[] = {
     ANIMCMD_FRAME((CONTEST_CATEGORY_COOL + NUMBER_OF_MON_TYPES) * 8, 0, FALSE, FALSE),
     ANIMCMD_END
@@ -931,6 +935,7 @@ static const union AnimCmd *const sSpriteAnimTable_MoveTypes[NUMBER_OF_MON_TYPES
     sSpriteAnim_TypeDragon,
     sSpriteAnim_TypeDark,
     sSpriteAnim_TypeFairy,
+    sSpriteAnim_TypeStellar,
     sSpriteAnim_CategoryCool,
     sSpriteAnim_CategoryBeauty,
     sSpriteAnim_CategoryCute,
@@ -2795,12 +2800,25 @@ static void ResetWindows(void)
         sMonSummaryScreen->windowIds[i] = WINDOW_NONE;
 }
 
+static void PrintTextOnWindowWithFont(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId, u32 fontId)
+{
+    AddTextPrinterParameterized4(windowId, fontId, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
+}
+
 static void PrintTextOnWindow(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
 {
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_SUMMARY)
-        AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, lineSpacing, sTextColors[colorId], 0, MirrorPtr(string));
-    else
-        AddTextPrinterParameterized4(windowId, FONT_NORMAL, x, y, 0, lineSpacing, sTextColors[colorId], 0, string);
+    PrintTextOnWindowWithFont(windowId, string, x, y, lineSpacing, colorId, FONT_NORMAL);
+}
+
+static void PrintTextOnWindowToFitPx(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId, u32 width)
+{
+    u32 fontId = GetFontIdToFit(string, FONT_NORMAL, 0, width);
+    PrintTextOnWindowWithFont(windowId, string, x, y, lineSpacing, colorId, fontId);
+}
+
+static void PrintTextOnWindowToFit(u8 windowId, const u8 *string, u8 x, u8 y, u8 lineSpacing, u8 colorId)
+{
+    PrintTextOnWindowToFitPx(windowId, string, x, y, lineSpacing, colorId, WindowWidthPx(windowId));
 }
 
 static void PrintMonInfo(void)
@@ -2817,7 +2835,6 @@ static void PrintMonInfo(void)
 
 static void PrintNotEggInfo(void)
 {
-    u8 strArray[16];
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     u16 dexNum = SpeciesToPokedexNum(summary->species);
@@ -2853,10 +2870,9 @@ static void PrintNotEggInfo(void)
     StringAppend(gStringVar1, gStringVar2);
     PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gStringVar1, 24, 17, 0, 1);
     GetMonNickname(mon, gStringVar1);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1);
-    strArray[0] = CHAR_SLASH;
-    StringCopy(&strArray[1], &GetSpeciesName(summary->species2)[0]);
-    PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, strArray, 0, 1, 0, 1);
+    PrintTextOnWindowToFitPx(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME, gStringVar1, 0, 1, 0, 1, WindowWidthPx(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME) - 9);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, gText_Slash, 0, 1, 0, 1);
+    PrintTextOnWindowToFitPx(PSS_LABEL_WINDOW_PORTRAIT_SPECIES, GetSpeciesName(summary->species2), 6, 1, 0, 1, WindowWidthPx(PSS_LABEL_WINDOW_PORTRAIT_SPECIES) - 9);
     PrintGenderSymbol(mon, summary->species2);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_NICKNAME);
     PutWindowTilemap(PSS_LABEL_WINDOW_PORTRAIT_SPECIES);
@@ -3245,7 +3261,7 @@ static void PrintMonTrainerMemo(void)
 static void BufferNatureString(void)
 {
     struct PokemonSummaryScreenData *sumStruct = sMonSummaryScreen;
-    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNatureNamePointers[sumStruct->summary.nature]);
+    DynamicPlaceholderTextUtil_SetPlaceholderPtr(2, gNaturesInfo[sumStruct->summary.nature].name);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(5, gText_EmptyString5);
 }
 
@@ -3418,6 +3434,7 @@ static void Task_PrintSkillsPage(u8 taskId)
 static void PrintHeldItemName(void)
 {
     const u8 *text;
+    u32 fontId;
     int x;
 
     if (sMonSummaryScreen->summary.item == ITEM_ENIGMA_BERRY_E_READER
@@ -3436,8 +3453,9 @@ static void PrintHeldItemName(void)
         text = gStringVar1;
     }
 
-    x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 72) + 6;
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, x, 1, 0, 0);
+    fontId = GetFontIdToFit(text, FONT_NORMAL, 0, WindowTemplateWidthPx(&sPageSkillsTemplate[PSS_DATA_WINDOW_SKILLS_HELD_ITEM]) - 8);
+    x = GetStringCenterAlignXOffset(fontId, text, 72) + 6;
+    PrintTextOnWindowWithFont(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_HELD_ITEM), text, x, 1, 0, 0, fontId);
 }
 
 static void PrintRibbonCount(void)
@@ -3460,19 +3478,21 @@ static void PrintRibbonCount(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_RIBBON_COUNT), text, x, 1, 0, 0);
 }
 
-static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
+static void BufferStat(u8 *dst, u8 statIndex, u32 stat, u32 strId, u32 n)
 {
     static const u8 sTextNatureDown[] = _("{COLOR}{08}");
     static const u8 sTextNatureUp[] = _("{COLOR}{05}");
     static const u8 sTextNatureNeutral[] = _("{COLOR}{01}");
     u8 *txtPtr;
 
-    if (natureMod == 0 || !SUMMARY_SCREEN_NATURE_COLORS)
+    if (statIndex == 0 || !SUMMARY_SCREEN_NATURE_COLORS || gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureNeutral);
-    else if (natureMod > 0)
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statUp)
         txtPtr = StringCopy(dst, sTextNatureUp);
-    else
+    else if (statIndex == gNaturesInfo[sMonSummaryScreen->summary.mintNature].statDown)
         txtPtr = StringCopy(dst, sTextNatureDown);
+    else
+        txtPtr = StringCopy(dst, sTextNatureNeutral);
 
     ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
@@ -3484,13 +3504,12 @@ static void BufferLeftColumnStats(void)
     u8 *maxHPString = Alloc(20);
     u8 *attackString = Alloc(20);
     u8 *defenseString = Alloc(20);
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
 
     DynamicPlaceholderTextUtil_Reset();
     BufferStat(currentHPString, 0, sMonSummaryScreen->summary.currentHP, 0, 3);
     BufferStat(maxHPString, 0, sMonSummaryScreen->summary.maxHP, 1, 3);
-    BufferStat(attackString, natureMod[STAT_ATK - 1], sMonSummaryScreen->summary.atk, 2, 7);
-    BufferStat(defenseString, natureMod[STAT_DEF - 1], sMonSummaryScreen->summary.def, 3, 7);
+    BufferStat(attackString, STAT_ATK, sMonSummaryScreen->summary.atk, 2, 7);
+    BufferStat(defenseString, STAT_DEF, sMonSummaryScreen->summary.def, 3, 7);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
 
     Free(currentHPString);
@@ -3506,12 +3525,10 @@ static void PrintLeftColumnStats(void)
 
 static void BufferRightColumnStats(void)
 {
-    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.mintNature];
-
     DynamicPlaceholderTextUtil_Reset();
-    BufferStat(gStringVar1, natureMod[STAT_SPATK - 1], sMonSummaryScreen->summary.spatk, 0, 3);
-    BufferStat(gStringVar2, natureMod[STAT_SPDEF - 1], sMonSummaryScreen->summary.spdef, 1, 3);
-    BufferStat(gStringVar3, natureMod[STAT_SPEED - 1], sMonSummaryScreen->summary.speed, 2, 3);
+    BufferStat(gStringVar1, STAT_SPATK, sMonSummaryScreen->summary.spatk, 0, 3);
+    BufferStat(gStringVar2, STAT_SPDEF, sMonSummaryScreen->summary.spdef, 1, 3);
+    BufferStat(gStringVar3, STAT_SPEED, sMonSummaryScreen->summary.speed, 2, 3);
     DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
 }
 
@@ -3621,7 +3638,7 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     if (move != 0)
     {
         pp = CalculatePPWithBonus(move, summary->ppBonuses, moveIndex);
-        PrintTextOnWindow(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
+        PrintTextOnWindowToFit(moveNameWindowId, GetMoveName(move), 0, moveIndex * 16 + 1, 0, 1);
         ConvertIntToDecimalStringN(gStringVar1, summary->pp[moveIndex], STR_CONV_MODE_RIGHT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
@@ -3789,9 +3806,9 @@ static void PrintNewMoveDetailsOrCancelText(void)
         u16 move = sMonSummaryScreen->newMove;
 
         if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
-            PrintTextOnWindow(windowId1, GetMoveName(move), 0, 65, 0, 6);
+            PrintTextOnWindowToFit(windowId1, GetMoveName(move), 0, 65, 0, 6);
         else
-            PrintTextOnWindow(windowId1, GetMoveName(move), 0, 65, 0, 5);
+            PrintTextOnWindowToFit(windowId1, GetMoveName(move), 0, 65, 0, 5);
 
         ConvertIntToDecimalStringN(gStringVar1, gMovesInfo[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 2);
         DynamicPlaceholderTextUtil_Reset();
