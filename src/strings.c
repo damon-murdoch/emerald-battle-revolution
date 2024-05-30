@@ -1851,6 +1851,7 @@ const u8 gText_ExpShareOn[] = _("The Exp. Share has been turned on.{PAUSE_UNTIL_
 const u8 gText_ExpShareOff[] = _("The Exp. Share has been turned off.{PAUSE_UNTIL_PRESS}");
 const u8 gText_BasePointsResetToZero[] = _("{STR_VAR_1}'s base points\nwere all reset to zero!{PAUSE_UNTIL_PRESS}");
 const u8 gText_PkmnBallChanged[] = _("{STR_VAR_1}'s ball has been changed!{PAUSE_UNTIL_PRESS}");
+const u8 gText_PkmnTeraTypeChanged[] = _("{STR_VAR_1}'s tera type has been changed!{PAUSE_UNTIL_PRESS}");
 
 
 const u8 gText_DynamaxBandOn[] = _("The Dynamax Band has been turned on.{PAUSE_UNTIL_PRESS}");

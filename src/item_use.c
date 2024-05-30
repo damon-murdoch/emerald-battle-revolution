@@ -1553,4 +1553,10 @@ void ItemUseOutOfBattle_DynamaxBand(u8 taskId) {
     FlagToggle(FLAG_DYNAMAX_BATTLE);
 }
 
+void ItemUseOutOfBattle_TeraShard(u8 taskId)
+{
+    gItemUseCB = ItemUseCB_TeraShard;
+    SetUpItemUseCallback(taskId);
+}
+
 #undef tUsingRegisteredKeyItem

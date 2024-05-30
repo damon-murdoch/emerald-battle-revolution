@@ -3065,6 +3065,7 @@ extern const u8 gText_DynamaxBandOff[];
 
 extern const u8 gText_BasePointsResetToZero[];
 extern const u8 gText_PkmnBallChanged[];
+extern const u8 gText_PkmnTeraTypeChanged[];
 
 // [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
 extern const u8 gText_Moves_Menu[];

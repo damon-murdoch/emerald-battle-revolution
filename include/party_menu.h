@@ -104,8 +104,31 @@ void MoveDeleterChooseMoveToForget(void);
 void ItemUseCB_ReduceIV(u8 taskId, TaskFunc task);
 void ItemUseCB_IncreaseIV(u8 taskId, TaskFunc task);
 void ItemUseCB_Pokeball(u8 taskId, TaskFunc task);
+void ItemUseCB_TeraShard(u8 taskId, TaskFunc task);
 
 // [Diego Mertens] Move Relearner as an option in the Pokémon Party Screen
 void CB2_ReturnToPartyMenuFromSummaryScreen(void);
+
+// Tera Shard Type Lookup Table
+static const u8 teraShardTypeLookup[] = {
+    [ITEM_BUG_TERA_SHARD] = TYPE_BUG,
+    [ITEM_DARK_TERA_SHARD] = TYPE_DARK,
+    [ITEM_DRAGON_TERA_SHARD] = TYPE_DRAGON,
+    [ITEM_ELECTRIC_TERA_SHARD] = TYPE_ELECTRIC,
+    [ITEM_FAIRY_TERA_SHARD] = TYPE_FAIRY,
+    [ITEM_FIGHTING_TERA_SHARD] = TYPE_FIGHTING,
+    [ITEM_FIRE_TERA_SHARD] = TYPE_FIRE,
+    [ITEM_FLYING_TERA_SHARD] = TYPE_FLYING,
+    [ITEM_GHOST_TERA_SHARD] = TYPE_GHOST,
+    [ITEM_GRASS_TERA_SHARD] = TYPE_GRASS,
+    [ITEM_GROUND_TERA_SHARD] = TYPE_GROUND,
+    [ITEM_ICE_TERA_SHARD] = TYPE_ICE,
+    [ITEM_NORMAL_TERA_SHARD] = TYPE_NORMAL,
+    [ITEM_POISON_TERA_SHARD] = TYPE_POISON,
+    [ITEM_PSYCHIC_TERA_SHARD] = TYPE_PSYCHIC,
+    [ITEM_ROCK_TERA_SHARD] = TYPE_ROCK,
+    [ITEM_STEEL_TERA_SHARD] = TYPE_STEEL,
+    [ITEM_WATER_TERA_SHARD] = TYPE_WATER,
+};
 
 #endif // GUARD_PARTY_MENU_H
