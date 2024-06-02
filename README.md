@@ -264,6 +264,11 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.5.1
+
+Simplified sample teams & sample sets shop menus, added move deleter to Battle Frontier 
+Underground, fixed some minor issues with battle frontier underground map sprites
+
 ### Ver. 1.5.0
 
 Updated to the new PokeEmerald-Expansion Pokedex Plus, which provides useful information
