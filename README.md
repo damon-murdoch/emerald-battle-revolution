@@ -150,23 +150,23 @@ rate of $9800 to 1 BP.
 
 Please see below for the list of features which are supported in each Battle Frontier facility.
 
-| Facility Name  | Level Scaling   | New Species   | 4 Pokémon (Doubles) | Total |
-| -------------- | --------------- | ------------- | ------------------- | ----- |
-| Battle Arena   | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Dome    | Yes             | No            | No                  | 1/3   |
-| Battle Factory | Yes             | Yes           | No                  | 2/3   |
-| Battle Palace  | Yes             | Yes           | No                  | 2/3   |
-| Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Pyramid | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
+| Facility Name  | Level Scaling   | New Species   | Doubles Mode | 4 Pokémon (Doubles) | Total |
+| -------------- | --------------- | ------------- | ------------ | ------------------- | ----- |
+| Battle Arena   | Yes             | Yes           | No           | N/A                 | 3/3   |
+| Battle Dome    | Yes             | No            | Yes          | No                  | 2/4   |
+| Battle Factory | Yes             | Yes           | Yes          | No                  | 3/4   |
+| Battle Palace  | Yes             | Yes           | Yes          | No                  | 3/4   |
+| Battle Pike    | Yes             | Yes           | N/A          | N/A                 | 2/2   |
+| Battle Pyramid | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Battle Tower   | Yes             | Yes           | Yes          | Yes                 | 4/4   |
 
 Please see below for the list of features which are supported in each Battle Tent.
 
-| Facility Name   | Level Scaling   | New Species   | 4 Pokémon (Doubles) | Total |
-| --------------- | --------------- | ------------- | ------------------- | ----- |
-| Fallarbor  Tent | Yes             | Yes           | N/A                 | 2/3   |
-| Slateport  Tent | Yes             | Yes           | N/A                 | 2/3   |
-| Verdanturf Tent | Yes             | Yes           | N/A                 | 2/3   |
+| Facility Name   | Level Scaling   | New Species   | Doubles Mode | 4 Pokémon (Doubles) | Total |
+| --------------- | --------------- | ------------- | ------------ | ------------------- | ----- |
+| Fallarbor  Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Slateport  Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Verdanturf Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
 
 ## Future Changes
 For a list of future changes which are intended for this project, 
