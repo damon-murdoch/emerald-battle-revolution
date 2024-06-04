@@ -9,7 +9,7 @@ script Introduction_EventScript_Startup {
 	msgbox(format("Welcome to Emerald Battle Revolution!"))
 	msgbox("Created by Damon Murdoch\n(Twitter: SirScrubbington)")
 	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
-	msgbox(format("Current Version: 1.5.1"))
+	msgbox(format("Current Version: 1.6.0"))
 	msgbox(format("For more information, please visit our website: https://www.dragapult.xyz?ebr"))
 	goto(Introduction_EventScript_AskSandboxMode)
 }
