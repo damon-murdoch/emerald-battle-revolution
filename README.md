@@ -264,6 +264,12 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.6.0
+
+Implemented variable move power, hidden ability selection chance and added an optional 'hard mode' 
+to the battle frontier controllers, which allows you to skip the easy (low base stat, ivs, etc.)
+opponents in the battle frontier and jump straight to the hardest.
+
 ### Ver. 1.5.1
 
 Simplified sample teams & sample sets shop menus, added move deleter to Battle Frontier 

@@ -394,6 +394,8 @@ Introduction_EventScript_SetupSandboxMode_1:
 	setflag FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE
 	setflag FLAG_BATTLE_FRONTIER_GENERATOR
 	setflag FLAG_BATTLE_FRONTIER_ALLOW_MEGA
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE
+	setflag FLAG_BATTLE_FRONTIER_ALLOW_TERA
 	setflag FLAG_BATTLE_FRONTIER_ALLOW_GMAX
 	setflag FLAG_BATTLE_FRONTIER_GENERATOR
 	setvar VAR_BIRCH_STATE, 4
@@ -505,7 +507,7 @@ Introduction_EventScript_Startup_Text_2:
 	.string "PokeEmerald-Expanded Project$"
 
 Introduction_EventScript_Startup_Text_3:
-	.string "Current Version: 1.5.1$"
+	.string "Current Version: 1.6.0$"
 
 Introduction_EventScript_Startup_Text_4:
 	.string "For more information, please visit our\n"
