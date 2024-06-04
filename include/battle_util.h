@@ -66,6 +66,10 @@ enum {
 #define IS_WHOLE_SIDE_ALIVE(battler)    ((IsBattlerAlive(battler) && IsBattlerAlive(BATTLE_PARTNER(battler))))
 #define IS_ALIVE_AND_PRESENT(battler)   (IsBattlerAlive(battler) && IsBattlerSpritePresent(battler))
 
+// Lowest and highest percentages used for damage roll calculations
+#define DMG_ROLL_PERCENT_LO 85
+#define DMG_ROLL_PERCENT_HI 100
+
 // for Natural Gift and Fling
 struct TypePower
 {
@@ -187,6 +191,7 @@ s32 CalculateMoveDamageVars(u32 move, u32 battlerAtk, u32 battlerDef, u32 moveTy
 uq4_12_t CalcTypeEffectivenessMultiplier(u32 move, u32 moveType, u32 battlerAtk, u32 battlerDef, u32 defAbility, bool32 recordAbilities);
 uq4_12_t CalcPartyMonTypeEffectivenessMultiplier(u16 move, u16 speciesDef, u16 abilityDef);
 uq4_12_t GetTypeModifier(u32 atkType, u32 defType);
+uq4_12_t GetTypeEffectiveness(struct Pokemon *mon, u8 moveType);
 s32 GetStealthHazardDamage(u8 hazardType, u32 battler);
 s32 GetStealthHazardDamageByTypesAndHP(u8 hazardType, u8 type1, u8 type2, u32 maxHp);
 bool32 CanMegaEvolve(u32 battler);
