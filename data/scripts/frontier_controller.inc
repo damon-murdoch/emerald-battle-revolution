@@ -43,37 +43,73 @@ BattleFrontierController_EventScript_ControllerOptions::
 	case 1, BattleFrontierController_EventScript_ControllerOptions_3
 	case 2, BattleFrontierController_EventScript_ControllerOptions_4
 	case 3, BattleFrontierController_EventScript_ControllerOptions_5
+	case 4, BattleFrontierController_EventScript_ControllerOptions_6
 	goto BattleFrontierController_EventScript_ControllerEnd
 	return
 
 BattleFrontierController_EventScript_ControllerOptions_2:
-	goto BattleFrontierController_EventScript_ControllerChangeOpponents
+	goto BattleFrontierController_EventScript_ControllerChangeDifficulty
 	return
 
 BattleFrontierController_EventScript_ControllerOptions_3:
-	goto BattleFrontierController_EventScript_ControllerChangeBehavior
+	goto BattleFrontierController_EventScript_ControllerChangeOpponents
 	return
 
 BattleFrontierController_EventScript_ControllerOptions_4:
-	goto BattleFrontierController_EventScript_ControllerChangeBanlist
+	goto BattleFrontierController_EventScript_ControllerChangeBehavior
 	return
 
 BattleFrontierController_EventScript_ControllerOptions_5:
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
+	return
+
+BattleFrontierController_EventScript_ControllerOptions_6:
 	goto BattleFrontierController_EventScript_ControllerChangeMusic
 	return
 
 
+BattleFrontierController_EventScript_ControllerChangeDifficulty::
+	goto_if_set FLAG_BATTLE_FRONTIER_FIXED_IV, BattleFrontierController_EventScript_ControllerChangeDifficulty_2
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_2
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_3
+BattleFrontierController_EventScript_ControllerChangeDifficulty_1:
+	yesnobox 0, 8
+	compare VAR_RESULT, YES
+	goto_if_eq BattleFrontierController_EventScript_ControllerChangeDifficulty_6
+BattleFrontierController_EventScript_ControllerChangeDifficulty_5:
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_6
+	goto BattleFrontierController_EventScript_ControllerAsk
+	return
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_2:
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_0
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_1
+	goto BattleFrontierController_EventScript_ControllerChangeDifficulty_1
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_6:
+	goto_if_set FLAG_BATTLE_FRONTIER_FIXED_IV, BattleFrontierController_EventScript_ControllerChangeDifficulty_8
+	setflag FLAG_BATTLE_FRONTIER_FIXED_IV
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_5
+	goto BattleFrontierController_EventScript_ControllerChangeDifficulty_5
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_8:
+	clearflag FLAG_BATTLE_FRONTIER_FIXED_IV
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_4
+	goto BattleFrontierController_EventScript_ControllerChangeDifficulty_5
+
+
 BattleFrontierController_EventScript_ControllerChangeOpponents::
 	goto_if_set FLAG_BATTLE_FRONTIER_GENERATOR, BattleFrontierController_EventScript_ControllerChangeOpponents_2
-	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3
 	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_4
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5
 	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6
 BattleFrontierController_EventScript_ControllerChangeOpponents_1:
 	yesnobox 0, 8
 	compare VAR_RESULT, YES
 	goto_if_eq BattleFrontierController_EventScript_ControllerChangeOpponents_6
 BattleFrontierController_EventScript_ControllerChangeOpponents_5:
-	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7
+	msgbox BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_6
 	goto BattleFrontierController_EventScript_ControllerAsk
 	return
 
@@ -81,17 +117,18 @@ BattleFrontierController_EventScript_ControllerChangeOpponents_2:
 	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_0
 	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1
 	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_2
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3
 	goto BattleFrontierController_EventScript_ControllerChangeOpponents_1
 
 BattleFrontierController_EventScript_ControllerChangeOpponents_6:
 	goto_if_set FLAG_BATTLE_FRONTIER_GENERATOR, BattleFrontierController_EventScript_ControllerChangeOpponents_8
 	setflag FLAG_BATTLE_FRONTIER_GENERATOR
-	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_8
 	goto BattleFrontierController_EventScript_ControllerChangeOpponents_5
 
 BattleFrontierController_EventScript_ControllerChangeOpponents_8:
 	clearflag FLAG_BATTLE_FRONTIER_GENERATOR
-	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5
+	msgbox BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7
 	goto BattleFrontierController_EventScript_ControllerChangeOpponents_5
 
 
@@ -144,7 +181,7 @@ BattleFrontierController_EventScript_ControllerChangeBanlistStandard::
 	case 5, BattleFrontierController_EventScript_ControllerChangeBanlistStandard_8
 	goto BattleFrontierController_EventScript_ControllerChangeBanlist
 BattleFrontierController_EventScript_ControllerChangeBanlistStandard_1:
-	goto BattleFrontierController_EventScript_ControllerAsk
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
 	return
 
 BattleFrontierController_EventScript_ControllerChangeBanlistStandard_3:
@@ -188,7 +225,7 @@ BattleFrontierController_EventScript_ControllerChangeBanlistDynamax::
 	case 1, BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_4
 	goto BattleFrontierController_EventScript_ControllerChangeBanlist
 BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_1:
-	goto BattleFrontierController_EventScript_ControllerAsk
+	goto BattleFrontierController_EventScript_ControllerChangeBanlist
 	return
 
 BattleFrontierController_EventScript_ControllerChangeBanlistDynamax_3:
@@ -429,6 +466,39 @@ BattleFrontierController_EventScript_ControllerInfo_Text_0:
 BattleFrontierController_EventScript_ControllerInfo_Text_1:
 	.string "What would you like to do?$"
 
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_0:
+	.string "You are currently playing hard mode,\n"
+	.string "where you will face up against difficult\l"
+	.string "opponents regardless of win streak.$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_1:
+	.string "Would you like to switch to normal mode,\n"
+	.string "where opponent difficulty will scale\l"
+	.string "based on your win streak?$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_2:
+	.string "You are currently playing normal mode,\n"
+	.string "where your opponents strength will\l"
+	.string "scale from easy to hard at 49 wins.$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_3:
+	.string "Would you like to switch to hard mode,\n"
+	.string "with all opponents scaled up from the\l"
+	.string "start?$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_4:
+	.string "Done! You'll now play against\n"
+	.string "difficulty-scaled Battle Frontier\l"
+	.string "opponents.$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_5:
+	.string "Done! You'll now play against difficult\n"
+	.string "Battle Frontier opponents only.$"
+
+BattleFrontierController_EventScript_ControllerChangeDifficulty_Text_6:
+	.string "Feel free to ask me again if you change\n"
+	.string "your mind!$"
+
 BattleFrontierController_EventScript_ControllerChangeOpponents_Text_0:
 	.string "You are currently playing against\n"
 	.string "modern Battle Frontier opponents.$"
@@ -439,28 +509,34 @@ BattleFrontierController_EventScript_ControllerChangeOpponents_Text_1:
 	.string "development.$"
 
 BattleFrontierController_EventScript_ControllerChangeOpponents_Text_2:
+	.string "Please note, all other opponent\n"
+	.string "behavior-related settings will be\l"
+	.string "ignored in legacy mode.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3:
 	.string "Would you like to switch to legacy\n"
 	.string "Battle Frontier opponents?$"
 
-BattleFrontierController_EventScript_ControllerChangeOpponents_Text_3:
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_4:
 	.string "You are currently playing against\n"
 	.string "legacy Battle Frontier opponents.$"
 
-BattleFrontierController_EventScript_ControllerChangeOpponents_Text_4:
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5:
+	.string "Modern Battle Frontier opponents are\n"
+	.string "randomly generated, and include new\l"
+	.string "species, items, formes and more.$"
+
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6:
 	.string "Would you like to switch to modern\n"
 	.string "Battle Frontier opponents?$"
 
-BattleFrontierController_EventScript_ControllerChangeOpponents_Text_5:
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7:
 	.string "Done! You'll now play against legacy\n"
 	.string "Battle Frontier opponents.$"
 
-BattleFrontierController_EventScript_ControllerChangeOpponents_Text_6:
+BattleFrontierController_EventScript_ControllerChangeOpponents_Text_8:
 	.string "Done! You'll now play against modern\n"
 	.string "Battle Frontier opponents.$"
-
-BattleFrontierController_EventScript_ControllerChangeOpponents_Text_7:
-	.string "Feel free to ask me again if you change\n"
-	.string "your mind!$"
 
 BattleFrontierController_EventScript_ControllerChangeBehavior_Text_0:
 	.string "I can change how modern Battle\n"
@@ -532,6 +608,7 @@ BattleFrontierController_EventScript_ControllerEnd_Text_0:
 	.string "I hope you have some good battles!$"
 
 BattleFrontierController_Text_ControllerOptionSelect::
+	.string "CHANGE DIFFICULTY$"
 	.string "CHANGE OPPONENTS$"
 	.string "CHANGE BEHAVIOR$"
 	.string "CHANGE BANLIST$"

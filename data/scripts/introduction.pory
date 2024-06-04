@@ -438,6 +438,8 @@ script Introduction_EventScript_SetupSandboxMode {
 	# (New!) Battle Frontier Generator Flags
 	setflag(FLAG_BATTLE_FRONTIER_GENERATOR)
 	setflag(FLAG_BATTLE_FRONTIER_ALLOW_MEGA)
+	setflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
+	setflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 	setflag(FLAG_BATTLE_FRONTIER_ALLOW_GMAX)
 	setflag(FLAG_BATTLE_FRONTIER_GENERATOR)
 
