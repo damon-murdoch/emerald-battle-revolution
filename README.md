@@ -264,6 +264,10 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.6.1
+
+Added missing attack power scaling values
+
 ### Ver. 1.6.0
 
 Implemented variable move power, hidden ability selection chance and added an optional 'hard mode' 
