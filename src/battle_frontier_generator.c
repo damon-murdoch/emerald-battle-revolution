@@ -966,8 +966,8 @@ static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties
 
         // If power is NOT in range
         if (!(IN_INCLUSIVE_RANGE(
-            fixedIVMinBSTLookup[properties->fixedIV],
-            fixedIVMaxBSTLookup[properties->fixedIV],
+            fixedIVMinAtkLookup[properties->fixedIV],
+            fixedIVMaxAtkLookup[properties->fixedIV],
             power
         )))
             return FALSE; // Out of range

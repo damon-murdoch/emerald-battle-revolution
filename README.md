@@ -266,7 +266,8 @@ the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANG
 
 ### Ver. 1.6.1
 
-Added missing attack power scaling values
+Added missing attack power scaling values, fixed issue with checking incorrect variable when
+performing power scaling calculations
 
 ### Ver. 1.6.0
 
