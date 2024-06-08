@@ -86,10 +86,13 @@ ELF = $(ROM:.gba=.elf)
 MAP = $(ROM:.gba=.map)
 SYM = $(ROM:.gba=.sym)
 
+TEST_OBJ_DIR_NAME_MODERN := build/modern-test
+TEST_OBJ_DIR_NAME_AGBCC := build/test
+
 ifeq ($(MODERN),0)
-TEST_OBJ_DIR_NAME := build/test
+TEST_OBJ_DIR_NAME := $(TEST_OBJ_DIR_NAME_AGBCC)
 else
-TEST_OBJ_DIR_NAME := build/modern-test
+TEST_OBJ_DIR_NAME := $(TEST_OBJ_DIR_NAME_MODERN)
 endif
 TESTELF = $(ROM:.gba=-test.elf)
 HEADLESSELF = $(ROM:.gba=-test-headless.elf)
@@ -333,7 +336,9 @@ tidymodern:
 
 tidycheck:
 	rm -f $(TESTELF) $(HEADLESSELF)
-	rm -rf $(TEST_OBJ_DIR_NAME)
+	rm -rf $(TEST_OBJ_DIR_NAME_MODERN)
+	rm -rf $(TEST_OBJ_DIR_NAME_AGBCC)
+
 
 # EBR Multi-Select .Pory File Build Script
 # Builds the auto-select menus for custom menus, including the sample teams and sets shop in the Battle Spot
