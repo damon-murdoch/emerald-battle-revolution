@@ -965,6 +965,7 @@ static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties
         if (power == 1)
             power = BFG_MOVE_POWER_SPECIAL;
 
+        // Multi-hit moves
         u8 hits = HITS(moveId);
         if (hits > 1)
             power *= hits; // Apply for each hit
@@ -3352,7 +3353,6 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
         break;
         case FRONTIER_LVL_50:
         case FRONTIER_LVL_OPEN:
-
             // High Challenge Num
             if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM))
                 properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
