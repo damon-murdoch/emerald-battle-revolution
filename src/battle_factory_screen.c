@@ -1764,6 +1764,7 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     {
         speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId; // Stores speciesId
         sFactorySelectScreen->mons[i + firstMonId].monId = speciesId;
+
         if (i < rentalRank)
             properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
         else
