@@ -19,7 +19,7 @@
 #define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_VARIABLE
 #define BFG_VAR_TEAM_GENERATION_METHOD VAR_FRONTIER_METHOD // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
 
-#define BFG_FLAG_FRONTIER_FIXED_IV 0 // Flag to enable or disable fixed IVs
+#define BFG_FLAG_FRONTIER_FIXED_IV FLAG_BATTLE_FRONTIER_FIXED_IV // Flag to enable or disable fixed IVs
 
 // Run 'move_ratings.py' as part of build pipeline
 #define BFG_GENERATE_MOVE_RATINGS FALSE    // Generate battle_frontier_generator_move_ratings.h
