@@ -41,6 +41,7 @@
 #define CATEGORY(m) (gMovesInfo[m].category)
 #define POWER(m) (gMovesInfo[m].power)
 #define TYPE(m) (gMovesInfo[m].type)
+#define HITS(m) (gMovesInfo[m].strikeCount)
 
 #define HAS_SPEED(n,e) ((gNatureInfo[n].posStat == STAT_SPEED) || (CHECK_EVS(e,F_EV_SPREAD_SPEED)))
 #define IS_STAB(s,t) (((gSpeciesInfo[s].types[0]) == (t)) || ((gSpeciesInfo[s].types[1]) == (t)))
@@ -963,6 +964,11 @@ static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties
         u8 power = POWER(moveId);
         if (power == 1)
             power = BFG_MOVE_POWER_SPECIAL;
+
+        // Multi-hit moves
+        u8 hits = HITS(moveId);
+        if (hits > 1)
+            power *= hits; // Apply for each hit
 
         // If power is NOT in range
         if (!(IN_INCLUSIVE_RANGE(
@@ -3125,13 +3131,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, 0);
 
+    // Calculate fixed iv
+    properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
+
     // If the fixed IVs flag is set
     #if BFG_FLAG_FRONTIER_FIXED_IV != 0
     if (FlagGet(BFG_FLAG_FRONTIER_FIXED_IV))
         properties.fixedIV = BFG_IV_FIXED;
-    else // Default values
     #endif
-        properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
 
     // Setup fixed values for level mode
     u8 lvlMode = GET_LVL_MODE();
@@ -3264,19 +3271,11 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         // Battle Factory
         if ((lvlMode != FRONTIER_LVL_TENT))
         {
-            #if BFG_FLAG_FRONTIER_FIXED_IV != 0
-            // If the fixed IVs flag is set
-            if (FlagGet(BFG_FLAG_FRONTIER_FIXED_IV))
-                properties.fixedIV = BFG_IV_FIXED;
-            else // Default values
-            #endif
-            {
-                // High Challenge Num / Rental Rank
-                if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM) || (i < rentalRank))
-                    properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
-                else // Basic Mode (Low BST)
-                    properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
-            }
+            // High Challenge Num / Rental Rank
+            if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM) || (i < rentalRank))
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+            else // Basic Mode (Low BST)
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
 
             // Min/Max BST Value Lookup Table
             properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
@@ -3354,19 +3353,11 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
         break;
         case FRONTIER_LVL_50:
         case FRONTIER_LVL_OPEN:
-            #if BFG_FLAG_FRONTIER_FIXED_IV != 0
-            // If the fixed IVs flag is set
-            if (FlagGet(BFG_FLAG_FRONTIER_FIXED_IV))
-                properties.fixedIV = BFG_IV_FIXED;
-            else // Default values
-            #endif
-            {
-                // High Challenge Num
-                if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM))
-                    properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
-                else // Basic Mode (Low BST)
-                    properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
-            }
+            // High Challenge Num
+            if ((challengeNum >= BFG_FACTORY_EXPERT_CHALLENGE_NUM))
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum + 1, FALSE);
+            else // Basic Mode (Low BST)
+                properties.fixedIV = GetFactoryMonFixedIV(challengeNum, FALSE);
 
             // Min/Max BST Value Lookup Table
             properties.minBST = fixedIVMinBSTLookup[properties.fixedIV];
