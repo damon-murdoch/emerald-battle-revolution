@@ -3421,6 +3421,7 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
     u8 i;
     u16 oldSeed = Random2();
 
+
     DebugPrintf("Setting facility party held items ...");
 
     #define SELECTED_ITEM_INDEX (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE + i)
@@ -3444,7 +3445,7 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
         SELECTED_ITEM = GetMonData(&(party[i]), MON_DATA_HELD_ITEM);
 
         // Use challenge num as seed
-        SeedRng2((u32)(challengeNum));
+        SeedRng2(challengeNum);
         if ((SELECTED_ITEM == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
             SELECTED_ITEM = GetSpeciesItem(&(party[i]), items, SELECTED_ITEM_INDEX);
@@ -3459,6 +3460,11 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
     #undef SELECTED_ITEM_INDEX
 
     DebugPrintf("Done.");
+}
+
+void SetFacilityPlayerAndOpponentParties()
+{
+
 }
 
 void SetRentalsToFacilityOpponentParty()
@@ -3484,7 +3490,7 @@ void SetRentalsToFacilityOpponentParty()
         return; // Battle Frontier items disabled
 
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+    u8 challengeNum = GET_CHALLENGE_NUM(battleMode, lvlMode);
 
     SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
     DebugPrintf("Done.");
@@ -3499,6 +3505,11 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
     InitGeneratorProperties(&properties, level, fixedIV);
 
     u8 lvlMode = GET_LVL_MODE();
+
+    // Generate seed combining trainer id and challenge number
+
+    u16 fixedSeed = (GET_TRAINER_ID() + challengeNum);
+    u16 oldSeed = Random2();
 
     switch(lvlMode)
     {
@@ -3524,6 +3535,9 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
         speciesId = gFrontierTempParty[i];
         DebugPrintf("Generating set for species %d ...", speciesId);
 
+        // Use challenge num as seed
+        SeedRng2(fixedSeed);
+
         // Generate Trainer Pokemon
         if (GenerateTrainerPokemonHandleForme(&gEnemyParty[i + firstMonId], speciesId, &properties))
         {
@@ -3532,6 +3546,8 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
             i++;
         }
     }
+
+    SeedRng(oldSeed); // Revert seed
 
     if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
         return; // Battle Tent items disabled
