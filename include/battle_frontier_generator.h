@@ -38,7 +38,7 @@
 #define RANDOM_OFFSET() RANDOM_RANGE(BFG_RANDOM_OFFSET_MIN, BFG_RANDOM_OFFSET_MAX)
 #endif
 
-#define GET_TRAINER_ID() (saveBlock2Copy->playerTrainerId[0] + saveBlock2Copy->playerTrainerId[1] + saveBlock2Copy->playerTrainerId[2] + saveBlock2Copy->playerTrainerId[3])
+#define GET_TRAINER_ID() (gSaveBlock2Ptr->playerTrainerId[0] + gSaveBlock2Ptr->playerTrainerId[1] + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3])
 
 // *** FORMAT ***
 #define IS_DOUBLES() (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
