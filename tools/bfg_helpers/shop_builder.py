@@ -36,7 +36,7 @@ LEGENDARY_OUTFILE = "legendary_shop.json"
 POKEMON_GOTO = "goto(Common_EventScript_Pokemon_Shop_CheckPurchase)"
 LEGENDARY_GOTO = "goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     # Pokemon lists
     pokemon_shop = []
@@ -102,19 +102,23 @@ if __name__ == '__main__':
             # Get the species constant
             constant = common.get_species_constant(name)
 
-            # Get the primary type for the species
-            primary_type = species["types"][0]
-
-            # Species first character
-            path = [primary_type,name]
-
             # Generate givemon string
             givemon_str = f"givemon({constant},{level})"
 
-            if is_legendary: # Add to legendary list
-                common.insert_data(legendary_shop, path, f"{givemon_str};{LEGENDARY_GOTO}")
-            else: # Add to standard list
-                common.insert_data(pokemon_shop, path, f"{givemon_str};{POKEMON_GOTO}")
+            # Loop over all types
+            for type in species["types"]:
+
+                # Species first character
+                path = [type, name]
+
+                if is_legendary:  # Add to legendary list
+                    common.insert_data(
+                        legendary_shop, path, f"{givemon_str};{LEGENDARY_GOTO}"
+                    )
+                else:  # Add to standard list
+                    common.insert_data(
+                        pokemon_shop, path, f"{givemon_str};{POKEMON_GOTO}"
+                    )
 
     # Create output directory (if not exists)
     os.makedirs(OUTPUT_DIRECTORY, exist_ok=True)

@@ -8,6 +8,7 @@
 #include "item.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "safari_zone.h"
 #include "sprite.h"
 #include "util.h"
 #include "constants/abilities.h"
@@ -28,7 +29,7 @@ void PrepareBattlerForTera(u32 battler)
     gBattleStruct->tera.isTerastallized[side] |= gBitTable[index];
     gBattleStruct->tera.alreadyTerastallized[battler] = TRUE;
 
-    // Remove Tera Orb charge.    
+    // Remove Tera Orb charge.
     if (B_FLAG_TERA_ORB_CHARGED != 0
         && (B_FLAG_TERA_ORB_NO_COST == 0 || !FlagGet(B_FLAG_TERA_ORB_NO_COST))
         && side == B_SIDE_PLAYER
@@ -103,8 +104,7 @@ bool32 CanTerastallize(u32 battler)
 // Returns a battler's Tera type.
 u32 GetBattlerTeraType(u32 battler)
 {
-    struct Pokemon *mon = &GetBattlerParty(battler)[gBattlerPartyIndexes[battler]];
-    return GetMonData(mon, MON_DATA_TERA_TYPE);
+    return GetMonData(&GetBattlerParty(battler)[gBattlerPartyIndexes[battler]], MON_DATA_TERA_TYPE);
 }
 
 // Returns whether a battler is terastallized.
@@ -140,7 +140,7 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
     // Safety check.
     if (!IsTerastallized(battler))
         return UQ_4_12(1.0);
-    
+
     // Stellar-type checks.
     if (teraType == TYPE_STELLAR)
     {
@@ -181,33 +181,9 @@ uq4_12_t GetTeraMultiplier(u32 battler, u32 type)
     }
 }
 
-// Most values pulled from the Tera type icon palette.
-const u16 sTeraTypeRGBValues[NUMBER_OF_MON_TYPES] = {
-    [TYPE_NORMAL] = RGB_WHITE, // custom
-    [TYPE_FIGHTING] = RGB(26, 8, 14),
-    [TYPE_FLYING] = RGB(31, 26, 7),
-    [TYPE_POISON] = RGB(26, 10, 25), // custom
-    [TYPE_GROUND] = RGB(25, 23, 18),
-    [TYPE_ROCK] = RGB(18, 16, 8), // custom
-    [TYPE_BUG] = RGB(18, 24, 6),
-    [TYPE_GHOST] = RGB(12, 10, 16),
-    [TYPE_STEEL] = RGB(19, 19, 20),
-    [TYPE_MYSTERY] = RGB_WHITE,
-    [TYPE_FIRE] = RGB(31, 20, 11),
-    [TYPE_WATER] = RGB(10, 18, 27),
-    [TYPE_GRASS] = RGB(12, 24, 11),
-    [TYPE_ELECTRIC] = RGB(30, 26, 7),
-    [TYPE_PSYCHIC] = RGB(31, 14, 15),
-    [TYPE_ICE] = RGB(14, 26, 25),
-    [TYPE_DRAGON] = RGB(10, 18, 27),
-    [TYPE_DARK] = RGB(6, 5, 8),
-    [TYPE_FAIRY] = RGB(31, 15, 21),
-    [TYPE_STELLAR] = RGB(10, 18, 27),
-};
-
 u16 GetTeraTypeRGB(u32 type)
 {
-    return sTeraTypeRGBValues[type];
+    return gTypesInfo[type].teraTypeRGBValue;
 }
 
 // TERASTAL TRIGGER:
@@ -648,6 +624,7 @@ static const struct SpriteTemplate sSpriteTemplate_StellarIndicator =
 
 static const struct SpriteSheet sTeraIndicatorSpriteSheets[NUMBER_OF_MON_TYPES + 1] =
 {
+    {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), TAG_NORMAL_INDICATOR_TILE}, // TYPE_NONE
     {sNormalIndicatorGfx, sizeof(sNormalIndicatorGfx), TAG_NORMAL_INDICATOR_TILE},
     {sFightingIndicatorGfx, sizeof(sFightingIndicatorGfx), TAG_FIGHTING_INDICATOR_TILE},
     {sFlyingIndicatorGfx, sizeof(sFlyingIndicatorGfx), TAG_FLYING_INDICATOR_TILE},
@@ -673,6 +650,7 @@ static const struct SpriteSheet sTeraIndicatorSpriteSheets[NUMBER_OF_MON_TYPES +
 
 static const struct SpriteTemplate * const sTeraIndicatorSpriteTemplates[NUMBER_OF_MON_TYPES] =
 {
+    [TYPE_NONE] = &sSpriteTemplate_NormalIndicator, // just in case
     [TYPE_NORMAL] = &sSpriteTemplate_NormalIndicator,
     [TYPE_FIGHTING] = &sSpriteTemplate_FightingIndicator,
     [TYPE_FLYING] = &sSpriteTemplate_FlyingIndicator,
@@ -734,6 +712,9 @@ void TeraIndicator_SetVisibilities(u32 healthboxId, bool32 invisible)
 {
     u8 spriteId = TeraIndicator_GetSpriteId(healthboxId);
     u32 battler = gSprites[healthboxId].hMain_Battler;
+
+    if (GetSafariZoneFlag())
+        return;
 
     if (invisible == TRUE)
         gSprites[spriteId].invisible = TRUE;

@@ -19,6 +19,8 @@
 #define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_VARIABLE
 #define BFG_VAR_TEAM_GENERATION_METHOD VAR_FRONTIER_METHOD // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
 
+#define BFG_FLAG_FRONTIER_FIXED_IV FLAG_BATTLE_FRONTIER_FIXED_IV // Flag to enable or disable fixed IVs
+
 // Run 'move_ratings.py' as part of build pipeline
 #define BFG_GENERATE_MOVE_RATINGS FALSE    // Generate battle_frontier_generator_move_ratings.h
 
@@ -28,6 +30,9 @@
 // #define BFG_RANDOM_RANGE_FIXED FALSE    // Fixed value for RANDOM_RANGE()
 // #define BFG_RANDOM_CHANCE_FIXED FALSE   // Fixed value for RANDOM_CHANCE()
 // #define BFG_RANDOM_BOOL_FIXED FALSE     // Fixed value for RANDOM_BOOL()
+
+#define BFG_RANDOM_STAB_TERA_CHANCE 2   // 1/2 chance for stab tera
+#define BFG_RANDOM_TERA_CHANCE 4        // 1/4 chance for non-stab tera
 
 #define BFG_RANDOM_STAB_TERA_CHANCE 2   // 1/2 chance for stab tera
 #define BFG_RANDOM_TERA_CHANCE 4        // 1/4 chance for non-stab tera
@@ -69,6 +74,8 @@
 
 // *** BASE STATS ***
 
+#define BFG_IV_FIXED 31 // Fixed IVs when 'FLAG_BATTLE_FRONTIER_FIXED_IV' is set
+
 #define BFG_IV_MIN_BST_0 BFG_BST_MIN
 #define BFG_IV_MIN_BST_3 180
 #define BFG_IV_MIN_BST_6 225
@@ -88,6 +95,40 @@
 #define BFG_IV_MAX_BST_18 630
 #define BFG_IV_MAX_BST_21 675
 #define BFG_IV_MAX_BST_MAX 720
+
+// Attack Power Scaling
+
+#define BFG_IV_MIN_ATK_0 20
+#define BFG_IV_MIN_ATK_3 25
+#define BFG_IV_MIN_ATK_6 30
+#define BFG_IV_MIN_ATK_9 35
+#define BFG_IV_MIN_ATK_12 40
+#define BFG_IV_MIN_ATK_15 45
+#define BFG_IV_MIN_ATK_18 50
+#define BFG_IV_MIN_ATK_21 55
+#define BFG_IV_MIN_ATK_MAX 60
+
+#define BFG_IV_MAX_ATK_0 60
+#define BFG_IV_MAX_ATK_3 75
+#define BFG_IV_MAX_ATK_6 90
+#define BFG_IV_MAX_ATK_9 105
+#define BFG_IV_MAX_ATK_12 120
+#define BFG_IV_MAX_ATK_15 135
+#define BFG_IV_MAX_ATK_18 150
+#define BFG_IV_MAX_ATK_21 165
+#define BFG_IV_MAX_ATK_MAX 180
+
+// Hidden Ability Scaling
+
+#define BFG_IV_HA_CHANCE_0 0 // 0% Chance
+#define BFG_IV_HA_CHANCE_3 24 // 1/24
+#define BFG_IV_HA_CHANCE_6 21 // 1/21
+#define BFG_IV_HA_CHANCE_9 18 // 1/18
+#define BFG_IV_HA_CHANCE_12 15 // 1/15
+#define BFG_IV_HA_CHANCE_15 12 // 1/12
+#define BFG_IV_HA_CHANCE_18 9 // 1/9
+#define BFG_IV_HA_CHANCE_21 6 // 1/6
+#define BFG_IV_HA_CHANCE_MAX 3 // 1/3
 
 // *** SPECIES ***
 #define BFG_LVL_50_ALLOW_BANNED_SPECIES FALSE   // Allow banned species (e.g. Kyogre,Groudon) in Frontier Lvl. 50 Mode
@@ -210,12 +251,14 @@
 
 #endif
 
-// *** ABILITIES ***
-#define BFG_HA_SELECTION_CHANCE 4 // Hidden ability selection chance (5 = 1/5)
-
 // *** MOVES *** 
 
-#define BFG_TEAM_GENERATOR_FAILURE_LIMIT 5 // Maximum times move selection can fail
+// Number of times 'random' move selection can fail
+#define BFG_TEAM_GENERATOR_RANDOM_FAILURE_LIMIT 20
+
+// Number of times 'filtered' move selection can fail
+#define BFG_TEAM_GENERATOR_FILTERED_FAILURE_LIMIT 4
+
 #define BFG_TEAM_GENERATOR_MINIMUM 1       // Minumum number of moves allowed
 
 #define BFG_MOVE_RATING_LIST_SIZE_ATTACK 0x20
@@ -228,7 +271,7 @@
 #define BFG_MOVE_DEFAULT_RATING 60       // Default rating for moves which do not have one
 
 #define BFG_MOVE_ACCEPT_EQUAL_MOVE_CHANCE 2   // Chance to accept move with equal rating
-#define BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE 10  // Chance to accept move with same rating
+#define BFG_MOVE_ACCEPT_WORSE_MOVE_CHANCE 8  // Chance to accept move with same rating
 
 // If this is set to true, the move lookup table
 // 'gBattleFrontierMoveStatusAllowSelect' will be used

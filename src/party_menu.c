@@ -14,6 +14,7 @@
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "evolution_scene.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
@@ -80,12 +81,6 @@
 #include "config/battle_frontier.h"
 
 #include "data/battle_frontier/battle_frontier_banned_species.h"
-
-#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
-#define gStringVar4 (MirrorPtr(gStringVar4))
-#define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) (AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str)))
-#define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
-#endif
 
 enum {
     MENU_SUMMARY,
@@ -2802,10 +2797,7 @@ static void PrintMessage(const u8 *text)
 {
     DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x4F, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_PARTY_MENU)
-        AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, MirrorPtr(text), GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    else
-        AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void PartyMenuDisplayYesNoMenu(void)
@@ -4111,6 +4103,13 @@ bool8 FieldCallback_PrepareFadeInFromMenu(void)
     FadeInFromBlack();
     CreateTask(Task_FieldMoveWaitForFade, 8);
     return TRUE;
+}
+
+// Same as above, but removes follower pokemon
+bool8 FieldCallback_PrepareFadeInForTeleport(void)
+{ 
+    RemoveFollowingPokemon();
+    return FieldCallback_PrepareFadeInFromMenu();
 }
 
 static void Task_FieldMoveWaitForFade(u8 taskId)
@@ -8228,6 +8227,38 @@ void ItemUseCB_Pokeball(u8 taskId, TaskFunc task){
         // Return the old ball
         if (I_RETURN_OLD_BALL)
             AddBagItem(oldBall, 1);
+        gTasks[taskId].func = task;
+    }
+    else // Item not activated
+    { 
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}
+
+void ItemUseCB_TeraShard(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 item = gSpecialVar_ItemId;
+
+    // Get the tera type for the item
+    u8 newType = teraShardTypeLookup[item];
+    u8 oldType = GetMonData(mon, MON_DATA_TERA_TYPE);
+
+    // New type does not match
+    if (newType != oldType) {
+        // Update the ball for the pokemon
+        SetMonData(mon, MON_DATA_TERA_TYPE, &newType);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, 1);
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnTeraTypeChanged);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
     else // Item not activated

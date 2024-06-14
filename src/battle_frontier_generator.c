@@ -36,10 +36,12 @@
 // *** STATS ***
 #define CHECK_EVS(evs,stat) ((evs) & (stat))
 
-// *** MOVE ***
+// *** MOVES ***
 
 #define CATEGORY(m) (gMovesInfo[m].category)
+#define POWER(m) (gMovesInfo[m].power)
 #define TYPE(m) (gMovesInfo[m].type)
+#define HITS(m) (gMovesInfo[m].strikeCount)
 
 #define HAS_SPEED(n,e) ((gNatureInfo[n].posStat == STAT_SPEED) || (CHECK_EVS(e,F_EV_SPREAD_SPEED)))
 #define IS_STAB(s,t) (((gSpeciesInfo[s].types[0]) == (t)) || ((gSpeciesInfo[s].types[1]) == (t)))
@@ -72,7 +74,7 @@
 #define IS_END_OF_TURN_ABILITY(a) ((a == ABILITY_MOODY) || (a == ABILITY_POISON_HEAL) || (a == ABILITY_SPEED_BOOST))
 
 #define IS_SPEED_CONTROL_EFFECT(e) (((e) == EFFECT_TRICK_ROOM) || ((e) == EFFECT_TAILWIND))
-#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_TWO_DOWN) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
+#define IS_STAT_REDUCING_EFFECT(e) (((e) == MOVE_EFFECT_ATK_MINUS_1) || ((e) == MOVE_EFFECT_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SPD_MINUS_1) ||  ((e) == MOVE_EFFECT_SP_ATK_MINUS_1) || ((e) == MOVE_EFFECT_SP_ATK_MINUS_2) || ((e) == MOVE_EFFECT_V_CREATE) || ((e) == MOVE_EFFECT_ATK_DEF_DOWN) || ((e) == MOVE_EFFECT_DEF_SPDEF_DOWN) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_1) || ((e) == MOVE_EFFECT_SP_DEF_MINUS_2))
 
 // *** TYPE ***
 #define IS_TYPE(x,y,type) ((x) == (type) || (y) == (type))
@@ -134,6 +136,42 @@ const u16 recycleItemsList[] = {
 // *** CONSTANTS ***
 #define SPECIES_END 0xFFFF
 #define FORME_DEFAULT 0xFF
+
+const u16 fixedIVHiddenAbilityLookup[] = {
+    [0] = BFG_IV_HA_CHANCE_0,
+    [3] = BFG_IV_HA_CHANCE_3,
+    [6] = BFG_IV_HA_CHANCE_6,
+    [9] = BFG_IV_HA_CHANCE_9,
+    [12] = BFG_IV_HA_CHANCE_12,
+    [15] = BFG_IV_HA_CHANCE_15,
+    [18] = BFG_IV_HA_CHANCE_18,
+    [21] = BFG_IV_HA_CHANCE_21,
+    [MAX_PER_STAT_IVS] = BFG_IV_HA_CHANCE_MAX,
+};
+
+const u16 fixedIVMinAtkLookup[] = {
+    [0] = BFG_IV_MIN_ATK_0,
+    [3] = BFG_IV_MIN_ATK_3,
+    [6] = BFG_IV_MIN_ATK_6,
+    [9] = BFG_IV_MIN_ATK_9,
+    [12] = BFG_IV_MIN_ATK_12,
+    [15] = BFG_IV_MIN_ATK_15,
+    [18] = BFG_IV_MIN_ATK_18,
+    [21] = BFG_IV_MIN_ATK_21,
+    [MAX_PER_STAT_IVS] = BFG_IV_MIN_ATK_MAX,
+};
+
+const u16 fixedIVMaxAtkLookup[] = {
+    [0] = BFG_IV_MAX_ATK_0,
+    [3] = BFG_IV_MAX_ATK_3,
+    [6] = BFG_IV_MAX_ATK_6,
+    [9] = BFG_IV_MAX_ATK_9,
+    [12] = BFG_IV_MAX_ATK_12,
+    [15] = BFG_IV_MAX_ATK_15,
+    [18] = BFG_IV_MAX_ATK_18,
+    [21] = BFG_IV_MAX_ATK_21,
+    [MAX_PER_STAT_IVS] = BFG_IV_MAX_ATK_MAX,
+};
 
 const u16 fixedIVMinBSTLookup[] = {
     [0] = BFG_IV_MIN_BST_0,
@@ -917,6 +955,33 @@ static bool32 IsIgnoreTypeCountMove(u16 moveId)
         return TRUE; // Attacks only
 }
 
+static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties)
+{
+    // Move is not a status move
+    if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
+    {
+        // Get the move power
+        u8 power = POWER(moveId);
+        if (power == 1)
+            power = BFG_MOVE_POWER_SPECIAL;
+
+        // Multi-hit moves
+        u8 hits = HITS(moveId);
+        if (hits > 1)
+            power *= hits; // Apply for each hit
+
+        // If power is NOT in range
+        if (!(IN_INCLUSIVE_RANGE(
+            fixedIVMinAtkLookup[properties->fixedIV],
+            fixedIVMaxAtkLookup[properties->fixedIV],
+            power
+        )))
+            return FALSE; // Out of range
+    }
+
+    return TRUE; // In range
+}
+
 static u8 GetMoveType(u16 moveId, u16 abilityId)
 {
     // Get the move type
@@ -1113,13 +1178,13 @@ static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
             } \
         }; break; \
         default: { \
-            if (IsNeverSelectMove(moveId)) continue; \
+            if (IsNeverSelectMove(moveId) || (!(CheckMovePower(moveId, properties)))) continue; \
             if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) { if ((numAllowedStatusMoves < BFG_MOVE_RATING_LIST_SIZE_STATUS) && ((method != BFG_TEAM_GENERATOR_FILTERED_ATTACKS_ONLY) && IsAllowedStatusMove(moveId))) allowedStatusMoves[numAllowedStatusMoves++] = moveId; } \
             else { if ((numAllowedAttackMoves < BFG_MOVE_RATING_LIST_SIZE_ATTACK) && ((spreadCategory == BFG_SPREAD_CATEGORY_MIXED) || (CATEGORY(moveId) == DAMAGE_CATEGORY_PHYSICAL && spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) || (CATEGORY(moveId) == DAMAGE_CATEGORY_SPECIAL && spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL))) allowedAttackMoves[numAllowedAttackMoves++] = moveId; } \
         }; break; \
     }
 
-static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove) 
+static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs, u8 abilityNum, u16 requiredMove, struct GeneratorProperties * properties) 
 {
     u16 i, j, moveIndex;
 
@@ -1184,7 +1249,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                 else  // General case
                 {
                     // While no move found, and failure limit has not been reached
-                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
+                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_RANDOM_FAILURE_LIMIT)) 
                     {
                         // Sample random move index
                         moveIndex = Random() % (teachableMoves + levelUpMoves);
@@ -1199,8 +1264,8 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                         else // Level-up learnset
                             moveId = levelUpLearnset[moveIndex].move;
 
-                        // Check banned moves
-                        if (IsNeverSelectMove(moveId)) 
+                        // Skip banned or over/under-levelled moves
+                        if (IsNeverSelectMove(moveId) || (!(CheckMovePower(moveId, properties))))
                         {
                             moveId = MOVE_NONE;
                             failures++;
@@ -1413,7 +1478,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                         moveId = MOVE_NONE; 
 
                         // While no move found, and failure limit has not been reached
-                        while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
+                        while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FILTERED_FAILURE_LIMIT)) 
                         {
                             // Sample a random attacking move from the list
                             moveIndex = Random() % numAllowedAttackMoves;
@@ -1465,7 +1530,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                     moveId = MOVE_NONE; 
 
                     // While no move found, and failure limit has not been reached
-                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FAILURE_LIMIT)) 
+                    while((moveId == MOVE_NONE) && (failures < BFG_TEAM_GENERATOR_FILTERED_FAILURE_LIMIT)) 
                     {
                         // Sample a random status move from the list
                         moveIndex = Random() % numAllowedStatusMoves;
@@ -2244,8 +2309,11 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
     );
 
     // If this species has a hidden ability
-    if (((species->abilities[1] != ABILITY_NONE) && (species->abilities[2] != ABILITY_NONE)) && RANDOM_CHANCE(BFG_HA_SELECTION_CHANCE)) 
-    {
+    if (
+        ((species->abilities[1] != ABILITY_NONE) && 
+        (species->abilities[2] != ABILITY_NONE)) && 
+        RANDOM_CHANCE(fixedIVHiddenAbilityLookup[properties->fixedIV])
+    ) {
         abilityNum = 3; // Hidden ability index
         SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
     }
@@ -2265,7 +2333,7 @@ bool32 GenerateTrainerPokemon(struct Pokemon * mon, u16 speciesId, u8 formeIndex
     // Give the chosen pokemon its specified moves.
     // Returns FRIENDSHIP_MAX unless the moveset
     // contains 'FRUSTRATION'. 
-    moveCount = GetSpeciesMoves(mon, formeId, nature, evs, abilityNum, move);
+    moveCount = GetSpeciesMoves(mon, formeId, nature, evs, abilityNum, move, properties);
     
     DebugPrintf("Moves found: %d ...", moveCount);
 
@@ -3063,8 +3131,14 @@ void GenerateTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount, u8 level)
     struct GeneratorProperties properties;
     InitGeneratorProperties(&properties, level, 0);
 
-    // Default values
+    // Calculate fixed iv
     properties.fixedIV = GetFrontierTrainerFixedIvs(trainerId);
+
+    // If the fixed IVs flag is set
+    #if BFG_FLAG_FRONTIER_FIXED_IV != 0
+    if (FlagGet(BFG_FLAG_FRONTIER_FIXED_IV))
+        properties.fixedIV = BFG_IV_FIXED;
+    #endif
 
     // Setup fixed values for level mode
     u8 lvlMode = GET_LVL_MODE();

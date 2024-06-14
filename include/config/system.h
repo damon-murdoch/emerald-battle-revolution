@@ -17,8 +17,4 @@
 // Comment out this line to disable sleep mode
 #define SYS_ENABLE_SLEEP_MODE
 
-// [FieryMewtwo] Enable trade with 
-// FRLG without beating the game
-#define SYS_ENABLE_FRLG_EARLY_TRADE
-
 #endif // GUARD_CONFIG_SYSTEM_H

@@ -196,12 +196,12 @@ Auto_EventScript_Pokemon_Shop_Rock_Page1_5:
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page1_6:
-	givemon SPECIES_BINACLE, 1
+	givemon SPECIES_ARON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Rock_Page6
+	goto Auto_EventScript_Pokemon_Shop_Rock_Page8
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page1_8:
@@ -223,27 +223,27 @@ Auto_EventScript_Pokemon_Shop_Rock_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page2_2:
-	givemon SPECIES_BONSLY, 1
+	givemon SPECIES_BINACLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page2_3:
-	givemon SPECIES_CARBINK, 1
+	givemon SPECIES_BONSLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page2_4:
-	givemon SPECIES_CRANIDOS, 1
+	givemon SPECIES_CARBINK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page2_5:
-	givemon SPECIES_GEODUDE, 1
+	givemon SPECIES_CORSOLA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page2_6:
-	givemon SPECIES_GEODUDE_ALOLAN, 1
+	givemon SPECIES_CRANIDOS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -270,27 +270,27 @@ Auto_EventScript_Pokemon_Shop_Rock_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page3_2:
-	givemon SPECIES_GLIMMET, 1
+	givemon SPECIES_DWEBBLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page3_3:
-	givemon SPECIES_IRON_BOULDER, 1
+	givemon SPECIES_GEODUDE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page3_4:
-	givemon SPECIES_IRON_THORNS, 1
+	givemon SPECIES_GEODUDE_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page3_5:
-	givemon SPECIES_KABUTO, 1
+	givemon SPECIES_GLIMMET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page3_6:
-	givemon SPECIES_KLAWF, 1
+	givemon SPECIES_GROWLITHE_HISUIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -317,27 +317,27 @@ Auto_EventScript_Pokemon_Shop_Rock_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page4_2:
-	givemon SPECIES_LARVITAR, 1
+	givemon SPECIES_IRON_BOULDER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page4_3:
-	givemon SPECIES_LILEEP, 1
+	givemon SPECIES_IRON_THORNS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page4_4:
-	givemon SPECIES_LUNATONE, 1
+	givemon SPECIES_KABUTO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page4_5:
-	givemon SPECIES_MINIOR, 1
+	givemon SPECIES_KLAWF, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page4_6:
-	givemon SPECIES_NACLI, 1
+	givemon SPECIES_LARVITAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -364,27 +364,27 @@ Auto_EventScript_Pokemon_Shop_Rock_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page5_2:
-	givemon SPECIES_NOSEPASS, 1
+	givemon SPECIES_LILEEP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page5_3:
-	givemon SPECIES_OMANYTE, 1
+	givemon SPECIES_LUNATONE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page5_4:
-	givemon SPECIES_ONIX, 1
+	givemon SPECIES_MINIOR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page5_5:
-	givemon SPECIES_ROCKRUFF, 1
+	givemon SPECIES_NACLI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page5_6:
-	givemon SPECIES_ROGGENROLA, 1
+	givemon SPECIES_NOSEPASS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -411,27 +411,27 @@ Auto_EventScript_Pokemon_Shop_Rock_Page6::
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_2:
-	givemon SPECIES_ROLYCOLY, 1
+	givemon SPECIES_OMANYTE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_3:
-	givemon SPECIES_SHIELDON, 1
+	givemon SPECIES_ONIX, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_4:
-	givemon SPECIES_SOLROCK, 1
+	givemon SPECIES_RELICANTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_5:
-	givemon SPECIES_STONJOURNER, 1
+	givemon SPECIES_RHYHORN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_6:
-	givemon SPECIES_TYRUNT, 1
+	givemon SPECIES_ROCKRUFF, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -440,6 +440,88 @@ Auto_EventScript_Pokemon_Shop_Rock_Page6_7:
 	return
 
 Auto_EventScript_Pokemon_Shop_Rock_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Rock_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Rock_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Rock_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Rock_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Rock_Page7_4
+	case 3, Auto_EventScript_Pokemon_Shop_Rock_Page7_5
+	case 4, Auto_EventScript_Pokemon_Shop_Rock_Page7_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Rock_Page7_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Rock_Page7_8
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_2:
+	givemon SPECIES_ROGGENROLA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_3:
+	givemon SPECIES_ROLYCOLY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_4:
+	givemon SPECIES_SHIELDON, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_5:
+	givemon SPECIES_SHUCKLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_6:
+	givemon SPECIES_SOLROCK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_7:
+	goto Auto_EventScript_Pokemon_Shop_Rock_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page7_8:
+	goto Auto_EventScript_Pokemon_Shop_Rock_Page8
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Rock_Page8
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Rock_Page8_2
+	case 1, Auto_EventScript_Pokemon_Shop_Rock_Page8_3
+	case 2, Auto_EventScript_Pokemon_Shop_Rock_Page8_4
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Rock_Page8_5
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Rock_Page8_6
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8_2:
+	givemon SPECIES_STONJOURNER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8_3:
+	givemon SPECIES_TIRTOUGA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8_4:
+	givemon SPECIES_TYRUNT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8_5:
+	goto Auto_EventScript_Pokemon_Shop_Rock_Page7
+	return
+
+Auto_EventScript_Pokemon_Shop_Rock_Page8_6:
 	goto Auto_EventScript_Pokemon_Shop_Rock_Page1
 	return
 
@@ -478,12 +560,12 @@ Auto_EventScript_Pokemon_Shop_Steel_Page1_5:
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page1_6:
-	givemon SPECIES_DURALUDON, 1
+	givemon SPECIES_DIGLETT_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Steel_Page3
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page5
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page1_8:
@@ -505,27 +587,27 @@ Auto_EventScript_Pokemon_Shop_Steel_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page2_2:
-	givemon SPECIES_HONEDGE, 1
+	givemon SPECIES_DURALUDON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page2_3:
-	givemon SPECIES_IRON_CROWN, 1
+	givemon SPECIES_DURANT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page2_4:
-	givemon SPECIES_KLEFKI, 1
+	givemon SPECIES_FERROSEED, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page2_5:
-	givemon SPECIES_KLINK, 1
+	givemon SPECIES_HONEDGE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page2_6:
-	givemon SPECIES_MAWILE, 1
+	givemon SPECIES_IRON_CROWN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -545,36 +627,136 @@ Auto_EventScript_Pokemon_Shop_Steel_Page3::
 	case 1, Auto_EventScript_Pokemon_Shop_Steel_Page3_3
 	case 2, Auto_EventScript_Pokemon_Shop_Steel_Page3_4
 	case 3, Auto_EventScript_Pokemon_Shop_Steel_Page3_5
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page3_6
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page3_7
+	case 4, Auto_EventScript_Pokemon_Shop_Steel_Page3_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page3_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page3_8
 	goto Auto_EventScript_Pokemon_Shop_Page4
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_2:
-	givemon SPECIES_MEOWTH_GALARIAN, 1
+	givemon SPECIES_IRON_TREADS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_3:
-	givemon SPECIES_ORTHWORM, 1
+	givemon SPECIES_KLEFKI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_4:
-	givemon SPECIES_SKARMORY, 1
+	givemon SPECIES_KLINK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_5:
-	givemon SPECIES_VAROOM, 1
+	givemon SPECIES_MAGNEMITE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_6:
-	goto Auto_EventScript_Pokemon_Shop_Steel_Page2
+	givemon SPECIES_MAWILE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Steel_Page3_7:
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page3_8:
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page4
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Steel_Page4
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Steel_Page4_2
+	case 1, Auto_EventScript_Pokemon_Shop_Steel_Page4_3
+	case 2, Auto_EventScript_Pokemon_Shop_Steel_Page4_4
+	case 3, Auto_EventScript_Pokemon_Shop_Steel_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Steel_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page4_8
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_2:
+	givemon SPECIES_MEOWTH_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_3:
+	givemon SPECIES_ORTHWORM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_4:
+	givemon SPECIES_PAWNIARD, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_5:
+	givemon SPECIES_SANDSHREW_ALOLAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_6:
+	givemon SPECIES_SHIELDON, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Steel_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Steel_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Steel_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Steel_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Steel_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Steel_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Steel_Page5_8
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_2:
+	givemon SPECIES_SKARMORY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_3:
+	givemon SPECIES_STUNFISK_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_4:
+	givemon SPECIES_TINKATINK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_5:
+	givemon SPECIES_TOGEDEMARU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_6:
+	givemon SPECIES_VAROOM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Steel_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Steel_Page5_8:
 	goto Auto_EventScript_Pokemon_Shop_Steel_Page1
 	return
 
@@ -618,7 +800,7 @@ Auto_EventScript_Pokemon_Shop_Water_Page1_6:
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Water_Page13
+	goto Auto_EventScript_Pokemon_Shop_Water_Page15
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page1_8:
@@ -640,27 +822,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page2_2:
-	givemon SPECIES_BRUXISH, 1
+	givemon SPECIES_BINACLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page2_3:
-	givemon SPECIES_BUIZEL, 1
+	givemon SPECIES_BRUXISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page2_4:
-	givemon SPECIES_CARVANHA, 1
+	givemon SPECIES_BUIZEL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page2_5:
-	givemon SPECIES_CHEWTLE, 1
+	givemon SPECIES_CARVANHA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page2_6:
-	givemon SPECIES_CHINCHOU, 1
+	givemon SPECIES_CHEWTLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -687,27 +869,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page3_2:
-	givemon SPECIES_CLAMPERL, 1
+	givemon SPECIES_CHINCHOU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page3_3:
-	givemon SPECIES_CLAUNCHER, 1
+	givemon SPECIES_CLAMPERL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page3_4:
-	givemon SPECIES_CORPHISH, 1
+	givemon SPECIES_CLAUNCHER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page3_5:
-	givemon SPECIES_CORSOLA, 1
+	givemon SPECIES_CORPHISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page3_6:
-	givemon SPECIES_DEWPIDER, 1
+	givemon SPECIES_CORSOLA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -734,27 +916,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page4_2:
-	givemon SPECIES_DONDOZO, 1
+	givemon SPECIES_CRAMORANT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page4_3:
-	givemon SPECIES_DRACOVISH, 1
+	givemon SPECIES_DEWPIDER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page4_4:
-	givemon SPECIES_DUCKLETT, 1
+	givemon SPECIES_DONDOZO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page4_5:
-	givemon SPECIES_FEEBAS, 1
+	givemon SPECIES_DRACOVISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page4_6:
-	givemon SPECIES_FINIZEN, 1
+	givemon SPECIES_DUCKLETT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -781,27 +963,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page5_2:
-	givemon SPECIES_FINNEON, 1
+	givemon SPECIES_FEEBAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page5_3:
-	givemon SPECIES_FRILLISH, 1
+	givemon SPECIES_FINIZEN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page5_4:
-	givemon SPECIES_FROAKIE, 1
+	givemon SPECIES_FINNEON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page5_5:
-	givemon SPECIES_GOLDEEN, 1
+	givemon SPECIES_FRILLISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page5_6:
-	givemon SPECIES_HORSEA, 1
+	givemon SPECIES_FROAKIE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -828,27 +1010,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page6::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page6_2:
-	givemon SPECIES_KRABBY, 1
+	givemon SPECIES_GOLDEEN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page6_3:
-	givemon SPECIES_LAPRAS, 1
+	givemon SPECIES_HORSEA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page6_4:
-	givemon SPECIES_LOTAD, 1
+	givemon SPECIES_IRON_BUNDLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page6_5:
-	givemon SPECIES_LUVDISC, 1
+	givemon SPECIES_KABUTO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page6_6:
-	givemon SPECIES_MAGIKARP, 1
+	givemon SPECIES_KRABBY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -875,27 +1057,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page7::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page7_2:
-	givemon SPECIES_MANTYKE, 1
+	givemon SPECIES_LAPRAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page7_3:
-	givemon SPECIES_MUDKIP, 1
+	givemon SPECIES_LOTAD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page7_4:
-	givemon SPECIES_OSHAWOTT, 1
+	givemon SPECIES_LUVDISC, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page7_5:
-	givemon SPECIES_PANPOUR, 1
+	givemon SPECIES_MAGIKARP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page7_6:
-	givemon SPECIES_PIPLUP, 1
+	givemon SPECIES_MANTYKE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -922,27 +1104,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page8::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page8_2:
-	givemon SPECIES_POLIWAG, 1
+	givemon SPECIES_MAREANIE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page8_3:
-	givemon SPECIES_POPPLIO, 1
+	givemon SPECIES_MUDKIP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page8_4:
-	givemon SPECIES_PSYDUCK, 1
+	givemon SPECIES_OMANYTE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page8_5:
-	givemon SPECIES_PYUKUMUKU, 1
+	givemon SPECIES_OSHAWOTT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page8_6:
-	givemon SPECIES_QUAXLY, 1
+	givemon SPECIES_PANPOUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -969,27 +1151,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page9::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page9_2:
-	givemon SPECIES_QWILFISH, 1
+	givemon SPECIES_PIPLUP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page9_3:
-	givemon SPECIES_RELICANTH, 1
+	givemon SPECIES_POLIWAG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page9_4:
-	givemon SPECIES_REMORAID, 1
+	givemon SPECIES_POPPLIO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page9_5:
-	givemon SPECIES_SEEL, 1
+	givemon SPECIES_PSYDUCK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page9_6:
-	givemon SPECIES_SHELLDER, 1
+	givemon SPECIES_PYUKUMUKU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1016,27 +1198,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page10::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page10_2:
-	givemon SPECIES_SHELLOS, 1
+	givemon SPECIES_QUAXLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page10_3:
-	givemon SPECIES_SLOWPOKE, 1
+	givemon SPECIES_QWILFISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page10_4:
-	givemon SPECIES_SOBBLE, 1
+	givemon SPECIES_RELICANTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page10_5:
-	givemon SPECIES_SQUIRTLE, 1
+	givemon SPECIES_REMORAID, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page10_6:
-	givemon SPECIES_STARYU, 1
+	givemon SPECIES_SEEL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1063,27 +1245,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page11::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page11_2:
-	givemon SPECIES_TENTACOOL, 1
+	givemon SPECIES_SHELLDER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page11_3:
-	givemon SPECIES_TIRTOUGA, 1
+	givemon SPECIES_SHELLOS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page11_4:
-	givemon SPECIES_TOTODILE, 1
+	givemon SPECIES_SKRELP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page11_5:
-	givemon SPECIES_TYMPOLE, 1
+	givemon SPECIES_SLOWPOKE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page11_6:
-	givemon SPECIES_VELUZA, 1
+	givemon SPECIES_SOBBLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1110,27 +1292,27 @@ Auto_EventScript_Pokemon_Shop_Water_Page12::
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page12_2:
-	givemon SPECIES_WAILMER, 1
+	givemon SPECIES_SPHEAL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page12_3:
-	givemon SPECIES_WALKING_WAKE, 1
+	givemon SPECIES_SQUIRTLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page12_4:
-	givemon SPECIES_WIGLETT, 1
+	givemon SPECIES_STARYU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page12_5:
-	givemon SPECIES_WINGULL, 1
+	givemon SPECIES_SURSKIT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page12_6:
-	givemon SPECIES_WISHIWASHI, 1
+	givemon SPECIES_TATSUGIRI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1147,21 +1329,121 @@ Auto_EventScript_Pokemon_Shop_Water_Page13::
 	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Water_Page13
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Water_Page13_2
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page13_3
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page13_4
+	case 1, Auto_EventScript_Pokemon_Shop_Water_Page13_3
+	case 2, Auto_EventScript_Pokemon_Shop_Water_Page13_4
+	case 3, Auto_EventScript_Pokemon_Shop_Water_Page13_5
+	case 4, Auto_EventScript_Pokemon_Shop_Water_Page13_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page13_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page13_8
 	goto Auto_EventScript_Pokemon_Shop_Page4
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page13_2:
-	givemon SPECIES_WOOPER, 1
+	givemon SPECIES_TENTACOOL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page13_3:
-	goto Auto_EventScript_Pokemon_Shop_Water_Page12
+	givemon SPECIES_TIRTOUGA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Water_Page13_4:
+	givemon SPECIES_TOTODILE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page13_5:
+	givemon SPECIES_TYMPOLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page13_6:
+	givemon SPECIES_VELUZA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page13_7:
+	goto Auto_EventScript_Pokemon_Shop_Water_Page12
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page13_8:
+	goto Auto_EventScript_Pokemon_Shop_Water_Page14
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Water_Page14::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Water_Page14
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Water_Page14_2
+	case 1, Auto_EventScript_Pokemon_Shop_Water_Page14_3
+	case 2, Auto_EventScript_Pokemon_Shop_Water_Page14_4
+	case 3, Auto_EventScript_Pokemon_Shop_Water_Page14_5
+	case 4, Auto_EventScript_Pokemon_Shop_Water_Page14_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page14_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page14_8
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_2:
+	givemon SPECIES_WAILMER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_3:
+	givemon SPECIES_WALKING_WAKE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_4:
+	givemon SPECIES_WIGLETT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_5:
+	givemon SPECIES_WIMPOD, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_6:
+	givemon SPECIES_WINGULL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_7:
+	goto Auto_EventScript_Pokemon_Shop_Water_Page13
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page14_8:
+	goto Auto_EventScript_Pokemon_Shop_Water_Page15
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Water_Page15::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Water_Page15
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Water_Page15_2
+	case 1, Auto_EventScript_Pokemon_Shop_Water_Page15_3
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page15_4
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Water_Page15_5
+	goto Auto_EventScript_Pokemon_Shop_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page15_2:
+	givemon SPECIES_WISHIWASHI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page15_3:
+	givemon SPECIES_WOOPER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page15_4:
+	goto Auto_EventScript_Pokemon_Shop_Water_Page14
+	return
+
+Auto_EventScript_Pokemon_Shop_Water_Page15_5:
 	goto Auto_EventScript_Pokemon_Shop_Water_Page1
 	return
 
@@ -1185,27 +1467,27 @@ Auto_EventScript_Pokemon_Shop_Ground_Page1_2:
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_3:
-	givemon SPECIES_CUBONE, 1
+	givemon SPECIES_BARBOACH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_4:
-	givemon SPECIES_DIGLETT, 1
+	givemon SPECIES_CUBONE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_5:
-	givemon SPECIES_DIGLETT_ALOLAN, 1
+	givemon SPECIES_DIGLETT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_6:
-	givemon SPECIES_DRILBUR, 1
+	givemon SPECIES_DIGLETT_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Ground_Page5
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page7
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page1_8:
@@ -1227,27 +1509,27 @@ Auto_EventScript_Pokemon_Shop_Ground_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page2_2:
-	givemon SPECIES_GLIGAR, 1
+	givemon SPECIES_DRILBUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page2_3:
-	givemon SPECIES_GOLETT, 1
+	givemon SPECIES_GEODUDE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page2_4:
-	givemon SPECIES_GREAT_TUSK, 1
+	givemon SPECIES_GIBLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page2_5:
-	givemon SPECIES_HIPPOPOTAS, 1
+	givemon SPECIES_GLIGAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page2_6:
-	givemon SPECIES_IRON_TREADS, 1
+	givemon SPECIES_GOLETT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1274,27 +1556,27 @@ Auto_EventScript_Pokemon_Shop_Ground_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page3_2:
-	givemon SPECIES_MUDBRAY, 1
+	givemon SPECIES_GREAT_TUSK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page3_3:
-	givemon SPECIES_PHANPY, 1
+	givemon SPECIES_HIPPOPOTAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page3_4:
-	givemon SPECIES_RHYHORN, 1
+	givemon SPECIES_IRON_TREADS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page3_5:
-	givemon SPECIES_SANDILE, 1
+	givemon SPECIES_LARVITAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page3_6:
-	givemon SPECIES_SANDSHREW, 1
+	givemon SPECIES_MUDBRAY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1321,27 +1603,27 @@ Auto_EventScript_Pokemon_Shop_Ground_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page4_2:
-	givemon SPECIES_SILICOBRA, 1
+	givemon SPECIES_NINCADA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page4_3:
-	givemon SPECIES_STUNFISK, 1
+	givemon SPECIES_NUMEL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page4_4:
-	givemon SPECIES_STUNFISK_GALARIAN, 1
+	givemon SPECIES_ONIX, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page4_5:
-	givemon SPECIES_TOEDSCOOL, 1
+	givemon SPECIES_PHANPY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page4_6:
-	givemon SPECIES_TRAPINCH, 1
+	givemon SPECIES_RHYHORN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1358,21 +1640,127 @@ Auto_EventScript_Pokemon_Shop_Ground_Page5::
 	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ground_Page5
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Ground_Page5_2
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page5_3
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page5_4
+	case 1, Auto_EventScript_Pokemon_Shop_Ground_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ground_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Ground_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Ground_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page5_8
 	goto Auto_EventScript_Pokemon_Shop_Page3
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page5_2:
-	givemon SPECIES_YAMASK_GALARIAN, 1
+	givemon SPECIES_SANDILE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page5_3:
-	goto Auto_EventScript_Pokemon_Shop_Ground_Page4
+	givemon SPECIES_SANDSHREW, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ground_Page5_4:
+	givemon SPECIES_SANDY_SHOCKS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page5_5:
+	givemon SPECIES_SANDYGAST, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page5_6:
+	givemon SPECIES_SILICOBRA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ground_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Ground_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Ground_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ground_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Ground_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Ground_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page6_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_2:
+	givemon SPECIES_STUNFISK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_3:
+	givemon SPECIES_STUNFISK_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_4:
+	givemon SPECIES_SWINUB, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_5:
+	givemon SPECIES_TOEDSCOOL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_6:
+	givemon SPECIES_TRAPINCH, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ground_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Ground_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Ground_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ground_Page7_4
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page7_5
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ground_Page7_6
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7_2:
+	givemon SPECIES_WOOPER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7_3:
+	givemon SPECIES_WOOPER_PALDEAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7_4:
+	givemon SPECIES_YAMASK_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7_5:
+	goto Auto_EventScript_Pokemon_Shop_Ground_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Ground_Page7_6:
 	goto Auto_EventScript_Pokemon_Shop_Ground_Page1
 	return
 
@@ -1391,32 +1779,32 @@ Auto_EventScript_Pokemon_Shop_Ice_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_2:
-	givemon SPECIES_BERGMITE, 1
+	givemon SPECIES_AMAURA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_3:
-	givemon SPECIES_CETODDLE, 1
+	givemon SPECIES_ARCTOVISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_4:
-	givemon SPECIES_CRYOGONAL, 1
+	givemon SPECIES_ARCTOZOLT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_5:
-	givemon SPECIES_CUBCHOO, 1
+	givemon SPECIES_BERGMITE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_6:
-	givemon SPECIES_DARUMAKA_GALARIAN, 1
+	givemon SPECIES_CETODDLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Ice_Page4
+	goto Auto_EventScript_Pokemon_Shop_Ice_Page5
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page1_8:
@@ -1438,27 +1826,27 @@ Auto_EventScript_Pokemon_Shop_Ice_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page2_2:
-	givemon SPECIES_DELIBIRD, 1
+	givemon SPECIES_CRYOGONAL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page2_3:
-	givemon SPECIES_EISCUE, 1
+	givemon SPECIES_CUBCHOO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page2_4:
-	givemon SPECIES_IRON_BUNDLE, 1
+	givemon SPECIES_DARUMAKA_GALARIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page2_5:
-	givemon SPECIES_SANDSHREW_ALOLAN, 1
+	givemon SPECIES_DELIBIRD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page2_6:
-	givemon SPECIES_SMOOCHUM, 1
+	givemon SPECIES_EISCUE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1485,27 +1873,27 @@ Auto_EventScript_Pokemon_Shop_Ice_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page3_2:
-	givemon SPECIES_SNOM, 1
+	givemon SPECIES_FRIGIBAX, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page3_3:
-	givemon SPECIES_SNORUNT, 1
+	givemon SPECIES_IRON_BUNDLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page3_4:
-	givemon SPECIES_SPHEAL, 1
+	givemon SPECIES_LAPRAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page3_5:
-	givemon SPECIES_SWINUB, 1
+	givemon SPECIES_SANDSHREW_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page3_6:
-	givemon SPECIES_VANILLITE, 1
+	givemon SPECIES_SMOOCHUM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1522,21 +1910,80 @@ Auto_EventScript_Pokemon_Shop_Ice_Page4::
 	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ice_Page4
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Ice_Page4_2
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page4_3
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page4_4
+	case 1, Auto_EventScript_Pokemon_Shop_Ice_Page4_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ice_Page4_4
+	case 3, Auto_EventScript_Pokemon_Shop_Ice_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Ice_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page4_8
 	goto Auto_EventScript_Pokemon_Shop_Page3
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page4_2:
-	givemon SPECIES_VULPIX_ALOLAN, 1
+	givemon SPECIES_SNEASEL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page4_3:
-	goto Auto_EventScript_Pokemon_Shop_Ice_Page3
+	givemon SPECIES_SNOM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ice_Page4_4:
+	givemon SPECIES_SNORUNT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page4_5:
+	givemon SPECIES_SNOVER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page4_6:
+	givemon SPECIES_SPHEAL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Ice_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Ice_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ice_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Ice_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Ice_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ice_Page5_4
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page5_5
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ice_Page5_6
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5_2:
+	givemon SPECIES_SWINUB, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5_3:
+	givemon SPECIES_VANILLITE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5_4:
+	givemon SPECIES_VULPIX_ALOLAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5_5:
+	goto Auto_EventScript_Pokemon_Shop_Ice_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Ice_Page5_6:
 	goto Auto_EventScript_Pokemon_Shop_Ice_Page1
 	return
 
@@ -1580,7 +2027,7 @@ Auto_EventScript_Pokemon_Shop_Normal_Page1_6:
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Normal_Page13
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page15
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page1_8:
@@ -1622,7 +2069,7 @@ Auto_EventScript_Pokemon_Shop_Normal_Page2_5:
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page2_6:
-	givemon SPECIES_DEERLING, 1
+	givemon SPECIES_CYCLIZAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1649,27 +2096,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page3_2:
-	givemon SPECIES_DITTO, 1
+	givemon SPECIES_DEERLING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page3_3:
-	givemon SPECIES_DODUO, 1
+	givemon SPECIES_DITTO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page3_4:
-	givemon SPECIES_DRAMPA, 1
+	givemon SPECIES_DODUO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page3_5:
-	givemon SPECIES_DUNSPARCE, 1
+	givemon SPECIES_DRAMPA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page3_6:
-	givemon SPECIES_EEVEE, 1
+	givemon SPECIES_DUNSPARCE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1696,27 +2143,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page4_2:
-	givemon SPECIES_FARFETCHD, 1
+	givemon SPECIES_EEVEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page4_3:
-	givemon SPECIES_FLETCHLING, 1
+	givemon SPECIES_FARFETCHD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page4_4:
-	givemon SPECIES_FURFROU, 1
+	givemon SPECIES_FLETCHLING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page4_5:
-	givemon SPECIES_GIRAFARIG, 1
+	givemon SPECIES_FURFROU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page4_6:
-	givemon SPECIES_GLAMEOW, 1
+	givemon SPECIES_GIRAFARIG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1743,27 +2190,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page5_2:
-	givemon SPECIES_HAPPINY, 1
+	givemon SPECIES_GLAMEOW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page5_3:
-	givemon SPECIES_HOOTHOOT, 1
+	givemon SPECIES_HAPPINY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page5_4:
-	givemon SPECIES_IGGLYBUFF, 1
+	givemon SPECIES_HELIOPTILE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page5_5:
-	givemon SPECIES_KANGASKHAN, 1
+	givemon SPECIES_HOOTHOOT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page5_6:
-	givemon SPECIES_KECLEON, 1
+	givemon SPECIES_IGGLYBUFF, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1790,27 +2237,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page6::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page6_2:
-	givemon SPECIES_KOMALA, 1
+	givemon SPECIES_INDEEDEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page6_3:
-	givemon SPECIES_LECHONK, 1
+	givemon SPECIES_KANGASKHAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page6_4:
-	givemon SPECIES_LICKITUNG, 1
+	givemon SPECIES_KECLEON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page6_5:
-	givemon SPECIES_LILLIPUP, 1
+	givemon SPECIES_KOMALA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page6_6:
-	givemon SPECIES_MEOWTH, 1
+	givemon SPECIES_LECHONK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1837,27 +2284,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page7::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page7_2:
-	givemon SPECIES_MILTANK, 1
+	givemon SPECIES_LICKITUNG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page7_3:
-	givemon SPECIES_MINCCINO, 1
+	givemon SPECIES_LILLIPUP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page7_4:
-	givemon SPECIES_MUNCHLAX, 1
+	givemon SPECIES_LITLEO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page7_5:
-	givemon SPECIES_ORANGURU, 1
+	givemon SPECIES_MEOWTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page7_6:
-	givemon SPECIES_PATRAT, 1
+	givemon SPECIES_MILTANK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1884,27 +2331,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page8::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page8_2:
-	givemon SPECIES_PIDGEY, 1
+	givemon SPECIES_MINCCINO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page8_3:
-	givemon SPECIES_PIDOVE, 1
+	givemon SPECIES_MUNCHLAX, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page8_4:
-	givemon SPECIES_PIKIPEK, 1
+	givemon SPECIES_ORANGURU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page8_5:
-	givemon SPECIES_PORYGON, 1
+	givemon SPECIES_PATRAT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page8_6:
-	givemon SPECIES_RATTATA, 1
+	givemon SPECIES_PIDGEY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1931,27 +2378,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page9::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page9_2:
-	givemon SPECIES_RUFFLET, 1
+	givemon SPECIES_PIDOVE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page9_3:
-	givemon SPECIES_SENTRET, 1
+	givemon SPECIES_PIKIPEK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page9_4:
-	givemon SPECIES_SKITTY, 1
+	givemon SPECIES_PORYGON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page9_5:
-	givemon SPECIES_SKWOVET, 1
+	givemon SPECIES_RATTATA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page9_6:
-	givemon SPECIES_SLAKOTH, 1
+	givemon SPECIES_RATTATA_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -1978,27 +2425,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page10::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page10_2:
-	givemon SPECIES_SMEARGLE, 1
+	givemon SPECIES_RUFFLET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page10_3:
-	givemon SPECIES_SPEAROW, 1
+	givemon SPECIES_SENTRET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page10_4:
-	givemon SPECIES_SPINDA, 1
+	givemon SPECIES_SHROODLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page10_5:
-	givemon SPECIES_SQUAWKABILLY, 1
+	givemon SPECIES_SKITTY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page10_6:
-	givemon SPECIES_STANTLER, 1
+	givemon SPECIES_SKWOVET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2025,27 +2472,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page11::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page11_2:
-	givemon SPECIES_STARLY, 1
+	givemon SPECIES_SLAKOTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page11_3:
-	givemon SPECIES_STUFFUL, 1
+	givemon SPECIES_SMEARGLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page11_4:
-	givemon SPECIES_SWABLU, 1
+	givemon SPECIES_SMOLIV, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page11_5:
-	givemon SPECIES_TAILLOW, 1
+	givemon SPECIES_SPEAROW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page11_6:
-	givemon SPECIES_TANDEMAUS, 1
+	givemon SPECIES_SPINDA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2072,27 +2519,27 @@ Auto_EventScript_Pokemon_Shop_Normal_Page12::
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page12_2:
-	givemon SPECIES_TAUROS, 1
+	givemon SPECIES_SQUAWKABILLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page12_3:
-	givemon SPECIES_TEDDIURSA, 1
+	givemon SPECIES_STANTLER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page12_4:
-	givemon SPECIES_WHISMUR, 1
+	givemon SPECIES_STARLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page12_5:
-	givemon SPECIES_WOOLOO, 1
+	givemon SPECIES_STUFFUL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page12_6:
-	givemon SPECIES_YUNGOOS, 1
+	givemon SPECIES_SWABLU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2111,31 +2558,113 @@ Auto_EventScript_Pokemon_Shop_Normal_Page13::
 	case 0, Auto_EventScript_Pokemon_Shop_Normal_Page13_2
 	case 1, Auto_EventScript_Pokemon_Shop_Normal_Page13_3
 	case 2, Auto_EventScript_Pokemon_Shop_Normal_Page13_4
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page13_5
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page13_6
+	case 3, Auto_EventScript_Pokemon_Shop_Normal_Page13_5
+	case 4, Auto_EventScript_Pokemon_Shop_Normal_Page13_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page13_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page13_8
 	goto Auto_EventScript_Pokemon_Shop_Page3
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page13_2:
-	givemon SPECIES_ZANGOOSE, 1
+	givemon SPECIES_TAILLOW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page13_3:
-	givemon SPECIES_ZIGZAGOON, 1
+	givemon SPECIES_TANDEMAUS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page13_4:
-	givemon SPECIES_ZORUA_HISUIAN, 1
+	givemon SPECIES_TAUROS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page13_5:
-	goto Auto_EventScript_Pokemon_Shop_Normal_Page12
+	givemon SPECIES_TEDDIURSA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Normal_Page13_6:
+	givemon SPECIES_WHISMUR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page13_7:
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page12
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page13_8:
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page14
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Normal_Page14
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Normal_Page14_2
+	case 1, Auto_EventScript_Pokemon_Shop_Normal_Page14_3
+	case 2, Auto_EventScript_Pokemon_Shop_Normal_Page14_4
+	case 3, Auto_EventScript_Pokemon_Shop_Normal_Page14_5
+	case 4, Auto_EventScript_Pokemon_Shop_Normal_Page14_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page14_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page14_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_2:
+	givemon SPECIES_WOOLOO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_3:
+	givemon SPECIES_YUNGOOS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_4:
+	givemon SPECIES_ZANGOOSE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_5:
+	givemon SPECIES_ZIGZAGOON, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_6:
+	givemon SPECIES_ZIGZAGOON_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_7:
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page13
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page14_8:
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page15
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Normal_Page15::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Normal_Page15
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Normal_Page15_2
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page15_3
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Normal_Page15_4
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page15_2:
+	givemon SPECIES_ZORUA_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page15_3:
+	goto Auto_EventScript_Pokemon_Shop_Normal_Page14
+	return
+
+Auto_EventScript_Pokemon_Shop_Normal_Page15_4:
 	goto Auto_EventScript_Pokemon_Shop_Normal_Page1
 	return
 
@@ -2154,32 +2683,32 @@ Auto_EventScript_Pokemon_Shop_Poison_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_2:
-	givemon SPECIES_CROAGUNK, 1
+	givemon SPECIES_BELLSPROUT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_3:
-	givemon SPECIES_EKANS, 1
+	givemon SPECIES_BUDEW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_4:
-	givemon SPECIES_FEZANDIPITI, 1
+	givemon SPECIES_BULBASAUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_5:
-	givemon SPECIES_GRIMER, 1
+	givemon SPECIES_CROAGUNK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_6:
-	givemon SPECIES_GRIMER_ALOLAN, 1
+	givemon SPECIES_EKANS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Poison_Page5
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page8
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page1_8:
@@ -2201,27 +2730,27 @@ Auto_EventScript_Pokemon_Shop_Poison_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page2_2:
-	givemon SPECIES_GULPIN, 1
+	givemon SPECIES_FEZANDIPITI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page2_3:
-	givemon SPECIES_KOFFING, 1
+	givemon SPECIES_FOONGUS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page2_4:
-	givemon SPECIES_MAREANIE, 1
+	givemon SPECIES_GASTLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page2_5:
-	givemon SPECIES_MUNKIDORI, 1
+	givemon SPECIES_GLIMMET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page2_6:
-	givemon SPECIES_NIDORAN_F, 1
+	givemon SPECIES_GRIMER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2248,27 +2777,27 @@ Auto_EventScript_Pokemon_Shop_Poison_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page3_2:
-	givemon SPECIES_NIDORAN_M, 1
+	givemon SPECIES_GRIMER_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page3_3:
-	givemon SPECIES_OKIDOGI, 1
+	givemon SPECIES_GULPIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page3_4:
-	givemon SPECIES_SALANDIT, 1
+	givemon SPECIES_IRON_MOTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page3_5:
-	givemon SPECIES_SEVIPER, 1
+	givemon SPECIES_KOFFING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page3_6:
-	givemon SPECIES_SHROODLE, 1
+	givemon SPECIES_MAREANIE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2295,27 +2824,27 @@ Auto_EventScript_Pokemon_Shop_Poison_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page4_2:
-	givemon SPECIES_SKORUPI, 1
+	givemon SPECIES_MUNKIDORI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page4_3:
-	givemon SPECIES_SKRELP, 1
+	givemon SPECIES_NIDORAN_F, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page4_4:
-	givemon SPECIES_STUNKY, 1
+	givemon SPECIES_NIDORAN_M, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page4_5:
-	givemon SPECIES_TRUBBISH, 1
+	givemon SPECIES_ODDISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page4_6:
-	givemon SPECIES_WOOPER_PALDEAN, 1
+	givemon SPECIES_OKIDOGI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2332,21 +2861,180 @@ Auto_EventScript_Pokemon_Shop_Poison_Page5::
 	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Poison_Page5
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Poison_Page5_2
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page5_3
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page5_4
+	case 1, Auto_EventScript_Pokemon_Shop_Poison_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Poison_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Poison_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Poison_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page5_8
 	goto Auto_EventScript_Pokemon_Shop_Page3
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page5_2:
-	givemon SPECIES_ZUBAT, 1
+	givemon SPECIES_QWILFISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page5_3:
-	goto Auto_EventScript_Pokemon_Shop_Poison_Page4
+	givemon SPECIES_QWILFISH_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Poison_Page5_4:
+	givemon SPECIES_SALANDIT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page5_5:
+	givemon SPECIES_SEVIPER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page5_6:
+	givemon SPECIES_SHROODLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Poison_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Poison_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Poison_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Poison_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Poison_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Poison_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page6_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_2:
+	givemon SPECIES_SKORUPI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_3:
+	givemon SPECIES_SKRELP, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_4:
+	givemon SPECIES_SNEASEL_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_5:
+	givemon SPECIES_SPINARAK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_6:
+	givemon SPECIES_STUNKY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Poison_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Poison_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Poison_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Poison_Page7_4
+	case 3, Auto_EventScript_Pokemon_Shop_Poison_Page7_5
+	case 4, Auto_EventScript_Pokemon_Shop_Poison_Page7_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page7_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page7_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_2:
+	givemon SPECIES_TENTACOOL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_3:
+	givemon SPECIES_TOXEL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_4:
+	givemon SPECIES_TRUBBISH, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_5:
+	givemon SPECIES_VAROOM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_6:
+	givemon SPECIES_VENIPEDE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_7:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page7_8:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page8
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Poison_Page8
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Poison_Page8_2
+	case 1, Auto_EventScript_Pokemon_Shop_Poison_Page8_3
+	case 2, Auto_EventScript_Pokemon_Shop_Poison_Page8_4
+	case 3, Auto_EventScript_Pokemon_Shop_Poison_Page8_5
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page8_6
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Poison_Page8_7
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_2:
+	givemon SPECIES_VENONAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_3:
+	givemon SPECIES_WEEDLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_4:
+	givemon SPECIES_WOOPER_PALDEAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_5:
+	givemon SPECIES_ZUBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_6:
+	goto Auto_EventScript_Pokemon_Shop_Poison_Page7
+	return
+
+Auto_EventScript_Pokemon_Shop_Poison_Page8_7:
 	goto Auto_EventScript_Pokemon_Shop_Poison_Page1
 	return
 
@@ -2375,22 +3063,22 @@ Auto_EventScript_Pokemon_Shop_Psychic_Page1_3:
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page1_4:
-	givemon SPECIES_CHINGLING, 1
+	givemon SPECIES_BALTOY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page1_5:
-	givemon SPECIES_DROWZEE, 1
+	givemon SPECIES_BELDUM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page1_6:
-	givemon SPECIES_ELGYEM, 1
+	givemon SPECIES_BRONZOR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Psychic_Page5
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page9
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page1_8:
@@ -2412,27 +3100,27 @@ Auto_EventScript_Pokemon_Shop_Psychic_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page2_2:
-	givemon SPECIES_ESPURR, 1
+	givemon SPECIES_BRUXISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page2_3:
-	givemon SPECIES_FLITTLE, 1
+	givemon SPECIES_CHINGLING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page2_4:
-	givemon SPECIES_GOTHITA, 1
+	givemon SPECIES_DROWZEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page2_5:
-	givemon SPECIES_HATENNA, 1
+	givemon SPECIES_ELGYEM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page2_6:
-	givemon SPECIES_INDEEDEE, 1
+	givemon SPECIES_ESPURR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2459,27 +3147,27 @@ Auto_EventScript_Pokemon_Shop_Psychic_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page3_2:
-	givemon SPECIES_MIME_JR, 1
+	givemon SPECIES_EXEGGCUTE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page3_3:
-	givemon SPECIES_MUNNA, 1
+	givemon SPECIES_FLITTLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page3_4:
-	givemon SPECIES_NATU, 1
+	givemon SPECIES_GIRAFARIG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page3_5:
-	givemon SPECIES_PONYTA_GALARIAN, 1
+	givemon SPECIES_GOTHITA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page3_6:
-	givemon SPECIES_RALTS, 1
+	givemon SPECIES_HATENNA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2506,27 +3194,27 @@ Auto_EventScript_Pokemon_Shop_Psychic_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page4_2:
-	givemon SPECIES_SIGILYPH, 1
+	givemon SPECIES_INDEEDEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page4_3:
-	givemon SPECIES_SLOWPOKE_GALARIAN, 1
+	givemon SPECIES_INKAY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page4_4:
-	givemon SPECIES_SOLOSIS, 1
+	givemon SPECIES_IRON_BOULDER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page4_5:
-	givemon SPECIES_SPOINK, 1
+	givemon SPECIES_IRON_CROWN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page4_6:
-	givemon SPECIES_UNOWN, 1
+	givemon SPECIES_IRON_LEAVES, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2544,26 +3232,208 @@ Auto_EventScript_Pokemon_Shop_Psychic_Page5::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Psychic_Page5_2
 	case 1, Auto_EventScript_Pokemon_Shop_Psychic_Page5_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page5_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page5_5
+	case 2, Auto_EventScript_Pokemon_Shop_Psychic_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Psychic_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Psychic_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page5_8
 	goto Auto_EventScript_Pokemon_Shop_Page3
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page5_2:
-	givemon SPECIES_WOOBAT, 1
+	givemon SPECIES_LUNATONE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page5_3:
-	givemon SPECIES_WYNAUT, 1
+	givemon SPECIES_MEDITITE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page5_4:
-	goto Auto_EventScript_Pokemon_Shop_Psychic_Page4
+	givemon SPECIES_MIME_JR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Psychic_Page5_5:
+	givemon SPECIES_MUNKIDORI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page5_6:
+	givemon SPECIES_MUNNA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Psychic_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Psychic_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Psychic_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Psychic_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Psychic_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Psychic_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page6_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_2:
+	givemon SPECIES_NATU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_3:
+	givemon SPECIES_ORANGURU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_4:
+	givemon SPECIES_PONYTA_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_5:
+	givemon SPECIES_RALTS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_6:
+	givemon SPECIES_SCREAM_TAIL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Psychic_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Psychic_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Psychic_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Psychic_Page7_4
+	case 3, Auto_EventScript_Pokemon_Shop_Psychic_Page7_5
+	case 4, Auto_EventScript_Pokemon_Shop_Psychic_Page7_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page7_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page7_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_2:
+	givemon SPECIES_SIGILYPH, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_3:
+	givemon SPECIES_SLOWPOKE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_4:
+	givemon SPECIES_SLOWPOKE_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_5:
+	givemon SPECIES_SMOOCHUM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_6:
+	givemon SPECIES_SOLOSIS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_7:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page7_8:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page8
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Psychic_Page8
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Psychic_Page8_2
+	case 1, Auto_EventScript_Pokemon_Shop_Psychic_Page8_3
+	case 2, Auto_EventScript_Pokemon_Shop_Psychic_Page8_4
+	case 3, Auto_EventScript_Pokemon_Shop_Psychic_Page8_5
+	case 4, Auto_EventScript_Pokemon_Shop_Psychic_Page8_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page8_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page8_8
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_2:
+	givemon SPECIES_SOLROCK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_3:
+	givemon SPECIES_SPOINK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_4:
+	givemon SPECIES_UNOWN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_5:
+	givemon SPECIES_VELUZA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_6:
+	givemon SPECIES_WOOBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_7:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page7
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page8_8:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page9
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page9::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Psychic_Page9
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Psychic_Page9_2
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page9_3
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Psychic_Page9_4
+	goto Auto_EventScript_Pokemon_Shop_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page9_2:
+	givemon SPECIES_WYNAUT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page9_3:
+	goto Auto_EventScript_Pokemon_Shop_Psychic_Page8
+	return
+
+Auto_EventScript_Pokemon_Shop_Psychic_Page9_4:
 	goto Auto_EventScript_Pokemon_Shop_Psychic_Page1
 	return
 
@@ -2592,22 +3462,22 @@ Auto_EventScript_Pokemon_Shop_Fighting_Page1_3:
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page1_4:
-	givemon SPECIES_FALINKS, 1
+	givemon SPECIES_CROAGUNK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page1_5:
-	givemon SPECIES_FARFETCHD_GALARIAN, 1
+	givemon SPECIES_FALINKS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page1_6:
-	givemon SPECIES_HAWLUCHA, 1
+	givemon SPECIES_FARFETCHD_GALARIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Fighting_Page4
+	goto Auto_EventScript_Pokemon_Shop_Fighting_Page6
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page1_8:
@@ -2629,27 +3499,27 @@ Auto_EventScript_Pokemon_Shop_Fighting_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page2_2:
-	givemon SPECIES_IRON_HANDS, 1
+	givemon SPECIES_FLAMIGO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page2_3:
-	givemon SPECIES_MACHOP, 1
+	givemon SPECIES_GREAT_TUSK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page2_4:
-	givemon SPECIES_MAKUHITA, 1
+	givemon SPECIES_HAWLUCHA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page2_5:
-	givemon SPECIES_MANKEY, 1
+	givemon SPECIES_HERACROSS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page2_6:
-	givemon SPECIES_MEDITITE, 1
+	givemon SPECIES_IRON_HANDS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2676,27 +3546,27 @@ Auto_EventScript_Pokemon_Shop_Fighting_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page3_2:
-	givemon SPECIES_MIENFOO, 1
+	givemon SPECIES_IRON_VALIANT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page3_3:
-	givemon SPECIES_PANCHAM, 1
+	givemon SPECIES_MACHOP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page3_4:
-	givemon SPECIES_PASSIMIAN, 1
+	givemon SPECIES_MAKUHITA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page3_5:
-	givemon SPECIES_RIOLU, 1
+	givemon SPECIES_MANKEY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page3_6:
-	givemon SPECIES_SAWK, 1
+	givemon SPECIES_MEDITITE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2723,27 +3593,27 @@ Auto_EventScript_Pokemon_Shop_Fighting_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_2:
-	givemon SPECIES_SNEASEL_HISUIAN, 1
+	givemon SPECIES_MIENFOO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_3:
-	givemon SPECIES_THROH, 1
+	givemon SPECIES_OKIDOGI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_4:
-	givemon SPECIES_TIMBURR, 1
+	givemon SPECIES_PANCHAM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_5:
-	givemon SPECIES_TYROGUE, 1
+	givemon SPECIES_PASSIMIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_6:
-	givemon SPECIES_ZAPDOS_GALARIAN, 1
+	givemon SPECIES_RIOLU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2752,6 +3622,94 @@ Auto_EventScript_Pokemon_Shop_Fighting_Page4_7:
 	return
 
 Auto_EventScript_Pokemon_Shop_Fighting_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Fighting_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fighting_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fighting_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Fighting_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Fighting_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fighting_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Fighting_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fighting_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fighting_Page5_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_2:
+	givemon SPECIES_SAWK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_3:
+	givemon SPECIES_SCRAGGY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_4:
+	givemon SPECIES_SLITHER_WING, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_5:
+	givemon SPECIES_SNEASEL_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_6:
+	givemon SPECIES_STUFFUL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Fighting_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Fighting_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fighting_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fighting_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Fighting_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Fighting_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fighting_Page6_5
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fighting_Page6_6
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fighting_Page6_7
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_2:
+	givemon SPECIES_THROH, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_3:
+	givemon SPECIES_TIMBURR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_4:
+	givemon SPECIES_TYROGUE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_5:
+	givemon SPECIES_ZAPDOS_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_6:
+	goto Auto_EventScript_Pokemon_Shop_Fighting_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Fighting_Page6_7:
 	goto Auto_EventScript_Pokemon_Shop_Fighting_Page1
 	return
 
@@ -2795,7 +3753,7 @@ Auto_EventScript_Pokemon_Shop_Fire_Page1_6:
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Fire_Page6
+	goto Auto_EventScript_Pokemon_Shop_Fire_Page7
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page1_8:
@@ -2869,22 +3827,22 @@ Auto_EventScript_Pokemon_Shop_Fire_Page3_2:
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page3_3:
-	givemon SPECIES_IRON_MOTH, 1
+	givemon SPECIES_HOUNDOUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page3_4:
-	givemon SPECIES_LITLEO, 1
+	givemon SPECIES_IRON_MOTH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page3_5:
-	givemon SPECIES_LITTEN, 1
+	givemon SPECIES_LARVESTA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page3_6:
-	givemon SPECIES_MAGBY, 1
+	givemon SPECIES_LITLEO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2911,27 +3869,27 @@ Auto_EventScript_Pokemon_Shop_Fire_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page4_2:
-	givemon SPECIES_NUMEL, 1
+	givemon SPECIES_LITTEN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page4_3:
-	givemon SPECIES_ORICORIO, 1
+	givemon SPECIES_LITWICK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page4_4:
-	givemon SPECIES_PANSEAR, 1
+	givemon SPECIES_MAGBY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page4_5:
-	givemon SPECIES_PONYTA, 1
+	givemon SPECIES_NUMEL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page4_6:
-	givemon SPECIES_SCORBUNNY, 1
+	givemon SPECIES_ORICORIO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2958,27 +3916,27 @@ Auto_EventScript_Pokemon_Shop_Fire_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page5_2:
-	givemon SPECIES_SIZZLIPEDE, 1
+	givemon SPECIES_PANSEAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page5_3:
-	givemon SPECIES_SLUGMA, 1
+	givemon SPECIES_PONYTA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page5_4:
-	givemon SPECIES_TEPIG, 1
+	givemon SPECIES_SALANDIT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page5_5:
-	givemon SPECIES_TORCHIC, 1
+	givemon SPECIES_SCORBUNNY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page5_6:
-	givemon SPECIES_TORKOAL, 1
+	givemon SPECIES_SIZZLIPEDE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -2996,26 +3954,67 @@ Auto_EventScript_Pokemon_Shop_Fire_Page6::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Fire_Page6_2
 	case 1, Auto_EventScript_Pokemon_Shop_Fire_Page6_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page6_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page6_5
+	case 2, Auto_EventScript_Pokemon_Shop_Fire_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fire_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Fire_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page6_8
 	goto Auto_EventScript_Pokemon_Shop_Page2
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page6_2:
-	givemon SPECIES_TURTONATOR, 1
+	givemon SPECIES_SLUGMA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page6_3:
-	givemon SPECIES_VULPIX, 1
+	givemon SPECIES_TEPIG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page6_4:
-	goto Auto_EventScript_Pokemon_Shop_Fire_Page5
+	givemon SPECIES_TORCHIC, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fire_Page6_5:
+	givemon SPECIES_TORKOAL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page6_6:
+	givemon SPECIES_TURTONATOR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Fire_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Fire_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fire_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fire_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fire_Page7_2
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page7_3
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fire_Page7_4
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page7_2:
+	givemon SPECIES_VULPIX, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page7_3:
+	goto Auto_EventScript_Pokemon_Shop_Fire_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Fire_Page7_4:
 	goto Auto_EventScript_Pokemon_Shop_Fire_Page1
 	return
 
@@ -3034,35 +4033,458 @@ Auto_EventScript_Pokemon_Shop_Flying_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_2:
-	givemon SPECIES_BOMBIRDIER, 1
+	givemon SPECIES_AERODACTYL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_3:
-	givemon SPECIES_CRAMORANT, 1
+	givemon SPECIES_ARCHEN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_4:
-	givemon SPECIES_FLAMIGO, 1
+	givemon SPECIES_ARTICUNO_GALARIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_5:
-	givemon SPECIES_NOIBAT, 1
+	givemon SPECIES_BOMBIRDIER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_6:
-	givemon SPECIES_ROOKIDEE, 1
+	givemon SPECIES_CHATOT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Flying_Page1
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page10
 	return
 
 Auto_EventScript_Pokemon_Shop_Flying_Page1_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page2
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page2
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page2_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page2_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page2_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page2_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page2_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page2_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page2_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_2:
+	givemon SPECIES_COMBEE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_3:
+	givemon SPECIES_CRAMORANT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_4:
+	givemon SPECIES_DELIBIRD, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_5:
+	givemon SPECIES_DODUO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_6:
+	givemon SPECIES_DRIFLOON, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page2_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page3
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page3
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page3_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page3_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page3_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page3_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page3_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page3_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page3_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_2:
+	givemon SPECIES_DUCKLETT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_3:
+	givemon SPECIES_EMOLGA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_4:
+	givemon SPECIES_FARFETCHD, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_5:
+	givemon SPECIES_FLAMIGO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_6:
+	givemon SPECIES_FLETCHLING, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page3_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page4
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page4
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page4_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page4_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page4_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page4_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_2:
+	givemon SPECIES_GLIGAR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_3:
+	givemon SPECIES_HAWLUCHA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_4:
+	givemon SPECIES_HOOTHOOT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_5:
+	givemon SPECIES_HOPPIP, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_6:
+	givemon SPECIES_IRON_JUGULIS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page5_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_2:
+	givemon SPECIES_LEDYBA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_3:
+	givemon SPECIES_MANTYKE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_4:
+	givemon SPECIES_MINIOR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_5:
+	givemon SPECIES_MOLTRES_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_6:
+	givemon SPECIES_MURKROW, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page6_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_2:
+	givemon SPECIES_NATU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_3:
+	givemon SPECIES_NOIBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_4:
+	givemon SPECIES_ORICORIO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_5:
+	givemon SPECIES_PIDGEY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_6:
+	givemon SPECIES_PIDOVE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page7_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page7_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page7_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page7_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page7_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_2:
+	givemon SPECIES_PIKIPEK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_3:
+	givemon SPECIES_ROOKIDEE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_4:
+	givemon SPECIES_ROWLET, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_5:
+	givemon SPECIES_RUFFLET, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_6:
+	givemon SPECIES_SCYTHER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page7_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page8
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page8
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page8_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page8_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page8_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page8_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page8_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page8_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page8_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_2:
+	givemon SPECIES_SIGILYPH, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_3:
+	givemon SPECIES_SKARMORY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_4:
+	givemon SPECIES_SPEAROW, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_5:
+	givemon SPECIES_SQUAWKABILLY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_6:
+	givemon SPECIES_STARLY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page7
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page8_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page9
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page9
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page9_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page9_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page9_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page9_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page9_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page9_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page9_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_2:
+	givemon SPECIES_SWABLU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_3:
+	givemon SPECIES_TAILLOW, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_4:
+	givemon SPECIES_TROPIUS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_5:
+	givemon SPECIES_VULLABY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_6:
+	givemon SPECIES_WATTREL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page8
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page9_8:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page10
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Flying_Page10
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Flying_Page10_2
+	case 1, Auto_EventScript_Pokemon_Shop_Flying_Page10_3
+	case 2, Auto_EventScript_Pokemon_Shop_Flying_Page10_4
+	case 3, Auto_EventScript_Pokemon_Shop_Flying_Page10_5
+	case 4, Auto_EventScript_Pokemon_Shop_Flying_Page10_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page10_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Flying_Page10_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_2:
+	givemon SPECIES_WINGULL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_3:
+	givemon SPECIES_WOOBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_4:
+	givemon SPECIES_YANMA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_5:
+	givemon SPECIES_ZAPDOS_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_6:
+	givemon SPECIES_ZUBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_7:
+	goto Auto_EventScript_Pokemon_Shop_Flying_Page9
+	return
+
+Auto_EventScript_Pokemon_Shop_Flying_Page10_8:
 	goto Auto_EventScript_Pokemon_Shop_Flying_Page1
 	return
 
@@ -3081,32 +4503,32 @@ Auto_EventScript_Pokemon_Shop_Ghost_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_2:
-	givemon SPECIES_CORSOLA_GALARIAN, 1
+	givemon SPECIES_BRAMBLIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_3:
-	givemon SPECIES_DHELMISE, 1
+	givemon SPECIES_CORSOLA_GALARIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_4:
-	givemon SPECIES_DRIFLOON, 1
+	givemon SPECIES_DHELMISE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_5:
-	givemon SPECIES_DUSKULL, 1
+	givemon SPECIES_DREEPY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_6:
-	givemon SPECIES_FLUTTER_MANE, 1
+	givemon SPECIES_DRIFLOON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Ghost_Page4
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page6
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page1_8:
@@ -3128,27 +4550,27 @@ Auto_EventScript_Pokemon_Shop_Ghost_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page2_2:
-	givemon SPECIES_GASTLY, 1
+	givemon SPECIES_DUSKULL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page2_3:
-	givemon SPECIES_GIMMIGHOUL, 1
+	givemon SPECIES_FLUTTER_MANE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page2_4:
-	givemon SPECIES_GREAVARD, 1
+	givemon SPECIES_FRILLISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page2_5:
-	givemon SPECIES_LITWICK, 1
+	givemon SPECIES_GASTLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page2_6:
-	givemon SPECIES_MIMIKYU, 1
+	givemon SPECIES_GIMMIGHOUL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3175,27 +4597,27 @@ Auto_EventScript_Pokemon_Shop_Ghost_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page3_2:
-	givemon SPECIES_MISDREAVUS, 1
+	givemon SPECIES_GOLETT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page3_3:
-	givemon SPECIES_PHANTUMP, 1
+	givemon SPECIES_GREAVARD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page3_4:
-	givemon SPECIES_PUMPKABOO, 1
+	givemon SPECIES_HONEDGE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page3_5:
-	givemon SPECIES_SANDYGAST, 1
+	givemon SPECIES_LITWICK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page3_6:
-	givemon SPECIES_SHUPPET, 1
+	givemon SPECIES_MIMIKYU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3214,31 +4636,125 @@ Auto_EventScript_Pokemon_Shop_Ghost_Page4::
 	case 0, Auto_EventScript_Pokemon_Shop_Ghost_Page4_2
 	case 1, Auto_EventScript_Pokemon_Shop_Ghost_Page4_3
 	case 2, Auto_EventScript_Pokemon_Shop_Ghost_Page4_4
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page4_5
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page4_6
+	case 3, Auto_EventScript_Pokemon_Shop_Ghost_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Ghost_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page4_8
 	goto Auto_EventScript_Pokemon_Shop_Page2
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page4_2:
-	givemon SPECIES_SINISTEA, 1
+	givemon SPECIES_MISDREAVUS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page4_3:
-	givemon SPECIES_SPIRITOMB, 1
+	givemon SPECIES_PHANTUMP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page4_4:
-	givemon SPECIES_YAMASK, 1
+	givemon SPECIES_POLTCHAGEIST, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page4_5:
-	goto Auto_EventScript_Pokemon_Shop_Ghost_Page3
+	givemon SPECIES_PUMPKABOO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Ghost_Page4_6:
+	givemon SPECIES_ROTOM, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ghost_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Ghost_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Ghost_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ghost_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Ghost_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Ghost_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page5_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_2:
+	givemon SPECIES_SABLEYE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_3:
+	givemon SPECIES_SANDYGAST, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_4:
+	givemon SPECIES_SHUPPET, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_5:
+	givemon SPECIES_SINISTEA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_6:
+	givemon SPECIES_SPIRITOMB, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Ghost_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Ghost_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Ghost_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Ghost_Page6_4
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page6_5
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Ghost_Page6_6
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6_2:
+	givemon SPECIES_YAMASK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6_3:
+	givemon SPECIES_YAMASK_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6_4:
+	givemon SPECIES_ZORUA_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6_5:
+	goto Auto_EventScript_Pokemon_Shop_Ghost_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Ghost_Page6_6:
 	goto Auto_EventScript_Pokemon_Shop_Ghost_Page1
 	return
 
@@ -3282,7 +4798,7 @@ Auto_EventScript_Pokemon_Shop_Grass_Page1_6:
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Grass_Page9
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page11
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page1_8:
@@ -3371,7 +4887,7 @@ Auto_EventScript_Pokemon_Shop_Grass_Page3_5:
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page3_6:
-	givemon SPECIES_EXEGGCUTE, 1
+	givemon SPECIES_DEERLING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3398,27 +4914,27 @@ Auto_EventScript_Pokemon_Shop_Grass_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page4_2:
-	givemon SPECIES_FERROSEED, 1
+	givemon SPECIES_DHELMISE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page4_3:
-	givemon SPECIES_FOMANTIS, 1
+	givemon SPECIES_EXEGGCUTE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page4_4:
-	givemon SPECIES_FOONGUS, 1
+	givemon SPECIES_FERROSEED, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page4_5:
-	givemon SPECIES_GOSSIFLEUR, 1
+	givemon SPECIES_FOMANTIS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page4_6:
-	givemon SPECIES_GROOKEY, 1
+	givemon SPECIES_FOONGUS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3445,27 +4961,27 @@ Auto_EventScript_Pokemon_Shop_Grass_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page5_2:
-	givemon SPECIES_HOPPIP, 1
+	givemon SPECIES_GOSSIFLEUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page5_3:
-	givemon SPECIES_IRON_LEAVES, 1
+	givemon SPECIES_GROOKEY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page5_4:
-	givemon SPECIES_MARACTUS, 1
+	givemon SPECIES_HOPPIP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page5_5:
-	givemon SPECIES_MORELULL, 1
+	givemon SPECIES_IRON_LEAVES, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page5_6:
-	givemon SPECIES_ODDISH, 1
+	givemon SPECIES_LILEEP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3492,27 +5008,27 @@ Auto_EventScript_Pokemon_Shop_Grass_Page6::
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page6_2:
-	givemon SPECIES_OGERPON, 1
+	givemon SPECIES_LOTAD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page6_3:
-	givemon SPECIES_PANSAGE, 1
+	givemon SPECIES_MARACTUS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page6_4:
-	givemon SPECIES_PETILIL, 1
+	givemon SPECIES_MORELULL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page6_5:
-	givemon SPECIES_POLTCHAGEIST, 1
+	givemon SPECIES_ODDISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page6_6:
-	givemon SPECIES_ROWLET, 1
+	givemon SPECIES_OGERPON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3539,27 +5055,27 @@ Auto_EventScript_Pokemon_Shop_Grass_Page7::
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page7_2:
-	givemon SPECIES_SEEDOT, 1
+	givemon SPECIES_PANSAGE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page7_3:
-	givemon SPECIES_SHROOMISH, 1
+	givemon SPECIES_PARAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page7_4:
-	givemon SPECIES_SKIDDO, 1
+	givemon SPECIES_PETILIL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page7_5:
-	givemon SPECIES_SMOLIV, 1
+	givemon SPECIES_PHANTUMP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page7_6:
-	givemon SPECIES_SNIVY, 1
+	givemon SPECIES_POLTCHAGEIST, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3586,27 +5102,27 @@ Auto_EventScript_Pokemon_Shop_Grass_Page8::
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page8_2:
-	givemon SPECIES_SNOVER, 1
+	givemon SPECIES_PUMPKABOO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page8_3:
-	givemon SPECIES_SPRIGATITO, 1
+	givemon SPECIES_ROWLET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page8_4:
-	givemon SPECIES_SUNKERN, 1
+	givemon SPECIES_SEEDOT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page8_5:
-	givemon SPECIES_TANGELA, 1
+	givemon SPECIES_SEWADDLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page8_6:
-	givemon SPECIES_TREECKO, 1
+	givemon SPECIES_SHROOMISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3624,26 +5140,120 @@ Auto_EventScript_Pokemon_Shop_Grass_Page9::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Grass_Page9_2
 	case 1, Auto_EventScript_Pokemon_Shop_Grass_Page9_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page9_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page9_5
+	case 2, Auto_EventScript_Pokemon_Shop_Grass_Page9_4
+	case 3, Auto_EventScript_Pokemon_Shop_Grass_Page9_5
+	case 4, Auto_EventScript_Pokemon_Shop_Grass_Page9_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page9_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page9_8
 	goto Auto_EventScript_Pokemon_Shop_Page2
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page9_2:
-	givemon SPECIES_TROPIUS, 1
+	givemon SPECIES_SKIDDO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page9_3:
-	givemon SPECIES_TURTWIG, 1
+	givemon SPECIES_SMOLIV, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page9_4:
-	goto Auto_EventScript_Pokemon_Shop_Grass_Page8
+	givemon SPECIES_SNIVY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Grass_Page9_5:
+	givemon SPECIES_SNOVER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page9_6:
+	givemon SPECIES_SPRIGATITO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page9_7:
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page8
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page9_8:
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page10
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Grass_Page10
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Grass_Page10_2
+	case 1, Auto_EventScript_Pokemon_Shop_Grass_Page10_3
+	case 2, Auto_EventScript_Pokemon_Shop_Grass_Page10_4
+	case 3, Auto_EventScript_Pokemon_Shop_Grass_Page10_5
+	case 4, Auto_EventScript_Pokemon_Shop_Grass_Page10_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page10_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page10_8
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_2:
+	givemon SPECIES_SUNKERN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_3:
+	givemon SPECIES_TANGELA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_4:
+	givemon SPECIES_TOEDSCOOL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_5:
+	givemon SPECIES_TREECKO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_6:
+	givemon SPECIES_TROPIUS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_7:
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page9
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page10_8:
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page11
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Grass_Page11::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Grass_Page11
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Grass_Page11_2
+	case 1, Auto_EventScript_Pokemon_Shop_Grass_Page11_3
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page11_4
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Grass_Page11_5
+	goto Auto_EventScript_Pokemon_Shop_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page11_2:
+	givemon SPECIES_TURTWIG, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page11_3:
+	givemon SPECIES_VOLTORB_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page11_4:
+	goto Auto_EventScript_Pokemon_Shop_Grass_Page10
+	return
+
+Auto_EventScript_Pokemon_Shop_Grass_Page11_5:
 	goto Auto_EventScript_Pokemon_Shop_Grass_Page1
 	return
 
@@ -3662,32 +5272,32 @@ Auto_EventScript_Pokemon_Shop_Bug_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_2:
-	givemon SPECIES_BLIPBUG, 1
+	givemon SPECIES_ANORITH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_3:
-	givemon SPECIES_BURMY, 1
+	givemon SPECIES_BLIPBUG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_4:
-	givemon SPECIES_CATERPIE, 1
+	givemon SPECIES_BURMY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_5:
-	givemon SPECIES_COMBEE, 1
+	givemon SPECIES_CATERPIE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_6:
-	givemon SPECIES_CUTIEFLY, 1
+	givemon SPECIES_COMBEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Bug_Page8
+	goto Auto_EventScript_Pokemon_Shop_Bug_Page9
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page1_8:
@@ -3709,27 +5319,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page2_2:
-	givemon SPECIES_DURANT, 1
+	givemon SPECIES_CUTIEFLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page2_3:
-	givemon SPECIES_DWEBBLE, 1
+	givemon SPECIES_DEWPIDER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page2_4:
-	givemon SPECIES_GRUBBIN, 1
+	givemon SPECIES_DURANT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page2_5:
-	givemon SPECIES_HERACROSS, 1
+	givemon SPECIES_DWEBBLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page2_6:
-	givemon SPECIES_ILLUMISE, 1
+	givemon SPECIES_GRUBBIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3756,27 +5366,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page3_2:
-	givemon SPECIES_JOLTIK, 1
+	givemon SPECIES_HERACROSS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page3_3:
-	givemon SPECIES_KARRABLAST, 1
+	givemon SPECIES_ILLUMISE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page3_4:
-	givemon SPECIES_KRICKETOT, 1
+	givemon SPECIES_JOLTIK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page3_5:
-	givemon SPECIES_LARVESTA, 1
+	givemon SPECIES_KARRABLAST, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page3_6:
-	givemon SPECIES_LEDYBA, 1
+	givemon SPECIES_KRICKETOT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3803,27 +5413,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page4_2:
-	givemon SPECIES_NINCADA, 1
+	givemon SPECIES_LARVESTA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page4_3:
-	givemon SPECIES_NYMBLE, 1
+	givemon SPECIES_LEDYBA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page4_4:
-	givemon SPECIES_PARAS, 1
+	givemon SPECIES_NINCADA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page4_5:
-	givemon SPECIES_PINECO, 1
+	givemon SPECIES_NYMBLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page4_6:
-	givemon SPECIES_PINSIR, 1
+	givemon SPECIES_PARAS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3850,27 +5460,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page5_2:
-	givemon SPECIES_RELLOR, 1
+	givemon SPECIES_PINECO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page5_3:
-	givemon SPECIES_SCATTERBUG, 1
+	givemon SPECIES_PINSIR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page5_4:
-	givemon SPECIES_SCYTHER, 1
+	givemon SPECIES_RELLOR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page5_5:
-	givemon SPECIES_SEWADDLE, 1
+	givemon SPECIES_SCATTERBUG, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page5_6:
-	givemon SPECIES_SHELMET, 1
+	givemon SPECIES_SCYTHER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3897,27 +5507,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page6::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page6_2:
-	givemon SPECIES_SHUCKLE, 1
+	givemon SPECIES_SEWADDLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page6_3:
-	givemon SPECIES_SLITHER_WING, 1
+	givemon SPECIES_SHELMET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page6_4:
-	givemon SPECIES_SPINARAK, 1
+	givemon SPECIES_SHUCKLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page6_5:
-	givemon SPECIES_SURSKIT, 1
+	givemon SPECIES_SIZZLIPEDE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page6_6:
-	givemon SPECIES_TAROUNTULA, 1
+	givemon SPECIES_SKORUPI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3944,27 +5554,27 @@ Auto_EventScript_Pokemon_Shop_Bug_Page7::
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page7_2:
-	givemon SPECIES_VENIPEDE, 1
+	givemon SPECIES_SLITHER_WING, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page7_3:
-	givemon SPECIES_VENONAT, 1
+	givemon SPECIES_SNOM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page7_4:
-	givemon SPECIES_VOLBEAT, 1
+	givemon SPECIES_SPINARAK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page7_5:
-	givemon SPECIES_WEEDLE, 1
+	givemon SPECIES_SURSKIT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page7_6:
-	givemon SPECIES_WIMPOD, 1
+	givemon SPECIES_TAROUNTULA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -3982,26 +5592,73 @@ Auto_EventScript_Pokemon_Shop_Bug_Page8::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Bug_Page8_2
 	case 1, Auto_EventScript_Pokemon_Shop_Bug_Page8_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page8_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page8_5
+	case 2, Auto_EventScript_Pokemon_Shop_Bug_Page8_4
+	case 3, Auto_EventScript_Pokemon_Shop_Bug_Page8_5
+	case 4, Auto_EventScript_Pokemon_Shop_Bug_Page8_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page8_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page8_8
 	goto Auto_EventScript_Pokemon_Shop_Page1
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page8_2:
-	givemon SPECIES_WURMPLE, 1
+	givemon SPECIES_VENIPEDE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page8_3:
-	givemon SPECIES_YANMA, 1
+	givemon SPECIES_VENONAT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page8_4:
-	goto Auto_EventScript_Pokemon_Shop_Bug_Page7
+	givemon SPECIES_VOLBEAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Bug_Page8_5:
+	givemon SPECIES_WEEDLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page8_6:
+	givemon SPECIES_WIMPOD, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page8_7:
+	goto Auto_EventScript_Pokemon_Shop_Bug_Page7
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page8_8:
+	goto Auto_EventScript_Pokemon_Shop_Bug_Page9
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Bug_Page9::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Bug_Page9
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Bug_Page9_2
+	case 1, Auto_EventScript_Pokemon_Shop_Bug_Page9_3
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page9_4
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Bug_Page9_5
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page9_2:
+	givemon SPECIES_WURMPLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page9_3:
+	givemon SPECIES_YANMA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page9_4:
+	goto Auto_EventScript_Pokemon_Shop_Bug_Page8
+	return
+
+Auto_EventScript_Pokemon_Shop_Bug_Page9_5:
 	goto Auto_EventScript_Pokemon_Shop_Bug_Page1
 	return
 
@@ -4025,27 +5682,27 @@ Auto_EventScript_Pokemon_Shop_Dark_Page1_2:
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_3:
-	givemon SPECIES_DEINO, 1
+	givemon SPECIES_BOMBIRDIER, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_4:
-	givemon SPECIES_HOUNDOUR, 1
+	givemon SPECIES_BRUTE_BONNET, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_5:
-	givemon SPECIES_IMPIDIMP, 1
+	givemon SPECIES_CARVANHA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_6:
-	givemon SPECIES_INKAY, 1
+	givemon SPECIES_DEINO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Dark_Page5
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page7
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page1_8:
@@ -4067,27 +5724,27 @@ Auto_EventScript_Pokemon_Shop_Dark_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page2_2:
-	givemon SPECIES_IRON_JUGULIS, 1
+	givemon SPECIES_GRIMER_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page2_3:
-	givemon SPECIES_MASCHIFF, 1
+	givemon SPECIES_HOUNDOUR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page2_4:
-	givemon SPECIES_MEOWTH_ALOLAN, 1
+	givemon SPECIES_IMPIDIMP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page2_5:
-	givemon SPECIES_MOLTRES_GALARIAN, 1
+	givemon SPECIES_INKAY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page2_6:
-	givemon SPECIES_MURKROW, 1
+	givemon SPECIES_IRON_JUGULIS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4114,27 +5771,27 @@ Auto_EventScript_Pokemon_Shop_Dark_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page3_2:
-	givemon SPECIES_NICKIT, 1
+	givemon SPECIES_MASCHIFF, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page3_3:
-	givemon SPECIES_PAWNIARD, 1
+	givemon SPECIES_MEOWTH_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page3_4:
-	givemon SPECIES_POOCHYENA, 1
+	givemon SPECIES_MOLTRES_GALARIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page3_5:
-	givemon SPECIES_PURRLOIN, 1
+	givemon SPECIES_MORPEKO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page3_6:
-	givemon SPECIES_QWILFISH_HISUIAN, 1
+	givemon SPECIES_MURKROW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4161,27 +5818,27 @@ Auto_EventScript_Pokemon_Shop_Dark_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page4_2:
-	givemon SPECIES_RATTATA_ALOLAN, 1
+	givemon SPECIES_NICKIT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page4_3:
-	givemon SPECIES_SABLEYE, 1
+	givemon SPECIES_PAWNIARD, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page4_4:
-	givemon SPECIES_SCRAGGY, 1
+	givemon SPECIES_POOCHYENA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page4_5:
-	givemon SPECIES_SNEASEL, 1
+	givemon SPECIES_PURRLOIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page4_6:
-	givemon SPECIES_VULLABY, 1
+	givemon SPECIES_QWILFISH_HISUIAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4199,26 +5856,114 @@ Auto_EventScript_Pokemon_Shop_Dark_Page5::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Dark_Page5_2
 	case 1, Auto_EventScript_Pokemon_Shop_Dark_Page5_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page5_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page5_5
+	case 2, Auto_EventScript_Pokemon_Shop_Dark_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Dark_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Dark_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page5_8
 	goto Auto_EventScript_Pokemon_Shop_Page1
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page5_2:
-	givemon SPECIES_ZIGZAGOON_GALARIAN, 1
+	givemon SPECIES_RATTATA_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page5_3:
-	givemon SPECIES_ZORUA, 1
+	givemon SPECIES_ROARING_MOON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page5_4:
-	goto Auto_EventScript_Pokemon_Shop_Dark_Page4
+	givemon SPECIES_SABLEYE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dark_Page5_5:
+	givemon SPECIES_SANDILE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page5_6:
+	givemon SPECIES_SCRAGGY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Dark_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Dark_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Dark_Page6_3
+	case 2, Auto_EventScript_Pokemon_Shop_Dark_Page6_4
+	case 3, Auto_EventScript_Pokemon_Shop_Dark_Page6_5
+	case 4, Auto_EventScript_Pokemon_Shop_Dark_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page6_8
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_2:
+	givemon SPECIES_SNEASEL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_3:
+	givemon SPECIES_SPIRITOMB, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_4:
+	givemon SPECIES_STUNKY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_5:
+	givemon SPECIES_VULLABY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_6:
+	givemon SPECIES_ZIGZAGOON_GALARIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Dark_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Dark_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Dark_Page7_2
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page7_3
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dark_Page7_4
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page7_2:
+	givemon SPECIES_ZORUA, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page7_3:
+	goto Auto_EventScript_Pokemon_Shop_Dark_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Dark_Page7_4:
 	goto Auto_EventScript_Pokemon_Shop_Dark_Page1
 	return
 
@@ -4237,32 +5982,32 @@ Auto_EventScript_Pokemon_Shop_Dragon_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_2:
-	givemon SPECIES_AXEW, 1
+	givemon SPECIES_APPLIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_3:
-	givemon SPECIES_BAGON, 1
+	givemon SPECIES_AXEW, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_4:
-	givemon SPECIES_CYCLIZAR, 1
+	givemon SPECIES_BAGON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_5:
-	givemon SPECIES_DRATINI, 1
+	givemon SPECIES_CYCLIZAR, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_6:
-	givemon SPECIES_DREEPY, 1
+	givemon SPECIES_DEINO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Dragon_Page3
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page5
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page1_8:
@@ -4284,27 +6029,27 @@ Auto_EventScript_Pokemon_Shop_Dragon_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page2_2:
-	givemon SPECIES_DRUDDIGON, 1
+	givemon SPECIES_DRACOVISH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page2_3:
-	givemon SPECIES_FRIGIBAX, 1
+	givemon SPECIES_DRACOZOLT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page2_4:
-	givemon SPECIES_GIBLE, 1
+	givemon SPECIES_DRAMPA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page2_5:
-	givemon SPECIES_GOOMY, 1
+	givemon SPECIES_DRATINI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page2_6:
-	givemon SPECIES_JANGMO_O, 1
+	givemon SPECIES_DREEPY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4322,26 +6067,132 @@ Auto_EventScript_Pokemon_Shop_Dragon_Page3::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Dragon_Page3_2
 	case 1, Auto_EventScript_Pokemon_Shop_Dragon_Page3_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page3_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page3_5
+	case 2, Auto_EventScript_Pokemon_Shop_Dragon_Page3_4
+	case 3, Auto_EventScript_Pokemon_Shop_Dragon_Page3_5
+	case 4, Auto_EventScript_Pokemon_Shop_Dragon_Page3_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page3_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page3_8
 	goto Auto_EventScript_Pokemon_Shop_Page1
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page3_2:
-	givemon SPECIES_ROARING_MOON, 1
+	givemon SPECIES_DRUDDIGON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page3_3:
-	givemon SPECIES_TATSUGIRI, 1
+	givemon SPECIES_DURALUDON, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page3_4:
-	goto Auto_EventScript_Pokemon_Shop_Dragon_Page2
+	givemon SPECIES_FRIGIBAX, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Dragon_Page3_5:
+	givemon SPECIES_GIBLE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page3_6:
+	givemon SPECIES_GOOMY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page3_7:
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page3_8:
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page4
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Dragon_Page4
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Dragon_Page4_2
+	case 1, Auto_EventScript_Pokemon_Shop_Dragon_Page4_3
+	case 2, Auto_EventScript_Pokemon_Shop_Dragon_Page4_4
+	case 3, Auto_EventScript_Pokemon_Shop_Dragon_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Dragon_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page4_8
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_2:
+	givemon SPECIES_GOUGING_FIRE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_3:
+	givemon SPECIES_JANGMO_O, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_4:
+	givemon SPECIES_NOIBAT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_5:
+	givemon SPECIES_RAGING_BOLT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_6:
+	givemon SPECIES_ROARING_MOON, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Dragon_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Dragon_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Dragon_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Dragon_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Dragon_Page5_5
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page5_6
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Dragon_Page5_7
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_2:
+	givemon SPECIES_TATSUGIRI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_3:
+	givemon SPECIES_TURTONATOR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_4:
+	givemon SPECIES_TYRUNT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_5:
+	givemon SPECIES_WALKING_WAKE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_6:
+	goto Auto_EventScript_Pokemon_Shop_Dragon_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Dragon_Page5_7:
 	goto Auto_EventScript_Pokemon_Shop_Dragon_Page1
 	return
 
@@ -4370,22 +6221,22 @@ Auto_EventScript_Pokemon_Shop_Electric_Page1_3:
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page1_4:
-	givemon SPECIES_DEDENNE, 1
+	givemon SPECIES_CHINCHOU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page1_5:
-	givemon SPECIES_DRACOZOLT, 1
+	givemon SPECIES_DEDENNE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page1_6:
-	givemon SPECIES_ELECTRIKE, 1
+	givemon SPECIES_DRACOZOLT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Electric_Page6
+	goto Auto_EventScript_Pokemon_Shop_Electric_Page7
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page1_8:
@@ -4407,27 +6258,27 @@ Auto_EventScript_Pokemon_Shop_Electric_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page2_2:
-	givemon SPECIES_ELEKID, 1
+	givemon SPECIES_ELECTRIKE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page2_3:
-	givemon SPECIES_EMOLGA, 1
+	givemon SPECIES_ELEKID, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page2_4:
-	givemon SPECIES_HELIOPTILE, 1
+	givemon SPECIES_EMOLGA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page2_5:
-	givemon SPECIES_MAGNEMITE, 1
+	givemon SPECIES_GEODUDE_ALOLAN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page2_6:
-	givemon SPECIES_MAREEP, 1
+	givemon SPECIES_HELIOPTILE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4454,27 +6305,27 @@ Auto_EventScript_Pokemon_Shop_Electric_Page3::
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page3_2:
-	givemon SPECIES_MINUN, 1
+	givemon SPECIES_IRON_HANDS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page3_3:
-	givemon SPECIES_MORPEKO, 1
+	givemon SPECIES_IRON_THORNS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page3_4:
-	givemon SPECIES_PACHIRISU, 1
+	givemon SPECIES_JOLTIK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page3_5:
-	givemon SPECIES_PAWMI, 1
+	givemon SPECIES_MAGNEMITE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page3_6:
-	givemon SPECIES_PICHU, 1
+	givemon SPECIES_MAREEP, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4501,27 +6352,27 @@ Auto_EventScript_Pokemon_Shop_Electric_Page4::
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page4_2:
-	givemon SPECIES_PINCURCHIN, 1
+	givemon SPECIES_MINUN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page4_3:
-	givemon SPECIES_PLUSLE, 1
+	givemon SPECIES_MORPEKO, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page4_4:
-	givemon SPECIES_RAGING_BOLT, 1
+	givemon SPECIES_PACHIRISU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page4_5:
-	givemon SPECIES_ROTOM, 1
+	givemon SPECIES_PAWMI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page4_6:
-	givemon SPECIES_SANDY_SHOCKS, 1
+	givemon SPECIES_PICHU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4548,27 +6399,27 @@ Auto_EventScript_Pokemon_Shop_Electric_Page5::
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page5_2:
-	givemon SPECIES_SHINX, 1
+	givemon SPECIES_PINCURCHIN, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page5_3:
-	givemon SPECIES_TADBULB, 1
+	givemon SPECIES_PLUSLE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page5_4:
-	givemon SPECIES_TOGEDEMARU, 1
+	givemon SPECIES_RAGING_BOLT, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page5_5:
-	givemon SPECIES_TOXEL, 1
+	givemon SPECIES_ROTOM, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page5_6:
-	givemon SPECIES_TYNAMO, 1
+	givemon SPECIES_SANDY_SHOCKS, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4588,36 +6439,89 @@ Auto_EventScript_Pokemon_Shop_Electric_Page6::
 	case 1, Auto_EventScript_Pokemon_Shop_Electric_Page6_3
 	case 2, Auto_EventScript_Pokemon_Shop_Electric_Page6_4
 	case 3, Auto_EventScript_Pokemon_Shop_Electric_Page6_5
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page6_6
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page6_7
+	case 4, Auto_EventScript_Pokemon_Shop_Electric_Page6_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page6_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page6_8
 	goto Auto_EventScript_Pokemon_Shop_Page1
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_2:
-	givemon SPECIES_VOLTORB, 1
+	givemon SPECIES_SHINX, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_3:
-	givemon SPECIES_VOLTORB_HISUIAN, 1
+	givemon SPECIES_STUNFISK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_4:
-	givemon SPECIES_WATTREL, 1
+	givemon SPECIES_TADBULB, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_5:
-	givemon SPECIES_YAMPER, 1
+	givemon SPECIES_TOGEDEMARU, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_6:
-	goto Auto_EventScript_Pokemon_Shop_Electric_Page5
+	givemon SPECIES_TOXEL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Electric_Page6_7:
+	goto Auto_EventScript_Pokemon_Shop_Electric_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page6_8:
+	goto Auto_EventScript_Pokemon_Shop_Electric_Page7
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Electric_Page7
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Electric_Page7_2
+	case 1, Auto_EventScript_Pokemon_Shop_Electric_Page7_3
+	case 2, Auto_EventScript_Pokemon_Shop_Electric_Page7_4
+	case 3, Auto_EventScript_Pokemon_Shop_Electric_Page7_5
+	case 4, Auto_EventScript_Pokemon_Shop_Electric_Page7_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page7_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Electric_Page7_8
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_2:
+	givemon SPECIES_TYNAMO, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_3:
+	givemon SPECIES_VOLTORB, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_4:
+	givemon SPECIES_VOLTORB_HISUIAN, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_5:
+	givemon SPECIES_WATTREL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_6:
+	givemon SPECIES_YAMPER, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_7:
+	goto Auto_EventScript_Pokemon_Shop_Electric_Page6
+	return
+
+Auto_EventScript_Pokemon_Shop_Electric_Page7_8:
 	goto Auto_EventScript_Pokemon_Shop_Electric_Page1
 	return
 
@@ -4636,32 +6540,32 @@ Auto_EventScript_Pokemon_Shop_Fairy_Page1::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_2:
-	givemon SPECIES_CLEFFA, 1
+	givemon SPECIES_AZURILL, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_3:
-	givemon SPECIES_COMFEY, 1
+	givemon SPECIES_CARBINK, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_4:
-	givemon SPECIES_FIDOUGH, 1
+	givemon SPECIES_CLEFFA, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_5:
-	givemon SPECIES_FLABEBE, 1
+	givemon SPECIES_COMFEY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_6:
-	givemon SPECIES_IRON_VALIANT, 1
+	givemon SPECIES_COTTONEE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_7:
-	goto Auto_EventScript_Pokemon_Shop_Fairy_Page3
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page6
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page1_8:
@@ -4683,27 +6587,27 @@ Auto_EventScript_Pokemon_Shop_Fairy_Page2::
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page2_2:
-	givemon SPECIES_MILCERY, 1
+	givemon SPECIES_CUTIEFLY, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page2_3:
-	givemon SPECIES_SCREAM_TAIL, 1
+	givemon SPECIES_DEDENNE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page2_4:
-	givemon SPECIES_SNUBBULL, 1
+	givemon SPECIES_FEZANDIPITI, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page2_5:
-	givemon SPECIES_SPRITZEE, 1
+	givemon SPECIES_FIDOUGH, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page2_6:
-	givemon SPECIES_SWIRLIX, 1
+	givemon SPECIES_FLABEBE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
@@ -4721,26 +6625,167 @@ Auto_EventScript_Pokemon_Shop_Fairy_Page3::
 	switch VAR_RESULT
 	case 0, Auto_EventScript_Pokemon_Shop_Fairy_Page3_2
 	case 1, Auto_EventScript_Pokemon_Shop_Fairy_Page3_3
-	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page3_4
-	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page3_5
+	case 2, Auto_EventScript_Pokemon_Shop_Fairy_Page3_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fairy_Page3_5
+	case 4, Auto_EventScript_Pokemon_Shop_Fairy_Page3_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page3_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page3_8
 	goto Auto_EventScript_Pokemon_Shop_Page1
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page3_2:
-	givemon SPECIES_TINKATINK, 1
+	givemon SPECIES_FLUTTER_MANE, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page3_3:
-	givemon SPECIES_TOGEPI, 1
+	givemon SPECIES_IGGLYBUFF, 1
 	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page3_4:
-	goto Auto_EventScript_Pokemon_Shop_Fairy_Page2
+	givemon SPECIES_IMPIDIMP, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Pokemon_Shop_Fairy_Page3_5:
+	givemon SPECIES_IRON_VALIANT, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page3_6:
+	givemon SPECIES_KLEFKI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page3_7:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page2
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page3_8:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page4
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fairy_Page4
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fairy_Page4_2
+	case 1, Auto_EventScript_Pokemon_Shop_Fairy_Page4_3
+	case 2, Auto_EventScript_Pokemon_Shop_Fairy_Page4_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fairy_Page4_5
+	case 4, Auto_EventScript_Pokemon_Shop_Fairy_Page4_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page4_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page4_8
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_2:
+	givemon SPECIES_MAWILE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_3:
+	givemon SPECIES_MILCERY, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_4:
+	givemon SPECIES_MIME_JR, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_5:
+	givemon SPECIES_MIMIKYU, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_6:
+	givemon SPECIES_MORELULL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_7:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page3
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page4_8:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page5
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fairy_Page5
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fairy_Page5_2
+	case 1, Auto_EventScript_Pokemon_Shop_Fairy_Page5_3
+	case 2, Auto_EventScript_Pokemon_Shop_Fairy_Page5_4
+	case 3, Auto_EventScript_Pokemon_Shop_Fairy_Page5_5
+	case 4, Auto_EventScript_Pokemon_Shop_Fairy_Page5_6
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page5_7
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page5_8
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_2:
+	givemon SPECIES_RALTS, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_3:
+	givemon SPECIES_SCREAM_TAIL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_4:
+	givemon SPECIES_SNUBBULL, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_5:
+	givemon SPECIES_SPRITZEE, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_6:
+	givemon SPECIES_SWIRLIX, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_7:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page4
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page5_8:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page6
+	return
+
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page6::
+	multichoice2 0, 0, Auto_Text_Pokemon_Shop_Fairy_Page6
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Pokemon_Shop_Fairy_Page6_2
+	case 1, Auto_EventScript_Pokemon_Shop_Fairy_Page6_3
+	case MULTI_L_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page6_4
+	case MULTI_R_PRESSED, Auto_EventScript_Pokemon_Shop_Fairy_Page6_5
+	goto Auto_EventScript_Pokemon_Shop_Page1
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page6_2:
+	givemon SPECIES_TINKATINK, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page6_3:
+	givemon SPECIES_TOGEPI, 1
+	goto Common_EventScript_Pokemon_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page6_4:
+	goto Auto_EventScript_Pokemon_Shop_Fairy_Page5
+	return
+
+Auto_EventScript_Pokemon_Shop_Fairy_Page6_5:
 	goto Auto_EventScript_Pokemon_Shop_Fairy_Page1
 	return
 
@@ -4787,51 +6832,67 @@ Auto_Text_Pokemon_Shop_Rock_Page1::
 	.string "AMAURA$"
 	.string "ANORITH$"
 	.string "ARCHEN$"
-	.string "BINACLE$"
+	.string "ARON$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Rock_Page2::
+	.string "BINACLE$"
 	.string "BONSLY$"
 	.string "CARBINK$"
+	.string "CORSOLA$"
 	.string "CRANIDOS$"
-	.string "GEODUDE$"
-	.string "GEODUDE-ALOLA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Rock_Page3::
+	.string "DWEBBLE$"
+	.string "GEODUDE$"
+	.string "GEODUDE-ALOLA$"
 	.string "GLIMMET$"
-	.string "IRON BOULDER$"
-	.string "IRON THORNS$"
-	.string "KABUTO$"
-	.string "KLAWF$"
+	.string "GROWLITHE-HISUI$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Rock_Page4::
+	.string "IRON BOULDER$"
+	.string "IRON THORNS$"
+	.string "KABUTO$"
+	.string "KLAWF$"
 	.string "LARVITAR$"
-	.string "LILEEP$"
-	.string "LUNATONE$"
-	.string "MINIOR$"
-	.string "NACLI$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Rock_Page5::
+	.string "LILEEP$"
+	.string "LUNATONE$"
+	.string "MINIOR$"
+	.string "NACLI$"
 	.string "NOSEPASS$"
-	.string "OMANYTE$"
-	.string "ONIX$"
-	.string "ROCKRUFF$"
-	.string "ROGGENROLA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Rock_Page6::
+	.string "OMANYTE$"
+	.string "ONIX$"
+	.string "RELICANTH$"
+	.string "RHYHORN$"
+	.string "ROCKRUFF$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Rock_Page7::
+	.string "ROGGENROLA$"
 	.string "ROLYCOLY$"
 	.string "SHIELDON$"
+	.string "SHUCKLE$"
 	.string "SOLROCK$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Rock_Page8::
 	.string "STONJOURNER$"
+	.string "TIRTOUGA$"
 	.string "TYRUNT$"
 	.string "Go Back$"
 	.string "$"
@@ -4841,23 +6902,42 @@ Auto_Text_Pokemon_Shop_Steel_Page1::
 	.string "BELDUM$"
 	.string "BRONZOR$"
 	.string "CUFANT$"
-	.string "DURALUDON$"
+	.string "DIGLETT-ALOLA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Steel_Page2::
+	.string "DURALUDON$"
+	.string "DURANT$"
+	.string "FERROSEED$"
 	.string "HONEDGE$"
 	.string "IRON CROWN$"
-	.string "KLEFKI$"
-	.string "KLINK$"
-	.string "MAWILE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Steel_Page3::
+	.string "IRON TREADS$"
+	.string "KLEFKI$"
+	.string "KLINK$"
+	.string "MAGNEMITE$"
+	.string "MAWILE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Steel_Page4::
 	.string "MEOWTH-GALAR$"
 	.string "ORTHWORM$"
+	.string "PAWNIARD$"
+	.string "SANDSHREW-ALOLA$"
+	.string "SHIELDON$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Steel_Page5::
 	.string "SKARMORY$"
+	.string "STUNFISK-GALAR$"
+	.string "TINKATINK$"
+	.string "TOGEDEMARU$"
 	.string "VAROOM$"
 	.string "Go Back$"
 	.string "$"
@@ -4872,87 +6952,105 @@ Auto_Text_Pokemon_Shop_Water_Page1::
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page2::
+	.string "BINACLE$"
 	.string "BRUXISH$"
 	.string "BUIZEL$"
 	.string "CARVANHA$"
 	.string "CHEWTLE$"
-	.string "CHINCHOU$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page3::
+	.string "CHINCHOU$"
 	.string "CLAMPERL$"
 	.string "CLAUNCHER$"
 	.string "CORPHISH$"
 	.string "CORSOLA$"
-	.string "DEWPIDER$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page4::
+	.string "CRAMORANT$"
+	.string "DEWPIDER$"
 	.string "DONDOZO$"
 	.string "DRACOVISH$"
 	.string "DUCKLETT$"
-	.string "FEEBAS$"
-	.string "FINIZEN$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page5::
+	.string "FEEBAS$"
+	.string "FINIZEN$"
 	.string "FINNEON$"
 	.string "FRILLISH$"
 	.string "FROAKIE$"
-	.string "GOLDEEN$"
-	.string "HORSEA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page6::
+	.string "GOLDEEN$"
+	.string "HORSEA$"
+	.string "IRON BUNDLE$"
+	.string "KABUTO$"
 	.string "KRABBY$"
-	.string "LAPRAS$"
-	.string "LOTAD$"
-	.string "LUVDISC$"
-	.string "MAGIKARP$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page7::
+	.string "LAPRAS$"
+	.string "LOTAD$"
+	.string "LUVDISC$"
+	.string "MAGIKARP$"
 	.string "MANTYKE$"
-	.string "MUDKIP$"
-	.string "OSHAWOTT$"
-	.string "PANPOUR$"
-	.string "PIPLUP$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page8::
-	.string "POLIWAG$"
-	.string "POPPLIO$"
-	.string "PSYDUCK$"
-	.string "PYUKUMUKU$"
-	.string "QUAXLY$"
+	.string "MAREANIE$"
+	.string "MUDKIP$"
+	.string "OMANYTE$"
+	.string "OSHAWOTT$"
+	.string "PANPOUR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page9::
-	.string "QWILFISH$"
-	.string "RELICANTH$"
-	.string "REMORAID$"
-	.string "SEEL$"
-	.string "SHELLDER$"
+	.string "PIPLUP$"
+	.string "POLIWAG$"
+	.string "POPPLIO$"
+	.string "PSYDUCK$"
+	.string "PYUKUMUKU$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page10::
-	.string "SHELLOS$"
-	.string "SLOWPOKE$"
-	.string "SOBBLE$"
-	.string "SQUIRTLE$"
-	.string "STARYU$"
+	.string "QUAXLY$"
+	.string "QWILFISH$"
+	.string "RELICANTH$"
+	.string "REMORAID$"
+	.string "SEEL$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Water_Page11::
+	.string "SHELLDER$"
+	.string "SHELLOS$"
+	.string "SKRELP$"
+	.string "SLOWPOKE$"
+	.string "SOBBLE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Water_Page12::
+	.string "SPHEAL$"
+	.string "SQUIRTLE$"
+	.string "STARYU$"
+	.string "SURSKIT$"
+	.string "TATSUGIRI$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Water_Page13::
 	.string "TENTACOOL$"
 	.string "TIRTOUGA$"
 	.string "TOTODILE$"
@@ -4961,89 +7059,121 @@ Auto_Text_Pokemon_Shop_Water_Page11::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Water_Page12::
+Auto_Text_Pokemon_Shop_Water_Page14::
 	.string "WAILMER$"
 	.string "WALKING WAKE$"
 	.string "WIGLETT$"
+	.string "WIMPOD$"
 	.string "WINGULL$"
-	.string "WISHIWASHI$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Water_Page13::
+Auto_Text_Pokemon_Shop_Water_Page15::
+	.string "WISHIWASHI$"
 	.string "WOOPER$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ground_Page1::
 	.string "BALTOY$"
+	.string "BARBOACH$"
 	.string "CUBONE$"
 	.string "DIGLETT$"
 	.string "DIGLETT-ALOLA$"
-	.string "DRILBUR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ground_Page2::
+	.string "DRILBUR$"
+	.string "GEODUDE$"
+	.string "GIBLE$"
 	.string "GLIGAR$"
 	.string "GOLETT$"
-	.string "GREAT TUSK$"
-	.string "HIPPOPOTAS$"
-	.string "IRON TREADS$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ground_Page3::
+	.string "GREAT TUSK$"
+	.string "HIPPOPOTAS$"
+	.string "IRON TREADS$"
+	.string "LARVITAR$"
 	.string "MUDBRAY$"
-	.string "PHANPY$"
-	.string "RHYHORN$"
-	.string "SANDILE$"
-	.string "SANDSHREW$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ground_Page4::
+	.string "NINCADA$"
+	.string "NUMEL$"
+	.string "ONIX$"
+	.string "PHANPY$"
+	.string "RHYHORN$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Ground_Page5::
+	.string "SANDILE$"
+	.string "SANDSHREW$"
+	.string "SANDY SHOCKS$"
+	.string "SANDYGAST$"
 	.string "SILICOBRA$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Ground_Page6::
 	.string "STUNFISK$"
 	.string "STUNFISK-GALAR$"
+	.string "SWINUB$"
 	.string "TOEDSCOOL$"
 	.string "TRAPINCH$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Ground_Page5::
+Auto_Text_Pokemon_Shop_Ground_Page7::
+	.string "WOOPER$"
+	.string "WOOPER-PALDEA$"
 	.string "YAMASK-GALAR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ice_Page1::
+	.string "AMAURA$"
+	.string "ARCTOVISH$"
+	.string "ARCTOZOLT$"
 	.string "BERGMITE$"
 	.string "CETODDLE$"
-	.string "CRYOGONAL$"
-	.string "CUBCHOO$"
-	.string "DARUMAKA-GALAR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ice_Page2::
+	.string "CRYOGONAL$"
+	.string "CUBCHOO$"
+	.string "DARUMAKA-GALAR$"
 	.string "DELIBIRD$"
 	.string "EISCUE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Ice_Page3::
+	.string "FRIGIBAX$"
 	.string "IRON BUNDLE$"
+	.string "LAPRAS$"
 	.string "SANDSHREW-ALOLA$"
 	.string "SMOOCHUM$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Ice_Page3::
+Auto_Text_Pokemon_Shop_Ice_Page4::
+	.string "SNEASEL$"
 	.string "SNOM$"
 	.string "SNORUNT$"
+	.string "SNOVER$"
 	.string "SPHEAL$"
-	.string "SWINUB$"
-	.string "VANILLITE$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Ice_Page4::
+Auto_Text_Pokemon_Shop_Ice_Page5::
+	.string "SWINUB$"
+	.string "VANILLITE$"
 	.string "VULPIX-ALOLA$"
 	.string "Go Back$"
 	.string "$"
@@ -5062,144 +7192,190 @@ Auto_Text_Pokemon_Shop_Normal_Page2::
 	.string "BUNNELBY$"
 	.string "CASTFORM$"
 	.string "CHATOT$"
-	.string "DEERLING$"
+	.string "CYCLIZAR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page3::
+	.string "DEERLING$"
 	.string "DITTO$"
 	.string "DODUO$"
 	.string "DRAMPA$"
 	.string "DUNSPARCE$"
-	.string "EEVEE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page4::
+	.string "EEVEE$"
 	.string "FARFETCHD$"
 	.string "FLETCHLING$"
 	.string "FURFROU$"
 	.string "GIRAFARIG$"
-	.string "GLAMEOW$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page5::
+	.string "GLAMEOW$"
 	.string "HAPPINY$"
+	.string "HELIOPTILE$"
 	.string "HOOTHOOT$"
 	.string "IGGLYBUFF$"
-	.string "KANGASKHAN$"
-	.string "KECLEON$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page6::
+	.string "INDEEDEE$"
+	.string "KANGASKHAN$"
+	.string "KECLEON$"
 	.string "KOMALA$"
 	.string "LECHONK$"
-	.string "LICKITUNG$"
-	.string "LILLIPUP$"
-	.string "MEOWTH$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page7::
+	.string "LICKITUNG$"
+	.string "LILLIPUP$"
+	.string "LITLEO$"
+	.string "MEOWTH$"
 	.string "MILTANK$"
-	.string "MINCCINO$"
-	.string "MUNCHLAX$"
-	.string "ORANGURU$"
-	.string "PATRAT$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page8::
+	.string "MINCCINO$"
+	.string "MUNCHLAX$"
+	.string "ORANGURU$"
+	.string "PATRAT$"
 	.string "PIDGEY$"
-	.string "PIDOVE$"
-	.string "PIKIPEK$"
-	.string "PORYGON$"
-	.string "RATTATA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page9::
-	.string "RUFFLET$"
-	.string "SENTRET$"
-	.string "SKITTY$"
-	.string "SKWOVET$"
-	.string "SLAKOTH$"
+	.string "PIDOVE$"
+	.string "PIKIPEK$"
+	.string "PORYGON$"
+	.string "RATTATA$"
+	.string "RATTATA-ALOLA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page10::
-	.string "SMEARGLE$"
-	.string "SPEAROW$"
-	.string "SPINDA$"
-	.string "SQUAWKABILLY$"
-	.string "STANTLER$"
+	.string "RUFFLET$"
+	.string "SENTRET$"
+	.string "SHROODLE$"
+	.string "SKITTY$"
+	.string "SKWOVET$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page11::
-	.string "STARLY$"
-	.string "STUFFUL$"
-	.string "SWABLU$"
-	.string "TAILLOW$"
-	.string "TANDEMAUS$"
+	.string "SLAKOTH$"
+	.string "SMEARGLE$"
+	.string "SMOLIV$"
+	.string "SPEAROW$"
+	.string "SPINDA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page12::
-	.string "TAUROS$"
-	.string "TEDDIURSA$"
-	.string "WHISMUR$"
-	.string "WOOLOO$"
-	.string "YUNGOOS$"
+	.string "SQUAWKABILLY$"
+	.string "STANTLER$"
+	.string "STARLY$"
+	.string "STUFFUL$"
+	.string "SWABLU$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Normal_Page13::
+	.string "TAILLOW$"
+	.string "TANDEMAUS$"
+	.string "TAUROS$"
+	.string "TEDDIURSA$"
+	.string "WHISMUR$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Normal_Page14::
+	.string "WOOLOO$"
+	.string "YUNGOOS$"
 	.string "ZANGOOSE$"
 	.string "ZIGZAGOON$"
+	.string "ZIGZAGOON-GALAR$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Normal_Page15::
 	.string "ZORUA-HISUI$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Poison_Page1::
+	.string "BELLSPROUT$"
+	.string "BUDEW$"
+	.string "BULBASAUR$"
 	.string "CROAGUNK$"
 	.string "EKANS$"
-	.string "FEZANDIPITI$"
-	.string "GRIMER$"
-	.string "GRIMER-ALOLA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Poison_Page2::
-	.string "GULPIN$"
-	.string "KOFFING$"
-	.string "MAREANIE$"
-	.string "MUNKIDORI$"
-	.string "NIDORAN-F$"
+	.string "FEZANDIPITI$"
+	.string "FOONGUS$"
+	.string "GASTLY$"
+	.string "GLIMMET$"
+	.string "GRIMER$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Poison_Page3::
+	.string "GRIMER-ALOLA$"
+	.string "GULPIN$"
+	.string "IRON MOTH$"
+	.string "KOFFING$"
+	.string "MAREANIE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Poison_Page4::
+	.string "MUNKIDORI$"
+	.string "NIDORAN-F$"
 	.string "NIDORAN-M$"
+	.string "ODDISH$"
 	.string "OKIDOGI$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Poison_Page5::
+	.string "QWILFISH$"
+	.string "QWILFISH-HISUI$"
 	.string "SALANDIT$"
 	.string "SEVIPER$"
 	.string "SHROODLE$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Poison_Page4::
+Auto_Text_Pokemon_Shop_Poison_Page6::
 	.string "SKORUPI$"
 	.string "SKRELP$"
+	.string "SNEASEL-HISUI$"
+	.string "SPINARAK$"
 	.string "STUNKY$"
-	.string "TRUBBISH$"
-	.string "WOOPER-PALDEA$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Poison_Page5::
+Auto_Text_Pokemon_Shop_Poison_Page7::
+	.string "TENTACOOL$"
+	.string "TOXEL$"
+	.string "TRUBBISH$"
+	.string "VAROOM$"
+	.string "VENIPEDE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Poison_Page8::
+	.string "VENONAT$"
+	.string "WEEDLE$"
+	.string "WOOPER-PALDEA$"
 	.string "ZUBAT$"
 	.string "Go Back$"
 	.string "$"
@@ -5207,41 +7383,76 @@ Auto_Text_Pokemon_Shop_Poison_Page5::
 Auto_Text_Pokemon_Shop_Psychic_Page1::
 	.string "ABRA$"
 	.string "ARTICUNO-GALAR$"
-	.string "CHINGLING$"
-	.string "DROWZEE$"
-	.string "ELGYEM$"
+	.string "BALTOY$"
+	.string "BELDUM$"
+	.string "BRONZOR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Psychic_Page2::
+	.string "BRUXISH$"
+	.string "CHINGLING$"
+	.string "DROWZEE$"
+	.string "ELGYEM$"
 	.string "ESPURR$"
-	.string "FLITTLE$"
-	.string "GOTHITA$"
-	.string "HATENNA$"
-	.string "INDEEDEE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Psychic_Page3::
-	.string "MIME JR.$"
-	.string "MUNNA$"
-	.string "NATU$"
-	.string "PONYTA-GALAR$"
-	.string "RALTS$"
+	.string "EXEGGCUTE$"
+	.string "FLITTLE$"
+	.string "GIRAFARIG$"
+	.string "GOTHITA$"
+	.string "HATENNA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Psychic_Page4::
-	.string "SIGILYPH$"
-	.string "SLOWPOKE-GALAR$"
-	.string "SOLOSIS$"
-	.string "SPOINK$"
-	.string "UNOWN$"
+	.string "INDEEDEE$"
+	.string "INKAY$"
+	.string "IRON BOULDER$"
+	.string "IRON CROWN$"
+	.string "IRON LEAVES$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Psychic_Page5::
+	.string "LUNATONE$"
+	.string "MEDITITE$"
+	.string "MIME JR.$"
+	.string "MUNKIDORI$"
+	.string "MUNNA$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Psychic_Page6::
+	.string "NATU$"
+	.string "ORANGURU$"
+	.string "PONYTA-GALAR$"
+	.string "RALTS$"
+	.string "SCREAM TAIL$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Psychic_Page7::
+	.string "SIGILYPH$"
+	.string "SLOWPOKE$"
+	.string "SLOWPOKE-GALAR$"
+	.string "SMOOCHUM$"
+	.string "SOLOSIS$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Psychic_Page8::
+	.string "SOLROCK$"
+	.string "SPOINK$"
+	.string "UNOWN$"
+	.string "VELUZA$"
 	.string "WOOBAT$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Psychic_Page9::
 	.string "WYNAUT$"
 	.string "Go Back$"
 	.string "$"
@@ -5249,14 +7460,23 @@ Auto_Text_Pokemon_Shop_Psychic_Page5::
 Auto_Text_Pokemon_Shop_Fighting_Page1::
 	.string "CLOBBOPUS$"
 	.string "CRABRAWLER$"
+	.string "CROAGUNK$"
 	.string "FALINKS$"
 	.string "FARFETCHD-GALAR$"
-	.string "HAWLUCHA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fighting_Page2::
+	.string "FLAMIGO$"
+	.string "GREAT TUSK$"
+	.string "HAWLUCHA$"
+	.string "HERACROSS$"
 	.string "IRON HANDS$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fighting_Page3::
+	.string "IRON VALIANT$"
 	.string "MACHOP$"
 	.string "MAKUHITA$"
 	.string "MANKEY$"
@@ -5264,17 +7484,25 @@ Auto_Text_Pokemon_Shop_Fighting_Page2::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Fighting_Page3::
+Auto_Text_Pokemon_Shop_Fighting_Page4::
 	.string "MIENFOO$"
+	.string "OKIDOGI$"
 	.string "PANCHAM$"
 	.string "PASSIMIAN$"
 	.string "RIOLU$"
-	.string "SAWK$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Fighting_Page4::
+Auto_Text_Pokemon_Shop_Fighting_Page5::
+	.string "SAWK$"
+	.string "SCRAGGY$"
+	.string "SLITHER WING$"
 	.string "SNEASEL-HISUI$"
+	.string "STUFFUL$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fighting_Page6::
 	.string "THROH$"
 	.string "TIMBURR$"
 	.string "TYROGUE$"
@@ -5302,77 +7530,184 @@ Auto_Text_Pokemon_Shop_Fire_Page2::
 
 Auto_Text_Pokemon_Shop_Fire_Page3::
 	.string "HEATMOR$"
+	.string "HOUNDOUR$"
 	.string "IRON MOTH$"
+	.string "LARVESTA$"
 	.string "LITLEO$"
-	.string "LITTEN$"
-	.string "MAGBY$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fire_Page4::
+	.string "LITTEN$"
+	.string "LITWICK$"
+	.string "MAGBY$"
 	.string "NUMEL$"
 	.string "ORICORIO$"
-	.string "PANSEAR$"
-	.string "PONYTA$"
-	.string "SCORBUNNY$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fire_Page5::
+	.string "PANSEAR$"
+	.string "PONYTA$"
+	.string "SALANDIT$"
+	.string "SCORBUNNY$"
 	.string "SIZZLIPEDE$"
-	.string "SLUGMA$"
-	.string "TEPIG$"
-	.string "TORCHIC$"
-	.string "TORKOAL$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fire_Page6::
+	.string "SLUGMA$"
+	.string "TEPIG$"
+	.string "TORCHIC$"
+	.string "TORKOAL$"
 	.string "TURTONATOR$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fire_Page7::
 	.string "VULPIX$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Flying_Page1::
+	.string "AERODACTYL$"
+	.string "ARCHEN$"
+	.string "ARTICUNO-GALAR$"
 	.string "BOMBIRDIER$"
+	.string "CHATOT$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page2::
+	.string "COMBEE$"
 	.string "CRAMORANT$"
+	.string "DELIBIRD$"
+	.string "DODUO$"
+	.string "DRIFLOON$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page3::
+	.string "DUCKLETT$"
+	.string "EMOLGA$"
+	.string "FARFETCHD$"
 	.string "FLAMIGO$"
+	.string "FLETCHLING$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page4::
+	.string "GLIGAR$"
+	.string "HAWLUCHA$"
+	.string "HOOTHOOT$"
+	.string "HOPPIP$"
+	.string "IRON JUGULIS$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page5::
+	.string "LEDYBA$"
+	.string "MANTYKE$"
+	.string "MINIOR$"
+	.string "MOLTRES-GALAR$"
+	.string "MURKROW$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page6::
+	.string "NATU$"
 	.string "NOIBAT$"
+	.string "ORICORIO$"
+	.string "PIDGEY$"
+	.string "PIDOVE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page7::
+	.string "PIKIPEK$"
 	.string "ROOKIDEE$"
+	.string "ROWLET$"
+	.string "RUFFLET$"
+	.string "SCYTHER$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page8::
+	.string "SIGILYPH$"
+	.string "SKARMORY$"
+	.string "SPEAROW$"
+	.string "SQUAWKABILLY$"
+	.string "STARLY$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page9::
+	.string "SWABLU$"
+	.string "TAILLOW$"
+	.string "TROPIUS$"
+	.string "VULLABY$"
+	.string "WATTREL$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Flying_Page10::
+	.string "WINGULL$"
+	.string "WOOBAT$"
+	.string "YANMA$"
+	.string "ZAPDOS-GALAR$"
+	.string "ZUBAT$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ghost_Page1::
+	.string "BRAMBLIN$"
 	.string "CORSOLA-GALAR$"
 	.string "DHELMISE$"
+	.string "DREEPY$"
 	.string "DRIFLOON$"
-	.string "DUSKULL$"
-	.string "FLUTTER MANE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Ghost_Page2::
+	.string "DUSKULL$"
+	.string "FLUTTER MANE$"
+	.string "FRILLISH$"
 	.string "GASTLY$"
 	.string "GIMMIGHOUL$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Ghost_Page3::
+	.string "GOLETT$"
 	.string "GREAVARD$"
+	.string "HONEDGE$"
 	.string "LITWICK$"
 	.string "MIMIKYU$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Ghost_Page3::
+Auto_Text_Pokemon_Shop_Ghost_Page4::
 	.string "MISDREAVUS$"
 	.string "PHANTUMP$"
+	.string "POLTCHAGEIST$"
 	.string "PUMPKABOO$"
-	.string "SANDYGAST$"
-	.string "SHUPPET$"
+	.string "ROTOM$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Ghost_Page4::
+Auto_Text_Pokemon_Shop_Ghost_Page5::
+	.string "SABLEYE$"
+	.string "SANDYGAST$"
+	.string "SHUPPET$"
 	.string "SINISTEA$"
 	.string "SPIRITOMB$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Ghost_Page6::
 	.string "YAMASK$"
+	.string "YAMASK-GALAR$"
+	.string "ZORUA-HISUI$"
 	.string "Go Back$"
 	.string "$"
 
@@ -5399,116 +7734,143 @@ Auto_Text_Pokemon_Shop_Grass_Page3::
 	.string "CHESPIN$"
 	.string "CHIKORITA$"
 	.string "COTTONEE$"
-	.string "EXEGGCUTE$"
+	.string "DEERLING$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page4::
+	.string "DHELMISE$"
+	.string "EXEGGCUTE$"
 	.string "FERROSEED$"
 	.string "FOMANTIS$"
 	.string "FOONGUS$"
-	.string "GOSSIFLEUR$"
-	.string "GROOKEY$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page5::
+	.string "GOSSIFLEUR$"
+	.string "GROOKEY$"
 	.string "HOPPIP$"
 	.string "IRON LEAVES$"
-	.string "MARACTUS$"
-	.string "MORELULL$"
-	.string "ODDISH$"
+	.string "LILEEP$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page6::
+	.string "LOTAD$"
+	.string "MARACTUS$"
+	.string "MORELULL$"
+	.string "ODDISH$"
 	.string "OGERPON$"
-	.string "PANSAGE$"
-	.string "PETILIL$"
-	.string "POLTCHAGEIST$"
-	.string "ROWLET$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page7::
-	.string "SEEDOT$"
-	.string "SHROOMISH$"
-	.string "SKIDDO$"
-	.string "SMOLIV$"
-	.string "SNIVY$"
+	.string "PANSAGE$"
+	.string "PARAS$"
+	.string "PETILIL$"
+	.string "PHANTUMP$"
+	.string "POLTCHAGEIST$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page8::
-	.string "SNOVER$"
-	.string "SPRIGATITO$"
-	.string "SUNKERN$"
-	.string "TANGELA$"
-	.string "TREECKO$"
+	.string "PUMPKABOO$"
+	.string "ROWLET$"
+	.string "SEEDOT$"
+	.string "SEWADDLE$"
+	.string "SHROOMISH$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Grass_Page9::
+	.string "SKIDDO$"
+	.string "SMOLIV$"
+	.string "SNIVY$"
+	.string "SNOVER$"
+	.string "SPRIGATITO$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Grass_Page10::
+	.string "SUNKERN$"
+	.string "TANGELA$"
+	.string "TOEDSCOOL$"
+	.string "TREECKO$"
 	.string "TROPIUS$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Grass_Page11::
 	.string "TURTWIG$"
+	.string "VOLTORB-HISUI$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page1::
+	.string "ANORITH$"
 	.string "BLIPBUG$"
 	.string "BURMY$"
 	.string "CATERPIE$"
 	.string "COMBEE$"
-	.string "CUTIEFLY$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page2::
+	.string "CUTIEFLY$"
+	.string "DEWPIDER$"
 	.string "DURANT$"
 	.string "DWEBBLE$"
 	.string "GRUBBIN$"
-	.string "HERACROSS$"
-	.string "ILLUMISE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page3::
+	.string "HERACROSS$"
+	.string "ILLUMISE$"
 	.string "JOLTIK$"
 	.string "KARRABLAST$"
 	.string "KRICKETOT$"
-	.string "LARVESTA$"
-	.string "LEDYBA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page4::
+	.string "LARVESTA$"
+	.string "LEDYBA$"
 	.string "NINCADA$"
 	.string "NYMBLE$"
 	.string "PARAS$"
-	.string "PINECO$"
-	.string "PINSIR$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page5::
+	.string "PINECO$"
+	.string "PINSIR$"
 	.string "RELLOR$"
 	.string "SCATTERBUG$"
 	.string "SCYTHER$"
-	.string "SEWADDLE$"
-	.string "SHELMET$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Bug_Page6::
+	.string "SEWADDLE$"
+	.string "SHELMET$"
 	.string "SHUCKLE$"
+	.string "SIZZLIPEDE$"
+	.string "SKORUPI$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Bug_Page7::
 	.string "SLITHER WING$"
+	.string "SNOM$"
 	.string "SPINARAK$"
 	.string "SURSKIT$"
 	.string "TAROUNTULA$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Bug_Page7::
+Auto_Text_Pokemon_Shop_Bug_Page8::
 	.string "VENIPEDE$"
 	.string "VENONAT$"
 	.string "VOLBEAT$"
@@ -5517,7 +7879,7 @@ Auto_Text_Pokemon_Shop_Bug_Page7::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Bug_Page8::
+Auto_Text_Pokemon_Shop_Bug_Page9::
 	.string "WURMPLE$"
 	.string "YANMA$"
 	.string "Go Back$"
@@ -5525,23 +7887,32 @@ Auto_Text_Pokemon_Shop_Bug_Page8::
 
 Auto_Text_Pokemon_Shop_Dark_Page1::
 	.string "ABSOL$"
+	.string "BOMBIRDIER$"
+	.string "BRUTE BONNET$"
+	.string "CARVANHA$"
 	.string "DEINO$"
-	.string "HOUNDOUR$"
-	.string "IMPIDIMP$"
-	.string "INKAY$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Dark_Page2::
+	.string "GRIMER-ALOLA$"
+	.string "HOUNDOUR$"
+	.string "IMPIDIMP$"
+	.string "INKAY$"
 	.string "IRON JUGULIS$"
-	.string "MASCHIFF$"
-	.string "MEOWTH-ALOLA$"
-	.string "MOLTRES-GALAR$"
-	.string "MURKROW$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Dark_Page3::
+	.string "MASCHIFF$"
+	.string "MEOWTH-ALOLA$"
+	.string "MOLTRES-GALAR$"
+	.string "MORPEKO$"
+	.string "MURKROW$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Dark_Page4::
 	.string "NICKIT$"
 	.string "PAWNIARD$"
 	.string "POOCHYENA$"
@@ -5550,64 +7921,101 @@ Auto_Text_Pokemon_Shop_Dark_Page3::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Dark_Page4::
+Auto_Text_Pokemon_Shop_Dark_Page5::
 	.string "RATTATA-ALOLA$"
+	.string "ROARING MOON$"
 	.string "SABLEYE$"
+	.string "SANDILE$"
 	.string "SCRAGGY$"
-	.string "SNEASEL$"
-	.string "VULLABY$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Dark_Page5::
+Auto_Text_Pokemon_Shop_Dark_Page6::
+	.string "SNEASEL$"
+	.string "SPIRITOMB$"
+	.string "STUNKY$"
+	.string "VULLABY$"
 	.string "ZIGZAGOON-GALAR$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Dark_Page7::
 	.string "ZORUA$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Dragon_Page1::
+	.string "APPLIN$"
 	.string "AXEW$"
 	.string "BAGON$"
 	.string "CYCLIZAR$"
+	.string "DEINO$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Dragon_Page2::
+	.string "DRACOVISH$"
+	.string "DRACOZOLT$"
+	.string "DRAMPA$"
 	.string "DRATINI$"
 	.string "DREEPY$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Dragon_Page2::
+Auto_Text_Pokemon_Shop_Dragon_Page3::
 	.string "DRUDDIGON$"
+	.string "DURALUDON$"
 	.string "FRIGIBAX$"
 	.string "GIBLE$"
 	.string "GOOMY$"
-	.string "JANGMO-O$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Dragon_Page3::
+Auto_Text_Pokemon_Shop_Dragon_Page4::
+	.string "GOUGING FIRE$"
+	.string "JANGMO-O$"
+	.string "NOIBAT$"
+	.string "RAGING BOLT$"
 	.string "ROARING MOON$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Dragon_Page5::
 	.string "TATSUGIRI$"
+	.string "TURTONATOR$"
+	.string "TYRUNT$"
+	.string "WALKING WAKE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Electric_Page1::
 	.string "ARCTOZOLT$"
 	.string "BLITZLE$"
+	.string "CHINCHOU$"
 	.string "DEDENNE$"
 	.string "DRACOZOLT$"
-	.string "ELECTRIKE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Electric_Page2::
+	.string "ELECTRIKE$"
 	.string "ELEKID$"
 	.string "EMOLGA$"
+	.string "GEODUDE-ALOLA$"
 	.string "HELIOPTILE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Electric_Page3::
+	.string "IRON HANDS$"
+	.string "IRON THORNS$"
+	.string "JOLTIK$"
 	.string "MAGNEMITE$"
 	.string "MAREEP$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Electric_Page3::
+Auto_Text_Pokemon_Shop_Electric_Page4::
 	.string "MINUN$"
 	.string "MORPEKO$"
 	.string "PACHIRISU$"
@@ -5616,7 +8024,7 @@ Auto_Text_Pokemon_Shop_Electric_Page3::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Electric_Page4::
+Auto_Text_Pokemon_Shop_Electric_Page5::
 	.string "PINCURCHIN$"
 	.string "PLUSLE$"
 	.string "RAGING BOLT$"
@@ -5625,16 +8033,17 @@ Auto_Text_Pokemon_Shop_Electric_Page4::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Electric_Page5::
+Auto_Text_Pokemon_Shop_Electric_Page6::
 	.string "SHINX$"
+	.string "STUNFISK$"
 	.string "TADBULB$"
 	.string "TOGEDEMARU$"
 	.string "TOXEL$"
-	.string "TYNAMO$"
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Electric_Page6::
+Auto_Text_Pokemon_Shop_Electric_Page7::
+	.string "TYNAMO$"
 	.string "VOLTORB$"
 	.string "VOLTORB-HISUI$"
 	.string "WATTREL$"
@@ -5643,16 +8052,43 @@ Auto_Text_Pokemon_Shop_Electric_Page6::
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fairy_Page1::
+	.string "AZURILL$"
+	.string "CARBINK$"
 	.string "CLEFFA$"
 	.string "COMFEY$"
-	.string "FIDOUGH$"
-	.string "FLABEBE$"
-	.string "IRON VALIANT$"
+	.string "COTTONEE$"
 	.string "Go Back$"
 	.string "$"
 
 Auto_Text_Pokemon_Shop_Fairy_Page2::
+	.string "CUTIEFLY$"
+	.string "DEDENNE$"
+	.string "FEZANDIPITI$"
+	.string "FIDOUGH$"
+	.string "FLABEBE$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fairy_Page3::
+	.string "FLUTTER MANE$"
+	.string "IGGLYBUFF$"
+	.string "IMPIDIMP$"
+	.string "IRON VALIANT$"
+	.string "KLEFKI$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fairy_Page4::
+	.string "MAWILE$"
 	.string "MILCERY$"
+	.string "MIME JR.$"
+	.string "MIMIKYU$"
+	.string "MORELULL$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Pokemon_Shop_Fairy_Page5::
+	.string "RALTS$"
 	.string "SCREAM TAIL$"
 	.string "SNUBBULL$"
 	.string "SPRITZEE$"
@@ -5660,7 +8096,7 @@ Auto_Text_Pokemon_Shop_Fairy_Page2::
 	.string "Go Back$"
 	.string "$"
 
-Auto_Text_Pokemon_Shop_Fairy_Page3::
+Auto_Text_Pokemon_Shop_Fairy_Page6::
 	.string "TINKATINK$"
 	.string "TOGEPI$"
 	.string "Go Back$"

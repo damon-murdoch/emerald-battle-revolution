@@ -1169,11 +1169,11 @@ void SetEReaderTrainerGfxId(void)
     SetBattleFacilityTrainerGfxId(TRAINER_EREADER, 0);
 }
 
-u8 GetBattleFacilityTrainerGfxId(u16 trainerId)
+u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
 {
     u32 i;
     u8 facilityClass;
-    u8 trainerObjectGfxId;
+    u16 trainerObjectGfxId;
 
     SetFacilityPtrsGetLevel();
 #if FREE_BATTLE_TOWER_E_READER == FALSE
@@ -1571,7 +1571,7 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
     u8 ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
     u16 move;
     u32 personality, ability, friendship, j;
-    
+
     if (fmon->gender == TRAINER_MON_MALE)
     {
         personality = GeneratePersonalityForGender(MON_MALE, fmon->species);
@@ -1580,10 +1580,10 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
     {
         personality = GeneratePersonalityForGender(MON_FEMALE, fmon->species);
     }
-    
+
     ModifyPersonalityForNature(&personality, fmon->nature);
     CreateMon(dst, fmon->species, level, fixedIV, TRUE, personality, otID, OT_ID_PRESET);
-    
+
     friendship = MAX_FRIENDSHIP;
     // Give the chosen Pokémon its specified moves.
     for (j = 0; j < MAX_MON_MOVES; j++)
@@ -1591,7 +1591,7 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         move = fmon->moves[j];
         if (flags & FLAG_FRONTIER_MON_FACTORY && move == MOVE_RETURN)
             move = MOVE_FRUSTRATION;
-        
+
         SetMonMoveSlot(dst, move, j);
         if (gMovesInfo[move].effect == EFFECT_FRUSTRATION)
             friendship = 0;  // Frustration is more powerful the lower the pokemon's friendship is.
@@ -1599,7 +1599,7 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
 
     SetMonData(dst, MON_DATA_FRIENDSHIP, &friendship);
     SetMonData(dst, MON_DATA_HELD_ITEM, &fmon->heldItem);
-    
+
     // try to set ability. Otherwise, random of non-hidden as per vanilla
     if (fmon->ability != ABILITY_NONE)
     {
@@ -1614,7 +1614,7 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
             ability = 0;
         SetMonData(dst, MON_DATA_ABILITY_NUM, &ability);
     }
-    
+
     if (fmon->ev != NULL)
     {
         SetMonData(dst, MON_DATA_HP_EV, &(fmon->ev[0]));
@@ -1624,10 +1624,10 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         SetMonData(dst, MON_DATA_SPDEF_EV, &(fmon->ev[4]));
         SetMonData(dst, MON_DATA_SPEED_EV, &(fmon->ev[5]));
     }
-    
+
     if (fmon->iv)
         SetMonData(dst, MON_DATA_IVS, &(fmon->iv));
-    
+
     if (fmon->isShiny)
     {
         u32 data = TRUE;
@@ -1643,8 +1643,13 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         u32 data = fmon->gigantamaxFactor;
         SetMonData(dst, MON_DATA_GIGANTAMAX_FACTOR, &data);
     }
-    
-    
+    if (fmon->teraType)
+    {
+        u32 data = fmon->teraType;
+        SetMonData(dst, MON_DATA_TERA_TYPE, &data);
+    }
+
+
     SetMonData(dst, MON_DATA_POKEBALL, &ball);
     CalculateMonStats(dst);
 }
@@ -1756,7 +1761,7 @@ static void FillTrainerParty(u16 trainerId, u8 firstMonId, u8 monCount)
             continue;
 
         chosenMonIndices[i] = monId;
-        
+
         // Place the chosen Pokémon into the trainer's party.
         CreateFacilityMon(&gFacilityTrainerMons[monId], level, fixedIV, otID, 0, &gEnemyParty[i + firstMonId]);
 
@@ -2063,7 +2068,7 @@ void DoSpecialTrainerBattle(void)
         BattleTransition_StartOnField(GetSpecialBattleTransition(B_TRANSITION_GROUP_SECRET_BASE));
         break;
     case SPECIAL_BATTLE_EREADER:
-    #if FREE_BATTLE_TOWER_E_READER == FALSE 
+    #if FREE_BATTLE_TOWER_E_READER == FALSE
         ZeroEnemyPartyMons();
         for (i = 0; i < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.ereaderTrainer.party); i++)
             CreateBattleTowerMon(&gEnemyParty[i], &gSaveBlock2Ptr->frontier.ereaderTrainer.party[i]);
@@ -3126,7 +3131,7 @@ static void FillPartnerParty(u16 trainerId)
         for (i = 0; i < FRONTIER_MULTI_PARTY_SIZE; i++)
         {
             monId = gSaveBlock2Ptr->frontier.trainerIds[i + 18];
-            CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otID, 0, &gPlayerParty[MULTI_PARTY_SIZE + i]);            
+            CreateFacilityMon(&gFacilityTrainerMons[monId], level, ivs, otID, 0, &gPlayerParty[MULTI_PARTY_SIZE + i]);
             for (j = 0; j < PLAYER_NAME_LENGTH + 1; j++)
                 trainerName[j] = gFacilityTrainers[trainerId].trainerName[j];
             SetMonData(&gPlayerParty[MULTI_PARTY_SIZE + i], MON_DATA_OT_NAME, &trainerName);
@@ -3556,7 +3561,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
     }
 }
 
-u8 FacilityClassToGraphicsId(u8 facilityClass)
+u16 FacilityClassToGraphicsId(u8 facilityClass)
 {
     u8 trainerObjectGfxId;
     u8 i;

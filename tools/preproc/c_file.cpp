@@ -195,7 +195,6 @@ void CFile::TryConvertString()
     long oldPos = m_pos;
     long oldLineNum = m_lineNum;
     bool noTerminator = false;
-    bool fixedCase = false;
 
     if (m_buffer[m_pos] != '_' || (m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1])))
         return;
@@ -205,13 +204,6 @@ void CFile::TryConvertString()
     if (m_buffer[m_pos] == '_')
     {
         noTerminator = true;
-        m_pos++;
-    }
-
-    // Fixed-case string
-    if (m_buffer[m_pos] == 'C')
-    {
-        fixedCase = true;
         m_pos++;
     }
 
@@ -242,13 +234,7 @@ void CFile::TryConvertString()
 
             try
             {
-                if (fixedCase) {
-                    s[0] = '\x7d'; // FIXED_CASE
-                    m_pos += stringParser.ParseString(m_pos, s+1, length);
-                    length++;
-                } else {
-                    m_pos += stringParser.ParseString(m_pos, s, length);
-                }
+                m_pos += stringParser.ParseString(m_pos, s, length);
             }
             catch (std::runtime_error& e)
             {
@@ -335,10 +321,10 @@ int ExtractData(const std::unique_ptr<unsigned char[]>& buffer, int offset, int 
 
 void CFile::TryConvertIncbin()
 {
-    std::string idents[6] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32" };
+    std::string idents[8] = { "INCBIN_S8", "INCBIN_U8", "INCBIN_S16", "INCBIN_U16", "INCBIN_S32", "INCBIN_U32", "DUMMY", "INCBIN_COMP"};
     int incbinType = -1;
 
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 8; i++)
     {
         if (CheckIdentifier(idents[i]))
         {
@@ -351,6 +337,8 @@ void CFile::TryConvertIncbin()
         return;
 
     int size = 1 << (incbinType / 2);
+    if (size > 4)
+        size = 4;
     bool isSigned = ((incbinType % 2) == 0);
 
     long oldPos = m_pos;
@@ -402,6 +390,10 @@ void CFile::TryConvertIncbin()
         }
 
         std::string path(&m_buffer[startPos], m_pos - startPos);
+
+        // INCBIN_COMP; include *compressed* version of file
+        if (incbinType == 7)
+            path = path.append(".lz");
 
         m_pos++;
 

@@ -1253,7 +1253,7 @@ static void PrintSafariMonInfo(u8 healthboxSpriteId, struct Pokemon *mon)
     barFontGfx = &gMonSpritesGfxPtr->barFontGfx[0x520 + (GetBattlerPosition(gSprites[healthboxSpriteId].hMain_Battler) * 384)];
     var = 5;
     nature = GetNature(mon);
-    StringCopy(&text[6], gNatureNamePointers[nature]);
+    StringCopy(&text[6], gNaturesInfo[nature].name);
     RenderTextHandleBold(barFontGfx, FONT_BOLD, text);
 
     for (j = 6, i = 0; i < var; i++, j++)
@@ -3752,4 +3752,10 @@ void ArrowsChangeColorLastBallCycle(bool32 showArrows)
         pltOutline->b = defaultPlttOutline->b;
     }
 #endif
+}
+
+void CategoryIcons_LoadSpritesGfx(void)
+{
+    LoadCompressedSpriteSheet(&gSpriteSheet_CategoryIcons);
+    LoadSpritePalette(&gSpritePal_CategoryIcons);
 }

@@ -7,7 +7,6 @@
 #include "config/level_caps.h"
 #include "config/pokemon.h"
 #include "config/overworld.h"
-#include "config/decap.h"
 
 // Invalid Versions show as "----------" in Gen 4 and Gen 5's summary screen.
 // In Gens 6 and 7, invalid versions instead show "a distant land" in the summary screen.
@@ -25,6 +24,12 @@
 #define VERSION_PEARL 11
 #define VERSION_PLATINUM 12
 #define VERSION_GAMECUBE 15
+
+// Version ID Modifiers
+#define MODIFIER_GAME_FREAK 0 // Official Games
+#define MODIFIER_EMERALD_BATTLE_REVOLUTION 1 // This Romhack
+
+#define VERSION_MODIFIER MODIFIER_EMERALD_BATTLE_REVOLUTION // This Romhack
 
 #define NUM_VERSIONS 15
 

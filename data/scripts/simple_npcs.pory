@@ -363,16 +363,6 @@ script BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1 {
     end
 }
 
-# RestArea_Visitor2
-script BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2 {
-    lock
-    faceplayer
-    msgbox(format("I always sit down here to rest after a long streak of battles - It really helps me relax."))
-    msgbox(format("Make sure you don't push yourself too hard!"))
-    release
-    end
-}
-
 # TMHMShop_Visitor1
 script BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1 {
     lock
