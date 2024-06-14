@@ -163,4 +163,4 @@ TRAINER_CLASSES = [
 RESTRICTED = ["deoxys", "arceus"]
 
 # Ignored species
-IGNORE_SPECIES = ["terapagos", "pecharunt", "cosmog", "cosmoem", "meltan"]
+IGNORE_SPECIES = ["cosmog", "cosmoem", "meltan"]
