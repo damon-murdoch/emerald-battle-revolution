@@ -323,7 +323,10 @@ script Auto_EventScript_Legendary_Shop_Normal_Page1
         case 2: # REGIGIGAS
             givemon(SPECIES_REGIGIGAS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # TYPE: NULL
+        case 3: # TERAPAGOS
+            givemon(SPECIES_TERAPAGOS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # TYPE: NULL
             givemon(SPECIES_TYPE_NULL,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -346,7 +349,10 @@ script Auto_EventScript_Legendary_Shop_Poison_Page1
         case 1: # NIHILEGO
             givemon(SPECIES_NIHILEGO,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # POIPOLE
+        case 2: # PECHARUNT
+            givemon(SPECIES_PECHARUNT,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # POIPOLE
             givemon(SPECIES_POIPOLE,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -676,7 +682,24 @@ script Auto_EventScript_Legendary_Shop_Ghost_Page1
         case 3: # MARSHADOW
             givemon(SPECIES_MARSHADOW,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 4: # SPECTRIER
+        case 4: # PECHARUNT
+            givemon(SPECIES_PECHARUNT,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Ghost_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Ghost_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Ghost_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Ghost_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # SPECTRIER
             givemon(SPECIES_SPECTRIER,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -1140,6 +1163,7 @@ text Auto_Text_Legendary_Shop_Normal_Page1
     "ARCEUS$"
     "MELOETTA$"
     "REGIGIGAS$"
+    "TERAPAGOS$"
     "TYPE: NULL$"
     "Go Back$"
     ""
@@ -1149,6 +1173,7 @@ text Auto_Text_Legendary_Shop_Poison_Page1
 {
     "ETERNATUS$"
     "NIHILEGO$"
+    "PECHARUNT$"
     "POIPOLE$"
     "Go Back$"
     ""
@@ -1275,6 +1300,13 @@ text Auto_Text_Legendary_Shop_Ghost_Page1
     "GIRATINA$"
     "HOOPA$"
     "MARSHADOW$"
+    "PECHARUNT$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Ghost_Page2
+{
     "SPECTRIER$"
     "Go Back$"
     ""
