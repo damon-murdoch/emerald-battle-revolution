@@ -48,3 +48,4 @@ src/data/encounter-report.csv
 src/data/ENCOUNTERS.md
 src/data/encounters.csv
 tools/trainerproc/trainerproc
+tools/poryscript
