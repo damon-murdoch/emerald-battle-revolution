@@ -420,6 +420,13 @@ static void SetRentalsToOpponentParty(void)
 
 static void SetPlayerAndOpponentParties(void)
 {
+    #if BFG_FLAG_FRONTIER_GENERATOR != 0
+    if (FlagGet(BFG_FLAG_FRONTIER_GENERATOR)) {
+        SetFacilityPlayerAndOpponentParties();
+        return;
+    }
+    #endif
+
     int i;
     u8 monLevel;
     u16 monId;

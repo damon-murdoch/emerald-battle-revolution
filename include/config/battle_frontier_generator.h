@@ -18,6 +18,13 @@
 #define BFG_TEAM_GENERATION_METHOD BFG_TEAM_GENERATOR_FILTERED_RANKING
 #define BFG_VAR_TEAM_GENERATION_METHOD 0 // Used if BFG_TEAM_GENERATION_METHOD is set to 'BFG_TEAM_GENERATOR_VARIABLE'
 
+// If this variable is set, a random seed will be generated
+// and saved for generating consistent battle factory sets
+// randomly. If this is not set, the challenge number + 
+// trainer ID will be combined to create the seed which
+// *may* fail to produce sufficiently randomised results.
+#define BFG_VAR_FACTORY_GENERATOR_SEED 0
+
 #define BFG_FLAG_FRONTIER_FIXED_IV 0 // Flag to enable or disable fixed IVs
 
 // Run 'move_ratings.py' as part of build pipeline
