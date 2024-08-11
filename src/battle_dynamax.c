@@ -86,7 +86,7 @@ bool32 CanDynamax(u32 battler)
         return FALSE;
 
     #if BFG_FLAG_FRONTIER_GENERATOR != 0
-    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanDynamax(&(GetSideParty(GetBattlerSide(battlerId))[gBattlerPartyIndexes[battlerId]])) == FALSE))
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER) && FlagGet(BFG_FLAG_FRONTIER_GENERATOR) && (FrontierBattlerCanDynamax(&(GetSideParty(GetBattlerSide(battler))[gBattlerPartyIndexes[battler]])) == FALSE))
         return FALSE;
     #endif
 

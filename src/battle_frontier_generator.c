@@ -902,7 +902,7 @@ static u8 SetMonMoves(struct Pokemon * mon, u16 moves[MAX_MON_MOVES])
     return moveCount;
 }
 
-static bool32 IsAlwaysSelectMove(u16 moveId) 
+static bool32 IsAlwaysSelectMove(u32 moveId) 
 {
     if (IS_DOUBLES())
         return gBattleFrontierMoveAlwaysSelectDoubles[moveId];
@@ -910,7 +910,7 @@ static bool32 IsAlwaysSelectMove(u16 moveId)
         return gBattleFrontierMoveAlwaysSelectSingles[moveId];
 }
 
-static bool32 IsNeverSelectMove(u16 moveId) 
+static bool32 IsNeverSelectMove(u32 moveId) 
 {
     if (IS_DOUBLES())
         return gBattleFrontierMoveNeverSelectDoubles[moveId];
@@ -918,7 +918,7 @@ static bool32 IsNeverSelectMove(u16 moveId)
         return gBattleFrontierMoveNeverSelectSingles[moveId];
 }
 
-static bool32 IsAllowedStatusMove(u16 moveId)
+static bool32 IsAllowedStatusMove(u32 moveId)
 {
     // Status move allow list enabled
     if (BFG_MOVE_USE_STATUS_ALLOW_LIST)
@@ -927,7 +927,7 @@ static bool32 IsAllowedStatusMove(u16 moveId)
         return TRUE; // Assume allowed
 }
 
-static bool32 IsIgnoreTypeCountMove(u16 moveId)
+static bool32 IsIgnoreTypeCountMove(u32 moveId)
 {
     if (BFG_MOVE_IGNORE_TYPE_COUNT)
         return TRUE; // Ignore all type limits
@@ -937,7 +937,7 @@ static bool32 IsIgnoreTypeCountMove(u16 moveId)
         return TRUE; // Attacks only
 }
 
-static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties)
+static bool32 CheckMovePower(u32 moveId, struct GeneratorProperties * properties)
 {
     // Move is not a status move
     if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
@@ -964,7 +964,7 @@ static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties
     return TRUE; // In range
 }
 
-static u8 GetMoveType(u16 moveId, u16 abilityId)
+static u8 GetFrontierMoveType(u32 moveId, u16 abilityId)
 {
     // Get the move type
     u8 type = TYPE(moveId);
@@ -997,7 +997,7 @@ static u8 GetMoveType(u16 moveId, u16 abilityId)
     return type;
 }
 
-static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
+static u16 GetAttackRating(u16 speciesId, u32 moveId, u16 abilityId, u8 type)
 {    
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
 
@@ -1209,7 +1209,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
     u8 moveCount = 0;
 
     // Current move
-    u16 moveId;
+    u32 moveId;
 
     // Get the method for selecting the moves
     u8 method = GetTeamGenerationMethod(); 
@@ -1397,7 +1397,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                         moveId = allowedAttackMoves[i];
                         
                         // Get move type, accounted for ability
-                        newType = GetMoveType(moveId, abilityId);
+                        newType = GetFrontierMoveType(moveId, abilityId);
                         attackRating = GetAttackRating(speciesId, moveId, abilityId, newType);
 
                         // Index of same-typed move
@@ -1432,7 +1432,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                                     // Replacing existing move
                                     if (moves[j] != MOVE_NONE)
                                     {
-                                        oldType = GetMoveType(moves[j], abilityId);
+                                        oldType = GetFrontierMoveType(moves[j], abilityId);
 
                                         // Update old type
                                         if (newType != oldType)
