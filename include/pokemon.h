@@ -26,6 +26,7 @@ enum {
     MON_DATA_IS_SHINY,
     MON_DATA_HIDDEN_NATURE,
     MON_DATA_HP_LOST,
+    MON_DATA_DAYS_SINCE_FORM_CHANGE,
     MON_DATA_ENCRYPT_SEPARATOR,
     MON_DATA_NICKNAME,
     MON_DATA_NICKNAME10,
@@ -138,8 +139,7 @@ struct PokemonSubstruct1
     u16 move1:11; // 2047 moves.
     u16 evolutionTracker1:5;
     u16 move2:11; // 2047 moves.
-    u16 evolutionTracker2:4;
-    u16 unused_02:1;
+    u16 evolutionTracker2:5;
     u16 move3:11; // 2047 moves.
     u16 unused_04:5;
     u16 move4:11; // 2047 moves.
@@ -247,7 +247,8 @@ struct BoxPokemon
     u8 hasSpecies:1;
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokémon Box Ruby & Sapphire will refuse to deposit a Pokémon with this flag set.
-    u8 unused_13:4;
+    u8 daysSinceFormChange:3; // 7 days.
+    u8 unused_13:1;
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
@@ -322,9 +323,7 @@ struct BattlePokemon
     /*0x17*/ u32 abilityNum:2;
     /*0x18*/ s8 statStages[NUM_BATTLE_STATS];
     /*0x20*/ u16 ability;
-    /*0x22*/ u8 type1;
-    /*0x23*/ u8 type2;
-    /*0x24*/ u8 type3;
+    /*0x22*/ u8 types[3];
     /*0x25*/ u8 pp[MAX_MON_MOVES];
     /*0x29*/ u16 hp;
     /*0x2B*/ u8 level;
@@ -350,7 +349,7 @@ struct Evolution
     u16 targetSpecies;
 };
 
-struct SpeciesInfo /*0x8C*/
+struct SpeciesInfo /*0xC4*/
 {
  /* 0x00 */ u8 baseHP;
  /* 0x01 */ u8 baseAttack;
@@ -438,25 +437,25 @@ struct SpeciesInfo /*0x8C*/
             u32 isHisuianForm:1;
             u32 isPaldeanForm:1;
             u32 cannotBeTraded:1;
-            u32 allPerfectIVs:1;
+            u32 perfectIVCount:3;   // This species will always generate with the specified amount of perfect IVs.
             u32 dexForceRequired:1; // This species will be taken into account for Pokédex ratings even if they have the "isMythical" flag set.
             u32 tmIlliterate:1;     // This species will be unable to learn the universal moves.
             u32 isFrontierBanned:1; // This species is not allowed to participate in Battle Frontier facilities.
-            u32 padding4:14;
+            u32 padding4:12;
             // Move Data
  /* 0x80 */ const struct LevelUpMove *levelUpLearnset;
  /* 0x84 */ const u16 *teachableLearnset;
-            const u16 *eggMoveLearnset;
- /* 0x88 */ const struct Evolution *evolutions;
- /* 0x84 */ const u16 *formSpeciesIdTable;
- /* 0x84 */ const struct FormChange *formChangeTable;
-#if OW_FOLLOWERS_ENABLED
-            struct ObjectEventGraphicsInfo followerData;
-#if OW_FOLLOWERS_SHARE_PALETTE == FALSE
-            const void* followerPalette;
-            const void* followerShinyPalette;
-#endif //OW_FOLLOWERS_SHARE_PALETTE
-#endif //OW_FOLLOWERS_ENABLED
+ /* 0x88 */ const u16 *eggMoveLearnset;
+ /* 0x8C */ const struct Evolution *evolutions;
+ /* 0x90 */ const u16 *formSpeciesIdTable;
+ /* 0x94 */ const struct FormChange *formChangeTable;
+#if OW_POKEMON_OBJECT_EVENTS
+ /* 0x98 */ struct ObjectEventGraphicsInfo overworldData;
+#if OW_PKMN_OBJECTS_SHARE_PALETTES == FALSE
+ /* 0xBC */ const void* overworldPalette;
+ /* 0xC0 */ const void* overworldShinyPalette;
+#endif //OW_PKMN_OBJECTS_SHARE_PALETTES
+#endif //OW_POKEMON_OBJECT_EVENTS
 };
 
 struct MoveInfo
@@ -694,6 +693,7 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern struct SpriteTemplate gMultiuseSpriteTemplate;
+extern u16 gFollowerSteps;
 
 extern const struct MoveInfo gMovesInfo[];
 extern const u8 gFacilityClassToPicIndex[];
@@ -807,7 +807,7 @@ u8 GetItemEffectParamOffset(u32 battler, u16 itemId, u8 effectByte, u8 effectBit
 u8 *UseStatIncreaseItem(u16 itemId);
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
-u16 GetEvolutionTargetSpecies(struct Pokemon *mon, u8 type, u16 evolutionItem, struct Pokemon *tradePartner);
+u16 GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode mode, u16 evolutionItem, struct Pokemon *tradePartner);
 bool8 IsMonPastEvolutionLevel(struct Pokemon *mon);
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16 nationalNum);
@@ -889,5 +889,9 @@ void HealPokemon(struct Pokemon *mon);
 void HealBoxPokemon(struct BoxPokemon *boxMon);
 const u8 *GetMoveName(u16 moveId);
 const u8 *GetMoveAnimationScript(u16 moveId);
+void UpdateDaysPassedSinceFormChange(u16 days);
+void TrySetDayLimitToFormChange(struct Pokemon *mon);
+u8 CheckDynamicMoveType(struct Pokemon *mon, u32 move, u32 battler);
+u8 CalculateHiddenPowerType(struct Pokemon *mon);
 
 #endif // GUARD_POKEMON_H
