@@ -4121,51 +4121,29 @@ static void SetMonTypeIcons(void)
 
 static void SetMoveTypeIcons(void)
 {
-    u8 i;
-    u32 speciesId;
+    u32 i;
+    u32 type;
     struct PokeSummary *summary = &sMonSummaryScreen->summary;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
+
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (summary->moves[i] != MOVE_NONE)
         {
-            u8 type;
-
-            switch(summary->moves[i]){
-                case MOVE_IVY_CUDGEL: {
-                    speciesId = GetMonData(mon, MON_DATA_SPECIES);
-
-                    switch (speciesId){
-                        case SPECIES_OGERPON_WELLSPRING_MASK:
-                        case SPECIES_OGERPON_WELLSPRING_MASK_TERA: {
-                            type = TYPE_WATER;
-                        }; break;
-                        case SPECIES_OGERPON_HEARTHFLAME_MASK:
-                        case SPECIES_OGERPON_HEARTHFLAME_MASK_TERA: {
-                            type = TYPE_FIRE;
-                        }; break;
-                        case SPECIES_OGERPON_CORNERSTONE_MASK:
-                        case SPECIES_OGERPON_CORNERSTONE_MASK_TERA: {
-                            type = TYPE_ROCK;
-                        }; break;
-                        default: {
-                            type = TYPE_GRASS;
-                        }
-                    }  
-                }; break;
-                case MOVE_HIDDEN_POWER: {
-                    type = GetMonHiddenPowerType(mon);
-                    type = ((type | 0xC0) & 0x3F); 
-                }; break;
-                default: {
-                    type = gMovesInfo[summary->moves[i]].type;
-                }; break;
+            if (P_SHOW_DYNAMIC_TYPES)
+            {
+                type = CheckDynamicMoveType(mon, summary->moves[i], 0);
+                SetTypeSpritePosAndPal(type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);  
             }
-
-            SetTypeSpritePosAndPal(type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE);
+            else
+            {
+                SetTypeSpritePosAndPal(gMovesInfo[summary->moves[i]].type, 85, 32 + (i * 16), i + SPRITE_ARR_ID_TYPE); 
+            }
         }
         else
+        {
             SetSpriteInvisibility(i + SPRITE_ARR_ID_TYPE, TRUE);
+        }     
     }
 }
 
@@ -4184,9 +4162,11 @@ static void SetContestMoveTypeIcons(void)
 
 static void SetNewMoveTypeIcon(void)
 {
+    u32 type = gMovesInfo[sMonSummaryScreen->newMove].type;
     struct Pokemon *mon = &sMonSummaryScreen->currentMon;
-    u16 newMove = sMonSummaryScreen->newMove;
-    u32 speciesId;
+
+    if (P_SHOW_DYNAMIC_TYPES)
+        type = CheckDynamicMoveType(mon, sMonSummaryScreen->newMove, 0);
 
     if (sMonSummaryScreen->newMove == MOVE_NONE)
     {
@@ -4194,43 +4174,14 @@ static void SetNewMoveTypeIcon(void)
     }
     else
     {
-        u8 type;
-        if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES) {
-            switch(newMove){
-                case MOVE_IVY_CUDGEL: {
-                    speciesId = GetMonData(mon, MON_DATA_SPECIES);
-
-                    switch (speciesId){
-                        case SPECIES_OGERPON_WELLSPRING_MASK:
-                        case SPECIES_OGERPON_WELLSPRING_MASK_TERA: {
-                            type = TYPE_WATER;
-                        }; break;
-                        case SPECIES_OGERPON_HEARTHFLAME_MASK:
-                        case SPECIES_OGERPON_HEARTHFLAME_MASK_TERA: {
-                            type = TYPE_FIRE;
-                        }; break;
-                        case SPECIES_OGERPON_CORNERSTONE_MASK:
-                        case SPECIES_OGERPON_CORNERSTONE_MASK_TERA: {
-                            type = TYPE_ROCK;
-                        }; break;
-                        default: {
-                            type = TYPE_GRASS;
-                        }
-                    } 
-                }; break;
-                case MOVE_HIDDEN_POWER: {
-                    type = GetMonHiddenPowerType(mon);
-                    type = ((type | 0xC0) & 0x3F);
-                }; break;
-                default: {
-                    type = gMovesInfo[sMonSummaryScreen->newMove].type;
-                }; break;
-            }
+        if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES)
+        {
+            SetTypeSpritePosAndPal(type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
         }
-        else {
-            type = NUMBER_OF_MON_TYPES + gMovesInfo[sMonSummaryScreen->newMove].contestCategory;
+        else
+        {
+            SetTypeSpritePosAndPal(NUMBER_OF_MON_TYPES + gMovesInfo[sMonSummaryScreen->newMove].contestCategory, 85, 96, SPRITE_ARR_ID_TYPE + 4);
         }
-        SetTypeSpritePosAndPal(type, 85, 96, SPRITE_ARR_ID_TYPE + 4);
     }
 }
 

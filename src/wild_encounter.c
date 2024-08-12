@@ -51,15 +51,7 @@ enum {
 
 static u16 FeebasRandom(void);
 static void FeebasSeedRng(u16 seed);
-static u32 GetLastFishingSpecies(void);
-static bool32 DoesSpeciesMatchLastFishingSpecies(u32 species);
-static u32 GetCurrentChainFishingDexNavStreak(void);
-static bool32 IsChainFishingStreakAtMax(void);
-static void IncrementChainFishingDexNavStreak(void);
-static void SetEncounterFishing(void);
-static void SetLastFishingSpecies(u32 species);
-static void HandleChainFishingStreak(u32 species);
-static void UpdateChainFishingSpeciesAndStreak(u32 species);
+static void UpdateChainFishingStreak();
 static bool8 IsWildLevelAllowedByRepel(u8 level);
 static void ApplyFluteEncounterRateMod(u32 *encRate);
 static void ApplyCleanseTagEncounterRateMod(u32 *encRate);
@@ -76,7 +68,6 @@ EWRAM_DATA static u32 sFeebasRngValue = 0;
 EWRAM_DATA bool8 gIsFishingEncounter = 0;
 EWRAM_DATA bool8 gIsSurfingEncounter = 0;
 EWRAM_DATA u8 gChainFishingDexNavStreak = 0;
-EWRAM_DATA static u16 sLastFishingSpecies = 0;
 
 #include "data/wild_encounters.h"
 
@@ -528,7 +519,7 @@ static u16 GenerateFishingWildMon(const struct WildPokemonInfo *wildMonInfo, u8 
     u16 wildMonSpecies = wildMonInfo->wildPokemon[wildMonIndex].species;
     u8 level = ChooseWildMonLevel(wildMonInfo->wildPokemon, wildMonIndex, WILD_AREA_FISHING);
 
-    UpdateChainFishingSpeciesAndStreak(wildMonSpecies);
+    UpdateChainFishingStreak();
     CreateWildMon(wildMonSpecies, level);
     return wildMonSpecies;
 }
@@ -680,9 +671,9 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
             else if (WildEncounterCheck(gWildMonHeaders[headerId].landMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
 
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter())
             {
-                roamer = &gSaveBlock1Ptr->roamer;
+                roamer = &gSaveBlock1Ptr->roamer[gEncounteredRoamerIndex];
                 if (!IsWildLevelAllowedByRepel(roamer->level))
                     return FALSE;
 
@@ -729,9 +720,9 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
             else if (WildEncounterCheck(gWildMonHeaders[headerId].waterMonsInfo->encounterRate, FALSE) != TRUE)
                 return FALSE;
 
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter())
             {
-                roamer = &gSaveBlock1Ptr->roamer;
+                roamer = &gSaveBlock1Ptr->roamer[gEncounteredRoamerIndex];
                 if (!IsWildLevelAllowedByRepel(roamer->level))
                     return FALSE;
 
@@ -831,7 +822,7 @@ bool8 SweetScentWildEncounter(void)
             if (gWildMonHeaders[headerId].landMonsInfo == NULL)
                 return FALSE;
 
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter())
             {
                 BattleSetup_StartRoamerBattle();
                 return TRUE;
@@ -852,7 +843,7 @@ bool8 SweetScentWildEncounter(void)
             if (gWildMonHeaders[headerId].waterMonsInfo == NULL)
                 return FALSE;
 
-            if (TryStartRoamerEncounter() == TRUE)
+            if (TryStartRoamerEncounter())
             {
                 BattleSetup_StartRoamerBattle();
                 return TRUE;
@@ -877,84 +868,27 @@ bool8 DoesCurrentMapHaveFishingMons(void)
         return FALSE;
 }
 
-static u32 GetLastFishingSpecies(void)
-{
-    return sLastFishingSpecies;
-}
-
-static bool32 DoesSpeciesMatchLastFishingSpecies(u32 species)
-{
-    return (species == GetLastFishingSpecies());
-}
-
-static u32 GetCurrentChainFishingDexNavStreak(void)
-{
-    return gChainFishingDexNavStreak;
-}
-
-static bool32 IsChainFishingStreakAtMax(void)
-{
-    return (GetCurrentChainFishingDexNavStreak() >= FISHING_CHAIN_LENGTH_MAX);
-}
-
-static void IncrementChainFishingDexNavStreak(void)
-{
-    gChainFishingDexNavStreak++;
-}
-
-void ResetChainFishingDexNavStreak(void)
-{
-    gChainFishingDexNavStreak = 0;
-}
-
-bool32 IsCurrentEncounterFishing(void)
-{
-    return gIsFishingEncounter;
-}
-
-static void SetEncounterFishing(void)
-{
-    gIsFishingEncounter = TRUE;
-}
-
 u32 CalculateChainFishingShinyRolls(void)
 {
-    return (1 + (2 * GetCurrentChainFishingDexNavStreak()));
+    return (2 * min(gChainFishingDexNavStreak, FISHING_CHAIN_SHINY_STREAK_MAX));
 }
 
-static void SetLastFishingSpecies(u32 species)
-{
-    sLastFishingSpecies = species;
-}
-
-static void HandleChainFishingStreak(u32 species)
-{
-    if (!DoesSpeciesMatchLastFishingSpecies(species))
-    {
-        ResetChainFishingDexNavStreak();
-        return;
-    }
-
-    if (IsChainFishingStreakAtMax())
-        return;
-
-    IncrementChainFishingDexNavStreak();
-}
-
-static void UpdateChainFishingSpeciesAndStreak(u32 species)
+static void UpdateChainFishingStreak()
 {
     if (!I_FISHING_CHAIN)
         return;
 
-    HandleChainFishingStreak(species);
-    SetLastFishingSpecies(species);
+    if (gChainFishingDexNavStreak >= FISHING_CHAIN_LENGTH_MAX)
+        return;
+
+    gChainFishingDexNavStreak++;
 }
 
 void FishingWildEncounter(u8 rod)
 {
     u16 species;
 
-    SetEncounterFishing();
+    gIsFishingEncounter = TRUE;
     if (CheckFeebas() == TRUE)
     {
         u8 level = ChooseWildMonLevel(&sWildFeebas, 0, WILD_AREA_FISHING);

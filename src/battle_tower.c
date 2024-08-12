@@ -146,7 +146,7 @@ const u8 gTowerFemaleFacilityClasses[20] =
     FACILITY_CLASS_LASS
 };
 
-const u8 gTowerMaleTrainerGfxIds[30] =
+const u16 gTowerMaleTrainerGfxIds[30] =
 {
     OBJ_EVENT_GFX_HIKER,
     OBJ_EVENT_GFX_TUBER_M,
@@ -180,7 +180,7 @@ const u8 gTowerMaleTrainerGfxIds[30] =
     OBJ_EVENT_GFX_HIKER
 };
 
-const u8 gTowerFemaleTrainerGfxIds[20] =
+const u16 gTowerFemaleTrainerGfxIds[20] =
 {
     OBJ_EVENT_GFX_WOMAN_2,
     OBJ_EVENT_GFX_TUBER_F,
@@ -2156,7 +2156,6 @@ void DoSpecialTrainerBattle(void)
             gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_DOUBLE | BATTLE_TYPE_TWO_OPPONENTS | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER;
         }
 
-        gPartnerSpriteId = VarGet(gSpecialVar_0x8007);
         gPartnerTrainerId = VarGet(gSpecialVar_0x8006) + TRAINER_PARTNER(PARTNER_NONE);
         FillPartnerParty(gPartnerTrainerId);
         CreateTask(Task_StartBattleAfterTransition, 1);
@@ -3069,9 +3068,7 @@ static void FillPartnerParty(u16 trainerId)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_MALE, partyData[i].species);
             else if (partyData[i].gender == TRAINER_MON_FEMALE)
                 personality = (personality & 0xFFFFFF00) | GeneratePersonalityForGender(MON_FEMALE, partyData[i].species);
-            if (partyData[i].nature != 0)
-                ModifyPersonalityForNature(&personality, partyData[i].nature - 1);
-
+            ModifyPersonalityForNature(&personality, partyData[i].nature);
             CreateMon(&gPlayerParty[i + 3], partyData[i].species, partyData[i].lvl, 0, TRUE, personality, OT_ID_PRESET, otID);
             j = partyData[i].isShiny;
             SetMonData(&gPlayerParty[i + 3], MON_DATA_IS_SHINY, &j);
@@ -3563,7 +3560,7 @@ static void FillTentTrainerParty_(u16 trainerId, u8 firstMonId, u8 monCount)
 
 u16 FacilityClassToGraphicsId(u8 facilityClass)
 {
-    u8 trainerObjectGfxId;
+    u16 trainerObjectGfxId;
     u8 i;
 
     // Search male classes.

@@ -38,9 +38,13 @@
 #define RANDOM_OFFSET() RANDOM_RANGE(BFG_RANDOM_OFFSET_MIN, BFG_RANDOM_OFFSET_MAX)
 #endif
 
+#define GET_TRAINER_ID() (gSaveBlock2Ptr->playerTrainerId[0] + gSaveBlock2Ptr->playerTrainerId[1] + gSaveBlock2Ptr->playerTrainerId[2] + gSaveBlock2Ptr->playerTrainerId[3])
+
 // *** FORMAT ***
 #define IS_DOUBLES() (VarGet(VAR_FRONTIER_BATTLE_MODE) == FRONTIER_MODE_DOUBLES)
 #define GET_LVL_MODE() (gSaveBlock2Ptr->frontier.lvlMode)
+
+#define GET_CHALLENGE_NUM(battleMode, lvlMode) ((gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode]) / FRONTIER_STAGES_PER_CHALLENGE)
 
 // Species Generator Properties
 struct GeneratorProperties {
@@ -74,6 +78,7 @@ void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum,
 
 void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challengeNum, u8 level, u8 fixedIV);
 
+void SetFacilityPlayerAndOpponentParties();
 void SetRentalsToFacilityOpponentParty();
 
 void RestoreFacilityPlayerPartyHeldItems(u8 challengeNum);
