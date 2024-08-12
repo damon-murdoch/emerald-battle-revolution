@@ -266,7 +266,7 @@
 #define VAR_RIVAL_RAYQUAZA_CALL_STEP_COUNTER             0x40F6
 #define VAR_FRONTIER_BGM                                 0x40F7 // Custom Frontier / Trainer Hill Battle BGM (Default: 0)
 #define VAR_FRONTIER_METHOD                              0x40F8 // Modern Battle Frontier Team Generation Method (Default: 0)
-#define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
+#define VAR_FACTORY_GENERATOR_SEED                       0x40F9 // Battle Factory Seed
 #define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var

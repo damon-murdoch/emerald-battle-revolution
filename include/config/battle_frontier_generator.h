@@ -21,6 +21,13 @@
 
 #define BFG_FLAG_FRONTIER_FIXED_IV FLAG_BATTLE_FRONTIER_FIXED_IV // Flag to enable or disable fixed IVs
 
+// If this variable is set, a random seed will be generated
+// and saved for generating consistent battle factory sets
+// randomly. If this is not set, the challenge number + 
+// trainer ID will be combined to create the seed which
+// *may* fail to produce sufficiently randomised results.
+#define BFG_VAR_FACTORY_GENERATOR_SEED VAR_FACTORY_GENERATOR_SEED
+
 // Run 'move_ratings.py' as part of build pipeline
 #define BFG_GENERATE_MOVE_RATINGS FALSE    // Generate battle_frontier_generator_move_ratings.h
 

@@ -1437,6 +1437,7 @@ static void NamingScreen_CreateWaldaDadIcon(void)
 //--------------------------------------------------
 
 static bool8 KeyboardKeyHandler_Character(u8);
+static void SwapKeyboardToLowerAfterFirstCapitalLetter(void);
 static bool8 KeyboardKeyHandler_Page(u8);
 static bool8 KeyboardKeyHandler_Backspace(u8);
 static bool8 KeyboardKeyHandler_OK(u8);
@@ -1481,11 +1482,7 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
     {
         bool8 textFull = AddTextCharacter();
 
-        if (TEXT_AUTO_LOWERCASE){
-            // [FieryMewtwo] Automatically switch keyboard to lowercase after the first character
-            if (sNamingScreen ->currentPage == KBPAGE_LETTERS_UPPER && GetTextEntryPosition() == 1)
-                MainState_StartPageSwap();
-        }
+        SwapKeyboardToLowerAfterFirstCapitalLetter();
 
         SquishCursor();
         
@@ -1496,6 +1493,20 @@ static bool8 KeyboardKeyHandler_Character(u8 input)
         }
     }
     return FALSE;
+}
+
+static void SwapKeyboardToLowerAfterFirstCapitalLetter(void)
+{
+    if (AUTO_LOWERCASE_KEYBOARD < GEN_6)
+        return;
+
+    if (sNamingScreen->currentPage != KBPAGE_LETTERS_UPPER)
+        return;
+
+    if (GetTextEntryPosition() != 1)
+        return;
+
+    MainState_StartPageSwap();
 }
 
 static bool8 KeyboardKeyHandler_Page(u8 input)

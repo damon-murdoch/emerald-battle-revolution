@@ -503,8 +503,9 @@ Auto_EventScript_Legendary_Shop_Normal_Page1::
 	case 1, Auto_EventScript_Legendary_Shop_Normal_Page1_3
 	case 2, Auto_EventScript_Legendary_Shop_Normal_Page1_4
 	case 3, Auto_EventScript_Legendary_Shop_Normal_Page1_5
-	case MULTI_L_PRESSED, Auto_EventScript_Legendary_Shop_Normal_Page1_6
-	case MULTI_R_PRESSED, Auto_EventScript_Legendary_Shop_Normal_Page1_7
+	case 4, Auto_EventScript_Legendary_Shop_Normal_Page1_6
+	case MULTI_L_PRESSED, Auto_EventScript_Legendary_Shop_Normal_Page1_7
+	case MULTI_R_PRESSED, Auto_EventScript_Legendary_Shop_Normal_Page1_8
 	goto Auto_EventScript_Legendary_Shop_Page3
 	return
 
@@ -524,15 +525,20 @@ Auto_EventScript_Legendary_Shop_Normal_Page1_4:
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_5:
-	givemon SPECIES_TYPE_NULL, 1
+	givemon SPECIES_TERAPAGOS, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_6:
-	goto Auto_EventScript_Legendary_Shop_Normal_Page1
+	givemon SPECIES_TYPE_NULL, 1
+	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Normal_Page1_7:
+	goto Auto_EventScript_Legendary_Shop_Normal_Page1
+	return
+
+Auto_EventScript_Legendary_Shop_Normal_Page1_8:
 	goto Auto_EventScript_Legendary_Shop_Normal_Page1
 	return
 
@@ -543,8 +549,9 @@ Auto_EventScript_Legendary_Shop_Poison_Page1::
 	case 0, Auto_EventScript_Legendary_Shop_Poison_Page1_2
 	case 1, Auto_EventScript_Legendary_Shop_Poison_Page1_3
 	case 2, Auto_EventScript_Legendary_Shop_Poison_Page1_4
-	case MULTI_L_PRESSED, Auto_EventScript_Legendary_Shop_Poison_Page1_5
-	case MULTI_R_PRESSED, Auto_EventScript_Legendary_Shop_Poison_Page1_6
+	case 3, Auto_EventScript_Legendary_Shop_Poison_Page1_5
+	case MULTI_L_PRESSED, Auto_EventScript_Legendary_Shop_Poison_Page1_6
+	case MULTI_R_PRESSED, Auto_EventScript_Legendary_Shop_Poison_Page1_7
 	goto Auto_EventScript_Legendary_Shop_Page3
 	return
 
@@ -559,15 +566,20 @@ Auto_EventScript_Legendary_Shop_Poison_Page1_3:
 	return
 
 Auto_EventScript_Legendary_Shop_Poison_Page1_4:
-	givemon SPECIES_POIPOLE, 1
+	givemon SPECIES_PECHARUNT, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Poison_Page1_5:
-	goto Auto_EventScript_Legendary_Shop_Poison_Page1
+	givemon SPECIES_POIPOLE, 1
+	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Poison_Page1_6:
+	goto Auto_EventScript_Legendary_Shop_Poison_Page1
+	return
+
+Auto_EventScript_Legendary_Shop_Poison_Page1_7:
 	goto Auto_EventScript_Legendary_Shop_Poison_Page1
 	return
 
@@ -1087,15 +1099,38 @@ Auto_EventScript_Legendary_Shop_Ghost_Page1_5:
 	return
 
 Auto_EventScript_Legendary_Shop_Ghost_Page1_6:
-	givemon SPECIES_SPECTRIER, 1
+	givemon SPECIES_PECHARUNT, 1
 	goto Common_EventScript_Legendary_Shop_CheckPurchase
 	return
 
 Auto_EventScript_Legendary_Shop_Ghost_Page1_7:
-	goto Auto_EventScript_Legendary_Shop_Ghost_Page1
+	goto Auto_EventScript_Legendary_Shop_Ghost_Page2
 	return
 
 Auto_EventScript_Legendary_Shop_Ghost_Page1_8:
+	goto Auto_EventScript_Legendary_Shop_Ghost_Page2
+	return
+
+
+Auto_EventScript_Legendary_Shop_Ghost_Page2::
+	multichoice2 0, 0, Auto_Text_Legendary_Shop_Ghost_Page2
+	switch VAR_RESULT
+	case 0, Auto_EventScript_Legendary_Shop_Ghost_Page2_2
+	case MULTI_L_PRESSED, Auto_EventScript_Legendary_Shop_Ghost_Page2_3
+	case MULTI_R_PRESSED, Auto_EventScript_Legendary_Shop_Ghost_Page2_4
+	goto Auto_EventScript_Legendary_Shop_Page2
+	return
+
+Auto_EventScript_Legendary_Shop_Ghost_Page2_2:
+	givemon SPECIES_SPECTRIER, 1
+	goto Common_EventScript_Legendary_Shop_CheckPurchase
+	return
+
+Auto_EventScript_Legendary_Shop_Ghost_Page2_3:
+	goto Auto_EventScript_Legendary_Shop_Ghost_Page1
+	return
+
+Auto_EventScript_Legendary_Shop_Ghost_Page2_4:
 	goto Auto_EventScript_Legendary_Shop_Ghost_Page1
 	return
 
@@ -1722,6 +1757,7 @@ Auto_Text_Legendary_Shop_Normal_Page1::
 	.string "ARCEUS$"
 	.string "MELOETTA$"
 	.string "REGIGIGAS$"
+	.string "TERAPAGOS$"
 	.string "TYPE: NULL$"
 	.string "Go Back$"
 	.string "$"
@@ -1729,6 +1765,7 @@ Auto_Text_Legendary_Shop_Normal_Page1::
 Auto_Text_Legendary_Shop_Poison_Page1::
 	.string "ETERNATUS$"
 	.string "NIHILEGO$"
+	.string "PECHARUNT$"
 	.string "POIPOLE$"
 	.string "Go Back$"
 	.string "$"
@@ -1831,6 +1868,11 @@ Auto_Text_Legendary_Shop_Ghost_Page1::
 	.string "GIRATINA$"
 	.string "HOOPA$"
 	.string "MARSHADOW$"
+	.string "PECHARUNT$"
+	.string "Go Back$"
+	.string "$"
+
+Auto_Text_Legendary_Shop_Ghost_Page2::
 	.string "SPECTRIER$"
 	.string "Go Back$"
 	.string "$"

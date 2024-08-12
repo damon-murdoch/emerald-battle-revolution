@@ -1740,6 +1740,13 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
 {
     s32 i;
     u16 speciesId;
+    u16 oldSeed = Random2();
+
+    #if BFG_VAR_FACTORY_GENERATOR_SEED != 0
+    u16 fixedSeed = VarGet(BFG_VAR_FACTORY_GENERATOR_SEED);
+    #else
+    u16 fixedSeed = (GET_TRAINER_ID() + challengeNum);
+    #endif
 
     DebugPrintf("Generating facility selectable Pokemon ...");
 
@@ -1775,6 +1782,8 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
 
         DebugPrintf("Generating set for species %d ...", speciesId);
         
+        // Use fixed seed
+        SeedRng2(fixedSeed);
         if (GenerateTrainerPokemonHandleForme(&(sFactorySelectScreen->mons[i + firstMonId].monData), speciesId, &properties))
         {
             // Add Pokemon item to items list
@@ -1791,12 +1800,11 @@ void GenerateFacilitySelectableMons(u8 firstMonId, u8 challengeNum, u8 rentalRan
     else if (BFG_FACTORY_ALLOW_ITEM == FALSE)
         return; // Battle Frontier items disabled
 
-    u16 oldSeed = Random2();
     // Allocate remaining items
     for(i=0; i < SELECTABLE_MONS_COUNT; i++)
     {
-        // Use challenge num as seed
-        SeedRng2((u32)(challengeNum));
+        // Use fixed seed
+        SeedRng2(fixedSeed);
         if ((items[i] == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
             items[i] = GetSpeciesItem(&(sFactorySelectScreen->mons[i + firstMonId].monData), items, PARTY_SIZE);

@@ -3,6 +3,7 @@
 #include "random.h"
 #include "pokemon.h"
 #include "event_data.h"
+#include "battle_tent.h"
 #include "battle_util.h"
 #include "battle_tower.h"
 #include "battle_factory.h"
@@ -17,6 +18,7 @@
 #include "constants/battle_move_effects.h"
 #include "constants/form_change_types.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_tent.h"
 #include "constants/abilities.h"
 #include "constants/trainers.h"
 #include "constants/pokemon.h"
@@ -920,7 +922,7 @@ static u8 SetMonMoves(struct Pokemon * mon, u16 moves[MAX_MON_MOVES])
     return moveCount;
 }
 
-static bool32 IsAlwaysSelectMove(u16 moveId) 
+static bool32 IsAlwaysSelectMove(u32 moveId) 
 {
     if (IS_DOUBLES())
         return gBattleFrontierMoveAlwaysSelectDoubles[moveId];
@@ -928,7 +930,7 @@ static bool32 IsAlwaysSelectMove(u16 moveId)
         return gBattleFrontierMoveAlwaysSelectSingles[moveId];
 }
 
-static bool32 IsNeverSelectMove(u16 moveId) 
+static bool32 IsNeverSelectMove(u32 moveId) 
 {
     if (IS_DOUBLES())
         return gBattleFrontierMoveNeverSelectDoubles[moveId];
@@ -936,7 +938,7 @@ static bool32 IsNeverSelectMove(u16 moveId)
         return gBattleFrontierMoveNeverSelectSingles[moveId];
 }
 
-static bool32 IsAllowedStatusMove(u16 moveId)
+static bool32 IsAllowedStatusMove(u32 moveId)
 {
     // Status move allow list enabled
     if (BFG_MOVE_USE_STATUS_ALLOW_LIST)
@@ -945,7 +947,7 @@ static bool32 IsAllowedStatusMove(u16 moveId)
         return TRUE; // Assume allowed
 }
 
-static bool32 IsIgnoreTypeCountMove(u16 moveId)
+static bool32 IsIgnoreTypeCountMove(u32 moveId)
 {
     if (BFG_MOVE_IGNORE_TYPE_COUNT)
         return TRUE; // Ignore all type limits
@@ -955,7 +957,7 @@ static bool32 IsIgnoreTypeCountMove(u16 moveId)
         return TRUE; // Attacks only
 }
 
-static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties)
+static bool32 CheckMovePower(u32 moveId, struct GeneratorProperties * properties)
 {
     // Move is not a status move
     if (CATEGORY(moveId) != DAMAGE_CATEGORY_STATUS)
@@ -982,7 +984,7 @@ static bool32 CheckMovePower(u16 moveId, struct GeneratorProperties * properties
     return TRUE; // In range
 }
 
-static u8 GetMoveType(u16 moveId, u16 abilityId)
+static u8 GetFrontierMoveType(u32 moveId, u16 abilityId)
 {
     // Get the move type
     u8 type = TYPE(moveId);
@@ -1015,7 +1017,7 @@ static u8 GetMoveType(u16 moveId, u16 abilityId)
     return type;
 }
 
-static u16 GetAttackRating(u16 speciesId, u16 moveId, u16 abilityId, u8 type)
+static u16 GetAttackRating(u16 speciesId, u32 moveId, u16 abilityId, u8 type)
 {    
     const struct MoveInfo* move = &(gMovesInfo[moveId]);
 
@@ -1227,7 +1229,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
     u8 moveCount = 0;
 
     // Current move
-    u16 moveId;
+    u32 moveId;
 
     // Get the method for selecting the moves
     u8 method = GetTeamGenerationMethod(); 
@@ -1415,7 +1417,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                         moveId = allowedAttackMoves[i];
                         
                         // Get move type, accounted for ability
-                        newType = GetMoveType(moveId, abilityId);
+                        newType = GetFrontierMoveType(moveId, abilityId);
                         attackRating = GetAttackRating(speciesId, moveId, abilityId, newType);
 
                         // Index of same-typed move
@@ -1450,7 +1452,7 @@ static u8 GetSpeciesMoves(struct Pokemon * mon, u16 speciesId, u8 nature, u8 evs
                                     // Replacing existing move
                                     if (moves[j] != MOVE_NONE)
                                     {
-                                        oldType = GetMoveType(moves[j], abilityId);
+                                        oldType = GetFrontierMoveType(moves[j], abilityId);
 
                                         // Update old type
                                         if (newType != oldType)
@@ -3330,8 +3332,16 @@ void GenerateFacilityInitialRentalMons(u8 firstMonId, u8 challengeNum, u8 rental
         DebugPrintf("Done.");
 
         gSaveBlock2Ptr->frontier.rentalMons[i].monId = speciesId;
+        gSaveBlock2Ptr->frontier.rentalMons[i].ivs = properties.fixedIV;
         i++;
     }
+
+    // (Optional) Generate random seed for factory mons
+
+    #if BFG_VAR_FACTORY_GENERATOR_SEED != 0
+    DebugPrintf("Generating random factory seed ...");
+    VarSet(BFG_VAR_FACTORY_GENERATOR_SEED, Random2());
+    #endif
 }
 
 void GenerateFacilityOpponentMons(u16 trainerId, u8 firstMonId, u8 challengeNum, u8 winStreak)
@@ -3442,6 +3452,12 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
     u8 i;
     u16 oldSeed = Random2();
 
+    #if BFG_VAR_FACTORY_GENERATOR_SEED != 0
+    u16 fixedSeed = VarGet(BFG_VAR_FACTORY_GENERATOR_SEED);
+    #else
+    u16 fixedSeed = (GET_TRAINER_ID() + challengeNum);
+    #endif
+
     DebugPrintf("Setting facility party held items ...");
 
     #define SELECTED_ITEM_INDEX (FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE + i)
@@ -3464,8 +3480,8 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
         // Get the currently held item for the Pokemon
         SELECTED_ITEM = GetMonData(&(party[i]), MON_DATA_HELD_ITEM);
 
-        // Use challenge num as seed
-        SeedRng2((u32)(challengeNum));
+        // Use fixed seed
+        SeedRng2(fixedSeed);
         if ((SELECTED_ITEM == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
         {
             SELECTED_ITEM = GetSpeciesItem(&(party[i]), items, SELECTED_ITEM_INDEX);
@@ -3480,6 +3496,153 @@ void SetFacilityPartyHeldItems(u8 challengeNum, struct Pokemon * party, u8 party
     #undef SELECTED_ITEM_INDEX
 
     DebugPrintf("Done.");
+}
+
+void SetFacilityPlayerAndOpponentParties()
+{
+    s32 i;
+    u16 level, ivs, speciesId;
+    u16 oldSeed = Random2();
+
+    // Get facility mon level
+    u8 lvlMode = GET_LVL_MODE();
+    switch(lvlMode)
+    {
+        case FRONTIER_LVL_TENT:
+            level = TENT_MIN_LEVEL;
+            break;
+        case FRONTIER_LVL_50:
+            level = FRONTIER_MAX_LEVEL_50;
+            break;
+        default: // FRONTIER_LVL_OPEN
+            level = FRONTIER_MAX_LEVEL_OPEN;
+            break;
+    }
+
+    u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u8 challengeNum = GET_CHALLENGE_NUM(battleMode, lvlMode);
+
+    #if BFG_VAR_FACTORY_GENERATOR_SEED != 0
+    u16 fixedSeed = VarGet(BFG_VAR_FACTORY_GENERATOR_SEED);
+    #else
+    u16 fixedSeed = (GET_TRAINER_ID() + challengeNum);
+    #endif
+
+    DebugPrintf("Restoring facility selected Pokemon ...");
+
+    // Allocate items (both player and opponent)
+    u16 items [FRONTIER_PARTY_SIZE + FRONTIER_PARTY_SIZE] = {
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE,
+        ITEM_NONE
+    };
+
+    struct GeneratorProperties properties;
+    InitGeneratorProperties(&properties, level, 0);
+    
+    // Use original trainer id
+    properties.otID = OT_ID_PLAYER_ID;
+
+    // Handle player rental mons
+    if (gSpecialVar_0x8005 < 2)
+    {
+        ZeroPlayerPartyMons();
+        
+        i=0; 
+        while(i != FRONTIER_PARTY_SIZE)
+        {
+            // Get the saved monId (speciesId) from the rentals list
+            speciesId = gSaveBlock2Ptr->frontier.rentalMons[i].monId;
+            ivs = gSaveBlock2Ptr->frontier.rentalMons[i].ivs;
+
+            // Update properties
+            properties.fixedIV = ivs;
+
+            // Use fixed seed
+            SeedRng2(fixedSeed);
+            if (GenerateTrainerPokemonHandleForme(&gPlayerParty[i], speciesId, &properties))
+            {
+                // Add Pokemon item to items list
+                items[i] = GetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM);
+                DebugPrintMonData(&gPlayerParty[i]);
+                i++;
+            }
+        }
+
+        // If items are allowed (seperate checks for both battle tent and battle factory)
+        if (!(((lvlMode == FRONTIER_LVL_TENT) && (BFG_TENT_ALLOW_ITEM == FALSE)) || (BFG_FACTORY_ALLOW_ITEM == FALSE)))
+        {
+            // Allocate remaining items
+            for(i=0; i < FRONTIER_PARTY_SIZE; i++)
+            {
+                // Use fixed seed
+                SeedRng2(fixedSeed);
+                if ((items[i] == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+                {
+                    items[i] = GetSpeciesItem(&gPlayerParty[i], items, PARTY_SIZE);
+                    SetMonData(&gPlayerParty[i], MON_DATA_HELD_ITEM, &(items[i]));
+                }
+
+                // Otherwise, leave as-is
+            }
+            SeedRng(oldSeed); // Revert seed
+        }
+    }
+
+    // Handle opponent rental mons
+    switch(gSpecialVar_0x8005)
+    {
+        case 0:
+        case 2:
+            i=0; 
+            while(i != FRONTIER_PARTY_SIZE)
+            {
+                // Get the saved monId (speciesId) from the rentals list
+                speciesId = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].monId;
+                ivs = gSaveBlock2Ptr->frontier.rentalMons[i + FRONTIER_PARTY_SIZE].ivs;
+                
+                // Update properties
+                properties.fixedIV = ivs;
+
+                // Use fixed seed
+                SeedRng2(fixedSeed);
+                if (GenerateTrainerPokemonHandleForme(&gEnemyParty[i], speciesId, &properties))
+                {
+                    // Calculate mon stats
+                    CalculateMonStats(&gEnemyParty[i]);
+
+                    // Add Pokemon item to items list
+                    items[i + FRONTIER_PARTY_SIZE] = GetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM);
+                    DebugPrintMonData(&gEnemyParty[i]);
+                    i++;
+                }
+            }
+
+            // If items are allowed (seperate checks for both battle tent and battle factory)
+            if (!(((lvlMode == FRONTIER_LVL_TENT) && (BFG_TENT_ALLOW_ITEM == FALSE)) || (BFG_FACTORY_ALLOW_ITEM == FALSE)))
+            {
+                // Allocate remaining items
+                for(i=0; i < FRONTIER_PARTY_SIZE; i++)
+                {
+                    // Use fixed seed
+                    SeedRng2(fixedSeed);
+                    if ((items[i + FRONTIER_PARTY_SIZE] == ITEM_NONE) && (!(RANDOM_CHANCE(BFG_NO_ITEM_SELECTION_CHANCE))))
+                    {
+                        items[i + FRONTIER_PARTY_SIZE] = GetSpeciesItem(&gEnemyParty[i], items, PARTY_SIZE);
+                        SetMonData(&gEnemyParty[i], MON_DATA_HELD_ITEM, &(items[i + FRONTIER_PARTY_SIZE]));
+                    }
+
+                    // Otherwise, leave as-is
+                }
+                SeedRng(oldSeed); // Revert seed
+            }
+            break;
+    }
+
+    SeedRng2(oldSeed); // Revert old seed
 }
 
 void SetRentalsToFacilityOpponentParty()
@@ -3505,7 +3668,7 @@ void SetRentalsToFacilityOpponentParty()
         return; // Battle Frontier items disabled
 
     u8 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u8 challengeNum = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode] / FRONTIER_STAGES_PER_CHALLENGE;
+    u8 challengeNum = GET_CHALLENGE_NUM(battleMode, lvlMode);
 
     SetFacilityPartyHeldItems(challengeNum, gEnemyParty, PARTY_SIZE);
     DebugPrintf("Done.");
@@ -3520,6 +3683,15 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
     InitGeneratorProperties(&properties, level, fixedIV);
 
     u8 lvlMode = GET_LVL_MODE();
+
+    // Backup original seed
+    u16 oldSeed = Random2();
+
+    #if BFG_VAR_FACTORY_GENERATOR_SEED != 0
+    u16 fixedSeed = VarGet(BFG_VAR_FACTORY_GENERATOR_SEED);
+    #else
+    u16 fixedSeed = (GET_TRAINER_ID() + challengeNum);
+    #endif
 
     switch(lvlMode)
     {
@@ -3545,6 +3717,9 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
         speciesId = gFrontierTempParty[i];
         DebugPrintf("Generating set for species %d ...", speciesId);
 
+        // Use challenge num as seed
+        SeedRng2(fixedSeed);
+
         // Generate Trainer Pokemon
         if (GenerateTrainerPokemonHandleForme(&gEnemyParty[i + firstMonId], speciesId, &properties))
         {
@@ -3553,6 +3728,8 @@ void FillFacilityTrainerParty(u16 trainerId, u32 otID, u8 firstMonId, u8 challen
             i++;
         }
     }
+
+    SeedRng(oldSeed); // Revert seed
 
     if (lvlMode == FRONTIER_LVL_TENT && BFG_TENT_ALLOW_ITEM == FALSE)
         return; // Battle Tent items disabled

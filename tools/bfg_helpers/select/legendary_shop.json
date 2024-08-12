@@ -359,6 +359,10 @@
         "action": "givemon(SPECIES_MARSHADOW,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
       },
       {
+        "name": "Pecharunt",
+        "action": "givemon(SPECIES_PECHARUNT,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
         "name": "Spectrier",
         "action": "givemon(SPECIES_SPECTRIER,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
       }
@@ -463,6 +467,10 @@
         "action": "givemon(SPECIES_REGIGIGAS,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
       },
       {
+        "name": "Terapagos",
+        "action": "givemon(SPECIES_TERAPAGOS,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
         "name": "Type: Null",
         "action": "givemon(SPECIES_TYPE_NULL,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
       }
@@ -478,6 +486,10 @@
       {
         "name": "Nihilego",
         "action": "givemon(SPECIES_NIHILEGO,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
+      },
+      {
+        "name": "Pecharunt",
+        "action": "givemon(SPECIES_PECHARUNT,1);goto(Common_EventScript_Legendary_Shop_CheckPurchase)"
       },
       {
         "name": "Poipole",
