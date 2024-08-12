@@ -14,6 +14,7 @@
 #include "decompress.h"
 #include "easy_chat.h"
 #include "event_data.h"
+#include "event_object_movement.h"
 #include "evolution_scene.h"
 #include "field_control_avatar.h"
 #include "field_effect.h"
@@ -80,12 +81,6 @@
 #include "config/battle_frontier.h"
 
 #include "data/battle_frontier/battle_frontier_banned_species.h"
-
-#if (DECAP_ENABLED) && (DECAP_MIRRORING) && !(DECAP_PARTY_MENU)
-#define gStringVar4 (MirrorPtr(gStringVar4))
-#define AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, str) (AddTextPrinterParameterized4(a, b, c, d, e, f, g, h, MirrorPtr(str)))
-#define AddTextPrinterParameterized3(a, b, c, d, e, f, str) AddTextPrinterParameterized3(a, b, c, d, e, f, MirrorPtr(str))
-#endif
 
 enum {
     MENU_SUMMARY,
@@ -2480,6 +2475,11 @@ static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, c
     AddTextPrinterParameterized3(windowId, FONT_SMALL, align[0], align[1], sFontColorTable[color], 0, str);
 }
 
+static void DisplayPartyPokemonBarDetailToFit(u8 windowId, const u8 *str, u8 color, const u8 *align, u32 width)
+{
+    AddTextPrinterParameterized3(windowId, GetFontIdToFit(str, FONT_SMALL, 0, width), align[0], align[1], sFontColorTable[color], 0, str);
+}
+
 static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
 {
     u8 nickname[POKEMON_NAME_LENGTH + 1];
@@ -2489,7 +2489,7 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox
         if (c == 1)
             menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[0] >> 3, menuBox->infoRects->dimensions[1] >> 3, menuBox->infoRects->dimensions[2] >> 3, menuBox->infoRects->dimensions[3] >> 3, FALSE);
         GetMonNickname(mon, nickname);
-        DisplayPartyPokemonBarDetail(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions);
+        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions, 50);
     }
 }
 
@@ -2797,10 +2797,7 @@ static void PrintMessage(const u8 *text)
 {
     DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x4F, 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
-    if (DECAP_ENABLED && DECAP_MIRRORING && !DECAP_PARTY_MENU)
-        AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, MirrorPtr(text), GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-    else
-        AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+    AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void PartyMenuDisplayYesNoMenu(void)
@@ -3081,6 +3078,9 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
 
 static void CursorCb_Switch(u8 taskId)
 {
+    // Reset follower steps when the party leader is changed
+    if (gPartyMenu.slotId == 0 || gPartyMenu.slotId2 == 0)
+        gFollowerSteps = 0;
     PlaySE(SE_SELECT);
     gPartyMenu.action = PARTY_ACTION_SWITCH;
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -4108,6 +4108,13 @@ bool8 FieldCallback_PrepareFadeInFromMenu(void)
     return TRUE;
 }
 
+// Same as above, but removes follower pokemon
+bool8 FieldCallback_PrepareFadeInForTeleport(void)
+{
+    RemoveFollowingPokemon();
+    return FieldCallback_PrepareFadeInFromMenu();
+}
+
 static void Task_FieldMoveWaitForFade(u8 taskId)
 {
     if (IsWeatherNotFadingIn() == TRUE)
@@ -4686,7 +4693,8 @@ void ItemUseCB_BattleScript(u8 taskId, TaskFunc task)
         gBattleStruct->itemPartyIndex[gBattlerInMenuId] = GetPartyIdFromBattleSlot(gPartyMenu.slotId);
         gPartyMenuUseExitCallback = TRUE;
         PlaySE(SE_SELECT);
-        RemoveBagItem(gSpecialVar_ItemId, 1);
+        if (!IsItemFlute(gSpecialVar_ItemId))
+            RemoveBagItem(gSpecialVar_ItemId, 1);
         ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
@@ -6456,6 +6464,7 @@ static void Task_TryItemUseFormChange(u8 taskId)
     case 0:
         targetSpecies = gTasks[taskId].tTargetSpecies;
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
+        TrySetDayLimitToFormChange(mon);
         CalculateMonStats(mon);
         gTasks[taskId].tState++;
         break;
@@ -7021,8 +7030,7 @@ static u8 GetPartySlotEntryStatus(s8 slot)
 
 static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 {
-    u16 i = 0;
-    u16 species;
+    u32 species;
 
     // Check banned species true/false
     bool8 checkBannedSpecies = TRUE;
@@ -7047,63 +7055,66 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
 
     switch (VarGet(VAR_FRONTIER_FACILITY))
     {
-    case FACILITY_MULTI_OR_EREADER:
-        if (GetMonData(mon, MON_DATA_HP) != 0)
+        case FACILITY_MULTI_OR_EREADER:
+            if (GetMonData(mon, MON_DATA_HP) != 0)
+                return TRUE;
+            return FALSE;
+        case FACILITY_UNION_ROOM:
             return TRUE;
-        return FALSE;
-    case FACILITY_UNION_ROOM:
-        return TRUE;
-    default: // Battle Frontier
-    
-        switch(lvlMode)
-        {
-            case FRONTIER_LVL_50:
-                if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvl50CustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-            case FRONTIER_LVL_OPEN:
-                if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-            case FRONTIER_LVL_TENT:
-                if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
-                    checkBannedSpecies = FALSE;
-                else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
-                {
-                    customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
-                    useCustomBanlist = TRUE;
-                }
-            break;
-        }
+        default: // Battle Frontier
+            switch(lvlMode)
+            {
+                case FRONTIER_LVL_50:
+                    if (BF_BATTLE_FRONTIER_LEVEL_50_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_50_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvl50CustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+                case FRONTIER_LVL_OPEN:
+                    if (BF_BATTLE_FRONTIER_LEVEL_OPEN_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_OPEN_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvlOpenCustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+                case FRONTIER_LVL_TENT:
+                    if (BF_BATTLE_FRONTIER_LEVEL_TENT_ALLOW_BANNED_SPECIES)
+                        checkBannedSpecies = FALSE;
+                    else if (BF_BATTLE_FRONTIER_LEVEL_TENT_CUSTOM_BANNED_SPECIES)
+                    {
+                        customBanlist = sFrontierLvlTentCustomBannedSpeciesList;
+                        useCustomBanlist = TRUE;
+                    }
+                break;
+            }
 
-        // Allow banned species is not set
-        if (checkBannedSpecies){
-            species = GetMonData(mon, MON_DATA_SPECIES);
-            if (useCustomBanlist)
+            // Allow banned species is not set
+            if (checkBannedSpecies)
             {
-                for(; customBanlist[i] != SPECIES_NONE; i++)
-                    if (customBanlist[i] == GET_BASE_SPECIES_ID(species))
-                        return FALSE;
+                species = GetMonData(mon, MON_DATA_SPECIES);
+
+                // Use custom banlist
+                if (useCustomBanlist)
+                {
+                    s32 i;
+                    for(i=0; (customBanlist[i] != SPECIES_NONE) && customBanlist[i] != GET_BASE_SPECIES_ID(species) && IsSpeciesEnabled(customBanlist[i]); i++)
+                        ;
+                        
+                    if (customBanlist[i] != SPECIES_NONE)
+                        return FALSE; 
+                }
+                // Use default banlist
+                else if (gSpeciesInfo[species].isFrontierBanned)
+                    return FALSE;
             }
-            else
-            {
-                for (; gFrontierBannedSpecies[i] != 0xFFFF; i++)
-                    if (gFrontierBannedSpecies[i] == GET_BASE_SPECIES_ID(species))
-                        return FALSE;
-            }
-        }
-        return TRUE;
     }
+        
+    return TRUE;
 }
 
 static u8 CheckBattleEntriesAndGetMessage(void)
@@ -7922,7 +7933,7 @@ void IsLastMonThatKnowsSurf(void)
             }
         }
         if (AnyStorageMonWithMove(move) != TRUE)
-            gSpecialVar_Result = TRUE;
+            gSpecialVar_Result = !P_CAN_FORGET_HIDDEN_MOVE;
     }
 }
 
@@ -8220,6 +8231,38 @@ void ItemUseCB_Pokeball(u8 taskId, TaskFunc task){
         // Return the old ball
         if (I_RETURN_OLD_BALL)
             AddBagItem(oldBall, 1);
+        gTasks[taskId].func = task;
+    }
+    else // Item not activated
+    { 
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+    }
+}
+
+void ItemUseCB_TeraShard(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 item = gSpecialVar_ItemId;
+
+    // Get the tera type for the item
+    u8 newType = teraShardTypeLookup[item];
+    u8 oldType = GetMonData(mon, MON_DATA_TERA_TYPE);
+
+    // New type does not match
+    if (newType != oldType) {
+        // Update the ball for the pokemon
+        SetMonData(mon, MON_DATA_TERA_TYPE, &newType);
+        gPartyMenuUseExitCallback = TRUE;
+        PlaySE(SE_USE_ITEM);
+        RemoveBagItem(item, 1);
+        GetMonNickname(mon, gStringVar1);
+        StringExpandPlaceholders(gStringVar4, gText_PkmnTeraTypeChanged);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
         gTasks[taskId].func = task;
     }
     else // Item not activated

@@ -325,15 +325,6 @@ BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1::
 	end
 
 
-BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2::
-	lock
-	faceplayer
-	msgbox BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_0
-	msgbox BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_1
-	release
-	end
-
-
 BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1::
 	lock
 	faceplayer
@@ -613,7 +604,7 @@ BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1_Text_4:
 	.string "first!$"
 
 BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_0:
-	.string "Have you heard of Terastralisation?$"
+	.string "Have you heard of Terastalisation?$"
 
 BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1_Text_1:
 	.string "It allows one of your POKéMON to change\n"
@@ -865,15 +856,6 @@ BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_2:
 
 BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1_Text_3:
 	.string "Hmmm ... Which one do I pick this time?$"
-
-BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_0:
-	.string "I always sit down here to rest after a\n"
-	.string "long streak of battles - It really helps\l"
-	.string "me relax.$"
-
-BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2_Text_1:
-	.string "Make sure you don't push yourself too\n"
-	.string "hard!$"
 
 BattleFrontier_Underground_B1F_EventScript_TMHMShop_Visitor1_Text_0:
 	.string "Wow, they have the complete set of TMs\n"

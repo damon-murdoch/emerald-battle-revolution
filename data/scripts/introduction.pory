@@ -9,7 +9,7 @@ script Introduction_EventScript_Startup {
 	msgbox(format("Welcome to Emerald Battle Revolution!"))
 	msgbox("Created by Damon Murdoch\n(Twitter: SirScrubbington)")
 	msgbox(format("Based on RHHideout's PokeEmerald-Expanded Project"))
-	msgbox(format("Current Version: 1.4.0"))
+	msgbox(format("Current Version: 1.6.2"))
 	msgbox(format("For more information, please visit our website: https://www.dragapult.xyz?ebr"))
 	goto(Introduction_EventScript_AskSandboxMode)
 }
@@ -438,6 +438,8 @@ script Introduction_EventScript_SetupSandboxMode {
 	# (New!) Battle Frontier Generator Flags
 	setflag(FLAG_BATTLE_FRONTIER_GENERATOR)
 	setflag(FLAG_BATTLE_FRONTIER_ALLOW_MEGA)
+	setflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
+	setflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 	setflag(FLAG_BATTLE_FRONTIER_ALLOW_GMAX)
 	setflag(FLAG_BATTLE_FRONTIER_GENERATOR)
 

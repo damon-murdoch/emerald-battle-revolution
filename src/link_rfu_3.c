@@ -672,6 +672,7 @@ void InitHostRfuGameData(struct RfuGameData *data, u8 activity, bool32 startedAc
     data->playerGender = gSaveBlock2Ptr->playerGender;
     data->activity = activity;
     data->startedActivity = startedActivity;
+    data->versionModifier = VERSION_MODIFIER;
     data->compatibility.language = GAME_LANGUAGE;
     data->compatibility.version = GAME_VERSION;
     data->compatibility.hasNews = FALSE;

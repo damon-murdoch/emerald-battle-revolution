@@ -6,6 +6,33 @@ import src.data as data
 
 CONFIG_FILE = "./include/config/battle_frontier_generator.h"
 
+# Species filename, for retrieving species constants
+SPECIES_FILE = "./include/constants/species.h"
+
+
+def get_species_constants():
+
+    # List of species
+    species = []
+
+    # Open the species list filename
+    with open(SPECIES_FILE) as f:
+        lines = f.readlines()
+
+        # Loop over the lines
+        for line in lines:
+            if line.startswith("#define"):
+                contents = line[8:].split(" ")
+
+                # Key (e.g. SPECIES_BULBASAUR)
+                key = contents[0].strip()
+
+                # Add species to list
+                species.append(key)
+
+    # Return species table
+    return species
+
 
 def remove_accented_chars(text):
     normalized_text = unicodedata.normalize('NFKD', text)

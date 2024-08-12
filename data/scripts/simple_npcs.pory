@@ -166,7 +166,7 @@ script BattleFrontier_Underground_B1F_EventScript_OtherShop_Visitor1 {
 script BattleFrontier_Underground_B1F_EventScript_TeraShop_Visitor1 {
     lock
     faceplayer
-    msgbox(format("Have you heard of Terastralisation?"))
+    msgbox(format("Have you heard of Terastalisation?"))
     msgbox(format("It allows one of your POKéMON to change into a different type once per game!"))
     msgbox(format("If you don't have a Tera Orb already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
     msgbox(format("The type changes depending on the POKéMON's Tera Type - Which can be changed using Tera Shards."))
@@ -359,16 +359,6 @@ script BattleFrontier_Underground_B1F_EventScript_MegaStone_Visitor1 {
     msgbox(format("Some megas best used with a team built around them, and others work well to support a team."))
     msgbox(format("If you don't have a Mega Stone already, you can buy one from the KEY ITEM shop at the bottom-right side of the mall."))
     msgbox(format("Hmmm ... Which one do I pick this time?"))
-    release
-    end
-}
-
-# RestArea_Visitor2
-script BattleFrontier_Underground_B1F_EventScript_RestArea_Visitor2 {
-    lock
-    faceplayer
-    msgbox(format("I always sit down here to rest after a long streak of battles - It really helps me relax."))
-    msgbox(format("Make sure you don't push yourself too hard!"))
     release
     end
 }

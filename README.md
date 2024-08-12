@@ -1,15 +1,15 @@
 # Emerald Battle Revolution
-## Pokemon Emerald Decompilation Project, based on the PokeEmerald Expansion Project
+## Pokémon Emerald Decompilation Project, based on the PokeEmerald Expansion Project
 ### Created by Damon Murdoch ([@SirScrubbington](https://twitter.com/SirScrubbington))
 
 ## About
 
-Emerald Battle Revolution is a Pokemon Emerald decompilation project 
+Emerald Battle Revolution is a Pokémon Emerald decompilation project 
 which uses the PokeEmerald Expansion project as a base. The goal for 
 this project is to create a sandbox for players to enjoy the incredible 
 post-game content in Emerald such as the Battle Frontier and other 
-facilities using new Pokemon and simple methods for obtaining properly 
-trained, competitive Pokemon easily without the need for modifying save files.
+facilities using new Pokémon and simple methods for obtaining properly 
+trained, competitive Pokémon easily without the need for modifying save files.
 
 ## Key Features
 
@@ -41,11 +41,11 @@ could need for making a competitive team. This includes, but is not limited to:
 
 * Elevator to Battle Dome
 
-* Legendary Pokemon Shop (Purchase unobtainable legendaries for $12,000)
+* Legendary Pokémon Shop (Purchase unobtainable legendaries for $12,000)
 * Legendary Forme-Changing Item Shop (Both Key Items and Held Items)
 
-* Pokemon Day Care, containing the following:
-  * Pokemon Breeder (Purchase any level 1 first evolution for $4,000)
+* Pokémon Day Care, containing the following:
+  * Pokémon Breeder (Purchase any level 1 first evolution for $4,000)
   * Evolution Item Shop
 
 * PokeDrugs Shop (Feathers/Drugs, Ability Changers, PP Up/Max, Bottle Cap)
@@ -54,9 +54,9 @@ could need for making a competitive team. This includes, but is not limited to:
 * Training Item Shop (Rare/XP Candy, Macho/Power Items, etc.)
 * Tera Shard Shop
 
-* Pokemon Center, containing the following:
+* Pokémon Center, containing the following:
   * High-value item trader (Cherish/Gold Bottle Caps for BP)
-  * Gigantamax Expert (Change Pokemon Gigantamax Factor)
+  * Gigantamax Expert (Change Pokémon Gigantamax Factor)
 
 * IV Berry Shop (IV Increasing / Decreasing Berries)
 * EV Berry Shop (EV Mochi / EV Decreasing Berries)
@@ -120,7 +120,7 @@ rate of $9800 to 1 BP.
 * EV Feathers give 4 EVs per use, Drugs/Mochis give 28 EVs
 * EV decreasing berries reduce by 28 evs
 * IV increasing/decreasing berries added for all types
-* Bottle Cap can be used on a Pokemon to max out all IVs
+* Bottle Cap can be used on a Pokémon to max out all IVs
 * EVs/IVs are now displayed in Summary Menu Stats Page
   * Click Left Bumper to see EVs, Right Bumper to see IVs
   * Click Start Button to return to regular stats menu
@@ -130,9 +130,9 @@ rate of $9800 to 1 BP.
     * While the band is turned off, you will be unable to use Dynamax
 
 #### Overworld / Other
-* Pokeballs can be swapped by using them on a Pokemon from the bag menu
-* Gold Bottle Cap can be exchanged for shiny Pokemon at Pokemon Shops
-* Pokemon can be nicknamed from the Party Menu
+* Pokeballs can be swapped by using them on a Pokémon from the bag menu
+* Gold Bottle Cap can be exchanged for shiny Pokémon at Pokémon Shops
+* Pokémon can be nicknamed from the Party Menu
 * Party slots can be swapped with Select
 * Move Relearner can teach pre-evolution moves
 * Move Relearner (basic) added to Party Menu
@@ -141,32 +141,32 @@ rate of $9800 to 1 BP.
 
 #### Battle Frontier
 * NPCs can be found in all battle facilities for changing battle bgm
-* Pokemon above or below level 50 will be scaled to level 50
-  * This means over-levelled Pokemon can now compete in level 50 battles
+* Pokémon above or below level 50 will be scaled to level 50
+  * This means over-levelled Pokémon can now compete in level 50 battles
 * Open Level ruleset has also been scaled down to level 50
-  * However, restricted Pokemon (i.e. Groudon, Kyogre, etc.) are now allowed
+  * However, restricted Pokémon (i.e. Groudon, Kyogre, etc.) are now allowed
 
 ##### Feature Table
 
 Please see below for the list of features which are supported in each Battle Frontier facility.
 
-| Facility Name  | Level Scaling   | New Species   | 4 Pokemon (Doubles) | Total |
-| -------------- | --------------- | ------------- | ------------------- | ----- |
-| Battle Arena   | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Dome    | Yes             | No            | No                  | 1/3   |
-| Battle Factory | Yes             | Yes           | No                  | 2/3   |
-| Battle Palace  | Yes             | Yes           | No                  | 2/3   |
-| Battle Pike    | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Pyramid | Yes             | Yes           | N/A                 | 2/3   |
-| Battle Tower   | Yes             | Yes           | Yes                 | 3/3   |
+| Facility Name  | Level Scaling   | New Species   | Doubles Mode | 4 Pokémon (Doubles) | Total |
+| -------------- | --------------- | ------------- | ------------ | ------------------- | ----- |
+| Battle Arena   | Yes             | Yes           | No           | N/A                 | 3/3   |
+| Battle Dome    | Yes             | No            | Yes          | No                  | 2/4   |
+| Battle Factory | Yes             | Yes           | Yes          | No                  | 3/4   |
+| Battle Palace  | Yes             | Yes           | Yes          | No                  | 3/4   |
+| Battle Pike    | Yes             | Yes           | N/A          | N/A                 | 2/2   |
+| Battle Pyramid | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Battle Tower   | Yes             | Yes           | Yes          | Yes                 | 4/4   |
 
 Please see below for the list of features which are supported in each Battle Tent.
 
-| Facility Name   | Level Scaling   | New Species   | 4 Pokemon (Doubles) | Total |
-| --------------- | --------------- | ------------- | ------------------- | ----- |
-| Fallarbor  Tent | Yes             | Yes           | N/A                 | 2/3   |
-| Slateport  Tent | Yes             | Yes           | N/A                 | 2/3   |
-| Verdanturf Tent | Yes             | Yes           | N/A                 | 2/3   |
+| Facility Name   | Level Scaling   | New Species   | Doubles Mode | 4 Pokémon (Doubles) | Total |
+| --------------- | --------------- | ------------- | ------------ | ------------------- | ----- |
+| Fallarbor  Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Slateport  Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
+| Verdanturf Tent | Yes             | Yes           | No           | N/A                 | 2/3   |
 
 ## Future Changes
 For a list of future changes which are intended for this project, 
@@ -191,7 +191,7 @@ If you experience any issues with the application, or would like to suggest impr
 
 * The entire [PokeEmerald-Expansion development team](https://github.com/rh-hideout/pokeemerald-expansion/wiki/Credits/_edit), for developing and maintaining the incredible source image this project uses
 
-* [Avara](https://www.pokecommunity.com/member.php?u=294199), for creating the [Changing Birch's Intro Pokemon](https://www.pokecommunity.com/showpost.php?p=9967857&postcount=6) tutorial
+* [Avara](https://www.pokecommunity.com/member.php?u=294199), for creating the [Changing Birch's Intro Pokémon](https://www.pokecommunity.com/showpost.php?p=9967857&postcount=6) tutorial
 
 * `SonikkuA-DatH`, for creating the [Make space for EWRAM Data for Summary Screen](https://github.com/pret/pokeemerald/wiki/Make-space-for-EWRAM-Data-for-Summary-screen) tutorial
 
@@ -264,15 +264,58 @@ implement this feature on their own projects.
 Please see below for the Dragapult Emerald project changelog. For changes related to
 the PokeEmerald Expanded project, please see the [PokeEmerald Changelog](./CHANGELOG.md).
 
+### Ver. 1.6.2
+
+Merged upstream changes
+
+### Ver. 1.6.1
+
+Added missing attack power scaling values, fixed issue with checking incorrect variable when 
+performing power scaling calculations, fixed issue with incorrectly accessed difficulty switch, 
+merged upstream changes
+
+### Ver. 1.6.0
+
+Implemented variable move power, hidden ability selection chance and added an optional 'hard mode' 
+to the battle frontier controllers, which allows you to skip the easy (low base stat, ivs, etc.)
+opponents in the battle frontier and jump straight to the hardest.
+
+### Ver. 1.5.1
+
+Simplified sample teams & sample sets shop menus, added move deleter to Battle Frontier 
+Underground, fixed some minor issues with battle frontier underground map sprites
+
+### Ver. 1.5.0
+
+Updated to the new PokeEmerald-Expansion Pokedex Plus, which provides useful information
+such as base stats, moves, formes and more. Re-enabled the displaying of tera types in 
+the summary menu, and added the ability to change the tera type of a Pokémon by using
+a single tera shard on them.
+
+### Ver. 1.4.2
+
+Merged upstream changes, fixed issue with text rendering, implemented game versioning system
+which will be used for preventing battling and trading with unofficial versions in the future, 
+fixed bugs related to the battle frontier underground link / cable club rooms
+
+### Ver. 1.4.1
+
+Expanded shops to allow for the purchasing of individual sets from a team, as well as expanded
+the individual Pokémon shops to show Pokémon in the categories for both their primary and
+secondary type
+
 ### Ver. 1.4.0
+
+Merged upstream changes, including support for terastalisation which can now be banned or
+unbanned using the Battle Frontier controllers, and used inside and out of Battle Facilities.
 
 Created new branch for developing the 'Battle Spot' feature, added new sample teams from 
 old VGC formats (2016, 2018 pre/post bank and 2019 sun, moon and ultra series).
 
 ### Ver. 1.3.3
 
-Implemented auto-generator for Pokemon and Legendary shop multi-select menus, 
-updated Pokemon Shop / Legendary Shop text
+Implemented auto-generator for Pokémon and Legendary shop multi-select menus, 
+updated Pokémon Shop / Legendary Shop text
 
 ### Ver. 1.3.2
 
@@ -300,13 +343,13 @@ and unbanning of megas, zmoves, gigantamax. Improved startup scripts
 ### Ver. 1.2.0
 
 Merged upstream changes which have implemented modern battle frontier set generation for Battle Factory, as well as all Battle Tent Facilities. 
-Battle Factory is fully working, including items, swapping, and open lvl. mode has every second Pokemon (and one Pokemon on each opponent team)
+Battle Factory is fully working, including items, swapping, and open lvl. mode has every second Pokémon (and one Pokémon on each opponent team)
 as a restricted legendary. Please see the [Battle Frontier Feature Table](#feature-table) for more details. 
 
 Optional BST range fixing has been implemented (compile-side), and open lvl. mode will now always have the highest BST limit by default rather 
 than starting low and increasing. The latest changes from the upstream branch of the Pokeemerald Expansion Project have now also been merged.
 
-The list of Pokemon which can be selected for each trainer class has been expanded, and Tera Blast has been added to the banned moves list as
+The list of Pokémon which can be selected for each trainer class has been expanded, and Tera Blast has been added to the banned moves list as
 it has not been fully implemented yet.
 
 ### Ver. 1.1.1
@@ -318,7 +361,7 @@ supported in each Battle Facility, including Battle Tents please see the [Battle
 
 ### Ver. 1.1.0
 
-Merged upstream changes which have implemented a more efficient species selection system, including ensuring that two restricted (i.e. legendary) Pokemon are picked on all teams in the 'Open' rules battle mode when playing doubles (with four Pokemon), and one is selected playing in formats where three Pokemon are selected.
+Merged upstream changes which have implemented a more efficient species selection system, including ensuring that two restricted (i.e. legendary) Pokémon are picked on all teams in the 'Open' rules battle mode when playing doubles (with four Pokémon), and one is selected playing in formats where three Pokémon are selected.
 
 Mythicals are now legal to be used in all level 50 and open rules formats, and have been added to the normal selection pool for both (Excluding Arceus and Deoxys, which are considered restricted).
 
@@ -338,18 +381,18 @@ months worth of development on a seperate repository ([battle frontier generator
 added to the Battle Frontier Underground which allows for the customisation of Battle Frontier
 Facilities, with the following options:
 
-* Change between legacy (original) Battle Frontier Sets, or modern (randomised) Battle Frontier Sets with new Pokemon, moves, etc.
+* Change between legacy (original) Battle Frontier Sets, or modern (randomised) Battle Frontier Sets with new Pokémon, moves, etc.
 * Change between different team generation modes (modern sets only), with the following options:
   * Default: Default level-up learnsets at level 50
   * Random: Completely randomised movesets
   * Filtered: Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore.
-  * Filtered (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Aside from status moves marked as 'required', or Pokemon who do not have four valid attacks, only attacking moves will be used.
+  * Filtered (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Aside from status moves marked as 'required', or Pokémon who do not have four valid attacks, only attacking moves will be used.
   * Ranked: Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Attacking moves are 'ranked' based on a viability table, so in general stronger moves are picked over weaker moves (accounting for STAB, abilities, etc.)
-  * Ranked (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Attacking moves are 'ranked' based on a viability table, so in general stronger moves are picked over weaker moves (accounting for STAB, abilities, etc). Aside from status moves marked as 'required', or Pokemon who do not have four valid attacks, only attacking moves will be used.
+  * Ranked (Attacks Only): Randomised movesets, with moves filtered out based on stats / hard-coded moves to select/ignore. Attacking moves are 'ranked' based on a viability table, so in general stronger moves are picked over weaker moves (accounting for STAB, abilities, etc). Aside from status moves marked as 'required', or Pokémon who do not have four valid attacks, only attacking moves will be used.
 * Change the background music during Battle Frontier matches
 
 For the 'Default' and 'Random' settings, EVs are invested in bulk (HP required, then Def/Spdef randomly) and a neutral nature is
-used. Otherwise, evs/ivs/nature are selected based upon the base-stats of the Pokemon, where nature and evs will be invested in
+used. Otherwise, evs/ivs/nature are selected based upon the base-stats of the Pokémon, where nature and evs will be invested in
 whichever stats are highest first. Signature Z-Moves and Mega Evolutions may be used in the later matches (~41+), 
 
 There is still a significant amount of work expected to be done on this part of the project, however it is currently in a completely
@@ -363,13 +406,13 @@ issue with the project describing the crash so it can be investigated.
 ### Ver. 0.9.8
 
 Merged upstream changes, removed unused poryscripts, reviewed and fixed code differences, 
-reverted upstream plural string changes due to text issues, gigantamax-flagged Pokemon
-can no longer evolve, and Pokemon without Gigantamax formes can no longer have the flag set.
+reverted upstream plural string changes due to text issues, gigantamax-flagged Pokémon
+can no longer evolve, and Pokémon without Gigantamax formes can no longer have the flag set.
 
 ### Ver. 0.9.7
 
-Added an NPC to the Battle Frontier Underground Pokemon Center which is
-able to change the Gigantamax Factor of a Pokemon for $500. Music-changing
+Added an NPC to the Battle Frontier Underground Pokémon Center which is
+able to change the Gigantamax Factor of a Pokémon for $500. Music-changing
 NPCs have also been added to the Battle Tent facilities.
 
 ### Ver. 0.9.6
@@ -389,11 +432,11 @@ tents located throughout the game.
 ### Ver. 0.9.4
 
 Removed Cherish Ball / Gold Bottle Cap from stores, added NPC for exchanging Battle Points
-for those items (50 each) to Battle Frontier Underground Pokemon Centre, reorganised shop items
+for those items (50 each) to Battle Frontier Underground Pokémon Centre, reorganised shop items
 
 ### Ver. 0.9.3
 
-Added fully working Pokemon Centre to (with respawn point) to Battle Frontier Underground, 
+Added fully working Pokémon Centre to (with respawn point) to Battle Frontier Underground, 
 added Gimmighoul Coin / Leaders Crest item effects
 
 ### Ver. 0.9.2
@@ -408,8 +451,8 @@ and the Battle Frontier Underground Game Corner
 
 ### Ver. 0.9.0
 
-Removed fade to black from pokemon salespeople, added multichoice text for all breeder options, 
-implemented pokemon breeder for all species, minor refractor to add some missing species
+Removed fade to black from Pokémon salespeople, added multichoice text for all breeder options, 
+implemented Pokémon breeder for all species, minor refractor to add some missing species
 
 ### Ver. 0.8.3
 
@@ -418,8 +461,8 @@ fixed bleakwind/wildbolt/sandsear storm accuracy,
 
 ### Ver. 0.8.2
 
-Implemented system for exchanging Gold Bottle Caps for shiny Pokemon in both the legendary Pokemon counter and
-the Pokemon breeder, added optional allow battle z-moves in battle frontier switch, reduce held item animation time
+Implemented system for exchanging Gold Bottle Caps for shiny Pokémon in both the legendary Pokémon counter and
+the Pokémon breeder, added optional allow battle z-moves in battle frontier switch, reduce held item animation time
 
 ### Ver. 0.8.1
 
@@ -429,17 +472,17 @@ developed based on the guides provided by [LOuroboros](https://www.pokecommunity
 ### Ver. 0.8.0
 
 Added fully working Game Corner to Battle Frontier Underground, where the greeter outside gives
-you a coin case if you do not already own one. Balls can now be used on a Pokemon from the bag
-menu to swap the ball the Pokemon is in. The original ball is returned to the player's inventory. 
-Battle frontier species checks have now been disabled for the open rules mode, allowing all Pokemon
+you a coin case if you do not already own one. Balls can now be used on a Pokémon from the bag
+menu to swap the ball the Pokémon is in. The original ball is returned to the player's inventory. 
+Battle frontier species checks have now been disabled for the open rules mode, allowing all Pokémon
 (incl. Mythicals) to be allowed. The level cap has also been reduced to level 50.
 
 ### Ver. 0.7.2
 
 Merged code from pokeemerald-expanded upcoming branch into dev, updated evolution methods for 
 all unobtainable evolutions (i.e. Hisuian formes, etc.) using a linking cable, new Paldean 
-Pokemon with unimplemented evolution methods have been given item evolutions. Updated 
-item prices, underground item shop layouts, and pokemon breeding helper messages.
+Pokémon with unimplemented evolution methods have been given item evolutions. Updated 
+item prices, underground item shop layouts, and Pokémon breeding helper messages.
 
 ### Ver. 0.7.1
 
@@ -447,7 +490,7 @@ Last used bike is now remembered, and will not be reset back to Acro bike each t
 get off it. Several item prices have been reduced. Signs have been added to all of the
 entrances to the Battle Frontier Underground, and the Battle Dome Underground Entrance
 has been moved to make it more accessible. Added a new file `ENCOUNTERS.md` which lists
-all of the locations where Pokemon can be encountered, generated by [Spawn Table Analyzer](https://github.com/damon-murdoch/pokeemerald-spawn-table-analyser).
+all of the locations where Pokémon can be encountered, generated by [Spawn Table Analyzer](https://github.com/damon-murdoch/pokeemerald-spawn-table-analyser).
 
 ### Ver. 0.7.0
 
@@ -465,11 +508,11 @@ and the original Move Tutor house. Instead of requiring a Heart Scale, both tuto
 
 ### Ver. 0.6.5
 
-Added Porymoves combined teachable_learnsets to teachable_learnsets.h, which will allow Pokemon to be taught 
-moves they learnt in any game after `Black and White 2`, except for `Pokemon Let's Go Pikachu and Eevee`. 
+Added Porymoves combined teachable_learnsets to teachable_learnsets.h, which will allow Pokémon to be taught 
+moves they learnt in any game after `Black and White 2`, except for `Pokémon Let's Go Pikachu and Eevee`. 
 
 Minor improvements have been made to the Battle Frontier Underground map layout, and development for a move 
-tutor for allowing Pokemon to be taught egg/tutor/other moves has been started.
+tutor for allowing Pokémon to be taught egg/tutor/other moves has been started.
 
 ### Ver. 0.6.4
 
@@ -491,13 +534,13 @@ and easier to navigate.
 
 ### Ver. 0.6.1
 
-Implemented basic pokemon breeder code, for selling basic Pokemon within the Battle
+Implemented basic Pokémon breeder code, for selling basic Pokémon within the Battle
 Frontier Underground Day Care. Training Item/Berry Sellers, signs, and many placeholders
 and other basic features have been added.
 
 ### Ver. 0.6.0
 
-Legendary Pokemon shop has now been implemented for all legendaries, using the new
+Legendary Pokémon shop has now been implemented for all legendaries, using the new
 left/right bumper navigation system to simplify navigation. Instructions for how to
 navigate the menu are displayed in the chat window. Several new underground shops 
 have been added, for purposes such as ev/iv training, battle items, tm/hms and more.
@@ -507,19 +550,19 @@ have been added, for purposes such as ev/iv training, battle items, tm/hms and m
 Legendary seller has been implemented up to generation six, and an additional feature
 has been added to multichoice2 which allows for the 'left' and 'right' bumpers to be
 accepted as inputs, similar to the 'b' button. This has been used for tabbing between
-Pokemon seller menus, rather than needing to have an additional item at the bottom 
+Pokémon seller menus, rather than needing to have an additional item at the bottom 
 of the menu.
 
 ### Ver. 0.5.3
 
 Battle Frontier Underground Day Care service has been added, with an entrance next to
-the Legendary Pokemon sales counter. Legendary Pokemon seller has been implemented up
+the Legendary Pokémon sales counter. Legendary Pokémon seller has been implemented up
 to the first three generations.
 
 ### Ver. 0.5.2
 
-Started work on Battle Frontier Underground Legendary Pokemon sales counter, which 
-will be able to sell any Legendary Pokemon to players for a flat price ($12000).
+Started work on Battle Frontier Underground Legendary Pokémon sales counter, which 
+will be able to sell any Legendary Pokémon to players for a flat price ($12000).
 
 ### Ver. 0.5.1
 
@@ -537,9 +580,9 @@ level scaling now works without issues for both open level (level 100) and level
 
 ### Ver. 0.4.4
 
-Implemented level scaling system for Battle Frontier facilities, which allows for Pokemon above level 50 to participate
-in level 50 battles and optionally, pokemon below level 50 can be raised to level 50 or level 100 in Open Battles. As a
-result, the minimum level for Open Battles has been raised to 100 to ensure Pokemon all have the same level.
+Implemented level scaling system for Battle Frontier facilities, which allows for Pokémon above level 50 to participate
+in level 50 battles and optionally, Pokémon below level 50 can be raised to level 50 or level 100 in Open Battles. As a
+result, the minimum level for Open Battles has been raised to 100 to ensure Pokémon all have the same level.
 
 ### Ver. 0.4.3
 
@@ -594,7 +637,7 @@ remain available, but with lower spawn rate).
 ### Ver. 0.2.2
 
 Merged upcoming branch of PokeEmerald-Expanded into the project, which adds support for
-several new features including all of the Generation 9 Pokemon (so far), Dynamax, most of
+several new features including all of the Generation 9 Pokémon (so far), Dynamax, most of
 the new items, and more. Resolved several merge conflicts which were caused as a result of
 this change.
 
@@ -671,7 +714,7 @@ Updated readme with planned features / credits / other information, release buil
 
 ### Ver. 0.0.1
 
-Implemented main/dev/debug branching system, modified Birch's intro Pokemon to Hisuian Zorua (Added SPECIES_INTRO #define for modifying both intro sprite/sound at once).
+Implemented main/dev/debug branching system, modified Birch's intro Pokémon to Hisuian Zorua (Added SPECIES_INTRO #define for modifying both intro sprite/sound at once).
 
 ### Ver. 0.0.0
 Cloned PokeEmerald Expansion project base image, unmodified source project is stored in branch 'base'

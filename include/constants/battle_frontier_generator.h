@@ -4,7 +4,14 @@
 #define BFG_BST_MIN 0
 #define BFG_BST_MAX 1530
 
+#define BFG_ATK_MIN 0
+#define BFG_ATK_MAX 255
+
 #define BFG_MOVE_TYPE_NONE 0xFF
+
+// Special moves with specific calculations
+// e.g. a power value of '1' will be replaced with this
+#define BFG_MOVE_POWER_SPECIAL 90
 
 #define TRAINER_CLASS_DEFAULT TRAINER_CLASS_COUNT // Unhandled Trainer Class / Factory Rental Picks
 

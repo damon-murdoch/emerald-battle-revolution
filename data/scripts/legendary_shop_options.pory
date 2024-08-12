@@ -141,14 +141,14 @@ script Auto_EventScript_Legendary_Shop_Steel_Page1
         case 2: # DIALGA
             givemon(SPECIES_DIALGA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # JIRACHI
-            givemon(SPECIES_JIRACHI,1)
+        case 3: # GENESECT
+            givemon(SPECIES_GENESECT,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 4: # MAGEARNA
-            givemon(SPECIES_MAGEARNA,1)
+        case 4: # HEATRAN
+            givemon(SPECIES_HEATRAN,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
-            goto(Auto_EventScript_Legendary_Shop_Steel_Page2)
+            goto(Auto_EventScript_Legendary_Shop_Steel_Page3)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Steel_Page2)
         default:
@@ -161,14 +161,40 @@ script Auto_EventScript_Legendary_Shop_Steel_Page2
     multichoice2(0,0,Auto_Text_Legendary_Shop_Steel_Page2)
     switch(var(VAR_RESULT))
     {
-        case 0: # MELMETAL
+        case 0: # JIRACHI
+            givemon(SPECIES_JIRACHI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # KARTANA
+            givemon(SPECIES_KARTANA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # MAGEARNA
+            givemon(SPECIES_MAGEARNA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # MELMETAL
             givemon(SPECIES_MELMETAL,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # REGISTEEL
+        case 4: # REGISTEEL
             givemon(SPECIES_REGISTEEL,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Steel_Page1)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Steel_Page3)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page4)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Steel_Page3
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Steel_Page3)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # STAKATAKA
+            givemon(SPECIES_STAKATAKA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Steel_Page2)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Steel_Page1)
         default:
@@ -216,6 +242,9 @@ script Auto_EventScript_Legendary_Shop_Water_Page2
         case 1: # TAPU FINI
             givemon(SPECIES_TAPU_FINI,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # VOLCANION
+            givemon(SPECIES_VOLCANION,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Water_Page1)
         case MULTI_R_PRESSED:
@@ -236,6 +265,12 @@ script Auto_EventScript_Legendary_Shop_Ground_Page1
         case 1: # LANDORUS
             givemon(SPECIES_LANDORUS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # TING-LU
+            givemon(SPECIES_TING_LU,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # ZYGARDE
+            givemon(SPECIES_ZYGARDE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Ground_Page1)
         case MULTI_R_PRESSED:
@@ -253,10 +288,16 @@ script Auto_EventScript_Legendary_Shop_Ice_Page1
         case 0: # ARTICUNO
             givemon(SPECIES_ARTICUNO,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # GLASTRIER
+        case 1: # CHIEN-PAO
+            givemon(SPECIES_CHIEN_PAO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # GLASTRIER
             givemon(SPECIES_GLASTRIER,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # REGICE
+        case 3: # KYUREM
+            givemon(SPECIES_KYUREM,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # REGICE
             givemon(SPECIES_REGICE,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -282,7 +323,10 @@ script Auto_EventScript_Legendary_Shop_Normal_Page1
         case 2: # REGIGIGAS
             givemon(SPECIES_REGIGIGAS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # TYPE: NULL
+        case 3: # TERAPAGOS
+            givemon(SPECIES_TERAPAGOS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # TYPE: NULL
             givemon(SPECIES_TYPE_NULL,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -302,7 +346,13 @@ script Auto_EventScript_Legendary_Shop_Poison_Page1
         case 0: # ETERNATUS
             givemon(SPECIES_ETERNATUS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # POIPOLE
+        case 1: # NIHILEGO
+            givemon(SPECIES_NIHILEGO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # PECHARUNT
+            givemon(SPECIES_PECHARUNT,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # POIPOLE
             givemon(SPECIES_POIPOLE,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -335,7 +385,7 @@ script Auto_EventScript_Legendary_Shop_Psychic_Page1
             givemon(SPECIES_DEOXYS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
-            goto(Auto_EventScript_Legendary_Shop_Psychic_Page3)
+            goto(Auto_EventScript_Legendary_Shop_Psychic_Page4)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Psychic_Page2)
         default:
@@ -351,17 +401,17 @@ script Auto_EventScript_Legendary_Shop_Psychic_Page2
         case 0: # HOOPA
             givemon(SPECIES_HOOPA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # LUGIA
+        case 1: # JIRACHI
+            givemon(SPECIES_JIRACHI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # LATIAS
+            givemon(SPECIES_LATIAS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # LATIOS
+            givemon(SPECIES_LATIOS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # LUGIA
             givemon(SPECIES_LUGIA,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # MESPRIT
-            givemon(SPECIES_MESPRIT,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # MEW
-            givemon(SPECIES_MEW,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 4: # MEWTWO
-            givemon(SPECIES_MEWTWO,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Psychic_Page1)
@@ -377,20 +427,46 @@ script Auto_EventScript_Legendary_Shop_Psychic_Page3
     multichoice2(0,0,Auto_Text_Legendary_Shop_Psychic_Page3)
     switch(var(VAR_RESULT))
     {
-        case 0: # NECROZMA
+        case 0: # MELOETTA
+            givemon(SPECIES_MELOETTA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # MESPRIT
+            givemon(SPECIES_MESPRIT,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # MEW
+            givemon(SPECIES_MEW,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # MEWTWO
+            givemon(SPECIES_MEWTWO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # NECROZMA
             givemon(SPECIES_NECROZMA,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # TAPU LELE
-            givemon(SPECIES_TAPU_LELE,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # UXIE
-            givemon(SPECIES_UXIE,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # VICTINI
-            givemon(SPECIES_VICTINI,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Psychic_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Psychic_Page4)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page3)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Psychic_Page4
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Psychic_Page4)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # TAPU LELE
+            givemon(SPECIES_TAPU_LELE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # UXIE
+            givemon(SPECIES_UXIE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # VICTINI
+            givemon(SPECIES_VICTINI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Psychic_Page3)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Psychic_Page1)
         default:
@@ -403,16 +479,48 @@ script Auto_EventScript_Legendary_Shop_Fighting_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Fighting_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # KORAIDON
+        case 0: # BUZZWOLE
+            givemon(SPECIES_BUZZWOLE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # COBALION
+            givemon(SPECIES_COBALION,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # KELDEO
+            givemon(SPECIES_KELDEO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # KORAIDON
             givemon(SPECIES_KORAIDON,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # KUBFU
+        case 4: # KUBFU
             givemon(SPECIES_KUBFU,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # MARSHADOW
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Fighting_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Fighting_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Fighting_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Fighting_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # MARSHADOW
             givemon(SPECIES_MARSHADOW,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # ZAMAZENTA
+        case 1: # PHEROMOSA
+            givemon(SPECIES_PHEROMOSA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # TERRAKION
+            givemon(SPECIES_TERRAKION,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # VIRIZION
+            givemon(SPECIES_VIRIZION,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # ZAMAZENTA
             givemon(SPECIES_ZAMAZENTA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -432,17 +540,17 @@ script Auto_EventScript_Legendary_Shop_Fire_Page1
         case 0: # BLACEPHALON
             givemon(SPECIES_BLACEPHALON,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # ENTEI
+        case 1: # CHI-YU
+            givemon(SPECIES_CHI_YU,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # ENTEI
             givemon(SPECIES_ENTEI,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # HEATRAN
+        case 3: # HEATRAN
             givemon(SPECIES_HEATRAN,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # HO-OH
+        case 4: # HO-OH
             givemon(SPECIES_HO_OH,1)
-            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 4: # MOLTRES
-            givemon(SPECIES_MOLTRES,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Fire_Page2)
@@ -458,7 +566,16 @@ script Auto_EventScript_Legendary_Shop_Fire_Page2
     multichoice2(0,0,Auto_Text_Legendary_Shop_Fire_Page2)
     switch(var(VAR_RESULT))
     {
-        case 0: # VOLCANION
+        case 0: # MOLTRES
+            givemon(SPECIES_MOLTRES,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # RESHIRAM
+            givemon(SPECIES_RESHIRAM,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # VICTINI
+            givemon(SPECIES_VICTINI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # VOLCANION
             givemon(SPECIES_VOLCANION,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -475,11 +592,72 @@ script Auto_EventScript_Legendary_Shop_Flying_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Flying_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # TORNADUS
+        case 0: # ARTICUNO
+            givemon(SPECIES_ARTICUNO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # CELESTEELA
+            givemon(SPECIES_CELESTEELA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # ENAMORUS
+            givemon(SPECIES_ENAMORUS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # HO-OH
+            givemon(SPECIES_HO_OH,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # LANDORUS
+            givemon(SPECIES_LANDORUS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Flying_Page3)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Flying_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Flying_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Flying_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # LUGIA
+            givemon(SPECIES_LUGIA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # MOLTRES
+            givemon(SPECIES_MOLTRES,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # RAYQUAZA
+            givemon(SPECIES_RAYQUAZA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # THUNDURUS
+            givemon(SPECIES_THUNDURUS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # TORNADUS
             givemon(SPECIES_TORNADUS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Flying_Page1)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Flying_Page3)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Flying_Page3
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Flying_Page3)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # YVELTAL
+            givemon(SPECIES_YVELTAL,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # ZAPDOS
+            givemon(SPECIES_ZAPDOS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Flying_Page2)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Flying_Page1)
         default:
@@ -492,10 +670,36 @@ script Auto_EventScript_Legendary_Shop_Ghost_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Ghost_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # GIRATINA
+        case 0: # BLACEPHALON
+            givemon(SPECIES_BLACEPHALON,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # GIRATINA
             givemon(SPECIES_GIRATINA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # SPECTRIER
+        case 2: # HOOPA
+            givemon(SPECIES_HOOPA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # MARSHADOW
+            givemon(SPECIES_MARSHADOW,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # PECHARUNT
+            givemon(SPECIES_PECHARUNT,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Ghost_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Ghost_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Ghost_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Ghost_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # SPECTRIER
             givemon(SPECIES_SPECTRIER,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -512,17 +716,43 @@ script Auto_EventScript_Legendary_Shop_Grass_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Grass_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # KARTANA
+        case 0: # CALYREX
+            givemon(SPECIES_CALYREX,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # CELEBI
+            givemon(SPECIES_CELEBI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # KARTANA
             givemon(SPECIES_KARTANA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # SHAYMIN
+        case 3: # SHAYMIN
             givemon(SPECIES_SHAYMIN,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # TAPU BULU
+        case 4: # TAPU BULU
             givemon(SPECIES_TAPU_BULU,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # VIRIZION
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Grass_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Grass_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page2)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Grass_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Grass_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # VIRIZION
             givemon(SPECIES_VIRIZION,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # WO-CHIEN
+            givemon(SPECIES_WO_CHIEN,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # ZARUDE
+            givemon(SPECIES_ZARUDE,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Grass_Page1)
@@ -613,23 +843,23 @@ script Auto_EventScript_Legendary_Shop_Dragon_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Dragon_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # KYUREM
-            givemon(SPECIES_KYUREM,1)
+        case 0: # DIALGA
+            givemon(SPECIES_DIALGA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # LATIAS
-            givemon(SPECIES_LATIAS,1)
+        case 1: # ETERNATUS
+            givemon(SPECIES_ETERNATUS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # LATIOS
-            givemon(SPECIES_LATIOS,1)
+        case 2: # GIRATINA
+            givemon(SPECIES_GIRATINA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 3: # RAYQUAZA
-            givemon(SPECIES_RAYQUAZA,1)
+        case 3: # GUZZLORD
+            givemon(SPECIES_GUZZLORD,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 4: # REGIDRAGO
-            givemon(SPECIES_REGIDRAGO,1)
+        case 4: # KORAIDON
+            givemon(SPECIES_KORAIDON,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
-            goto(Auto_EventScript_Legendary_Shop_Dragon_Page2)
+            goto(Auto_EventScript_Legendary_Shop_Dragon_Page3)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Dragon_Page2)
         default:
@@ -642,17 +872,52 @@ script Auto_EventScript_Legendary_Shop_Dragon_Page2
     multichoice2(0,0,Auto_Text_Legendary_Shop_Dragon_Page2)
     switch(var(VAR_RESULT))
     {
-        case 0: # RESHIRAM
-            givemon(SPECIES_RESHIRAM,1)
+        case 0: # KYUREM
+            givemon(SPECIES_KYUREM,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # ZEKROM
-            givemon(SPECIES_ZEKROM,1)
+        case 1: # LATIAS
+            givemon(SPECIES_LATIAS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # ZYGARDE
-            givemon(SPECIES_ZYGARDE,1)
+        case 2: # LATIOS
+            givemon(SPECIES_LATIOS,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # MIRAIDON
+            givemon(SPECIES_MIRAIDON,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # PALKIA
+            givemon(SPECIES_PALKIA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Dragon_Page1)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Dragon_Page3)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page1)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Dragon_Page3
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Dragon_Page3)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # RAYQUAZA
+            givemon(SPECIES_RAYQUAZA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # REGIDRAGO
+            givemon(SPECIES_REGIDRAGO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # RESHIRAM
+            givemon(SPECIES_RESHIRAM,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # ZEKROM
+            givemon(SPECIES_ZEKROM,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # ZYGARDE
+            givemon(SPECIES_ZYGARDE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Dragon_Page2)
         case MULTI_R_PRESSED:
             goto(Auto_EventScript_Legendary_Shop_Dragon_Page1)
         default:
@@ -700,7 +965,10 @@ script Auto_EventScript_Legendary_Shop_Electric_Page2
         case 1: # ZAPDOS
             givemon(SPECIES_ZAPDOS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # ZERAORA
+        case 2: # ZEKROM
+            givemon(SPECIES_ZEKROM,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # ZERAORA
             givemon(SPECIES_ZERAORA,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -717,13 +985,45 @@ script Auto_EventScript_Legendary_Shop_Fairy_Page1
     multichoice2(0,0,Auto_Text_Legendary_Shop_Fairy_Page1)
     switch(var(VAR_RESULT))
     {
-        case 0: # ENAMORUS
+        case 0: # DIANCIE
+            givemon(SPECIES_DIANCIE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # ENAMORUS
             givemon(SPECIES_ENAMORUS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 1: # XERNEAS
+        case 2: # MAGEARNA
+            givemon(SPECIES_MAGEARNA,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 3: # TAPU BULU
+            givemon(SPECIES_TAPU_BULU,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 4: # TAPU FINI
+            givemon(SPECIES_TAPU_FINI,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case MULTI_L_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Fairy_Page2)
+        case MULTI_R_PRESSED:
+            goto(Auto_EventScript_Legendary_Shop_Fairy_Page2)
+        default:
+            goto(Auto_EventScript_Legendary_Shop_Page1)
+    }
+}
+
+script Auto_EventScript_Legendary_Shop_Fairy_Page2
+{
+    multichoice2(0,0,Auto_Text_Legendary_Shop_Fairy_Page2)
+    switch(var(VAR_RESULT))
+    {
+        case 0: # TAPU KOKO
+            givemon(SPECIES_TAPU_KOKO,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 1: # TAPU LELE
+            givemon(SPECIES_TAPU_LELE,1)
+            goto(Common_EventScript_Legendary_Shop_CheckPurchase)
+        case 2: # XERNEAS
             givemon(SPECIES_XERNEAS,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
-        case 2: # ZACIAN
+        case 3: # ZACIAN
             givemon(SPECIES_ZACIAN,1)
             goto(Common_EventScript_Legendary_Shop_CheckPurchase)
         case MULTI_L_PRESSED:
@@ -793,16 +1093,26 @@ text Auto_Text_Legendary_Shop_Steel_Page1
     "CELESTEELA$"
     "COBALION$"
     "DIALGA$"
-    "JIRACHI$"
-    "MAGEARNA$"
+    "GENESECT$"
+    "HEATRAN$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Legendary_Shop_Steel_Page2
 {
+    "JIRACHI$"
+    "KARTANA$"
+    "MAGEARNA$"
     "MELMETAL$"
     "REGISTEEL$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Steel_Page3
+{
+    "STAKATAKA$"
     "Go Back$"
     ""
 }
@@ -822,6 +1132,7 @@ text Auto_Text_Legendary_Shop_Water_Page2
 {
     "SUICUNE$"
     "TAPU FINI$"
+    "VOLCANION$"
     "Go Back$"
     ""
 }
@@ -830,6 +1141,8 @@ text Auto_Text_Legendary_Shop_Ground_Page1
 {
     "GROUDON$"
     "LANDORUS$"
+    "TING-LU$"
+    "ZYGARDE$"
     "Go Back$"
     ""
 }
@@ -837,7 +1150,9 @@ text Auto_Text_Legendary_Shop_Ground_Page1
 text Auto_Text_Legendary_Shop_Ice_Page1
 {
     "ARTICUNO$"
+    "CHIEN-PAO$"
     "GLASTRIER$"
+    "KYUREM$"
     "REGICE$"
     "Go Back$"
     ""
@@ -848,6 +1163,7 @@ text Auto_Text_Legendary_Shop_Normal_Page1
     "ARCEUS$"
     "MELOETTA$"
     "REGIGIGAS$"
+    "TERAPAGOS$"
     "TYPE: NULL$"
     "Go Back$"
     ""
@@ -856,6 +1172,8 @@ text Auto_Text_Legendary_Shop_Normal_Page1
 text Auto_Text_Legendary_Shop_Poison_Page1
 {
     "ETERNATUS$"
+    "NIHILEGO$"
+    "PECHARUNT$"
     "POIPOLE$"
     "Go Back$"
     ""
@@ -875,17 +1193,27 @@ text Auto_Text_Legendary_Shop_Psychic_Page1
 text Auto_Text_Legendary_Shop_Psychic_Page2
 {
     "HOOPA$"
+    "JIRACHI$"
+    "LATIAS$"
+    "LATIOS$"
     "LUGIA$"
-    "MESPRIT$"
-    "MEW$"
-    "MEWTWO$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Legendary_Shop_Psychic_Page3
 {
+    "MELOETTA$"
+    "MESPRIT$"
+    "MEW$"
+    "MEWTWO$"
     "NECROZMA$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Psychic_Page4
+{
     "TAPU LELE$"
     "UXIE$"
     "VICTINI$"
@@ -895,9 +1223,21 @@ text Auto_Text_Legendary_Shop_Psychic_Page3
 
 text Auto_Text_Legendary_Shop_Fighting_Page1
 {
+    "BUZZWOLE$"
+    "COBALION$"
+    "KELDEO$"
     "KORAIDON$"
     "KUBFU$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Fighting_Page2
+{
     "MARSHADOW$"
+    "PHEROMOSA$"
+    "TERRAKION$"
+    "VIRIZION$"
     "ZAMAZENTA$"
     "Go Back$"
     ""
@@ -906,16 +1246,19 @@ text Auto_Text_Legendary_Shop_Fighting_Page1
 text Auto_Text_Legendary_Shop_Fire_Page1
 {
     "BLACEPHALON$"
+    "CHI-YU$"
     "ENTEI$"
     "HEATRAN$"
     "HO-OH$"
-    "MOLTRES$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Legendary_Shop_Fire_Page2
 {
+    "MOLTRES$"
+    "RESHIRAM$"
+    "VICTINI$"
     "VOLCANION$"
     "Go Back$"
     ""
@@ -923,14 +1266,47 @@ text Auto_Text_Legendary_Shop_Fire_Page2
 
 text Auto_Text_Legendary_Shop_Flying_Page1
 {
+    "ARTICUNO$"
+    "CELESTEELA$"
+    "ENAMORUS$"
+    "HO-OH$"
+    "LANDORUS$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Flying_Page2
+{
+    "LUGIA$"
+    "MOLTRES$"
+    "RAYQUAZA$"
+    "THUNDURUS$"
     "TORNADUS$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Flying_Page3
+{
+    "YVELTAL$"
+    "ZAPDOS$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Legendary_Shop_Ghost_Page1
 {
+    "BLACEPHALON$"
     "GIRATINA$"
+    "HOOPA$"
+    "MARSHADOW$"
+    "PECHARUNT$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Ghost_Page2
+{
     "SPECTRIER$"
     "Go Back$"
     ""
@@ -938,10 +1314,20 @@ text Auto_Text_Legendary_Shop_Ghost_Page1
 
 text Auto_Text_Legendary_Shop_Grass_Page1
 {
+    "CALYREX$"
+    "CELEBI$"
     "KARTANA$"
     "SHAYMIN$"
     "TAPU BULU$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Grass_Page2
+{
     "VIRIZION$"
+    "WO-CHIEN$"
+    "ZARUDE$"
     "Go Back$"
     ""
 }
@@ -977,17 +1363,30 @@ text Auto_Text_Legendary_Shop_Dark_Page2
 
 text Auto_Text_Legendary_Shop_Dragon_Page1
 {
-    "KYUREM$"
-    "LATIAS$"
-    "LATIOS$"
-    "RAYQUAZA$"
-    "REGIDRAGO$"
+    "DIALGA$"
+    "ETERNATUS$"
+    "GIRATINA$"
+    "GUZZLORD$"
+    "KORAIDON$"
     "Go Back$"
     ""
 }
 
 text Auto_Text_Legendary_Shop_Dragon_Page2
 {
+    "KYUREM$"
+    "LATIAS$"
+    "LATIOS$"
+    "MIRAIDON$"
+    "PALKIA$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Dragon_Page3
+{
+    "RAYQUAZA$"
+    "REGIDRAGO$"
     "RESHIRAM$"
     "ZEKROM$"
     "ZYGARDE$"
@@ -1010,6 +1409,7 @@ text Auto_Text_Legendary_Shop_Electric_Page2
 {
     "XURKITREE$"
     "ZAPDOS$"
+    "ZEKROM$"
     "ZERAORA$"
     "Go Back$"
     ""
@@ -1017,7 +1417,19 @@ text Auto_Text_Legendary_Shop_Electric_Page2
 
 text Auto_Text_Legendary_Shop_Fairy_Page1
 {
+    "DIANCIE$"
     "ENAMORUS$"
+    "MAGEARNA$"
+    "TAPU BULU$"
+    "TAPU FINI$"
+    "Go Back$"
+    ""
+}
+
+text Auto_Text_Legendary_Shop_Fairy_Page2
+{
+    "TAPU KOKO$"
+    "TAPU LELE$"
     "XERNEAS$"
     "ZACIAN$"
     "Go Back$"

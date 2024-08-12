@@ -7,7 +7,7 @@
 // Allow Mega Evolutions in Dynamax Battles
 #define DB_ALLOW_MEGA_EVOLUTION FALSE
 
-// Allow Terastralisation in Dynamax Battles
+// Allow Terastalisation in Dynamax Battles
 #define DB_ALLOW_TERASTRALISATION FALSE
 
 // Allow AI opponent to use Dynamax

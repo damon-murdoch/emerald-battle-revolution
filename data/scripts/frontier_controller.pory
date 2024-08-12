@@ -31,17 +31,48 @@ script BattleFrontierController_EventScript_ControllerInfo {
 script BattleFrontierController_EventScript_ControllerOptions {
 	multichoice2(18,0,BattleFrontierController_Text_ControllerOptionSelect)
 	switch(var(VAR_RESULT)) {
-		case 0: # Change Opponents
+		case 0: # Change Difficulty
+			goto(BattleFrontierController_EventScript_ControllerChangeDifficulty)
+		case 1: # Change Opponents
 			goto(BattleFrontierController_EventScript_ControllerChangeOpponents)
-		case 1: # Change Behavior
+		case 2: # Change Behavior
 			goto(BattleFrontierController_EventScript_ControllerChangeBehavior)
-		case 2: # Change Rules
+		case 3: # Change Rules
 			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
-		case 3: # Change Music
+		case 4: # Change Music
 			goto(BattleFrontierController_EventScript_ControllerChangeMusic)
 		default: 
 			goto(BattleFrontierController_EventScript_ControllerEnd)
 	}
+}
+
+script BattleFrontierController_EventScript_ControllerChangeDifficulty {
+
+	if (flag(FLAG_BATTLE_FRONTIER_FIXED_IV) == TRUE) {
+		msgbox(format("You are currently playing hard mode, where you will face up against difficult opponents regardless of win streak."))
+		msgbox(format("Would you like to switch to normal mode, where opponent difficulty will scale based on your win streak?"))
+	}
+	else # Frontier Generator not enabled
+	{
+		msgbox(format("You are currently playing normal mode, where your opponents strength will scale from easy to hard at 49 wins."))
+		msgbox(format("Would you like to switch to hard mode, with all opponents scaled up from the start?"))
+	}
+
+	yesnobox(0, 8)
+	if (var(VAR_RESULT) == YES) {
+		if (flag(FLAG_BATTLE_FRONTIER_FIXED_IV) == TRUE) {
+			clearflag(FLAG_BATTLE_FRONTIER_FIXED_IV) # Clear the flag
+			msgbox(format("Done! You'll now play against difficulty-scaled Battle Frontier opponents."))
+		}
+		else # Frontier Generator not enabled
+		{
+			setflag(FLAG_BATTLE_FRONTIER_FIXED_IV) # Set the flag
+			msgbox(format("Done! You'll now play against difficult Battle Frontier opponents only."))
+		}
+	}
+
+	msgbox(format("Feel free to ask me again if you change your mind!"))
+	goto(BattleFrontierController_EventScript_ControllerAsk)
 }
 
 script BattleFrontierController_EventScript_ControllerChangeOpponents {
@@ -49,13 +80,15 @@ script BattleFrontierController_EventScript_ControllerChangeOpponents {
 	if (flag(FLAG_BATTLE_FRONTIER_GENERATOR) == TRUE) {
 		msgbox(format("You are currently playing against modern Battle Frontier opponents."))
 		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
+		msgbox(format("Please note, all other opponent behavior-related settings will be ignored in legacy mode."))
 		msgbox(format("Would you like to switch to legacy Battle Frontier opponents?"))
 	}
 	else # Frontier Generator not enabled
 	{
 		msgbox(format("You are currently playing against legacy Battle Frontier opponents."))
-		msgbox(format("Would you like to switch to modern Battle Frontier opponents?"))
+		msgbox(format("Modern Battle Frontier opponents are randomly generated, and include new species, items, formes and more."))
 		msgbox(format("Keep in mind, you may experience bugs or crashes using this mode during development."))
+		msgbox(format("Would you like to switch to modern Battle Frontier opponents?"))
 	}
 
 	yesnobox(0, 8)
@@ -128,13 +161,15 @@ script BattleFrontierController_EventScript_ControllerChangeBanlistStandard {
 			msgbox(format("Okay! Z-Moves will be banned."))
 			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_ZMOVE)
 		case 4: # ALLOW TERA
-			msgbox(format("Tera is not available yet, sorry!"))
+			msgbox(format("Okay! Terastalisation will be allowed."))
+			setflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 		case 5: # BAN TERA
-			msgbox(format("Tera is not available yet, sorry!"))
+			msgbox(format("Okay! Terastalisation will be banned."))
+			clearflag(FLAG_BATTLE_FRONTIER_ALLOW_TERA)
 		default:
 			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
 	}
-	goto(BattleFrontierController_EventScript_ControllerAsk)
+	goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
 }
 
 script BattleFrontierController_EventScript_ControllerChangeBanlistDynamax {
@@ -153,7 +188,7 @@ script BattleFrontierController_EventScript_ControllerChangeBanlistDynamax {
 		default:
 			goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
 	}
-	goto(BattleFrontierController_EventScript_ControllerAsk)
+	goto(BattleFrontierController_EventScript_ControllerChangeBanlist)
 }
 
 script BattleFrontierController_EventScript_ControllerChangeMusicPage1 {
@@ -272,6 +307,7 @@ script BattleFrontierController_EventScript_ControllerEnd {
 }
 
 text BattleFrontierController_Text_ControllerOptionSelect {
+	"CHANGE DIFFICULTY$"
 	"CHANGE OPPONENTS$"
 	"CHANGE BEHAVIOR$"
 	"CHANGE BANLIST$"

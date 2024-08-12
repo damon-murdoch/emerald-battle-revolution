@@ -299,7 +299,7 @@
 #define B_WEATHER_HAIL_PERMANENT      (1 << 10)
 #define B_WEATHER_HAIL                (B_WEATHER_HAIL_TEMPORARY | B_WEATHER_HAIL_PERMANENT)
 #define B_WEATHER_STRONG_WINDS        (1 << 11)
-#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL | B_WEATHER_STRONG_WINDS | B_WEATHER_SNOW)
+#define B_WEATHER_ANY                 (B_WEATHER_RAIN | B_WEATHER_SANDSTORM | B_WEATHER_SUN | B_WEATHER_HAIL | B_WEATHER_STRONG_WINDS | B_WEATHER_SNOW | B_WEATHER_FOG)
 #define B_WEATHER_PRIMAL_ANY          (B_WEATHER_RAIN_PRIMAL | B_WEATHER_SUN_PRIMAL | B_WEATHER_STRONG_WINDS)
 #define B_WEATHER_SNOW_TEMPORARY      (1 << 12)
 #define B_WEATHER_SNOW_PERMANENT      (1 << 13)
@@ -380,28 +380,28 @@
 #define MOVE_EFFECT_KNOCK_OFF           55
 #define MOVE_EFFECT_DEF_SPDEF_DOWN      56
 #define MOVE_EFFECT_CLEAR_SMOG          57
-#define MOVE_EFFECT_SP_ATK_TWO_DOWN     58
-#define MOVE_EFFECT_SMACK_DOWN          59
-#define MOVE_EFFECT_FLAME_BURST         60
-#define MOVE_EFFECT_FEINT               61
-#define MOVE_EFFECT_SPECTRAL_THIEF      62
-#define MOVE_EFFECT_V_CREATE            63
-#define MOVE_EFFECT_HAPPY_HOUR          64
-#define MOVE_EFFECT_CORE_ENFORCER       65
-#define MOVE_EFFECT_THROAT_CHOP         66
-#define MOVE_EFFECT_INCINERATE          67
-#define MOVE_EFFECT_BUG_BITE            68
-#define MOVE_EFFECT_RECOIL_HP_25        69
-#define MOVE_EFFECT_TRAP_BOTH           70
-#define MOVE_EFFECT_ROUND               71
-#define MOVE_EFFECT_STOCKPILE_WORE_OFF  72
-#define MOVE_EFFECT_DIRE_CLAW           73
-#define MOVE_EFFECT_STEALTH_ROCK        74
-#define MOVE_EFFECT_SPIKES              75
-#define MOVE_EFFECT_SYRUP_BOMB          76
-#define MOVE_EFFECT_FLORAL_HEALING      77
-#define MOVE_EFFECT_SECRET_POWER        78
-#define MOVE_EFFECT_PSYCHIC_NOISE       79
+#define MOVE_EFFECT_SMACK_DOWN          58
+#define MOVE_EFFECT_FLAME_BURST         59
+#define MOVE_EFFECT_FEINT               60
+#define MOVE_EFFECT_SPECTRAL_THIEF      61
+#define MOVE_EFFECT_V_CREATE            62
+#define MOVE_EFFECT_HAPPY_HOUR          63
+#define MOVE_EFFECT_CORE_ENFORCER       64
+#define MOVE_EFFECT_THROAT_CHOP         65
+#define MOVE_EFFECT_INCINERATE          66
+#define MOVE_EFFECT_BUG_BITE            67
+#define MOVE_EFFECT_RECOIL_HP_25        68
+#define MOVE_EFFECT_TRAP_BOTH           69
+#define MOVE_EFFECT_ROUND               70
+#define MOVE_EFFECT_STOCKPILE_WORE_OFF  71
+#define MOVE_EFFECT_DIRE_CLAW           72
+#define MOVE_EFFECT_STEALTH_ROCK        73
+#define MOVE_EFFECT_SPIKES              74
+#define MOVE_EFFECT_SYRUP_BOMB          75
+#define MOVE_EFFECT_FLORAL_HEALING      76
+#define MOVE_EFFECT_SECRET_POWER        77
+#define MOVE_EFFECT_PSYCHIC_NOISE       78
+#define MOVE_EFFECT_TERA_BLAST          79
 
 #define NUM_MOVE_EFFECTS                80
 
@@ -477,6 +477,7 @@
 #define B_WIN_VS_OUTCOME_DRAW    21
 #define B_WIN_VS_OUTCOME_LEFT    22
 #define B_WIN_VS_OUTCOME_RIGHT   23
+#define B_WIN_MOVE_DESCRIPTION   24
 
 // The following are duplicate id values for windows that Battle Arena uses differently.
 #define ARENA_WIN_PLAYER_NAME      15
