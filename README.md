@@ -1,3 +1,6 @@
+# NOTE: This project has been moved!
+# You are looking for: https://github.com/damon-murdoch/pokeemerald-expansion
+
 # Emerald Battle Revolution
 ## Pokémon Emerald Decompilation Project, based on the PokeEmerald Expansion Project
 ### Created by Damon Murdoch ([@SirScrubbington](https://twitter.com/SirScrubbington))
